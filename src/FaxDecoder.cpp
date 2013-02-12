@@ -29,16 +29,18 @@
 
 #include <wx/progdlg.h>
 
+#ifndef __WXMSW__
 #include <audiofile.h>
+#endif
 
 #include <math.h>
-#include <complex.h>
+#include <complex>
 
 /* Note: the decoding algorithms are adapted from yahfax (on sourceforge)
    which was an improved adaptation of hamfax.
 */
 
-WX_DEFINE_LIST(wxImageList);
+WX_DEFINE_LIST(FaxImageList);
 
 bool FaxDecoder::Error(wxString error)
 {
@@ -82,7 +84,7 @@ double apply_firfilter(struct firfilter *filter, double sample)
      return sum;
 }
 
-void FaxDecoder::DemodulateData(uint8_t *data, int16_t *sample, int n)
+void FaxDecoder::DemodulateData(wxUint8 *data, wxInt16 *sample, int n)
 {
      double f=0;
      double ifirold = 0, qfirold = 0;
@@ -120,18 +122,21 @@ void FaxDecoder::DemodulateData(uint8_t *data, int16_t *sample, int n)
 }
 
 /* perform fourier transform at a specific frequency */
-double FaxDecoder::FourierTransformSub(uint8_t* buffer, int buffer_len, int freq)
+double FaxDecoder::FourierTransformSub(wxUint8* buffer, int buffer_len, int freq)
 {
-     int k = freq * 60.0 / m_lpm;
-     complex double ret = 0;
-     int n;
-     for(n=0; n<buffer_len; n++)
-          ret += (complex double)buffer[n] * cexp(-(2.0*M_PI*I*k*n) / buffer_len);
-     return cabs(ret);
+    std::complex<double> k = freq * 60.0 / m_lpm, buffer_lenc = buffer_len;
+    std::complex<double> ret = 0;
+    std::complex<double> im(0, 1);
+    int n;
+    for(n=0; n<buffer_len; n++) {
+        std::complex<double> nc = n;
+        ret += (std::complex<double>)buffer[n] * exp(-(2.0*M_PI*im*k*nc) / buffer_lenc);
+    }
+    return abs(ret);
 }
 
 /* see if the fourier transform at the start and stop frequencies reveils header */
-FaxDecoder::Header FaxDecoder::DetectLineType(uint8_t* buffer, int buffer_len)
+FaxDecoder::Header FaxDecoder::DetectLineType(wxUint8* buffer, int buffer_len)
 {
      const int threshold = 5; /* 5 is pretty arbitrary but works in practice even with lots of noise */
      if(FourierTransformSub(buffer, buffer_len, m_StartFrequency) / buffer_len > threshold)
@@ -157,7 +162,7 @@ static int median(int *x, int n)
    wide of a ^ shaped wedge, find positon it fits to the minimum.
 
    This isn't very fast, but only is used for phasing lines */
-int FaxDecoder::FaxPhasingLinePosition(uint8_t *image, int imagewidth)
+int FaxDecoder::FaxPhasingLinePosition(wxUint8 *image, int imagewidth)
 {
     int n = imagewidth * .07;
     int i;
@@ -179,7 +184,7 @@ int FaxDecoder::FaxPhasingLinePosition(uint8_t *image, int imagewidth)
    buffer should contain sampleRate*60.0/m_lpm*colors bytes
    image will contain imagewidth*colors bytes
 */
-void FaxDecoder::DecodeImageLine(uint8_t* buffer, int buffer_len, uint8_t *image)
+void FaxDecoder::DecodeImageLine(wxUint8* buffer, int buffer_len, wxUint8 *image)
 {
      int n = sampleRate*60.0/m_lpm;
 
@@ -205,6 +210,9 @@ void FaxDecoder::DecodeImageLine(uint8_t* buffer, int buffer_len, uint8_t *image
 
 bool FaxDecoder::DecodeFaxFromAudio(wxString fileName)
 {
+#ifdef __WXMSW__
+    return false;
+#else
     AFfilehandle aFile;
     AFfileoffset size = 0;
     
@@ -225,13 +233,13 @@ bool FaxDecoder::DecodeFaxFromAudio(wxString fileName)
     int blocksize = sampleRate*60.0/m_lpm*m_faxcolors;
     
     int len;
-    int16_t sample[blocksize];
-    uint8_t data[blocksize];
+    wxInt16 sample[blocksize];
+    wxUint8 data[blocksize];
     
     int height = size / 2 / sampleRate / 60.0 * m_lpm / m_faxcolors;
     int imgpos = 0;
 
-    uint8_t *imgdata = new uint8_t[m_imagewidth*height*3];
+    wxUint8 *imgdata = new wxUint8[m_imagewidth*height*3];
 
     int line = 0;
     int imageline = 0;
@@ -337,4 +345,5 @@ bool FaxDecoder::DecodeFaxFromAudio(wxString fileName)
 
      delete imgdata;
      return true;
+#endif
 }

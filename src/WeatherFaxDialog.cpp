@@ -52,11 +52,12 @@ void WeatherFaxDialog::NewFaxClicked( wxCommandEvent& event )
     wxFileDialog openDialog
         ( this, _( "Open Weather Fax Input File" ),
           m_weatherfax_pi.m_path, wxT ( "" ),
-          wxT ( "WAV files (*.wav)|*.WAV;*.wav|"
-                "Supported Image Files|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;"
-                "*.TIF;*.tif;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;"
-                "*.PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga|"
-                "All files (*.*)|*.*" ), wxFD_OPEN);
+          _ ( "\
+WAV files (*.wav)|*.WAV;*.wav|\
+Supported Image Files|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;\
+*.TIF;*.tif;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;\
+*.PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga|\
+All files (*.*)|*.*" ), wxFD_OPEN);
 
     if( openDialog.ShowModal() == wxID_OK ) {
         wxString filename = openDialog.GetPath();
@@ -72,9 +73,9 @@ void WeatherFaxDialog::NewFaxClicked( wxCommandEvent& event )
                                m_weatherfax_pi.m_bSkipHeaderDetection,
                                m_weatherfax_pi.m_bIncludeHeadersInImage);
             decoder.DecodeFaxFromAudio(filename);
-            wxImageList images = decoder.images;
+            FaxImageList images = decoder.images;
             int i=0;
-            for(wxImageList::iterator it = images.begin(); it !=  images.end(); it++) {
+            for(FaxImageList::iterator it = images.begin(); it !=  images.end(); it++) {
                 WeatherFaxImage *img = new WeatherFaxImage(**it);
                 m_lFaxes->Append(filenamec.GetFullName()+_("-")
                                  +wxString::Format(_T("%d"), ++i), img);

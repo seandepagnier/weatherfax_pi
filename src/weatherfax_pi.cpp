@@ -202,15 +202,6 @@ void weatherfax_pi::RearrangeWindow()
       SetColorScheme(PI_ColorScheme());
 
       m_pWeatherFaxDialog->Fit();
-
-#ifdef __WXMSW__
-      //UGLY!!!!!!! On Windows XP the transparent window is not refreshed properly in OpenGL mode at least on the Atom powered netbooks, so we have to disable transparency.
-      wxFileConfig *cfg = GetOCPNConfigObject();
-      cfg->SetPath(_T("/Settings"));
-      bool gl = cfg->Read(_T("OpenGL"));
-      cfg = NULL;
-      if (!(gl && wxPlatformInfo::Get().GetOSMajorVersion() == 5 && wxPlatformInfo::Get().GetOSMinorVersion() == 1))
-#endif
 }
 
 void weatherfax_pi::OnToolbarToolCallback(int id)
@@ -262,7 +253,7 @@ bool weatherfax_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
             for(int x=0; x<w; x++) {
                 int sx = x*sw/w;
                 for(int c=0; c<3; c++) {
-                    uint8_t v = subdata[3*(sw*sy+sx)+c];
+                    wxUint8 v = subdata[3*(sw*sy+sx)+c];
                     stretcheddata[3*(w*y+x)+c] = m_bInvert ? 255-v : v;
                 }
             }

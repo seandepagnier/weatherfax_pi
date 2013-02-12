@@ -31,10 +31,8 @@
   #include "wx/wx.h"
 #endif //precompiled headers
 
-#include <stdint.h>
-
 #include <wx/listimpl.cpp>
-WX_DECLARE_LIST(wxImage, wxImageList);
+WX_DECLARE_LIST(wxImage, FaxImageList);
 
 enum Bandwidth {NARROW, MIDDLE, WIDE};
 
@@ -68,17 +66,17 @@ public:
 
     bool DecodeFaxFromAudio(wxString filename);
 
-    wxImageList images;
+    FaxImageList images;
 
 private:
     enum Header {IMAGE, START, STOP};
 
     bool Error(wxString error);
-    double FourierTransformSub(uint8_t* buffer, int buffer_len, int freq);
-    Header DetectLineType(uint8_t* buffer, int buffer_len);
-    void DemodulateData(uint8_t *data, int16_t *sample, int n);
-    void DecodeImageLine(uint8_t* buffer, int buffer_len, uint8_t *image);
-    int FaxPhasingLinePosition(uint8_t *image, int imagewidth);
+    double FourierTransformSub(wxUint8* buffer, int buffer_len, int freq);
+    Header DetectLineType(wxUint8* buffer, int buffer_len);
+    void DemodulateData(wxUint8 *data, wxInt16 *sample, int n);
+    void DecodeImageLine(wxUint8* buffer, int buffer_len, wxUint8 *image);
+    int FaxPhasingLinePosition(wxUint8 *image, int imagewidth);
 
     wxWindow &m_parent;
 
