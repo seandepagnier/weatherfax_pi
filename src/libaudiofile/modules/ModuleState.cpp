@@ -38,6 +38,10 @@
 #include <functional>
 #include <stdio.h>
 
+#if defined (_WIN32)
+static inline long long llrint(double x){return (long long)(x > 0.0 ? x + 0.5 : x - 0.5);}
+#endif
+
 ModuleState::ModuleState() :
 	m_isDirty(true)
 {

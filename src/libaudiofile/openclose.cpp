@@ -24,7 +24,7 @@
 #include <assert.h>
 #include <string.h>
 
-#ifdef HAVE_UNISTD_H
+#if (HAVE_UNISTD_H)
 #include <unistd.h>
 #endif
 
@@ -41,6 +41,13 @@
 #include "modules/ModuleState.h"
 #include "units.h"
 #include "util.h"
+
+#if defined(_WIN32)
+#include <io.h>
+#include <stdlib.h>
+#include <stdio.h>
+#define _dup dup
+#endif
 
 static status _afOpenFile (int access, File *f, const char *filename,
 	AFfilehandle *file, AFfilesetup filesetup);
