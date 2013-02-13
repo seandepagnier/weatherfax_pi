@@ -29,9 +29,7 @@
 
 #include <wx/progdlg.h>
 
-#ifndef __WXMSW__
 #include <audiofile.h>
-#endif
 
 #include <math.h>
 #include <complex>
@@ -210,9 +208,6 @@ void FaxDecoder::DecodeImageLine(wxUint8* buffer, int buffer_len, wxUint8 *image
 
 bool FaxDecoder::DecodeFaxFromAudio(wxString fileName)
 {
-#ifdef __WXMSW__
-    return false;
-#else
     AFfilehandle aFile;
     AFfileoffset size = 0;
     
@@ -349,5 +344,4 @@ bool FaxDecoder::DecodeFaxFromAudio(wxString fileName)
      delete [] data;
      delete [] imgdata;
      return true;
-#endif
 }
