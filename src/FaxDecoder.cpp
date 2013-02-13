@@ -233,8 +233,10 @@ bool FaxDecoder::DecodeFaxFromAudio(wxString fileName)
     int blocksize = sampleRate*60.0/m_lpm*m_faxcolors;
     
     int len;
-    wxInt16 sample[blocksize];
-    wxUint8 data[blocksize];
+    wxInt16 *sample;
+    sample = new wxInt16[blocksize];
+    wxUint8 *data;
+    data = new wxUint8[blocksize];
     
     int height = size / 2 / sampleRate / 60.0 * m_lpm / m_faxcolors;
     int imgpos = 0;
@@ -343,7 +345,9 @@ bool FaxDecoder::DecodeFaxFromAudio(wxString fileName)
          images.Append(new wxImage(m_imagewidth, imageline, id));
      }
 
-     delete imgdata;
+     delete [] sample;
+     delete [] data;
+     delete [] imgdata;
      return true;
 #endif
 }

@@ -298,8 +298,9 @@ bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
         wxImage subimg = m_image->GetSubImage(r);
 
         unsigned char *data = subimg.GetData();
-        unsigned char idata[subimg.GetWidth()*subimg.GetHeight()*3];
+        unsigned char *idata = NULL;
         if(m_pWeatherFaxDialog && !m_bInvert) {
+            idata = new unsigned char[subimg.GetWidth()*subimg.GetHeight()*3];
             for(unsigned int i=0; i<sizeof idata; i++)
                 idata[i] = 255-data[i];
             data = idata;
@@ -308,6 +309,7 @@ bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
         glTexImage2D(GL_TEXTURE_RECTANGLE_ARB, 0, GL_RGBA,
                      subimg.GetWidth(), subimg.GetHeight(),
                      0, GL_RGB, GL_UNSIGNED_BYTE, data);
+        delete [] idata;
     }
         
     glEnable(GL_TEXTURE_RECTANGLE_ARB);
