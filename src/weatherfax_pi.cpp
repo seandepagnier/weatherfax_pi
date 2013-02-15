@@ -301,8 +301,9 @@ bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
         unsigned char *data = subimg.GetData();
         unsigned char *idata = NULL;
         if(m_pWeatherFaxDialog && !m_bInvert) {
-            idata = new unsigned char[subimg.GetWidth()*subimg.GetHeight()*3];
-            for(unsigned int i=0; i<sizeof idata; i++)
+            int size = subimg.GetWidth()*subimg.GetHeight()*3;
+            idata = new unsigned char[size];
+            for(unsigned int i=0; i<size; i++)
                 idata[i] = 255-data[i];
             data = idata;
         }
