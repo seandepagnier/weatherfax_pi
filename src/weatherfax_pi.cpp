@@ -69,7 +69,7 @@ weatherfax_pi::weatherfax_pi(void *ppimgr)
     : opencpn_plugin_18(ppimgr)
 {
       int w = weatherfax_icon::width, h = weatherfax_icon::height;
-      char *img_data = new char[3*w*h];
+      char *img_data = (char*)malloc(3*w*h); /* wximage needs malloc */
       const char *data = weatherfax_icon::header_data;
       for(int i=0; i<w*h; i++)
           HEADER_PIXEL(data, (img_data+3*i))
@@ -245,9 +245,10 @@ bool weatherfax_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
         wxRect r(m_image->p1.x, m_image->p1.y, sw, sh);
         wxImage subimg = m_image->GetSubImage(r);
 
+        /* TODO: convert to wxImage::Scale) */
         /* from subimg (sw by sh) to stretchedimg (w by h) */
         unsigned char *subdata = subimg.GetData();
-        unsigned char *stretcheddata = new unsigned char[w*h*3];
+        unsigned char *stretcheddata = (unsigned char*)malloc(w*h*3); /* malloc needed for wximage */
         for(int y=0; y<h; y++) {
             int sy = y*sh/h;
             for(int x=0; x<w; x++) {
@@ -288,7 +289,7 @@ bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
         glTexParameteri( GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
         glTexParameteri( GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
         
-#if 0 /* I think we can delete these */
+#if 1 /* I think we can delete these */
         glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
         glPixelStorei( GL_UNPACK_SKIP_PIXELS, 0 );
         glPixelStorei( GL_UNPACK_SKIP_ROWS, 0 );
@@ -306,7 +307,7 @@ bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
             data = idata;
         }
 
-        glTexImage2D(GL_TEXTURE_RECTANGLE_ARB, 0, GL_RGBA,
+        glTexImage2D(GL_TEXTURE_RECTANGLE_ARB, 0, GL_RGB,
                      subimg.GetWidth(), subimg.GetHeight(),
                      0, GL_RGB, GL_UNSIGNED_BYTE, data);
         delete [] idata;

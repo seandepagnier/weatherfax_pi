@@ -245,7 +245,8 @@ bool FaxDecoder::DecodeFaxFromAudio(wxString fileName)
 
     bool gotstart = false;
 
-    int phasingPos[m_phasingLines], phasingLinesLeft = 0, phasingSkipData = 0, phasingSkippedData = 0;
+    int *phasingPos = new int[m_phasingLines];
+    int phasingLinesLeft = 0, phasingSkipData = 0, phasingSkippedData = 0;
 
     wxProgressDialog *progressdialog = new wxProgressDialog(
         _("Decoding fax audio data"), _("Fax Decoder"), height, NULL,
@@ -286,7 +287,7 @@ bool FaxDecoder::DecodeFaxFromAudio(wxString fileName)
             } else
                 if(type == STOP && typecount == m_StopLength*m_lpm/60.0 - leewaylines) {
                     int is = m_imagewidth*imageline*3;
-                    unsigned char *id = new unsigned char[is];
+                    unsigned char *id = (unsigned char*)malloc(is); /* wximage needs malloc */
                     memcpy(id, imgdata, is);
                     images.Append(new wxImage(m_imagewidth, imageline, id));
                     imageline = 0;
@@ -324,6 +325,7 @@ bool FaxDecoder::DecodeFaxFromAudio(wxString fileName)
         line++;
      }
 
+     delete phasingPos;
      delete progressdialog;
 
      afCloseFile(aFile);
@@ -335,7 +337,7 @@ bool FaxDecoder::DecodeFaxFromAudio(wxString fileName)
          memset(imgdata+imgpos, 0, m_imagewidth*imageline*m_imagecolors - imgpos);
 
          int is = m_imagewidth*imageline*3;
-         unsigned char *id = new unsigned char[is];
+         unsigned char *id = (unsigned char *)malloc(is); /* wximage needs malloc */
          memcpy(id, imgdata, is);
          images.Append(new wxImage(m_imagewidth, imageline, id));
      }
