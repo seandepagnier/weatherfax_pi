@@ -300,13 +300,12 @@ bool FaxDecoder::DecodeFaxFromAudio(wxString fileName)
         /* throw away first 2 lines of phasing because we are not sure
            if they are misaligned start lines */
         const int phasingSkipLines = 2;
-        if(phasingLinesLeft >= 0 && phasingLinesLeft <= m_phasingLines - phasingSkipLines)
+        if(phasingLinesLeft > 0 && phasingLinesLeft <= m_phasingLines - phasingSkipLines)
             phasingPos[phasingLinesLeft-1] = FaxPhasingLinePosition(data, len);
 
         if(type == IMAGE && phasingLinesLeft >= -phasingSkipLines)
-            if(!--phasingLinesLeft) { /* decrement each phasing line */
+            if(!--phasingLinesLeft) /* decrement each phasing line */
                 phasingSkipData = median(phasingPos, m_phasingLines - phasingSkipLines);
-            }
 
         /* go past the phasing lines we skipping to make sure we are in the image */
         if(m_bIncludeHeadersInImages || (type == IMAGE && phasingLinesLeft < -phasingSkipLines)) {
@@ -325,7 +324,7 @@ bool FaxDecoder::DecodeFaxFromAudio(wxString fileName)
         line++;
      }
 
-     delete phasingPos;
+     delete [] phasingPos;
      delete progressdialog;
 
      afCloseFile(aFile);

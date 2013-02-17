@@ -151,11 +151,19 @@ All files (*.*)|*.*" ), wxFD_OPEN);
                                m_weatherfax_pi.m_bIncludeHeadersInImage);
             decoder.DecodeFaxFromAudio(filename);
             FaxImageList images = decoder.images;
-            int i=0;
+            int i=0, n = -1;
             for(FaxImageList::iterator it = images.begin(); it !=  images.end(); it++) {
                 WeatherFaxImage *img = new WeatherFaxImage(**it);
-                m_lFaxes->Append(filenamec.GetFullName()+_("-")
-                                 +wxString::Format(_T("%d"), ++i), img);
+                n = m_lFaxes->Append(filenamec.GetFullName()+_("-")
+                                     +wxString::Format(_T("%d"), ++i), img);
+            }
+            if(n == -1) {
+                wxMessageDialog w( this, _("Failed to decode input file: ") + filename, _("Failed"),
+                                   wxOK | wxICON_ERROR );
+                w.ShowModal();
+            } else {
+                m_lFaxes->SetSelection(n);
+                EditFaxClicked(event);
             }
         } else {
             wxImage wimg;
@@ -187,8 +195,7 @@ void WeatherFaxDialog::EditFaxClicked( wxCommandEvent& event )
 
     if(image.m_Coords->p1.x < image.m_Coords->p2.x &&
        image.m_Coords->p1.y < image.m_Coords->p2.y &&
-       image.m_Coords->lat1 > image.m_Coords->lat2 &&
-       image.m_Coords->lon1 < image.m_Coords->lon2) {
+       image.m_Coords->lat1 > image.m_Coords->lat2) {
         m_weatherfax_pi.SetImageToRender(&image);
     } else {
         wxMessageDialog w( this, _("Image edit resulted in zero size (did you forget to set the coordinates?)"),
@@ -289,7 +296,9 @@ EditFaxDialog::~EditFaxDialog()
     if(sel == -1)
         sel = m_SelectedIndex;
 
-    if(sel == 0) {
+    if(sel == 0 &&
+       (m_newCoords.lat1 || m_newCoords.lat2 ||
+        m_newCoords.lon1 || m_newCoords.lon2)) {
         int cc = m_Coords.GetCount();
         wxString newname = m_newCoords->name, newnumberedname;
         for(int n=0, i=-1; i != cc; n++) {
