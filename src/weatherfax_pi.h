@@ -37,7 +37,7 @@
 #include <wx/fileconf.h>
 
 #define     PLUGIN_VERSION_MAJOR    0
-#define     PLUGIN_VERSION_MINOR    1
+#define     PLUGIN_VERSION_MINOR    2
 
 #define     MY_API_VERSION_MAJOR    1
 #define     MY_API_VERSION_MINOR    8
@@ -90,7 +90,9 @@ public:
       void SetWeatherFaxDialogY    (int x){ m_weatherfax_dialog_y = x;}
 
       void SetTransparency(int val) { m_iTransparency = val; }
+      void SetWhiteTransparency(int val) { m_iWhiteTransparency = val; }
       void SetInvert(bool val) { m_bInvert = val; }
+      void UpdateImage() { m_bNeedUpdateImageDC = m_bNeedUpdateImageGL = true; }
 
       void OnWeatherFaxDialogClose();
 
@@ -103,7 +105,8 @@ public:
       /* audio decoding options */
       int m_ImageWidth, m_BitsPerPixel, m_Carrier, m_Deviation, m_Filter;
       bool m_bSkipHeaderDetection, m_bIncludeHeadersInImage;
-    
+
+      wxFileConfig     *m_pconfig;
 private:
       void ReadImageToRender(WeatherFaxImage *image);
 
@@ -111,7 +114,6 @@ private:
       unsigned int m_gltexture;
       WeatherFaxImage *m_image;
 
-      wxFileConfig     *m_pconfig;
       bool              LoadConfig(void);
       bool              SaveConfig(void);
 
@@ -124,6 +126,7 @@ private:
       int               m_weatherfax_dialog_x, m_weatherfax_dialog_y;
       int               m_display_width, m_display_height;
       int               m_iTransparency;
+      int               m_iWhiteTransparency;
       bool              m_bInvert;
 
       int               m_leftclick_tool_id;

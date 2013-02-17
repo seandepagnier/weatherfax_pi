@@ -23,12 +23,10 @@
 #include <wx/slider.h>
 #include <wx/checkbox.h>
 #include <wx/dialog.h>
-#include <wx/bitmap.h>
-#include <wx/image.h>
-#include <wx/icon.h>
-#include <wx/statbmp.h>
 #include <wx/scrolwin.h>
 #include <wx/stattext.h>
+#include <wx/combobox.h>
+#include <wx/radiobut.h>
 #include <wx/spinctrl.h>
 #include <wx/choice.h>
 
@@ -54,6 +52,7 @@ class WeatherFaxDialogBase : public wxDialog
 		virtual void EditFaxClicked( wxCommandEvent& event ) { event.Skip(); }
 		virtual void DeleteFaxClicked( wxCommandEvent& event ) { event.Skip(); }
 		virtual void TransparencyChanged( wxScrollEvent& event ) { event.Skip(); }
+		virtual void WhiteTransparencyChanged( wxScrollEvent& event ) { event.Skip(); }
 		virtual void OnInvert( wxCommandEvent& event ) { event.Skip(); }
 		
 	
@@ -61,6 +60,7 @@ class WeatherFaxDialogBase : public wxDialog
 		wxStaticBoxSizer* sbFax;
 		wxListBox* m_lFaxes;
 		wxSlider* m_sTransparency;
+		wxSlider* m_sWhiteTransparency;
 		
 		WeatherFaxDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxCAPTION|wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxTAB_TRAVERSAL ); 
 		~WeatherFaxDialogBase();
@@ -76,16 +76,37 @@ class EditFaxDialogBase : public wxDialog
 	
 	protected:
 		wxScrolledWindow* m_swFaxArea;
-		wxStaticBitmap* m_bFaxBitmap;
-		wxButton* m_bSetCoordinates;
-		wxButton* m_bSplit;
+		wxStaticText* m_staticText10;
+		wxComboBox* m_cbCoordSet;
+		wxButton* m_bRemoveCoordSet;
+		wxRadioButton* m_rbCoord1;
+		wxSpinCtrl* m_sCoord1X;
+		wxSpinCtrl* m_sCoord1Y;
+		wxStaticText* m_staticText6;
+		wxSpinCtrl* m_sCoord1Lat;
+		wxSpinCtrl* m_sCoord1Lon;
+		wxRadioButton* m_rbCoord2;
+		wxSpinCtrl* m_sCoord2X;
+		wxSpinCtrl* m_sCoord2Y;
+		wxStaticText* m_staticText8;
+		wxSpinCtrl* m_sCoord2Lat;
+		wxSpinCtrl* m_sCoord2Lon;
+		wxButton* m_bSplitImage;
+		wxChoice* m_cFilter;
+		wxStaticText* m_staticText9;
+		wxSlider* m_sPhasing;
 		wxStdDialogButtonSizer* m_sdbSizer3;
 		wxButton* m_sdbSizer3OK;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void BitmapClick( wxMouseEvent& event ) { event.Skip(); }
-		virtual void SetCoordinates( wxCommandEvent& event ) { event.Skip(); }
-		virtual void Split( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnBitmapClick( wxMouseEvent& event ) { event.Skip(); }
+		virtual void OnPaintImage( wxPaintEvent& event ) { event.Skip(); }
+		virtual void OnCoordSet( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnCoordText( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnRemoveCoords( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnSpin( wxSpinEvent& event ) { event.Skip(); }
+		virtual void OnSplitImage( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnPhasing( wxScrollEvent& event ) { event.Skip(); }
 		
 	
 	public:

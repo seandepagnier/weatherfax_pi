@@ -56,8 +56,11 @@ WeatherFaxDialogBase::WeatherFaxDialogBase( wxWindow* parent, wxWindowID id, con
 	wxStaticBoxSizer* sbSizer4;
 	sbSizer4 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Transparency") ), wxVERTICAL );
 	
-	m_sTransparency = new wxSlider( this, wxID_ANY, 255, 0, 255, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL|wxSL_INVERSE );
-	sbSizer4->Add( m_sTransparency, 0, wxBOTTOM|wxEXPAND|wxTOP, 5 );
+	m_sTransparency = new wxSlider( this, wxID_ANY, 50, 0, 255, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	sbSizer4->Add( m_sTransparency, 0, wxEXPAND, 5 );
+	
+	m_sWhiteTransparency = new wxSlider( this, wxID_ANY, 50, 0, 255, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	sbSizer4->Add( m_sWhiteTransparency, 0, wxEXPAND, 5 );
 	
 	m_cInvert = new wxCheckBox( this, wxID_ANY, _("Invert"), wxDefaultPosition, wxDefaultSize, 0 );
 	sbSizer4->Add( m_cInvert, 0, wxALL, 5 );
@@ -86,6 +89,15 @@ WeatherFaxDialogBase::WeatherFaxDialogBase( wxWindow* parent, wxWindowID id, con
 	m_sTransparency->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
 	m_sTransparency->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
 	m_sTransparency->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Connect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Connect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Connect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
 	m_cInvert->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::OnInvert ), NULL, this );
 }
 
@@ -105,6 +117,15 @@ WeatherFaxDialogBase::~WeatherFaxDialogBase()
 	m_sTransparency->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
 	m_sTransparency->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
 	m_sTransparency->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
 	m_cInvert->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::OnInvert ), NULL, this );
 	
 }
@@ -122,38 +143,118 @@ EditFaxDialogBase::EditFaxDialogBase( wxWindow* parent, wxWindowID id, const wxS
 	
 	m_swFaxArea = new wxScrolledWindow( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxHSCROLL|wxVSCROLL );
 	m_swFaxArea->SetScrollRate( 5, 5 );
-	wxFlexGridSizer* fgSizer17;
-	fgSizer17 = new wxFlexGridSizer( 0, 2, 0, 0 );
-	fgSizer17->SetFlexibleDirection( wxBOTH );
-	fgSizer17->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-	
-	m_bFaxBitmap = new wxStaticBitmap( m_swFaxArea, wxID_ANY, wxNullBitmap, wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer17->Add( m_bFaxBitmap, 0, wxALL|wxEXPAND, 5 );
-	
-	
-	m_swFaxArea->SetSizer( fgSizer17 );
-	m_swFaxArea->Layout();
-	fgSizer17->Fit( m_swFaxArea );
 	fgSizer14->Add( m_swFaxArea, 1, wxALL|wxEXPAND, 5 );
 	
-	wxBoxSizer* bSizer5;
-	bSizer5 = new wxBoxSizer( wxHORIZONTAL );
+	wxStaticBoxSizer* sbSizer4;
+	sbSizer4 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Configure Image Coordinates") ), wxVERTICAL );
 	
-	m_bSetCoordinates = new wxButton( this, wxID_ANY, _("Set Coordinates"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer5->Add( m_bSetCoordinates, 0, wxALL, 5 );
+	wxFlexGridSizer* fgSizer9;
+	fgSizer9 = new wxFlexGridSizer( 0, 1, 0, 0 );
+	fgSizer9->AddGrowableRow( 1 );
+	fgSizer9->SetFlexibleDirection( wxBOTH );
+	fgSizer9->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_bSplit = new wxButton( this, wxID_ANY, _("Split"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer5->Add( m_bSplit, 0, wxALL, 5 );
+	wxFlexGridSizer* fgSizer8;
+	fgSizer8 = new wxFlexGridSizer( 0, 3, 0, 0 );
+	fgSizer8->SetFlexibleDirection( wxBOTH );
+	fgSizer8->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_staticText10 = new wxStaticText( this, wxID_ANY, _("Coord Set"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText10->Wrap( -1 );
+	fgSizer8->Add( m_staticText10, 0, wxALL, 5 );
+	
+	m_cbCoordSet = new wxComboBox( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL, 0 ); 
+	fgSizer8->Add( m_cbCoordSet, 0, wxALL, 5 );
+	
+	m_bRemoveCoordSet = new wxButton( this, wxID_ANY, _("Remove"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer8->Add( m_bRemoveCoordSet, 0, wxALL, 5 );
 	
 	
-	fgSizer14->Add( bSizer5, 1, wxEXPAND, 5 );
+	fgSizer9->Add( fgSizer8, 1, wxEXPAND, 5 );
+	
+	wxFlexGridSizer* fgSizer7;
+	fgSizer7 = new wxFlexGridSizer( 0, 6, 0, 0 );
+	fgSizer7->SetFlexibleDirection( wxBOTH );
+	fgSizer7->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_rbCoord1 = new wxRadioButton( this, wxID_ANY, _("Coord 1 X/Y"), wxDefaultPosition, wxDefaultSize, wxRB_GROUP );
+	fgSizer7->Add( m_rbCoord1, 0, wxALL, 5 );
+	
+	m_sCoord1X = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 10, 0 );
+	fgSizer7->Add( m_sCoord1X, 0, wxALL, 5 );
+	
+	m_sCoord1Y = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 10, 0 );
+	fgSizer7->Add( m_sCoord1Y, 0, wxALL, 5 );
+	
+	m_staticText6 = new wxStaticText( this, wxID_ANY, _("Lat/Lon"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText6->Wrap( -1 );
+	fgSizer7->Add( m_staticText6, 0, wxALL, 5 );
+	
+	m_sCoord1Lat = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -90, 90, 0 );
+	fgSizer7->Add( m_sCoord1Lat, 0, wxALL, 5 );
+	
+	m_sCoord1Lon = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -180, 180, 0 );
+	fgSizer7->Add( m_sCoord1Lon, 0, wxALL, 5 );
+	
+	m_rbCoord2 = new wxRadioButton( this, wxID_ANY, _("Coord 2 X/Y"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer7->Add( m_rbCoord2, 0, wxALL, 5 );
+	
+	m_sCoord2X = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 10, 0 );
+	fgSizer7->Add( m_sCoord2X, 0, wxALL, 5 );
+	
+	m_sCoord2Y = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 10, 0 );
+	fgSizer7->Add( m_sCoord2Y, 0, wxALL, 5 );
+	
+	m_staticText8 = new wxStaticText( this, wxID_ANY, _("Lat/Lon"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText8->Wrap( -1 );
+	fgSizer7->Add( m_staticText8, 0, wxALL, 5 );
+	
+	m_sCoord2Lat = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -90, 90, 0 );
+	fgSizer7->Add( m_sCoord2Lat, 0, wxALL, 5 );
+	
+	m_sCoord2Lon = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -180, 180, 0 );
+	fgSizer7->Add( m_sCoord2Lon, 0, wxALL, 5 );
+	
+	
+	fgSizer9->Add( fgSizer7, 1, wxEXPAND, 5 );
+	
+	
+	sbSizer4->Add( fgSizer9, 1, 0, 5 );
+	
+	
+	fgSizer14->Add( sbSizer4, 1, wxEXPAND, 5 );
+	
+	wxFlexGridSizer* fgSizer10;
+	fgSizer10 = new wxFlexGridSizer( 1, 0, 0, 0 );
+	fgSizer10->AddGrowableCol( 3 );
+	fgSizer10->SetFlexibleDirection( wxHORIZONTAL );
+	fgSizer10->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_bSplitImage = new wxButton( this, wxID_ANY, _("Split Image"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer10->Add( m_bSplitImage, 0, wxALL, 5 );
+	
+	wxString m_cFilterChoices[] = { _("No Filter"), _("Lowpass 1"), _("Lowpass 2") };
+	int m_cFilterNChoices = sizeof( m_cFilterChoices ) / sizeof( wxString );
+	m_cFilter = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_cFilterNChoices, m_cFilterChoices, 0 );
+	m_cFilter->SetSelection( 0 );
+	fgSizer10->Add( m_cFilter, 0, wxALL, 5 );
+	
+	m_staticText9 = new wxStaticText( this, wxID_ANY, _("Phasing"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText9->Wrap( -1 );
+	fgSizer10->Add( m_staticText9, 0, wxALL, 5 );
+	
+	m_sPhasing = new wxSlider( this, wxID_ANY, 0, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL|wxSL_INVERSE );
+	fgSizer10->Add( m_sPhasing, 0, wxALL|wxEXPAND, 5 );
 	
 	m_sdbSizer3 = new wxStdDialogButtonSizer();
 	m_sdbSizer3OK = new wxButton( this, wxID_OK );
 	m_sdbSizer3->AddButton( m_sdbSizer3OK );
 	m_sdbSizer3->Realize();
 	
-	fgSizer14->Add( m_sdbSizer3, 1, wxEXPAND, 5 );
+	fgSizer10->Add( m_sdbSizer3, 1, wxEXPAND, 5 );
+	
+	
+	fgSizer14->Add( fgSizer10, 1, wxEXPAND|wxFIXED_MINSIZE, 5 );
 	
 	
 	this->SetSizer( fgSizer14 );
@@ -162,17 +263,49 @@ EditFaxDialogBase::EditFaxDialogBase( wxWindow* parent, wxWindowID id, const wxS
 	this->Centre( wxBOTH );
 	
 	// Connect Events
-	m_bFaxBitmap->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( EditFaxDialogBase::BitmapClick ), NULL, this );
-	m_bSetCoordinates->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxDialogBase::SetCoordinates ), NULL, this );
-	m_bSplit->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxDialogBase::Split ), NULL, this );
+	m_swFaxArea->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( EditFaxDialogBase::OnBitmapClick ), NULL, this );
+	m_swFaxArea->Connect( wxEVT_PAINT, wxPaintEventHandler( EditFaxDialogBase::OnPaintImage ), NULL, this );
+	m_cbCoordSet->Connect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( EditFaxDialogBase::OnCoordSet ), NULL, this );
+	m_cbCoordSet->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( EditFaxDialogBase::OnCoordText ), NULL, this );
+	m_bRemoveCoordSet->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxDialogBase::OnRemoveCoords ), NULL, this );
+	m_sCoord1X->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxDialogBase::OnSpin ), NULL, this );
+	m_sCoord1Y->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxDialogBase::OnSpin ), NULL, this );
+	m_sCoord2X->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxDialogBase::OnSpin ), NULL, this );
+	m_sCoord2Y->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxDialogBase::OnSpin ), NULL, this );
+	m_bSplitImage->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxDialogBase::OnSplitImage ), NULL, this );
+	m_sPhasing->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
+	m_sPhasing->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
+	m_sPhasing->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
+	m_sPhasing->Connect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
+	m_sPhasing->Connect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
+	m_sPhasing->Connect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
+	m_sPhasing->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
+	m_sPhasing->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
+	m_sPhasing->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
 }
 
 EditFaxDialogBase::~EditFaxDialogBase()
 {
 	// Disconnect Events
-	m_bFaxBitmap->Disconnect( wxEVT_LEFT_DOWN, wxMouseEventHandler( EditFaxDialogBase::BitmapClick ), NULL, this );
-	m_bSetCoordinates->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxDialogBase::SetCoordinates ), NULL, this );
-	m_bSplit->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxDialogBase::Split ), NULL, this );
+	m_swFaxArea->Disconnect( wxEVT_LEFT_DOWN, wxMouseEventHandler( EditFaxDialogBase::OnBitmapClick ), NULL, this );
+	m_swFaxArea->Disconnect( wxEVT_PAINT, wxPaintEventHandler( EditFaxDialogBase::OnPaintImage ), NULL, this );
+	m_cbCoordSet->Disconnect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( EditFaxDialogBase::OnCoordSet ), NULL, this );
+	m_cbCoordSet->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( EditFaxDialogBase::OnCoordText ), NULL, this );
+	m_bRemoveCoordSet->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxDialogBase::OnRemoveCoords ), NULL, this );
+	m_sCoord1X->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxDialogBase::OnSpin ), NULL, this );
+	m_sCoord1Y->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxDialogBase::OnSpin ), NULL, this );
+	m_sCoord2X->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxDialogBase::OnSpin ), NULL, this );
+	m_sCoord2Y->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxDialogBase::OnSpin ), NULL, this );
+	m_bSplitImage->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxDialogBase::OnSplitImage ), NULL, this );
+	m_sPhasing->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
+	m_sPhasing->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
+	m_sPhasing->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
+	m_sPhasing->Disconnect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
+	m_sPhasing->Disconnect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
+	m_sPhasing->Disconnect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
+	m_sPhasing->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
+	m_sPhasing->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
+	m_sPhasing->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
 	
 }
 

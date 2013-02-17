@@ -26,32 +26,36 @@
  */
 
 #include "weatherfax_pi.h"
-#include "WeatherFaxUI.h"
+
+struct WeatherFaxImageCoordinates
+{
+    WeatherFaxImageCoordinates(wxString n) : name(n) {}
+    wxString name;
+    wxPoint p1, p2;
+    double lat1, lon1, lat2, lon2;
+};
+
+WX_DECLARE_LIST(WeatherFaxImageCoordinates, WeatherFaxImageCoordinateList);
 
 class WeatherFaxImage : public wxImage
 {
 public:
-    WeatherFaxImage(wxImage img) : wxImage(img), valid_location(false)
-    {
-#if 0 /* hack for quick testing */
-        p1.x = 0;   p1.y = 0;
-        p2.x = 256; p2.y = 256;
-        lat1 = 0;   lon1 = 150;
-        lat2 = -30; lon2 = 180;
-        valid_location = true;
-#endif
+    WeatherFaxImage(wxImage img) : wxImage(img), m_Coords(NULL), phasing(0) {  }
+    WeatherFaxImageCoordinates *m_Coords;
+
+    wxImage PhasedImage() {
+        return wxImage(GetWidth(), GetHeight() - 1,
+                       GetData() + phasing*3, true);
     }
 
-    bool valid_location;
-    wxPoint p1, p2;
-    double lat1, lon1, lat2, lon2;
+    int phasing;
 };
 
 class WeatherFaxDialog: public WeatherFaxDialogBase
 {
 public:
-    WeatherFaxDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
-        : WeatherFaxDialogBase( parent ), m_weatherfax_pi(_weatherfax_pi) {}
+    WeatherFaxDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent);
+
     ~WeatherFaxDialog();
 
     void OnListBox( wxCommandEvent& event );
@@ -59,38 +63,52 @@ public:
     void EditFaxClicked( wxCommandEvent& event );
     void DeleteFaxClicked( wxCommandEvent& event );
     void TransparencyChanged( wxScrollEvent& event );
+    void WhiteTransparencyChanged( wxScrollEvent& event );
     void OnInvert( wxCommandEvent& event );
+
+    WeatherFaxImageCoordinateList m_Coords;
 
 protected:
     weatherfax_pi &m_weatherfax_pi;
 };
 
-enum EditState {NONE, COORD1, COORD2, SPLIT};
-class EditFaxDialog: public EditFaxDialogBase
+enum EditState {COORD, SPLITIMAGE};
+class EditFaxDialog : public EditFaxDialogBase
 {
 public:
-    EditFaxDialog( WeatherFaxImage &img, wxString name, WeatherFaxDialog &parent)
-        : EditFaxDialogBase( &parent ), m_parent(parent), m_name(name), m_splits(0),
-        m_EditState(NONE), m_img(img) { UpdateBitmap(); }
+    EditFaxDialog( WeatherFaxImage &img, wxString name, WeatherFaxDialog &parent,
+                   WeatherFaxImageCoordinateList &coords);
+    ~EditFaxDialog();
 
     void OnSize( wxSizeEvent& event ) { Fit(); }
-    void BitmapClick( wxMouseEvent& event );
-    void SetCoordinates( wxCommandEvent& event );
-    void Crop( wxCommandEvent& event );
-    void Split( wxCommandEvent& event );
-    void Invert( wxCommandEvent& event );
+    void OnBitmapClick( wxMouseEvent& event );
+    void OnCoordSet( wxCommandEvent& event );
+    void OnCoordText( wxCommandEvent& event );
+    void OnRemoveCoords( wxCommandEvent& event );
+    void OnSplitImage( wxCommandEvent& event );
+    void OnPhasing( wxScrollEvent& event );
+    void StoreCoords();
 
 protected:
 
+    wxString NewCoordName();
+    void SetCoords();
+    void OnSpin( wxSpinEvent& event );
+    void UpdateCoords();
+    void OnPaintImage( wxPaintEvent& event);
+
     WeatherFaxDialog &m_parent;
+    WeatherFaxImage &m_img;
+    WeatherFaxImageCoordinates *&m_curCoords;
 
     wxString m_name;
     int m_splits;
 
     EditState m_EditState;
     
-    void UpdateBitmap();
+    WeatherFaxImageCoordinates *m_newCoords;
+    WeatherFaxImageCoordinateList &m_Coords;
 
-    WeatherFaxImage &m_img;
+    bool m_skippaint;
+    int m_SelectedIndex;
 };
-

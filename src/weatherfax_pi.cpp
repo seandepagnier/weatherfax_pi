@@ -210,6 +210,7 @@ void weatherfax_pi::OnToolbarToolCallback(int id)
       {
             m_pWeatherFaxDialog = new WeatherFaxDialog(*this, m_parent_window);
             m_pWeatherFaxDialog->m_sTransparency->SetValue(m_iTransparency);
+            m_pWeatherFaxDialog->m_sWhiteTransparency->SetValue(m_iWhiteTransparency);
             m_pWeatherFaxDialog->Move(wxPoint(m_weatherfax_dialog_x, m_weatherfax_dialog_y));
       }
 
@@ -221,14 +222,17 @@ void weatherfax_pi::OnToolbarToolCallback(int id)
 
 bool weatherfax_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
 {
-    if(!m_image)
-        return true;
+    if(!m_image || !m_image->m_Coords)
+        return false;
 
     wxPoint p1, p2;
-    GetCanvasPixLL( vp, &p1, m_image->lat1, m_image->lon1 );
-    GetCanvasPixLL( vp, &p2, m_image->lat2, m_image->lon2 );
+    GetCanvasPixLL( vp, &p1, m_image->m_Coords->lat1, m_image->m_Coords->lon1 );
+    GetCanvasPixLL( vp, &p2, m_image->m_Coords->lat2, m_image->m_Coords->lon2 );
 
     int w = p2.x-p1.x, h = p2.y-p1.y;
+
+    if(w < 0 || h < 0)
+        return false;
 
     if(!m_CacheBitmap || m_bNeedUpdateImageDC ||
        m_CacheBitmap->GetWidth() != w || m_CacheBitmap->GetHeight() != h) {
@@ -241,10 +245,13 @@ bool weatherfax_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
         if(w > 8192 || h > 8192)
             return false;
 
-        int sw = m_image->p2.x-m_image->p1.x, sh = m_image->p2.y-m_image->p1.y;
-        wxRect r(m_image->p1.x, m_image->p1.y, sw, sh);
-        wxImage subimg = m_image->GetSubImage(r);
+        int sw = m_image->m_Coords->p2.x-m_image->m_Coords->p1.x;
+        int sh = m_image->m_Coords->p2.y-m_image->m_Coords->p1.y;
+        wxRect r(m_image->m_Coords->p1.x, m_image->m_Coords->p1.y, sw, sh);
+        wxImage subimg = m_image->PhasedImage().GetSubImage(r);
 
+        if(!subimg.IsOk())
+            return false;
         /* TODO: convert to wxImage::Scale) */
         /* from subimg (sw by sh) to stretchedimg (w by h) */
         unsigned char *subdata = subimg.GetData();
@@ -255,7 +262,11 @@ bool weatherfax_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
                 int sx = x*sw/w;
                 for(int c=0; c<3; c++) {
                     wxUint8 v = subdata[3*(sw*sy+sx)+c];
-                    stretcheddata[3*(w*y+x)+c] = m_bInvert ? 255-v : v;
+                    if(v > 255-m_iWhiteTransparency)
+                        v = 255;
+                    else if(m_bInvert)
+                        v = 255-v;
+                    stretcheddata[3*(w*y+x)+c] = v;
                 }
             }
         }
@@ -263,20 +274,28 @@ bool weatherfax_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
         wxImage stretchedimg(w, h, stretcheddata);
 
         m_CacheBitmap = new wxBitmap(stretchedimg);
+        m_CacheBitmap->SetMask(new wxMask(*m_CacheBitmap, wxColour(255, 255, 255)));
     }
 
-    dc.DrawBitmap(*m_CacheBitmap, p1.x, p1.y);
+    dc.DrawBitmap(*m_CacheBitmap, p1.x, p1.y, true);
 
     return true;
 }
 
 bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
 {
-    if(!m_image)
-        return true;
-
-    glPushAttrib(GL_COLOR_BUFFER_BIT | GL_ENABLE_BIT | GL_POLYGON_BIT | GL_TEXTURE_BIT);
+    if(!m_image || !m_image->m_Coords)
+        return false;
     
+    wxPoint p1, p2;
+    GetCanvasPixLL( vp, &p1, m_image->m_Coords->lat1, m_image->m_Coords->lon1 );
+    GetCanvasPixLL( vp, &p2, m_image->m_Coords->lat2, m_image->m_Coords->lon2 );
+    int w = m_image->m_Coords->p2.x - m_image->m_Coords->p1.x;
+    int h = m_image->m_Coords->p2.y - m_image->m_Coords->p1.y;
+
+    if(w < 0 || h < 0)
+        return false;
+
     if(m_bNeedUpdateImageGL) {
         m_bNeedUpdateImageGL = false;
 
@@ -295,45 +314,50 @@ bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
         glPixelStorei( GL_UNPACK_SKIP_ROWS, 0 );
 #endif
         
-        wxRect r(m_image->p1.x,  m_image->p1.y, m_image->p2.x-m_image->p1.x, m_image->p2.y-m_image->p1.y);
-        wxImage subimg = m_image->GetSubImage(r);
+        wxRect r(m_image->m_Coords->p1.x, m_image->m_Coords->p1.y,
+                 m_image->m_Coords->p2.x - m_image->m_Coords->p1.x,
+                 m_image->m_Coords->p2.y - m_image->m_Coords->p1.y);
+        wxImage subimg = m_image->PhasedImage().GetSubImage(r);
+
+        if(!subimg.IsOk())
+            return false;
 
         unsigned char *data = subimg.GetData();
         unsigned char *idata = NULL;
-        if(m_pWeatherFaxDialog && !m_bInvert) {
-            int size = subimg.GetWidth()*subimg.GetHeight()*3;
-            idata = new unsigned char[size];
-            for(unsigned int i=0; i<size; i++)
-                idata[i] = 255-data[i];
-            data = idata;
+        unsigned int size = subimg.GetWidth()*subimg.GetHeight();
+        idata = new unsigned char[4*size];
+        for(unsigned int i=0; i<size; i++) {
+            wxUint8 r = data[3*i + 0], g = data[3*i + 1], b = data[3*i + 2];
+            if(m_bInvert)
+                idata[4*i + 0] = r,  idata[4*i + 1] = g, idata[4*i + 2] = b;
+            else
+                idata[4*i + 0] = 255-r,  idata[4*i + 1] = 255-g, idata[4*i + 2] = 255-b;
+
+            idata[4*i+3] = 255-m_iWhiteTransparency+idata[4*i+0]*m_iWhiteTransparency/255; /* alpha */
         }
 
-        glTexImage2D(GL_TEXTURE_RECTANGLE_ARB, 0, GL_RGB,
+        glTexImage2D(GL_TEXTURE_RECTANGLE_ARB, 0, GL_RGBA,
                      subimg.GetWidth(), subimg.GetHeight(),
-                     0, GL_RGB, GL_UNSIGNED_BYTE, data);
+                     0, GL_RGBA, GL_UNSIGNED_BYTE, idata);
         delete [] idata;
     }
         
+    glPushAttrib(GL_COLOR_BUFFER_BIT | GL_ENABLE_BIT | GL_POLYGON_BIT | GL_TEXTURE_BIT);
+
     glEnable(GL_TEXTURE_RECTANGLE_ARB);
     glEnable( GL_BLEND );
     glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
     glDisable( GL_MULTISAMPLE );
     glTexEnvi( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_BLEND);
-    glColor4ub(255, 255, 255, m_iTransparency);
+    glColor4ub(255, 255, 255, 255-m_iTransparency);
     glBindTexture(GL_TEXTURE_RECTANGLE_ARB, m_gltexture);
     
-    wxPoint p1, p2;
-    GetCanvasPixLL( vp, &p1, m_image->lat1, m_image->lon1 );
-    GetCanvasPixLL( vp, &p2, m_image->lat2, m_image->lon2 );
-    int w = m_image->p2.x - m_image->p1.x, h = m_image->p2.y - m_image->p1.y;
-
     glBegin(GL_QUADS);
     glTexCoord2i(0, 0), glVertex2i(p1.x, p1.y);
     glTexCoord2i(w, 0), glVertex2i(p2.x, p1.y);
     glTexCoord2i(w, h), glVertex2i(p2.x, p2.y);
     glTexCoord2i(0, h), glVertex2i(p1.x, p2.y);
     glEnd();
-
 
     glPopAttrib();
 
@@ -342,22 +366,22 @@ bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
 
 void weatherfax_pi::SetImageToRender(WeatherFaxImage *image)
 {
-    if(m_image != image) {
-        m_image = image;
-        m_bNeedUpdateImageDC = true;
-        m_bNeedUpdateImageGL = true;
-    }
+    m_image = image;
+    m_bNeedUpdateImageDC = true;
+    m_bNeedUpdateImageGL = true;
+
     RequestRefresh( m_parent_window );
 }
 
 bool weatherfax_pi::LoadConfig(void)
 {
-      wxFileConfig *pConf = (wxFileConfig *)m_pconfig;
+      wxFileConfig *pConf = m_pconfig;
 
       if(pConf)
       {
             pConf->SetPath ( _T( "/Settings/WeatherFax" ) );
             pConf->Read ( _T( "Transparency" ),  &m_iTransparency, 64 );
+            pConf->Read ( _T( "WhiteTransparency" ),  &m_iWhiteTransparency, 64 );
             pConf->Read ( _T( "Invert" ),  &m_bInvert, 0 );
             pConf->Read ( _T( "Path" ),  &m_path, _T ( "" ) );
 
@@ -385,12 +409,13 @@ bool weatherfax_pi::LoadConfig(void)
 
 bool weatherfax_pi::SaveConfig(void)
 {
-      wxFileConfig *pConf = (wxFileConfig *)m_pconfig;
+      wxFileConfig *pConf = m_pconfig;
 
       if(pConf)
       {
             pConf->SetPath ( _T ( "/Settings/WeatherFax" ) );
             pConf->Write ( _T ( "Transparency" ), m_iTransparency );
+            pConf->Write ( _T ( "WhiteTransparency" ), m_iWhiteTransparency );
             pConf->Write ( _T ( "Invert" ), m_bInvert );
             pConf->Write ( _T ( "Path" ), m_path );
 
