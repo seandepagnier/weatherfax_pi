@@ -297,8 +297,8 @@ EditFaxDialog::~EditFaxDialog()
         sel = m_SelectedIndex;
 
     if(sel == 0 &&
-       (m_newCoords.lat1 || m_newCoords.lat2 ||
-        m_newCoords.lon1 || m_newCoords.lon2)) {
+       (m_newCoords->lat1 || m_newCoords->lat2 ||
+        m_newCoords->lon1 || m_newCoords->lon2)) {
         int cc = m_Coords.GetCount();
         wxString newname = m_newCoords->name, newnumberedname;
         for(int n=0, i=-1; i != cc; n++) {
