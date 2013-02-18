@@ -132,7 +132,7 @@ void WeatherFaxDialog::NewFaxClicked( wxCommandEvent& event )
           _ ( "\
 WAV files (*.wav)|*.WAV;*.wav|\
 Supported Image Files|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;\
-*.TIF;*.tif;*.TIFF;*.tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;\
+*.TIF;*.tif;*.TIFF;*.tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;\
 *.PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga|\
 All files (*.*)|*.*" ), wxFD_OPEN);
 
