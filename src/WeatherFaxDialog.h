@@ -72,7 +72,7 @@ protected:
     weatherfax_pi &m_weatherfax_pi;
 };
 
-enum EditState {COORD, SPLITIMAGE};
+enum EditState {COORDINATES, SPLITIMAGE};
 class EditFaxDialog : public EditFaxDialogBase
 {
 public:

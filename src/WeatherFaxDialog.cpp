@@ -241,7 +241,7 @@ EditFaxDialog::EditFaxDialog( WeatherFaxImage &img, wxString name,
     : EditFaxDialogBase( &parent ), m_parent(parent),
       m_img(img), m_curCoords(img.m_Coords),
       m_name(name), m_splits(0),
-      m_EditState(COORD), m_Coords(coords)
+      m_EditState(COORDINATES), m_Coords(coords)
 {
     m_swFaxArea->SetScrollbars(1, 1, m_img.GetWidth(), m_img.GetHeight()-1);
 
@@ -321,7 +321,7 @@ EditFaxDialog::~EditFaxDialog()
 void EditFaxDialog::OnBitmapClick( wxMouseEvent& event )
 {
     switch(m_EditState) {
-        case COORD:
+        case COORDINATES:
         {
             wxPoint p = m_swFaxArea->CalcUnscrolledPosition(event.GetPosition());
 
@@ -374,7 +374,7 @@ void EditFaxDialog::OnBitmapClick( wxMouseEvent& event )
             wxRect r2(0, 0, m_img.GetWidth(), split.y);
             m_img = m_img.GetSubImage(r2);
             Refresh();
-            m_EditState = COORD;
+            m_EditState = COORDINATES;
         } break;
     }
 }
@@ -418,7 +418,7 @@ void EditFaxDialog::OnSplitImage( wxCommandEvent& event )
     if(w.ShowModal() == wxID_OK)
         m_EditState = SPLITIMAGE;
     else
-        m_EditState = COORD;
+        m_EditState = COORDINATES;
 }
 
 void EditFaxDialog::OnPhasing( wxScrollEvent& event )
