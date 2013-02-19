@@ -37,6 +37,10 @@
 #include "compression.h"
 #include "util.h"
 
+#ifdef __MSVC__
+#define isnan _isnan
+#endif
+
 bool _af_pcm_format_ok (AudioFormat *f)
 {
 	assert(!isnan(f->pcm.slope));
