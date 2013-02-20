@@ -233,6 +233,9 @@ EditFaxDialogBase::EditFaxDialogBase( wxWindow* parent, wxWindowID id, const wxS
 	m_bSplitImage = new wxButton( this, wxID_ANY, _("Split Image"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer10->Add( m_bSplitImage, 0, wxALL, 5 );
 	
+	m_bPolarToMercator = new wxButton( this, wxID_ANY, _("Polar->Mercator"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer10->Add( m_bPolarToMercator, 0, wxALL, 5 );
+	
 	wxString m_cFilterChoices[] = { _("No Filter"), _("Lowpass 1"), _("Lowpass 2") };
 	int m_cFilterNChoices = sizeof( m_cFilterChoices ) / sizeof( wxString );
 	m_cFilter = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_cFilterNChoices, m_cFilterChoices, 0 );
@@ -273,6 +276,7 @@ EditFaxDialogBase::EditFaxDialogBase( wxWindow* parent, wxWindowID id, const wxS
 	m_sCoord2X->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxDialogBase::OnSpin ), NULL, this );
 	m_sCoord2Y->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxDialogBase::OnSpin ), NULL, this );
 	m_bSplitImage->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxDialogBase::OnSplitImage ), NULL, this );
+	m_bPolarToMercator->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxDialogBase::OnPolarToMercator ), NULL, this );
 	m_sPhasing->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
 	m_sPhasing->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
 	m_sPhasing->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
@@ -297,6 +301,7 @@ EditFaxDialogBase::~EditFaxDialogBase()
 	m_sCoord2X->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxDialogBase::OnSpin ), NULL, this );
 	m_sCoord2Y->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxDialogBase::OnSpin ), NULL, this );
 	m_bSplitImage->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxDialogBase::OnSplitImage ), NULL, this );
+	m_bPolarToMercator->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxDialogBase::OnPolarToMercator ), NULL, this );
 	m_sPhasing->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
 	m_sPhasing->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );
 	m_sPhasing->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( EditFaxDialogBase::OnPhasing ), NULL, this );

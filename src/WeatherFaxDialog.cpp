@@ -136,8 +136,13 @@ Supported Image Files|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;\
 *.PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga|\
 All files (*.*)|*.*" ), wxFD_OPEN);
 
+#if 0
     if( openDialog.ShowModal() == wxID_OK ) {
         wxString filename = openDialog.GetPath();
+#else
+    if(1) {
+        wxString filename = _("/home/sean/fax2.png");
+#endif
         wxFileName filenamec(filename);
         m_weatherfax_pi.m_path = openDialog.GetDirectory();        
         if(filenamec.GetExt() == _("wav") || filenamec.GetExt() == _("WAV")) {
@@ -239,22 +244,22 @@ EditFaxDialog::EditFaxDialog( WeatherFaxImage &img, wxString name,
                               WeatherFaxDialog &parent,
                               WeatherFaxImageCoordinateList &coords)
     : EditFaxDialogBase( &parent ), m_parent(parent),
-      m_img(img), m_curCoords(img.m_Coords),
+      m_wfimg(img), m_curCoords(img.m_Coords),
       m_name(name), m_splits(0),
       m_EditState(COORDINATES), m_Coords(coords)
 {
-    m_swFaxArea->SetScrollbars(1, 1, m_img.GetWidth(), m_img.GetHeight()-1);
+    m_swFaxArea->SetScrollbars(1, 1, m_wfimg.m_img.GetWidth(), m_wfimg.m_img.GetHeight()-1);
 
-    m_sPhasing->SetRange(0, m_img.GetWidth()-1);
-    m_sPhasing->SetValue(m_img.phasing);
+    m_sPhasing->SetRange(0, m_wfimg.m_img.GetWidth()-1);
+    m_sPhasing->SetValue(m_wfimg.phasing);
 
     m_rbCoord1->SetValue(true);
     m_rbCoord2->SetValue(false);
 
     m_sCoord1X->SetRange(0, 0);
-    m_sCoord2X->SetRange(m_img.GetWidth(), m_img.GetWidth());
+    m_sCoord2X->SetRange(m_wfimg.m_img.GetWidth(), m_wfimg.m_img.GetWidth());
     m_sCoord1Y->SetRange(0, 0);
-    m_sCoord2Y->SetRange(m_img.GetHeight()-1, m_img.GetHeight()-1);
+    m_sCoord2Y->SetRange(m_wfimg.m_img.GetHeight()-1, m_wfimg.m_img.GetHeight()-1);
 
     UpdateCoords();
 
@@ -276,7 +281,7 @@ EditFaxDialog::EditFaxDialog( WeatherFaxImage &img, wxString name,
     m_cbCoordSet->Append(newcoordname);
     int sel = 0;
     for(int i=0; i<cc; i++) {
-        if(m_img.m_Coords == m_Coords[i])
+        if(m_curCoords == m_Coords[i])
             sel = i+1;
         m_cbCoordSet->Append(m_Coords[i]->name);
     }
@@ -284,6 +289,8 @@ EditFaxDialog::EditFaxDialog( WeatherFaxImage &img, wxString name,
     m_cbCoordSet->SetSelection(sel);
     m_newCoords = new WeatherFaxImageCoordinates(newcoordname);
     m_newCoords->lat1 = m_newCoords->lat2 = m_newCoords->lon1 = m_newCoords->lon2 = 0;
+
+
 
     SetCoords();
 }
@@ -321,61 +328,70 @@ EditFaxDialog::~EditFaxDialog()
 void EditFaxDialog::OnBitmapClick( wxMouseEvent& event )
 {
     switch(m_EditState) {
-        case COORDINATES:
-        {
-            wxPoint p = m_swFaxArea->CalcUnscrolledPosition(event.GetPosition());
+    case COORDINATES:
+    {
+        wxPoint p = m_swFaxArea->CalcUnscrolledPosition(event.GetPosition());
+        
+        if(m_rbCoord1->GetValue()) {
+            m_sCoord1X->SetRange(p.x, p.x);
+            m_sCoord1Y->SetRange(p.y, p.y);
+            m_rbCoord1->SetValue(false);
+            m_rbCoord2->SetValue(true);
+        } else if(m_rbCoord2->GetValue()) {
+            m_sCoord2X->SetRange(p.x, p.x);
+            m_sCoord2Y->SetRange(p.y, p.y);
+            m_rbCoord2->SetValue(false);
+            m_rbCoord1->SetValue(true);
+        }
+        
+        /* automatically make sure coord2 is greater than coord1,
+           but if all zero (initial) leave it alone */
+        
+        int x1, x2, y1, y2;
+        x1 = m_sCoord1X->GetValue();
+        x2 = m_sCoord2X->GetValue();
+        y1 = m_sCoord1Y->GetValue();
+        y2 = m_sCoord2Y->GetValue();
+        
+        if( x1 > x2 ) {
+            if(x2)
+                m_sCoord1X->SetRange(x2, x2);
+            m_sCoord2X->SetRange(x1, x1);
+        }
+        
+        if( y1 > y2 ) {
+            if(y2)
+                m_sCoord1Y->SetRange(y2, y2);
+            m_sCoord2Y->SetRange(y1, y1);
+        }
+        
+        UpdateCoords();
+    } break;
+    case SPLITIMAGE:
+    {
+        wxPoint split = m_swFaxArea->CalcUnscrolledPosition(event.GetPosition());
+        wxRect r1(0, split.y, m_wfimg.m_img.GetWidth(), m_wfimg.m_img.GetHeight()-split.y-1);
+        wxImage img2 = m_wfimg.m_img.GetSubImage(r1);
+        m_parent.m_lFaxes->Append(m_name + _("-")
+                                  + wxString::Format(_T("%d"), m_splits++),
+                                  new WeatherFaxImage(img2));
+        
+        wxRect r2(0, 0, m_wfimg.m_img.GetWidth(), split.y);
+        m_wfimg.m_img = m_wfimg.m_img.GetSubImage(r2);
+        Refresh();
+        m_EditState = COORDINATES;
+    } break;
+    case POLAR:
+    {
+        polarpole.x = event.GetPosition().x;
+        polarpole.y = -event.GetPosition().y;
 
-            if(m_rbCoord1->GetValue()) {
-                m_sCoord1X->SetRange(p.x, p.x);
-                m_sCoord1Y->SetRange(p.y, p.y);
-                m_rbCoord1->SetValue(false);
-                m_rbCoord2->SetValue(true);
-            } else
-            if(m_rbCoord2->GetValue()) {
-                m_sCoord2X->SetRange(p.x, p.x);
-                m_sCoord2Y->SetRange(p.y, p.y);
-                m_rbCoord2->SetValue(false);
-                m_rbCoord1->SetValue(true);
-            }
+        MakeMercatorFromPolar();
+        Refresh();
 
-            /* automatically make sure coord2 is greater than coord1,
-               but if all zero (initial) leave it alone */
+        m_EditState = COORDINATES;
+    } break;
 
-            int x1, x2, y1, y2;
-            x1 = m_sCoord1X->GetValue();
-            x2 = m_sCoord2X->GetValue();
-            y1 = m_sCoord1Y->GetValue();
-            y2 = m_sCoord2Y->GetValue();
-
-            
-            if( x1 > x2 ) {
-                if(x2)
-                    m_sCoord1X->SetRange(x2, x2);
-                m_sCoord2X->SetRange(x1, x1);
-            }
-
-            if( y1 > y2 ) {
-                if(y2)
-                    m_sCoord1Y->SetRange(y2, y2);
-                m_sCoord2Y->SetRange(y1, y1);
-            }
-
-            UpdateCoords();
-        } break;
-        case SPLITIMAGE:
-        {
-            wxPoint split = m_swFaxArea->CalcUnscrolledPosition(event.GetPosition());
-            wxRect r1(0, split.y, m_img.GetWidth(), m_img.GetHeight()-split.y-1);
-            wxImage img2 = m_img.GetSubImage(r1);
-            m_parent.m_lFaxes->Append(m_name + _("-")
-                                      + wxString::Format(_T("%d"), m_splits++),
-                                      new WeatherFaxImage(img2));
-
-            wxRect r2(0, 0, m_img.GetWidth(), split.y);
-            m_img = m_img.GetSubImage(r2);
-            Refresh();
-            m_EditState = COORDINATES;
-        } break;
     }
 }
 
@@ -421,9 +437,28 @@ void EditFaxDialog::OnSplitImage( wxCommandEvent& event )
         m_EditState = COORDINATES;
 }
 
+void EditFaxDialog::OnPolarToMercator( wxCommandEvent& event )
+{
+#if 0
+    wxMessageDialog w( this, _("Click lowest latitude on vertical meridian"),
+                       _("Polar correction"), wxOK );
+    w.ShowModal();
+    m_wfimg.Reset();
+
+    m_EditState = POLAR;
+#else
+    polarpole.x = 297;
+    polarpole.y = -72;
+    m_wfimg.Reset();
+
+    MakeMercatorFromPolar();
+#endif
+    Refresh();
+}
+
 void EditFaxDialog::OnPhasing( wxScrollEvent& event )
 {
-    m_img.phasing = event.GetPosition();
+    m_wfimg.phasing = event.GetPosition();
     Refresh();
 }
 
@@ -475,15 +510,15 @@ void EditFaxDialog::UpdateCoords()
 {
     m_sCoord1X->SetRange(0, m_sCoord2X->GetValue());
     m_sCoord1Y->SetRange(0, m_sCoord2Y->GetValue());
-    m_sCoord2X->SetRange(m_sCoord1X->GetValue(), m_img.GetWidth());
-    m_sCoord2Y->SetRange(m_sCoord1Y->GetValue(), m_img.GetHeight()-1);
+    m_sCoord2X->SetRange(m_sCoord1X->GetValue(), m_wfimg.m_img.GetWidth());
+    m_sCoord2Y->SetRange(m_sCoord1Y->GetValue(), m_wfimg.m_img.GetHeight()-1);
     Refresh();
 }
 
 void EditFaxDialog::OnPaintImage( wxPaintEvent& event)
 {
     wxPaintDC dc( m_swFaxArea );
-    wxBitmap bmp(m_img.PhasedImage());
+    wxBitmap bmp(m_wfimg.PhasedImage());
 
     int x, y;
     m_swFaxArea->GetViewStart(&x, &y);
@@ -501,11 +536,205 @@ void EditFaxDialog::OnPaintImage( wxPaintEvent& event)
     int x1 = m_sCoord1X->GetValue(), y1 = m_sCoord1Y->GetValue();
     int x2 = m_sCoord2X->GetValue(), y2 = m_sCoord2Y->GetValue();
     
-    dc.SetPen(wxPen( *wxBLACK, 3 ));
+    dc.SetPen(wxPen( *wxRED, 3 ));
     dc.SetBrush(wxBrush(*wxBLACK));
 
     dc.DrawLine(x1-x, 0, x1-x, h);
     dc.DrawLine(x2-x, 0, x2-x, h);
     dc.DrawLine(0, y1-y, w, y1-y);
     dc.DrawLine(0, y2-y, w, y2-y);
+}
+
+inline unsigned char ImageValueMono(unsigned char *data, int w, int x, int y)
+{
+    return data[3*(y*w + x) + 0];
+}
+
+void ImageValue(unsigned char *data, int w, int x, int y, unsigned char c[3])
+{
+    for(int i = 0; i<3; i++)
+        c[i] = data[3*(y*w + x) + i];
+}
+
+inline unsigned char InterpColorMono(unsigned char c0, unsigned char c1, double d)
+{
+    return (1-d)*c0 + d*c1;
+}
+
+void InterpColor(unsigned char c0[3], unsigned char c1[3], double d, unsigned char c[3])
+{
+    for(int i=0; i<3; i++)
+        c[i] = (1-d)*c0[i] + d*c1[i];
+}
+
+void ImageInterpolatedValueMono(unsigned char *data, int w, double x, double y, unsigned char c[3])
+{
+    int x0 = floor(x), x1 = ceil(x), y0 = floor(y), y1 = ceil(y);
+    unsigned char nc[4], xc[2];
+    nc[0] = ImageValueMono(data, w, x0, y0);
+    nc[1] = ImageValueMono(data, w, x1, y0);
+    nc[2] = ImageValueMono(data, w, x0, y1);
+    nc[3] = ImageValueMono(data, w, x1, y1);
+
+    double d0 = x - x0, d1 = y - y0;
+    xc[0] = InterpColorMono(nc[0], nc[1], d0);
+    xc[1] = InterpColorMono(nc[2], nc[3], d0);
+    c[0] = c[1] = c[2] = InterpColorMono(xc[0], xc[1], d1);
+}
+
+void ImageInterpolatedValue(unsigned char *data, int w, double x, double y, unsigned char c[3])
+{
+    int x0 = floor(x), x1 = ceil(x), y0 = floor(y), y1 = ceil(y);
+    unsigned char nc[4][3], xc[2][3];
+    ImageValue(data, w, x0, y0, nc[0]);
+    ImageValue(data, w, x1, y0, nc[1]);
+    ImageValue(data, w, x0, y1, nc[2]);
+    ImageValue(data, w, x1, y1, nc[3]);
+
+    double d0 = x - x0, d1 = y - y0;
+    InterpColor(nc[0], nc[1], d0, xc[0]);
+    InterpColor(nc[2], nc[3], d0, xc[1]);
+    InterpColor(xc[0], xc[1], d1, c);
+}
+
+const double alpha = .38;
+
+void EditFaxDialog::PolarToMercator(double px, double py, double &mx, double &my)
+{
+    double dx = px - polarpole.x, dy = py - polarpole.y;
+
+    double theta = atan2(dx, dy);
+    mx = mercatoroffset.x + theta*mercatorwidth;
+
+    double d = hypot(dx, dy);
+
+     // y =.5 ln( (1 + sin t) / (1 - sin t) )
+    d = polarheight - d;
+// begin quadratic fit
+    double pu = d/polarheight;
+
+    double pp = alpha*pu*pu + (1-alpha)*pu;
+//
+
+#if 0
+    double t = pp * (M_PI/2);
+    double y = .5 * log((1 + sin(t)) / (1 - sin(t)));
+#else
+    void toSM(double lat, double lon, double lat0, double lon0, double *x, double *y);
+    double x, y;
+    double lat = pp*90;
+    double z = 6375585.74;
+    toSM(lat, 0, 0, 0, &x, &y);
+    y /= z;
+#endif
+
+    y*=mercatorheight;
+
+    y = mercatoroffset.y - y;
+
+    my = y;
+}
+
+void EditFaxDialog::MercatorToPolar(double mx, double my, double &px, double &py)
+{
+    double theta = (mx - mercatoroffset.x)/mercatorwidth;
+    double y = my;
+
+     // y =.5 ln( (1 + sin t) / (1 - sin t) )
+    // t = asin ( (exp(2*y) - 1) / (exp(2*y) + 1) )
+
+    y = mercatoroffset.y - y;
+
+    y /= mercatorheight;
+
+#if 0
+    double t = asin ((exp(2*y) - 1) / (exp(2*y) + 1));
+    double pp = t / (M_PI/2);
+#else
+    void fromSM(double x, double y, double lat0, double lon0, double *lat, double *lon);
+    double lat, lon;
+    double z = 6375585.74;
+    fromSM(0, y*z, 0, 0, &lat, &lon);
+    double pp = lat/90;
+#endif
+
+
+// begin quadratic fit
+    double pu = (-(1-alpha) + sqrt( (1-alpha)*(1-alpha) + 4*alpha*pp ) ) / (2 * alpha);
+
+    double d = pu*polarheight;
+//
+    d = polarheight - d;
+
+    double dx = d*sin(theta), dy = d*cos(theta);
+
+    px = dx + polarpole.x;
+    py = dy + polarpole.y;
+}
+
+void EditFaxDialog::MakeMercatorFromPolar()
+{
+    int w = m_wfimg.m_img.GetWidth(), h = m_wfimg.m_img.GetHeight();
+
+    polarequator = 560;
+    polarheight = polarequator - polarpole.y;
+
+    mercatorwidth = w;
+    mercatorheight = h;
+
+/* determine location of mercator pole and image boundaries */
+    mercatoroffset.x = 0;
+    mercatoroffset.y = 0;
+
+    double p1x, p2x, p3x, p4x, p5x, p6x;
+    double p1y, p2y, p3y, p4y, p5y, p6y;
+    PolarToMercator(0, 0, p1x, p1y);
+    PolarToMercator(w, 0, p2x, p2y);
+    PolarToMercator(w, h, p3x, p3y);
+    PolarToMercator(0, h, p4x, p4y);
+
+    int minp = wxMin(p1x, p4x);
+    int maxp = wxMax(p2x, p3x);
+
+    mercatoroffset.x = -minp;
+
+    int mw = maxp - minp;
+
+    PolarToMercator(polarpole.x, 0, p5x, p5y);
+    PolarToMercator(polarpole.x, h, p6x, p6y);
+
+    minp = wxMin(p1y, p2y);
+    minp = wxMin(minp, p5y);
+
+    mercatoroffset.y = -minp;
+
+    maxp = wxMax(p3y, p4y);
+    maxp = wxMax(maxp, p6y);
+
+    int mh = maxp - minp;
+
+/* now generate mercator image from polar image */
+    m_wfimg.m_img.Create(mw, mh);
+    unsigned char *d = m_wfimg.m_origimg.GetData(), *md = m_wfimg.m_img.GetData();
+    for(int x=0; x<mw; x++)
+        for(int y=0; y<mh; y++) {
+            double px, py;
+            unsigned char *cd = md + 3*(y*mw + x);
+
+            MercatorToPolar(x, y, px, py);
+
+            if(px >= 0 && py >= 0 && px < w-1 && py < h-1)
+#if 1
+                ImageInterpolatedValueMono
+#elif 1                
+                ImageInterpolatedValue
+#else
+                ImageValue
+#endif
+                    (d, w, px, py, cd);
+            else
+                cd[0] = cd[1] = cd[2] = 255;
+        }
+
+    m_swFaxArea->SetScrollbars(1, 1, m_wfimg.m_img.GetWidth(), m_wfimg.m_img.GetHeight()-1);
 }

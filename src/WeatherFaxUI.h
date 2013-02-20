@@ -92,6 +92,7 @@ class EditFaxDialogBase : public wxDialog
 		wxSpinCtrl* m_sCoord2Lat;
 		wxSpinCtrl* m_sCoord2Lon;
 		wxButton* m_bSplitImage;
+		wxButton* m_bPolarToMercator;
 		wxChoice* m_cFilter;
 		wxStaticText* m_staticText9;
 		wxSlider* m_sPhasing;
@@ -106,6 +107,7 @@ class EditFaxDialogBase : public wxDialog
 		virtual void OnRemoveCoords( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnSpin( wxSpinEvent& event ) { event.Skip(); }
 		virtual void OnSplitImage( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnPolarToMercator( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnPhasing( wxScrollEvent& event ) { event.Skip(); }
 		
 	

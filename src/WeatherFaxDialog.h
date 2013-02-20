@@ -37,17 +37,21 @@ struct WeatherFaxImageCoordinates
 
 WX_DECLARE_LIST(WeatherFaxImageCoordinates, WeatherFaxImageCoordinateList);
 
-class WeatherFaxImage : public wxImage
+class WeatherFaxImage
 {
 public:
-    WeatherFaxImage(wxImage img) : wxImage(img), m_Coords(NULL), phasing(0) {  }
-    WeatherFaxImageCoordinates *m_Coords;
+    WeatherFaxImage(wxImage img) : m_img(img), m_origimg(img), m_Coords(NULL), phasing(0) {  }
 
     wxImage PhasedImage() {
-        return wxImage(GetWidth(), GetHeight() - 1,
-                       GetData() + phasing*3, true);
+        return wxImage(m_img.GetWidth(), m_img.GetHeight() - 1,
+                       m_img.GetData() + phasing*3, true);
     }
 
+    void Reset() { m_img = m_origimg; }
+
+
+    wxImage m_img, m_origimg;
+    WeatherFaxImageCoordinates *m_Coords;
     int phasing;
 };
 
@@ -72,7 +76,7 @@ protected:
     weatherfax_pi &m_weatherfax_pi;
 };
 
-enum EditState {COORDINATES, SPLITIMAGE};
+enum EditState {COORDINATES, SPLITIMAGE, POLAR};
 class EditFaxDialog : public EditFaxDialogBase
 {
 public:
@@ -86,6 +90,7 @@ public:
     void OnCoordText( wxCommandEvent& event );
     void OnRemoveCoords( wxCommandEvent& event );
     void OnSplitImage( wxCommandEvent& event );
+    void OnPolarToMercator( wxCommandEvent& event );
     void OnPhasing( wxScrollEvent& event );
     void StoreCoords();
 
@@ -97,8 +102,14 @@ protected:
     void UpdateCoords();
     void OnPaintImage( wxPaintEvent& event);
 
+
+    void PolarToMercator(double px, double py, double &mx, double &my);
+    void MercatorToPolar(double mx, double my, double &px, double &py);
+
+    void MakeMercatorFromPolar();
+
     WeatherFaxDialog &m_parent;
-    WeatherFaxImage &m_img;
+    WeatherFaxImage &m_wfimg;
     WeatherFaxImageCoordinates *&m_curCoords;
 
     wxString m_name;
@@ -111,4 +122,8 @@ protected:
 
     bool m_skippaint;
     int m_SelectedIndex;
+
+    wxPoint polarpole, mercatoroffset;
+    double polarheight, polarequator;
+    double mercatorwidth, mercatorheight;
 };
