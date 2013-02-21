@@ -77,6 +77,8 @@ public:
 
       void OnToolbarToolCallback(int id);
 
+      bool GetOverlayCoords(PlugIn_ViewPort *vp, wxPoint &p1, wxPoint &p2, int &w, int &h);
+
       bool RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp);
       bool RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp);
 

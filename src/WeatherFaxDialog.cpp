@@ -387,7 +387,7 @@ void EditFaxDialog::OnBitmapClick( wxMouseEvent& event )
         polarpole.y = -event.GetPosition().y;
 
         MakeMercatorFromPolar();
-        Refresh();
+        UpdateCoords();
 
         m_EditState = COORDINATES;
     } break;
@@ -448,10 +448,11 @@ void EditFaxDialog::OnPolarToMercator( wxCommandEvent& event )
     m_EditState = POLAR;
 #else
     polarpole.x = 297;
-    polarpole.y = -72;
+    polarpole.y = -76;
     m_wfimg.Reset();
 
     MakeMercatorFromPolar();
+    UpdateCoords();
 #endif
     Refresh();
 }
@@ -489,6 +490,12 @@ void EditFaxDialog::SetCoords()
     }
     m_SelectedIndex = index;
 
+    int w = m_wfimg.m_img.GetWidth(), h = m_wfimg.m_img.GetHeight()-1;
+    m_sCoord1X->SetRange(0, w);
+    m_sCoord2X->SetRange(0, w);
+    m_sCoord1Y->SetRange(0, h);
+    m_sCoord2Y->SetRange(0, h);
+
     m_sCoord1X->SetValue(m_curCoords->p1.x);
     m_sCoord1Y->SetValue(m_curCoords->p1.y);
     m_sCoord1Lat->SetValue(m_curCoords->lat1);
@@ -498,7 +505,8 @@ void EditFaxDialog::SetCoords()
     m_sCoord2Y->SetValue(m_curCoords->p2.y);
     m_sCoord2Lat->SetValue(m_curCoords->lat2);
     m_sCoord2Lon->SetValue(m_curCoords->lon2);
-    Refresh();
+
+    UpdateCoords();
 }
 
 void EditFaxDialog::OnSpin( wxSpinEvent& event)
@@ -608,17 +616,17 @@ void EditFaxDialog::PolarToMercator(double px, double py, double &mx, double &my
 
     double d = hypot(dx, dy);
 
-     // y =.5 ln( (1 + sin t) / (1 - sin t) )
     d = polarheight - d;
-// begin quadratic fit
     double pu = d/polarheight;
 
+// begin quadratic fit
     double pp = alpha*pu*pu + (1-alpha)*pu;
-//
+// end
 
-#if 0
+#if 1
     double t = pp * (M_PI/2);
-    double y = .5 * log((1 + sin(t)) / (1 - sin(t)));
+    double s = sin(t);
+    double y = .5 * log((1 + s) / (1 - s));
 #else
     void toSM(double lat, double lon, double lat0, double lon0, double *x, double *y);
     double x, y;
@@ -640,16 +648,13 @@ void EditFaxDialog::MercatorToPolar(double mx, double my, double &px, double &py
     double theta = (mx - mercatoroffset.x)/mercatorwidth;
     double y = my;
 
-     // y =.5 ln( (1 + sin t) / (1 - sin t) )
-    // t = asin ( (exp(2*y) - 1) / (exp(2*y) + 1) )
-
     y = mercatoroffset.y - y;
 
     y /= mercatorheight;
 
-#if 0
-    double t = asin ((exp(2*y) - 1) / (exp(2*y) + 1));
-    double pp = t / (M_PI/2);
+#if 1
+    double lat = 2.0 * atan(exp(y)) - M_PI/2.;
+    double pp = lat/(M_PI/2);
 #else
     void fromSM(double x, double y, double lat0, double lon0, double *lat, double *lon);
     double lat, lon;
@@ -658,12 +663,13 @@ void EditFaxDialog::MercatorToPolar(double mx, double my, double &px, double &py
     double pp = lat/90;
 #endif
 
-
 // begin quadratic fit
-    double pu = (-(1-alpha) + sqrt( (1-alpha)*(1-alpha) + 4*alpha*pp ) ) / (2 * alpha);
+    double b = 1-alpha;
+    double pu = (alpha == 0) ? pp: (-b + sqrt( b*b + 4*alpha*pp ) ) / (2 * alpha);
+// end
 
     double d = pu*polarheight;
-//
+
     d = polarheight - d;
 
     double dx = d*sin(theta), dy = d*cos(theta);
