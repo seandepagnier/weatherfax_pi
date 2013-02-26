@@ -206,7 +206,7 @@ void FaxDecoder::DecodeImageLine(wxUint8* buffer, int buffer_len, wxUint8 *image
           }
 }
 
-bool FaxDecoder::DecodeFaxFromAudio(wxString fileName)
+bool FaxDecoder::DecodeFaxFromAudio(wxString fileName, wxWindow *parent)
 {
     AFfilehandle aFile;
     AFfileoffset size = 0;
@@ -248,8 +248,8 @@ bool FaxDecoder::DecodeFaxFromAudio(wxString fileName)
     int *phasingPos = new int[m_phasingLines];
     int phasingLinesLeft = 0, phasingSkipData = 0, phasingSkippedData = 0;
 
-    wxProgressDialog *progressdialog = new wxProgressDialog(
-        _("Decoding fax audio data"), _("Fax Decoder"), height, NULL,
+    wxProgressDialog progressdialog(
+        _("Decoding fax audio data"), _("Fax Decoder"), height, parent,
         wxPD_SMOOTH | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME | wxPD_CAN_ABORT);
 
     for(;;) {
@@ -318,14 +318,13 @@ bool FaxDecoder::DecodeFaxFromAudio(wxString fileName)
             imageline++;
         }
 
-        if(!progressdialog->Update(line))
+        if(line%20 == 0 && !progressdialog.Update(line))
             break;
 
         line++;
      }
 
      delete [] phasingPos;
-     delete progressdialog;
 
      afCloseFile(aFile);
 

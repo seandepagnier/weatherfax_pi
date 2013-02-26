@@ -222,28 +222,47 @@ void weatherfax_pi::OnToolbarToolCallback(int id)
       m_pWeatherFaxDialog->Move(p);
 }
 
-bool weatherfax_pi::GetOverlayCoords(PlugIn_ViewPort *vp, wxPoint &p1, wxPoint &p2, int &w, int &h)
+bool weatherfax_pi::GetOverlayCoords(PlugIn_ViewPort *vp, wxPoint &p0, wxPoint &pwh, int &w, int &h)
 {
     if(!m_image || !m_image->m_Coords)
         return false;
 
+    wxImage &img = m_image->m_mappedimg;
+
+    if(!img.IsOk())
+        return false;
+
+    w=img.GetWidth();
+    h=img.GetHeight();
+
+    double lon0 = m_image->m_Coords->lon(0), lonw = m_image->m_Coords->lon(w);
+
+    /* skip coordinates that go the long way around the world */
+    if(lon0+180 < vp->clon && lonw+180 > vp->clon)
+        return false;
+    if(lon0-180 < vp->clon && lonw-180 > vp->clon)
+        return false;
+
     double lat1 = m_image->m_Coords->lat1, lon1 = m_image->m_Coords->lon1;
     double lat2 = m_image->m_Coords->lat2, lon2 = m_image->m_Coords->lon2;
-
-    /* skip segments that go the wrong way around the world */
-    if(lon1+180 < vp->clon && lon2+180 > vp->clon)
-        return false;
-    if(lon1-180 < vp->clon && lon2-180 > vp->clon)
-        return false;
     
+    wxPoint p1, p2;
     GetCanvasPixLL( vp, &p1, lat1, lon1 );
     GetCanvasPixLL( vp, &p2, lat2, lon2 );
-    w = m_image->m_Coords->p2.x - m_image->m_Coords->p1.x;
-    h = m_image->m_Coords->p2.y - m_image->m_Coords->p1.y;
 
-    if(w < 0 || h < 0)
-        return false;
+    /* now extrapolate to 0-w and 0-h from p1 p2 pa etc.. 
+    (m_image->m_Coords->p2.x-m_image->m_Coords->p1.x)/(p2.x-p1.x) = (m_image->m_Coords->p1.x - 0) / (p1.x - p0.x)
+    p0.x = p1.x - (p2.x-p1.x) * (m_image->m_Coords->p1.x - 0) /
+    (m_image->m_Coords->p2.x-m_image->m_Coords->p1.x)
+    */
 
+    double divx = (m_image->m_Coords->p2.x-m_image->m_Coords->p1.x);
+    double divy = (m_image->m_Coords->p2.y-m_image->m_Coords->p1.y);
+    p0.x = p1.x - (p2.x-p1.x) * (m_image->m_Coords->p1.x - 0) / divx;
+    p0.y = p1.y - (p2.y-p1.y) * (m_image->m_Coords->p1.y - 0) / divy;
+
+    pwh.x = p1.x - (p2.x-p1.x) * (m_image->m_Coords->p1.x - w) / divx;
+    pwh.y = p1.y - (p2.y-p1.y) * (m_image->m_Coords->p1.y - h) / divy;
     return true;
 }
 
@@ -253,6 +272,8 @@ bool weatherfax_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
     int w, h;
     if(!GetOverlayCoords(vp, p1, p2, w, h))
         return false;
+
+    wxImage &img = m_image->m_mappedimg;
 
     int iw = p2.x-p1.x, ih = p2.y-p1.y;
 
@@ -264,19 +285,15 @@ bool weatherfax_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
         m_CacheBitmap = NULL;
 
         /* dont go too huge */
-        if(w > 8192 || h > 8192)
+        if(iw > 4096 || ih > 4096)
             return false;
 
         wxRect r(m_image->m_Coords->p1.x, m_image->m_Coords->p1.y, w, h);
-        wxImage subimg = m_image->PhasedImage().GetSubImage(r);
-
-        if(!subimg.IsOk())
-            return false;
 
 #if 0
         wxImage stretchedimg = subimg.Scale(iw, ih); /* doesn't support saturated transparency, or invert */
 #else        
-        unsigned char *subdata = subimg.GetData();
+        unsigned char *subdata = img.GetData();
         unsigned char *stretcheddata = (unsigned char*)malloc(iw*ih*3); /* malloc needed for wximage */
         for(int y=0; y<ih; y++) {
             int sy = y*h/ih;
@@ -284,6 +301,8 @@ bool weatherfax_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
                 int sx = x*w/iw;
                 for(int c=0; c<3; c++) {
                     wxUint8 v = subdata[3*(w*sy+sx)+c];
+                    /* this is wonky because sometimes it makes colors bright
+                       rather than white (triggering mask) but it looks cool... */
                     if(v > 255-m_iWhiteTransparency)
                         v = 255;
                     else if(m_bInvert)
@@ -313,6 +332,8 @@ bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
     if(!GetOverlayCoords(vp, p1, p2, w, h))
         return false;
 
+    wxImage &img = m_image->m_mappedimg;
+
     if(m_bNeedUpdateImageGL) {
         m_bNeedUpdateImageGL = false;
 
@@ -330,18 +351,9 @@ bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
         glPixelStorei( GL_UNPACK_SKIP_PIXELS, 0 );
         glPixelStorei( GL_UNPACK_SKIP_ROWS, 0 );
 #endif
-        
-        wxRect r(m_image->m_Coords->p1.x, m_image->m_Coords->p1.y,
-                 m_image->m_Coords->p2.x - m_image->m_Coords->p1.x,
-                 m_image->m_Coords->p2.y - m_image->m_Coords->p1.y);
-        wxImage subimg = m_image->PhasedImage().GetSubImage(r);
-
-        if(!subimg.IsOk())
-            return false;
-
-        unsigned char *data = subimg.GetData();
+        unsigned char *data = img.GetData();
         unsigned char *idata = NULL;
-        unsigned int size = subimg.GetWidth()*subimg.GetHeight();
+        unsigned int size = img.GetWidth()*img.GetHeight();
         idata = new unsigned char[4*size];
         for(unsigned int i=0; i<size; i++) {
             wxUint8 r = data[3*i + 0], g = data[3*i + 1], b = data[3*i + 2];
@@ -350,12 +362,12 @@ bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
             else
                 idata[4*i + 0] = 255-r,  idata[4*i + 1] = 255-g, idata[4*i + 2] = 255-b;
 
-            wxUint8 a = 255 + -r*m_iWhiteTransparency/255; /* white alpha */
+            wxUint8 a = 255 + -(r+g+b)/3*m_iWhiteTransparency/255; /* white alpha */
             idata[4*i+3] = a;
         }
 
         glTexImage2D(GL_TEXTURE_RECTANGLE_ARB, 0, GL_RGBA,
-                     subimg.GetWidth(), subimg.GetHeight(),
+                     img.GetWidth(), img.GetHeight(),
                      0, GL_RGBA, GL_UNSIGNED_BYTE, idata);
         delete [] idata;
     }

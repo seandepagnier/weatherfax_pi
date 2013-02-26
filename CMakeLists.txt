@@ -66,6 +66,8 @@ SET(SRC_WEATHERFAX
             src/WeatherFaxDialog.cpp
             src/WeatherFaxUI.h
             src/WeatherFaxUI.cpp
+            src/WeatherFaxImage.h
+            src/WeatherFaxImage.cpp
 
             src/libaudiofile/aupv.c
             src/libaudiofile/error.c

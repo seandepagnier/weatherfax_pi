@@ -26,34 +26,7 @@
  */
 
 #include "weatherfax_pi.h"
-
-struct WeatherFaxImageCoordinates
-{
-    WeatherFaxImageCoordinates(wxString n) : name(n) {}
-    wxString name;
-    wxPoint p1, p2;
-    double lat1, lon1, lat2, lon2;
-};
-
-WX_DECLARE_LIST(WeatherFaxImageCoordinates, WeatherFaxImageCoordinateList);
-
-class WeatherFaxImage
-{
-public:
-    WeatherFaxImage(wxImage img) : m_img(img), m_origimg(img), m_Coords(NULL), phasing(0) {  }
-
-    wxImage PhasedImage() {
-        return wxImage(m_img.GetWidth(), m_img.GetHeight() - 1,
-                       m_img.GetData() + phasing*3, true);
-    }
-
-    void Reset() { m_img = m_origimg; }
-
-
-    wxImage m_img, m_origimg;
-    WeatherFaxImageCoordinates *m_Coords;
-    int phasing;
-};
+#include "WeatherFaxImage.h"
 
 class WeatherFaxDialog: public WeatherFaxDialogBase
 {
@@ -76,54 +49,57 @@ protected:
     weatherfax_pi &m_weatherfax_pi;
 };
 
-enum EditState {COORDINATES, SPLITIMAGE, POLAR};
-class EditFaxDialog : public EditFaxDialogBase
+class EditFaxWizard : public EditFaxWizardBase
 {
 public:
-    EditFaxDialog( WeatherFaxImage &img, wxString name, WeatherFaxDialog &parent,
+    EditFaxWizard( WeatherFaxImage &img, wxString name, WeatherFaxDialog &parent,
                    WeatherFaxImageCoordinateList &coords);
-    ~EditFaxDialog();
+    ~EditFaxWizard();
 
-    void OnSize( wxSizeEvent& event ) { Fit(); }
-    void OnBitmapClick( wxMouseEvent& event );
+    void OnSetSizes( wxInitDialogEvent& event ) { SetSize(640, 480);  }
+//    void OnSize( wxSizeEvent& event ) { Fit(); }
+    void UpdateMappingControls();
+    void OnWizardPageChanged( wxWizardEvent& event );
+    void OnMappingChoice( wxCommandEvent& event );
+    void OnGetMappingParameters( wxCommandEvent& event );
+    void OnBitmapClickPage2( wxMouseEvent& event );
+    void OnBitmapClickPage3( wxMouseEvent& event );
     void OnCoordSet( wxCommandEvent& event );
     void OnCoordText( wxCommandEvent& event );
     void OnRemoveCoords( wxCommandEvent& event );
-    void OnSplitImage( wxCommandEvent& event );
-    void OnPolarToMercator( wxCommandEvent& event );
-    void OnPhasing( wxScrollEvent& event );
+    void StoreMappingParams();
+    void ApplyMapping();
+    void OnApplyMapping( wxCommandEvent& event );
+    void OnResetMapping( wxCommandEvent& event );
     void StoreCoords();
 
 protected:
 
+    void UpdatePage1();
+    void UpdatePage1( wxCommandEvent& event );
+    void UpdatePage1( wxScrollEvent& event );
+
     wxString NewCoordName();
     void SetCoords();
     void OnSpin( wxSpinEvent& event );
-    void UpdateCoords();
     void OnPaintImage( wxPaintEvent& event);
-
-
-    void PolarToMercator(double px, double py, double &mx, double &my);
-    void MercatorToPolar(double mx, double my, double &px, double &py);
-
-    void MakeMercatorFromPolar();
 
     WeatherFaxDialog &m_parent;
     WeatherFaxImage &m_wfimg;
     WeatherFaxImageCoordinates *&m_curCoords;
 
     wxString m_name;
-    int m_splits;
 
-    EditState m_EditState;
-    
     WeatherFaxImageCoordinates *m_newCoords;
     WeatherFaxImageCoordinateList &m_Coords;
 
     bool m_skippaint;
-    int m_SelectedIndex;
 
-    wxPoint polarpole, mercatoroffset;
-    double polarheight, polarequator;
-    double mercatorwidth, mercatorheight;
+    /* page 2 */
+    int mappingparamstate;
+    wxPoint mapping1, mapping2;
+    double mapping1lat, mapping2lat;
+
+    /* page 3 */
+    int m_SelectedIndex;
 };

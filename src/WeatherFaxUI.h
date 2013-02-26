@@ -25,10 +25,17 @@
 #include <wx/dialog.h>
 #include <wx/scrolwin.h>
 #include <wx/stattext.h>
+#include <wx/choice.h>
+#include <wx/bitmap.h>
+#include <wx/image.h>
+#include <wx/icon.h>
+#include <wx/textctrl.h>
+#include <wx/spinctrl.h>
 #include <wx/combobox.h>
 #include <wx/radiobut.h>
-#include <wx/spinctrl.h>
-#include <wx/choice.h>
+#include <wx/wizard.h>
+#include <wx/dynarray.h>
+WX_DEFINE_ARRAY_PTR( wxWizardPageSimple*, WizardPages );
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -68,14 +75,39 @@ class WeatherFaxDialogBase : public wxDialog
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Class EditFaxDialogBase
+/// Class EditFaxWizardBase
 ///////////////////////////////////////////////////////////////////////////////
-class EditFaxDialogBase : public wxDialog 
+class EditFaxWizardBase : public wxWizard 
 {
 	private:
 	
 	protected:
-		wxScrolledWindow* m_swFaxArea;
+		wxScrolledWindow* m_swFaxArea1;
+		wxStaticText* m_staticText16;
+		wxChoice* m_cFilter;
+		wxStaticText* m_staticText9;
+		wxSlider* m_sPhasing;
+		wxStaticText* m_staticText17;
+		wxChoice* m_cRotation;
+		wxStaticText* m_staticText101;
+		wxSlider* m_sSkew;
+		wxScrolledWindow* m_swFaxArea2;
+		wxStaticText* m_staticText15;
+		wxChoice* m_cMapping;
+		wxStaticText* m_staticText21;
+		wxStaticText* m_staticText22;
+		wxStaticText* m_staticText24;
+		wxTextCtrl* m_tMappingMultiplier;
+		wxStaticText* m_stMappingLabel1;
+		wxSpinCtrl* m_sMappingValue1;
+		wxStaticText* m_stMappingLabel2;
+		wxSpinCtrl* m_sMappingValue2;
+		wxStaticText* m_stMappingLabel3;
+		wxSpinCtrl* m_sMappingValue3;
+		wxButton* m_bResetMapping;
+		wxButton* m_bApplyMapping;
+		wxButton* m_bGetMappingParameters;
+		wxScrolledWindow* m_swFaxArea3;
 		wxStaticText* m_staticText10;
 		wxComboBox* m_cbCoordSet;
 		wxButton* m_bRemoveCoordSet;
@@ -91,30 +123,31 @@ class EditFaxDialogBase : public wxDialog
 		wxStaticText* m_staticText8;
 		wxSpinCtrl* m_sCoord2Lat;
 		wxSpinCtrl* m_sCoord2Lon;
-		wxButton* m_bSplitImage;
-		wxButton* m_bPolarToMercator;
-		wxChoice* m_cFilter;
-		wxStaticText* m_staticText9;
-		wxSlider* m_sPhasing;
-		wxStdDialogButtonSizer* m_sdbSizer3;
-		wxButton* m_sdbSizer3OK;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void OnBitmapClick( wxMouseEvent& event ) { event.Skip(); }
+		virtual void OnSetSizes( wxInitDialogEvent& event ) { event.Skip(); }
+		virtual void OnWizardPageChanged( wxWizardEvent& event ) { event.Skip(); }
+		virtual void OnBitmapClickPage1( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnPaintImage( wxPaintEvent& event ) { event.Skip(); }
+		virtual void UpdatePage1( wxCommandEvent& event ) { event.Skip(); }
+		virtual void UpdatePage1( wxScrollEvent& event ) { event.Skip(); }
+		virtual void OnBitmapClickPage2( wxMouseEvent& event ) { event.Skip(); }
+		virtual void OnMappingChoice( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnResetMapping( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnApplyMapping( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnGetMappingParameters( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnBitmapClickPage3( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnCoordSet( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnCoordText( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnRemoveCoords( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnSpin( wxSpinEvent& event ) { event.Skip(); }
-		virtual void OnSplitImage( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnPolarToMercator( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnPhasing( wxScrollEvent& event ) { event.Skip(); }
 		
 	
 	public:
 		
-		EditFaxDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Edit Fax"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 600,400 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxRESIZE_BORDER ); 
-		~EditFaxDialogBase();
+		EditFaxWizardBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Edit Fax Image"), const wxBitmap& bitmap = wxNullBitmap, const wxPoint& pos = wxDefaultPosition, long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER );
+		WizardPages m_pages;
+		~EditFaxWizardBase();
 	
 };
 

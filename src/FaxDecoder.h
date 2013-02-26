@@ -64,7 +64,7 @@ public:
         firfilters[1] = firfilter(bandwidth);
     }
 
-    bool DecodeFaxFromAudio(wxString filename);
+    bool DecodeFaxFromAudio(wxString filename, wxWindow *parent);
 
     FaxImageList images;
 
