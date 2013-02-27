@@ -64,10 +64,13 @@ WeatherFaxDialog::WeatherFaxDialog( weatherfax_pi &_weatherfax_pi, wxWindow* par
 
     for(std::list<wxString>::iterator it = namelist.begin();
         it != namelist.end(); it++) {
-        /* replace any _ back with spaces */
+        wxString name = *it;
+#if defined (__WIN32__)
+        /* replace any _ with spaces because windows is bad */
+        name = ReplaceChar(name, '_', ' ');
+#endif
         pConf->SetPath ( _T ( "/Settings/WeatherFax/CoordinateSets/" ) + *it );
-        WeatherFaxImageCoordinates *newcoord
-            = new WeatherFaxImageCoordinates(*it);
+        WeatherFaxImageCoordinates *newcoord = new WeatherFaxImageCoordinates(name);
 
         pConf->Read ( _T ( "Point1X" ), &newcoord->p1.x, 0);
         pConf->Read ( _T ( "Point1Y" ), &newcoord->p1.y, 0);
@@ -93,6 +96,10 @@ WeatherFaxDialog::~WeatherFaxDialog()
     pConf->SetPath ( _T ( "/Settings/WeatherFax/CoordinateSets" ) );
     wxString names;
     for(unsigned int i=0; i<m_Coords.GetCount(); i++) {
+#if defined (__WIN32__)
+        /* space does bad things on windows */
+        m_Coords[i]->name = ReplaceChar(m_Coords[i]->name, ' ', '_');
+#endif
         /* names are not allowed semicolon because we need it */
         m_Coords[i]->name = ReplaceChar(m_Coords[i]->name, ';', ',');
         names += m_Coords[i]->name + _(";");

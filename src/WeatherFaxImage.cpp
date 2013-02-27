@@ -67,7 +67,8 @@ void WeatherFaxImage::MakePhasedImage()
             skewpos++;
         }
 
-        while(skewpos > 1) {
+        while(skewpos > 1 &&
+              dd+3 < m_phasedimg.GetData()+imgsize) {
             dd[0] = 255;
             dd[1] = 255;
             dd[2] = 255;
@@ -247,7 +248,8 @@ void WeatherFaxImage::MercatorToInput(double mx, double my, double &px, double &
 void WeatherFaxImage::MakeMappedImage(wxWindow *parent)
 {
     /* in this case we can just copy */
-    if(mappingheightmultiplier == 1 && mappingwidthmultiplier == 1 &&
+    if(mappingheightmultiplier == 1 &&
+       mappingwidthmultiplier == 1 &&
        mapping == MERCATOR) {
         m_mappedimg = m_phasedimg;
         return;
