@@ -27,9 +27,12 @@
 
 #include "FaxDecoder.h"
 
-#include <wx/progdlg.h>
+#ifdef __linux__
+#include <sys/ioctl.h>
+#include <sys/soundcard.h>
+#endif
 
-#include <audiofile.h>
+#include <wx/progdlg.h>
 
 #include <math.h>
 #include <complex>
@@ -101,13 +104,15 @@ void FaxDecoder::DemodulateData(wxUint8 *data, wxInt16 *sample, int n)
                if(mag>10000) {
                     double y=qfirold*ifirout-ifirold*qfirout;
                     double x=sampleRate/m_deviation*asin(y)/2.0/M_PI;
+                    if(x<-1.5) /* need to make adjustable by user */
+                        x = 1;
                     if(x<-1.0)
                          x=-1.0;
                     else if(x>1.0)
                          x=1.0;
                     data[i]=(int)((x/2.0+0.5)*255.0);
                } else
-                    data[i]=0;
+                    data[i]=255;
 
                ifirold=ifirout;
                qfirold=qfirout;
@@ -206,25 +211,8 @@ void FaxDecoder::DecodeImageLine(wxUint8* buffer, int buffer_len, wxUint8 *image
           }
 }
 
-bool FaxDecoder::DecodeFaxFromAudio(wxString fileName, wxWindow *parent)
+bool FaxDecoder::DecodeFax()
 {
-    AFfilehandle aFile;
-    AFfileoffset size = 0;
-    
-    AFfilesetup fs=0;
-    if((aFile=afOpenFile(fileName.ToUTF8(),"r",fs))==AF_NULL_FILEHANDLE)
-        return Error(_("could not open input file: ") + fileName);
-    
-    if(afGetFrameSize(aFile,AF_DEFAULT_TRACK,0)!=2)
-        return Error(_("samples size not 16 bit"));
-    
-    sampleRate = afGetRate(aFile,AF_DEFAULT_TRACK);
-    
-    size = afGetTrackBytes (aFile, AF_DEFAULT_TRACK);
-    if(size < 0)
-        // file is still being written to..
-        return Error(_("cannot deal with incomplete input file"));
-
     int blocksize = sampleRate*60.0/m_lpm*m_faxcolors;
     
     int len;
@@ -248,14 +236,29 @@ bool FaxDecoder::DecodeFaxFromAudio(wxString fileName, wxWindow *parent)
     int *phasingPos = new int[m_phasingLines];
     int phasingLinesLeft = 0, phasingSkipData = 0, phasingSkippedData = 0;
 
-    wxProgressDialog progressdialog(
-        _("Decoding fax audio data"), _("Fax Decoder"), height, parent,
+    wxProgressDialog *progressdialog;
+    if(inputtype == FILENAME)
+        progressdialog = new wxProgressDialog(
+        _("Decoding fax audio data"), _("Fax Decoder"), height, &m_parent,
         wxPD_SMOOTH | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME | wxPD_CAN_ABORT);
 
     for(;;) {
-        if((len = afReadFrames(aFile, AF_DEFAULT_TRACK, sample, blocksize)) != blocksize)
-            /* end of file, end decoding */
-            break;
+        switch(inputtype) {
+        case DSP:
+        {
+            int count;
+            for(len = 0; len < 2*blocksize; len += count)
+                if((count = read(dsp, (char*)sample + len, 2*blocksize - len)) <= 0)
+                    break;
+            len /= 2;
+        } break;
+        case FILENAME:
+        {
+            if((len = afReadFrames(aFile, AF_DEFAULT_TRACK, sample, blocksize)) != blocksize)
+                /* end of file, end decoding */
+                goto done;
+        } break;
+        }
 
         DemodulateData(data, sample, len);
 
@@ -318,15 +321,15 @@ bool FaxDecoder::DecodeFaxFromAudio(wxString fileName, wxWindow *parent)
             imageline++;
         }
 
-        if(line%20 == 0 && !progressdialog.Update(line))
+        if(progressdialog && line%20 == 0 && !progressdialog->Update(line))
             break;
 
         line++;
      }
+done:
 
+     delete progressdialog;
      delete [] phasingPos;
-
-     afCloseFile(aFile);
 
      /* put left overdata into an image */
      if((m_bIncludeHeadersInImages || gotstart) &&
@@ -344,4 +347,56 @@ bool FaxDecoder::DecodeFaxFromAudio(wxString fileName, wxWindow *parent)
      delete [] data;
      delete [] imgdata;
      return true;
+}
+
+bool FaxDecoder::DecodeFaxFromFilename(wxString fileName)
+{
+    size = 0;
+    AFfilesetup fs=0;
+    if((aFile=afOpenFile(fileName.ToUTF8(),"r",fs))==AF_NULL_FILEHANDLE)
+        return Error(_("could not open input file: ") + fileName);
+    
+    if(afGetFrameSize(aFile,AF_DEFAULT_TRACK,0)!=2)
+        return Error(_("samples size not 16 bit"));
+    
+    sampleRate = afGetRate(aFile,AF_DEFAULT_TRACK);
+    
+    size = afGetTrackBytes (aFile, AF_DEFAULT_TRACK);
+    if(size < 0)
+        // file is still being written to..
+        return Error(_("cannot deal with incomplete input file"));
+
+    inputtype = FILENAME;
+    bool ret =  DecodeFax();
+    afCloseFile(aFile);
+    return ret;
+}
+
+bool FaxDecoder::DecodeFaxFromDSP()
+{
+#ifdef __linux__
+     if((dsp=open("/dev/dsp",O_RDONLY))==-1)
+         return false;
+		
+     int format=AFMT_S16_LE;
+     if(ioctl(dsp,SNDCTL_DSP_SETFMT,&format)==-1 || format!=AFMT_S16_LE)
+         return false;
+
+     int channels=1;
+     if(ioctl(dsp,SNDCTL_DSP_CHANNELS,&channels)==-1 || channels!=1)
+         return false;
+
+     int speed=sampleRate;
+     if(ioctl(dsp,SNDCTL_DSP_SPEED,&sampleRate)==-1
+        || speed<sampleRate*0.99 || speed>sampleRate*1.01)
+         return false;
+
+    inputtype = DSP;
+    size = 0;
+    bool ret = DecodeFax();
+    close(dsp);
+    return ret;
+#else
+    return false;
+#endif
 }

@@ -25,6 +25,8 @@
  ***************************************************************************
  */
 
+#include "../../../include/ocpn_plugin.h"
+
 struct WeatherFaxImageCoordinates
 {
     WeatherFaxImageCoordinates(wxString n) : name(n) {}
@@ -45,11 +47,26 @@ WX_DECLARE_LIST(WeatherFaxImageCoordinates, WeatherFaxImageCoordinateList);
 class WeatherFaxImage
 {
 public:
-    WeatherFaxImage(wxImage img) : m_origimg(img),
+        WeatherFaxImage(wxImage img, int transparency, int whitetransparency, bool invert)
+            : m_origimg(img),
         phasing(0), skew(0), filter(0), rotation(0),
-        mapping(MERCATOR), inputpole(wxPoint(0,0)), inputequator(0),
-        mappingwidthmultiplier(1), mappingheightmultiplier(1),
-        m_Coords(NULL) {  }
+        mapping(MERCATOR), inputpole(wxPoint(0,0)), inputequator(0), inputtrueratio(1),
+        mappingmultiplier(1), mappingratio(1),
+        m_Coords(NULL),
+        m_CacheBitmap(NULL), m_gltextures(NULL), m_numgltexturesw(0), m_numgltexturesh(0),
+        m_iTransparency(transparency), m_iWhiteTransparency(whitetransparency), m_bInvert(invert)
+    {}
+
+    /* copy constructor, make sure we don't share cached data because we aren't ref counting */
+    WeatherFaxImage(WeatherFaxImage &img)
+    {
+        *this = img;
+        m_CacheBitmap = NULL;
+        m_gltextures = NULL;
+    }
+
+
+    ~WeatherFaxImage() { FreeData(); }
 
     wxImage m_origimg;
 
@@ -61,12 +78,12 @@ public:
     /* page 2 */
     void InputToMercator(double px, double py, double &mx, double &my);
     void MercatorToInput(double mx, double my, double &px, double &py);
-    void MakeMappedImage(wxWindow *parent);
+    bool MakeMappedImage(wxWindow *parent);
     enum MapType {MERCATOR, POLAR, FIXED_FLAT};
     MapType mapping;
     wxPoint inputpole;
-    double inputequator; /* y value */
-    double mappingwidthmultiplier, mappingheightmultiplier;
+    double inputequator, /* y value */ inputtrueratio;
+    double mappingmultiplier, mappingratio;
 
     double inputheight; /* used internally */
     wxPoint mercatoroffset;
@@ -75,4 +92,17 @@ public:
 
     /* page 3 */
     WeatherFaxImageCoordinates *m_Coords;
+
+    /* rendering */
+    void FreeData();
+    bool GetOverlayCoords(PlugIn_ViewPort *vp, wxPoint &p0, wxPoint &pwh, int &w, int &h);
+    void RenderImage(wxDC &dc, PlugIn_ViewPort *vp);
+    void RenderImageGL(PlugIn_ViewPort *vp);
+
+    wxBitmap *m_CacheBitmap;
+    unsigned int *m_gltextures, m_numgltexturesw, m_numgltexturesh;
+
+    int               m_iTransparency;
+    int               m_iWhiteTransparency;
+    bool              m_bInvert;
 };

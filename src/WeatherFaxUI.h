@@ -12,7 +12,7 @@
 #include <wx/xrc/xmlres.h>
 #include <wx/intl.h>
 #include <wx/string.h>
-#include <wx/listbox.h>
+#include <wx/checklst.h>
 #include <wx/gdicmn.h>
 #include <wx/font.h>
 #include <wx/colour.h>
@@ -29,10 +29,10 @@
 #include <wx/bitmap.h>
 #include <wx/image.h>
 #include <wx/icon.h>
-#include <wx/textctrl.h>
-#include <wx/spinctrl.h>
 #include <wx/combobox.h>
 #include <wx/radiobut.h>
+#include <wx/spinctrl.h>
+#include <wx/textctrl.h>
 #include <wx/wizard.h>
 #include <wx/dynarray.h>
 WX_DEFINE_ARRAY_PTR( wxWizardPageSimple*, WizardPages );
@@ -48,14 +48,17 @@ class WeatherFaxDialogBase : public wxDialog
 	private:
 	
 	protected:
-		wxButton* m_bNew;
+		wxButton* m_bCapture;
+		wxButton* m_bOpen;
 		wxButton* m_bEdit;
 		wxButton* m_bDelete;
 		wxCheckBox* m_cInvert;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void OnListBox( wxCommandEvent& event ) { event.Skip(); }
-		virtual void NewFaxClicked( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnFaxes( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnFaxesToggled( wxCommandEvent& event ) { event.Skip(); }
+		virtual void CaptureFaxClicked( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OpenFaxClicked( wxCommandEvent& event ) { event.Skip(); }
 		virtual void EditFaxClicked( wxCommandEvent& event ) { event.Skip(); }
 		virtual void DeleteFaxClicked( wxCommandEvent& event ) { event.Skip(); }
 		virtual void TransparencyChanged( wxScrollEvent& event ) { event.Skip(); }
@@ -65,7 +68,7 @@ class WeatherFaxDialogBase : public wxDialog
 	
 	public:
 		wxStaticBoxSizer* sbFax;
-		wxListBox* m_lFaxes;
+		wxCheckListBox* m_lFaxes;
 		wxSlider* m_sTransparency;
 		wxSlider* m_sWhiteTransparency;
 		
@@ -91,6 +94,20 @@ class EditFaxWizardBase : public wxWizard
 		wxChoice* m_cRotation;
 		wxStaticText* m_staticText101;
 		wxSlider* m_sSkew;
+		wxComboBox* m_cbCoordSet;
+		wxButton* m_bRemoveCoordSet;
+		wxRadioButton* m_rbCoord1;
+		wxStaticText* m_staticText6;
+		wxSpinCtrl* m_sCoord1X;
+		wxSpinCtrl* m_sCoord1Lat;
+		wxSpinCtrl* m_sCoord1Y;
+		wxSpinCtrl* m_sCoord1Lon;
+		wxRadioButton* m_rbCoord2;
+		wxStaticText* m_staticText8;
+		wxSpinCtrl* m_sCoord2X;
+		wxSpinCtrl* m_sCoord2Lat;
+		wxSpinCtrl* m_sCoord2Y;
+		wxSpinCtrl* m_sCoord2Lon;
 		wxScrolledWindow* m_swFaxArea2;
 		wxStaticText* m_staticText15;
 		wxChoice* m_cMapping;
@@ -98,31 +115,19 @@ class EditFaxWizardBase : public wxWizard
 		wxStaticText* m_staticText22;
 		wxStaticText* m_staticText24;
 		wxTextCtrl* m_tMappingMultiplier;
+		wxStaticText* m_staticText20;
+		wxTextCtrl* m_tMappingRatio;
 		wxStaticText* m_stMappingLabel1;
-		wxSpinCtrl* m_sMappingValue1;
+		wxSpinCtrl* m_sMappingPoleX;
 		wxStaticText* m_stMappingLabel2;
-		wxSpinCtrl* m_sMappingValue2;
-		wxStaticText* m_stMappingLabel3;
-		wxSpinCtrl* m_sMappingValue3;
-		wxButton* m_bResetMapping;
+		wxSpinCtrl* m_sMappingPoleY;
+		wxStaticText* m_stMapping;
+		wxSpinCtrl* m_sMappingEquatorY;
 		wxButton* m_bApplyMapping;
 		wxButton* m_bGetMappingParameters;
-		wxScrolledWindow* m_swFaxArea3;
-		wxStaticText* m_staticText10;
-		wxComboBox* m_cbCoordSet;
-		wxButton* m_bRemoveCoordSet;
-		wxRadioButton* m_rbCoord1;
-		wxSpinCtrl* m_sCoord1X;
-		wxSpinCtrl* m_sCoord1Y;
-		wxStaticText* m_staticText6;
-		wxSpinCtrl* m_sCoord1Lat;
-		wxSpinCtrl* m_sCoord1Lon;
-		wxRadioButton* m_rbCoord2;
-		wxSpinCtrl* m_sCoord2X;
-		wxSpinCtrl* m_sCoord2Y;
-		wxStaticText* m_staticText8;
-		wxSpinCtrl* m_sCoord2Lat;
-		wxSpinCtrl* m_sCoord2Lon;
+		wxStaticText* m_staticText211;
+		wxTextCtrl* m_tTrueRatio;
+		wxButton* m_bInformation;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnSetSizes( wxInitDialogEvent& event ) { event.Skip(); }
@@ -131,16 +136,17 @@ class EditFaxWizardBase : public wxWizard
 		virtual void OnPaintImage( wxPaintEvent& event ) { event.Skip(); }
 		virtual void UpdatePage1( wxCommandEvent& event ) { event.Skip(); }
 		virtual void UpdatePage1( wxScrollEvent& event ) { event.Skip(); }
-		virtual void OnBitmapClickPage2( wxMouseEvent& event ) { event.Skip(); }
-		virtual void OnMappingChoice( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnResetMapping( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnApplyMapping( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnGetMappingParameters( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnBitmapClickPage3( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnCoordSet( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnCoordText( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnRemoveCoords( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnSpin( wxSpinEvent& event ) { event.Skip(); }
+		virtual void OnBitmapClickPage2( wxMouseEvent& event ) { event.Skip(); }
+		virtual void OnMappingChoice( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnUpdateMapping( wxSpinEvent& event ) { event.Skip(); }
+		virtual void OnApplyMapping( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnGetMappingParameters( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnUpdateMapping( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnInformation( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:

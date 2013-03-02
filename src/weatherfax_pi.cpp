@@ -75,11 +75,6 @@ weatherfax_pi::weatherfax_pi(void *ppimgr)
           HEADER_PIXEL(data, (img_data+3*i))
       wxImage img_weatherfax(w, h, (unsigned char*)img_data);
       bmp_weatherfax_pi = new wxBitmap(img_weatherfax);
-
-      m_CacheBitmap = NULL;
-      m_gltexture = 0;
-
-      m_image = NULL;
 }
 
 int weatherfax_pi::Init(void)
@@ -209,8 +204,6 @@ void weatherfax_pi::OnToolbarToolCallback(int id)
       if(!m_pWeatherFaxDialog)
       {
             m_pWeatherFaxDialog = new WeatherFaxDialog(*this, m_parent_window);
-            m_pWeatherFaxDialog->m_sTransparency->SetValue(m_iTransparency);
-            m_pWeatherFaxDialog->m_sWhiteTransparency->SetValue(m_iWhiteTransparency);
             m_pWeatherFaxDialog->Move(wxPoint(m_weatherfax_dialog_x, m_weatherfax_dialog_y));
       }
 
@@ -222,185 +215,28 @@ void weatherfax_pi::OnToolbarToolCallback(int id)
       m_pWeatherFaxDialog->Move(p);
 }
 
-bool weatherfax_pi::GetOverlayCoords(PlugIn_ViewPort *vp, wxPoint &p0, wxPoint &pwh, int &w, int &h)
-{
-    if(!m_image || !m_image->m_Coords)
-        return false;
-
-    wxImage &img = m_image->m_mappedimg;
-
-    if(!img.IsOk())
-        return false;
-
-    w=img.GetWidth();
-    h=img.GetHeight();
-
-    double lon0 = m_image->m_Coords->lon(0), lonw = m_image->m_Coords->lon(w);
-
-    /* skip coordinates that go the long way around the world */
-    if(lon0+180 < vp->clon && lonw+180 > vp->clon)
-        return false;
-    if(lon0-180 < vp->clon && lonw-180 > vp->clon)
-        return false;
-
-    double lat1 = m_image->m_Coords->lat1, lon1 = m_image->m_Coords->lon1;
-    double lat2 = m_image->m_Coords->lat2, lon2 = m_image->m_Coords->lon2;
-    
-    wxPoint p1, p2;
-    GetCanvasPixLL( vp, &p1, lat1, lon1 );
-    GetCanvasPixLL( vp, &p2, lat2, lon2 );
-
-    /* now extrapolate to 0-w and 0-h from p1 p2 pa etc.. 
-    (m_image->m_Coords->p2.x-m_image->m_Coords->p1.x)/(p2.x-p1.x) = (m_image->m_Coords->p1.x - 0) / (p1.x - p0.x)
-    p0.x = p1.x - (p2.x-p1.x) * (m_image->m_Coords->p1.x - 0) /
-    (m_image->m_Coords->p2.x-m_image->m_Coords->p1.x)
-    */
-
-    double divx = (m_image->m_Coords->p2.x-m_image->m_Coords->p1.x);
-    double divy = (m_image->m_Coords->p2.y-m_image->m_Coords->p1.y);
-    p0.x = p1.x - (p2.x-p1.x) * (m_image->m_Coords->p1.x - 0) / divx;
-    p0.y = p1.y - (p2.y-p1.y) * (m_image->m_Coords->p1.y - 0) / divy;
-
-    pwh.x = p1.x - (p2.x-p1.x) * (m_image->m_Coords->p1.x - w) / divx;
-    pwh.y = p1.y - (p2.y-p1.y) * (m_image->m_Coords->p1.y - h) / divy;
-    return true;
-}
-
 bool weatherfax_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
 {
-    wxPoint p1, p2;
-    int w, h;
-    if(!GetOverlayCoords(vp, p1, p2, w, h))
-        return false;
+    if(!m_pWeatherFaxDialog)
+        return true;
 
-    wxImage &img = m_image->m_mappedimg;
-
-    int iw = p2.x-p1.x, ih = p2.y-p1.y;
-
-    if(!m_CacheBitmap || m_bNeedUpdateImageDC ||
-       m_CacheBitmap->GetWidth() != iw || m_CacheBitmap->GetHeight() != ih) {
-        m_bNeedUpdateImageDC = false;
-
-        delete m_CacheBitmap;
-        m_CacheBitmap = NULL;
-
-        /* dont go too huge */
-        if(iw > 4096 || ih > 4096)
-            return false;
-
-        wxRect r(m_image->m_Coords->p1.x, m_image->m_Coords->p1.y, w, h);
-
-#if 0
-        wxImage stretchedimg = subimg.Scale(iw, ih); /* doesn't support saturated transparency, or invert */
-#else        
-        unsigned char *subdata = img.GetData();
-        unsigned char *stretcheddata = (unsigned char*)malloc(iw*ih*3); /* malloc needed for wximage */
-        for(int y=0; y<ih; y++) {
-            int sy = y*h/ih;
-            for(int x=0; x<iw; x++) {
-                int sx = x*w/iw;
-                for(int c=0; c<3; c++) {
-                    wxUint8 v = subdata[3*(w*sy+sx)+c];
-                    /* this is wonky because sometimes it makes colors bright
-                       rather than white (triggering mask) but it looks cool... */
-                    if(v > 255-m_iWhiteTransparency)
-                        v = 255;
-                    else if(m_bInvert)
-                        v = 255-v;
-                    stretcheddata[3*(iw*y+x)+c] = v;
-                }
-            }
-        }
-
-        wxImage stretchedimg(iw, ih, stretcheddata);
-#endif
-
-        m_CacheBitmap = new wxBitmap(stretchedimg);
-        if(m_iWhiteTransparency)
-            m_CacheBitmap->SetMask(new wxMask(*m_CacheBitmap, wxColour(255, 255, 255)));
-    }
-
-    dc.DrawBitmap(*m_CacheBitmap, p1.x, p1.y, true);
+    for(unsigned int i=0; i<m_pWeatherFaxDialog->m_lFaxes->GetCount(); i++)
+        if(m_pWeatherFaxDialog->m_lFaxes->IsChecked(i))
+            ((WeatherFaxImage*)m_pWeatherFaxDialog->m_lFaxes->GetClientData(i))->RenderImage(dc, vp);
 
     return true;
 }
 
 bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
 {
-    wxPoint p1, p2;
-    int w, h;
-    if(!GetOverlayCoords(vp, p1, p2, w, h))
-        return false;
+    if(!m_pWeatherFaxDialog)
+        return true;
 
-    wxImage &img = m_image->m_mappedimg;
-
-    if(m_bNeedUpdateImageGL) {
-        m_bNeedUpdateImageGL = false;
-
-        if(!m_gltexture)
-            glGenTextures(1, &m_gltexture);
-        glBindTexture(GL_TEXTURE_RECTANGLE_ARB, m_gltexture);
-        
-        glTexParameteri( GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_WRAP_S, GL_CLAMP );
-        glTexParameteri( GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_WRAP_T, GL_CLAMP );
-        glTexParameteri( GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-        glTexParameteri( GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
-        
-#if 1 /* I think we can delete these */
-        glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
-        glPixelStorei( GL_UNPACK_SKIP_PIXELS, 0 );
-        glPixelStorei( GL_UNPACK_SKIP_ROWS, 0 );
-#endif
-        unsigned char *data = img.GetData();
-        unsigned char *idata = NULL;
-        unsigned int size = img.GetWidth()*img.GetHeight();
-        idata = new unsigned char[4*size];
-        for(unsigned int i=0; i<size; i++) {
-            wxUint8 r = data[3*i + 0], g = data[3*i + 1], b = data[3*i + 2];
-            if(m_bInvert)
-                idata[4*i + 0] = r,  idata[4*i + 1] = g, idata[4*i + 2] = b;
-            else
-                idata[4*i + 0] = 255-r,  idata[4*i + 1] = 255-g, idata[4*i + 2] = 255-b;
-
-            wxUint8 a = 255 + -(r+g+b)/3*m_iWhiteTransparency/255; /* white alpha */
-            idata[4*i+3] = a;
-        }
-
-        glTexImage2D(GL_TEXTURE_RECTANGLE_ARB, 0, GL_RGBA,
-                     img.GetWidth(), img.GetHeight(),
-                     0, GL_RGBA, GL_UNSIGNED_BYTE, idata);
-        delete [] idata;
-    }
-        
-    glPushAttrib(GL_COLOR_BUFFER_BIT | GL_ENABLE_BIT | GL_POLYGON_BIT | GL_TEXTURE_BIT);
-
-    glEnable(GL_TEXTURE_RECTANGLE_ARB);
-    glEnable( GL_BLEND );
-    glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-    glDisable( GL_MULTISAMPLE );
-    glTexEnvi( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_BLEND);
-    glColor4ub(255, 255, 255, 255-m_iTransparency);
-    glBindTexture(GL_TEXTURE_RECTANGLE_ARB, m_gltexture);
-    
-    glBegin(GL_QUADS);
-    glTexCoord2i(0, 0), glVertex2i(p1.x, p1.y);
-    glTexCoord2i(w, 0), glVertex2i(p2.x, p1.y);
-    glTexCoord2i(w, h), glVertex2i(p2.x, p2.y);
-    glTexCoord2i(0, h), glVertex2i(p1.x, p2.y);
-    glEnd();
-
-    glPopAttrib();
+    for(unsigned int i=0; i<m_pWeatherFaxDialog->m_lFaxes->GetCount(); i++)
+        if(m_pWeatherFaxDialog->m_lFaxes->IsChecked(i))
+            ((WeatherFaxImage*)m_pWeatherFaxDialog->m_lFaxes->GetClientData(i))->RenderImageGL(vp);
 
     return true;
-}
-
-void weatherfax_pi::SetImageToRender(WeatherFaxImage *image)
-{
-    m_image = image;
-    m_bNeedUpdateImageDC = true;
-    m_bNeedUpdateImageGL = true;
-
-    RequestRefresh( m_parent_window );
 }
 
 bool weatherfax_pi::LoadConfig(void)
@@ -410,16 +246,13 @@ bool weatherfax_pi::LoadConfig(void)
       if(pConf)
       {
             pConf->SetPath ( _T( "/Settings/WeatherFax" ) );
-            pConf->Read ( _T( "Transparency" ),  &m_iTransparency, 64 );
-            pConf->Read ( _T( "WhiteTransparency" ),  &m_iWhiteTransparency, 64 );
-            pConf->Read ( _T( "Invert" ),  &m_bInvert, 0 );
             pConf->Read ( _T( "Path" ),  &m_path, _T ( "" ) );
 
             m_weatherfax_dialog_x =  pConf->Read ( _T ( "DialogPosX" ), 20L );
             m_weatherfax_dialog_y =  pConf->Read ( _T ( "DialogPosY" ), 20L );
 
             pConf->SetPath ( _T ( "/Settings/WeatherFax/Audio" ) );
-            pConf->Read ( _T ( "ImageWidth" ), &m_ImageWidth, 576 );
+            pConf->Read ( _T ( "ImageWidth" ), &m_ImageWidth, 576*2 );
             pConf->Read ( _T ( "BitsPerPixel" ), &m_BitsPerPixel, 8 );
             pConf->Read ( _T ( "Carrier" ), &m_Carrier, 1900 );
             pConf->Read ( _T ( "Deviation" ), &m_Deviation, 400 );
@@ -432,8 +265,7 @@ bool weatherfax_pi::LoadConfig(void)
             def = ::wxGetCwd() + _T("/plugins");
             pConf->Read ( _T ( "WeatherFaxDataLocation" ), &m_weatherfax_dir, def);
             return true;
-      }
-      else
+      } else
             return false;
 }
 
@@ -444,9 +276,6 @@ bool weatherfax_pi::SaveConfig(void)
       if(pConf)
       {
             pConf->SetPath ( _T ( "/Settings/WeatherFax" ) );
-            pConf->Write ( _T ( "Transparency" ), m_iTransparency );
-            pConf->Write ( _T ( "WhiteTransparency" ), m_iWhiteTransparency );
-            pConf->Write ( _T ( "Invert" ), m_bInvert );
             pConf->Write ( _T ( "Path" ), m_path );
 
             pConf->Write ( _T ( "DialogPosX" ),   m_weatherfax_dialog_x );

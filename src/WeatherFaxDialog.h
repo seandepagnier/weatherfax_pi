@@ -35,8 +35,10 @@ public:
 
     ~WeatherFaxDialog();
 
-    void OnListBox( wxCommandEvent& event );
-    void NewFaxClicked( wxCommandEvent& event );
+    void OnFaxes( wxCommandEvent& event );
+    void OnFaxesToggled( wxCommandEvent& event );
+    void CaptureFaxClicked( wxCommandEvent& event );
+    void OpenFaxClicked( wxCommandEvent& event );
     void EditFaxClicked( wxCommandEvent& event );
     void DeleteFaxClicked( wxCommandEvent& event );
     void TransparencyChanged( wxScrollEvent& event );
@@ -56,11 +58,13 @@ public:
                    WeatherFaxImageCoordinateList &coords);
     ~EditFaxWizard();
 
-    void OnSetSizes( wxInitDialogEvent& event ) { SetSize(640, 480);  }
+    void OnSetSizes( wxInitDialogEvent& event );
 //    void OnSize( wxSizeEvent& event ) { Fit(); }
     void UpdateMappingControls();
     void OnWizardPageChanged( wxWizardEvent& event );
     void OnMappingChoice( wxCommandEvent& event );
+    void GetMappingParametersFixedFlat();
+    void GetMappingParametersPolar();
     void OnGetMappingParameters( wxCommandEvent& event );
     void OnBitmapClickPage2( wxMouseEvent& event );
     void OnBitmapClickPage3( wxMouseEvent& event );
@@ -68,9 +72,15 @@ public:
     void OnCoordText( wxCommandEvent& event );
     void OnRemoveCoords( wxCommandEvent& event );
     void StoreMappingParams();
-    void ApplyMapping();
+    void ResetMapping();
+    bool ApplyMapping();
+    
+    void SetCoordRanges();
     void OnApplyMapping( wxCommandEvent& event );
-    void OnResetMapping( wxCommandEvent& event );
+    void OnUpdateMapping( wxSpinEvent& event ) { Refresh(); }
+    void OnUpdateMapping( wxCommandEvent& event ) { Refresh(); }
+    void OnInformation( wxCommandEvent& event );
+
     void StoreCoords();
 
 protected:
@@ -96,10 +106,6 @@ protected:
     bool m_skippaint;
 
     /* page 2 */
-    int mappingparamstate;
-    wxPoint mapping1, mapping2;
-    double mapping1lat, mapping2lat;
-
-    /* page 3 */
     int m_SelectedIndex;
+    bool m_bmappingapplied;
 };

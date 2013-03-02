@@ -29,23 +29,29 @@ WeatherFaxDialogBase::WeatherFaxDialogBase( wxWindow* parent, wxWindowID id, con
 	fgSizer7->SetFlexibleDirection( wxBOTH );
 	fgSizer7->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_lFaxes = new wxListBox( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0, NULL, 0 ); 
+	wxArrayString m_lFaxesChoices;
+	m_lFaxes = new wxCheckListBox( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_lFaxesChoices, 0 );
 	fgSizer7->Add( m_lFaxes, 0, wxALL|wxEXPAND, 5 );
 	
-	wxBoxSizer* bSizer4;
-	bSizer4 = new wxBoxSizer( wxHORIZONTAL );
+	wxFlexGridSizer* fgSizer16;
+	fgSizer16 = new wxFlexGridSizer( 0, 4, 0, 0 );
+	fgSizer16->SetFlexibleDirection( wxBOTH );
+	fgSizer16->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_bNew = new wxButton( this, wxID_ANY, _("New"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer4->Add( m_bNew, 0, wxALL, 5 );
+	m_bCapture = new wxButton( this, wxID_ANY, _("Capture"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer16->Add( m_bCapture, 0, wxALL, 5 );
+	
+	m_bOpen = new wxButton( this, wxID_ANY, _("Open"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer16->Add( m_bOpen, 0, wxALL, 5 );
 	
 	m_bEdit = new wxButton( this, wxID_ANY, _("Edit"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer4->Add( m_bEdit, 0, wxALL, 5 );
+	fgSizer16->Add( m_bEdit, 0, wxALL, 5 );
 	
 	m_bDelete = new wxButton( this, wxID_ANY, _("Delete"), wxDefaultPosition, wxDefaultSize, 0 );
-	bSizer4->Add( m_bDelete, 0, wxALL, 5 );
+	fgSizer16->Add( m_bDelete, 0, wxALL, 5 );
 	
 	
-	fgSizer7->Add( bSizer4, 1, wxEXPAND, 5 );
+	fgSizer7->Add( fgSizer16, 1, wxEXPAND, 5 );
 	
 	
 	sbFax->Add( fgSizer7, 1, wxEXPAND, 5 );
@@ -76,8 +82,10 @@ WeatherFaxDialogBase::WeatherFaxDialogBase( wxWindow* parent, wxWindowID id, con
 	this->Centre( wxBOTH );
 	
 	// Connect Events
-	m_lFaxes->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( WeatherFaxDialogBase::OnListBox ), NULL, this );
-	m_bNew->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::NewFaxClicked ), NULL, this );
+	m_lFaxes->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( WeatherFaxDialogBase::OnFaxes ), NULL, this );
+	m_lFaxes->Connect( wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, wxCommandEventHandler( WeatherFaxDialogBase::OnFaxesToggled ), NULL, this );
+	m_bCapture->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::CaptureFaxClicked ), NULL, this );
+	m_bOpen->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::OpenFaxClicked ), NULL, this );
 	m_bEdit->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::EditFaxClicked ), NULL, this );
 	m_bDelete->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::DeleteFaxClicked ), NULL, this );
 	m_sTransparency->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
@@ -104,8 +112,10 @@ WeatherFaxDialogBase::WeatherFaxDialogBase( wxWindow* parent, wxWindowID id, con
 WeatherFaxDialogBase::~WeatherFaxDialogBase()
 {
 	// Disconnect Events
-	m_lFaxes->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( WeatherFaxDialogBase::OnListBox ), NULL, this );
-	m_bNew->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::NewFaxClicked ), NULL, this );
+	m_lFaxes->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( WeatherFaxDialogBase::OnFaxes ), NULL, this );
+	m_lFaxes->Disconnect( wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, wxCommandEventHandler( WeatherFaxDialogBase::OnFaxesToggled ), NULL, this );
+	m_bCapture->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::CaptureFaxClicked ), NULL, this );
+	m_bOpen->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::OpenFaxClicked ), NULL, this );
 	m_bEdit->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::EditFaxClicked ), NULL, this );
 	m_bDelete->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::DeleteFaxClicked ), NULL, this );
 	m_sTransparency->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
@@ -164,7 +174,7 @@ EditFaxWizardBase::EditFaxWizardBase( wxWindow* parent, wxWindowID id, const wxS
 	m_staticText16->Wrap( -1 );
 	fgSizer10->Add( m_staticText16, 0, wxALL, 5 );
 	
-	wxString m_cFilterChoices[] = { _("No Filter"), _("Lowpass 1"), _("Lowpass 2") };
+	wxString m_cFilterChoices[] = { _("No Filter"), _("Removal 1"), _("Removal 2"), _("removal 3"), _("Value 1"), _("Value 2"), _("Value 3") };
 	int m_cFilterNChoices = sizeof( m_cFilterChoices ) / sizeof( wxString );
 	m_cFilter = new wxChoice( m_wizPage1, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_cFilterNChoices, m_cFilterChoices, 0 );
 	m_cFilter->SetSelection( 0 );
@@ -191,7 +201,7 @@ EditFaxWizardBase::EditFaxWizardBase( wxWindow* parent, wxWindowID id, const wxS
 	m_staticText101->Wrap( -1 );
 	fgSizer10->Add( m_staticText101, 0, wxALL, 5 );
 	
-	m_sSkew = new wxSlider( m_wizPage1, wxID_ANY, 0, -100, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	m_sSkew = new wxSlider( m_wizPage1, wxID_ANY, 0, -1000, 1000, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
 	fgSizer10->Add( m_sSkew, 0, wxALL|wxEXPAND, 5 );
 	
 	
@@ -208,15 +218,100 @@ EditFaxWizardBase::EditFaxWizardBase( wxWindow* parent, wxWindowID id, const wxS
 	m_pages.Add( m_wizPage2 );
 	
 	wxFlexGridSizer* fgSizer111;
-	fgSizer111 = new wxFlexGridSizer( 0, 1, 0, 0 );
+	fgSizer111 = new wxFlexGridSizer( 2, 1, 0, 0 );
 	fgSizer111->AddGrowableCol( 0 );
 	fgSizer111->AddGrowableRow( 0 );
 	fgSizer111->SetFlexibleDirection( wxBOTH );
 	fgSizer111->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
+	wxFlexGridSizer* fgSizer171;
+	fgSizer171 = new wxFlexGridSizer( 1, 2, 0, 0 );
+	fgSizer171->AddGrowableCol( 1 );
+	fgSizer171->AddGrowableRow( 0 );
+	fgSizer171->SetFlexibleDirection( wxBOTH );
+	fgSizer171->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	wxStaticBoxSizer* sbSizer4;
+	sbSizer4 = new wxStaticBoxSizer( new wxStaticBox( m_wizPage2, wxID_ANY, _("Image Coordinates") ), wxVERTICAL );
+	
+	wxFlexGridSizer* fgSizer9;
+	fgSizer9 = new wxFlexGridSizer( 0, 1, 0, 0 );
+	fgSizer9->AddGrowableRow( 1 );
+	fgSizer9->SetFlexibleDirection( wxBOTH );
+	fgSizer9->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	wxFlexGridSizer* fgSizer8;
+	fgSizer8 = new wxFlexGridSizer( 0, 3, 0, 0 );
+	fgSizer8->SetFlexibleDirection( wxBOTH );
+	fgSizer8->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_cbCoordSet = new wxComboBox( m_wizPage2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), 0, NULL, 0 ); 
+	fgSizer8->Add( m_cbCoordSet, 0, wxALL, 5 );
+	
+	m_bRemoveCoordSet = new wxButton( m_wizPage2, wxID_ANY, _("Remove"), wxDefaultPosition, wxSize( 80,-1 ), 0 );
+	fgSizer8->Add( m_bRemoveCoordSet, 0, wxTOP, 5 );
+	
+	
+	fgSizer9->Add( fgSizer8, 1, wxEXPAND, 5 );
+	
+	wxFlexGridSizer* fgSizer7;
+	fgSizer7 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer7->SetFlexibleDirection( wxBOTH );
+	fgSizer7->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_rbCoord1 = new wxRadioButton( m_wizPage2, wxID_ANY, _("Coord 1"), wxDefaultPosition, wxDefaultSize, wxRB_GROUP );
+	fgSizer7->Add( m_rbCoord1, 0, wxALL, 5 );
+	
+	m_staticText6 = new wxStaticText( m_wizPage2, wxID_ANY, _("Lat/Lon"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText6->Wrap( -1 );
+	fgSizer7->Add( m_staticText6, 0, wxALL, 5 );
+	
+	m_sCoord1X = new wxSpinCtrl( m_wizPage2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
+	fgSizer7->Add( m_sCoord1X, 0, wxALL, 5 );
+	
+	m_sCoord1Lat = new wxSpinCtrl( m_wizPage2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 60,-1 ), wxSP_ARROW_KEYS, -90, 90, 0 );
+	fgSizer7->Add( m_sCoord1Lat, 0, wxALL, 5 );
+	
+	m_sCoord1Y = new wxSpinCtrl( m_wizPage2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
+	fgSizer7->Add( m_sCoord1Y, 0, wxALL, 5 );
+	
+	m_sCoord1Lon = new wxSpinCtrl( m_wizPage2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 60,-1 ), wxSP_ARROW_KEYS, -180, 180, 0 );
+	fgSizer7->Add( m_sCoord1Lon, 0, wxALL, 5 );
+	
+	m_rbCoord2 = new wxRadioButton( m_wizPage2, wxID_ANY, _("Coord 2"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer7->Add( m_rbCoord2, 0, wxALL, 5 );
+	
+	m_staticText8 = new wxStaticText( m_wizPage2, wxID_ANY, _("Lat/Lon"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText8->Wrap( -1 );
+	fgSizer7->Add( m_staticText8, 0, wxALL, 5 );
+	
+	m_sCoord2X = new wxSpinCtrl( m_wizPage2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
+	fgSizer7->Add( m_sCoord2X, 0, wxALL, 5 );
+	
+	m_sCoord2Lat = new wxSpinCtrl( m_wizPage2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 60,-1 ), wxSP_ARROW_KEYS, -90, 90, 0 );
+	fgSizer7->Add( m_sCoord2Lat, 0, wxALL, 5 );
+	
+	m_sCoord2Y = new wxSpinCtrl( m_wizPage2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
+	fgSizer7->Add( m_sCoord2Y, 0, wxALL, 5 );
+	
+	m_sCoord2Lon = new wxSpinCtrl( m_wizPage2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 60,-1 ), wxSP_ARROW_KEYS, -180, 180, 0 );
+	fgSizer7->Add( m_sCoord2Lon, 0, wxALL, 5 );
+	
+	
+	fgSizer9->Add( fgSizer7, 1, wxEXPAND, 5 );
+	
+	
+	sbSizer4->Add( fgSizer9, 1, 0, 5 );
+	
+	
+	fgSizer171->Add( sbSizer4, 1, wxEXPAND, 5 );
+	
 	m_swFaxArea2 = new wxScrolledWindow( m_wizPage2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxHSCROLL|wxVSCROLL );
 	m_swFaxArea2->SetScrollRate( 5, 5 );
-	fgSizer111->Add( m_swFaxArea2, 1, wxEXPAND | wxALL, 5 );
+	fgSizer171->Add( m_swFaxArea2, 1, wxEXPAND | wxALL, 5 );
+	
+	
+	fgSizer111->Add( fgSizer171, 1, wxEXPAND, 5 );
 	
 	wxStaticBoxSizer* sbSizer51;
 	sbSizer51 = new wxStaticBoxSizer( new wxStaticBox( m_wizPage2, wxID_ANY, _("Coordinates Mapping Correction") ), wxVERTICAL );
@@ -234,7 +329,7 @@ EditFaxWizardBase::EditFaxWizardBase( wxWindow* parent, wxWindowID id, const wxS
 	
 	m_staticText15 = new wxStaticText( m_wizPage2, wxID_ANY, _("Input Type"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText15->Wrap( -1 );
-	fgSizer17->Add( m_staticText15, 0, wxALL, 5 );
+	fgSizer17->Add( m_staticText15, 0, wxALIGN_CENTER|wxALL, 5 );
 	
 	wxString m_cMappingChoices[] = { _("mercator"), _("polar"), _("fixed-flat") };
 	int m_cMappingNChoices = sizeof( m_cMappingChoices ) / sizeof( wxString );
@@ -244,18 +339,25 @@ EditFaxWizardBase::EditFaxWizardBase( wxWindow* parent, wxWindowID id, const wxS
 	
 	m_staticText21 = new wxStaticText( m_wizPage2, wxID_ANY, _("Output Type"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText21->Wrap( -1 );
-	fgSizer17->Add( m_staticText21, 0, wxALL, 5 );
+	fgSizer17->Add( m_staticText21, 0, wxALIGN_CENTER|wxALL, 5 );
 	
 	m_staticText22 = new wxStaticText( m_wizPage2, wxID_ANY, _("Mercator"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText22->Wrap( -1 );
 	fgSizer17->Add( m_staticText22, 0, wxALL, 5 );
 	
-	m_staticText24 = new wxStaticText( m_wizPage2, wxID_ANY, _("Size Multiplier"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText24 = new wxStaticText( m_wizPage2, wxID_ANY, _("Size"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText24->Wrap( -1 );
-	fgSizer17->Add( m_staticText24, 0, wxALL, 5 );
+	fgSizer17->Add( m_staticText24, 0, wxALIGN_CENTER|wxALL, 5 );
 	
 	m_tMappingMultiplier = new wxTextCtrl( m_wizPage2, wxID_ANY, _("1"), wxDefaultPosition, wxSize( 50,-1 ), 0 );
 	fgSizer17->Add( m_tMappingMultiplier, 0, wxALL, 5 );
+	
+	m_staticText20 = new wxStaticText( m_wizPage2, wxID_ANY, _("W/H"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText20->Wrap( -1 );
+	fgSizer17->Add( m_staticText20, 0, wxALIGN_CENTER|wxALL, 5 );
+	
+	m_tMappingRatio = new wxTextCtrl( m_wizPage2, wxID_ANY, _("1"), wxDefaultPosition, wxSize( 50,-1 ), 0 );
+	fgSizer17->Add( m_tMappingRatio, 0, wxALL, 5 );
 	
 	
 	fgSizer101->Add( fgSizer17, 1, wxEXPAND, 5 );
@@ -265,26 +367,26 @@ EditFaxWizardBase::EditFaxWizardBase( wxWindow* parent, wxWindowID id, const wxS
 	fgChangingLabelSizer->SetFlexibleDirection( wxBOTH );
 	fgChangingLabelSizer->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_stMappingLabel1 = new wxStaticText( m_wizPage2, wxID_ANY, _("MyLabel__"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_stMappingLabel1 = new wxStaticText( m_wizPage2, wxID_ANY, _("Pole X"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_stMappingLabel1->Wrap( -1 );
-	fgChangingLabelSizer->Add( m_stMappingLabel1, 0, wxALL, 5 );
+	fgChangingLabelSizer->Add( m_stMappingLabel1, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_sMappingValue1 = new wxSpinCtrl( m_wizPage2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -100000, 100000, 369 );
-	fgChangingLabelSizer->Add( m_sMappingValue1, 0, wxALL, 5 );
+	m_sMappingPoleX = new wxSpinCtrl( m_wizPage2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 70,-1 ), wxSP_ARROW_KEYS, -100000, 100000, 369 );
+	fgChangingLabelSizer->Add( m_sMappingPoleX, 0, wxALL, 5 );
 	
-	m_stMappingLabel2 = new wxStaticText( m_wizPage2, wxID_ANY, _("MyLabel__"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_stMappingLabel2 = new wxStaticText( m_wizPage2, wxID_ANY, _("Pole Y"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_stMappingLabel2->Wrap( -1 );
-	fgChangingLabelSizer->Add( m_stMappingLabel2, 0, wxALL, 5 );
+	fgChangingLabelSizer->Add( m_stMappingLabel2, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_sMappingValue2 = new wxSpinCtrl( m_wizPage2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -100000, 100000, -74 );
-	fgChangingLabelSizer->Add( m_sMappingValue2, 0, wxALL, 5 );
+	m_sMappingPoleY = new wxSpinCtrl( m_wizPage2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 70,-1 ), wxSP_ARROW_KEYS, -100000, 100000, -74 );
+	fgChangingLabelSizer->Add( m_sMappingPoleY, 0, wxALL, 5 );
 	
-	m_stMappingLabel3 = new wxStaticText( m_wizPage2, wxID_ANY, _("MyLabel____"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_stMappingLabel3->Wrap( -1 );
-	fgChangingLabelSizer->Add( m_stMappingLabel3, 0, wxALL, 5 );
+	m_stMapping = new wxStaticText( m_wizPage2, wxID_ANY, _("Equator Y"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_stMapping->Wrap( -1 );
+	fgChangingLabelSizer->Add( m_stMapping, 0, wxALIGN_CENTER|wxALL, 5 );
 	
-	m_sMappingValue3 = new wxSpinCtrl( m_wizPage2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( -1,-1 ), wxSP_ARROW_KEYS, -100000, 100000, 560 );
-	fgChangingLabelSizer->Add( m_sMappingValue3, 0, wxALL, 5 );
+	m_sMappingEquatorY = new wxSpinCtrl( m_wizPage2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 70,-1 ), wxSP_ARROW_KEYS, -100000, 100000, 560 );
+	fgChangingLabelSizer->Add( m_sMappingEquatorY, 0, wxALL, 5 );
 	
 	
 	fgSizer101->Add( fgChangingLabelSizer, 1, wxEXPAND, 5 );
@@ -294,14 +396,21 @@ EditFaxWizardBase::EditFaxWizardBase( wxWindow* parent, wxWindowID id, const wxS
 	fgSizer13->SetFlexibleDirection( wxBOTH );
 	fgSizer13->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_bResetMapping = new wxButton( m_wizPage2, wxID_ANY, _("Reset"), wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer13->Add( m_bResetMapping, 0, wxALL, 5 );
-	
 	m_bApplyMapping = new wxButton( m_wizPage2, wxID_ANY, _("Apply"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer13->Add( m_bApplyMapping, 0, wxALL, 5 );
 	
-	m_bGetMappingParameters = new wxButton( m_wizPage2, wxID_ANY, _("Get Mapping"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_bGetMappingParameters = new wxButton( m_wizPage2, wxID_ANY, _("Get Mapping "), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer13->Add( m_bGetMappingParameters, 0, wxALL, 5 );
+	
+	m_staticText211 = new wxStaticText( m_wizPage2, wxID_ANY, _("True Width Ratio"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText211->Wrap( -1 );
+	fgSizer13->Add( m_staticText211, 0, wxALIGN_CENTER|wxALL, 5 );
+	
+	m_tTrueRatio = new wxTextCtrl( m_wizPage2, wxID_ANY, _("1"), wxDefaultPosition, wxSize( 50,-1 ), 0 );
+	fgSizer13->Add( m_tTrueRatio, 0, wxALL, 5 );
+	
+	m_bInformation = new wxButton( m_wizPage2, wxID_ANY, _("Information"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer13->Add( m_bInformation, 0, wxALL, 5 );
 	
 	
 	fgSizer101->Add( fgSizer13, 1, wxEXPAND, 5 );
@@ -316,103 +425,6 @@ EditFaxWizardBase::EditFaxWizardBase( wxWindow* parent, wxWindowID id, const wxS
 	m_wizPage2->SetSizer( fgSizer111 );
 	m_wizPage2->Layout();
 	fgSizer111->Fit( m_wizPage2 );
-	wxWizardPageSimple* m_wizPage3 = new wxWizardPageSimple( this );
-	m_pages.Add( m_wizPage3 );
-	
-	wxFlexGridSizer* fgSizer14;
-	fgSizer14 = new wxFlexGridSizer( 0, 1, 0, 0 );
-	fgSizer14->AddGrowableCol( 0 );
-	fgSizer14->AddGrowableRow( 0 );
-	fgSizer14->SetFlexibleDirection( wxBOTH );
-	fgSizer14->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-	
-	m_swFaxArea3 = new wxScrolledWindow( m_wizPage3, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxHSCROLL|wxVSCROLL );
-	m_swFaxArea3->SetScrollRate( 5, 5 );
-	fgSizer14->Add( m_swFaxArea3, 1, wxALL|wxEXPAND, 5 );
-	
-	wxStaticBoxSizer* sbSizer4;
-	sbSizer4 = new wxStaticBoxSizer( new wxStaticBox( m_wizPage3, wxID_ANY, _("Configure Image Coordinates") ), wxVERTICAL );
-	
-	wxFlexGridSizer* fgSizer9;
-	fgSizer9 = new wxFlexGridSizer( 0, 1, 0, 0 );
-	fgSizer9->AddGrowableRow( 1 );
-	fgSizer9->SetFlexibleDirection( wxBOTH );
-	fgSizer9->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-	
-	wxFlexGridSizer* fgSizer8;
-	fgSizer8 = new wxFlexGridSizer( 0, 3, 0, 0 );
-	fgSizer8->SetFlexibleDirection( wxBOTH );
-	fgSizer8->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-	
-	m_staticText10 = new wxStaticText( m_wizPage3, wxID_ANY, _("Coord Set"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText10->Wrap( -1 );
-	fgSizer8->Add( m_staticText10, 0, wxALL, 5 );
-	
-	m_cbCoordSet = new wxComboBox( m_wizPage3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, NULL, 0 ); 
-	fgSizer8->Add( m_cbCoordSet, 0, wxALL, 5 );
-	
-	m_bRemoveCoordSet = new wxButton( m_wizPage3, wxID_ANY, _("Remove"), wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer8->Add( m_bRemoveCoordSet, 0, wxALL, 5 );
-	
-	
-	fgSizer9->Add( fgSizer8, 1, wxEXPAND, 5 );
-	
-	wxFlexGridSizer* fgSizer7;
-	fgSizer7 = new wxFlexGridSizer( 0, 6, 0, 0 );
-	fgSizer7->SetFlexibleDirection( wxBOTH );
-	fgSizer7->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-	
-	m_rbCoord1 = new wxRadioButton( m_wizPage3, wxID_ANY, _("Coord 1 X/Y"), wxDefaultPosition, wxDefaultSize, wxRB_GROUP );
-	fgSizer7->Add( m_rbCoord1, 0, wxALL, 5 );
-	
-	m_sCoord1X = new wxSpinCtrl( m_wizPage3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 10, 0 );
-	fgSizer7->Add( m_sCoord1X, 0, wxALL, 5 );
-	
-	m_sCoord1Y = new wxSpinCtrl( m_wizPage3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 10, 0 );
-	fgSizer7->Add( m_sCoord1Y, 0, wxALL, 5 );
-	
-	m_staticText6 = new wxStaticText( m_wizPage3, wxID_ANY, _("Lat/Lon"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText6->Wrap( -1 );
-	fgSizer7->Add( m_staticText6, 0, wxALL, 5 );
-	
-	m_sCoord1Lat = new wxSpinCtrl( m_wizPage3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -90, 90, 0 );
-	fgSizer7->Add( m_sCoord1Lat, 0, wxALL, 5 );
-	
-	m_sCoord1Lon = new wxSpinCtrl( m_wizPage3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -180, 180, 0 );
-	fgSizer7->Add( m_sCoord1Lon, 0, wxALL, 5 );
-	
-	m_rbCoord2 = new wxRadioButton( m_wizPage3, wxID_ANY, _("Coord 2 X/Y"), wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer7->Add( m_rbCoord2, 0, wxALL, 5 );
-	
-	m_sCoord2X = new wxSpinCtrl( m_wizPage3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 10, 0 );
-	fgSizer7->Add( m_sCoord2X, 0, wxALL, 5 );
-	
-	m_sCoord2Y = new wxSpinCtrl( m_wizPage3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 10, 0 );
-	fgSizer7->Add( m_sCoord2Y, 0, wxALL, 5 );
-	
-	m_staticText8 = new wxStaticText( m_wizPage3, wxID_ANY, _("Lat/Lon"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText8->Wrap( -1 );
-	fgSizer7->Add( m_staticText8, 0, wxALL, 5 );
-	
-	m_sCoord2Lat = new wxSpinCtrl( m_wizPage3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -90, 90, 0 );
-	fgSizer7->Add( m_sCoord2Lat, 0, wxALL, 5 );
-	
-	m_sCoord2Lon = new wxSpinCtrl( m_wizPage3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -180, 180, 0 );
-	fgSizer7->Add( m_sCoord2Lon, 0, wxALL, 5 );
-	
-	
-	fgSizer9->Add( fgSizer7, 1, wxEXPAND, 5 );
-	
-	
-	sbSizer4->Add( fgSizer9, 1, 0, 5 );
-	
-	
-	fgSizer14->Add( sbSizer4, 1, wxEXPAND, 5 );
-	
-	
-	m_wizPage3->SetSizer( fgSizer14 );
-	m_wizPage3->Layout();
-	fgSizer14->Fit( m_wizPage3 );
 	
 	this->Centre( wxBOTH );
 	
@@ -447,14 +459,6 @@ EditFaxWizardBase::EditFaxWizardBase( wxWindow* parent, wxWindowID id, const wxS
 	m_sSkew->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( EditFaxWizardBase::UpdatePage1 ), NULL, this );
 	m_sSkew->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( EditFaxWizardBase::UpdatePage1 ), NULL, this );
 	m_sSkew->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( EditFaxWizardBase::UpdatePage1 ), NULL, this );
-	m_swFaxArea2->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( EditFaxWizardBase::OnBitmapClickPage2 ), NULL, this );
-	m_swFaxArea2->Connect( wxEVT_PAINT, wxPaintEventHandler( EditFaxWizardBase::OnPaintImage ), NULL, this );
-	m_cMapping->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( EditFaxWizardBase::OnMappingChoice ), NULL, this );
-	m_bResetMapping->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxWizardBase::OnResetMapping ), NULL, this );
-	m_bApplyMapping->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxWizardBase::OnApplyMapping ), NULL, this );
-	m_bGetMappingParameters->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxWizardBase::OnGetMappingParameters ), NULL, this );
-	m_swFaxArea3->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( EditFaxWizardBase::OnBitmapClickPage3 ), NULL, this );
-	m_swFaxArea3->Connect( wxEVT_PAINT, wxPaintEventHandler( EditFaxWizardBase::OnPaintImage ), NULL, this );
 	m_cbCoordSet->Connect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( EditFaxWizardBase::OnCoordSet ), NULL, this );
 	m_cbCoordSet->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( EditFaxWizardBase::OnCoordText ), NULL, this );
 	m_bRemoveCoordSet->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxWizardBase::OnRemoveCoords ), NULL, this );
@@ -462,6 +466,15 @@ EditFaxWizardBase::EditFaxWizardBase( wxWindow* parent, wxWindowID id, const wxS
 	m_sCoord1Y->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxWizardBase::OnSpin ), NULL, this );
 	m_sCoord2X->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxWizardBase::OnSpin ), NULL, this );
 	m_sCoord2Y->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxWizardBase::OnSpin ), NULL, this );
+	m_swFaxArea2->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( EditFaxWizardBase::OnBitmapClickPage2 ), NULL, this );
+	m_swFaxArea2->Connect( wxEVT_PAINT, wxPaintEventHandler( EditFaxWizardBase::OnPaintImage ), NULL, this );
+	m_cMapping->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( EditFaxWizardBase::OnMappingChoice ), NULL, this );
+	m_sMappingPoleX->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxWizardBase::OnUpdateMapping ), NULL, this );
+	m_sMappingPoleY->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxWizardBase::OnUpdateMapping ), NULL, this );
+	m_bApplyMapping->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxWizardBase::OnApplyMapping ), NULL, this );
+	m_bGetMappingParameters->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxWizardBase::OnGetMappingParameters ), NULL, this );
+	m_tTrueRatio->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( EditFaxWizardBase::OnUpdateMapping ), NULL, this );
+	m_bInformation->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxWizardBase::OnInformation ), NULL, this );
 }
 
 EditFaxWizardBase::~EditFaxWizardBase()
@@ -491,14 +504,6 @@ EditFaxWizardBase::~EditFaxWizardBase()
 	m_sSkew->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( EditFaxWizardBase::UpdatePage1 ), NULL, this );
 	m_sSkew->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( EditFaxWizardBase::UpdatePage1 ), NULL, this );
 	m_sSkew->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( EditFaxWizardBase::UpdatePage1 ), NULL, this );
-	m_swFaxArea2->Disconnect( wxEVT_LEFT_DOWN, wxMouseEventHandler( EditFaxWizardBase::OnBitmapClickPage2 ), NULL, this );
-	m_swFaxArea2->Disconnect( wxEVT_PAINT, wxPaintEventHandler( EditFaxWizardBase::OnPaintImage ), NULL, this );
-	m_cMapping->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( EditFaxWizardBase::OnMappingChoice ), NULL, this );
-	m_bResetMapping->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxWizardBase::OnResetMapping ), NULL, this );
-	m_bApplyMapping->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxWizardBase::OnApplyMapping ), NULL, this );
-	m_bGetMappingParameters->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxWizardBase::OnGetMappingParameters ), NULL, this );
-	m_swFaxArea3->Disconnect( wxEVT_LEFT_DOWN, wxMouseEventHandler( EditFaxWizardBase::OnBitmapClickPage3 ), NULL, this );
-	m_swFaxArea3->Disconnect( wxEVT_PAINT, wxPaintEventHandler( EditFaxWizardBase::OnPaintImage ), NULL, this );
 	m_cbCoordSet->Disconnect( wxEVT_COMMAND_COMBOBOX_SELECTED, wxCommandEventHandler( EditFaxWizardBase::OnCoordSet ), NULL, this );
 	m_cbCoordSet->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( EditFaxWizardBase::OnCoordText ), NULL, this );
 	m_bRemoveCoordSet->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxWizardBase::OnRemoveCoords ), NULL, this );
@@ -506,6 +511,15 @@ EditFaxWizardBase::~EditFaxWizardBase()
 	m_sCoord1Y->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxWizardBase::OnSpin ), NULL, this );
 	m_sCoord2X->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxWizardBase::OnSpin ), NULL, this );
 	m_sCoord2Y->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxWizardBase::OnSpin ), NULL, this );
+	m_swFaxArea2->Disconnect( wxEVT_LEFT_DOWN, wxMouseEventHandler( EditFaxWizardBase::OnBitmapClickPage2 ), NULL, this );
+	m_swFaxArea2->Disconnect( wxEVT_PAINT, wxPaintEventHandler( EditFaxWizardBase::OnPaintImage ), NULL, this );
+	m_cMapping->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( EditFaxWizardBase::OnMappingChoice ), NULL, this );
+	m_sMappingPoleX->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxWizardBase::OnUpdateMapping ), NULL, this );
+	m_sMappingPoleY->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( EditFaxWizardBase::OnUpdateMapping ), NULL, this );
+	m_bApplyMapping->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxWizardBase::OnApplyMapping ), NULL, this );
+	m_bGetMappingParameters->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxWizardBase::OnGetMappingParameters ), NULL, this );
+	m_tTrueRatio->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( EditFaxWizardBase::OnUpdateMapping ), NULL, this );
+	m_bInformation->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( EditFaxWizardBase::OnInformation ), NULL, this );
 	
 	m_pages.Clear();
 }

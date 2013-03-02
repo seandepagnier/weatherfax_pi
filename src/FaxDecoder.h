@@ -31,6 +31,8 @@
   #include "wx/wx.h"
 #endif //precompiled headers
 
+#include <audiofile.h>
+
 #include <wx/listimpl.cpp>
 WX_DECLARE_LIST(wxImage, FaxImageList);
 
@@ -64,11 +66,22 @@ public:
         firfilters[1] = firfilter(bandwidth);
     }
 
-    bool DecodeFaxFromAudio(wxString filename, wxWindow *parent);
+    bool DecodeFaxFromFilename(wxString filename);
+    bool DecodeFaxFromDSP();
 
     FaxImageList images;
 
+    void SetSampleRate(int rate) { sampleRate = rate; }
+
 private:
+    bool DecodeFax();
+
+    enum InputType {FILENAME, DSP} inputtype;
+
+    int dsp;
+    AFfilehandle aFile;
+    AFfileoffset size;
+
     enum Header {IMAGE, START, STOP};
 
     bool Error(wxString error);

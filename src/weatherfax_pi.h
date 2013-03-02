@@ -37,7 +37,7 @@
 #include <wx/fileconf.h>
 
 #define     PLUGIN_VERSION_MAJOR    0
-#define     PLUGIN_VERSION_MINOR    3
+#define     PLUGIN_VERSION_MINOR    4
 
 #define     MY_API_VERSION_MAJOR    1
 #define     MY_API_VERSION_MINOR    8
@@ -77,12 +77,8 @@ public:
 
       void OnToolbarToolCallback(int id);
 
-      bool GetOverlayCoords(PlugIn_ViewPort *vp, wxPoint &p0, wxPoint &pwh, int &w, int &h);
-
       bool RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp);
       bool RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp);
-
-      void SetImageToRender(WeatherFaxImage *image);
 
 //    Optional plugin overrides
       void SetColorScheme(PI_ColorScheme cs);
@@ -91,18 +87,11 @@ public:
       void SetWeatherFaxDialogX    (int x){ m_weatherfax_dialog_x = x;};
       void SetWeatherFaxDialogY    (int x){ m_weatherfax_dialog_y = x;}
 
-      void SetTransparency(int val) { m_iTransparency = val; }
-      void SetWhiteTransparency(int val) { m_iWhiteTransparency = val; }
-      void SetInvert(bool val) { m_bInvert = val; }
-      void UpdateImage() { m_bNeedUpdateImageDC = m_bNeedUpdateImageGL = true; }
-
       void OnWeatherFaxDialogClose();
 
       wxWindow         *m_parent_window;
 
       wxString m_path;
-      bool m_bNeedUpdateImageDC;
-      bool m_bNeedUpdateImageGL;
 
       /* audio decoding options */
       int m_ImageWidth, m_BitsPerPixel, m_Carrier, m_Deviation, m_Filter;
@@ -111,10 +100,6 @@ public:
       wxFileConfig     *m_pconfig;
 private:
       void ReadImageToRender(WeatherFaxImage *image);
-
-      wxBitmap *m_CacheBitmap;
-      unsigned int m_gltexture;
-      WeatherFaxImage *m_image;
 
       bool              LoadConfig(void);
       bool              SaveConfig(void);
@@ -127,9 +112,6 @@ private:
 
       int               m_weatherfax_dialog_x, m_weatherfax_dialog_y;
       int               m_display_width, m_display_height;
-      int               m_iTransparency;
-      int               m_iWhiteTransparency;
-      bool              m_bInvert;
 
       int               m_leftclick_tool_id;
 
