@@ -41,7 +41,7 @@
    which was an improved adaptation of hamfax.
 */
 
-WX_DEFINE_LIST(FaxImageList);
+//WX_DEFINE_LIST(FaxImageList);
 
 bool FaxDecoder::Error(wxString error)
 {
@@ -104,12 +104,14 @@ void FaxDecoder::DemodulateData(wxUint8 *data, wxInt16 *sample, int n)
                if(mag>10000) {
                     double y=qfirold*ifirout-ifirold*qfirout;
                     double x=sampleRate/m_deviation*asin(y)/2.0/M_PI;
-                    if(x<-1.5) /* need to make adjustable by user */
+                    datadouble[i] = x; /* for demod display */
+                    if(x<minus_saturation_threshold)
                         x = 1;
                     if(x<-1.0)
                          x=-1.0;
                     else if(x>1.0)
                          x=1.0;
+
                     data[i]=(int)((x/2.0+0.5)*255.0);
                } else
                     data[i]=255;
@@ -211,38 +213,60 @@ void FaxDecoder::DecodeImageLine(wxUint8* buffer, int buffer_len, wxUint8 *image
           }
 }
 
+void FaxDecoder::SetupToDecode()
+{
+    blocksize = sampleRate*60.0/m_lpm*m_faxcolors;
+    
+    sample = new wxInt16[blocksize];
+    data = new wxUint8[blocksize];
+    datadouble = new double[blocksize];
+    
+    height = size / 2 / sampleRate / 60.0 * m_lpm / m_faxcolors;
+    imgpos = 0;
+
+    if(height == 0) /* for unknown size, start out at 256 */
+        height = 256;
+
+    imgdata = (wxUint8*)malloc(m_imagewidth*height*3);
+
+    line = 0;
+    imageline = 0;
+    lasttype = IMAGE;
+    typecount = 0;
+
+    gotstart = false;
+
+    phasingPos = new int[m_phasingLines];
+    phasingLinesLeft = phasingSkipData = phasingSkippedData = 0;
+}
+
+void FaxDecoder::CleanUp()
+{
+     if(m_DecoderMutex.Lock() == wxMUTEX_NO_ERROR) {
+         free(imgdata);
+         imageline = 0;
+         m_DecoderMutex.Unlock();
+     }
+     line = 0;
+
+     delete [] sample;
+     delete [] data;
+     delete [] datadouble;
+
+     switch(inputtype) {
+     case DSP:
+         close(dsp);
+         break;
+     case FILENAME:
+         afCloseFile(aFile);
+         break;
+     }
+}
+
 bool FaxDecoder::DecodeFax()
 {
-    int blocksize = sampleRate*60.0/m_lpm*m_faxcolors;
-    
-    int len;
-    wxInt16 *sample;
-    sample = new wxInt16[blocksize];
-    wxUint8 *data;
-    data = new wxUint8[blocksize];
-    
-    int height = size / 2 / sampleRate / 60.0 * m_lpm / m_faxcolors;
-    int imgpos = 0;
-
-    wxUint8 *imgdata = new wxUint8[m_imagewidth*height*3];
-
-    int line = 0;
-    int imageline = 0;
-    Header lasttype = IMAGE;
-    int typecount = 0;
-
-    bool gotstart = false;
-
-    int *phasingPos = new int[m_phasingLines];
-    int phasingLinesLeft = 0, phasingSkipData = 0, phasingSkippedData = 0;
-
-    wxProgressDialog *progressdialog;
-    if(inputtype == FILENAME)
-        progressdialog = new wxProgressDialog(
-        _("Decoding fax audio data"), _("Fax Decoder"), height, &m_parent,
-        wxPD_SMOOTH | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME | wxPD_CAN_ABORT);
-
     for(;;) {
+        int len;
         switch(inputtype) {
         case DSP:
         {
@@ -289,12 +313,14 @@ bool FaxDecoder::DecodeFax()
                 gotstart = true;
             } else
                 if(type == STOP && typecount == m_StopLength*m_lpm/60.0 - leewaylines) {
+#if 0
                     int is = m_imagewidth*imageline*3;
                     unsigned char *id = (unsigned char*)malloc(is); /* wximage needs malloc */
                     memcpy(id, imgdata, is);
                     images.Append(new wxImage(m_imagewidth, imageline, id));
                     imageline = 0;
                     imgpos = 0;
+#endif
                     typecount = 0;
                     gotstart = false;
                 }
@@ -312,42 +338,51 @@ bool FaxDecoder::DecodeFax()
 
         /* go past the phasing lines we skipping to make sure we are in the image */
         if(m_bIncludeHeadersInImages || (type == IMAGE && phasingLinesLeft < -phasingSkipLines)) {
-            DecodeImageLine(data, len, imgdata+imgpos);
+            if(m_DecoderMutex.Lock() == wxMUTEX_NO_ERROR) {
+                if(imageline >= height) {
+                    height *= 2;
+                    imgdata = (wxUint8*)realloc(imgdata, m_imagewidth*height*3);
+                }
 
-            int skiplen = ((phasingSkipData-phasingSkippedData)%len)*m_imagewidth/len;
-            phasingSkippedData = phasingSkipData; /* reset skipped position */
+                DecodeImageLine(data, len, imgdata+imgpos);
+                
+                int skiplen = ((phasingSkipData-phasingSkippedData)%len)*m_imagewidth/len;
+                phasingSkippedData = phasingSkipData; /* reset skipped position */
 
-            imgpos += (m_imagewidth-skiplen)*m_imagecolors;
-            imageline++;
+                imgpos += (m_imagewidth-skiplen)*m_imagecolors;
+                imageline++;
+                m_DecoderMutex.Unlock();
+            }
         }
 
-        if(progressdialog && line%20 == 0 && !progressdialog->Update(line))
+        if(m_bEndDecoding)
             break;
 
         line++;
      }
 done:
 
-     delete progressdialog;
      delete [] phasingPos;
 
      /* put left overdata into an image */
      if((m_bIncludeHeadersInImages || gotstart) &&
         imageline > 10 /* throw away really short images */) {
-         /* fill rest of the line with zeros */
-         memset(imgdata+imgpos, 0, m_imagewidth*imageline*m_imagecolors - imgpos);
-
          int is = m_imagewidth*imageline*3;
          unsigned char *id = (unsigned char *)malloc(is); /* wximage needs malloc */
          memcpy(id, imgdata, is);
-         images.Append(new wxImage(m_imagewidth, imageline, id));
+
+         /* fill rest of the line with zeros */
+         memset(id+imgpos, 0, m_imagewidth*imageline*m_imagecolors - imgpos);
+
+//         images.Append(new wxImage(m_imagewidth, imageline, id));
      }
 
-     delete [] sample;
-     delete [] data;
-     delete [] imgdata;
+
+     CleanUp();
+
      return true;
 }
+
 
 bool FaxDecoder::DecodeFaxFromFilename(wxString fileName)
 {
@@ -367,9 +402,8 @@ bool FaxDecoder::DecodeFaxFromFilename(wxString fileName)
         return Error(_("cannot deal with incomplete input file"));
 
     inputtype = FILENAME;
-    bool ret =  DecodeFax();
-    afCloseFile(aFile);
-    return ret;
+    SetupToDecode();
+    return true;
 }
 
 bool FaxDecoder::DecodeFaxFromDSP()
@@ -393,9 +427,8 @@ bool FaxDecoder::DecodeFaxFromDSP()
 
     inputtype = DSP;
     size = 0;
-    bool ret = DecodeFax();
-    close(dsp);
-    return ret;
+    SetupToDecode();
+    return true;
 #else
     return false;
 #endif

@@ -33,8 +33,8 @@
 
 #include <audiofile.h>
 
-#include <wx/listimpl.cpp>
-WX_DECLARE_LIST(wxImage, FaxImageList);
+//#include <wx/listimpl.cpp>
+//WX_DECLARE_LIST(wxImage, FaxImageList);
 
 enum Bandwidth {NARROW, MIDDLE, WIDE};
 
@@ -54,7 +54,7 @@ public:
     FaxDecoder(wxWindow &parent, int imagewidth, int BitsPerPixel, int carrier,
                int deviation, enum Bandwidth bandwidth,
                bool bSkipHeaderDetection, bool bIncludeHeadersInImages)
-        : m_parent(parent), m_imagewidth(imagewidth), m_BitsPerPixel(BitsPerPixel),
+        : m_bEndDecoding(false), m_imagewidth(imagewidth), m_parent(parent), m_BitsPerPixel(BitsPerPixel),
         m_carrier(carrier), m_deviation(deviation),
         m_bSkipHeaderDetection(bSkipHeaderDetection),
         m_bIncludeHeadersInImages(bIncludeHeadersInImages),
@@ -69,12 +69,26 @@ public:
     bool DecodeFaxFromFilename(wxString filename);
     bool DecodeFaxFromDSP();
 
-    FaxImageList images;
+//    FaxImageList images;
 
     void SetSampleRate(int rate) { sampleRate = rate; }
 
-private:
+    void SetupToDecode();
+    void CleanUp();
     bool DecodeFax();
+
+    bool m_bEndDecoding;
+
+    wxMutex m_DecoderMutex;
+
+    wxUint8 *imgdata;
+    int line, imageline;
+    int blocksize;
+    int m_imagewidth;
+    double minus_saturation_threshold;
+    double *datadouble;
+
+private:
 
     enum InputType {FILENAME, DSP} inputtype;
 
@@ -93,8 +107,8 @@ private:
 
     wxWindow &m_parent;
 
+    /* fax settings */
     int sampleRate;
-    int m_imagewidth;
     int m_BitsPerPixel;
     double m_carrier, m_deviation;
     struct firfilter firfilters[2];
@@ -106,4 +120,18 @@ private:
     int m_StartFrequency, m_StopFrequency;
     int m_StartLength, m_StopLength;
     int m_phasingLines;
+
+    /* internal state machine */
+    wxInt16 *sample;
+    wxUint8 *data;
+    
+    int height, imgpos;
+
+    Header lasttype;
+    int typecount;
+
+    bool gotstart;
+
+    int *phasingPos;
+    int phasingLinesLeft, phasingSkipData, phasingSkippedData;
 };

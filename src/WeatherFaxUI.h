@@ -25,13 +25,13 @@
 #include <wx/dialog.h>
 #include <wx/scrolwin.h>
 #include <wx/stattext.h>
+#include <wx/spinctrl.h>
 #include <wx/choice.h>
 #include <wx/bitmap.h>
 #include <wx/image.h>
 #include <wx/icon.h>
 #include <wx/combobox.h>
 #include <wx/radiobut.h>
-#include <wx/spinctrl.h>
 #include <wx/textctrl.h>
 #include <wx/wizard.h>
 #include <wx/dynarray.h>
@@ -86,6 +86,10 @@ class EditFaxWizardBase : public wxWizard
 	
 	protected:
 		wxScrolledWindow* m_swFaxArea1;
+		wxButton* m_bStopDecoding;
+		wxStaticText* m_staticText212;
+		wxSpinCtrl* m_sMinusSaturationThreshold;
+		wxScrolledWindow* m_bPhasingArea;
 		wxStaticText* m_staticText16;
 		wxChoice* m_cFilter;
 		wxStaticText* m_staticText9;
@@ -134,6 +138,8 @@ class EditFaxWizardBase : public wxWizard
 		virtual void OnWizardPageChanged( wxWizardEvent& event ) { event.Skip(); }
 		virtual void OnBitmapClickPage1( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnPaintImage( wxPaintEvent& event ) { event.Skip(); }
+		virtual void OnStopDecoding( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnPaintPhasing( wxPaintEvent& event ) { event.Skip(); }
 		virtual void UpdatePage1( wxCommandEvent& event ) { event.Skip(); }
 		virtual void UpdatePage1( wxScrollEvent& event ) { event.Skip(); }
 		virtual void OnCoordSet( wxCommandEvent& event ) { event.Skip(); }

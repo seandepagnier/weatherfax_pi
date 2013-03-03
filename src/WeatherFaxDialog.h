@@ -51,16 +51,38 @@ protected:
     weatherfax_pi &m_weatherfax_pi;
 };
 
+class FaxDecoder;
+class DecoderThread : public wxThread
+{
+public:
+    DecoderThread(FaxDecoder &decoder)
+        : wxThread(wxTHREAD_JOINABLE), m_decoder(decoder) { Create(); }
+    void *Entry();
+private:
+    FaxDecoder &m_decoder;
+};
+
 class EditFaxWizard : public EditFaxWizardBase
 {
 public:
-    EditFaxWizard( WeatherFaxImage &img, wxString name, WeatherFaxDialog &parent,
+    EditFaxWizard( WeatherFaxImage &img, FaxDecoder *decoder,
+                   WeatherFaxDialog &parent,
                    WeatherFaxImageCoordinateList &coords);
+
     ~EditFaxWizard();
+
+    wxTimer m_tDecoder;
+    DecoderThread *m_thDecoder;
+    FaxDecoder *m_decoder;
+
+    void MakeNewCoordinates();
+    void OnDecoderTimer( wxTimerEvent & );
 
     void OnSetSizes( wxInitDialogEvent& event );
 //    void OnSize( wxSizeEvent& event ) { Fit(); }
     void UpdateMappingControls();
+    void OnStopDecoding( wxCommandEvent& event );
+    void OnPaintPhasing( wxPaintEvent& event );
     void OnWizardPageChanged( wxWizardEvent& event );
     void OnMappingChoice( wxCommandEvent& event );
     void GetMappingParametersFixedFlat();
@@ -97,8 +119,6 @@ protected:
     WeatherFaxDialog &m_parent;
     WeatherFaxImage &m_wfimg;
     WeatherFaxImageCoordinates *&m_curCoords;
-
-    wxString m_name;
 
     WeatherFaxImageCoordinates *m_newCoords;
     WeatherFaxImageCoordinateList &m_Coords;
