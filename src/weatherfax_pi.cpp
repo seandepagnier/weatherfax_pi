@@ -222,7 +222,7 @@ bool weatherfax_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
 
     for(unsigned int i=0; i<m_pWeatherFaxDialog->m_lFaxes->GetCount(); i++)
         if(m_pWeatherFaxDialog->m_lFaxes->IsChecked(i))
-            ((WeatherFaxImage*)m_pWeatherFaxDialog->m_lFaxes->GetClientData(i))->RenderImage(dc, vp);
+            m_pWeatherFaxDialog->m_Faxes[i]->RenderImage(dc, vp);
 
     return true;
 }
@@ -234,7 +234,7 @@ bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
 
     for(unsigned int i=0; i<m_pWeatherFaxDialog->m_lFaxes->GetCount(); i++)
         if(m_pWeatherFaxDialog->m_lFaxes->IsChecked(i))
-            ((WeatherFaxImage*)m_pWeatherFaxDialog->m_lFaxes->GetClientData(i))->RenderImageGL(vp);
+            m_pWeatherFaxDialog->m_Faxes[i]->RenderImageGL(vp);
 
     return true;
 }

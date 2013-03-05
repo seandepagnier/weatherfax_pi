@@ -25,6 +25,8 @@
  ***************************************************************************
  */
 
+#include <vector>
+
 #include "weatherfax_pi.h"
 #include "WeatherFaxImage.h"
 
@@ -47,7 +49,10 @@ public:
 
     WeatherFaxImageCoordinateList m_Coords;
 
+    std::vector<WeatherFaxImage*>m_Faxes;
+
 protected:
+
     weatherfax_pi &m_weatherfax_pi;
 };
 

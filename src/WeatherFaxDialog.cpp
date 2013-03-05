@@ -122,17 +122,17 @@ WeatherFaxDialog::~WeatherFaxDialog()
         delete m_Coords[i];
     }
 
-    for(unsigned int i=0; i<m_lFaxes->GetCount(); i++)
-        delete (WeatherFaxImage*)m_lFaxes->GetClientData(i);
+    for(unsigned int i=0; i<m_Faxes.size(); i++)
+        delete m_Faxes[i];
 }
 
 void WeatherFaxDialog::OnFaxes( wxCommandEvent& event )
 {
     int selection = m_lFaxes->GetSelection();
-    if(selection < 0)
+    if(selection < 0 || selection >= (int)m_Faxes.size())
         return;
 
-    WeatherFaxImage &img = *(WeatherFaxImage*)m_lFaxes->GetClientData(selection);
+    WeatherFaxImage &img = *m_Faxes[selection];
     m_sTransparency->SetValue(img.m_iTransparency);
     m_sWhiteTransparency->SetValue(img.m_iWhiteTransparency);
     m_cInvert->SetValue(img.m_bInvert);
@@ -172,7 +172,8 @@ void WeatherFaxDialog::CaptureFaxClicked( wxCommandEvent& event )
 
     if(wizard.RunWizard(wizard.m_pages[0])) {
         static int dspc;
-        int selection = m_lFaxes->Append(_("dsp - ") + wxString::Format(_T("%d"), dspc), img);
+        int selection = m_lFaxes->Append(_("dsp - ") + wxString::Format(_T("%d"), dspc));
+        m_Faxes.push_back(img);
         m_lFaxes->Check(selection, false);
     } else
         delete img;
@@ -218,7 +219,8 @@ All files (*.*)|*.*" ), wxFD_OPEN);
             EditFaxWizard wizard(*img, &decoder, *this, m_Coords);
 
             if(wizard.RunWizard(wizard.m_pages[0])) {
-                int selection = m_lFaxes->Append(filename, img);
+                int selection = m_lFaxes->Append(filename);
+                m_Faxes.push_back(img);
                 m_lFaxes->Check(selection, false);
             } else
                 delete img;
@@ -227,7 +229,8 @@ All files (*.*)|*.*" ), wxFD_OPEN);
             wxImage wimg;
             if(wimg.LoadFile(filename)) {
                 WeatherFaxImage *img = new WeatherFaxImage(wimg, transparency, whitetransparency, invert);
-                int n = m_lFaxes->Append(filenamec.GetFullName(), img);
+                int n = m_lFaxes->Append(filenamec.GetFullName());
+                m_Faxes.push_back(img);
                 m_lFaxes->SetSelection(n);
                 EditFaxClicked(event);
             } else {
@@ -242,10 +245,10 @@ All files (*.*)|*.*" ), wxFD_OPEN);
 void WeatherFaxDialog::EditFaxClicked( wxCommandEvent& event )
 {
     int selection = m_lFaxes->GetSelection();
-    if(selection < 0)
+    if(selection < 0 || selection >= (int)m_Faxes.size())
         return;
 
-    WeatherFaxImage &image = *(WeatherFaxImage*)m_lFaxes->GetClientData(selection);
+    WeatherFaxImage &image = *m_Faxes[selection];
     WeatherFaxImage backupimage = image;
     EditFaxWizard wizard(image, NULL, *this, m_Coords);
     if(!wizard.RunWizard(wizard.m_pages[0])) {
@@ -265,9 +268,11 @@ void WeatherFaxDialog::EditFaxClicked( wxCommandEvent& event )
 void WeatherFaxDialog::DeleteFaxClicked( wxCommandEvent& event )
 {
     int selection = m_lFaxes->GetSelection();
-    if(selection < 0)
+    if(selection < 0 || selection >= (int)m_Faxes.size())
         return;
-    delete (WeatherFaxImage*)m_lFaxes->GetClientData(selection);
+
+    delete m_Faxes[selection];
+
     m_lFaxes->Delete(selection);
     RequestRefresh( m_parent );
 }
@@ -275,9 +280,10 @@ void WeatherFaxDialog::DeleteFaxClicked( wxCommandEvent& event )
 void WeatherFaxDialog::TransparencyChanged( wxScrollEvent& event )
 {
     int selection = m_lFaxes->GetSelection();
-    if(selection < 0)
+    if(selection < 0 || selection >= (int)m_Faxes.size())
         return;
-    WeatherFaxImage &image = *(WeatherFaxImage*)m_lFaxes->GetClientData(selection);
+
+    WeatherFaxImage &image = *m_Faxes[selection];
     image.m_iTransparency = event.GetPosition();
     RequestRefresh( m_parent );
 }
@@ -285,9 +291,10 @@ void WeatherFaxDialog::TransparencyChanged( wxScrollEvent& event )
 void WeatherFaxDialog::WhiteTransparencyChanged( wxScrollEvent& event )
 {
     int selection = m_lFaxes->GetSelection();
-    if(selection < 0)
+    if(selection < 0 || selection >= (int)m_Faxes.size())
         return;
-    WeatherFaxImage &image = *(WeatherFaxImage*)m_lFaxes->GetClientData(selection);
+
+    WeatherFaxImage &image = *m_Faxes[selection];
     image.m_iWhiteTransparency = event.GetPosition();
     image.FreeData();
     RequestRefresh( m_parent );
@@ -296,9 +303,10 @@ void WeatherFaxDialog::WhiteTransparencyChanged( wxScrollEvent& event )
 void WeatherFaxDialog::OnInvert( wxCommandEvent& event )
 {
     int selection = m_lFaxes->GetSelection();
-    if(selection < 0)
+    if(selection < 0 || selection >= (int)m_Faxes.size())
         return;
-    WeatherFaxImage &image = *(WeatherFaxImage*)m_lFaxes->GetClientData(selection);
+
+    WeatherFaxImage &image = *m_Faxes[selection];
     image.m_bInvert = event.IsChecked();
     image.FreeData();
     RequestRefresh( m_parent );
