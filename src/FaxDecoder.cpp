@@ -129,6 +129,7 @@ void FaxDecoder::DemodulateData(wxUint8 *data, wxInt16 *sample, int n)
 /* perform fourier transform at a specific frequency */
 double FaxDecoder::FourierTransformSub(wxUint8* buffer, int buffer_len, int freq)
 {
+#if 0
     std::complex<double> k = freq * 60.0 / m_lpm, buffer_lenc = buffer_len;
     std::complex<double> ret = 0;
     std::complex<double> im(0, 1);
@@ -138,6 +139,16 @@ double FaxDecoder::FourierTransformSub(wxUint8* buffer, int buffer_len, int freq
         ret += (std::complex<double>)buffer[n] * exp(-(2.0*M_PI*im*k*nc) / buffer_lenc);
     }
     return abs(ret);
+#else // std::complex is slow,   exp(Pi*i*k) = cos(Pi*k) + I*sin(Pi*k), abs(a + bi) = hypot(a, b);
+    double k = -2 * M_PI * freq * 60.0 / m_lpm / buffer_len;
+    double retr = 0, reti = 0;
+    int n;
+    for(n=0; n<buffer_len; n++) {
+        retr += buffer[n]*cos(k*n);
+        reti += buffer[n]*sin(k*n);
+    }
+    return hypot(retr, reti);
+#endif
 }
 
 /* see if the fourier transform at the start and stop frequencies reveils header */

@@ -157,7 +157,7 @@ class EditFaxWizardBase : public wxWizard
 	
 	public:
 		
-		EditFaxWizardBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Edit Fax Image"), const wxBitmap& bitmap = wxNullBitmap, const wxPoint& pos = wxDefaultPosition, long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER );
+		EditFaxWizardBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Edit Fax Image"), const wxBitmap& bitmap = wxNullBitmap, const wxPoint& pos = wxDefaultPosition, long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxRESIZE_BORDER );
 		WizardPages m_pages;
 		~EditFaxWizardBase();
 	

@@ -498,9 +498,6 @@ void EditFaxWizard::OnPaintPhasing( wxPaintEvent& event )
 void EditFaxWizard::OnWizardPageChanged( wxWizardEvent& event )
 {
     if(event.GetPage() == m_pages[1]) {
-        m_tDecoder.Stop();
-        m_thDecoder->Kill();
-
         ResetMapping();
         m_cMapping->SetSelection(m_wfimg.mapping);
         UpdateMappingControls();
@@ -720,7 +717,6 @@ not recommended because of ambiguity of north or south pole"),
     double inputpoley2 = (-b - sqrt(b*b - 4*a*c)) / (2*a);
 
     /* pick correct root */
-//    double inputpoley = mapping1y > mapping2y ? inputpoley1 : inputpoley2;
     double inputpoley = (south ? pp1 < pp2 : pp1 > pp2) ? inputpoley1 : inputpoley2;
 
     double inputequator = (mapping1y - inputpoley) / pp1 + inputpoley;
@@ -1085,6 +1081,5 @@ void EditFaxWizard::OnPaintImage( wxPaintEvent& event)
             dc.DrawEllipse(inputpolex - x - d/inputtrueratio,
                            inputpoley - y - d, 2*d/inputtrueratio, 2*d);
         }
-
     }
 }
