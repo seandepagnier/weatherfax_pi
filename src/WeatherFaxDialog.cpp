@@ -324,12 +324,13 @@ EditFaxWizard::EditFaxWizard( WeatherFaxImage &img, FaxDecoder *decoder,
       m_wfimg(img), m_curCoords(img.m_Coords),
       m_Coords(coords)
 {
-    m_sPhasing->SetRange(0, m_wfimg.m_origimg.GetWidth()-1);
     m_sPhasing->SetValue(m_wfimg.phasing);
     m_sSkew->SetValue(m_wfimg.skew);
     m_cFilter->SetSelection(m_wfimg.filter);
     m_cRotation->SetSelection(m_wfimg.rotation);
     m_wfimg.MakePhasedImage();
+
+    m_sPhasing->SetRange(0, m_wfimg.m_phasedimg.GetWidth()-1);
 
     m_swFaxArea1->SetScrollbars(1, 1, m_wfimg.m_phasedimg.GetWidth(), m_wfimg.m_phasedimg.GetHeight());
 
@@ -438,6 +439,8 @@ void EditFaxWizard::OnDecoderTimer( wxTimerEvent & )
             int w = m_decoder->m_imagewidth, h = m_decoder->imageline;
             m_wfimg.m_origimg = wxImage( w, h );
             memcpy(m_wfimg.m_origimg.GetData(), m_decoder->imgdata, w*h*3);
+
+            m_sPhasing->SetRange(0, m_wfimg.m_origimg.GetWidth()-1);
 
             int oldh = m_wfimg.m_phasedimg.GetHeight();
 

@@ -50,6 +50,11 @@ void WeatherFaxImage::FreeData()
 /* page 1 */
 void WeatherFaxImage::MakePhasedImage()
 {
+    if(!m_origimg.IsOk()) {
+        m_phasedimg.Create(1, 1);
+        return;
+    }
+
     /* subtract 1 to get rid of manged stuff from phasing or skew fix */
     int linelen = 3*m_origimg.GetWidth();
     unsigned char *d = m_origimg.GetData() + phasing*3;
