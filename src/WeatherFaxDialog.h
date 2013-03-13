@@ -27,8 +27,9 @@
 
 #include <vector>
 
-#include "weatherfax_pi.h"
-#include "WeatherFaxImage.h"
+#include "WeatherFaxUI.h"
+
+class weatherfax_pi;
 
 class WeatherFaxDialog: public WeatherFaxDialogBase
 {
@@ -52,6 +53,7 @@ public:
     std::vector<WeatherFaxImage*>m_Faxes;
 
 protected:
+    void UpdateButtonStates();
 
     weatherfax_pi &m_weatherfax_pi;
 };
@@ -65,72 +67,4 @@ public:
     void *Entry();
 private:
     FaxDecoder &m_decoder;
-};
-
-class EditFaxWizard : public EditFaxWizardBase
-{
-public:
-    EditFaxWizard( WeatherFaxImage &img, FaxDecoder *decoder,
-                   WeatherFaxDialog &parent,
-                   WeatherFaxImageCoordinateList &coords);
-
-    ~EditFaxWizard();
-
-    wxTimer m_tDecoder;
-    DecoderThread *m_thDecoder;
-    FaxDecoder *m_decoder;
-
-    void MakeNewCoordinates();
-    void OnDecoderTimer( wxTimerEvent & );
-
-    void OnSetSizes( wxInitDialogEvent& event );
-//    void OnSize( wxSizeEvent& event ) { Fit(); }
-    void UpdateMappingControls();
-    void OnStopDecoding( wxCommandEvent& event );
-    void OnPaintPhasing( wxPaintEvent& event );
-    void OnWizardPageChanged( wxWizardEvent& event );
-    void OnMappingChoice( wxCommandEvent& event );
-    void GetMappingParametersFixedFlat();
-    void GetMappingParametersPolar();
-    void OnGetMappingParameters( wxCommandEvent& event );
-    void OnBitmapClickPage2( wxMouseEvent& event );
-    void OnBitmapClickPage3( wxMouseEvent& event );
-    void OnCoordSet( wxCommandEvent& event );
-    void OnCoordText( wxCommandEvent& event );
-    void OnRemoveCoords( wxCommandEvent& event );
-    void StoreMappingParams();
-    void ResetMapping();
-    bool ApplyMapping();
-    
-    void SetCoordRanges();
-    void OnApplyMapping( wxCommandEvent& event );
-    void OnUpdateMapping( wxSpinEvent& event ) { Refresh(); }
-    void OnUpdateMapping( wxCommandEvent& event ) { Refresh(); }
-    void OnInformation( wxCommandEvent& event );
-
-    void StoreCoords();
-
-protected:
-
-    void UpdatePage1();
-    void UpdatePage1( wxCommandEvent& event );
-    void UpdatePage1( wxScrollEvent& event );
-
-    wxString NewCoordName();
-    void SetCoords();
-    void OnSpin( wxSpinEvent& event );
-    void OnPaintImage( wxPaintEvent& event);
-
-    WeatherFaxDialog &m_parent;
-    WeatherFaxImage &m_wfimg;
-    WeatherFaxImageCoordinates *&m_curCoords;
-
-    WeatherFaxImageCoordinates *m_newCoords;
-    WeatherFaxImageCoordinateList &m_Coords;
-
-    bool m_skippaint;
-
-    /* page 2 */
-    int m_SelectedIndex;
-    bool m_bmappingapplied;
 };

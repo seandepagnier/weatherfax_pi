@@ -41,8 +41,6 @@
    which was an improved adaptation of hamfax.
 */
 
-//WX_DEFINE_LIST(FaxImageList);
-
 bool FaxDecoder::Error(wxString error)
 {
     wxMessageDialog w( &m_parent, _("Failure Decoding Fax: ") + error, _("Failed"),

@@ -37,14 +37,12 @@
 #include <wx/fileconf.h>
 
 #define     PLUGIN_VERSION_MAJOR    0
-#define     PLUGIN_VERSION_MINOR    4
+#define     PLUGIN_VERSION_MINOR    5
 
 #define     MY_API_VERSION_MAJOR    1
 #define     MY_API_VERSION_MINOR    8
 
 #include "../../../include/ocpn_plugin.h"
-
-#include "WeatherFaxUI.h"
 
 //----------------------------------------------------------------------------------------------------------
 //    The PlugIn Class Definition

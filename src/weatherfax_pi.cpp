@@ -33,6 +33,7 @@
 #endif //precompiled headers
 
 #include "weatherfax_pi.h"
+#include "WeatherFaxImage.h"
 #include "WeatherFaxDialog.h"
 
 // the class factories, used to create and destroy instances of the PlugIn

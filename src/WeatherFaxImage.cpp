@@ -34,6 +34,7 @@
 #include <wx/progdlg.h>
 
 #include "WeatherFaxImage.h"
+WX_DEFINE_LIST(WeatherFaxImageCoordinateList);
 
 void WeatherFaxImage::FreeData()
 {
@@ -60,7 +61,7 @@ void WeatherFaxImage::MakePhasedImage()
     unsigned char *d = m_origimg.GetData() + phasing*3;
     unsigned char *origimgend = d + linelen*m_origimg.GetHeight();
 
-    m_phasedimg.Create(m_origimg.GetWidth(), m_origimg.GetHeight()-1);
+    m_phasedimg.Create(m_origimg.GetWidth(), m_origimg.GetHeight());
     unsigned char *dd = m_phasedimg.GetData();
     unsigned char *phasedimgend = dd + linelen*m_phasedimg.GetHeight();
 
@@ -132,6 +133,10 @@ void WeatherFaxImage::MakePhasedImage()
             skewpos--;
         }
     }
+
+    /* crop last line of phased image */
+    m_phasedimg.Resize(wxSize(m_phasedimg.GetWidth(), m_phasedimg.GetHeight()-1),
+                       wxPoint(0, 0));
 
     /* apply rotation */
     switch(rotation) {
@@ -208,47 +213,45 @@ void WeatherFaxImage::InputToMercator(double px, double py, double &mx, double &
     double dx, dy;
 
     /* apply offsets */
-    dx = px - inputpole.x;
-    dy = py - inputpole.y;
+    dx = px - m_Coords->inputpole.x;
+    dy = py - m_Coords->inputpole.y;
 
     /* map coordinates */
     double theta, pp, x, y;
-    switch(mapping) {
-    case MERCATOR:
+    switch(m_Coords->mapping) {
+    case WeatherFaxImageCoordinates::MERCATOR:
         x = dx;
         y = dy;
         break;
-    case POLAR:
-        /* for polar stereographic */
-        dx *= inputtrueratio;
+    case WeatherFaxImageCoordinates::POLAR:
+    case WeatherFaxImageCoordinates::CONIC:
+    {
+        /* for polar stereographic, or lambert conformal conic */
+        dx *= m_Coords->inputtrueratio;
 
-        if(inputheight < 0)
-            dy = -dy;
-
-        theta = atan2(dx, dy);
+        theta = atan2(dx, fabs(dy));
         x = theta*m_phasedimg.GetWidth();
-        pp = 1 - 4/M_PI*atan(hypot(dx, dy) / fabs(inputheight));
-        break;
-    case FIXED_FLAT:
+
+        double z = hypot(dx, dy) / inputheight;
+        double q = 4/M_PI*atan(z);
+        pp = q + (inputheight > 0 ? -1 : 1); /* inputheight < 0 for south polar */
+    } break;
+    case WeatherFaxImageCoordinates::FIXED_FLAT:
         x = dx;
-        pp = 1 - dy / inputheight;
+        pp = dy / inputheight - 1;
         break;
     }
 
     /* if not mercator, it is fixed and needs conversion here */
-    if(mapping != MERCATOR) {
+    if(m_Coords->mapping != WeatherFaxImageCoordinates::MERCATOR) {
         double s = sin(pp * (M_PI/2));
         y = .5 * log((1 + s) / (1 - s));
         y *= m_phasedimg.GetHeight();
     }
 
     /* apply scale */
-    x*=mappingmultiplier*mappingratio;
-    y*=mappingmultiplier;
-
-    /* input height is positive for south-polar images */
-    if(inputheight > 0)
-        y = -y;
+    x*=m_Coords->mappingmultiplier*m_Coords->mappingratio;
+    y*=m_Coords->mappingmultiplier;
 
     /* apply offsets */
     mx = mercatoroffset.x + x;
@@ -264,62 +267,52 @@ void WeatherFaxImage::MercatorToInput(double mx, double my, double &px, double &
     x = mx - mercatoroffset.x;
     y = my - mercatoroffset.y;
 
-    /* input is positive for south-polar images */
-    if(inputheight > 0)
-        y = -y;
-
     /* apply scale */
-    x /= mappingmultiplier*mappingratio;
-    y /= mappingmultiplier;
+    x /= m_Coords->mappingmultiplier*m_Coords->mappingratio;
+    y /= m_Coords->mappingmultiplier;
 
     /* if not mercator, it is fixed and needs conversion here */
     double pp;
-    if(mapping != MERCATOR) {
+    if(m_Coords->mapping != WeatherFaxImageCoordinates::MERCATOR) {
         y /= m_phasedimg.GetHeight();
         pp = 4/M_PI*atan(exp(y)) - 1;
     }
 
     /* unmap coordinates */
     double dx, dy;
-    switch(mapping) {
-    case MERCATOR:
+    switch(m_Coords->mapping) {
+    case WeatherFaxImageCoordinates::MERCATOR:
         dx = x;
         dy = y;
         break;
-    case POLAR:
+    case WeatherFaxImageCoordinates::POLAR:
+    case WeatherFaxImageCoordinates::CONIC:
     {
-        /* for polar stereographic */
-        double d = tan((1 - pp) * M_PI / 4) * fabs(inputheight);
+        /* for polar stereographic, or lambert conformal conic */
+        double q = inputheight > 0 ? 1 + pp : 1 - pp; /* inputheight < 0 for south polar */
+        double z = tan(q * M_PI / 4);
+        double d = z * inputheight;
+
         double theta = x / m_phasedimg.GetWidth();
-        dx = d*sin(theta), dy = d*cos(theta);
-
-        if(inputheight < 0) /* south polar has negative height */
-            dy = -dy;
-
-        dx /= inputtrueratio;
+        dx = fabs(d)*sin(theta), dy = d*cos(theta);
+        dx /= m_Coords->inputtrueratio;
     } break;
-    case FIXED_FLAT:
+    case WeatherFaxImageCoordinates::FIXED_FLAT:
         dx = x;
-        dy = (1-pp) * inputheight;
+        dy = (1+pp) * fabs(inputheight);
         break;
     }
 
     /* apply offsets */
-    px = dx + inputpole.x;
-    py = dy + inputpole.y;
+    px = dx + m_Coords->inputpole.x;
+    py = dy + m_Coords->inputpole.y;
 }
 
-bool WeatherFaxImage::MakeMappedImage(wxWindow *parent)
+bool WeatherFaxImage::MakeMappedImage(wxWindow *parent, bool paramsonly)
 {
-    /* in this simple yet common case we can quickly copy */
-    if(mappingmultiplier == 1 && mappingratio == 1 && mapping == MERCATOR) {
-        m_mappedimg = m_phasedimg;
-        return true;
-    }
-
     int w = m_phasedimg.GetWidth(), h = m_phasedimg.GetHeight();
 
-    inputheight = inputequator - inputpole.y;
+    inputheight = m_Coords->inputequator - m_Coords->inputpole.y;
 
     /* determine location of offsets and image boundaries */
     mercatoroffset.x = 0;
@@ -342,8 +335,8 @@ bool WeatherFaxImage::MakeMappedImage(wxWindow *parent)
 
     /* for polar, one of the two points along vertical meridian often
        are the extreme, so expand height based on these */
-    InputToMercator(inputpole.x, 0, p5x, p5y);
-    InputToMercator(inputpole.x, h, p6x, p6y);
+    InputToMercator(m_Coords->inputpole.x, 0, p5x, p5y);
+    InputToMercator(m_Coords->inputpole.x, h, p6x, p6y);
 
     minp = wxMin(p1y, p2y);
     minp = wxMin(minp, p5y);
@@ -354,6 +347,18 @@ bool WeatherFaxImage::MakeMappedImage(wxWindow *parent)
     maxp = wxMax(maxp, p6y);
 
     int mh = maxp - minp;
+
+    /* only computing parameters, not the actual mapping */
+    if(paramsonly)
+        return true;
+
+    /* in this simple yet common case we can quickly copy */
+    if(m_Coords->mappingmultiplier == 1 &&
+       m_Coords->mappingratio == 1 &&
+       m_Coords->mapping == WeatherFaxImageCoordinates::MERCATOR) {
+        m_mappedimg = m_phasedimg;
+        return true;
+    }
 
     if(mw < 0 || mh < 0) {
         wxMessageDialog w( parent, _("Resulting image has negative dimensions, aborting\n"),

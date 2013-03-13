@@ -33,9 +33,6 @@
 
 #include <audiofile.h>
 
-//#include <wx/listimpl.cpp>
-//WX_DECLARE_LIST(wxImage, FaxImageList);
-
 enum Bandwidth {NARROW, MIDDLE, WIDE};
 
 struct firfilter {

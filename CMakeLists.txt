@@ -64,6 +64,8 @@ SET(SRC_WEATHERFAX
             src/FaxDecoder.cpp
             src/WeatherFaxDialog.h
             src/WeatherFaxDialog.cpp
+            src/WeatherFaxWizard.h
+            src/WeatherFaxWizard.cpp
             src/WeatherFaxUI.h
             src/WeatherFaxUI.cpp
             src/WeatherFaxImage.h

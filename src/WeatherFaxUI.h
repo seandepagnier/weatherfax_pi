@@ -78,9 +78,9 @@ class WeatherFaxDialogBase : public wxDialog
 };
 
 ///////////////////////////////////////////////////////////////////////////////
-/// Class EditFaxWizardBase
+/// Class WeatherFaxWizardBase
 ///////////////////////////////////////////////////////////////////////////////
-class EditFaxWizardBase : public wxWizard 
+class WeatherFaxWizardBase : public wxWizard 
 {
 	private:
 	
@@ -98,20 +98,21 @@ class EditFaxWizardBase : public wxWizard
 		wxChoice* m_cRotation;
 		wxStaticText* m_staticText101;
 		wxSlider* m_sSkew;
+		wxFlexGridSizer* m_fgSizerUnMappedCoords;
 		wxComboBox* m_cbCoordSet;
 		wxButton* m_bRemoveCoordSet;
-		wxRadioButton* m_rbCoord1;
+		wxRadioButton* m_rbCoord1UnMapped;
 		wxStaticText* m_staticText6;
-		wxSpinCtrl* m_sCoord1X;
-		wxSpinCtrl* m_sCoord1Lat;
-		wxSpinCtrl* m_sCoord1Y;
-		wxSpinCtrl* m_sCoord1Lon;
-		wxRadioButton* m_rbCoord2;
+		wxSpinCtrl* m_sCoord1XUnMapped;
+		wxSpinCtrl* m_sCoord1LonUnMapped;
+		wxSpinCtrl* m_sCoord1YUnMapped;
+		wxSpinCtrl* m_sCoord1LatUnMapped;
+		wxRadioButton* m_rbCoord2UnMapped;
 		wxStaticText* m_staticText8;
-		wxSpinCtrl* m_sCoord2X;
-		wxSpinCtrl* m_sCoord2Lat;
-		wxSpinCtrl* m_sCoord2Y;
-		wxSpinCtrl* m_sCoord2Lon;
+		wxSpinCtrl* m_sCoord2XUnMapped;
+		wxSpinCtrl* m_sCoord2LonUnMapped;
+		wxSpinCtrl* m_sCoord2YUnMapped;
+		wxSpinCtrl* m_sCoord2LatUnMapped;
 		wxScrolledWindow* m_swFaxArea2;
 		wxStaticText* m_staticText15;
 		wxChoice* m_cMapping;
@@ -121,17 +122,30 @@ class EditFaxWizardBase : public wxWizard
 		wxTextCtrl* m_tMappingMultiplier;
 		wxStaticText* m_staticText20;
 		wxTextCtrl* m_tMappingRatio;
+		wxStaticText* m_staticText211;
+		wxTextCtrl* m_tTrueRatio;
 		wxStaticText* m_stMappingLabel1;
 		wxSpinCtrl* m_sMappingPoleX;
 		wxStaticText* m_stMappingLabel2;
 		wxSpinCtrl* m_sMappingPoleY;
 		wxStaticText* m_stMapping;
 		wxSpinCtrl* m_sMappingEquatorY;
-		wxButton* m_bApplyMapping;
-		wxButton* m_bGetMappingParameters;
-		wxStaticText* m_staticText211;
-		wxTextCtrl* m_tTrueRatio;
+		wxButton* m_bGetMapping;
+		wxButton* m_bGetEquator;
 		wxButton* m_bInformation;
+		wxRadioButton* m_rbCoord1;
+		wxStaticText* m_staticText61;
+		wxSpinCtrl* m_sCoord1X;
+		wxSpinCtrl* m_sCoord1Lon;
+		wxSpinCtrl* m_sCoord1Y;
+		wxSpinCtrl* m_sCoord1Lat;
+		wxRadioButton* m_rbCoord2;
+		wxStaticText* m_staticText81;
+		wxSpinCtrl* m_sCoord2X;
+		wxSpinCtrl* m_sCoord2Lon;
+		wxSpinCtrl* m_sCoord2Y;
+		wxSpinCtrl* m_sCoord2Lat;
+		wxScrolledWindow* m_swFaxArea3;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnSetSizes( wxInitDialogEvent& event ) { event.Skip(); }
@@ -148,18 +162,20 @@ class EditFaxWizardBase : public wxWizard
 		virtual void OnSpin( wxSpinEvent& event ) { event.Skip(); }
 		virtual void OnBitmapClickPage2( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnMappingChoice( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnUpdateMapping( wxSpinEvent& event ) { event.Skip(); }
-		virtual void OnApplyMapping( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnGetMappingParameters( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnUpdateMapping( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnUpdateMapping( wxSpinEvent& event ) { event.Skip(); }
+		virtual void OnGetMapping( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnGetEquator( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnInformation( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnBitmapClickPage3( wxMouseEvent& event ) { event.Skip(); }
 		
 	
 	public:
+		wxFlexGridSizer* m_fgSizer434;
 		
-		EditFaxWizardBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Edit Fax Image"), const wxBitmap& bitmap = wxNullBitmap, const wxPoint& pos = wxDefaultPosition, long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxRESIZE_BORDER );
+		WeatherFaxWizardBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax Image"), const wxBitmap& bitmap = wxNullBitmap, const wxPoint& pos = wxDefaultPosition, long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxRESIZE_BORDER );
 		WizardPages m_pages;
-		~EditFaxWizardBase();
+		~WeatherFaxWizardBase();
 	
 };
 

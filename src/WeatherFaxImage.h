@@ -29,10 +29,20 @@
 
 struct WeatherFaxImageCoordinates
 {
-    WeatherFaxImageCoordinates(wxString n) : name(n) {}
+WeatherFaxImageCoordinates(wxString n) : name(n),
+        p1(wxPoint(0, 0)), p2(wxPoint(0, 0)), lat1(0), lon1(0), lat2(0), lon2(0),
+        mapping(MERCATOR), inputpole(wxPoint(0,0)), inputequator(0), inputtrueratio(1),
+        mappingmultiplier(1), mappingratio(1)
+        {}
     wxString name;
     wxPoint p1, p2;
     double lat1, lon1, lat2, lon2;
+
+    enum MapType {MERCATOR, POLAR, CONIC, FIXED_FLAT};
+    MapType mapping;
+    wxPoint inputpole;
+    double inputequator, /* y value */ inputtrueratio;
+    double mappingmultiplier, mappingratio;
 
 /*
   (p1.x - x) / (lat1 - lat(x)) = (p2.x - p1.x) / (lat2 - lat1)
@@ -42,6 +52,7 @@ struct WeatherFaxImageCoordinates
     double lon(int x) { return lon1 - (p1.x - x) * (lon2 - lon1) / (p2.x - p1.x); }
 };
 
+#include <wx/listimpl.cpp>
 WX_DECLARE_LIST(WeatherFaxImageCoordinates, WeatherFaxImageCoordinateList);
 
 class WeatherFaxImage
@@ -50,8 +61,6 @@ public:
         WeatherFaxImage(wxImage img, int transparency, int whitetransparency, bool invert)
             : m_origimg(img),
         phasing(0), skew(0), filter(0), rotation(0),
-        mapping(MERCATOR), inputpole(wxPoint(0,0)), inputequator(0), inputtrueratio(1),
-        mappingmultiplier(1), mappingratio(1),
         m_Coords(NULL),
         m_CacheBitmap(NULL), m_gltextures(NULL), m_numgltexturesw(0), m_numgltexturesh(0),
         m_iTransparency(transparency), m_iWhiteTransparency(whitetransparency), m_bInvert(invert)
@@ -65,7 +74,6 @@ public:
         m_gltextures = NULL;
     }
 
-
     ~WeatherFaxImage() { FreeData(); }
 
     wxImage m_origimg;
@@ -78,19 +86,12 @@ public:
     /* page 2 */
     void InputToMercator(double px, double py, double &mx, double &my);
     void MercatorToInput(double mx, double my, double &px, double &py);
-    bool MakeMappedImage(wxWindow *parent);
-    enum MapType {MERCATOR, POLAR, FIXED_FLAT};
-    MapType mapping;
-    wxPoint inputpole;
-    double inputequator, /* y value */ inputtrueratio;
-    double mappingmultiplier, mappingratio;
+    bool MakeMappedImage(wxWindow *parent, bool paramsonly);
 
     double inputheight; /* used internally */
     wxPoint mercatoroffset;
 
     wxImage m_mappedimg;
-
-    /* page 3 */
     WeatherFaxImageCoordinates *m_Coords;
 
     /* rendering */
