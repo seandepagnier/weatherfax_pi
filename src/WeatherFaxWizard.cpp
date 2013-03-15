@@ -32,6 +32,10 @@
 #include "WeatherFaxDialog.h"
 #include "WeatherFaxWizard.h"
 
+#ifdef __MSVC__
+#define isnan _isnan
+#endif
+
 double square(double x) { return x*x; }
 
 WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img, FaxDecoder *decoder,
