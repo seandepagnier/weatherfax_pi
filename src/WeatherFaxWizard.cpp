@@ -824,6 +824,7 @@ void WeatherFaxWizard::SetCoords(int index)
     m_tMappingRatio->SetValue
         (wxString::Format(_("%.2f"), m_curCoords->mappingratio));
 
+#if 0 /* these get set when mapping is made, not here */
     SetCoordRanges();
 
     m_sCoord1X->SetValue(x1);
@@ -837,6 +838,7 @@ void WeatherFaxWizard::SetCoords(int index)
 
     m_sCoord2Lat->SetValue(m_curCoords->lat2);
     m_sCoord2Lon->SetValue(m_curCoords->lon2);
+#endif
 
     Refresh();
 }
