@@ -867,6 +867,9 @@ void WeatherFaxWizard::OnPaintImage( wxPaintEvent& event)
 
     if( bmp.IsOk() ) {
         wxMemoryDC mdc(bmp);
+        int bw = bmp.GetWidth(), bh = bmp.GetHeight();
+        if(w > bw) w = bw;
+        if(h > bh) h = bh;
         dc.Blit( 0, 0, w, h, &mdc, x, y);
         mdc.SelectObject( wxNullBitmap );
     }
