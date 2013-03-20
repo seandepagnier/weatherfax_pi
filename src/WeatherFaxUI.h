@@ -156,6 +156,7 @@ class WeatherFaxWizardBase : public wxWizard
 		virtual void OnPaintPhasing( wxPaintEvent& event ) { event.Skip(); }
 		virtual void UpdatePage1( wxCommandEvent& event ) { event.Skip(); }
 		virtual void UpdatePage1( wxScrollEvent& event ) { event.Skip(); }
+		virtual void UpdatePage1Rotation( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnCoordSet( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnCoordText( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnRemoveCoords( wxCommandEvent& event ) { event.Skip(); }

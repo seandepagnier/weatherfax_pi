@@ -76,6 +76,7 @@ public:
 protected:
 
     void UpdatePage1();
+    void UpdatePage1Rotation ( wxCommandEvent& event );
     void UpdatePage1( wxCommandEvent& event );
     void UpdatePage1( wxScrollEvent& event );
 

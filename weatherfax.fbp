@@ -969,7 +969,7 @@
             <event name="OnWizardHelp"></event>
             <event name="OnWizardPageChanged">OnWizardPageChanged</event>
             <event name="OnWizardPageChanging"></event>
-            <object class="WizardPageSimple" expanded="0">
+            <object class="WizardPageSimple" expanded="1">
                 <property name="bg"></property>
                 <property name="bitmap"></property>
                 <property name="context_help"></property>
@@ -2067,7 +2067,7 @@
                                                     <property name="window_name"></property>
                                                     <property name="window_style"></property>
                                                     <event name="OnChar"></event>
-                                                    <event name="OnChoice">UpdatePage1</event>
+                                                    <event name="OnChoice">UpdatePage1Rotation</event>
                                                     <event name="OnEnterWindow"></event>
                                                     <event name="OnEraseBackground"></event>
                                                     <event name="OnKeyDown"></event>
