@@ -51,7 +51,7 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img, FaxDecoder *decoder,
     m_cRotation->SetSelection(m_wfimg.rotation);
     m_wfimg.MakePhasedImage();
 
-    m_sPhasing->SetRange(0, m_wfimg.m_origimg.GetWidth()-1);
+    m_sPhasing->SetRange(0, m_wfimg.m_phasedimg.GetWidth()-1);
 
     m_swFaxArea1->SetScrollbars(1, 1, m_wfimg.m_phasedimg.GetWidth(), m_wfimg.m_phasedimg.GetHeight());
 
