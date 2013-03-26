@@ -103,16 +103,16 @@ class WeatherFaxWizardBase : public wxWizard
 		wxButton* m_bRemoveCoordSet;
 		wxRadioButton* m_rbCoord1UnMapped;
 		wxStaticText* m_staticText6;
-		wxSpinCtrl* m_sCoord1XUnMapped;
-		wxSpinCtrl* m_sCoord1LonUnMapped;
 		wxSpinCtrl* m_sCoord1YUnMapped;
 		wxSpinCtrl* m_sCoord1LatUnMapped;
+		wxSpinCtrl* m_sCoord1XUnMapped;
+		wxSpinCtrl* m_sCoord1LonUnMapped;
 		wxRadioButton* m_rbCoord2UnMapped;
 		wxStaticText* m_staticText8;
-		wxSpinCtrl* m_sCoord2XUnMapped;
-		wxSpinCtrl* m_sCoord2LonUnMapped;
 		wxSpinCtrl* m_sCoord2YUnMapped;
 		wxSpinCtrl* m_sCoord2LatUnMapped;
+		wxSpinCtrl* m_sCoord2XUnMapped;
+		wxSpinCtrl* m_sCoord2LonUnMapped;
 		wxScrolledWindow* m_swFaxArea2;
 		wxStaticText* m_staticText15;
 		wxChoice* m_cMapping;
@@ -135,16 +135,16 @@ class WeatherFaxWizardBase : public wxWizard
 		wxButton* m_bInformation;
 		wxRadioButton* m_rbCoord1;
 		wxStaticText* m_staticText61;
-		wxSpinCtrl* m_sCoord1X;
-		wxSpinCtrl* m_sCoord1Lon;
 		wxSpinCtrl* m_sCoord1Y;
 		wxSpinCtrl* m_sCoord1Lat;
+		wxSpinCtrl* m_sCoord1X;
+		wxSpinCtrl* m_sCoord1Lon;
 		wxRadioButton* m_rbCoord2;
 		wxStaticText* m_staticText81;
-		wxSpinCtrl* m_sCoord2X;
-		wxSpinCtrl* m_sCoord2Lon;
 		wxSpinCtrl* m_sCoord2Y;
 		wxSpinCtrl* m_sCoord2Lat;
+		wxSpinCtrl* m_sCoord2X;
+		wxSpinCtrl* m_sCoord2Lon;
 		wxScrolledWindow* m_swFaxArea3;
 		
 		// Virtual event handlers, overide them in your derived class
