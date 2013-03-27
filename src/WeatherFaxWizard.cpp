@@ -157,7 +157,7 @@ void WeatherFaxWizard::OnDecoderTimer( wxTimerEvent & )
         m_decoder->minus_saturation_threshold =
             -(1 + (double)m_sMinusSaturationThreshold->GetValue()/10);
 
-        if(m_decoder->imageline > m_wfimg.m_origimg.GetHeight()) {
+        if(m_decoder->imageline > (m_wfimg.m_origimg.IsOk() ? m_wfimg.m_origimg.GetHeight() : 0)) {
             int w = m_decoder->m_imagewidth, h = m_decoder->imageline;
             m_wfimg.m_origimg = wxImage( w, h );
             memcpy(m_wfimg.m_origimg.GetData(), m_decoder->imgdata, w*h*3);
