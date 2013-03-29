@@ -194,14 +194,14 @@ void WeatherFaxWizard::OnStopDecoding( wxCommandEvent& event )
 
 void WeatherFaxWizard::OnPaintPhasing( wxPaintEvent& event )
 {
-    if(!m_decoder)
-        return;
-
     wxWindow *window = dynamic_cast<wxWindow*>(event.GetEventObject());
     if(!window)
         return;
 
     wxPaintDC dc( window );
+
+    if(!m_decoder)
+        return;
 
     dc.SetBrush(wxBrush(*wxBLACK));
     dc.SetPen(wxPen( *wxBLACK, 1 ));
