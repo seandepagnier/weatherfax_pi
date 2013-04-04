@@ -175,7 +175,7 @@ void WeatherFaxWizard::OnDecoderTimer( wxTimerEvent & )
             int sw, sh;
             m_swFaxArea1->GetSize(&sw, &sh);
             if(y >= oldh - sh)
-                y = ph;
+                y += ph - oldh;
             if(y < 0)
                 y = 0;
             m_swFaxArea1->SetScrollbars(1, 1, pw, ph, x, y);
@@ -620,7 +620,7 @@ void WeatherFaxWizard::OnCoordText( wxCommandEvent& event )
     else if(index != m_SelectedIndex)
         return;
 
-    m_cbCoordSet->SetString(index, event.GetString());
+//    m_cbCoordSet->SetString(index, event.GetString());
     m_curCoords->name = event.GetString();
 }
 

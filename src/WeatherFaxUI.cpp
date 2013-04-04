@@ -14,7 +14,7 @@ WeatherFaxDialogBase::WeatherFaxDialogBase( wxWindow* parent, wxWindowID id, con
 	this->SetSizeHints( wxSize( -1,-1 ), wxSize( -1,-1 ) );
 	
 	wxFlexGridSizer* fgSizer8;
-	fgSizer8 = new wxFlexGridSizer( 0, 1, 0, 0 );
+	fgSizer8 = new wxFlexGridSizer( 2, 1, 0, 0 );
 	fgSizer8->AddGrowableCol( 0 );
 	fgSizer8->AddGrowableRow( 0 );
 	fgSizer8->SetFlexibleDirection( wxBOTH );
@@ -151,7 +151,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	m_wizPage1->SetMinSize( wxSize( 300,-1 ) );
 	
 	wxFlexGridSizer* fgSizer11;
-	fgSizer11 = new wxFlexGridSizer( 0, 1, 0, 0 );
+	fgSizer11 = new wxFlexGridSizer( 2, 1, 0, 0 );
 	fgSizer11->AddGrowableCol( 0 );
 	fgSizer11->AddGrowableRow( 0 );
 	fgSizer11->SetFlexibleDirection( wxBOTH );
@@ -162,7 +162,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	fgSizer11->Add( m_swFaxArea1, 1, wxEXPAND | wxALL, 5 );
 	
 	wxFlexGridSizer* fgSizer172;
-	fgSizer172 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer172 = new wxFlexGridSizer( 1, 2, 0, 0 );
 	fgSizer172->AddGrowableCol( 1 );
 	fgSizer172->AddGrowableRow( 0 );
 	fgSizer172->SetFlexibleDirection( wxBOTH );
@@ -172,14 +172,14 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	sbSizer7 = new wxStaticBoxSizer( new wxStaticBox( m_wizPage1, wxID_ANY, _("Decoder") ), wxVERTICAL );
 	
 	wxFlexGridSizer* fgSizer19;
-	fgSizer19 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer19 = new wxFlexGridSizer( 1, 2, 0, 0 );
 	fgSizer19->AddGrowableCol( 1 );
 	fgSizer19->AddGrowableRow( 0 );
 	fgSizer19->SetFlexibleDirection( wxBOTH );
 	fgSizer19->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
 	wxFlexGridSizer* fgSizer18;
-	fgSizer18 = new wxFlexGridSizer( 0, 1, 0, 0 );
+	fgSizer18 = new wxFlexGridSizer( 2, 1, 0, 0 );
 	fgSizer18->AddGrowableCol( 0 );
 	fgSizer18->AddGrowableRow( 0 );
 	fgSizer18->SetFlexibleDirection( wxBOTH );
@@ -189,7 +189,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	fgSizer18->Add( m_bStopDecoding, 0, wxALL, 5 );
 	
 	wxFlexGridSizer* fgSizer20;
-	fgSizer20 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer20 = new wxFlexGridSizer( 1, 2, 0, 0 );
 	fgSizer20->SetFlexibleDirection( wxBOTH );
 	fgSizer20->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
@@ -222,7 +222,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	sbSizer5 = new wxStaticBoxSizer( new wxStaticBox( m_wizPage1, wxID_ANY, _("Image Correction") ), wxVERTICAL );
 	
 	wxFlexGridSizer* fgSizer10;
-	fgSizer10 = new wxFlexGridSizer( 0, 4, 0, 0 );
+	fgSizer10 = new wxFlexGridSizer( 2, 4, 0, 0 );
 	fgSizer10->AddGrowableCol( 3 );
 	fgSizer10->SetFlexibleDirection( wxHORIZONTAL );
 	fgSizer10->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
@@ -294,8 +294,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	wxStaticBoxSizer* sbSizer4;
 	sbSizer4 = new wxStaticBoxSizer( new wxStaticBox( m_wizPage2, wxID_ANY, _("Image Coordinates") ), wxVERTICAL );
 	
-	m_fgSizer434 = new wxFlexGridSizer( 0, 1, 0, 0 );
-	m_fgSizer434->AddGrowableRow( 1 );
+	m_fgSizer434 = new wxFlexGridSizer( 2, 1, 0, 0 );
 	m_fgSizer434->SetFlexibleDirection( wxBOTH );
 	m_fgSizer434->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
@@ -380,8 +379,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	sbSizer51 = new wxStaticBoxSizer( new wxStaticBox( m_wizPage2, wxID_ANY, _("Coordinates Mapping Correction") ), wxVERTICAL );
 	
 	wxFlexGridSizer* fgSizer101;
-	fgSizer101 = new wxFlexGridSizer( 3, 1, 0, 0 );
-	fgSizer101->AddGrowableCol( 3 );
+	fgSizer101 = new wxFlexGridSizer( 2, 1, 0, 0 );
 	fgSizer101->SetFlexibleDirection( wxHORIZONTAL );
 	fgSizer101->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
@@ -501,8 +499,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	sbSizer41 = new wxStaticBoxSizer( new wxStaticBox( m_wizPage3, wxID_ANY, _("Image Coordinates") ), wxVERTICAL );
 	
 	wxFlexGridSizer* fgSizer91;
-	fgSizer91 = new wxFlexGridSizer( 0, 1, 0, 0 );
-	fgSizer91->AddGrowableRow( 1 );
+	fgSizer91 = new wxFlexGridSizer( 1, 1, 0, 0 );
 	fgSizer91->SetFlexibleDirection( wxBOTH );
 	fgSizer91->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
