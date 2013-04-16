@@ -173,6 +173,7 @@ wxString weatherfax_pi::GetLongDescription()
       return _("Weather Fax PlugIn for OpenCPN\n\
 Read weather fax encoded data as audio or image. \n\
 Overlay this on top of charts. \n\
+Enable OpenGL (in Display options) for best results. \n\
 \n\
 The Weather Fax plugin was written by Sean D'Epagnier\n\
 ");
@@ -218,7 +219,7 @@ void weatherfax_pi::OnToolbarToolCallback(int id)
 
 bool weatherfax_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
 {
-    if(!m_pWeatherFaxDialog)
+    if(!m_pWeatherFaxDialog || !m_pWeatherFaxDialog->IsShown())
         return true;
 
     for(unsigned int i=0; i<m_pWeatherFaxDialog->m_lFaxes->GetCount(); i++)
@@ -230,7 +231,7 @@ bool weatherfax_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
 
 bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
 {
-    if(!m_pWeatherFaxDialog)
+    if(!m_pWeatherFaxDialog || !m_pWeatherFaxDialog->IsShown())
         return true;
 
     for(unsigned int i=0; i<m_pWeatherFaxDialog->m_lFaxes->GetCount(); i++)

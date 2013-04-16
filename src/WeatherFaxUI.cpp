@@ -324,6 +324,8 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	
 	m_staticText6 = new wxStaticText( m_wizPage2, wxID_ANY, _("Lat/Lon"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText6->Wrap( -1 );
+	m_staticText6->SetForegroundColour( wxColour( 255, 0, 0 ) );
+	
 	fgSizer7->Add( m_staticText6, 0, wxALL, 5 );
 	
 	m_sCoord1YUnMapped = new wxSpinCtrl( m_wizPage2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
@@ -345,6 +347,8 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	
 	m_staticText8 = new wxStaticText( m_wizPage2, wxID_ANY, _("Lat/Lon"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText8->Wrap( -1 );
+	m_staticText8->SetForegroundColour( wxColour( 0, 255, 0 ) );
+	
 	fgSizer7->Add( m_staticText8, 0, wxALL, 5 );
 	
 	m_sCoord2YUnMapped = new wxSpinCtrl( m_wizPage2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
@@ -515,6 +519,8 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	
 	m_staticText61 = new wxStaticText( m_wizPage3, wxID_ANY, _("Lat/Lon"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText61->Wrap( -1 );
+	m_staticText61->SetForegroundColour( wxColour( 255, 0, 0 ) );
+	
 	fgSizer71->Add( m_staticText61, 0, wxALL, 5 );
 	
 	m_sCoord1Y = new wxSpinCtrl( m_wizPage3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
@@ -536,6 +542,8 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	
 	m_staticText81 = new wxStaticText( m_wizPage3, wxID_ANY, _("Lat/Lon"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText81->Wrap( -1 );
+	m_staticText81->SetForegroundColour( wxColour( 0, 255, 0 ) );
+	
 	fgSizer71->Add( m_staticText81, 0, wxALL, 5 );
 	
 	m_sCoord2Y = new wxSpinCtrl( m_wizPage3, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );

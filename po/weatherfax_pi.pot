@@ -1,0 +1,445 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: weatherfax_pi 3.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-16 13:27+1200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/WeatherFaxDialog.cpp:113
+msgid ";"
+msgstr ""
+
+#: src/WeatherFaxDialog.cpp:181
+msgid "Failed to set stuff up with dsp, this only works on linux"
+msgstr ""
+
+#: src/WeatherFaxDialog.cpp:182
+msgid "Failure"
+msgstr ""
+
+#: src/WeatherFaxDialog.cpp:193
+msgid "dsp - "
+msgstr ""
+
+#: src/WeatherFaxDialog.cpp:213
+msgid "Open Weather Fax Input File"
+msgstr ""
+
+#: src/WeatherFaxDialog.cpp:215
+msgid ""
+"Supported Image Files|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;*.TIF;*.tif;*.TIFF;"
+"*.tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;*.PCX;*."
+"pcx;*.PICT;*.pict;*.TGA;*.tga|WAV files (*.wav)|*.WAV;*.wav|All files (*.*)|*."
+"*"
+msgstr ""
+
+#: src/WeatherFaxDialog.cpp:226
+msgid "wav"
+msgstr ""
+
+#: src/WeatherFaxDialog.cpp:226
+msgid "WAV"
+msgstr ""
+
+#: src/WeatherFaxDialog.cpp:237 src/WeatherFaxDialog.cpp:274
+msgid "Failed to load input file: "
+msgstr ""
+
+#: src/WeatherFaxDialog.cpp:237 src/WeatherFaxDialog.cpp:274
+#: src/FaxDecoder.cpp:46
+msgid "Failed"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:23
+msgid "Fax"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:41
+msgid "Capture"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:44
+msgid "Open"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:47
+msgid "Edit"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:50
+msgid "Delete"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:63
+msgid "Transparency"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:71
+msgid "Invert"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:172
+msgid "Decoder"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:188
+msgid "Stop"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:196
+msgid "Sat"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:222
+msgid "Image Correction"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:230 src/WeatherFaxUI.cpp:744
+msgid "Filter"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:234
+msgid "No Filter"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:234
+msgid "Removal 1"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:234
+msgid "Removal 2"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:234
+msgid "removal 3"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:234
+msgid "Value 1"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:234
+msgid "Value 2"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:234
+msgid "Value 3"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:240
+msgid "Phasing"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:247
+msgid "Rotation"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:251
+msgid "None"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:251
+msgid "CCW"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:251
+msgid "CW"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:251
+msgid "180"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:257
+msgid "Skew"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:295 src/WeatherFaxUI.cpp:503
+msgid "Image Coordinates"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:309
+msgid "Remove"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:320 src/WeatherFaxUI.cpp:343 src/WeatherFaxUI.cpp:515
+#: src/WeatherFaxUI.cpp:538
+msgid "Coord Y/X"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:325 src/WeatherFaxUI.cpp:348 src/WeatherFaxUI.cpp:520
+#: src/WeatherFaxUI.cpp:543
+msgid "Lat/Lon"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:383
+msgid "Coordinates Mapping Correction"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:395
+msgid "Input Type"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:399
+msgid "mercator"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:399
+msgid "polar"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:399
+msgid "conic"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:399
+msgid "fixed-flat"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:405
+msgid "Output Type"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:409
+msgid "Mercator"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:413
+msgid "Size"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:417 src/WeatherFaxUI.cpp:424 src/WeatherFaxUI.cpp:431
+msgid "1"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:420
+msgid "W/H"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:427
+msgid "True Width Ratio"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:442
+msgid "Pole X"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:449
+msgid "Pole Y"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:456
+msgid "Equator Y"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:463
+msgid "Get Mapping "
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:466
+msgid "Get Equator"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:469 src/WeatherFaxWizard.cpp:740
+msgid "Information"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:704
+msgid "Audio Decoding Options"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:716
+msgid "Image Width"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:723
+msgid "Bits per Pixel"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:730
+msgid "Carrier"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:737
+msgid "Deviation"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:748
+msgid "narrow"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:748
+msgid "middle"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:748
+msgid "wide"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:757
+msgid ""
+"Skip start, stop and \n"
+"phasing detection"
+msgstr ""
+
+#: src/WeatherFaxUI.cpp:760
+msgid "Include header data in image"
+msgstr ""
+
+#: src/WeatherFaxUI.h:75
+msgid "Weather Fax"
+msgstr ""
+
+#: src/WeatherFaxUI.h:177
+msgid "Weather Fax Image"
+msgstr ""
+
+#: src/WeatherFaxUI.h:209
+msgid "Weather Fax Preferences"
+msgstr ""
+
+#: src/FaxDecoder.cpp:46
+msgid "Failure Decoding Fax: "
+msgstr ""
+
+#: src/FaxDecoder.cpp:206
+msgid "fax_decode_image_line requires specific buffer length"
+msgstr ""
+
+#: src/FaxDecoder.cpp:401
+msgid "could not open input file: "
+msgstr ""
+
+#: src/FaxDecoder.cpp:404
+msgid "samples size not 16 bit"
+msgstr ""
+
+#: src/FaxDecoder.cpp:411
+msgid "cannot deal with incomplete input file"
+msgstr ""
+
+#: src/WeatherFaxWizard.cpp:108
+#, c-format
+msgid " %d"
+msgstr ""
+
+#: src/WeatherFaxWizard.cpp:129
+#, c-format
+msgid "New Coord %d"
+msgstr ""
+
+#: src/WeatherFaxWizard.cpp:131
+msgid "New Coord"
+msgstr ""
+
+#: src/WeatherFaxWizard.cpp:346
+msgid ""
+"Warning, latitudes on different sides of equator not recommended because of "
+"ambiguity of north or south pole"
+msgstr ""
+
+#: src/WeatherFaxWizard.cpp:348 src/WeatherFaxWizard.cpp:492
+#: src/WeatherFaxWizard.cpp:545 src/WeatherFaxWizard.cpp:561
+msgid "Mapping"
+msgstr ""
+
+#: src/WeatherFaxWizard.cpp:489
+msgid ""
+"Calculating Mapping Failed.\n"
+"Perhaps you have chosen the wrong mapping type for this image, or the "
+"coordinates specified are not correct\n"
+msgstr ""
+
+#: src/WeatherFaxWizard.cpp:544
+msgid "Calculating Mapping not yet supported.\n"
+msgstr ""
+
+#: src/WeatherFaxWizard.cpp:560
+msgid "Calculating Equator not yet supported.\n"
+msgstr ""
+
+#: src/WeatherFaxWizard.cpp:715
+msgid ""
+"Mapping allows for scaling, and conversion between coordinate systems\n"
+"Latitudes are +N -S, Longitudes +E -W\n"
+"\n"
+"For polar mapping mode:\n"
+"Get Mapping parameters calculates the mapping from the coordinates given, but "
+"the first coordinate's X value (vertical red line) must align with the pole "
+"in polar mode on the vertical meridian\n"
+"Once the coordinates are entered, the mapping should make the the blue "
+"latitudes align.  If they are far off, check the input coordinates.\n"
+"Once they are close:\n"
+"First adjust pole X to center the latitudes. Next adjust the Pole Y value "
+"until the blue latitude curve closest to the pole is correct. Now, if the "
+"second blue latitude is too wide, then the true width ratio needs to be "
+"increased, otherwise it should be decreased. Repeat adjusting the Pole Y and "
+"true width ratio until both align. It is easiest to calibrate correctly if "
+"you use the farthest spaced latitudes available.\n"
+"Once the blue latitudes align perfectly, recompute the equator to ensure the "
+"resulting mapping is correct. At this point, the coordinates can be changed "
+"to better locations if needed. If true width is very close to 1.0 it probably "
+"should be exactly 1.0.\n"
+"It is also possible to go to the next step, adjust the coordinates, then come "
+"back to this step and get the mapping parameters again to improve the "
+"estimate."
+msgstr ""
+
+#: src/WeatherFaxWizard.cpp:828 src/WeatherFaxWizard.cpp:831
+#, c-format
+msgid "%.2f"
+msgstr ""
+
+#: src/weatherfax_pi.cpp:101 src/weatherfax_pi.cpp:162
+msgid "WeatherFax"
+msgstr ""
+
+#: src/weatherfax_pi.cpp:168
+msgid "Weather Fax PlugIn for OpenCPN"
+msgstr ""
+
+#: src/weatherfax_pi.cpp:173
+msgid ""
+"Weather Fax PlugIn for OpenCPN\n"
+"Read weather fax encoded data as audio or image. \n"
+"Overlay this on top of charts. \n"
+"Enable OpenGL (in Display options) for best results. \n"
+"\n"
+"The Weather Fax plugin was written by Sean D'Epagnier\n"
+msgstr ""
+
+#: src/weatherfax_pi.cpp:307
+msgid "WeatherFax Preferences"
+msgstr ""
+
+#: src/WeatherFaxImage.cpp:364
+msgid "Resulting image has negative dimensions, aborting\n"
+msgstr ""
+
+#: src/WeatherFaxImage.cpp:365 src/WeatherFaxImage.cpp:376
+msgid "Mapping Failed"
+msgstr ""
+
+#: src/WeatherFaxImage.cpp:374
+#, c-format
+msgid "Resulting image larger than %dMB, aborting\n"
+msgstr ""
+
+#: src/WeatherFaxImage.cpp:384
+msgid "Mapping Weather Fax Image"
+msgstr ""
+
+#: src/WeatherFaxImage.cpp:384
+msgid "Weather Fax Mapper"
+msgstr ""

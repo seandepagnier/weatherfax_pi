@@ -1,0 +1,13 @@
+src/WeatherFaxDialog.cpp
+src/WeatherFaxUI.cpp
+src/WeatherFaxWizard.h
+src/WeatherFaxDialog.h
+src/FaxDecoder.h
+src/WeatherFaxUI.h
+src/weatherfax_icon.h
+src/FaxDecoder.cpp
+src/WeatherFaxImage.h
+src/WeatherFaxWizard.cpp
+src/weatherfax_pi.h
+src/weatherfax_pi.cpp
+src/WeatherFaxImage.cpp
