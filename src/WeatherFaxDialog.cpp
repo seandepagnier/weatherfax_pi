@@ -298,6 +298,7 @@ void WeatherFaxDialog::EditFaxClicked( wxCommandEvent& event )
     } else
         image = backupimage;
 
+    m_parent->SetFocus(); /* try this to see if it helps or not */
     RequestRefresh( m_parent );
 }
 
