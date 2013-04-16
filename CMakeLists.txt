@@ -1,7 +1,7 @@
 ##---------------------------------------------------------------------------
 ## Author:      Sean D'Epagnier
 ## Copyright:   
-## License:     wxWidgets License
+## License:     GPLv3
 ##---------------------------------------------------------------------------
  
 # define minimum cmake version
@@ -25,7 +25,6 @@ INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/src)
 
 # require proper c++
 #ADD_DEFINITIONS( "-Wall -ansi -pedantic -Wno-variadic-macros" )
-#TODO: Should we use  -fno-stack-protector
 #  IF NOT DEBUGGING CFLAGS="-O2 -march=native"
 IF(NOT WIN32)
  ADD_DEFINITIONS( "-Wall -g -O0 -fexceptions -fvisibility=hidden" )
@@ -43,11 +42,6 @@ IF(WIN32)
     ADD_DEFINITIONS(-D__MSVC__)
     ADD_DEFINITIONS(-D_CRT_NONSTDC_NO_DEPRECATE -D_CRT_SECURE_NO_DEPRECATE)
 ENDIF(WIN32)
-
-
-#SET(wxWidgets_USE_LIBS base core net xml html adv)
-#SET(BUILD_SHARED_LIBS TRUE)
-#FIND_PACKAGE(wxWidgets REQUIRED)
 
 INCLUDE(${wxWidgets_USE_FILE})
 
