@@ -223,7 +223,7 @@ void WeatherFaxWizard::OnPaintPhasing( wxPaintEvent& event )
     p = h*(-1+(s/2))/s;
     dc.DrawLine(0, p, w, p);
     
-    dc.SetPen(wxPen( *wxGREEN, 1 ));
+    dc.SetPen(wxPen( wxColour(32,192,32), 1 ));
     p = h*(m_decoder->minus_saturation_threshold+(s/2))/s;
     dc.DrawLine(0, p, w, p);
 }
@@ -894,7 +894,7 @@ void WeatherFaxWizard::OnPaintImage( wxPaintEvent& event)
         dc.DrawLine(x1-x, 0, x1-x, h);
         dc.DrawLine(0, y1-y, w, y1-y);
 
-        dc.SetPen(wxPen( *wxGREEN, 1 ));
+        dc.SetPen(wxPen( wxColour(32,192,32), 1 ));
         dc.DrawLine(x2-x, 0, x2-x, h);
         dc.DrawLine(0, y2-y, w, y2-y);
 

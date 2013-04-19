@@ -32,8 +32,6 @@
 #include <sys/soundcard.h>
 #endif
 
-#include <wx/progdlg.h>
-
 #include <math.h>
 #include <complex>
 
