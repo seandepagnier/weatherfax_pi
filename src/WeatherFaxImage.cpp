@@ -369,10 +369,13 @@ bool WeatherFaxImage::MakeMappedImage(wxWindow *parent, bool paramsonly)
 
     const int maxsize = 30;
         /* bigger than 30 megabytes is pretty huge and possibly too slow */
-    if(mw * mh > maxsize*1024*1024) {
+    double maxscale = maxsize*1024*1024 / ((double)mw * mh);
+    if(maxscale < 1) {
         wxMessageDialog w
-            ( parent, wxString::Format(_("Resulting image larger than %dMB, aborting\n"),
-                                     maxsize),
+            ( parent, wxString::Format(
+                _("Resulting image larger than %dMB\n\
+Try changing size parameter to a smaller value. (less than %.2f)\naborting\n"),
+                maxsize, sqrt(maxscale)*m_Coords->mappingmultiplier),
               _("Mapping Failed"), wxOK | wxICON_ERROR );
         w.ShowModal();
         return false;
