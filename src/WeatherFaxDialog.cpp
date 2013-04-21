@@ -110,7 +110,7 @@ WeatherFaxDialog::~WeatherFaxDialog()
 #endif
         /* names are not allowed semicolon because we need it */
         m_Coords[i]->name = ReplaceChar(m_Coords[i]->name, ';', ',');
-        names += m_Coords[i]->name + _(";");
+        names += m_Coords[i]->name + _T(";");
     }
     
     pConf->Write ( _T ( "Names" ), names);
@@ -190,7 +190,7 @@ void WeatherFaxDialog::CaptureFaxClicked( wxCommandEvent& event )
 
     if(wizard.RunWizard(wizard.m_pages[0])) {
         static int dspc;
-        int selection = m_lFaxes->Append(_("dsp - ") + wxString::Format(_T("%d"), dspc));
+        int selection = m_lFaxes->Append(_T("dsp - ") + wxString::Format(_T("%d"), dspc));
         m_Faxes.push_back(img);
 
         wizard.StoreCoords();
@@ -223,7 +223,7 @@ All files (*.*)|*.*" ), wxFD_OPEN);
         wxString filename = openDialog.GetPath();
         wxFileName filenamec(filename);
         m_weatherfax_pi.m_path = openDialog.GetDirectory();        
-        if(filenamec.GetExt() == _("wav") || filenamec.GetExt() == _("WAV")) {
+        if(filenamec.GetExt() == _T("wav") || filenamec.GetExt() == _T("WAV")) {
             FaxDecoder decoder(*this,
                                m_weatherfax_pi.m_ImageWidth,
                                m_weatherfax_pi.m_BitsPerPixel,

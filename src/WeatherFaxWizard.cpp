@@ -105,7 +105,7 @@ WeatherFaxWizard::~WeatherFaxWizard()
         for(int n=0, i=-1; i != cc; n++) {
             newnumberedname = newname;
             if(n)
-                newnumberedname += wxString::Format(_(" %d"), n);
+                newnumberedname += wxString::Format(_T(" %d"), n);
 
             if(!cc)
                 break;
@@ -825,10 +825,10 @@ void WeatherFaxWizard::SetCoords(int index)
     m_tTrueRatio->SetValue(wxString::Format(_T("%.4f"), m_curCoords->inputtrueratio));
 
     m_tMappingMultiplier->SetValue
-        (wxString::Format(_("%.2f"), m_curCoords->mappingmultiplier));
+        (wxString::Format(_T("%.2f"), m_curCoords->mappingmultiplier));
     
     m_tMappingRatio->SetValue
-        (wxString::Format(_("%.2f"), m_curCoords->mappingratio));
+        (wxString::Format(_T("%.2f"), m_curCoords->mappingratio));
 
 #if 0 /* these get set when mapping is made, not here */
     SetCoordRanges();
