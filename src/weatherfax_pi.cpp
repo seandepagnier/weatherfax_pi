@@ -35,6 +35,7 @@
 #include "weatherfax_pi.h"
 #include "WeatherFaxImage.h"
 #include "WeatherFaxDialog.h"
+#include "icons.h"
 
 // the class factories, used to create and destroy instances of the PlugIn
 
@@ -54,29 +55,18 @@ extern "C" DECL_EXP void destroy_pi(opencpn_plugin* p)
 //
 //---------------------------------------------------------------------------------------------------------
 
-namespace weatherfax_icon
+weatherfax_pi::weatherfax_pi(void *ppimgr)
+    : opencpn_plugin_18(ppimgr)
 {
-#include "weatherfax_icon.h"
+    // Create the PlugIn icons
+    initialize_images();
 }
-
 
 //---------------------------------------------------------------------------------------------------------
 //
 //          PlugIn initialization and de-init
 //
 //---------------------------------------------------------------------------------------------------------
-
-weatherfax_pi::weatherfax_pi(void *ppimgr)
-    : opencpn_plugin_18(ppimgr)
-{
-      int w = weatherfax_icon::width, h = weatherfax_icon::height;
-      char *img_data = (char*)malloc(3*w*h); /* wximage needs malloc */
-      const char *data = weatherfax_icon::header_data;
-      for(int i=0; i<w*h; i++)
-          HEADER_PIXEL(data, (img_data+3*i))
-      wxImage img_weatherfax(w, h, (unsigned char*)img_data);
-      bmp_weatherfax_pi = new wxBitmap(img_weatherfax);
-}
 
 int weatherfax_pi::Init(void)
 {
@@ -97,9 +87,10 @@ int weatherfax_pi::Init(void)
       //    And load the configuration items
       LoadConfig();
 
-      m_leftclick_tool_id  = InsertPlugInTool(_T(""), bmp_weatherfax_pi, bmp_weatherfax_pi, wxITEM_NORMAL,
-            _("WeatherFax"), _T(""), NULL,
-             WEATHERFAX_TOOL_POSITION, 0, this);
+      m_leftclick_tool_id  = InsertPlugInTool(_T(""), _img_weatherfax,
+                                              _img_weatherfax, wxITEM_NORMAL,
+                                              _("WeatherFax"), _T(""), NULL,
+                                              WEATHERFAX_TOOL_POSITION, 0, this);
 
       m_pWeatherFaxDialog = NULL;
 
@@ -154,7 +145,7 @@ int weatherfax_pi::GetPlugInVersionMinor()
 
 wxBitmap *weatherfax_pi::GetPlugInBitmap()
 {
-      return bmp_weatherfax_pi;
+      return _img_weatherfax;
 }
 
 wxString weatherfax_pi::GetCommonName()

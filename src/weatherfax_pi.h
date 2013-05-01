@@ -106,8 +106,6 @@ private:
 
       WeatherFaxDialog      *m_pWeatherFaxDialog;
 
-      wxBitmap *bmp_weatherfax_pi;
-
       int               m_weatherfax_dialog_x, m_weatherfax_dialog_y;
       int               m_display_width, m_display_height;
 
