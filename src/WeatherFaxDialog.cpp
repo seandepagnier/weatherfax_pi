@@ -10,7 +10,7 @@
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
+ *   the Free Software Foundation; either version 3 of the License, or     *
  *   (at your option) any later version.                                   *
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
@@ -32,6 +32,7 @@
 #include "WeatherFaxImage.h"
 #include "WeatherFaxDialog.h"
 #include "WeatherFaxWizard.h"
+#include "AboutDialog.h"
 
 /* replace characters a in input with b */
 wxString ReplaceChar(wxString input, wxChar a, wxChar b)
@@ -46,7 +47,7 @@ wxString ReplaceChar(wxString input, wxChar a, wxChar b)
 }
 
 WeatherFaxDialog::WeatherFaxDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
-    : WeatherFaxDialogBase( parent ), m_weatherfax_pi(_weatherfax_pi)
+    : WeatherFaxDialogBase( parent ), m_SchedulesDialog(_weatherfax_pi, this), m_weatherfax_pi(_weatherfax_pi)
 {
     wxFileConfig *pConf = m_weatherfax_pi.m_pconfig;
     pConf->SetPath ( _T ( "/Settings/WeatherFax/CoordinateSets" ) );
@@ -141,13 +142,23 @@ WeatherFaxDialog::~WeatherFaxDialog()
         delete m_Faxes[i];
 }
 
+void WeatherFaxDialog::EnableDisplayControls(bool enable)
+{
+    m_sTransparency->Enable(enable);
+    m_sWhiteTransparency->Enable(enable);
+    m_cInvert->Enable(enable);
+}
+
 void WeatherFaxDialog::OnFaxes( wxCommandEvent& event )
 {
     UpdateButtonStates();
 
     int selection = m_lFaxes->GetSelection();
-    if(selection < 0 || selection >= (int)m_Faxes.size())
+    if(selection < 0 || selection >= (int)m_Faxes.size()) {
+        EnableDisplayControls(false);
         return;
+    }
+    EnableDisplayControls(true);
 
     WeatherFaxImage &img = *m_Faxes[selection];
     m_sTransparency->SetValue(img.m_iTransparency);
@@ -158,6 +169,12 @@ void WeatherFaxDialog::OnFaxes( wxCommandEvent& event )
 void WeatherFaxDialog::OnFaxesToggled( wxCommandEvent& event )
 {
     RequestRefresh( m_parent );
+}
+
+void WeatherFaxDialog::SchedulesClicked( wxCommandEvent& event )
+{
+    m_SchedulesDialog.Load();
+    m_SchedulesDialog.Show();
 }
 
 void WeatherFaxDialog::CaptureFaxClicked( wxCommandEvent& event )
@@ -178,7 +195,7 @@ void WeatherFaxDialog::CaptureFaxClicked( wxCommandEvent& event )
      decoder.SetSampleRate(8000);
 
      if(!decoder.DecodeFaxFromDSP()) {
-         wxMessageDialog w( this, _("Failed to set stuff up with dsp, this only works on linux"),
+         wxMessageDialog w( this, _("Failed to set stuff up with dsp, this only works on linux if you have /dev/dsp"),
                             _("Failure"),
                             wxOK | wxICON_ERROR );
          w.ShowModal();
@@ -203,12 +220,75 @@ void WeatherFaxDialog::CaptureFaxClicked( wxCommandEvent& event )
     UpdateButtonStates();
 }
 
-void WeatherFaxDialog::OpenFaxClicked( wxCommandEvent& event )
+void WeatherFaxDialog::OpenWav(wxString filename)
 {
     int transparency = m_sTransparency->GetValue();
     int whitetransparency = m_sWhiteTransparency->GetValue();
     bool invert = m_cInvert->GetValue();
 
+    FaxDecoder decoder(*this,
+                       m_weatherfax_pi.m_ImageWidth,
+                       m_weatherfax_pi.m_BitsPerPixel,
+                       m_weatherfax_pi.m_Carrier,
+                       m_weatherfax_pi.m_Deviation,
+                       (enum Bandwidth)m_weatherfax_pi.m_Filter,
+                       m_weatherfax_pi.m_bSkipHeaderDetection,
+                       m_weatherfax_pi.m_bIncludeHeadersInImage);
+    
+    if(!decoder.DecodeFaxFromFilename(filename)) {
+        wxMessageDialog w( this, _("Failed to load input file: ") + filename, _("Failed"),
+                           wxOK | wxICON_ERROR );
+        w.ShowModal();
+        return;
+    }
+    WeatherFaxImage *img = new WeatherFaxImage(wxNullImage, transparency, whitetransparency, invert);
+    WeatherFaxWizard wizard(*img, &decoder, *this, m_Coords);
+    
+    if(wizard.RunWizard(wizard.m_pages[0])) {
+        int selection = m_lFaxes->Append(filename);
+        m_Faxes.push_back(img);
+        
+        wizard.StoreCoords();
+        wizard.StoreMappingParams();
+                
+        m_lFaxes->Check(selection, true);
+    } else
+        delete img;
+}
+
+void WeatherFaxDialog::OpenImage(wxString filename)
+{
+    int transparency = m_sTransparency->GetValue();
+    int whitetransparency = m_sWhiteTransparency->GetValue();
+    bool invert = m_cInvert->GetValue();
+
+    wxImage wimg;
+    if(wimg.LoadFile(filename)) {
+        WeatherFaxImage *img = new WeatherFaxImage(wimg, transparency, whitetransparency, invert);
+        WeatherFaxWizard wizard(*img, NULL, *this, m_Coords);
+        
+        if(wizard.RunWizard(wizard.m_pages[0])) {
+            wxFileName filenamec(filename);
+
+            int selection = m_lFaxes->Append(filenamec.GetFullName());
+            m_Faxes.push_back(img);
+            
+            wizard.StoreCoords();
+            wizard.StoreMappingParams();
+            
+            m_lFaxes->SetSelection(selection);
+            m_lFaxes->Check(selection, true);
+        } else
+            delete img;
+    } else {
+        wxMessageDialog w( this, _("Failed to load input file: ") + filename, _("Failed"),
+                           wxOK | wxICON_ERROR );
+        w.ShowModal();
+    }
+}
+
+void WeatherFaxDialog::OpenFaxClicked( wxCommandEvent& event )
+{
     wxFileDialog openDialog
         ( this, _( "Open Weather Fax Input File" ),
           m_weatherfax_pi.m_path, wxT ( "" ),
@@ -224,57 +304,9 @@ All files (*.*)|*.*" ), wxFD_OPEN);
         wxFileName filenamec(filename);
         m_weatherfax_pi.m_path = openDialog.GetDirectory();        
         if(filenamec.GetExt() == _T("wav") || filenamec.GetExt() == _T("WAV")) {
-            FaxDecoder decoder(*this,
-                               m_weatherfax_pi.m_ImageWidth,
-                               m_weatherfax_pi.m_BitsPerPixel,
-                               m_weatherfax_pi.m_Carrier,
-                               m_weatherfax_pi.m_Deviation,
-                               (enum Bandwidth)m_weatherfax_pi.m_Filter,
-                               m_weatherfax_pi.m_bSkipHeaderDetection,
-                               m_weatherfax_pi.m_bIncludeHeadersInImage);
-
-            if(!decoder.DecodeFaxFromFilename(filename)) {
-                wxMessageDialog w( this, _("Failed to load input file: ") + filename, _("Failed"),
-                                   wxOK | wxICON_ERROR );
-                w.ShowModal();
-                return;
-            }
-            WeatherFaxImage *img = new WeatherFaxImage(wxNullImage, transparency, whitetransparency, invert);
-            WeatherFaxWizard wizard(*img, &decoder, *this, m_Coords);
-
-            if(wizard.RunWizard(wizard.m_pages[0])) {
-                int selection = m_lFaxes->Append(filename);
-                m_Faxes.push_back(img);
-
-                wizard.StoreCoords();
-                wizard.StoreMappingParams();
-                
-                m_lFaxes->Check(selection, true);
-            } else
-                delete img;
-
+            OpenWav(filename);
         } else {
-            wxImage wimg;
-            if(wimg.LoadFile(filename)) {
-                WeatherFaxImage *img = new WeatherFaxImage(wimg, transparency, whitetransparency, invert);
-                WeatherFaxWizard wizard(*img, NULL, *this, m_Coords);
-
-                if(wizard.RunWizard(wizard.m_pages[0])) {
-                    int selection = m_lFaxes->Append(filenamec.GetFullName());
-                    m_Faxes.push_back(img);
-
-                    wizard.StoreCoords();
-                    wizard.StoreMappingParams();
-
-                    m_lFaxes->SetSelection(selection);
-                    m_lFaxes->Check(selection, true);
-                } else
-                    delete img;
-            } else {
-                wxMessageDialog w( this, _("Failed to load input file: ") + filename, _("Failed"),
-                                   wxOK | wxICON_ERROR );
-                w.ShowModal();
-            }
+            OpenImage(filename);
         }
     }
     UpdateButtonStates();
@@ -315,6 +347,12 @@ void WeatherFaxDialog::DeleteFaxClicked( wxCommandEvent& event )
     UpdateButtonStates();
 
     RequestRefresh( m_parent );
+}
+
+void WeatherFaxDialog::OnAbout( wxCommandEvent& event )
+{
+    AboutDialog dlg(this);
+    dlg.ShowModal();
 }
 
 void WeatherFaxDialog::TransparencyChanged( wxScrollEvent& event )

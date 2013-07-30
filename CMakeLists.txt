@@ -20,6 +20,7 @@ SET(PLUGIN_SOURCE_DIR .)
 MESSAGE (STATUS "*** Building ${PACKAGE_NAME} ***")
 
 #SET(CMAKE_BUILD_TYPE Debug)
+SET(PREFIX_PARENTDATA ${PREFIX_DATA}/${PARENT})
 
 INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/include ${CMAKE_SOURCE_DIR}/src)
 
@@ -64,6 +65,10 @@ SET(SRC_WEATHERFAX
             src/WeatherFaxUI.cpp
             src/WeatherFaxImage.h
             src/WeatherFaxImage.cpp
+            src/SchedulesDialog.cpp
+            src/SchedulesDialog.h
+            src/AboutDialog.h
+            src/AboutDialog.cpp
             src/icons.h
             src/icons.cpp
 
@@ -143,6 +148,12 @@ ENDIF(UNIX AND NOT APPLE)
 
 IF(WIN32)
 INSTALL(TARGETS ${PACKAGE_NAME} RUNTIME DESTINATION "plugins")
+ENDIF(WIN32)
+
+IF(WIN32)
+  INSTALL(DIRECTORY data DESTINATION "plugins\\\\weatherfax")
+ELSE(WIN32)
+  INSTALL(DIRECTORY data DESTINATION ${PREFIX_PARENTDATA}/plugins/weatherfax)
 ENDIF(WIN32)
  	  	 
 INCLUDE("../PluginLocalization.cmake")

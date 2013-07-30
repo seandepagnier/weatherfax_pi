@@ -23,16 +23,21 @@
 #include <wx/slider.h>
 #include <wx/checkbox.h>
 #include <wx/dialog.h>
-#include <wx/scrolwin.h>
+#include <wx/listctrl.h>
 #include <wx/stattext.h>
+#include <wx/textctrl.h>
+#include <wx/listbox.h>
 #include <wx/spinctrl.h>
-#include <wx/choice.h>
+#include <wx/panel.h>
 #include <wx/bitmap.h>
 #include <wx/image.h>
 #include <wx/icon.h>
-#include <wx/combobox.h>
 #include <wx/radiobut.h>
-#include <wx/textctrl.h>
+#include <wx/notebook.h>
+#include <wx/gauge.h>
+#include <wx/scrolwin.h>
+#include <wx/choice.h>
+#include <wx/combobox.h>
 #include <wx/wizard.h>
 #include <wx/dynarray.h>
 WX_DEFINE_ARRAY_PTR( wxWizardPageSimple*, WizardPages );
@@ -48,19 +53,23 @@ class WeatherFaxDialogBase : public wxDialog
 	private:
 	
 	protected:
+		wxButton* m_bSchedules;
 		wxButton* m_bCapture;
 		wxButton* m_bOpen;
 		wxButton* m_bEdit;
 		wxButton* m_bDelete;
+		wxButton* m_bAbout;
 		wxCheckBox* m_cInvert;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnFaxes( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnFaxesToggled( wxCommandEvent& event ) { event.Skip(); }
+		virtual void SchedulesClicked( wxCommandEvent& event ) { event.Skip(); }
 		virtual void CaptureFaxClicked( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OpenFaxClicked( wxCommandEvent& event ) { event.Skip(); }
 		virtual void EditFaxClicked( wxCommandEvent& event ) { event.Skip(); }
 		virtual void DeleteFaxClicked( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnAbout( wxCommandEvent& event ) { event.Skip(); }
 		virtual void TransparencyChanged( wxScrollEvent& event ) { event.Skip(); }
 		virtual void WhiteTransparencyChanged( wxScrollEvent& event ) { event.Skip(); }
 		virtual void OnInvert( wxCommandEvent& event ) { event.Skip(); }
@@ -71,9 +80,70 @@ class WeatherFaxDialogBase : public wxDialog
 		wxCheckListBox* m_lFaxes;
 		wxSlider* m_sTransparency;
 		wxSlider* m_sWhiteTransparency;
+		wxCheckBox* m_cbDisplaySelected;
 		
 		WeatherFaxDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxCAPTION|wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxTAB_TRAVERSAL ); 
 		~WeatherFaxDialogBase();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class SchedulesDialogBase
+///////////////////////////////////////////////////////////////////////////////
+class SchedulesDialogBase : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxListCtrl* m_lSchedules;
+		wxNotebook* m_notebook1;
+		wxPanel* m_panel1;
+		wxStaticText* m_staticText24;
+		wxTextCtrl* m_tContainsLat;
+		wxStaticText* m_staticText25;
+		wxTextCtrl* m_tContainsLon;
+		wxButton* m_bBoatPosition;
+		wxButton* m_bReset;
+		wxListBox* m_lStations;
+		wxButton* m_bAll;
+		wxButton* m_bNone;
+		wxSpinCtrl* m_skhzmin;
+		wxStaticText* m_staticText27;
+		wxSpinCtrl* m_skhzmax;
+		wxStaticText* m_staticText28;
+		wxButton* m_bAllFrequencies;
+		wxCheckBox* m_cbHasArea;
+		wxCheckBox* m_cbHasValidTime;
+		wxPanel* m_panel2;
+		wxCheckBox* m_cbMessageBox;
+		wxCheckBox* m_cbExternalAlarm;
+		wxTextCtrl* m_tExternalAlarmCommand;
+		wxPanel* m_panel3;
+		wxRadioButton* m_rbAlsaCapture;
+		wxRadioButton* m_rbExternalCapture;
+		wxTextCtrl* m_tExternalCapture;
+		wxRadioButton* m_rbManualCapture;
+		wxStaticText* m_stCaptureStatus;
+		wxGauge* m_gCaptureStatus;
+		wxButton* m_bClose;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OnSchedulesLeftDown( wxMouseEvent& event ) { event.Skip(); }
+		virtual void OnSchedulesSort( wxListEvent& event ) { event.Skip(); }
+		virtual void OnFilter( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnBoatPosition( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnReset( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnAllStations( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnNoStations( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnFilter( wxSpinEvent& event ) { event.Skip(); }
+		virtual void OnAllFrequencies( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		
+		SchedulesDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Schedules"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 760,500 ), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER ); 
+		~SchedulesDialogBase();
 	
 };
 
@@ -208,6 +278,30 @@ class WeatherFaxPrefsDialog : public wxDialog
 		
 		WeatherFaxPrefsDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax Preferences"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxCAPTION|wxDEFAULT_DIALOG_STYLE ); 
 		~WeatherFaxPrefsDialog();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class AboutDialogBase
+///////////////////////////////////////////////////////////////////////////////
+class AboutDialogBase : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxStaticText* m_staticText110;
+		wxButton* m_bDonate;
+		wxButton* m_bClose;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OnDonate( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		
+		AboutDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("About Watchman"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
+		~AboutDialogBase();
 	
 };
 

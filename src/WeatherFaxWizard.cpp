@@ -10,7 +10,7 @@
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
+ *   the Free Software Foundation; either version 3 of the License, or     *
  *   (at your option) any later version.                                   *
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
@@ -43,7 +43,7 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img, FaxDecoder *decoder,
                               WeatherFaxImageCoordinateList &coords)
     : WeatherFaxWizardBase( &parent ), m_decoder(decoder), m_parent(parent),
       m_wfimg(img), m_curCoords(img.m_Coords),
-      m_Coords(coords)
+      m_Coords(coords), m_bChanged(true)
 {
     m_sPhasing->SetValue(m_wfimg.phasing);
     m_sSkew->SetValue(m_wfimg.skew);
@@ -97,9 +97,10 @@ WeatherFaxWizard::~WeatherFaxWizard()
     if(sel == -1)
         sel = m_SelectedIndex;
 
-    if(sel == 0 &&
+    if(/*sel == 0 &&
        (m_newCoords->lat1 || m_newCoords->lat2 ||
-        m_newCoords->lon1 || m_newCoords->lon2)) {
+       m_newCoords->lon1 || m_newCoords->lon2)*/
+        m_bChanged) {
         int cc = m_Coords.GetCount();
         wxString newname = m_newCoords->name, newnumberedname;
         for(int n=0, i=-1; i != cc; n++) {
@@ -620,7 +621,6 @@ void WeatherFaxWizard::OnCoordText( wxCommandEvent& event )
     else if(index != m_SelectedIndex)
         return;
 
-//    m_cbCoordSet->SetString(index, event.GetString());
     m_curCoords->name = event.GetString();
 }
 
@@ -783,6 +783,7 @@ void WeatherFaxWizard::SetCoords(int index)
 {
     m_cbCoordSet->SetSelection(index);
 
+#if 0
     if(index == 0) {
         m_curCoords = m_newCoords;
         m_bRemoveCoordSet->Disable();
@@ -790,6 +791,17 @@ void WeatherFaxWizard::SetCoords(int index)
         m_curCoords = m_Coords[index-1];
         m_bRemoveCoordSet->Enable();
     }
+#else
+        m_curCoords = m_newCoords;
+
+    if(index) {
+
+        WeatherFaxImageCoordinates c = *m_Coords[index-1];
+        *m_newCoords = c; /* copy data */
+        m_bChanged = false;
+    } else
+        m_bChanged = true;
+#endif
     m_SelectedIndex = index;
 
     m_cbCoordSet->SetValue(m_curCoords->name);

@@ -10,7 +10,7 @@
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
+ *   the Free Software Foundation; either version 3 of the License, or     *
  *   (at your option) any later version.                                   *
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
@@ -98,6 +98,7 @@ int weatherfax_pi::Init(void)
               WANTS_OPENGL_OVERLAY_CALLBACK |
               WANTS_TOOLBAR_CALLBACK    |
               INSTALLS_TOOLBAR_TOOL     |
+              WANTS_NMEA_EVENTS         |
               WANTS_PREFERENCES         |
               WANTS_CONFIG
            );
@@ -214,7 +215,9 @@ bool weatherfax_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
         return true;
 
     for(unsigned int i=0; i<m_pWeatherFaxDialog->m_lFaxes->GetCount(); i++)
-        if(m_pWeatherFaxDialog->m_lFaxes->IsChecked(i))
+        if(m_pWeatherFaxDialog->m_lFaxes->IsChecked(i) ||
+           (m_pWeatherFaxDialog->m_cbDisplaySelected->GetValue() &&
+            (int)i == m_pWeatherFaxDialog->m_lFaxes->GetSelection()))
             m_pWeatherFaxDialog->m_Faxes[i]->RenderImage(dc, vp);
 
     return true;
@@ -292,6 +295,11 @@ bool weatherfax_pi::SaveConfig(void)
             return false;
 }
 
+void weatherfax_pi::SetPositionFixEx(PlugIn_Position_Fix_Ex &pfix)
+{
+    m_lastfix = pfix;
+}
+
 void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
 {
     WeatherFaxPrefsDialog *dialog =
@@ -325,3 +333,4 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
     }
     delete dialog;
 }
+

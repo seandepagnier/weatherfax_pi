@@ -10,7 +10,7 @@
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
+ *   the Free Software Foundation; either version 3 of the License, or     *
  *   (at your option) any later version.                                   *
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
@@ -28,6 +28,7 @@
 #include <vector>
 
 #include "WeatherFaxUI.h"
+#include "SchedulesDialog.h"
 
 class weatherfax_pi;
 
@@ -38,15 +39,21 @@ public:
 
     ~WeatherFaxDialog();
 
+    void EnableDisplayControls(bool enable);
     void OnFaxes( wxCommandEvent& event );
     void OnFaxesToggled( wxCommandEvent& event );
+    void SchedulesClicked( wxCommandEvent& event );
     void CaptureFaxClicked( wxCommandEvent& event );
     void OpenFaxClicked( wxCommandEvent& event );
     void EditFaxClicked( wxCommandEvent& event );
     void DeleteFaxClicked( wxCommandEvent& event );
+    void OnAbout( wxCommandEvent& event );
     void TransparencyChanged( wxScrollEvent& event );
     void WhiteTransparencyChanged( wxScrollEvent& event );
     void OnInvert( wxCommandEvent& event );
+
+    void OpenWav(wxString filename);
+    void OpenImage(wxString filename);
 
     WeatherFaxImageCoordinateList m_Coords;
 
@@ -54,6 +61,8 @@ public:
 
 protected:
     void UpdateButtonStates();
+
+    SchedulesDialog m_SchedulesDialog;
 
     weatherfax_pi &m_weatherfax_pi;
 };

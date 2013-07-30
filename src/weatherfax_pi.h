@@ -10,7 +10,7 @@
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
+ *   the Free Software Foundation; either version 3 of the License, or     *
  *   (at your option) any later version.                                   *
  *                                                                         *
  *   This program is distributed in the hope that it will be useful,       *
@@ -37,7 +37,7 @@
 #include <wx/fileconf.h>
 
 #define     PLUGIN_VERSION_MAJOR    0
-#define     PLUGIN_VERSION_MINOR    7
+#define     PLUGIN_VERSION_MINOR    8
 
 #define     MY_API_VERSION_MAJOR    1
 #define     MY_API_VERSION_MINOR    8
@@ -58,6 +58,7 @@ class weatherfax_pi : public opencpn_plugin_18
 public:
       weatherfax_pi(void *ppimgr);
 
+      
 //    The required PlugIn Methods
       int Init(void);
       bool DeInit(void);
@@ -96,15 +97,19 @@ public:
       bool m_bSkipHeaderDetection, m_bIncludeHeadersInImage;
 
       wxFileConfig     *m_pconfig;
+
+      PlugIn_Position_Fix_Ex m_lastfix;
+
+      WeatherFaxDialog      *m_pWeatherFaxDialog;
+
 private:
       void ReadImageToRender(WeatherFaxImage *image);
 
       bool              LoadConfig(void);
       bool              SaveConfig(void);
 
+      void SetPositionFixEx(PlugIn_Position_Fix_Ex &pfix);
       void ShowPreferencesDialog( wxWindow* parent );
-
-      WeatherFaxDialog      *m_pWeatherFaxDialog;
 
       int               m_weatherfax_dialog_x, m_weatherfax_dialog_y;
       int               m_display_width, m_display_height;
