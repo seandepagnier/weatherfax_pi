@@ -123,6 +123,7 @@ class SchedulesDialogBase : public wxDialog
 		wxRadioButton* m_rbExternalCapture;
 		wxTextCtrl* m_tExternalCapture;
 		wxRadioButton* m_rbManualCapture;
+		wxRadioButton* m_rbNoAction;
 		wxStaticText* m_stCaptureStatus;
 		wxGauge* m_gCaptureStatus;
 		wxButton* m_bClose;
@@ -300,7 +301,7 @@ class AboutDialogBase : public wxDialog
 	
 	public:
 		
-		AboutDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("About Watchman"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
+		AboutDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("About Weatherfax"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
 		~AboutDialogBase();
 	
 };

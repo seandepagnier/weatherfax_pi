@@ -71,7 +71,8 @@ static const char * check_xpm[] = {
 
 SchedulesDialog::SchedulesDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
     : SchedulesDialogBase( parent ), m_weatherfax_pi(_weatherfax_pi),
-      m_ExternalCaptureProcess(NULL), m_bLoaded(false), m_bDisableFilter(false)
+      m_ExternalCaptureProcess(NULL), m_CurrentSchedule(NULL),
+      m_bLoaded(false), m_bDisableFilter(false), m_bKilling(false)
 {
 }
 
@@ -115,6 +116,7 @@ SchedulesDialog::~SchedulesDialog()
     pConf->Write ( _T ( "externalcapture" ), m_rbExternalCapture->GetValue() );
     pConf->Write ( _T ( "externalcapturecommand" ), m_tExternalCapture->GetValue() );
     pConf->Write ( _T ( "manualcapture" ), m_rbExternalCapture->GetValue() );
+    pConf->Write ( _T ( "noaction" ), m_rbNoAction->GetValue() );
 }
 
 void SchedulesDialog::Load()
@@ -129,7 +131,7 @@ void SchedulesDialog::Load()
     imglist->Add(wxBitmap(check_xpm));
     m_lSchedules->AssignImageList(imglist, wxIMAGE_LIST_SMALL);
 
-    m_lSchedules->InsertColumn(ENABLED, _("Capture"));
+    m_lSchedules->InsertColumn(CAPTURE, _("Capture"));
     m_lSchedules->InsertColumn(STATION, _("Station"));
     m_lSchedules->InsertColumn(FREQUENCY, _("Frequency"));
     m_lSchedules->InsertColumn(TIME, _("Time (UTC)"));
@@ -137,12 +139,15 @@ void SchedulesDialog::Load()
     m_lSchedules->InsertColumn(VALID_TIME, _("Valid Time"));
     m_lSchedules->InsertColumn(MAP_AREA, _("Map Area"));
 
-    m_Timer.Connect(wxEVT_TIMER, wxTimerEventHandler
-                    ( SchedulesDialog::OnTimer ), NULL, this);
-    m_Timer.Start(1000 * (60 - wxDateTime::Now().GetSecond()), true);
-
-    m_ExternalCaptureTimer.Connect(wxEVT_TIMER, wxTimerEventHandler
-                    ( SchedulesDialog::OnExternalCaptureTimer ), NULL, this);
+    m_AlarmTimer.Connect(wxEVT_TIMER, wxTimerEventHandler
+                    ( SchedulesDialog::OnAlarmTimer ), NULL, this);
+    m_CaptureTimer.Connect(wxEVT_TIMER, wxTimerEventHandler
+                    ( SchedulesDialog::OnCaptureTimer ), NULL, this);
+    m_EndCaptureTimer.Connect(wxEVT_TIMER, wxTimerEventHandler
+                    ( SchedulesDialog::OnEndCaptureTimer ), NULL, this);
+    m_ProgressTimer.Connect(wxEVT_TIMER, wxTimerEventHandler
+                    ( SchedulesDialog::OnProgressTimer ), NULL, this);
+    m_ProgressTimer.Start(30 * 1000, false);
 
     wxFileConfig *pConf = m_weatherfax_pi.m_pconfig;
 
@@ -201,6 +206,8 @@ void SchedulesDialog::Load()
     m_rbAlsaCapture->SetValue(b);
     pConf->Read ( _T ( "manualcapture" ), &b, true );
     m_rbExternalCapture->SetValue(b);
+    pConf->Read ( _T ( "noaction" ), &b, true );
+    m_rbNoAction->SetValue(b);
 
     s = wxFileName::GetPathSeparator();
     OpenXML(*GetpSharedDataLocation() + _T("plugins")
@@ -380,10 +387,13 @@ void SchedulesDialog::OnSchedulesLeftDown( wxMouseEvent& event )
         Schedule *schedule =
             reinterpret_cast<Schedule*>(wxUIntToPtr(m_lSchedules->GetItemData(index)));
         schedule->Capture = !schedule->Capture;
+        if(schedule->Capture)
+            AddScheduleToCapture(schedule);
+        else
+            RemoveScheduleToCapture(schedule);
 
         m_lSchedules->SetItemImage(index, schedule->Capture ? 0 : -1);
-
-        UpdateItem(index);
+//        UpdateItem(index);
     }
 
     // Allow wx to process...
@@ -430,10 +440,17 @@ void SchedulesDialog::OnSchedulesSort( wxListEvent& event )
     sortorder = -sortorder;
 
     if(sortcol == 0) {
+#if 0
+        m_CaptureSchedules.clear();
         for(std::list<Schedule*>::iterator it = m_Schedules.begin();
-            it != m_Schedules.end(); it++)
+            it != m_Schedules.end(); it++) {
             (*it)->Capture = sortorder == 1;
+            if(sortorder == 1)
+                m_CaptureSchedules.push_back(*it);
+        }
+
         RebuildList();
+#endif
     } else
         if(m_lSchedules->GetItemCount() > 500)  {
             wxMessageDialog mdlg(this, _("Sorting this many schedules might take too long"),
@@ -545,7 +562,7 @@ void SchedulesDialog::UpdateItem(long index)
         (wxUIntToPtr(m_lSchedules->GetItemData(index)));
 
     m_lSchedules->SetItemImage(index, schedule->Capture ? 0 : -1);
-//    m_lWeatherRoutes->SetColumnWidth(ENABLED, 20);
+    m_lSchedules->SetColumnWidth(CAPTURE, 50);
 
     m_lSchedules->SetItem(index, STATION, schedule->Station);
     m_lSchedules->SetColumnWidth(STATION, 100 /*wxLIST_AUTOSIZE*/);
@@ -556,107 +573,197 @@ void SchedulesDialog::UpdateItem(long index)
     m_lSchedules->SetItem(index, TIME, wxString::Format(_T("%04d"),schedule->Time));
 
     m_lSchedules->SetItem(index, CONTENTS, schedule->Contents);
-    m_lSchedules->SetColumnWidth(CONTENTS, 250 /*wxLIST_AUTOSIZE*/);
+    m_lSchedules->SetColumnWidth(CONTENTS, 350 /*wxLIST_AUTOSIZE*/);
 
     m_lSchedules->SetItem(index, VALID_TIME, wxString::Format(_T("%02d"), schedule->ValidTime));
     m_lSchedules->SetItem(index, MAP_AREA, schedule->area.AreaDescription());
-//    m_lSchedules->SetColumnWidth(MAP_AREA, wxLIST_AUTOSIZE);
+    m_lSchedules->SetColumnWidth(MAP_AREA, 150);
 }
 
-void SchedulesDialog::OnTimer( wxTimerEvent & )
+void SchedulesDialog::AddScheduleToCapture(Schedule *s)
+
 {
-    m_stCaptureStatus->SetLabel(_T(""));
-
-    for(std::list<Schedule*>::iterator it = m_Schedules.begin();
-        it != m_Schedules.end(); it++) {
-        if(!(*it)->Capture)
-            continue;
-
-        wxDateTime t((*it)->Time/100, (*it)->Time%100);
-        
-        int seconds = (wxDateTime::Now().ToUTC() - t).GetSeconds().ToLong();
-        if(seconds > -60) {
-            /* in progress */
-            if(seconds >= 0 && seconds < (*it)->duration*60) {
-                wxString l = _("Capturing current fax ")
-                                            + (*it)->Contents + _T(" at ") + 
-                    wxString::Format(_T("%.1f khz"), (*it)->Frequency);
-                if(m_stCaptureStatus->GetLabel() != l) {
-                    m_stCaptureStatus->SetLabel(l);
-                    Fit();
-                }
-
-                m_gCaptureStatus->SetRange((*it)->duration*60);
-                m_gCaptureStatus->SetValue(seconds);
-            }
-
-            /* about to start */
-            if(seconds < 0) {
-                if(m_rbExternalCapture->GetValue()) {
-                    if(m_ExternalCaptureProcess) {
-                        wxMessageDialog mdlg(this, _("Already capturing, cannot capture: ") + (*it)->Contents,
-                                             _("weatherfax"), wxOK | wxICON_ERROR);
-                        mdlg.ShowModal();
-                    } else {
-                        m_ExternalCaptureFilename = wxFileName::CreateTempFileName(_T("OCPNWFCapture"));
-                        wxString command = m_tExternalCapture->GetValue()
-                            + _T(" ") + m_ExternalCaptureFilename;
-                        
-                        if((m_ExternalCaptureProcess = wxProcess::Open(command))) {
-                            m_ExternalCaptureProcess->Connect(wxEVT_END_PROCESS, wxProcessEventHandler
-                                                              ( SchedulesDialog::OnTerminate ), NULL, this);
-                            m_ExternalCaptureTimer.Start(1000 * 60 * (*it)->duration);
-                        } else {
-                            wxMessageDialog mdlg(this, _("Failed to launch: ") + command,
-                                                 _("weatherfax"), wxOK | wxICON_ERROR);
-                            mdlg.ShowModal();
-                        }
+    int start = s->StartSeconds(), end = start + s->duration*60;
+    std::list<Schedule*>::iterator it, itp = m_CaptureSchedules.end();
+    for(it = m_CaptureSchedules.begin(); it != m_CaptureSchedules.end();) {
+        int itstart = (*it)->StartSeconds(), itend = itstart + (*it)->duration*60;
+        if(end > itstart && start < itend) {
+            wxMessageDialog mdlg(this, _("Capturing fax: ") + s->Contents +
+                                 _(" Conflicts with already scheduled fax: ") + (*it)->Contents +
+                                 _(" disable this fax? "),
+                                 _("weatherfax schedules"), wxYES_NO | wxICON_WARNING);
+            if(mdlg.ShowModal() == wxID_YES) {
+                (*it)->Capture = false;
+                for(long i=0; i<m_lSchedules->GetItemCount(); i++) {
+                    Schedule *schedule = reinterpret_cast<Schedule*>
+                        (wxUIntToPtr(m_lSchedules->GetItemData(i)));
+                    if(schedule == *it) {
+                        m_lSchedules->SetItemImage(i, -1);
+                        break;
                     }
                 }
-                break;
-            /* will start in a minute or so */
-            } else if(seconds <= 60) {
-                if(m_cbExternalAlarm->GetValue())
-                    wxProcess::Open(m_tExternalAlarmCommand->GetValue());
+                it = m_CaptureSchedules.erase(it);
+                continue;
+            } else {
+                s->Capture = false;
+                return;
+            }
+        }
 
-                if(m_cbMessageBox->GetValue()) {
-                    wxMessageDialog mdlg(this, _("Tune ssb radio to") +
-                                         wxString::Format(_T(" %.1f khz "), (*it)->Frequency - 1.9)
-                                         + _("to recieve fax for") + _T(" ") + (*it)->Contents,
-                                         _("Weather Fax Schedule Beginning Soon"), wxOK);
-                    mdlg.ShowModal();
-                }
-                break;
+        if(start < itstart) {
+            if(itp == m_CaptureSchedules.end())
+                itp = it;
+        }
+        it++;
+    }
+
+    m_CaptureSchedules.insert(itp, s);
+    if(s == m_CaptureSchedules.front())
+        UpdateTimer();
+}
+
+void SchedulesDialog::RemoveScheduleToCapture(Schedule *s)
+{
+    for(std::list<Schedule*>::iterator it = m_CaptureSchedules.begin();
+        it != m_CaptureSchedules.end(); it++)
+        if(*it == s) {
+            if(m_CaptureSchedules.erase(it) == m_CaptureSchedules.begin())
+                UpdateTimer();
+            break;
+        }
+}
+
+void SchedulesDialog::UpdateTimer()
+{
+    if(m_CaptureSchedules.size() == 0) {
+        m_AlarmTimer.Stop();
+        m_CaptureTimer.Stop();
+    } else {
+        Schedule *s = m_CaptureSchedules.front();
+        m_AlarmTimer.Start(1000 * (s->StartSeconds() - 60), true);
+        m_CaptureTimer.Start(1000 * (s->StartSeconds() - 0), true);
+    }
+}
+
+void SchedulesDialog::UpdateProgress()
+{
+    Schedule *s = m_CurrentSchedule;
+    if(!s) {
+        m_stCaptureStatus->SetLabel(_T(""));
+        m_gCaptureStatus->SetValue(0);
+    } else {
+        wxString l = _("Current fax: ") + s->Contents + _T(" on ") + 
+            wxString::Format(_T("%.1f khz"), s->Frequency);
+        if(m_stCaptureStatus->GetLabel() != l) {
+            m_stCaptureStatus->SetLabel(l);
+            Fit();
+        }
+
+        int seconds = s->Seconds(), range = s->duration*60;
+        if(seconds >= range)
+            seconds = range-1;
+        m_gCaptureStatus->SetRange(range);
+        m_gCaptureStatus->SetValue(seconds);
+    }
+}
+
+void SchedulesDialog::OnAlarmTimer( wxTimerEvent & )
+{
+    Schedule *s = m_CaptureSchedules.front();
+    if(m_cbExternalAlarm->GetValue())
+        wxProcess::Open(m_tExternalAlarmCommand->GetValue());
+    
+    if(m_cbMessageBox->GetValue()) {
+        wxMessageDialog mdlg(this, _("Tune ssb radio to") +
+                             wxString::Format(_T(" %.1f khz "), s->Frequency - 1.9)
+                             + _("to receive fax for") + _T(" ") + s->Contents,
+                             _("Weather Fax Schedule Beginning Soon"), wxOK);
+        mdlg.ShowModal();
+    }
+}
+
+void SchedulesDialog::OnCaptureTimer( wxTimerEvent & )
+{
+    if(m_CurrentSchedule) {
+        wxMessageDialog mdlg(this, _("Already capturing, cannot capture: ") +
+                             m_CaptureSchedules.front()->Contents, _("weatherfax"), wxOK | wxICON_ERROR);
+        mdlg.ShowModal();
+        return;
+    }
+
+    m_CurrentSchedule = m_CaptureSchedules.front();
+    m_CaptureSchedules.pop_front();
+
+    m_EndCaptureTimer.Start(1000 * 60 * m_CurrentSchedule->duration);
+
+    if(m_rbExternalCapture->GetValue()) {
+        if(m_ExternalCaptureProcess) {
+            wxMessageDialog mdlg(this, _("Already capturing, cannot capture: ") +
+                                 m_CurrentSchedule->Contents, _("weatherfax"), wxOK | wxICON_ERROR);
+            mdlg.ShowModal();
+        } else {
+            m_ExternalCaptureFilename = wxFileName::CreateTempFileName(_T("OCPNWFCapture"));
+            wxString command = m_tExternalCapture->GetValue()
+                + _T(" ") + m_ExternalCaptureFilename;
+                        
+            if((m_ExternalCaptureProcess = wxProcess::Open(command))) {
+                m_ExternalCaptureProcess->Connect(wxEVT_END_PROCESS, wxProcessEventHandler
+                                                  ( SchedulesDialog::OnTerminate ), NULL, this);
+            } else {
+                wxMessageDialog mdlg(this, _("Failed to launch: ") + command,
+                                     _("weatherfax"), wxOK | wxICON_ERROR);
+                mdlg.ShowModal();
             }
         }
     }
+    UpdateTimer();
+    UpdateProgress();
+}
 
-    m_Timer.Start(1000 * (60 - wxDateTime::Now().GetSecond()), true);
+void SchedulesDialog::OnEndCaptureTimer( wxTimerEvent & )
+{
+    StopExternalProcess();
+    if(m_rbExternalCapture->GetValue()) {
+        m_weatherfax_pi.m_pWeatherFaxDialog->OpenWav(m_ExternalCaptureFilename);
+    } else if(m_rbManualCapture->GetValue()) {
+        wxFileDialog openDialog( this, _( "Open Weather Fax Input File" ),
+                                 m_weatherfax_pi.m_path, wxT ( "" ),
+                                 _ ( "WAV files (*.wav)|*.WAV;*.wav|All files (*.*)|*.*" ), wxFD_OPEN);
+        m_weatherfax_pi.m_path = openDialog.GetDirectory();        
+        wxString filename = openDialog.GetPath();
+        m_weatherfax_pi.m_pWeatherFaxDialog->OpenWav(filename);
+    }
+    m_weatherfax_pi.m_pWeatherFaxDialog->UpdateButtonStates();
+
+    m_CaptureSchedules.push_back(m_CurrentSchedule);
+    m_CurrentSchedule = NULL;
+    UpdateTimer();
+}
+
+void SchedulesDialog::OnProgressTimer( wxTimerEvent & )
+{
+    UpdateProgress();
 }
 
 void SchedulesDialog::OnTerminate(wxProcessEvent& event)
 {
     if(event.GetPid() == m_ExternalCaptureProcess->GetPid()) {
-        if(event.GetExitCode()) {
+        if(!m_bKilling) {
             wxMessageDialog mdlg(this, _("External Capture Execution failed"),
-                                 _("rtlsdr"), wxOK | wxICON_ERROR);
+                                 _("weatherfax"), wxOK | wxICON_ERROR);
             mdlg.ShowModal();
         }
         m_ExternalCaptureProcess = NULL;
     }
 }
 
-void SchedulesDialog::OnExternalCaptureTimer( wxTimerEvent & )
-{
-    StopExternalProcess();
-    m_weatherfax_pi.m_pWeatherFaxDialog->OpenWav(m_ExternalCaptureFilename);
-}
-
 void SchedulesDialog::StopExternalProcess()
 {
     int pid = m_ExternalCaptureProcess->GetPid();
+    m_bKilling = true;
     wxProcess::Kill(pid);
     wxThread::Sleep(10);
     if(wxProcess::Exists(pid))
         wxProcess::Kill(pid, wxSIGKILL);
+    m_bKilling = false;
 }

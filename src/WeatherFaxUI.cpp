@@ -325,7 +325,7 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	m_panel2->SetSizer( fgSizer31 );
 	m_panel2->Layout();
 	fgSizer31->Fit( m_panel2 );
-	m_notebook1->AddPage( m_panel2, _("1 minute prior"), false );
+	m_notebook1->AddPage( m_panel2, _("1 minute alarm"), false );
 	m_panel3 = new wxPanel( m_notebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer30;
 	fgSizer30 = new wxFlexGridSizer( 0, 1, 0, 0 );
@@ -353,8 +353,11 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	
 	fgSizer30->Add( fgSizer32, 1, wxEXPAND, 5 );
 	
-	m_rbManualCapture = new wxRadioButton( m_panel3, wxID_ANY, _("Manual Capture with external program"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_rbManualCapture = new wxRadioButton( m_panel3, wxID_ANY, _("Manual Capture with external program Open File When Done"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer30->Add( m_rbManualCapture, 0, wxALL, 5 );
+	
+	m_rbNoAction = new wxRadioButton( m_panel3, wxID_ANY, _("No Action"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer30->Add( m_rbNoAction, 0, wxALL, 5 );
 	
 	
 	m_panel3->SetSizer( fgSizer30 );

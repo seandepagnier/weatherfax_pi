@@ -55,12 +55,13 @@ public:
     void OpenWav(wxString filename);
     void OpenImage(wxString filename);
 
+    void UpdateButtonStates();
+
     WeatherFaxImageCoordinateList m_Coords;
 
     std::vector<WeatherFaxImage*>m_Faxes;
 
 protected:
-    void UpdateButtonStates();
 
     SchedulesDialog m_SchedulesDialog;
 
