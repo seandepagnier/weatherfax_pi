@@ -39,11 +39,13 @@ WeatherFaxImageCoordinates(wxString n) : name(n),
     wxPoint p1, p2;
     double lat1, lon1, lat2, lon2;
 
-    enum MapType {MERCATOR, POLAR, CONIC, FIXED_FLAT};
+    enum MapType {MERCATOR, POLAR, CONIC, FIXED_FLAT, MAP_TYPES};
     MapType mapping;
     wxPoint inputpole;
     double inputequator, /* y value */ inputtrueratio;
     double mappingmultiplier, mappingratio;
+
+    wxString Station, Area;
 
 /*
   (p1.x - x) / (lat1 - lat(x)) = (p2.x - p1.x) / (lat2 - lat1)
@@ -51,6 +53,9 @@ WeatherFaxImageCoordinates(wxString n) : name(n),
   lat(x) = lat1 - (p1.x - x) * (lat2 - lat1) / (p2.x - p1.x)
 */
     double lon(int x) { return lon1 - (p1.x - x) * (lon2 - lon1) / (p2.x - p1.x); }
+
+    static wxString MapName(enum MapType type);
+    static MapType GetMapType(wxString name);
 };
 
 #include <wx/listimpl.cpp>

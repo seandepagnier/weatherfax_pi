@@ -9,9 +9,9 @@
 
 ///////////////////////////////////////////////////////////////////////////
 
-WeatherFaxDialogBase::WeatherFaxDialogBase( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxFrame( parent, id, title, pos, size, style )
 {
-	this->SetSizeHints( wxSize( -1,-1 ), wxSize( -1,-1 ) );
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
 	wxFlexGridSizer* fgSizer8;
 	fgSizer8 = new wxFlexGridSizer( 2, 1, 0, 0 );
@@ -37,24 +37,6 @@ WeatherFaxDialogBase::WeatherFaxDialogBase( wxWindow* parent, wxWindowID id, con
 	fgSizer16 = new wxFlexGridSizer( 2, 0, 0, 0 );
 	fgSizer16->SetFlexibleDirection( wxBOTH );
 	fgSizer16->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-	
-	m_bSchedules = new wxButton( this, wxID_ANY, _("Schedules"), wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer16->Add( m_bSchedules, 0, wxALL, 5 );
-	
-	m_bCapture = new wxButton( this, wxID_ANY, _("Capture"), wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer16->Add( m_bCapture, 0, wxALL, 5 );
-	
-	m_bOpen = new wxButton( this, wxID_ANY, _("Open"), wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer16->Add( m_bOpen, 0, wxALL, 5 );
-	
-	m_bEdit = new wxButton( this, wxID_ANY, _("Edit"), wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer16->Add( m_bEdit, 0, wxALL, 5 );
-	
-	m_bDelete = new wxButton( this, wxID_ANY, _("Delete"), wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer16->Add( m_bDelete, 0, wxALL, 5 );
-	
-	m_bAbout = new wxButton( this, wxID_ANY, _("About"), wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer16->Add( m_bAbout, 0, wxALL, 5 );
 	
 	
 	fgSizer7->Add( fgSizer16, 1, wxEXPAND, 5 );
@@ -94,70 +76,117 @@ WeatherFaxDialogBase::WeatherFaxDialogBase( wxWindow* parent, wxWindowID id, con
 	
 	this->SetSizer( fgSizer8 );
 	this->Layout();
-	fgSizer8->Fit( this );
+	m_menubar1 = new wxMenuBar( 0 );
+	m_menu1 = new wxMenu();
+	wxMenuItem* m_menuItem1;
+	m_menuItem1 = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("Open") ) + wxT('\t') + wxT("Ctrl+o"), wxEmptyString, wxITEM_NORMAL );
+	m_menu1->Append( m_menuItem1 );
+	
+	m_mEdit = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("Edit") ) + wxT('\t') + wxT("Ctrl+e"), wxEmptyString, wxITEM_NORMAL );
+	m_menu1->Append( m_mEdit );
+	
+	m_mDelete = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("Delete") ) + wxT('\t') + wxT("Ctrl+d"), wxEmptyString, wxITEM_NORMAL );
+	m_menu1->Append( m_mDelete );
+	
+	m_menu1->AppendSeparator();
+	
+	wxMenuItem* m_menuItem4;
+	m_menuItem4 = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("OnClose") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menu1->Append( m_menuItem4 );
+	
+	m_menubar1->Append( m_menu1, _("File") ); 
+	
+	m_menu2 = new wxMenu();
+	wxMenuItem* m_menuItem8;
+	m_menuItem8 = new wxMenuItem( m_menu2, wxID_ANY, wxString( _("Capture") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menu2->Append( m_menuItem8 );
+	
+	wxMenuItem* m_menuItem5;
+	m_menuItem5 = new wxMenuItem( m_menu2, wxID_ANY, wxString( _("HF Schedules") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menu2->Append( m_menuItem5 );
+	
+	wxMenuItem* m_menuItem6;
+	m_menuItem6 = new wxMenuItem( m_menu2, wxID_ANY, wxString( _("Internet") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menu2->Append( m_menuItem6 );
+	
+	m_menubar1->Append( m_menu2, _("Retrieve") ); 
+	
+	m_menu3 = new wxMenu();
+	wxMenuItem* m_menuItem7;
+	m_menuItem7 = new wxMenuItem( m_menu3, wxID_ANY, wxString( _("About") ) + wxT('\t') + wxT("F1"), wxEmptyString, wxITEM_NORMAL );
+	m_menu3->Append( m_menuItem7 );
+	
+	m_menubar1->Append( m_menu3, _("Help") ); 
+	
+	this->SetMenuBar( m_menubar1 );
+	
 	
 	this->Centre( wxBOTH );
 	
 	// Connect Events
-	m_lFaxes->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( WeatherFaxDialogBase::OnFaxes ), NULL, this );
-	m_lFaxes->Connect( wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, wxCommandEventHandler( WeatherFaxDialogBase::OnFaxesToggled ), NULL, this );
-	m_bSchedules->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::SchedulesClicked ), NULL, this );
-	m_bCapture->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::CaptureFaxClicked ), NULL, this );
-	m_bOpen->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::OpenFaxClicked ), NULL, this );
-	m_bEdit->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::EditFaxClicked ), NULL, this );
-	m_bDelete->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::DeleteFaxClicked ), NULL, this );
-	m_bAbout->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::OnAbout ), NULL, this );
-	m_sTransparency->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
-	m_sTransparency->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
-	m_sTransparency->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
-	m_sTransparency->Connect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
-	m_sTransparency->Connect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
-	m_sTransparency->Connect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
-	m_sTransparency->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
-	m_sTransparency->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
-	m_sTransparency->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
-	m_sWhiteTransparency->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
-	m_sWhiteTransparency->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
-	m_sWhiteTransparency->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
-	m_sWhiteTransparency->Connect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
-	m_sWhiteTransparency->Connect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
-	m_sWhiteTransparency->Connect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
-	m_sWhiteTransparency->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
-	m_sWhiteTransparency->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
-	m_sWhiteTransparency->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
-	m_cInvert->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::OnInvert ), NULL, this );
+	m_lFaxes->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnFaxes ), NULL, this );
+	m_lFaxes->Connect( wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, wxCommandEventHandler( WeatherFaxBase::OnFaxesToggled ), NULL, this );
+	m_sTransparency->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
+	m_sTransparency->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
+	m_sTransparency->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
+	m_sTransparency->Connect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
+	m_sTransparency->Connect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
+	m_sTransparency->Connect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
+	m_sTransparency->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
+	m_sTransparency->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
+	m_sTransparency->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( WeatherFaxBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( WeatherFaxBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Connect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( WeatherFaxBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Connect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( WeatherFaxBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Connect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( WeatherFaxBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( WeatherFaxBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( WeatherFaxBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( WeatherFaxBase::WhiteTransparencyChanged ), NULL, this );
+	m_cInvert->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( WeatherFaxBase::OnInvert ), NULL, this );
+	this->Connect( m_menuItem1->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnOpen ) );
+	this->Connect( m_mEdit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnEdit ) );
+	this->Connect( m_mDelete->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnDelete ) );
+	this->Connect( m_menuItem4->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnClose ) );
+	this->Connect( m_menuItem8->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnCapture ) );
+	this->Connect( m_menuItem5->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnSchedules ) );
+	this->Connect( m_menuItem6->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnInternet ) );
+	this->Connect( m_menuItem7->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnAbout ) );
 }
 
-WeatherFaxDialogBase::~WeatherFaxDialogBase()
+WeatherFaxBase::~WeatherFaxBase()
 {
 	// Disconnect Events
-	m_lFaxes->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( WeatherFaxDialogBase::OnFaxes ), NULL, this );
-	m_lFaxes->Disconnect( wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, wxCommandEventHandler( WeatherFaxDialogBase::OnFaxesToggled ), NULL, this );
-	m_bSchedules->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::SchedulesClicked ), NULL, this );
-	m_bCapture->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::CaptureFaxClicked ), NULL, this );
-	m_bOpen->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::OpenFaxClicked ), NULL, this );
-	m_bEdit->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::EditFaxClicked ), NULL, this );
-	m_bDelete->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::DeleteFaxClicked ), NULL, this );
-	m_bAbout->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::OnAbout ), NULL, this );
-	m_sTransparency->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
-	m_sTransparency->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
-	m_sTransparency->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
-	m_sTransparency->Disconnect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
-	m_sTransparency->Disconnect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
-	m_sTransparency->Disconnect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
-	m_sTransparency->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
-	m_sTransparency->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
-	m_sTransparency->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( WeatherFaxDialogBase::TransparencyChanged ), NULL, this );
-	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
-	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
-	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
-	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
-	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
-	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
-	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
-	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
-	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( WeatherFaxDialogBase::WhiteTransparencyChanged ), NULL, this );
-	m_cInvert->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( WeatherFaxDialogBase::OnInvert ), NULL, this );
+	m_lFaxes->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnFaxes ), NULL, this );
+	m_lFaxes->Disconnect( wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, wxCommandEventHandler( WeatherFaxBase::OnFaxesToggled ), NULL, this );
+	m_sTransparency->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
+	m_sTransparency->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
+	m_sTransparency->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
+	m_sTransparency->Disconnect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
+	m_sTransparency->Disconnect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
+	m_sTransparency->Disconnect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
+	m_sTransparency->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
+	m_sTransparency->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
+	m_sTransparency->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( WeatherFaxBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( WeatherFaxBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_LINEDOWN, wxScrollEventHandler( WeatherFaxBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_PAGEUP, wxScrollEventHandler( WeatherFaxBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_PAGEDOWN, wxScrollEventHandler( WeatherFaxBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( WeatherFaxBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( WeatherFaxBase::WhiteTransparencyChanged ), NULL, this );
+	m_sWhiteTransparency->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( WeatherFaxBase::WhiteTransparencyChanged ), NULL, this );
+	m_cInvert->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( WeatherFaxBase::OnInvert ), NULL, this );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnOpen ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnEdit ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnDelete ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnClose ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnCapture ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnSchedules ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnInternet ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnAbout ) );
 	
 }
 
@@ -173,6 +202,8 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	fgSizer25->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
 	m_lSchedules = new wxListCtrl( this, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), wxLC_REPORT );
+	m_lSchedules->SetMinSize( wxSize( -1,160 ) );
+	
 	fgSizer25->Add( m_lSchedules, 0, wxALL|wxEXPAND, 5 );
 	
 	m_notebook1 = new wxNotebook( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
@@ -376,7 +407,7 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	fgSizer34->SetFlexibleDirection( wxBOTH );
 	fgSizer34->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_stCaptureStatus = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 250,-1 ), 0 );
+	m_stCaptureStatus = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 350,-1 ), 0 );
 	m_stCaptureStatus->Wrap( -1 );
 	fgSizer34->Add( m_stCaptureStatus, 0, wxALL, 5 );
 	
@@ -396,6 +427,7 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	
 	this->SetSizer( fgSizer25 );
 	this->Layout();
+	fgSizer25->Fit( this );
 	
 	this->Centre( wxBOTH );
 	
@@ -435,6 +467,172 @@ SchedulesDialogBase::~SchedulesDialogBase()
 	m_cbHasArea->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( SchedulesDialogBase::OnFilter ), NULL, this );
 	m_cbHasValidTime->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( SchedulesDialogBase::OnFilter ), NULL, this );
 	m_bClose->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( SchedulesDialogBase::OnClose ), NULL, this );
+	
+}
+
+InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	wxFlexGridSizer* fgSizer38;
+	fgSizer38 = new wxFlexGridSizer( 0, 1, 0, 0 );
+	fgSizer38->SetFlexibleDirection( wxBOTH );
+	fgSizer38->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_notebook2 = new wxNotebook( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
+	m_panel4 = new wxPanel( m_notebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxFlexGridSizer* fgSizer39;
+	fgSizer39 = new wxFlexGridSizer( 0, 1, 0, 0 );
+	fgSizer39->AddGrowableCol( 0 );
+	fgSizer39->AddGrowableRow( 0 );
+	fgSizer39->SetFlexibleDirection( wxBOTH );
+	fgSizer39->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_lUrls = new wxListCtrl( m_panel4, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT );
+	fgSizer39->Add( m_lUrls, 0, wxALL|wxEXPAND, 5 );
+	
+	wxFlexGridSizer* fgSizer42;
+	fgSizer42 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer42->SetFlexibleDirection( wxBOTH );
+	fgSizer42->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	wxStaticBoxSizer* sbSizer10;
+	sbSizer10 = new wxStaticBoxSizer( new wxStaticBox( m_panel4, wxID_ANY, _("Contains") ), wxVERTICAL );
+	
+	wxFlexGridSizer* fgSizer27;
+	fgSizer27 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer27->SetFlexibleDirection( wxBOTH );
+	fgSizer27->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_staticText24 = new wxStaticText( m_panel4, wxID_ANY, _("Lat"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText24->Wrap( -1 );
+	fgSizer27->Add( m_staticText24, 0, wxALL, 5 );
+	
+	m_tContainsLat = new wxTextCtrl( m_panel4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer27->Add( m_tContainsLat, 0, wxALL, 5 );
+	
+	m_staticText25 = new wxStaticText( m_panel4, wxID_ANY, _("Lon"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText25->Wrap( -1 );
+	fgSizer27->Add( m_staticText25, 0, wxALL, 5 );
+	
+	m_tContainsLon = new wxTextCtrl( m_panel4, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer27->Add( m_tContainsLon, 0, wxALL, 5 );
+	
+	m_bBoatPosition = new wxButton( m_panel4, wxID_ANY, _("Boat Position"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer27->Add( m_bBoatPosition, 0, wxALL, 5 );
+	
+	m_bReset = new wxButton( m_panel4, wxID_ANY, _("Reset"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer27->Add( m_bReset, 0, wxALL, 5 );
+	
+	
+	sbSizer10->Add( fgSizer27, 1, wxEXPAND, 5 );
+	
+	
+	fgSizer42->Add( sbSizer10, 1, wxEXPAND, 5 );
+	
+	wxStaticBoxSizer* sbSizer12;
+	sbSizer12 = new wxStaticBoxSizer( new wxStaticBox( m_panel4, wxID_ANY, _("Stations") ), wxVERTICAL );
+	
+	wxFlexGridSizer* fgSizer28;
+	fgSizer28 = new wxFlexGridSizer( 0, 1, 0, 0 );
+	fgSizer28->AddGrowableCol( 0 );
+	fgSizer28->SetFlexibleDirection( wxBOTH );
+	fgSizer28->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_lStations = new wxListBox( m_panel4, wxID_ANY, wxDefaultPosition, wxSize( 150,60 ), 0, NULL, wxLB_MULTIPLE ); 
+	fgSizer28->Add( m_lStations, 0, wxALL|wxEXPAND, 5 );
+	
+	wxFlexGridSizer* fgSizer29;
+	fgSizer29 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer29->SetFlexibleDirection( wxBOTH );
+	fgSizer29->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_bAll = new wxButton( m_panel4, wxID_ANY, _("All"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer29->Add( m_bAll, 0, wxALL, 5 );
+	
+	m_bNone = new wxButton( m_panel4, wxID_ANY, _("None"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer29->Add( m_bNone, 0, wxALL, 5 );
+	
+	
+	fgSizer28->Add( fgSizer29, 1, wxEXPAND, 5 );
+	
+	
+	sbSizer12->Add( fgSizer28, 1, wxEXPAND, 5 );
+	
+	
+	fgSizer42->Add( sbSizer12, 1, wxEXPAND, 5 );
+	
+	
+	fgSizer39->Add( fgSizer42, 1, wxEXPAND, 5 );
+	
+	
+	m_panel4->SetSizer( fgSizer39 );
+	m_panel4->Layout();
+	fgSizer39->Fit( m_panel4 );
+	m_notebook2->AddPage( m_panel4, _("Url"), true );
+	m_panel5 = new wxPanel( m_notebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxFlexGridSizer* fgSizer48;
+	fgSizer48 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer48->SetFlexibleDirection( wxBOTH );
+	fgSizer48->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_staticText34 = new wxStaticText( m_panel5, wxID_ANY, _("Not Implemented"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText34->Wrap( -1 );
+	fgSizer48->Add( m_staticText34, 0, wxALL, 5 );
+	
+	
+	m_panel5->SetSizer( fgSizer48 );
+	m_panel5->Layout();
+	fgSizer48->Fit( m_panel5 );
+	m_notebook2->AddPage( m_panel5, _("Email"), false );
+	
+	fgSizer38->Add( m_notebook2, 1, wxEXPAND | wxALL, 5 );
+	
+	wxFlexGridSizer* fgSizer40;
+	fgSizer40 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer40->SetFlexibleDirection( wxBOTH );
+	fgSizer40->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_bRetrieve = new wxButton( this, wxID_ANY, _("Retrieve"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer40->Add( m_bRetrieve, 0, wxALL, 5 );
+	
+	m_bClose = new wxButton( this, wxID_ANY, _("Close"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer40->Add( m_bClose, 0, wxALL, 5 );
+	
+	
+	fgSizer38->Add( fgSizer40, 1, wxEXPAND, 5 );
+	
+	
+	this->SetSizer( fgSizer38 );
+	this->Layout();
+	fgSizer38->Fit( this );
+	
+	this->Centre( wxBOTH );
+	
+	// Connect Events
+	m_tContainsLat->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
+	m_tContainsLon->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
+	m_bBoatPosition->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnBoatPosition ), NULL, this );
+	m_bReset->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnReset ), NULL, this );
+	m_lStations->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
+	m_bAll->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnAllStations ), NULL, this );
+	m_bNone->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnNoStations ), NULL, this );
+	m_bRetrieve->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
+	m_bClose->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnClose ), NULL, this );
+}
+
+InternetRetrievalDialogBase::~InternetRetrievalDialogBase()
+{
+	// Disconnect Events
+	m_tContainsLat->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
+	m_tContainsLon->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
+	m_bBoatPosition->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnBoatPosition ), NULL, this );
+	m_bReset->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnReset ), NULL, this );
+	m_lStations->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
+	m_bAll->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnAllStations ), NULL, this );
+	m_bNone->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnNoStations ), NULL, this );
+	m_bRetrieve->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
+	m_bClose->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnClose ), NULL, this );
 	
 }
 

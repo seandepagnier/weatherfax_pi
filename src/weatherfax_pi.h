@@ -37,7 +37,7 @@
 #include <wx/fileconf.h>
 
 #define     PLUGIN_VERSION_MAJOR    0
-#define     PLUGIN_VERSION_MINOR    8
+#define     PLUGIN_VERSION_MINOR    9
 
 #define     MY_API_VERSION_MAJOR    1
 #define     MY_API_VERSION_MINOR    8
@@ -51,7 +51,7 @@
 #define WEATHERFAX_TOOL_POSITION    -1          // Request default positioning of toolbar tool
 
 class WeatherFaxImage;
-class WeatherFaxDialog;
+class WeatherFax;
 
 class weatherfax_pi : public opencpn_plugin_18
 {
@@ -83,10 +83,12 @@ public:
       void SetColorScheme(PI_ColorScheme cs);
 
 //    Other public methods
-      void SetWeatherFaxDialogX    (int x){ m_weatherfax_dialog_x = x;};
-      void SetWeatherFaxDialogY    (int x){ m_weatherfax_dialog_y = x;}
+      void SetWeatherFaxX    (int x){ m_weatherfax_dialog_x = x;}
+      void SetWeatherFaxY    (int x){ m_weatherfax_dialog_y = x;}
 
-      void OnWeatherFaxDialogClose();
+      void OnWeatherFaxClose();
+
+      static wxString StandardPath();
 
       wxWindow         *m_parent_window;
 
@@ -100,7 +102,7 @@ public:
 
       PlugIn_Position_Fix_Ex m_lastfix;
 
-      WeatherFaxDialog      *m_pWeatherFaxDialog;
+      WeatherFax      *m_pWeatherFax;
 
 private:
       void ReadImageToRender(WeatherFaxImage *image);

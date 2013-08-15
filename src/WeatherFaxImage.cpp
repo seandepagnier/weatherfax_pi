@@ -36,6 +36,28 @@
 #include "WeatherFaxImage.h"
 WX_DEFINE_LIST(WeatherFaxImageCoordinateList);
 
+wxString WeatherFaxImageCoordinates::MapName(MapType type)
+{
+    switch(type) {
+    case MERCATOR:   return _T("Mercator");
+    case POLAR:      return _T("Polar");
+    case CONIC:      return _T("Conic");
+    case FIXED_FLAT: return _T("FixedFlat");
+    default: break;
+    }
+    return _T("");
+}
+
+WeatherFaxImageCoordinates::MapType WeatherFaxImageCoordinates::GetMapType(wxString name)
+{
+    for(int i=0; i < MAP_TYPES; i++) {
+        WeatherFaxImageCoordinates::MapType type = (WeatherFaxImageCoordinates::MapType)i;
+        if(name == MapName(type))
+            return type;
+    }
+    return MERCATOR;
+}
+
 void WeatherFaxImage::FreeData()
 {
     if(m_gltextures) {
@@ -240,6 +262,7 @@ void WeatherFaxImage::InputToMercator(double px, double py, double &mx, double &
         x = dx;
         pp = dy / inputheight - 1;
         break;
+    default: break;
     }
 
     /* if not mercator, it is fixed and needs conversion here */
@@ -301,6 +324,7 @@ void WeatherFaxImage::MercatorToInput(double mx, double my, double &px, double &
         dx = x;
         dy = (1+pp) * fabs(inputheight);
         break;
+    default: break;
     }
 
     /* apply offsets */

@@ -29,41 +29,44 @@
 
 #include "WeatherFaxUI.h"
 #include "SchedulesDialog.h"
+#include "InternetRetrievalDialog.h"
 
 class weatherfax_pi;
 
-class WeatherFaxDialog: public WeatherFaxDialogBase
+class WeatherFax: public WeatherFaxBase
 {
 public:
-    WeatherFaxDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent);
+    WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent);
 
-    ~WeatherFaxDialog();
+    ~WeatherFax();
 
     void EnableDisplayControls(bool enable);
     void OnFaxes( wxCommandEvent& event );
     void OnFaxesToggled( wxCommandEvent& event );
-    void SchedulesClicked( wxCommandEvent& event );
-    void CaptureFaxClicked( wxCommandEvent& event );
-    void OpenFaxClicked( wxCommandEvent& event );
-    void EditFaxClicked( wxCommandEvent& event );
-    void DeleteFaxClicked( wxCommandEvent& event );
-    void OnAbout( wxCommandEvent& event );
     void TransparencyChanged( wxScrollEvent& event );
     void WhiteTransparencyChanged( wxScrollEvent& event );
     void OnInvert( wxCommandEvent& event );
+    void OnOpen( wxCommandEvent& event );
+    void OnEdit( wxCommandEvent& event );
+    void OnDelete( wxCommandEvent& event );
+    void OnClose( wxCommandEvent& event ) { Hide(); }
+    void OnCapture( wxCommandEvent& event );
+    void OnSchedules( wxCommandEvent& event );
+    void OnInternet( wxCommandEvent& event );
+    void OnAbout( wxCommandEvent& event );
 
-    void OpenWav(wxString filename);
+    void OpenWav(wxString filename, wxString station=_T(""), wxString area=_T(""));
     void OpenImage(wxString filename);
 
-    void UpdateButtonStates();
+    void UpdateMenuStates();
 
     WeatherFaxImageCoordinateList m_Coords;
 
     std::vector<WeatherFaxImage*>m_Faxes;
 
 protected:
-
     SchedulesDialog m_SchedulesDialog;
+    InternetRetrievalDialog m_InternetRetrievalDialog;
 
     weatherfax_pi &m_weatherfax_pi;
 };

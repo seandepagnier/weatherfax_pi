@@ -27,7 +27,7 @@
 
 #include "WeatherFaxUI.h"
 
-class WeatherFaxDialog;
+class WeatherFax;
 class DecoderThread;
 class FaxDecoder;
 
@@ -35,8 +35,9 @@ class WeatherFaxWizard : public WeatherFaxWizardBase
 {
 public:
     WeatherFaxWizard( WeatherFaxImage &img, FaxDecoder *decoder,
-                      WeatherFaxDialog &parent,
-                      WeatherFaxImageCoordinateList &coords);
+                      WeatherFax &parent,
+                      WeatherFaxImageCoordinateList &coords,
+                      wxString newcoordbasename);
 
     ~WeatherFaxWizard();
 
@@ -85,9 +86,11 @@ protected:
     void OnSpin( wxSpinEvent& event );
     void OnPaintImage( wxPaintEvent& event);
 
-    WeatherFaxDialog &m_parent;
+    WeatherFax &m_parent;
     WeatherFaxImage &m_wfimg;
     WeatherFaxImageCoordinates *&m_curCoords;
+
+    wxString m_NewCoordBaseName;
 
     WeatherFaxImageCoordinates *m_newCoords;
     WeatherFaxImageCoordinateList &m_Coords;

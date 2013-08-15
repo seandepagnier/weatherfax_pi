@@ -57,8 +57,8 @@ SET(SRC_WEATHERFAX
             src/weatherfax_pi.cpp
             src/FaxDecoder.h
             src/FaxDecoder.cpp
-            src/WeatherFaxDialog.h
-            src/WeatherFaxDialog.cpp
+            src/WeatherFax.h
+            src/WeatherFax.cpp
             src/WeatherFaxWizard.h
             src/WeatherFaxWizard.cpp
             src/WeatherFaxUI.h
@@ -67,6 +67,8 @@ SET(SRC_WEATHERFAX
             src/WeatherFaxImage.cpp
             src/SchedulesDialog.cpp
             src/SchedulesDialog.h
+            src/InternetRetrievalDialog.cpp
+            src/InternetRetrievalDialog.h
             src/AboutDialog.h
             src/AboutDialog.cpp
             src/icons.h

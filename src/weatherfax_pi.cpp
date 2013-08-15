@@ -32,9 +32,11 @@
   #include "wx/wx.h"
 #endif //precompiled headers
 
+#include <wx/stdpaths.h>
+
 #include "weatherfax_pi.h"
 #include "WeatherFaxImage.h"
-#include "WeatherFaxDialog.h"
+#include "WeatherFax.h"
 #include "icons.h"
 
 // the class factories, used to create and destroy instances of the PlugIn
@@ -92,7 +94,7 @@ int weatherfax_pi::Init(void)
                                               _("WeatherFax"), _T(""), NULL,
                                               WEATHERFAX_TOOL_POSITION, 0, this);
 
-      m_pWeatherFaxDialog = NULL;
+      m_pWeatherFax = NULL;
 
       return (WANTS_OVERLAY_CALLBACK |
               WANTS_OPENGL_OVERLAY_CALLBACK |
@@ -107,15 +109,15 @@ int weatherfax_pi::Init(void)
 bool weatherfax_pi::DeInit(void)
 {
       //    Record the dialog position
-      if (NULL != m_pWeatherFaxDialog)
+      if (NULL != m_pWeatherFax)
       {
-            wxPoint p = m_pWeatherFaxDialog->GetPosition();
-            SetWeatherFaxDialogX(p.x);
-            SetWeatherFaxDialogY(p.y);
+            wxPoint p = m_pWeatherFax->GetPosition();
+            SetWeatherFaxX(p.x);
+            SetWeatherFaxY(p.y);
 
-            m_pWeatherFaxDialog->Close();
-            delete m_pWeatherFaxDialog;
-            m_pWeatherFaxDialog = NULL;
+            m_pWeatherFax->Close();
+            delete m_pWeatherFax;
+            m_pWeatherFax = NULL;
       }
       SaveConfig();
 
@@ -178,61 +180,77 @@ int weatherfax_pi::GetToolbarToolCount(void)
 
 void weatherfax_pi::SetColorScheme(PI_ColorScheme cs)
 {
-      if (NULL == m_pWeatherFaxDialog)
+      if (NULL == m_pWeatherFax)
             return;
-      DimeWindow(m_pWeatherFaxDialog);
+      DimeWindow(m_pWeatherFax);
 }
 
 void weatherfax_pi::RearrangeWindow()
 {
-      if (NULL == m_pWeatherFaxDialog)
+      if (NULL == m_pWeatherFax)
             return;
 
       SetColorScheme(PI_ColorScheme());
 
-      m_pWeatherFaxDialog->Fit();
+      m_pWeatherFax->Fit();
 }
 
 void weatherfax_pi::OnToolbarToolCallback(int id)
 {
-      if(!m_pWeatherFaxDialog)
+      if(!m_pWeatherFax)
       {
-            m_pWeatherFaxDialog = new WeatherFaxDialog(*this, m_parent_window);
-            m_pWeatherFaxDialog->Move(wxPoint(m_weatherfax_dialog_x, m_weatherfax_dialog_y));
+            m_pWeatherFax = new WeatherFax(*this, m_parent_window);
+            m_pWeatherFax->Move(wxPoint(m_weatherfax_dialog_x, m_weatherfax_dialog_y));
       }
 
       RearrangeWindow();
-      m_pWeatherFaxDialog->Show(!m_pWeatherFaxDialog->IsShown());
+      m_pWeatherFax->Show(!m_pWeatherFax->IsShown());
 
-      wxPoint p = m_pWeatherFaxDialog->GetPosition();
-      m_pWeatherFaxDialog->Move(0,0);        // workaround for gtk autocentre dialog behavior
-      m_pWeatherFaxDialog->Move(p);
+      wxPoint p = m_pWeatherFax->GetPosition();
+      m_pWeatherFax->Move(0,0);        // workaround for gtk autocentre dialog behavior
+      m_pWeatherFax->Move(p);
 }
 
 bool weatherfax_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
 {
-    if(!m_pWeatherFaxDialog || !m_pWeatherFaxDialog->IsShown())
+    if(!m_pWeatherFax || !m_pWeatherFax->IsShown())
         return true;
 
-    for(unsigned int i=0; i<m_pWeatherFaxDialog->m_lFaxes->GetCount(); i++)
-        if(m_pWeatherFaxDialog->m_lFaxes->IsChecked(i) ||
-           (m_pWeatherFaxDialog->m_cbDisplaySelected->GetValue() &&
-            (int)i == m_pWeatherFaxDialog->m_lFaxes->GetSelection()))
-            m_pWeatherFaxDialog->m_Faxes[i]->RenderImage(dc, vp);
+    for(unsigned int i=0; i<m_pWeatherFax->m_lFaxes->GetCount(); i++)
+        if(m_pWeatherFax->m_lFaxes->IsChecked(i) ||
+           (m_pWeatherFax->m_cbDisplaySelected->GetValue() &&
+            (int)i == m_pWeatherFax->m_lFaxes->GetSelection()))
+            m_pWeatherFax->m_Faxes[i]->RenderImage(dc, vp);
 
     return true;
 }
 
 bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
 {
-    if(!m_pWeatherFaxDialog || !m_pWeatherFaxDialog->IsShown())
+    if(!m_pWeatherFax || !m_pWeatherFax->IsShown())
         return true;
 
-    for(unsigned int i=0; i<m_pWeatherFaxDialog->m_lFaxes->GetCount(); i++)
-        if(m_pWeatherFaxDialog->m_lFaxes->IsChecked(i))
-            m_pWeatherFaxDialog->m_Faxes[i]->RenderImageGL(vp);
+    for(unsigned int i=0; i<m_pWeatherFax->m_lFaxes->GetCount(); i++)
+        if(m_pWeatherFax->m_lFaxes->IsChecked(i))
+            m_pWeatherFax->m_Faxes[i]->RenderImageGL(vp);
 
     return true;
+}
+
+wxString weatherfax_pi::StandardPath()
+{
+    wxStandardPathsBase& std_path = wxStandardPathsBase::Get();
+#ifdef __WXMSW__
+    wxString stdPath  = std_path.GetConfigDir();
+#endif
+#ifdef __WXGTK__
+    wxString stdPath  = std_path.GetUserDataDir();
+#endif
+#ifdef __WXOSX__
+    wxString stdPath  = std_path.GetUserConfigDir();   // should be ~/Library/Preferences	
+#endif
+
+    return stdPath + wxFileName::GetPathSeparator();
 }
 
 bool weatherfax_pi::LoadConfig(void)

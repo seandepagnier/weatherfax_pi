@@ -29,7 +29,7 @@
 
 #include "FaxDecoder.h"
 #include "WeatherFaxImage.h"
-#include "WeatherFaxDialog.h"
+#include "WeatherFax.h"
 #include "WeatherFaxWizard.h"
 
 #ifdef __MSVC__
@@ -39,10 +39,12 @@
 double square(double x) { return x*x; }
 
 WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img, FaxDecoder *decoder,
-                              WeatherFaxDialog &parent,
-                              WeatherFaxImageCoordinateList &coords)
+                                    WeatherFax &parent,
+                                    WeatherFaxImageCoordinateList &coords,
+                                    wxString newcoordbasename)
     : WeatherFaxWizardBase( &parent ), m_decoder(decoder), m_parent(parent),
       m_wfimg(img), m_curCoords(img.m_Coords),
+      m_NewCoordBaseName(newcoordbasename.empty() ? wxString(_("New Coord")) : newcoordbasename),
       m_Coords(coords), m_bChanged(true)
 {
     m_sPhasing->SetValue(m_wfimg.phasing);
@@ -122,14 +124,20 @@ WeatherFaxWizard::~WeatherFaxWizard()
 
 void WeatherFaxWizard::MakeNewCoordinates()
 {
+    if(m_curCoords && m_curCoords->Station.empty() && !m_curCoords->Area.empty()) {
+        m_bRemoveCoordSet->Disable();        
+        m_cbCoordSet->Append(m_curCoords->name);
+        return;
+    }
+
     /* make a new coord, yet making sure it has a unique name */
     wxString newcoordname;
     int cc = m_Coords.GetCount();
     for(int n=0, i=-1; i != cc; n++) {
         if(n)
-            newcoordname = wxString::Format(_("New Coord %d"), n);
+            newcoordname = wxString::Format(m_NewCoordBaseName + _T(" %d"), n);
         else
-            newcoordname = _("New Coord");
+            newcoordname = m_NewCoordBaseName;
         if(!cc)
             break;
         for(i=0; i<cc; i++)
@@ -322,6 +330,7 @@ void WeatherFaxWizard::UpdateMappingControls()
         m_bGetMapping->Enable();
         m_bGetEquator->Disable();
         break;
+    default: break;
     }
 }
 
@@ -783,25 +792,18 @@ void WeatherFaxWizard::SetCoords(int index)
 {
     m_cbCoordSet->SetSelection(index);
 
-#if 0
-    if(index == 0) {
-        m_curCoords = m_newCoords;
-        m_bRemoveCoordSet->Disable();
-    } else {
-        m_curCoords = m_Coords[index-1];
-        m_bRemoveCoordSet->Enable();
-    }
-#else
-        m_curCoords = m_newCoords;
+    m_curCoords = m_newCoords;
 
     if(index) {
-
         WeatherFaxImageCoordinates c = *m_Coords[index-1];
         *m_newCoords = c; /* copy data */
+        m_bRemoveCoordSet->Enable();
         m_bChanged = false;
-    } else
+    } else {
+        m_bRemoveCoordSet->Disable();
         m_bChanged = true;
-#endif
+    }
+
     m_SelectedIndex = index;
 
     m_cbCoordSet->SetValue(m_curCoords->name);
@@ -841,22 +843,6 @@ void WeatherFaxWizard::SetCoords(int index)
     
     m_tMappingRatio->SetValue
         (wxString::Format(_T("%.2f"), m_curCoords->mappingratio));
-
-#if 0 /* these get set when mapping is made, not here */
-    SetCoordRanges();
-
-    m_sCoord1X->SetValue(x1);
-    m_sCoord1Y->SetValue(y1);
-    
-    m_sCoord2X->SetValue(x2);
-    m_sCoord2Y->SetValue(y2);
-    
-    m_sCoord1Lat->SetValue(m_curCoords->lat1);
-    m_sCoord1Lon->SetValue(m_curCoords->lon1);
-
-    m_sCoord2Lat->SetValue(m_curCoords->lat2);
-    m_sCoord2Lon->SetValue(m_curCoords->lon2);
-#endif
 
     Refresh();
 }
