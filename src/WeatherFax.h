@@ -49,7 +49,7 @@ public:
     void OnOpen( wxCommandEvent& event );
     void OnEdit( wxCommandEvent& event );
     void OnDelete( wxCommandEvent& event );
-    void OnClose( wxCommandEvent& event ) { Hide(); }
+    void OnClose( wxCommandEvent& event ) { Show(false); }
     void OnCapture( wxCommandEvent& event );
     void OnSchedules( wxCommandEvent& event );
     void OnInternet( wxCommandEvent& event );

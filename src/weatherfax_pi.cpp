@@ -203,8 +203,9 @@ void weatherfax_pi::OnToolbarToolCallback(int id)
             m_pWeatherFax->Move(wxPoint(m_weatherfax_dialog_x, m_weatherfax_dialog_y));
       }
 
-      RearrangeWindow();
       m_pWeatherFax->Show(!m_pWeatherFax->IsShown());
+
+      RearrangeWindow();
 
       wxPoint p = m_pWeatherFax->GetPosition();
       m_pWeatherFax->Move(0,0);        // workaround for gtk autocentre dialog behavior

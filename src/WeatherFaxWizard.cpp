@@ -27,16 +27,11 @@
 
 #include <wx/fileconf.h>
 
+#include "weatherfax_pi.h"
 #include "FaxDecoder.h"
 #include "WeatherFaxImage.h"
 #include "WeatherFax.h"
 #include "WeatherFaxWizard.h"
-
-#ifdef __MSVC__
-#define isnan _isnan
-#endif
-
-double square(double x) { return x*x; }
 
 WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img, FaxDecoder *decoder,
                                     WeatherFax &parent,
@@ -630,6 +625,7 @@ void WeatherFaxWizard::OnCoordText( wxCommandEvent& event )
     else if(index != m_SelectedIndex)
         return;
 
+    m_cbCoordSet->SetString(m_SelectedIndex, event.GetString());
     m_curCoords->name = event.GetString();
 }
 

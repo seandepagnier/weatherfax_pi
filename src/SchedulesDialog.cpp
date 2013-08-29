@@ -498,6 +498,15 @@ void SchedulesDialog::OnAllFrequencies( wxCommandEvent& event )
     Filter();
 }
 
+void SchedulesDialog::OnInformation( wxCommandEvent& event )
+{
+    wxMessageDialog mdlg(this, _("\
+Select fax images by clicking in the capture (first) column\n\
+Schedules can be filtered to reduce number of stations, and sorted by clicking the header column\n"),
+                         _("weatherfax schedules"), wxOK | wxICON_INFORMATION);
+    mdlg.ShowModal();
+}
+
 void SchedulesDialog::OnClose( wxCommandEvent& event )
 {
     Hide();
@@ -770,6 +779,7 @@ void SchedulesDialog::OnEndCaptureTimer( wxTimerEvent & )
     m_CaptureSchedules.push_back(m_CurrentSchedule);
     m_CurrentSchedule = NULL;
     UpdateTimer();
+    UpdateProgress();
 }
 
 void SchedulesDialog::OnProgressTimer( wxTimerEvent & )
@@ -791,6 +801,9 @@ void SchedulesDialog::OnTerminate(wxProcessEvent& event)
 
 void SchedulesDialog::StopExternalProcess()
 {
+    if(!m_ExternalCaptureProcess)
+        return;
+
     int pid = m_ExternalCaptureProcess->GetPid();
     m_bKilled = true;
     wxProcess::Kill(pid);

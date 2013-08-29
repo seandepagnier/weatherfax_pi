@@ -136,51 +136,6 @@ WeatherFax::WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
 failed:
     wxMessageDialog mdlg(this, error, _("Weather Fax"), wxOK | wxICON_ERROR);
     mdlg.ShowModal();
-
-#if 0
-    wxFileConfig *pConf = m_weatherfax_pi.m_pconfig;
-    pConf->SetPath ( _T ( "/Settings/WeatherFax/CoordinateSets" ) );
-
-    wxString names;
-    pConf->Read ( _T ( "Names" ), &names, _T(""));
-
-    /* split at each ; to get all the names in a list */
-    std::list<wxString> namelist;
-    while(names.size()) {
-        namelist.push_back(names.BeforeFirst(';'));
-        names = names.AfterFirst(';');
-    }
-
-    for(std::list<wxString>::iterator it = namelist.begin();
-        it != namelist.end(); it++) {
-        wxString name = *it;
-#if defined (__WIN32__)
-        /* replace any _ with spaces because windows is bad */
-        name = ReplaceChar(name, '_', ' ');
-#endif
-        pConf->SetPath ( _T ( "/Settings/WeatherFax/CoordinateSets/" ) + *it );
-        WeatherFaxImageCoordinates *newcoord = new WeatherFaxImageCoordinates(name);
-
-        pConf->Read ( _T ( "Point1X" ), &newcoord->p1.x, 0);
-        pConf->Read ( _T ( "Point1Y" ), &newcoord->p1.y, 0);
-        pConf->Read ( _T ( "Point1Lat" ), &newcoord->lat1, 0);
-        pConf->Read ( _T ( "Point1Lon" ), &newcoord->lon1, 0);
-v        pConf->Read ( _T ( "Point2X" ), &newcoord->p2.x, 0);
-        pConf->Read ( _T ( "Point2Y" ), &newcoord->p2.y, 0);
-        pConf->Read ( _T ( "Point2Lat" ), &newcoord->lat2, 0);
-        pConf->Read ( _T ( "Point2Lon" ), &newcoord->lon2, 0);
-
-        pConf->Read ( _T ( "mapping" ), (int*)&newcoord->mapping, 0);
-        pConf->Read ( _T ( "inputpolex" ), &newcoord->inputpole.x, 0);
-        pConf->Read ( _T ( "inputpoley" ), &newcoord->inputpole.y, 0);
-        pConf->Read ( _T ( "inputequator" ), &newcoord->inputequator, 0);
-        pConf->Read ( _T ( "inputtrueratio" ), &newcoord->inputtrueratio, 1.0);
-        pConf->Read ( _T ( "mappingmultiplier" ), &newcoord->mappingmultiplier, 1.0);
-        pConf->Read ( _T ( "mappingratio" ), &newcoord->mappingratio, 1.0);
-
-        m_Coords.Append(newcoord);
-    }
-#endif
 }
 
 WeatherFax::~WeatherFax()
@@ -245,49 +200,6 @@ WeatherFax::~WeatherFax()
         mdlg.ShowModal();
     }
 
-#if 0
-    wxFileConfig *pConf = m_weatherfax_pi.m_pconfig;
-
-    /* remove from config all cordinate sets */
-    pConf->SetPath ( _T ( "/Settings/WeatherFax" ) );
-    pConf->DeleteGroup(_T("CoordinateSets"));
-
-    pConf->SetPath ( _T ( "/Settings/WeatherFax/CoordinateSets" ) );
-    wxString names;
-    for(unsigned int i=0; i<m_Coords.GetCount(); i++) {
-#if defined (__WIN32__)
-        /* space does bad things on windows */
-        m_Coords[i]->name = ReplaceChar(m_Coords[i]->name, ' ', '_');
-#endif
-        /* names are not allowed semicolon because we need it */
-        m_Coords[i]->name = ReplaceChar(m_Coords[i]->name, ';', ',');
-        names += m_Coords[i]->name + _T(";");
-    }
-    
-    pConf->Write ( _T ( "Names" ), names);
-
-    for(unsigned int i=0; i<m_Coords.GetCount(); i++) {
-        pConf->SetPath ( _T ( "/Settings/WeatherFax/CoordinateSets/" ) + m_Coords[i]->name );
-        pConf->Write ( _T ( "Point1X" ), m_Coords[i]->p1.x);
-        pConf->Write ( _T ( "Point1Y" ), m_Coords[i]->p1.y);
-        pConf->Write ( _T ( "Point1Lat" ), m_Coords[i]->lat1);
-        pConf->Write ( _T ( "Point1Lon" ), m_Coords[i]->lon1);
-        pConf->Write ( _T ( "Point2X" ), m_Coords[i]->p2.x);
-        pConf->Write ( _T ( "Point2Y" ), m_Coords[i]->p2.y);
-        pConf->Write ( _T ( "Point2Lat" ), m_Coords[i]->lat2);
-        pConf->Write ( _T ( "Point2Lon" ), m_Coords[i]->lon2);
-
-        pConf->Write ( _T ( "mapping" ), (int)m_Coords[i]->mapping);
-        pConf->Write ( _T ( "inputpolex" ), m_Coords[i]->inputpole.x);
-        pConf->Write ( _T ( "inputpoley" ), m_Coords[i]->inputpole.y);
-        pConf->Write ( _T ( "inputequator" ), m_Coords[i]->inputequator);
-        pConf->Write ( _T ( "inputtrueratio" ), m_Coords[i]->inputtrueratio);
-        pConf->Write ( _T ( "mappingmultiplier" ), m_Coords[i]->mappingmultiplier);
-        pConf->Write ( _T ( "mappingratio" ), m_Coords[i]->mappingratio);
-
-        delete m_Coords[i];
-    }
-#endif
     for(unsigned int i=0; i<m_Faxes.size(); i++)
         delete m_Faxes[i];
 }
@@ -457,6 +369,40 @@ void WeatherFax::OnDelete( wxCommandEvent& event )
     RequestRefresh( m_parent );
 }
 
+void WeatherFax::TransparencyChanged( wxScrollEvent& event )
+{
+    int selection = m_lFaxes->GetSelection();
+    if(selection < 0 || selection >= (int)m_Faxes.size())
+        return;
+
+    WeatherFaxImage &image = *m_Faxes[selection];
+    image.m_iTransparency = event.GetPosition();
+    RequestRefresh( m_parent );
+}
+
+void WeatherFax::WhiteTransparencyChanged( wxScrollEvent& event )
+{
+    int selection = m_lFaxes->GetSelection();
+    if(selection < 0 || selection >= (int)m_Faxes.size())
+        return;
+
+    WeatherFaxImage &image = *m_Faxes[selection];
+    image.m_iWhiteTransparency = event.GetPosition();
+    image.FreeData();
+    RequestRefresh( m_parent );
+}
+
+void WeatherFax::OnInvert( wxCommandEvent& event )
+{
+    int selection = m_lFaxes->GetSelection();
+    if(selection < 0 || selection >= (int)m_Faxes.size())
+        return;
+
+    WeatherFaxImage &image = *m_Faxes[selection];
+    image.m_bInvert = event.IsChecked();
+    image.FreeData();
+    RequestRefresh( m_parent );
+}
 
 void WeatherFax::OnCapture( wxCommandEvent& event )
 {

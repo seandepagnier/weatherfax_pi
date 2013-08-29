@@ -86,7 +86,7 @@ class WeatherFaxBase : public wxFrame
 		wxSlider* m_sWhiteTransparency;
 		wxCheckBox* m_cbDisplaySelected;
 		
-		WeatherFaxBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 300,300 ), long style = wxCLOSE_BOX|wxDEFAULT_FRAME_STYLE|wxRESIZE_BORDER|wxTAB_TRAVERSAL );
+		WeatherFaxBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 300,300 ), long style = wxCLOSE_BOX|wxDEFAULT_FRAME_STYLE|wxFRAME_FLOAT_ON_PARENT|wxFRAME_NO_TASKBAR|wxRESIZE_BORDER|wxTAB_TRAVERSAL );
 		
 		~WeatherFaxBase();
 	
@@ -119,6 +119,7 @@ class SchedulesDialogBase : public wxDialog
 		wxButton* m_bAllFrequencies;
 		wxCheckBox* m_cbHasArea;
 		wxCheckBox* m_cbHasValidTime;
+		wxButton* m_bInformation;
 		wxPanel* m_panel2;
 		wxCheckBox* m_cbMessageBox;
 		wxCheckBox* m_cbExternalAlarm;
@@ -143,6 +144,7 @@ class SchedulesDialogBase : public wxDialog
 		virtual void OnNoStations( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnFilter( wxSpinEvent& event ) { event.Skip(); }
 		virtual void OnAllFrequencies( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnInformation( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
 		
 	

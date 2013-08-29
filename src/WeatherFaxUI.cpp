@@ -91,7 +91,7 @@ WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString&
 	m_menu1->AppendSeparator();
 	
 	wxMenuItem* m_menuItem4;
-	m_menuItem4 = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("OnClose") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menuItem4 = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("Close") ) , wxEmptyString, wxITEM_NORMAL );
 	m_menu1->Append( m_menuItem4 );
 	
 	m_menubar1->Append( m_menu1, _("File") ); 
@@ -311,6 +311,11 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	
 	fgSizer26->Add( sbSizer14, 1, wxEXPAND, 5 );
 	
+	wxFlexGridSizer* fgSizer46;
+	fgSizer46 = new wxFlexGridSizer( 0, 1, 0, 0 );
+	fgSizer46->SetFlexibleDirection( wxBOTH );
+	fgSizer46->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
 	wxStaticBoxSizer* sbSizer13;
 	sbSizer13 = new wxStaticBoxSizer( new wxStaticBox( m_panel1, wxID_ANY, _("Constraints") ), wxVERTICAL );
 	
@@ -329,7 +334,13 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	sbSizer13->Add( fgSizer35, 1, wxEXPAND, 5 );
 	
 	
-	fgSizer26->Add( sbSizer13, 1, wxEXPAND, 5 );
+	fgSizer46->Add( sbSizer13, 1, wxEXPAND, 5 );
+	
+	m_bInformation = new wxButton( m_panel1, wxID_ANY, _("Information"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer46->Add( m_bInformation, 0, wxALL, 5 );
+	
+	
+	fgSizer26->Add( fgSizer46, 1, wxEXPAND, 5 );
 	
 	
 	m_panel1->SetSizer( fgSizer26 );
@@ -446,6 +457,7 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	m_bAllFrequencies->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( SchedulesDialogBase::OnAllFrequencies ), NULL, this );
 	m_cbHasArea->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( SchedulesDialogBase::OnFilter ), NULL, this );
 	m_cbHasValidTime->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( SchedulesDialogBase::OnFilter ), NULL, this );
+	m_bInformation->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( SchedulesDialogBase::OnInformation ), NULL, this );
 	m_bClose->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( SchedulesDialogBase::OnClose ), NULL, this );
 }
 
@@ -466,6 +478,7 @@ SchedulesDialogBase::~SchedulesDialogBase()
 	m_bAllFrequencies->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( SchedulesDialogBase::OnAllFrequencies ), NULL, this );
 	m_cbHasArea->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( SchedulesDialogBase::OnFilter ), NULL, this );
 	m_cbHasValidTime->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( SchedulesDialogBase::OnFilter ), NULL, this );
+	m_bInformation->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( SchedulesDialogBase::OnInformation ), NULL, this );
 	m_bClose->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( SchedulesDialogBase::OnClose ), NULL, this );
 	
 }
