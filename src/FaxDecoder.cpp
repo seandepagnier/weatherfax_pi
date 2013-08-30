@@ -81,7 +81,7 @@ double apply_firfilter(struct firfilter *filter, double sample)
      return sum;
 }
 
-void FaxDecoder::DemodulateData(wxUint8 *data, wxInt16 *sample, int n)
+void FaxDecoder::DemodulateData(int n)
 {
      double f=0;
      double ifirold = 0, qfirold = 0;
@@ -90,8 +90,11 @@ void FaxDecoder::DemodulateData(wxUint8 *data, wxInt16 *sample, int n)
      for(i=0; i<n; i++) {
           f += (double)m_carrier/sampleRate;
 
-          double ifirout=apply_firfilter(firfilters+0, sample[i]*cos(2*M_PI*f));
-          double qfirout=apply_firfilter(firfilters+1, sample[i]*sin(2*M_PI*f));
+
+          wxInt16 samplei = samplesize == 2 ? sample[i] : ((wxInt8*)sample)[i];
+
+          double ifirout=apply_firfilter(firfilters+0, samplei*cos(2*M_PI*f));
+          double qfirout=apply_firfilter(firfilters+1, samplei*sin(2*M_PI*f));
 
           if(m_bFM) {
                double mag=sqrt(qfirout*qfirout+ifirout*ifirout);
@@ -291,7 +294,7 @@ bool FaxDecoder::DecodeFax()
         } break;
         }
 
-        DemodulateData(data, sample, len);
+        DemodulateData(len);
 
         enum Header type;
         if(m_bSkipHeaderDetection)
@@ -398,8 +401,9 @@ bool FaxDecoder::DecodeFaxFromFilename(wxString fileName)
     if((aFile=afOpenFile(fileName.ToUTF8(),"r",fs))==AF_NULL_FILEHANDLE)
         return Error(_("could not open input file: ") + fileName);
     
-    if(afGetFrameSize(aFile,AF_DEFAULT_TRACK,0)!=2)
-        return Error(_("samples size not 16 bit"));
+    samplesize = afGetFrameSize(aFile,AF_DEFAULT_TRACK,0);
+    if(samplesize!=1 && samplesize!=2)
+        return Error(_("sample size not 8 or 16 bit: ") + wxString::Format(_T("%d"), samplesize));
     
     sampleRate = afGetRate(aFile,AF_DEFAULT_TRACK);
     

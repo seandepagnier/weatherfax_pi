@@ -91,6 +91,7 @@ private:
 
     int dsp;
     AFfilehandle aFile;
+    int samplesize;
     AFfileoffset size;
 
     enum Header {IMAGE, START, STOP};
@@ -98,7 +99,7 @@ private:
     bool Error(wxString error);
     double FourierTransformSub(wxUint8* buffer, int buffer_len, int freq);
     Header DetectLineType(wxUint8* buffer, int buffer_len);
-    void DemodulateData(wxUint8 *data, wxInt16 *sample, int n);
+    void DemodulateData(int n);
     void DecodeImageLine(wxUint8* buffer, int buffer_len, wxUint8 *image);
     int FaxPhasingLinePosition(wxUint8 *image, int imagewidth);
 

@@ -94,10 +94,7 @@ WeatherFaxWizard::~WeatherFaxWizard()
     if(sel == -1)
         sel = m_SelectedIndex;
 
-    if(/*sel == 0 &&
-       (m_newCoords->lat1 || m_newCoords->lat2 ||
-       m_newCoords->lon1 || m_newCoords->lon2)*/
-        m_bChanged) {
+    if(m_bChanged) {
         int cc = m_Coords.GetCount();
         wxString newname = m_newCoords->name, newnumberedname;
         for(int n=0, i=-1; i != cc; n++) {
@@ -269,8 +266,16 @@ void WeatherFaxWizard::OnWizardPageChanged( wxWizardEvent& event )
         m_rbCoord1UnMapped->SetValue(true);
         m_rbCoord2UnMapped->SetValue(false);
 
-        if(!ApplyMapping())
+        if(!ApplyMapping()) {
+            wxMessageDialog w
+                ( this, _("Failed to apply mapping\nCheck Mapping Correction Parameters"),
+                  _("Mapping"), wxOK | wxICON_ERROR );
+            w.ShowModal();
             ShowPage(m_pages[1], true);
+        } else if(m_curCoords->mapping == WeatherFaxImageCoordinates::MERCATOR &&
+                m_curCoords->mappingmultiplier == 1 &&
+                m_curCoords->mappingratio == 1)
+            EndModal(wxID_OK);
     }
 }
 
@@ -631,12 +636,13 @@ void WeatherFaxWizard::OnCoordText( wxCommandEvent& event )
 
 void WeatherFaxWizard::OnRemoveCoords( wxCommandEvent& event )
 {
-    int selection = m_cbCoordSet->GetSelection();
+    int selection = m_SelectedIndex;//m_cbCoordSet->GetSelection();
     if(selection == 0) /* don't delete first item, button should be disabled anyway */
         return;
 
     m_cbCoordSet->Delete(selection);
     m_Coords.DeleteNode(m_Coords.Item(selection-1));
+    m_cbCoordSet->SetSelection(selection-1);
     SetCoords(selection-1);
 }
 
@@ -788,14 +794,14 @@ void WeatherFaxWizard::SetCoords(int index)
 {
     m_cbCoordSet->SetSelection(index);
 
-    m_curCoords = m_newCoords;
-
     if(index) {
-        WeatherFaxImageCoordinates c = *m_Coords[index-1];
-        *m_newCoords = c; /* copy data */
+//        WeatherFaxImageCoordinates c = *m_Coords[index-1];
+//        *m_newCoords = c; /* copy data */
+        m_curCoords = m_Coords[index-1];
         m_bRemoveCoordSet->Enable();
         m_bChanged = false;
     } else {
+        m_curCoords = m_newCoords;
         m_bRemoveCoordSet->Disable();
         m_bChanged = true;
     }

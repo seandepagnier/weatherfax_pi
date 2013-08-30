@@ -350,10 +350,13 @@ bool WeatherFaxImage::MakeMappedImage(wxWindow *parent, bool paramsonly)
     InputToMercator(w, h, p3x, p3y);
     InputToMercator(0, h, p4x, p4y);
 
-    int minp = wxMin(p1x, p4x);
-    int maxp = wxMax(p2x, p3x);
+    double minp = wxMin(p1x, p4x);
+    double maxp = wxMax(p2x, p3x);
 
     mercatoroffset.x = -minp;
+
+    if(isnan(minp) || isnan(maxp))
+        return false;
 
     int mw = maxp - minp;
 
@@ -369,6 +372,9 @@ bool WeatherFaxImage::MakeMappedImage(wxWindow *parent, bool paramsonly)
 
     maxp = wxMax(p3y, p4y);
     maxp = wxMax(maxp, p6y);
+
+    if(isnan(minp) || isnan(maxp))
+        return false;
 
     int mh = maxp - minp;
 
