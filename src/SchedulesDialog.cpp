@@ -281,7 +281,7 @@ bool SchedulesDialog::OpenXML(wxString filename)
 //                m_lStations->SetSelection(m_lStations->Append(station));
                 m_lStations->Append(station);
                 std::list<Schedule> schedules;
-                std::list<ScheduleArea> Areas;
+                std::list<FaxArea> Areas;
 
                 for(TiXmlElement* f = e->FirstChildElement(); f; f = f->NextSiblingElement()) {
                     if(!strcmp(f->Value(), "Frequency")) {
@@ -328,7 +328,7 @@ bool SchedulesDialog::OpenXML(wxString filename)
                             }
                         }
                     } else if(!strcmp(f->Value(), "Area")) {
-                        ScheduleArea Area;
+                        FaxArea Area;
                         Area.name = wxString::FromUTF8(f->Attribute("Name"));
                         Area.description = wxString::FromUTF8(f->Attribute("Description"));
                         
@@ -347,7 +347,7 @@ bool SchedulesDialog::OpenXML(wxString filename)
                     if((*it).Duration == -1)
                         FAIL(_("Failed to find Duration for: ") + (*it).Contents);
                     if((*it).area_name.size()) {
-                        for(std::list<ScheduleArea>::iterator it2 = Areas.begin();
+                        for(std::list<FaxArea>::iterator it2 = Areas.begin();
                             it2 != Areas.end(); it2++)
                             if((*it).area_name == (*it2).name) {
                                 (*it).Area = *it2;

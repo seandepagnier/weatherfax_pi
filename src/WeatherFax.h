@@ -28,6 +28,34 @@
 #include <vector>
 
 #include "WeatherFaxUI.h"
+
+
+class FaxArea
+{
+public:
+    wxString name, description;
+    double lat1, lat2, lon1, lon2;
+
+    FaxArea() : lat1(NAN), lat2(NAN), lon1(NAN), lon2(NAN) {}
+
+    bool ContainsLat(double lat) { return isnan(lat) || (lat >= lat1 && lat <= lat2); }
+    bool ContainsLon(double lon) { return isnan(lon) ||
+            (lon2 - lon1 < 180 && lon >= lon1 && lon <= lon2) ||
+            (lon2 - lon1 >= 180 && (lon <= lon1 || lon >= lon2)); }
+
+    wxString LatArea(double lat) { return wxString::Format(_T("%.0f"), fabs(lat))
+            + ((lat >= 0) ? _T("N") : _T("S")); }
+    wxString LonArea(double lon) { return wxString::Format(_T("%.0f"), fabs(lon))
+            + ((lon >= 0) ? _T("E") : _T("W")); }
+    wxString AreaDescription() {
+        return description +
+            ((!isnan(lat1) && !isnan(lat2)) ?
+             _T(" ") + LatArea(lat1) + _T("-") + LatArea(lat2) : _T("")) +
+            ((!isnan(lon1) && !isnan(lon2)) ?
+             _T(" ") + LonArea(lon1) + _T("-") + LonArea(lon2) : _T(""));
+    }
+};
+
 #include "SchedulesDialog.h"
 #include "InternetRetrievalDialog.h"
 

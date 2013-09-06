@@ -34,52 +34,24 @@
 
 class weatherfax_pi;
 
-#if 0
-class ScheduleArea
-{
-public:
-    wxString name, description;
-    double lat1, lat2, lon1, lon2;
-
-    ScheduleArea() : lat1(NAN), lat2(NAN), lon1(NAN), lon2(NAN) {}
-
-    bool ContainsLat(double lat) { return isnan(lat) || (lat >= lat1 && lat <= lat2); }
-    bool ContainsLon(double lon) { return isnan(lon) ||
-            (lon2 - lon1 < 180 && lon >= lon1 && lon <= lon2) ||
-            (lon2 - lon1 >= 180 && (lon <= lon1 || lon >= lon2)); }
-
-    wxString LatArea(double lat) { return wxString::Format(_T("%.0f"), fabs(lat))
-            + ((lat >= 0) ? _T("N") : _T("S")); }
-    wxString LonArea(double lon) { return wxString::Format(_T("%.0f"), fabs(lon))
-            + ((lon >= 0) ? _T("E") : _T("W")); }
-    wxString AreaDescription() {
-        return description +
-            ((!isnan(lat1) && !isnan(lat2)) ?
-             _T(" ") + LatArea(lat1) + _T("-") + LatArea(lat2) : _T("")) +
-            ((!isnan(lon1) && !isnan(lon2)) ?
-             _T(" ") + LonArea(lon1) + _T("-") + LonArea(lon2) : _T(""));
-    }
-};
-#endif
-
 class FaxUrl
 {
 public:
     bool Filtered;
     bool Selected;
 
-    wxString Station;
+    wxString Server;
+    wxString Url;
     wxString Contents;
     wxString area_name;
 
-//    ScheduleArea Area;
-
+    FaxArea Area;
 };
 
 class InternetRetrievalDialog: public InternetRetrievalDialogBase
 {
 public:
-    enum {SELECTED, STATION, CONTENTS, MAP_AREA};
+    enum {SELECTED, SERVER, CONTENTS, MAP_AREA};
 
     InternetRetrievalDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent);
     ~InternetRetrievalDialog();
@@ -88,17 +60,17 @@ public:
     void ClearInternetRetrieval();
     bool OpenXML(wxString filename);
 
-    void OnInternetRetrievalLeftDown( wxMouseEvent& event );
-    void OnInternetRetrievalSort( wxListEvent& event );
+    void OnUrlsLeftDown( wxMouseEvent& event );
+    void OnUrlsSort( wxListEvent& event );
     void OnFilter( wxCommandEvent& event ) { Filter(); }
     void OnBoatPosition( wxCommandEvent& event );
     void OnReset( wxCommandEvent& event );
-    void OnAllStations( wxCommandEvent& event );
-    void OnNoStations( wxCommandEvent& event );
+    void OnAllServers( wxCommandEvent& event );
+    void OnNoServers( wxCommandEvent& event );
     void OnRetrieve( wxCommandEvent& event );
     void OnClose( wxCommandEvent& event );
 
-    bool HasStation(wxString station);
+    bool HasServer(wxString server);
     void Filter();
     void RebuildList();
     void UpdateItem(long index);

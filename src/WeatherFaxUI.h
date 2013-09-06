@@ -172,7 +172,7 @@ class InternetRetrievalDialogBase : public wxDialog
 		wxTextCtrl* m_tContainsLon;
 		wxButton* m_bBoatPosition;
 		wxButton* m_bReset;
-		wxListBox* m_lStations;
+		wxListBox* m_lServers;
 		wxButton* m_bAll;
 		wxButton* m_bNone;
 		wxPanel* m_panel5;
@@ -181,11 +181,13 @@ class InternetRetrievalDialogBase : public wxDialog
 		wxButton* m_bClose;
 		
 		// Virtual event handlers, overide them in your derived class
+		virtual void OnUrlsLeftDown( wxMouseEvent& event ) { event.Skip(); }
+		virtual void OnUrlsSor( wxListEvent& event ) { event.Skip(); }
 		virtual void OnFilter( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnBoatPosition( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnReset( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnAllStations( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnNoStations( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnAllServers( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnNoServers( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnRetrieve( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
 		
