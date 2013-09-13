@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<OCPNWeatherFaxInternetRetrieval>
+  <Server Name="NOAA">
+      <Map Url="" Contents="SURFACE ANALYSIS(SHIPPING)" Area="1" />
+      <Area Name="1" lat1="1N" lat2="55N" lon1="41E" lon2="199E" />
+  </Server>
+</OCPNWeatherFaxInternetRetrieval>
