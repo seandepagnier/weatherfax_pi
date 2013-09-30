@@ -72,7 +72,7 @@ static const char * check_xpm[] = {
 SchedulesDialog::SchedulesDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
     : SchedulesDialogBase( parent ), m_weatherfax_pi(_weatherfax_pi),
       m_ExternalCaptureProcess(NULL), m_CurrentSchedule(NULL),
-      m_bLoaded(false), m_bDisableFilter(false), m_bKilled(false), m_bRebuilding(false)
+      m_bLoaded(false), m_bDisableFilter(true), m_bKilled(false), m_bRebuilding(false)
 {
 }
 
@@ -164,20 +164,11 @@ void SchedulesDialog::Load()
     wxString stations;
     pConf->Read ( _T ( "Stations" ), &stations, _T(""));
 
-    if(!stations.empty()) {
-        /* split at each ; to get all the names in a list */
-        std::list<wxString> stationlist;
-        while(stations.size()) {
-            stationlist.push_back(stations.BeforeFirst(';'));
-            stations = stations.AfterFirst(';');
-        }
-
-        m_lStations->DeselectAll();
-        for(unsigned int i=0; i < m_lStations->GetCount(); i++)
-            for(std::list<wxString>::iterator it = stationlist.begin();
-                it != stationlist.end(); it++)
-                if(m_lStations->GetString(i) == *it)
-                    m_lStations->SetSelection(i);
+    std::list<wxString> stationlist;
+    /* split at each ; to get all the names in a list */
+    while(stations.size()) {
+        stationlist.push_back(stations.BeforeFirst(';'));
+        stations = stations.AfterFirst(';');
     }
 
     int i;
@@ -215,6 +206,14 @@ void SchedulesDialog::Load()
             + s + _T("weatherfax") + s + _T("data") + s
             + _T("WeatherFaxSchedules.xml"));
 
+    m_lStations->DeselectAll();
+    for(unsigned int i=0; i < m_lStations->GetCount(); i++)
+        for(std::list<wxString>::iterator it = stationlist.begin();
+            it != stationlist.end(); it++)
+            if(m_lStations->GetString(i) == *it)
+                m_lStations->SetSelection(i);
+
+    m_bDisableFilter = false;
     Filter();
 }
 
@@ -760,6 +759,10 @@ void SchedulesDialog::OnCaptureTimer( wxTimerEvent & )
 void SchedulesDialog::OnEndCaptureTimer( wxTimerEvent & )
 {
     StopExternalProcess();
+
+    if(!m_CurrentSchedule)
+        return;
+
     wxString filename;
     if(m_rbExternalCapture->GetValue())
         filename = m_ExternalCaptureFilename;

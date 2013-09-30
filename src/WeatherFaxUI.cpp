@@ -68,6 +68,7 @@ WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString&
 	fgSizer24->Add( m_cInvert, 0, wxALL, 5 );
 	
 	m_cbDisplaySelected = new wxCheckBox( this, wxID_ANY, _("Display Selected"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_cbDisplaySelected->SetValue(true); 
 	fgSizer24->Add( m_cbDisplaySelected, 0, wxALL, 5 );
 	
 	
@@ -124,6 +125,7 @@ WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString&
 	this->Centre( wxBOTH );
 	
 	// Connect Events
+	this->Connect( wxEVT_CLOSE_WINDOW, wxCloseEventHandler( WeatherFaxBase::OnClose ) );
 	m_lFaxes->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnFaxes ), NULL, this );
 	m_lFaxes->Connect( wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, wxCommandEventHandler( WeatherFaxBase::OnFaxesToggled ), NULL, this );
 	m_sTransparency->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
@@ -159,6 +161,7 @@ WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString&
 WeatherFaxBase::~WeatherFaxBase()
 {
 	// Disconnect Events
+	this->Disconnect( wxEVT_CLOSE_WINDOW, wxCloseEventHandler( WeatherFaxBase::OnClose ) );
 	m_lFaxes->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnFaxes ), NULL, this );
 	m_lFaxes->Disconnect( wxEVT_COMMAND_CHECKLISTBOX_TOGGLED, wxCommandEventHandler( WeatherFaxBase::OnFaxesToggled ), NULL, this );
 	m_sTransparency->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
@@ -377,10 +380,8 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	fgSizer30->SetFlexibleDirection( wxBOTH );
 	fgSizer30->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_rbAlsaCapture = new wxRadioButton( m_panel3, wxID_ANY, _("Alsa Capture"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_rbAlsaCapture->Enable( false );
-	
-	fgSizer30->Add( m_rbAlsaCapture, 0, wxALL, 5 );
+	m_rbNoAction = new wxRadioButton( m_panel3, wxID_ANY, _("No Action"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer30->Add( m_rbNoAction, 0, wxALL, 5 );
 	
 	wxFlexGridSizer* fgSizer32;
 	fgSizer32 = new wxFlexGridSizer( 1, 0, 0, 0 );
@@ -397,11 +398,13 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	
 	fgSizer30->Add( fgSizer32, 1, wxEXPAND, 5 );
 	
-	m_rbManualCapture = new wxRadioButton( m_panel3, wxID_ANY, _("Manual Capture with external program Open File When Done"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_rbManualCapture = new wxRadioButton( m_panel3, wxID_ANY, _("Manual Capture (with external program) automatic Open File"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer30->Add( m_rbManualCapture, 0, wxALL, 5 );
 	
-	m_rbNoAction = new wxRadioButton( m_panel3, wxID_ANY, _("No Action"), wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer30->Add( m_rbNoAction, 0, wxALL, 5 );
+	m_rbAlsaCapture = new wxRadioButton( m_panel3, wxID_ANY, _("Alsa Capture"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_rbAlsaCapture->Enable( false );
+	
+	fgSizer30->Add( m_rbAlsaCapture, 0, wxALL, 5 );
 	
 	
 	m_panel3->SetSizer( fgSizer30 );

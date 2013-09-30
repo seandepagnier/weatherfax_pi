@@ -64,6 +64,7 @@ class WeatherFaxBase : public wxFrame
 		wxMenu* m_menu3;
 		
 		// Virtual event handlers, overide them in your derived class
+		virtual void OnClose( wxCloseEvent& event ) { event.Skip(); }
 		virtual void OnFaxes( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnFaxesToggled( wxCommandEvent& event ) { event.Skip(); }
 		virtual void TransparencyChanged( wxScrollEvent& event ) { event.Skip(); }
@@ -86,7 +87,7 @@ class WeatherFaxBase : public wxFrame
 		wxSlider* m_sWhiteTransparency;
 		wxCheckBox* m_cbDisplaySelected;
 		
-		WeatherFaxBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 300,300 ), long style = wxCLOSE_BOX|wxDEFAULT_FRAME_STYLE|wxFRAME_FLOAT_ON_PARENT|wxFRAME_NO_TASKBAR|wxRESIZE_BORDER|wxTAB_TRAVERSAL );
+		WeatherFaxBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 300,300 ), long style = wxCAPTION|wxCLOSE_BOX|wxFRAME_FLOAT_ON_PARENT|wxFRAME_NO_TASKBAR|wxRESIZE_BORDER|wxTAB_TRAVERSAL );
 		
 		~WeatherFaxBase();
 	
@@ -125,11 +126,11 @@ class SchedulesDialogBase : public wxDialog
 		wxCheckBox* m_cbExternalAlarm;
 		wxTextCtrl* m_tExternalAlarmCommand;
 		wxPanel* m_panel3;
-		wxRadioButton* m_rbAlsaCapture;
+		wxRadioButton* m_rbNoAction;
 		wxRadioButton* m_rbExternalCapture;
 		wxTextCtrl* m_tExternalCapture;
 		wxRadioButton* m_rbManualCapture;
-		wxRadioButton* m_rbNoAction;
+		wxRadioButton* m_rbAlsaCapture;
 		wxStaticText* m_stCaptureStatus;
 		wxGauge* m_gCaptureStatus;
 		wxButton* m_bClose;

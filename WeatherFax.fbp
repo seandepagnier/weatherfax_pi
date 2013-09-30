@@ -43,7 +43,7 @@
             <property name="name">WeatherFaxBase</property>
             <property name="pos"></property>
             <property name="size">300,300</property>
-            <property name="style">wxCLOSE_BOX|wxDEFAULT_FRAME_STYLE|wxFRAME_FLOAT_ON_PARENT|wxFRAME_NO_TASKBAR|wxRESIZE_BORDER</property>
+            <property name="style">wxCAPTION|wxCLOSE_BOX|wxFRAME_FLOAT_ON_PARENT|wxFRAME_NO_TASKBAR|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Weather Fax</property>
             <property name="tooltip"></property>
@@ -60,7 +60,7 @@
             <event name="OnAuiPaneRestore"></event>
             <event name="OnAuiRender"></event>
             <event name="OnChar"></event>
-            <event name="OnClose"></event>
+            <event name="OnClose">OnClose</event>
             <event name="OnEnterWindow"></event>
             <event name="OnEraseBackground"></event>
             <event name="OnHibernate"></event>
@@ -589,7 +589,7 @@
                                 <property name="caption"></property>
                                 <property name="caption_visible">1</property>
                                 <property name="center_pane">0</property>
-                                <property name="checked">0</property>
+                                <property name="checked">1</property>
                                 <property name="close_button">1</property>
                                 <property name="context_help"></property>
                                 <property name="context_menu">1</property>
@@ -3321,14 +3321,14 @@
                                             <property name="dock">Dock</property>
                                             <property name="dock_fixed">0</property>
                                             <property name="docking">Left</property>
-                                            <property name="enabled">0</property>
+                                            <property name="enabled">1</property>
                                             <property name="fg"></property>
                                             <property name="floatable">1</property>
                                             <property name="font"></property>
                                             <property name="gripper">0</property>
                                             <property name="hidden">0</property>
                                             <property name="id">wxID_ANY</property>
-                                            <property name="label">Alsa Capture</property>
+                                            <property name="label">No Action</property>
                                             <property name="max_size"></property>
                                             <property name="maximize_button">0</property>
                                             <property name="maximum_size"></property>
@@ -3336,7 +3336,7 @@
                                             <property name="minimize_button">0</property>
                                             <property name="minimum_size"></property>
                                             <property name="moveable">1</property>
-                                            <property name="name">m_rbAlsaCapture</property>
+                                            <property name="name">m_rbNoAction</property>
                                             <property name="pane_border">1</property>
                                             <property name="pane_position"></property>
                                             <property name="pane_size"></property>
@@ -3613,7 +3613,7 @@
                                             <property name="gripper">0</property>
                                             <property name="hidden">0</property>
                                             <property name="id">wxID_ANY</property>
-                                            <property name="label">Manual Capture with external program Open File When Done</property>
+                                            <property name="label">Manual Capture (with external program) automatic Open File</property>
                                             <property name="max_size"></property>
                                             <property name="maximize_button">0</property>
                                             <property name="maximum_size"></property>
@@ -3694,14 +3694,14 @@
                                             <property name="dock">Dock</property>
                                             <property name="dock_fixed">0</property>
                                             <property name="docking">Left</property>
-                                            <property name="enabled">1</property>
+                                            <property name="enabled">0</property>
                                             <property name="fg"></property>
                                             <property name="floatable">1</property>
                                             <property name="font"></property>
                                             <property name="gripper">0</property>
                                             <property name="hidden">0</property>
                                             <property name="id">wxID_ANY</property>
-                                            <property name="label">No Action</property>
+                                            <property name="label">Alsa Capture</property>
                                             <property name="max_size"></property>
                                             <property name="maximize_button">0</property>
                                             <property name="maximum_size"></property>
@@ -3709,7 +3709,7 @@
                                             <property name="minimize_button">0</property>
                                             <property name="minimum_size"></property>
                                             <property name="moveable">1</property>
-                                            <property name="name">m_rbNoAction</property>
+                                            <property name="name">m_rbAlsaCapture</property>
                                             <property name="pane_border">1</property>
                                             <property name="pane_position"></property>
                                             <property name="pane_size"></property>

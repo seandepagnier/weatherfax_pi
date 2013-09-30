@@ -69,6 +69,7 @@ public:
     ~WeatherFax();
 
     void EnableDisplayControls(bool enable);
+    void OnClose( wxCloseEvent& event ) { Hide(); }
     void OnFaxes( wxCommandEvent& event );
     void OnFaxesToggled( wxCommandEvent& event );
     void TransparencyChanged( wxScrollEvent& event );
