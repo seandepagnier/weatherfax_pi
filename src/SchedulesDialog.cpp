@@ -658,10 +658,10 @@ void SchedulesDialog::AddScheduleToCapture(Schedule *s)
 
 void SchedulesDialog::RemoveScheduleToCapture(Schedule *s)
 {
+    s->Capture = false;
     for(std::list<Schedule*>::iterator it = m_CaptureSchedules.begin();
         it != m_CaptureSchedules.end(); it++)
         if(*it == s) {
-            s->Capture = false;
             if(m_CaptureSchedules.erase(it) == m_CaptureSchedules.begin())
                 UpdateTimer();
             break;
