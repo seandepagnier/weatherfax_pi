@@ -117,6 +117,12 @@ SchedulesDialog::~SchedulesDialog()
     pConf->Write ( _T ( "externalcapturecommand" ), m_tExternalCapture->GetValue() );
     pConf->Write ( _T ( "manualcapture" ), m_rbExternalCapture->GetValue() );
     pConf->Write ( _T ( "noaction" ), m_rbNoAction->GetValue() );
+
+    wxString captures;
+    for(std::list<Schedule*>::iterator it = m_CaptureSchedules.begin();
+        it != m_CaptureSchedules.end(); it++)
+        captures += wxString::Format(_T("%.1f,%04d;"), (*it)->Frequency, (*it)->Time);
+    pConf->Write ( _T ( "captures" ), captures );
 }
 
 void SchedulesDialog::Load()
@@ -201,6 +207,15 @@ void SchedulesDialog::Load()
     pConf->Read ( _T ( "noaction" ), &b, true );
     m_rbNoAction->SetValue(b);
 
+    wxString captures;
+    pConf->Read ( _T ( "captures" ), &captures, _T("") );
+    std::list<wxString> capturelist;
+    /* split at each ; to get all the names in a list */
+    while(captures.size()) {
+        capturelist.push_back(captures.BeforeFirst(';'));
+        captures = captures.AfterFirst(';');
+    }
+
     s = wxFileName::GetPathSeparator();
     OpenXML(*GetpSharedDataLocation() + _T("plugins")
             + s + _T("weatherfax") + s + _T("data") + s
@@ -212,6 +227,21 @@ void SchedulesDialog::Load()
             it != stationlist.end(); it++)
             if(m_lStations->GetString(i) == *it)
                 m_lStations->SetSelection(i);
+
+    for(std::list<wxString>::iterator it = capturelist.begin();
+        it != capturelist.end(); it++) {
+        double freq;
+        (*it).BeforeFirst(',').ToDouble(&freq);
+        long time;
+        (*it).AfterFirst(',').ToLong(&time);
+
+        for(std::list<Schedule*>::iterator it2 = m_Schedules.begin();
+            it2 != m_Schedules.end(); it2++)
+            if(floor(freq) == floor((*it2)->Frequency) && time == (*it2)->Time) {
+                AddScheduleToCapture(*it2);
+                break;
+            }
+    }
 
     m_bDisableFilter = false;
     Filter();
@@ -386,11 +416,10 @@ void SchedulesDialog::OnSchedulesLeftDown( wxMouseEvent& event )
         // Process the clicked item
         Schedule *schedule =
             reinterpret_cast<Schedule*>(wxUIntToPtr(m_lSchedules->GetItemData(index)));
-        schedule->Capture = !schedule->Capture;
         if(schedule->Capture)
-            AddScheduleToCapture(schedule);
-        else
             RemoveScheduleToCapture(schedule);
+        else
+            AddScheduleToCapture(schedule);
 
         m_lSchedules->SetItemImage(index, schedule->Capture ? 0 : -1);
         UpdateProgress();
@@ -497,15 +526,6 @@ void SchedulesDialog::OnAllFrequencies( wxCommandEvent& event )
     Filter();
 }
 
-void SchedulesDialog::OnInformation( wxCommandEvent& event )
-{
-    wxMessageDialog mdlg(this, _("\
-Select fax images by clicking in the capture (first) column\n\
-Schedules can be filtered to reduce number of stations, and sorted by clicking the header column\n"),
-                         _("weatherfax schedules"), wxOK | wxICON_INFORMATION);
-    mdlg.ShowModal();
-}
-
 void SchedulesDialog::OnClose( wxCommandEvent& event )
 {
     Hide();
@@ -581,7 +601,7 @@ void SchedulesDialog::UpdateItem(long index)
     m_lSchedules->SetItem(index, STATION, schedule->Station);
     m_lSchedules->SetColumnWidth(STATION, 100 /*wxLIST_AUTOSIZE*/);
 
-    m_lSchedules->SetItem(index, FREQUENCY, wxString::Format(_T("%.3f"), schedule->Frequency));
+    m_lSchedules->SetItem(index, FREQUENCY, wxString::Format(_T("%.1f"), schedule->Frequency));
 //    m_lSchedules->SetColumnWidth(FREQUENCY, wxLIST_AUTOSIZE);
 
     m_lSchedules->SetItem(index, TIME, wxString::Format(_T("%04d"),schedule->Time));
@@ -619,10 +639,8 @@ void SchedulesDialog::AddScheduleToCapture(Schedule *s)
                 }
                 it = m_CaptureSchedules.erase(it);
                 continue;
-            } else {
-                s->Capture = false;
+            } else
                 return;
-            }
         }
 
         if(start < itstart) {
@@ -632,6 +650,7 @@ void SchedulesDialog::AddScheduleToCapture(Schedule *s)
         it++;
     }
 
+    s->Capture = true;
     m_CaptureSchedules.insert(itp, s);
     if(s == m_CaptureSchedules.front())
         UpdateTimer();
@@ -642,6 +661,7 @@ void SchedulesDialog::RemoveScheduleToCapture(Schedule *s)
     for(std::list<Schedule*>::iterator it = m_CaptureSchedules.begin();
         it != m_CaptureSchedules.end(); it++)
         if(*it == s) {
+            s->Capture = false;
             if(m_CaptureSchedules.erase(it) == m_CaptureSchedules.begin())
                 UpdateTimer();
             break;

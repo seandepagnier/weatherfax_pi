@@ -89,7 +89,6 @@ public:
     void OnNoStations( wxCommandEvent& event );
     void OnFilter( wxSpinEvent& event ) { Filter(); }
     void OnAllFrequencies( wxCommandEvent& event );
-    void OnInformation( wxCommandEvent& event );
     void OnClose( wxCommandEvent& event );
 
     bool HasStation(wxString station);

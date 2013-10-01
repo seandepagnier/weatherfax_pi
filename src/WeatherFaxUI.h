@@ -73,6 +73,7 @@ class WeatherFaxBase : public wxFrame
 		virtual void OnOpen( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnEdit( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnDelete( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnPreferences( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnCapture( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnSchedules( wxCommandEvent& event ) { event.Skip(); }
@@ -120,7 +121,6 @@ class SchedulesDialogBase : public wxDialog
 		wxButton* m_bAllFrequencies;
 		wxCheckBox* m_cbHasArea;
 		wxCheckBox* m_cbHasValidTime;
-		wxButton* m_bInformation;
 		wxPanel* m_panel2;
 		wxCheckBox* m_cbMessageBox;
 		wxCheckBox* m_cbExternalAlarm;
@@ -131,6 +131,8 @@ class SchedulesDialogBase : public wxDialog
 		wxTextCtrl* m_tExternalCapture;
 		wxRadioButton* m_rbManualCapture;
 		wxRadioButton* m_rbAlsaCapture;
+		wxPanel* m_panel7;
+		wxStaticText* m_staticText33;
 		wxStaticText* m_stCaptureStatus;
 		wxGauge* m_gCaptureStatus;
 		wxButton* m_bClose;
@@ -145,7 +147,6 @@ class SchedulesDialogBase : public wxDialog
 		virtual void OnNoStations( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnFilter( wxSpinEvent& event ) { event.Skip(); }
 		virtual void OnAllFrequencies( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnInformation( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
 		
 	
@@ -328,6 +329,7 @@ class WeatherFaxPrefsDialog : public wxDialog
 		wxChoice* m_cFilter;
 		wxCheckBox* m_cbSkip;
 		wxCheckBox* m_cbInclude;
+		wxCheckBox* m_cbLoadSchedulesStart;
 		
 		WeatherFaxPrefsDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax Preferences"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxCAPTION|wxDEFAULT_DIALOG_STYLE ); 
 		~WeatherFaxPrefsDialog();

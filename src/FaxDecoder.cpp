@@ -239,7 +239,6 @@ void FaxDecoder::SetupToDecode()
 
     imgdata = (wxUint8*)malloc(m_imagewidth*height*3);
 
-    line = 0;
     imageline = 0;
     lasttype = IMAGE;
     typecount = 0;
@@ -257,7 +256,6 @@ void FaxDecoder::CleanUp()
          imageline = 0;
          m_DecoderMutex.Unlock();
      }
-     line = 0;
 
      delete [] sample;
      delete [] data;
@@ -318,21 +316,19 @@ bool FaxDecoder::DecodeFax()
             const int leewaylines = 4;
 
             if(type == START && typecount == m_StartLength*m_lpm/60.0 - leewaylines) {
-                /* image start detected, prepare for phasing */
+                /* image start detected, reset image at 0 lines  */
+                if(!m_bIncludeHeadersInImages) {
+                    imageline = 0;
+                    imgpos = 0;
+                }
+
+                /* prepare for phasing */
                 phasingLinesLeft = m_phasingLines;
                 gotstart = true;
             } else
                 if(type == STOP && typecount == m_StopLength*m_lpm/60.0 - leewaylines) {
-#if 0
-                    int is = m_imagewidth*imageline*3;
-                    unsigned char *id = (unsigned char*)malloc(is); /* wximage needs malloc */
-                    memcpy(id, imgdata, is);
-                    images.Append(new wxImage(m_imagewidth, imageline, id));
-                    imageline = 0;
-                    imgpos = 0;
-#endif
-                    typecount = 0;
-                    gotstart = false;
+                    if(!m_bIncludeHeadersInImages)
+                        break;
                 }
         }
 
@@ -367,8 +363,6 @@ bool FaxDecoder::DecodeFax()
 
         if(m_bEndDecoding)
             break;
-
-        line++;
      }
 done:
 
@@ -383,10 +377,7 @@ done:
 
          /* fill rest of the line with zeros */
          memset(id+imgpos, 0, m_imagewidth*imageline*m_imagecolors - imgpos);
-
-//         images.Append(new wxImage(m_imagewidth, imageline, id));
      }
-
 
      CleanUp();
 

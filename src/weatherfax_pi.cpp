@@ -72,99 +72,97 @@ weatherfax_pi::weatherfax_pi(void *ppimgr)
 
 int weatherfax_pi::Init(void)
 {
-      AddLocaleCatalog( _T("opencpn-weatherfax_pi") );
+    AddLocaleCatalog( _T("opencpn-weatherfax_pi") );
 
-      // Set some default private member parameters
-      m_weatherfax_dialog_x = 0;
-      m_weatherfax_dialog_y = 0;
+    // Set some default private member parameters
+    m_weatherfax_dialog_x = 0;
+    m_weatherfax_dialog_y = 0;
 
-      ::wxDisplaySize(&m_display_width, &m_display_height);
+    ::wxDisplaySize(&m_display_width, &m_display_height);
 
-      //    Get a pointer to the opencpn display canvas, to use as a parent for the POI Manager dialog
-      m_parent_window = GetOCPNCanvasWindow();
+    //    Get a pointer to the opencpn display canvas, to use as a parent for the POI Manager dialog
+    m_parent_window = GetOCPNCanvasWindow();
 
-      //    Get a pointer to the opencpn configuration object
-      m_pconfig = GetOCPNConfigObject();
+    //    Get a pointer to the opencpn configuration object
+    m_pconfig = GetOCPNConfigObject();
 
-      //    And load the configuration items
-      LoadConfig();
+    //    And load the configuration items
+    LoadConfig();
 
-      m_leftclick_tool_id  = InsertPlugInTool(_T(""), _img_weatherfax,
-                                              _img_weatherfax, wxITEM_NORMAL,
-                                              _("WeatherFax"), _T(""), NULL,
-                                              WEATHERFAX_TOOL_POSITION, 0, this);
+    m_leftclick_tool_id  = InsertPlugInTool(_T(""), _img_weatherfax,
+                                            _img_weatherfax, wxITEM_NORMAL,
+                                            _("WeatherFax"), _T(""), NULL,
+                                            WEATHERFAX_TOOL_POSITION, 0, this);
 
-      m_pWeatherFax = NULL;
+    m_pWeatherFax = new WeatherFax(*this, m_parent_window);
+    m_pWeatherFax->Move(wxPoint(m_weatherfax_dialog_x, m_weatherfax_dialog_y));
 
-      return (WANTS_OVERLAY_CALLBACK |
-              WANTS_OPENGL_OVERLAY_CALLBACK |
-              WANTS_TOOLBAR_CALLBACK    |
-              INSTALLS_TOOLBAR_TOOL     |
-              WANTS_NMEA_EVENTS         |
-              WANTS_PREFERENCES         |
-              WANTS_CONFIG
-           );
+    return (WANTS_OVERLAY_CALLBACK |
+            WANTS_OPENGL_OVERLAY_CALLBACK |
+            WANTS_TOOLBAR_CALLBACK    |
+            INSTALLS_TOOLBAR_TOOL     |
+            WANTS_NMEA_EVENTS         |
+            WANTS_PREFERENCES         |
+            WANTS_CONFIG
+        );
 }
 
 bool weatherfax_pi::DeInit(void)
 {
       //    Record the dialog position
-      if (NULL != m_pWeatherFax)
-      {
-            wxPoint p = m_pWeatherFax->GetPosition();
-            SetWeatherFaxX(p.x);
-            SetWeatherFaxY(p.y);
+    wxPoint p = m_pWeatherFax->GetPosition();
+    SetWeatherFaxX(p.x);
+    SetWeatherFaxY(p.y);
 
-            m_pWeatherFax->Close();
-            delete m_pWeatherFax;
-            m_pWeatherFax = NULL;
-      }
-      SaveConfig();
+    m_pWeatherFax->Close();
+    delete m_pWeatherFax;
+    m_pWeatherFax = NULL;
 
-      RemovePlugInTool(m_leftclick_tool_id);
+    SaveConfig();
 
-      return true;
+    RemovePlugInTool(m_leftclick_tool_id);
+
+    return true;
 }
 
 int weatherfax_pi::GetAPIVersionMajor()
 {
-      return MY_API_VERSION_MAJOR;
+    return MY_API_VERSION_MAJOR;
 }
 
 int weatherfax_pi::GetAPIVersionMinor()
 {
-      return MY_API_VERSION_MINOR;
+    return MY_API_VERSION_MINOR;
 }
 
 int weatherfax_pi::GetPlugInVersionMajor()
 {
-      return PLUGIN_VERSION_MAJOR;
+    return PLUGIN_VERSION_MAJOR;
 }
 
 int weatherfax_pi::GetPlugInVersionMinor()
 {
-      return PLUGIN_VERSION_MINOR;
+    return PLUGIN_VERSION_MINOR;
 }
 
 wxBitmap *weatherfax_pi::GetPlugInBitmap()
 {
-      return _img_weatherfax;
+    return _img_weatherfax;
 }
 
 wxString weatherfax_pi::GetCommonName()
 {
-      return _("WeatherFax");
+    return _("WeatherFax");
 }
-
 
 wxString weatherfax_pi::GetShortDescription()
 {
-      return _("Weather Fax PlugIn for OpenCPN");
+    return _("Weather Fax PlugIn for OpenCPN");
 }
 
 wxString weatherfax_pi::GetLongDescription()
 {
-      return _("Weather Fax PlugIn for OpenCPN\n\
+    return _("Weather Fax PlugIn for OpenCPN\n\
 Read weather fax encoded data as audio or image. \n\
 Overlay this on top of charts. \n\
 Enable OpenGL (in Display options) for best results. \n\
@@ -175,41 +173,35 @@ The Weather Fax plugin was written by Sean D'Epagnier\n\
 
 int weatherfax_pi::GetToolbarToolCount(void)
 {
-      return 1;
+    return 1;
 }
 
 void weatherfax_pi::SetColorScheme(PI_ColorScheme cs)
 {
-      if (NULL == m_pWeatherFax)
-            return;
-      DimeWindow(m_pWeatherFax);
+    if (NULL == m_pWeatherFax)
+        return;
+    DimeWindow(m_pWeatherFax);
 }
 
 void weatherfax_pi::RearrangeWindow()
 {
-      if (NULL == m_pWeatherFax)
-            return;
+    if (NULL == m_pWeatherFax)
+        return;
 
-      SetColorScheme(PI_ColorScheme());
+    SetColorScheme(PI_ColorScheme());
 
-      m_pWeatherFax->Fit();
+    m_pWeatherFax->Fit();
 }
 
 void weatherfax_pi::OnToolbarToolCallback(int id)
 {
-      if(!m_pWeatherFax)
-      {
-            m_pWeatherFax = new WeatherFax(*this, m_parent_window);
-            m_pWeatherFax->Move(wxPoint(m_weatherfax_dialog_x, m_weatherfax_dialog_y));
-      }
+    m_pWeatherFax->Show(!m_pWeatherFax->IsShown());
 
-      m_pWeatherFax->Show(!m_pWeatherFax->IsShown());
+    RearrangeWindow();
 
-      RearrangeWindow();
-
-      wxPoint p = m_pWeatherFax->GetPosition();
-      m_pWeatherFax->Move(0,0);        // workaround for gtk autocentre dialog behavior
-      m_pWeatherFax->Move(p);
+    wxPoint p = m_pWeatherFax->GetPosition();
+    m_pWeatherFax->Move(0,0);        // workaround for gtk autocentre dialog behavior
+    m_pWeatherFax->Move(p);
 }
 
 bool weatherfax_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
@@ -258,62 +250,68 @@ wxString weatherfax_pi::StandardPath()
 
 bool weatherfax_pi::LoadConfig(void)
 {
-      wxFileConfig *pConf = m_pconfig;
+    wxFileConfig *pConf = m_pconfig;
 
-      if(pConf)
-      {
-            pConf->SetPath ( _T( "/Settings/WeatherFax" ) );
-            pConf->Read ( _T( "Path" ),  &m_path, _T ( "" ) );
+    if(pConf)
+    {
+        pConf->SetPath ( _T( "/Settings/WeatherFax" ) );
+        pConf->Read ( _T( "Path" ),  &m_path, _T ( "" ) );
 
-            m_weatherfax_dialog_x =  pConf->Read ( _T ( "DialogPosX" ), 20L );
-            m_weatherfax_dialog_y =  pConf->Read ( _T ( "DialogPosY" ), 20L );
+        m_weatherfax_dialog_x =  pConf->Read ( _T ( "DialogPosX" ), 20L );
+        m_weatherfax_dialog_y =  pConf->Read ( _T ( "DialogPosY" ), 20L );
 
-            pConf->SetPath ( _T ( "/Settings/WeatherFax/Audio" ) );
-            pConf->Read ( _T ( "ImageWidth" ), &m_ImageWidth, 576*2 );
-            pConf->Read ( _T ( "BitsPerPixel" ), &m_BitsPerPixel, 8 );
-            pConf->Read ( _T ( "Carrier" ), &m_Carrier, 1900 );
-            pConf->Read ( _T ( "Deviation" ), &m_Deviation, 400 );
-            pConf->Read ( _T ( "Filter" ), &m_Filter, 1 );
-            pConf->Read ( _T ( "SkipHeaderDetection" ), &m_bSkipHeaderDetection, 0 );
-            pConf->Read ( _T ( "IncludeHeadersInImage" ), &m_bIncludeHeadersInImage, 0 );
+        pConf->SetPath ( _T ( "/Settings/WeatherFax/Audio" ) );
+        pConf->Read ( _T ( "ImageWidth" ), &m_ImageWidth, 576*2 );
+        pConf->Read ( _T ( "BitsPerPixel" ), &m_BitsPerPixel, 8 );
+        pConf->Read ( _T ( "Carrier" ), &m_Carrier, 1900 );
+        pConf->Read ( _T ( "Deviation" ), &m_Deviation, 400 );
+        pConf->Read ( _T ( "Filter" ), &m_Filter, 1 );
+        pConf->Read ( _T ( "SkipHeaderDetection" ), &m_bSkipHeaderDetection, 0 );
+        pConf->Read ( _T ( "IncludeHeadersInImage" ), &m_bIncludeHeadersInImage, 0 );
 
-            pConf->SetPath ( _T ( "/Directories" ) );
-            wxString def;
-            def = ::wxGetCwd() + _T("/plugins");
-            pConf->Read ( _T ( "WeatherFaxDataLocation" ), &m_weatherfax_dir, def);
-            return true;
-      } else
-            return false;
+        pConf->SetPath ( _T ( "/Settings/WeatherFax/Schedules" ) );
+        pConf->Read ( _T ( "LoadAtStart" ), &m_bLoadSchedulesStart, 0 );
+
+        pConf->SetPath ( _T ( "/Directories" ) );
+        wxString def;
+        def = ::wxGetCwd() + _T("/plugins");
+        pConf->Read ( _T ( "WeatherFaxDataLocation" ), &m_weatherfax_dir, def);
+        return true;
+    } else
+        return false;
 }
 
 bool weatherfax_pi::SaveConfig(void)
 {
-      wxFileConfig *pConf = m_pconfig;
+    wxFileConfig *pConf = m_pconfig;
 
-      if(pConf)
-      {
-            pConf->SetPath ( _T ( "/Settings/WeatherFax" ) );
-            pConf->Write ( _T ( "Path" ), m_path );
+    if(pConf)
+    {
+        pConf->SetPath ( _T ( "/Settings/WeatherFax" ) );
+        pConf->Write ( _T ( "Path" ), m_path );
 
-            pConf->Write ( _T ( "DialogPosX" ),   m_weatherfax_dialog_x );
-            pConf->Write ( _T ( "DialogPosY" ),   m_weatherfax_dialog_y );
+        pConf->Write ( _T ( "DialogPosX" ),   m_weatherfax_dialog_x );
+        pConf->Write ( _T ( "DialogPosY" ),   m_weatherfax_dialog_y );
 
-            pConf->SetPath ( _T ( "/Settings/WeatherFax/Audio" ) );
-            pConf->Write ( _T ( "ImageWidth" ), m_ImageWidth );
-            pConf->Write ( _T ( "BitsPerPixel" ), m_BitsPerPixel );
-            pConf->Write ( _T ( "Carrier" ), m_Carrier );
-            pConf->Write ( _T ( "Deviation" ), m_Deviation );
-            pConf->Write ( _T ( "Filter" ), m_Filter );
-            pConf->Write ( _T ( "SkipHeaderDetection" ), m_bSkipHeaderDetection );
-            pConf->Write ( _T ( "IncludeHeadersInImage" ), m_bIncludeHeadersInImage );
+        pConf->SetPath ( _T ( "/Settings/WeatherFax/Audio" ) );
+        pConf->Write ( _T ( "ImageWidth" ), m_ImageWidth );
+        pConf->Write ( _T ( "BitsPerPixel" ), m_BitsPerPixel );
+        pConf->Write ( _T ( "Carrier" ), m_Carrier );
+        pConf->Write ( _T ( "Deviation" ), m_Deviation );
+        pConf->Write ( _T ( "Filter" ), m_Filter );
+        pConf->Write ( _T ( "SkipHeaderDetection" ), m_bSkipHeaderDetection );
+        pConf->Write ( _T ( "IncludeHeadersInImage" ), m_bIncludeHeadersInImage );
 
-            pConf->SetPath ( _T ( "/Directories" ) );
-            pConf->Write ( _T ( "WeatherFaxDataLocation" ), m_weatherfax_dir );
+        pConf->SetPath ( _T ( "/Settings/WeatherFax/Schedules" ) );
+        pConf->Write ( _T ( "LoadAtStart" ), m_bLoadSchedulesStart );
 
-            return true;
-      }
-      else
-            return false;
+        pConf->SetPath ( _T ( "/Directories" ) );
+        pConf->Write ( _T ( "WeatherFaxDataLocation" ), m_weatherfax_dir );
+
+        return true;
+    }
+    else
+        return false;
 }
 
 void weatherfax_pi::SetPositionFixEx(PlugIn_Position_Fix_Ex &pfix)
@@ -335,6 +333,8 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
     dialog->m_cFilter->SetSelection(m_Filter);
     dialog->m_cbSkip->SetValue(m_bSkipHeaderDetection);
     dialog->m_cbInclude->SetValue(m_bIncludeHeadersInImage);
+
+    dialog->m_cbLoadSchedulesStart->SetValue(m_bLoadSchedulesStart);
     
     dialog->Fit();
     wxColour cl;
@@ -350,6 +350,9 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
         m_Filter = dialog->m_cFilter->GetSelection();
         m_bSkipHeaderDetection = dialog->m_cbSkip->GetValue();
         m_bIncludeHeadersInImage = dialog->m_cbInclude->GetValue();
+
+        m_bLoadSchedulesStart = dialog->m_cbLoadSchedulesStart->GetValue();
+
         SaveConfig();
     }
     delete dialog;

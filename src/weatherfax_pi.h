@@ -89,6 +89,7 @@ public:
       void SetWeatherFaxY    (int x){ m_weatherfax_dialog_y = x;}
 
       void OnWeatherFaxClose();
+      void ShowPreferencesDialog( wxWindow* parent );
 
       static wxString StandardPath();
 
@@ -99,6 +100,8 @@ public:
       /* audio decoding options */
       int m_ImageWidth, m_BitsPerPixel, m_Carrier, m_Deviation, m_Filter;
       bool m_bSkipHeaderDetection, m_bIncludeHeadersInImage;
+
+      bool m_bLoadSchedulesStart;
 
       wxFileConfig     *m_pconfig;
 
@@ -113,7 +116,6 @@ private:
       bool              SaveConfig(void);
 
       void SetPositionFixEx(PlugIn_Position_Fix_Ex &pfix);
-      void ShowPreferencesDialog( wxWindow* parent );
 
       int               m_weatherfax_dialog_x, m_weatherfax_dialog_y;
       int               m_display_width, m_display_height;

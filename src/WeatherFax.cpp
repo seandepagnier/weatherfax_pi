@@ -132,6 +132,10 @@ WeatherFax::WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
                 m_Coords.Append(coord);
             }
     }
+
+    if(m_weatherfax_pi.m_bLoadSchedulesStart)
+        m_SchedulesDialog.Load();
+
     return;
 failed:
     wxMessageDialog mdlg(NULL, error, _("Weather Fax"), wxOK | wxICON_ERROR);

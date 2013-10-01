@@ -78,6 +78,7 @@ public:
     void OnOpen( wxCommandEvent& event );
     void OnEdit( wxCommandEvent& event );
     void OnDelete( wxCommandEvent& event );
+    void OnPreferences( wxCommandEvent& event ) { m_weatherfax_pi.ShowPreferencesDialog( this ); }
     void OnClose( wxCommandEvent& event ) { Show(false); }
     void OnCapture( wxCommandEvent& event );
     void OnSchedules( wxCommandEvent& event );

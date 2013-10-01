@@ -213,7 +213,7 @@ void WeatherFaxWizard::OnPaintPhasing( wxPaintEvent& event )
     window->GetSize(&w, &h);
     for(int x = 0; x<w; x++) {
         int i = x * blocksize / w;
-        int y = h*((m_decoder->line ? m_decoder->datadouble[i] : 0) +(s/2))/s;
+        int y = h*((m_decoder->imageline ? m_decoder->datadouble[i] : 0) +(s/2))/s;
         dc.DrawLine(x, h/2, x, y);
     }
 
@@ -476,7 +476,7 @@ mapping1y^2*q + mapping2y^2*(e - 1)/d = 0
     double e = square(cm2lm1l);
     double d = square(cm2lm1l*sm2lm1l);
     double q = square(pp2)/square(pp1);
-    double a = q + (e - 1) /d;
+    double a = q + (e - 1)/d;
     double b = 2*(mapping2y*(1 - e)/d - mapping1y*q);
     double c = square(mapping1y)*q + square(mapping2y)*(e - 1)/d;
     double inputpoley1 = (-b + sqrt(b*b - 4*a*c)) / (2*a);
@@ -795,8 +795,6 @@ void WeatherFaxWizard::SetCoords(int index)
     m_cbCoordSet->SetSelection(index);
 
     if(index) {
-//        WeatherFaxImageCoordinates c = *m_Coords[index-1];
-//        *m_newCoords = c; /* copy data */
         m_curCoords = m_Coords[index-1];
         m_bRemoveCoordSet->Enable();
         m_bChanged = false;
