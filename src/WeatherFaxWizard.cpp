@@ -40,7 +40,7 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img, FaxDecoder *decoder,
     : WeatherFaxWizardBase( &parent ), m_decoder(decoder), m_parent(parent),
       m_wfimg(img), m_curCoords(img.m_Coords),
       m_NewCoordBaseName(newcoordbasename.empty() ? wxString(_("New Coord")) : newcoordbasename),
-      m_Coords(coords), m_bChanged(true)
+      m_Coords(coords)
 {
     m_sPhasing->SetValue(m_wfimg.phasing);
     m_sSkew->SetValue(m_wfimg.skew);
@@ -94,7 +94,7 @@ WeatherFaxWizard::~WeatherFaxWizard()
     if(sel == -1)
         sel = m_SelectedIndex;
 
-    if(m_bChanged) {
+    if(sel == 0 && GetReturnCode() != wxID_CANCEL) {
         int cc = m_Coords.GetCount();
         wxString newname = m_newCoords->name, newnumberedname;
         for(int n=0, i=-1; i != cc; n++) {
@@ -116,7 +116,7 @@ WeatherFaxWizard::~WeatherFaxWizard()
 
 void WeatherFaxWizard::MakeNewCoordinates()
 {
-    if(m_curCoords && m_curCoords->Station.empty() && !m_curCoords->Area.empty()) {
+    if(m_curCoords && !m_curCoords->Station.empty() && !m_curCoords->Area.empty()) {
         m_bRemoveCoordSet->Disable();        
         m_cbCoordSet->Append(m_curCoords->name);
         return;
@@ -158,7 +158,8 @@ void WeatherFaxWizard::OnDecoderTimer( wxTimerEvent & )
         m_decoder->minus_saturation_threshold =
             -(1 + (double)m_sMinusSaturationThreshold->GetValue()/10);
 
-        if(m_decoder->imageline > (m_wfimg.m_origimg.IsOk() ? m_wfimg.m_origimg.GetHeight() : 0)) {
+        if(m_decoder->imageline &&
+           (!m_wfimg.m_origimg.IsOk() || m_decoder->imageline != m_wfimg.m_origimg.GetHeight())) {
             int w = m_decoder->m_imagewidth, h = m_decoder->imageline;
             m_wfimg.m_origimg = wxImage( w, h );
             memcpy(m_wfimg.m_origimg.GetData(), m_decoder->imgdata, w*h*3);
@@ -797,11 +798,9 @@ void WeatherFaxWizard::SetCoords(int index)
     if(index) {
         m_curCoords = m_Coords[index-1];
         m_bRemoveCoordSet->Enable();
-        m_bChanged = false;
     } else {
         m_curCoords = m_newCoords;
         m_bRemoveCoordSet->Disable();
-        m_bChanged = true;
     }
 
     m_SelectedIndex = index;

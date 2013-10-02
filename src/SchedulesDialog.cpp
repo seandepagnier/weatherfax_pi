@@ -242,6 +242,7 @@ void SchedulesDialog::Load()
                 break;
             }
     }
+    UpdateProgress();
 
     m_bDisableFilter = false;
     Filter();
@@ -450,7 +451,10 @@ int wxCALLBACK SortSchedules(long item1, long item2, long list)
     
     lc->GetItem(it1);
     lc->GetItem(it2);
-    
+
+    if(sortcol == SchedulesDialog::CAPTURE) {
+        return sortorder * (it1.GetImage() > it2.GetImage() ? 1 : -1);
+    } else
     if(sortcol == SchedulesDialog::FREQUENCY ||
        sortcol == SchedulesDialog::TIME ||
        sortcol == SchedulesDialog::VALID_TIME ||
@@ -458,8 +462,7 @@ int wxCALLBACK SortSchedules(long item1, long item2, long list)
         double a, b;
         it1.GetText().ToDouble(&a);
         it2.GetText().ToDouble(&b);
-        return sortorder * ((a > b) ? 1 : -1)
-;
+        return sortorder * ((a > b) ? 1 : -1);
     } else
         return sortorder * it1.GetText().Cmp(it2.GetText());
 }
@@ -469,8 +472,8 @@ void SchedulesDialog::OnSchedulesSort( wxListEvent& event )
     sortcol = event.GetColumn();
     sortorder = -sortorder;
 
-    if(sortcol == 0) {
 #if 0
+    if(sortcol == 0) {
         m_CaptureSchedules.clear();
         for(std::list<Schedule*>::iterator it = m_Schedules.begin();
             it != m_Schedules.end(); it++) {
@@ -480,8 +483,8 @@ void SchedulesDialog::OnSchedulesSort( wxListEvent& event )
         }
 
         RebuildList();
-#endif
     } else
+#endif
         if(m_lSchedules->GetItemCount() > 500)  {
             wxMessageDialog mdlg(this, _("Sorting this many schedules might take too long"),
                                  _("weatherfax"), wxOK | wxICON_ERROR);

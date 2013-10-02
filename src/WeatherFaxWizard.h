@@ -99,6 +99,4 @@ protected:
 
     /* page 2 */
     int m_SelectedIndex;
-
-    bool m_bChanged;
 };
