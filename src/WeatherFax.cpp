@@ -419,7 +419,7 @@ void WeatherFax::WhiteTransparencyChanged( wxScrollEvent& event )
         return;
 
     WeatherFaxImage &image = *m_Faxes[selection];
-v    image.m_iWhiteTransparency = event.GetPosition();
+    image.m_iWhiteTransparency = event.GetPosition();
     image.FreeData();
     RequestRefresh( m_parent );
 }
