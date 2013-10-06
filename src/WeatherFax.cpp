@@ -36,6 +36,8 @@
 #include "WeatherFaxWizard.h"
 #include "AboutDialog.h"
 
+#include "wximgkap.h"
+
 /* replace characters a in input with b */
 wxString ReplaceChar(wxString input, wxChar a, wxChar b)
 {
@@ -270,9 +272,9 @@ void WeatherFax::OpenWav(wxString filename, wxString station, wxString area)
         
         wizard.StoreCoords();
         wizard.StoreMappingParams();
-                
-        m_lFaxes->Check(selection, true);
 
+        m_lFaxes->SetSelection(selection);
+                
         RequestRefresh( m_parent );
         UpdateMenuStates();
     } else
@@ -300,7 +302,6 @@ void WeatherFax::OpenImage(wxString filename)
             wizard.StoreMappingParams();
             
             m_lFaxes->SetSelection(selection);
-            m_lFaxes->Check(selection, true);
 
             RequestRefresh( m_parent );
             UpdateMenuStates();
@@ -311,6 +312,19 @@ void WeatherFax::OpenImage(wxString filename)
                            wxOK | wxICON_ERROR );
         w.ShowModal();
     }
+}
+
+void WeatherFax::Export(wxString filename)
+{
+    int selection = m_lFaxes->GetSelection();
+    if(selection < 0 || selection >= (int)m_Faxes.size())
+        return;
+
+    WeatherFaxImage &image = *m_Faxes[selection];
+    
+    wximgtokap(image, m_weatherfax_pi.m_iExportColors,
+               m_weatherfax_pi.m_bExportDepthMeters ? METERS : FATHOMS,
+               m_weatherfax_pi.m_sExportSoundingDatum.mb_str(), filename.mb_str());
 }
 
 void WeatherFax::OnOpen( wxCommandEvent& event )
@@ -348,13 +362,28 @@ void WeatherFax::OnEdit( wxCommandEvent& event )
         wizard.StoreCoords();
         wizard.StoreMappingParams();
 
-        m_lFaxes->Check(selection, true);
         image.FreeData();
     } else
         image = backupimage;
 
     m_parent->SetFocus(); /* try this to see if it helps or not */
     RequestRefresh( m_parent );
+}
+
+void WeatherFax::OnExport( wxCommandEvent& event )
+{
+    wxFileDialog saveDialog
+        ( this, _( "Save Weather Fax To KAP" ),
+          m_weatherfax_pi.m_export_path, wxT ( "" ),
+          _ ( "\
+Supported Files|*.KAP;*.kap|\
+All files (*.*)|*.*" ), wxFD_SAVE);
+
+    if( saveDialog.ShowModal() == wxID_OK ) {
+        wxString filename = saveDialog.GetPath();
+        m_weatherfax_pi.m_export_path = saveDialog.GetDirectory();        
+        Export(filename);
+    }
 }
 
 void WeatherFax::OnDelete( wxCommandEvent& event )
@@ -390,7 +419,7 @@ void WeatherFax::WhiteTransparencyChanged( wxScrollEvent& event )
         return;
 
     WeatherFaxImage &image = *m_Faxes[selection];
-    image.m_iWhiteTransparency = event.GetPosition();
+v    image.m_iWhiteTransparency = event.GetPosition();
     image.FreeData();
     RequestRefresh( m_parent );
 }
@@ -443,8 +472,6 @@ void WeatherFax::OnCapture( wxCommandEvent& event )
         wizard.StoreCoords();
         wizard.StoreMappingParams();
 
-        m_lFaxes->Check(selection, true);
-
         RequestRefresh( m_parent );
         UpdateMenuStates();
     } else
@@ -474,10 +501,12 @@ void WeatherFax::UpdateMenuStates()
     int selection = m_lFaxes->GetSelection();
     if(selection < 0 || selection >= (int)m_Faxes.size()) {
         m_mEdit->Enable(false);
+        m_mExport->Enable(false);
         m_mDelete->Enable(false);
         EnableDisplayControls(false);
     } else {
         m_mEdit->Enable();
+        m_mExport->Enable();
         m_mDelete->Enable();
         EnableDisplayControls(true);
     }

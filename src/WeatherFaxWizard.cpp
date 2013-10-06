@@ -242,12 +242,12 @@ void WeatherFaxWizard::OnWizardPageChanged( wxWizardEvent& event )
             x2 = m_sCoord2X->GetValue(), y2 = m_sCoord2Y->GetValue();
 
             m_wfimg.MercatorToInput(x1, y1, mx1, my1);
-            m_sCoord1XUnMapped->SetValue(mx1);
-            m_sCoord1YUnMapped->SetValue(my1);
+            m_sCoord1XUnMapped->SetValue(round(mx1));
+            m_sCoord1YUnMapped->SetValue(round(my1));
 
             m_wfimg.MercatorToInput(x2, y2, mx2, my2);
-            m_sCoord2XUnMapped->SetValue(mx2);
-            m_sCoord2YUnMapped->SetValue(my2);
+            m_sCoord2XUnMapped->SetValue(round(mx2));
+            m_sCoord2YUnMapped->SetValue(round(my2));
     
             m_sCoord1LatUnMapped->SetValue(m_sCoord1Lat->GetValue());
             m_sCoord1LonUnMapped->SetValue(m_sCoord1Lon->GetValue());

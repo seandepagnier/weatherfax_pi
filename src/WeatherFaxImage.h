@@ -52,7 +52,29 @@ WeatherFaxImageCoordinates(wxString n) : name(n),
   lat1 - lat(x) = (p1.x - x) * (lat2 - lat1) / (p2.x - p1.x)
   lat(x) = lat1 - (p1.x - x) * (lat2 - lat1) / (p2.x - p1.x)
 */
-    double lon(int x) { return lon1 - (p1.x - x) * (lon2 - lon1) / (p2.x - p1.x); }
+    double lon(int x) { 
+        double d = (lon2 - lon1);
+        while(d <= -180) d += 360;
+        while(d >=  180) d -= 360;
+        return lon1 - (p1.x - x) * d / (p2.x - p1.x);
+    }
+
+    double lat(int y) {
+        double s1 = sin(lat1/90 * (M_PI/2));
+        double y1 = .5 * log((1 + s1) / (1 - s1));
+        double s2 = sin(lat2/90 * (M_PI/2));
+        double y2 = .5 * log((1 + s2) / (1 - s2));
+
+        //      y1/(p1.y-eq) = y2/(p2.y-eq);
+        // y1*p2.y - y1*eq = y2*p1.y - y2*eq;
+        double eq = (y1*p2.y - y2*p1.y) / (y1 - y2);
+
+        //        y1/(p1.y-eq) = yy/(y-eq);
+        //        y1*(y-eq)/(p1.y-eq) = yy;
+        double yy = y1*(y-eq)/(p1.y-eq);
+
+        return 90*(4/M_PI*atan(exp(yy)) - 1);
+    }
 
     static wxString MapName(enum MapType type);
     static MapType GetMapType(wxString name);
@@ -94,7 +116,7 @@ public:
     void MercatorToInput(double mx, double my, double &px, double &py);
     bool MakeMappedImage(wxWindow *parent, bool paramsonly);
 
-    double inputheight; /* used internally */
+    double inputheight, aspectratio; /* used internally */
     wxPoint mercatoroffset;
 
     wxImage m_mappedimg;

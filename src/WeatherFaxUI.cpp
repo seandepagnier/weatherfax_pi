@@ -86,6 +86,9 @@ WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString&
 	m_mEdit = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("Edit") ) + wxT('\t') + wxT("Ctrl+e"), wxEmptyString, wxITEM_NORMAL );
 	m_menu1->Append( m_mEdit );
 	
+	m_mExport = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("Export") ) + wxT('\t') + wxT("Ctrl+x"), wxEmptyString, wxITEM_NORMAL );
+	m_menu1->Append( m_mExport );
+	
 	m_mDelete = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("Delete") ) + wxT('\t') + wxT("Ctrl+d"), wxEmptyString, wxITEM_NORMAL );
 	m_menu1->Append( m_mDelete );
 	
@@ -156,6 +159,7 @@ WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString&
 	m_cbDisplaySelected->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( WeatherFaxBase::OnFaxesToggled ), NULL, this );
 	this->Connect( m_menuItem1->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnOpen ) );
 	this->Connect( m_mEdit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnEdit ) );
+	this->Connect( m_mExport->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnExport ) );
 	this->Connect( m_mDelete->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnDelete ) );
 	this->Connect( m_menuItem9->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnPreferences ) );
 	this->Connect( m_menuItem4->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnClose ) );
@@ -193,6 +197,7 @@ WeatherFaxBase::~WeatherFaxBase()
 	m_cbDisplaySelected->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( WeatherFaxBase::OnFaxesToggled ), NULL, this );
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnOpen ) );
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnEdit ) );
+	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnExport ) );
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnDelete ) );
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnPreferences ) );
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnClose ) );
@@ -422,8 +427,8 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	fgSizer49->SetFlexibleDirection( wxBOTH );
 	fgSizer49->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_staticText33 = new wxStaticText( m_panel7, wxID_ANY, _("Select fax images by clicking in the capture (first) column\n\nSchedules can be sorted by clicking the header column\n\nThe schedules need testing as I can only receive from a few of the possible stations.  Corrections can be made by modifying the WeatherFaxSchedules.xml file. Patches can be submitted via github."), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText33->Wrap( 600 );
+	m_staticText33 = new wxStaticText( m_panel7, wxID_ANY, _("Select fax images by clicking in the capture (first) column\n\nSchedules can be sorted by clicking the header column\n\nThe schedules need testing as I can only receive from a few of the possible stations.  Corrections can be made by modifying the WeatherFaxSchedules.xml file. Patches can be submitted via github.\n\nAutomatic control of a ssb radio is desireable as well, however the author only has a tecsun pl-600.  If a suitable radio can be donated, support will be implemented."), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText33->Wrap( 640 );
 	fgSizer49->Add( m_staticText33, 0, wxALL, 5 );
 	
 	
@@ -1238,6 +1243,11 @@ WeatherFaxPrefsDialog::WeatherFaxPrefsDialog( wxWindow* parent, wxWindowID id, c
 	fgSizer51->SetFlexibleDirection( wxBOTH );
 	fgSizer51->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
+	wxFlexGridSizer* fgSizer55;
+	fgSizer55 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer55->SetFlexibleDirection( wxBOTH );
+	fgSizer55->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
 	wxStaticBoxSizer* sbSizer6;
 	sbSizer6 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Audio Decoding Options") ), wxVERTICAL );
 	
@@ -1302,10 +1312,15 @@ WeatherFaxPrefsDialog::WeatherFaxPrefsDialog( wxWindow* parent, wxWindowID id, c
 	sbSizer6->Add( fgSizer12, 1, wxEXPAND, 5 );
 	
 	
-	fgSizer51->Add( sbSizer6, 1, wxEXPAND, 5 );
+	fgSizer55->Add( sbSizer6, 1, wxEXPAND, 5 );
+	
+	wxFlexGridSizer* fgSizer56;
+	fgSizer56 = new wxFlexGridSizer( 0, 1, 0, 0 );
+	fgSizer56->SetFlexibleDirection( wxBOTH );
+	fgSizer56->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
 	wxStaticBoxSizer* sbSizer18;
-	sbSizer18 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Schedules") ), wxVERTICAL );
+	sbSizer18 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("HF Schedules") ), wxVERTICAL );
 	
 	wxFlexGridSizer* fgSizer47;
 	fgSizer47 = new wxFlexGridSizer( 0, 1, 0, 0 );
@@ -1319,7 +1334,81 @@ WeatherFaxPrefsDialog::WeatherFaxPrefsDialog( wxWindow* parent, wxWindowID id, c
 	sbSizer18->Add( fgSizer47, 1, wxEXPAND, 5 );
 	
 	
-	fgSizer51->Add( sbSizer18, 1, wxEXPAND, 5 );
+	fgSizer56->Add( sbSizer18, 1, wxEXPAND, 5 );
+	
+	wxStaticBoxSizer* sbSizer17;
+	sbSizer17 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Export") ), wxVERTICAL );
+	
+	wxFlexGridSizer* fgSizer53;
+	fgSizer53 = new wxFlexGridSizer( 0, 1, 0, 0 );
+	fgSizer53->SetFlexibleDirection( wxBOTH );
+	fgSizer53->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	wxFlexGridSizer* fgSizer511;
+	fgSizer511 = new wxFlexGridSizer( 0, 3, 0, 0 );
+	fgSizer511->SetFlexibleDirection( wxBOTH );
+	fgSizer511->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_staticText36 = new wxStaticText( this, wxID_ANY, _("Reduce to"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText36->Wrap( -1 );
+	fgSizer511->Add( m_staticText36, 0, wxALL, 5 );
+	
+	m_sExportColors = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 2, 32768, 64 );
+	fgSizer511->Add( m_sExportColors, 0, wxALL, 5 );
+	
+	m_staticText37 = new wxStaticText( this, wxID_ANY, _("Colors"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText37->Wrap( -1 );
+	fgSizer511->Add( m_staticText37, 0, wxALL, 5 );
+	
+	
+	fgSizer53->Add( fgSizer511, 1, wxEXPAND, 5 );
+	
+	wxStaticBoxSizer* sbSizer181;
+	sbSizer181 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Depth") ), wxVERTICAL );
+	
+	wxFlexGridSizer* fgSizer52;
+	fgSizer52 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer52->SetFlexibleDirection( wxBOTH );
+	fgSizer52->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_rbExportDepthMeters = new wxRadioButton( this, wxID_ANY, _("Meters"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer52->Add( m_rbExportDepthMeters, 0, wxALL, 5 );
+	
+	m_rbExportDepthFathoms = new wxRadioButton( this, wxID_ANY, _("Fathoms"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer52->Add( m_rbExportDepthFathoms, 0, wxALL, 5 );
+	
+	
+	sbSizer181->Add( fgSizer52, 1, wxEXPAND, 5 );
+	
+	
+	fgSizer53->Add( sbSizer181, 1, wxEXPAND, 5 );
+	
+	wxFlexGridSizer* fgSizer54;
+	fgSizer54 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer54->SetFlexibleDirection( wxBOTH );
+	fgSizer54->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_staticText38 = new wxStaticText( this, wxID_ANY, _("fix sounding datum"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText38->Wrap( -1 );
+	fgSizer54->Add( m_staticText38, 0, wxALL, 5 );
+	
+	m_tExportSoundingDatum = new wxTextCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer54->Add( m_tExportSoundingDatum, 0, wxALL, 5 );
+	
+	
+	fgSizer53->Add( fgSizer54, 1, wxEXPAND, 5 );
+	
+	
+	sbSizer17->Add( fgSizer53, 1, wxEXPAND, 5 );
+	
+	
+	fgSizer56->Add( sbSizer17, 1, wxEXPAND, 5 );
+	
+	
+	fgSizer55->Add( fgSizer56, 1, wxEXPAND, 5 );
+	
+	
+	fgSizer51->Add( fgSizer55, 1, wxEXPAND, 5 );
 	
 	m_sdbSizer1 = new wxStdDialogButtonSizer();
 	m_sdbSizer1OK = new wxButton( this, wxID_OK );
@@ -1350,6 +1439,22 @@ AboutDialogBase::AboutDialogBase( wxWindow* parent, wxWindowID id, const wxStrin
 	fgSizer90 = new wxFlexGridSizer( 0, 1, 0, 0 );
 	fgSizer90->SetFlexibleDirection( wxBOTH );
 	fgSizer90->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	wxFlexGridSizer* fgSizer50;
+	fgSizer50 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer50->SetFlexibleDirection( wxBOTH );
+	fgSizer50->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_staticText34 = new wxStaticText( this, wxID_ANY, _("Weather Fax Plugin Version"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText34->Wrap( -1 );
+	fgSizer50->Add( m_staticText34, 0, wxALL, 5 );
+	
+	m_stVersion = new wxStaticText( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	m_stVersion->Wrap( -1 );
+	fgSizer50->Add( m_stVersion, 0, wxALL, 5 );
+	
+	
+	fgSizer90->Add( fgSizer50, 1, wxEXPAND, 5 );
 	
 	m_staticText110 = new wxStaticText( this, wxID_ANY, _("The weatherfax plugin for opencpn is intended to reduce the amount of user interaction to receive weather fax images and to overlay them directly onto charts.\n\nTo get started, open either an image or recorded wav audio file of a ssb radio fax transmission.\n\nLicense: GPLv3+\n\nSource Code:\nhttps://github.com/seandepagnier/weatherfax_pi\n\nAuthor:\nSean D'Epagnier\n\nMany thanks to all of the translators and testers."), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText110->Wrap( 400 );

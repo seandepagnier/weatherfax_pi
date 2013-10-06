@@ -273,7 +273,7 @@ void WeatherFaxImage::InputToMercator(double px, double py, double &mx, double &
     }
 
     /* apply scale */
-    x*=m_Coords->mappingmultiplier*m_Coords->mappingratio;
+    x*=m_Coords->mappingmultiplier*aspectratio;
     y*=m_Coords->mappingmultiplier;
 
     /* apply offsets */
@@ -291,7 +291,7 @@ void WeatherFaxImage::MercatorToInput(double mx, double my, double &px, double &
     y = my - mercatoroffset.y;
 
     /* apply scale */
-    x /= m_Coords->mappingmultiplier*m_Coords->mappingratio;
+    x /= m_Coords->mappingmultiplier*aspectratio;
     y /= m_Coords->mappingmultiplier;
 
     /* if not mercator, it is fixed and needs conversion here */
@@ -342,9 +342,19 @@ bool WeatherFaxImage::MakeMappedImage(wxWindow *parent, bool paramsonly)
     mercatoroffset.x = 0;
     mercatoroffset.y = 0;
 
-    /* four corners of input */
     double p1x, p2x, p3x, p4x, p5x, p6x;
     double p1y, p2y, p3y, p4y, p5y, p6y;
+
+    /* calculate aspect ratio to give 1:1 along equator so if the image is
+       saved as a kap file it can be displayed as mercator without needing to
+       change he aspect ratio, this method is not numerically perfect but
+       I think it is close enough in practice */
+    aspectratio = 1;
+    InputToMercator(m_Coords->inputpole.x+2e-2, m_Coords->inputequator, p2x, p2y);
+    InputToMercator(m_Coords->inputpole.x, m_Coords->inputequator+2e-2, p3x, p3y);
+    aspectratio = p3y / p2x * m_Coords->mappingratio;
+
+    /* four corners of input */
     InputToMercator(0, 0, p1x, p1y);
     InputToMercator(w, 0, p2x, p2y);
     InputToMercator(w, h, p3x, p3y);
@@ -411,7 +421,7 @@ Try changing size parameter to a smaller value. (less than %.2f)\naborting\n"),
         return false;
     }
 
-/* now generate mercator image from input image */
+    /* now generate mercator image from input image */
     m_mappedimg.Create(mw, mh);
     wxProgressDialog progressdialog(
         _("Mapping Weather Fax Image"), _("Weather Fax Mapper"), mw, parent,
@@ -419,8 +429,8 @@ Try changing size parameter to a smaller value. (less than %.2f)\naborting\n"),
 
     unsigned char *d = m_phasedimg.GetData(), *md = m_mappedimg.GetData();
     for(int x=0; x<mw; x++) {
-        if(x%200 == 0 && !progressdialog.Update(x))
-            return false;
+//        if(x%200 == 0 && !progressdialog.Update(x))
+//            return false;
 
         for(int y=0; y<mh; y++) {
             double px, py;

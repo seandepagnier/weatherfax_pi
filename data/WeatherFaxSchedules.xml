@@ -928,77 +928,77 @@
 
   <Station Name="Wellington, New Zealand">
     <Frequency khz="3247.4">
-      <Map Time="1245" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="12" />
-      <Map Time="1345" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="12" />
-      <Map Time="1445" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="12" />
-      <Map Time="1545" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="12" Area="TNZ" Duration="12" />
-      <Map Time="1645" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="12" Area="SWP" Duration="12" />
-      <Map Time="0945" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="06" Area="TNZ" Duration="12" />
-      <Map Time="1045" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="06" Area="SWP" Duration="12" />
+      <Map Time="1245" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1345" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1445" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1545" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="12" Area="TNZ" Duration="15" />
+      <Map Time="1645" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="0945" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="06" Area="TNZ" Duration="15" />
+      <Map Time="1045" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="06" Area="SWP" Duration="15" />
     </Frequency>
 
     <Frequency khz="5807">
-      <Map Time="0000" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="12" />
-      <Map Time="0100" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="12" />
-      <Map Time="0200" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="12" />
-      <Map Time="0300" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="00" Area="TNZ" Duration="12" />
-      <Map Time="0400" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="00" Area="SWP" Duration="12" />
-      <Map Time="0900" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="06" Area="TNZ" Duration="12" />
-      <Map Time="1000" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="06" Area="SWP" Duration="12" />
+      <Map Time="0000" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0100" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0200" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0300" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="00" Area="TNZ" Duration="15" />
+      <Map Time="0400" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0900" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="06" Area="TNZ" Duration="15" />
+      <Map Time="1000" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="06" Area="SWP" Duration="15" />
 
-      <Map Time="1200" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="12" />
-      <Map Time="1300" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="12" />
-      <Map Time="1400" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="12" />
-      <Map Time="1500" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="12" Area="TNZ" Duration="12" />
-      <Map Time="1600" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="12" Area="SWP" Duration="12" />
-      <Map Time="2100" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="18" Area="TNZ" Duration="12" />
-      <Map Time="2200" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="18" Area="SWP" Duration="12" />
+      <Map Time="1200" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1300" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1400" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1500" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="12" Area="TNZ" Duration="15" />
+      <Map Time="1600" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="2100" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="18" Area="TNZ" Duration="15" />
+      <Map Time="2200" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="18" Area="SWP" Duration="15" />
     </Frequency>
     
     <Frequency khz="9459">
-      <Map Time="0015" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="12" />
-      <Map Time="0115" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="12" />
-      <Map Time="0215" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="12" />
-      <Map Time="0315" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="00" Area="TNZ" Duration="12" />
-      <Map Time="0415" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="00" Area="SWP" Duration="12" />
-      <Map Time="0915" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="06" Area="TNZ" Duration="12" />
-      <Map Time="1015" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="06" Area="SWP" Duration="12" />
+      <Map Time="0015" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0115" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0215" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0315" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="00" Area="TNZ" Duration="15" />
+      <Map Time="0415" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0915" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="06" Area="TNZ" Duration="15" />
+      <Map Time="1015" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="06" Area="SWP" Duration="15" />
 
-      <Map Time="1215" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="12" />
-      <Map Time="1315" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="12" />
-      <Map Time="1415" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="12" />
-      <Map Time="1515" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="12" Area="TNZ" Duration="12" />
-      <Map Time="1615" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="12" Area="SWP" Duration="12" />
-      <Map Time="2115" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="18" Area="TNZ" Duration="12" />
-      <Map Time="2215" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="18" Area="SWP" Duration="12" />
+      <Map Time="1215" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1315" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1415" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1515" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="12" Area="TNZ" Duration="15" />
+      <Map Time="1615" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="2115" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="18" Area="TNZ" Duration="15" />
+      <Map Time="2215" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="18" Area="SWP" Duration="15" />
     </Frequency>
     
     <Frequency khz="13550.5">
-      <Map Time="0030" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="12" />
-      <Map Time="0130" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="12" />
-      <Map Time="0230" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="12" />
-      <Map Time="0330" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="00" Area="TNZ" Duration="12" />
-      <Map Time="0430" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="00" Area="SWP" Duration="12" />
-      <Map Time="0930" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="06" Area="TNZ" Duration="12" />
-      <Map Time="1030" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="06" Area="SWP" Duration="12" />
+      <Map Time="0030" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0130" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0230" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0330" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="00" Area="TNZ" Duration="15" />
+      <Map Time="0430" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0930" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="06" Area="TNZ" Duration="15" />
+      <Map Time="1030" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="06" Area="SWP" Duration="15" />
 
-      <Map Time="1230" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="12" />
-      <Map Time="1330" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="12" />
-      <Map Time="1430" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="12" />
-      <Map Time="1530" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="12" Area="TNZ" Duration="12" />
-      <Map Time="1630" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="12" Area="SWP" Duration="12" />
-      <Map Time="2130" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="18" Area="TNZ" Duration="12" />
-      <Map Time="2230" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="18" Area="SWP" Duration="12" />
+      <Map Time="1230" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1330" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1430" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1530" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="12" Area="TNZ" Duration="15" />
+      <Map Time="1630" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="2130" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="18" Area="TNZ" Duration="15" />
+      <Map Time="2230" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="18" Area="SWP" Duration="15" />
     </Frequency>
     
     <Frequency khz="16340.1">
-      <Map Time="0045" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="12" />
-      <Map Time="0145" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="12" />
-      <Map Time="0245" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="12" />
-      <Map Time="0345" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="00" Area="TNZ" Duration="12" />
-      <Map Time="0445" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="00" Area="SWP" Duration="12" />
-      <Map Time="2145" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="18" Area="TNZ" Duration="12" />
-      <Map Time="2245" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="18" Area="SWP" Duration="12"/>
+      <Map Time="0045" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0145" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0245" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0345" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="00" Area="TNZ" Duration="15" />
+      <Map Time="0445" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="2145" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="18" Area="TNZ" Duration="15" />
+      <Map Time="2245" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="18" Area="SWP" Duration="15"/>
     </Frequency>
     
     <Area Name="TNZ" Description="TASMAN SEA - NEW ZEALAND" />

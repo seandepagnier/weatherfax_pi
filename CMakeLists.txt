@@ -74,6 +74,9 @@ SET(SRC_WEATHERFAX
             src/icons.h
             src/icons.cpp
 
+            src/wximgkap.h
+            src/wximgkap.cpp
+
             src/libaudiofile/aupv.c
             src/libaudiofile/error.c
             src/libaudiofile/extended.c

@@ -59,6 +59,7 @@ class WeatherFaxBase : public wxFrame
 		wxMenuBar* m_menubar1;
 		wxMenu* m_menu1;
 		wxMenuItem* m_mEdit;
+		wxMenuItem* m_mExport;
 		wxMenuItem* m_mDelete;
 		wxMenu* m_menu2;
 		wxMenu* m_menu3;
@@ -72,6 +73,7 @@ class WeatherFaxBase : public wxFrame
 		virtual void OnInvert( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnOpen( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnEdit( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnExport( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnDelete( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnPreferences( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
@@ -196,7 +198,7 @@ class InternetRetrievalDialogBase : public wxDialog
 	
 	public:
 		
-		InternetRetrievalDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Internet Retrieval"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
+		InternetRetrievalDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Internet Retrieval"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER ); 
 		~InternetRetrievalDialogBase();
 	
 };
@@ -317,6 +319,9 @@ class WeatherFaxPrefsDialog : public wxDialog
 		wxStaticText* m_staticText31;
 		wxStaticText* m_staticText32;
 		wxStaticText* m_staticText33;
+		wxStaticText* m_staticText36;
+		wxStaticText* m_staticText37;
+		wxStaticText* m_staticText38;
 		wxStdDialogButtonSizer* m_sdbSizer1;
 		wxButton* m_sdbSizer1OK;
 		wxButton* m_sdbSizer1Cancel;
@@ -330,6 +335,10 @@ class WeatherFaxPrefsDialog : public wxDialog
 		wxCheckBox* m_cbSkip;
 		wxCheckBox* m_cbInclude;
 		wxCheckBox* m_cbLoadSchedulesStart;
+		wxSpinCtrl* m_sExportColors;
+		wxRadioButton* m_rbExportDepthMeters;
+		wxRadioButton* m_rbExportDepthFathoms;
+		wxTextCtrl* m_tExportSoundingDatum;
 		
 		WeatherFaxPrefsDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax Preferences"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxCAPTION|wxDEFAULT_DIALOG_STYLE ); 
 		~WeatherFaxPrefsDialog();
@@ -344,6 +353,8 @@ class AboutDialogBase : public wxDialog
 	private:
 	
 	protected:
+		wxStaticText* m_staticText34;
+		wxStaticText* m_stVersion;
 		wxStaticText* m_staticText110;
 		wxButton* m_bDonate;
 		wxButton* m_bClose;

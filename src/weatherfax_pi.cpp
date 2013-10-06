@@ -256,6 +256,7 @@ bool weatherfax_pi::LoadConfig(void)
     {
         pConf->SetPath ( _T( "/Settings/WeatherFax" ) );
         pConf->Read ( _T( "Path" ),  &m_path, _T ( "" ) );
+        pConf->Read ( _T( "ExportPath" ),  &m_export_path, _T ( "" ) );
 
         m_weatherfax_dialog_x =  pConf->Read ( _T ( "DialogPosX" ), 20L );
         m_weatherfax_dialog_y =  pConf->Read ( _T ( "DialogPosY" ), 20L );
@@ -272,6 +273,11 @@ bool weatherfax_pi::LoadConfig(void)
         pConf->SetPath ( _T ( "/Settings/WeatherFax/Schedules" ) );
         pConf->Read ( _T ( "LoadAtStart" ), &m_bLoadSchedulesStart, 0 );
 
+        pConf->SetPath ( _T ( "/Settings/WeatherFax/Export" ) );
+        pConf->Read ( _T ( "Colors" ), &m_iExportColors, 64 );
+        pConf->Read ( _T ( "DepthMeters" ), &m_bExportDepthMeters, true );
+        pConf->Read ( _T ( "SoundingDatum" ), &m_sExportSoundingDatum, _T("LOWEST LOW WATER"));
+
         pConf->SetPath ( _T ( "/Directories" ) );
         wxString def;
         def = ::wxGetCwd() + _T("/plugins");
@@ -285,33 +291,37 @@ bool weatherfax_pi::SaveConfig(void)
 {
     wxFileConfig *pConf = m_pconfig;
 
-    if(pConf)
-    {
-        pConf->SetPath ( _T ( "/Settings/WeatherFax" ) );
-        pConf->Write ( _T ( "Path" ), m_path );
-
-        pConf->Write ( _T ( "DialogPosX" ),   m_weatherfax_dialog_x );
-        pConf->Write ( _T ( "DialogPosY" ),   m_weatherfax_dialog_y );
-
-        pConf->SetPath ( _T ( "/Settings/WeatherFax/Audio" ) );
-        pConf->Write ( _T ( "ImageWidth" ), m_ImageWidth );
-        pConf->Write ( _T ( "BitsPerPixel" ), m_BitsPerPixel );
-        pConf->Write ( _T ( "Carrier" ), m_Carrier );
-        pConf->Write ( _T ( "Deviation" ), m_Deviation );
-        pConf->Write ( _T ( "Filter" ), m_Filter );
-        pConf->Write ( _T ( "SkipHeaderDetection" ), m_bSkipHeaderDetection );
-        pConf->Write ( _T ( "IncludeHeadersInImage" ), m_bIncludeHeadersInImage );
-
-        pConf->SetPath ( _T ( "/Settings/WeatherFax/Schedules" ) );
-        pConf->Write ( _T ( "LoadAtStart" ), m_bLoadSchedulesStart );
-
-        pConf->SetPath ( _T ( "/Directories" ) );
-        pConf->Write ( _T ( "WeatherFaxDataLocation" ), m_weatherfax_dir );
-
-        return true;
-    }
-    else
+    if(!pConf)
         return false;
+
+    pConf->SetPath ( _T ( "/Settings/WeatherFax" ) );
+    pConf->Write ( _T ( "Path" ), m_path );
+    pConf->Write ( _T ( "ExportPath" ), m_export_path );
+    
+    pConf->Write ( _T ( "DialogPosX" ),   m_weatherfax_dialog_x );
+    pConf->Write ( _T ( "DialogPosY" ),   m_weatherfax_dialog_y );
+    
+    pConf->SetPath ( _T ( "/Settings/WeatherFax/Audio" ) );
+    pConf->Write ( _T ( "ImageWidth" ), m_ImageWidth );
+    pConf->Write ( _T ( "BitsPerPixel" ), m_BitsPerPixel );
+    pConf->Write ( _T ( "Carrier" ), m_Carrier );
+    pConf->Write ( _T ( "Deviation" ), m_Deviation );
+    pConf->Write ( _T ( "Filter" ), m_Filter );
+    pConf->Write ( _T ( "SkipHeaderDetection" ), m_bSkipHeaderDetection );
+    pConf->Write ( _T ( "IncludeHeadersInImage" ), m_bIncludeHeadersInImage );
+    
+    pConf->SetPath ( _T ( "/Settings/WeatherFax/Schedules" ) );
+    pConf->Write ( _T ( "LoadAtStart" ), m_bLoadSchedulesStart );
+    
+    pConf->SetPath ( _T ( "/Settings/WeatherFax/Export" ) );
+    pConf->Write ( _T ( "Colors" ), m_iExportColors );
+    pConf->Write ( _T ( "DepthMeters" ), m_bExportDepthMeters );
+    pConf->Write ( _T ( "SoundingDatum" ), m_sExportSoundingDatum );
+
+    pConf->SetPath ( _T ( "/Directories" ) );
+    pConf->Write ( _T ( "WeatherFaxDataLocation" ), m_weatherfax_dir );
+
+    return true;
 }
 
 void weatherfax_pi::SetPositionFixEx(PlugIn_Position_Fix_Ex &pfix)
@@ -335,6 +345,10 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
     dialog->m_cbInclude->SetValue(m_bIncludeHeadersInImage);
 
     dialog->m_cbLoadSchedulesStart->SetValue(m_bLoadSchedulesStart);
+
+    dialog->m_sExportColors->SetValue(m_iExportColors);
+    dialog->m_rbExportDepthMeters->SetValue(m_bExportDepthMeters);
+    dialog->m_tExportSoundingDatum->SetValue(m_sExportSoundingDatum);
     
     dialog->Fit();
     wxColour cl;
@@ -352,6 +366,10 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
         m_bIncludeHeadersInImage = dialog->m_cbInclude->GetValue();
 
         m_bLoadSchedulesStart = dialog->m_cbLoadSchedulesStart->GetValue();
+
+        m_iExportColors = dialog->m_sExportColors->GetValue();
+        m_bExportDepthMeters = dialog->m_rbExportDepthMeters->GetValue();
+        m_sExportSoundingDatum = dialog->m_tExportSoundingDatum->GetValue();
 
         SaveConfig();
     }
