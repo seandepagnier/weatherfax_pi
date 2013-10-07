@@ -147,7 +147,7 @@ int weatherfax_pi::GetPlugInVersionMinor()
 
 wxBitmap *weatherfax_pi::GetPlugInBitmap()
 {
-    return _img_weatherfax;
+    return new wxBitmap(_img_weatherfax->ConvertToImage().Copy());
 }
 
 wxString weatherfax_pi::GetCommonName()
