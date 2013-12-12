@@ -27,7 +27,8 @@
 
 #include <list>
 
-#include "../../../include/tinyxml.h"
+// #include "../../../include/tinyxml.h"
+#include "tinyxml.h"
 
 #include "weatherfax_pi.h"
 #include "FaxDecoder.h"

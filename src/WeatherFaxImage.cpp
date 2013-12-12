@@ -31,6 +31,10 @@
   #include "wx/wx.h"
 #endif //precompiled headers
 
+#ifdef __MSVC__
+#define isnan _isnan
+#endif
+
 #include <wx/progdlg.h>
 
 #include "WeatherFaxImage.h"
