@@ -25,9 +25,9 @@
  ***************************************************************************
  */
 
+#include <wx/wx.h>
 #include <wx/imaglist.h>
 #include <wx/progdlg.h>
-#include <wx/wx.h>
 
 #include <list>
 

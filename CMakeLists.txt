@@ -73,6 +73,10 @@ SET(SRC_WEATHERFAX
             src/AboutDialog.cpp
             src/icons.h
             src/icons.cpp
+			src/tinyxml.h
+			src/tinyxml.cpp
+			src/tinyxmlerror.cpp
+			src/tinyxmlparser.cpp
 
             src/wximgkap.h
             src/wximgkap.cpp
