@@ -25,12 +25,15 @@
  ***************************************************************************
  */
 
+#include <wx/wx.h>
+ 
 #include <wx/imaglist.h>
 #include <wx/progdlg.h>
 
-#include <list>
+ // #include "../../../include/tinyxml.h"
+#include "tinyxml.h"
 
-#include "../../../include/tinyxml.h"
+#include <list>
 
 #include "weatherfax_pi.h"
 #include "WeatherFaxImage.h"
