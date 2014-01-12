@@ -34,13 +34,14 @@
 #include "AboutDialog.h"
 #include "weatherfax_pi.h"
 
-AboutDialog::    AboutDialog( wxWindow *parent ) : AboutDialogBase(parent)
+#define ABOUT_AUTHOR_URL ""
+
+AboutDialog::AboutDialog( wxWindow *parent ) : AboutDialogBase(parent)
 {
-    m_stVersion->SetLabel(wxString::Format(_T("%d.%d"),
-                                           PLUGIN_VERSION_MAJOR, PLUGIN_VERSION_MINOR));
+    m_stVersion->SetLabel(wxString::Format(_T("%d.%d"), PLUGIN_VERSION_MAJOR, PLUGIN_VERSION_MINOR));
 }
 
-void AboutDialog::OnDonate( wxCommandEvent& event )
+void AboutDialog::OnAboutAuthor( wxCommandEvent& event )
 {
-      wxLaunchDefaultBrowser(_T("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=sean%40depagnier%2ecom&lc=US&item_name=weatherfax&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHostedGuest"));
+    wxLaunchDefaultBrowser(_T(ABOUT_AUTHOR_URL));
 }

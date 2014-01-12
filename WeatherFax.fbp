@@ -6145,7 +6145,7 @@
                                                         <object class="wxFlexGridSizer" expanded="0">
                                                             <property name="cols">2</property>
                                                             <property name="flexible_direction">wxBOTH</property>
-                                                            <property name="growablecols"></property>
+                                                            <property name="growablecols">1</property>
                                                             <property name="growablerows"></property>
                                                             <property name="hgap">0</property>
                                                             <property name="minimum_size"></property>
@@ -6239,7 +6239,7 @@
                                                             </object>
                                                             <object class="sizeritem" expanded="0">
                                                                 <property name="border">5</property>
-                                                                <property name="flag">wxALL</property>
+                                                                <property name="flag">wxALL|wxEXPAND</property>
                                                                 <property name="proportion">0</property>
                                                                 <object class="wxSpinCtrl" expanded="0">
                                                                     <property name="BottomDockable">1</property>
@@ -6293,7 +6293,7 @@
                                                                     <property name="subclass"></property>
                                                                     <property name="toolbar_pane">0</property>
                                                                     <property name="tooltip"></property>
-                                                                    <property name="value">3</property>
+                                                                    <property name="value">12</property>
                                                                     <property name="window_extra_style"></property>
                                                                     <property name="window_name"></property>
                                                                     <property name="window_style"></property>
@@ -13893,7 +13893,7 @@
                         <property name="gripper">0</property>
                         <property name="hidden">0</property>
                         <property name="id">wxID_ANY</property>
-                        <property name="label">The weatherfax plugin for opencpn is intended to reduce the amount of user interaction to receive weather fax images and to overlay them directly onto charts.&#x0A;&#x0A;To get started, open either an image or recorded wav audio file of a ssb radio fax transmission.&#x0A;&#x0A;License: GPLv3+&#x0A;&#x0A;Source Code:&#x0A;https://github.com/seandepagnier/weatherfax_pi&#x0A;&#x0A;Author:&#x0A;Sean D&apos;Epagnier&#x0A;&#x0A;Many thanks to all of the translators and testers.</property>
+                        <property name="label">The weatherfax plugin for opencpn is intended to reduce the amount of user interaction to receive weather faxes and optionally overlay them directly onto charts.&#x0A;&#x0A;This includes a fax decoder, which converts radio fax audio into images.&#x0A;&#x0A;To get started, open either an image or recorded wav audio file of a ssb radio fax transmission.&#x0A;&#x0A;Source Code:&#x0A;https://github.com/seandepagnier/weatherfax_pi&#x0A;&#x0A;Many thanks to translators and testers.</property>
                         <property name="max_size"></property>
                         <property name="maximize_button">0</property>
                         <property name="maximum_size"></property>
@@ -13993,7 +13993,7 @@
                                 <property name="gripper">0</property>
                                 <property name="hidden">0</property>
                                 <property name="id">wxID_ANY</property>
-                                <property name="label">Donate</property>
+                                <property name="label">About the Author</property>
                                 <property name="max_size"></property>
                                 <property name="maximize_button">0</property>
                                 <property name="maximum_size"></property>
@@ -14001,7 +14001,7 @@
                                 <property name="minimize_button">0</property>
                                 <property name="minimum_size"></property>
                                 <property name="moveable">1</property>
-                                <property name="name">m_bDonate</property>
+                                <property name="name">m_bAboutAuthor</property>
                                 <property name="pane_border">1</property>
                                 <property name="pane_position"></property>
                                 <property name="pane_size"></property>
@@ -14022,7 +14022,7 @@
                                 <property name="window_extra_style"></property>
                                 <property name="window_name"></property>
                                 <property name="window_style"></property>
-                                <event name="OnButtonClick">OnDonate</event>
+                                <event name="OnButtonClick">OnAboutAuthor</event>
                                 <event name="OnChar"></event>
                                 <event name="OnEnterWindow"></event>
                                 <event name="OnEraseBackground"></event>

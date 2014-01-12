@@ -33,6 +33,10 @@
 
 #include <audiofile.h>
 
+#ifdef OCPN_USE_PORTAUDIO
+    #include <portaudio.h>
+#endif
+
 enum Bandwidth {NARROW, MIDDLE, WIDE};
 
 struct firfilter {
@@ -65,8 +69,7 @@ public:
 
     bool DecodeFaxFromFilename(wxString filename);
     bool DecodeFaxFromDSP();
-
-//    FaxImageList images;
+    bool DecodeFaxFromPortAudio();
 
     void SetSampleRate(int rate) { sampleRate = rate; }
 
@@ -80,19 +83,25 @@ public:
 
     wxUint8 *imgdata;
     int imageline;
-    int blocksize;
+    int blocksize, blocklines;
     int m_imagewidth;
     double minus_saturation_threshold;
     double *datadouble;
 
 private:
+    int samplesize;
 
-    enum InputType {FILENAME, DSP} inputtype;
+    enum InputType {FILENAME, DSP, PORTAUDIO} inputtype;
 
     int dsp;
+
     AFfilehandle aFile;
-    int samplesize;
     AFfileoffset size;
+
+#ifdef OCPN_USE_PORTAUDIO
+    PaStream *pa_stream;
+    int16_t *pa_data;
+#endif
 
     enum Header {IMAGE, START, STOP};
 

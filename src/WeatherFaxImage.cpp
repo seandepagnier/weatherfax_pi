@@ -157,8 +157,13 @@ void WeatherFaxImage::MakePhasedImage()
     }
 
     /* crop last line of phased image */
+#if 0
     m_phasedimg.Resize(wxSize(m_phasedimg.GetWidth(), m_phasedimg.GetHeight()-1),
                        wxPoint(0, 0));
+#else
+//    m_phasedimg = wxImage(m_phasedimg.GetWidth(), m_phasedimg.GetHeight()-1, m_phasedimg.GetData(), true);
+
+#endif
 
     /* apply rotation */
     switch(rotation) {
@@ -350,8 +355,8 @@ bool WeatherFaxImage::MakeMappedImage(wxWindow *parent, bool paramsonly)
        change he aspect ratio, this method is not numerically perfect but
        I think it is close enough in practice */
     aspectratio = 1;
-    InputToMercator(m_Coords->inputpole.x+2e-2, m_Coords->inputequator, p2x, p2y);
-    InputToMercator(m_Coords->inputpole.x, m_Coords->inputequator+2e-2, p3x, p3y);
+    InputToMercator(m_Coords->inputpole.x + 1/4.0, m_Coords->inputequator, p2x, p2y);
+    InputToMercator(m_Coords->inputpole.x, m_Coords->inputequator + 1/4.0, p3x, p3y);
     aspectratio = p3y / p2x * m_Coords->mappingratio;
 
     /* four corners of input */

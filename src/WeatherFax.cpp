@@ -453,10 +453,9 @@ void WeatherFax::OnCapture( wxCommandEvent& event )
 
      decoder.SetSampleRate(8000);
 
-     if(!decoder.DecodeFaxFromDSP()) {
-         wxMessageDialog w( this, _("Failed to set stuff up with dsp, this only works on linux if you have /dev/dsp"),
-                            _("Failure"),
-                            wxOK | wxICON_ERROR );
+     if(!decoder.DecodeFaxFromPortAudio() && !decoder.DecodeFaxFromDSP()) {
+         wxMessageDialog w( this, _("Failed to set stuff up with portaudio or dsp\nCapture failed."),
+                            _("Failure"), wxOK | wxICON_ERROR );
          w.ShowModal();
          return;
      }
@@ -465,8 +464,8 @@ void WeatherFax::OnCapture( wxCommandEvent& event )
      WeatherFaxWizard wizard(*img, &decoder, *this, m_Coords, _T(""));
 
     if(wizard.RunWizard(wizard.m_pages[0])) {
-        static int dspc;
-        int selection = m_lFaxes->Append(_T("dsp - ") + wxString::Format(_T("%d"), dspc));
+        static int capture_count;
+        m_lFaxes->Append(_T("Capture - ") + wxString::Format(_T("%d"), capture_count++));
         m_Faxes.push_back(img);
 
         wizard.StoreCoords();

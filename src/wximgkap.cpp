@@ -33,6 +33,7 @@
 #include <ctype.h>
 #include <stdlib.h>		/* for malloc() */
 #include <string.h>		/* for strncmp() */
+#include <math.h>
 
 #include <time.h>       /* for date in kap */
 
@@ -45,11 +46,11 @@
 typedef struct
 {
     uint8_t rgbRed, rgbGreen, rgbBlue, rgbReserved;
-} RGBQUAD;
+} RGBQUAD_t;
 
 typedef union
 {
-    RGBQUAD  q;
+    RGBQUAD_t  q;
     uint32_t p;
 } Color32;
 
