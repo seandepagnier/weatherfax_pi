@@ -31,14 +31,17 @@
 #include "FaxDecoder.h"
 #include "WeatherFaxImage.h"
 #include "WeatherFax.h"
+#include "DecoderOptionsDialog.h"
 #include "WeatherFaxWizard.h"
 
-WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img, FaxDecoder *decoder,
+WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
+                                    bool use_decoder, wxString decoder_filename,
                                     WeatherFax &parent,
                                     WeatherFaxImageCoordinateList &coords,
                                     wxString newcoordbasename)
-    : WeatherFaxWizardBase( &parent ), m_decoder(decoder), m_parent(parent),
-      m_wfimg(img), m_curCoords(img.m_Coords),
+    : WeatherFaxWizardBase( &parent ), m_decoder(*this, decoder_filename),
+      m_DecoderOptionsDialog(this, m_decoder),
+      m_parent(parent), m_wfimg(img), m_curCoords(img.m_Coords),
       m_NewCoordBaseName(newcoordbasename.empty() ? wxString(_("New Coord")) : newcoordbasename),
       m_Coords(coords)
 {
@@ -54,25 +57,30 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img, FaxDecoder *decoder,
 
     MakeNewCoordinates();
 
-    if(m_decoder) {
+    if(use_decoder) {
         /* periodically check for updates */
         m_tDecoder.Connect(wxEVT_TIMER, wxTimerEventHandler( WeatherFaxWizard::OnDecoderTimer ), NULL, this);
         m_tDecoder.Start(1000, wxTIMER_ONE_SHOT);
 
         /* run decoder in a separate thread */
-        m_thDecoder = new DecoderThread(*m_decoder);
+        m_thDecoder = new DecoderThread(m_decoder);
         m_thDecoder->Run();
     } else {
         m_thDecoder = NULL;
         m_bStopDecoding->Disable();
-        m_sMinusSaturationThreshold->Disable();
+
+        m_DecoderOptionsDialog.m_sMinusSaturationThreshold->Disable();
     }
 }
 
 WeatherFaxWizard::~WeatherFaxWizard()
 {
-    if(m_decoder) {
-        m_decoder->m_bEndDecoding = true;
+    if(m_thDecoder) {
+        m_decoder.m_bEndDecoding = true;
+
+        if(m_bDecoderStopped)
+            m_decoder.m_DecoderStopMutex.Unlock();
+
         m_thDecoder->Wait(); /* wait for decoder thread to end */
         delete m_thDecoder;
     }
@@ -154,15 +162,11 @@ void WeatherFaxWizard::MakeNewCoordinates()
 
 void WeatherFaxWizard::OnDecoderTimer( wxTimerEvent & )
 {
-    if(m_decoder->m_DecoderMutex.Lock() == wxMUTEX_NO_ERROR) {
-        m_decoder->minus_saturation_threshold =
-            -(1 + (double)m_sMinusSaturationThreshold->GetValue()/10);
-
-        if(m_decoder->imageline &&
-           (!m_wfimg.m_origimg.IsOk() || m_decoder->imageline != m_wfimg.m_origimg.GetHeight())) {
-            int w = m_decoder->m_imagewidth, h = m_decoder->imageline;
+    if(m_decoder.m_DecoderMutex.Lock() == wxMUTEX_NO_ERROR) {
+        int w = m_decoder.m_imagewidth, h = m_decoder.m_imageline;
+        if(h && (!m_wfimg.m_origimg.IsOk() || h != m_wfimg.m_origimg.GetHeight())) {
             m_wfimg.m_origimg = wxImage( w, h );
-            memcpy(m_wfimg.m_origimg.GetData(), m_decoder->imgdata, w*h*3);
+            memcpy(m_wfimg.m_origimg.GetData(), m_decoder.m_imgdata, w*h*3);
 
             m_sPhasing->SetRange(0, m_wfimg.m_origimg.GetWidth()-1);
 
@@ -183,7 +187,7 @@ void WeatherFaxWizard::OnDecoderTimer( wxTimerEvent & )
             m_swFaxArea1->SetScrollbars(1, 1, pw, ph, x, y);
             m_swFaxArea1->Refresh();
         }
-        m_decoder->m_DecoderMutex.Unlock();
+        m_decoder.m_DecoderMutex.Unlock();
         m_bPhasingArea->Refresh();
     }
     m_tDecoder.Start(1000, wxTIMER_ONE_SHOT);
@@ -191,7 +195,18 @@ void WeatherFaxWizard::OnDecoderTimer( wxTimerEvent & )
 
 void WeatherFaxWizard::OnStopDecoding( wxCommandEvent& event )
 {
-    m_decoder->m_bEndDecoding = true;
+    if(m_bDecoderStopped) {
+        m_bStopDecoding->SetLabel(_("Stop"));
+        m_decoder.m_DecoderStopMutex.Unlock();
+    } else {
+        m_bStopDecoding->SetLabel(_("Start"));
+        m_decoder.m_DecoderStopMutex.Lock();
+    }
+}
+
+void WeatherFaxWizard::OnDecoderOptions( wxCommandEvent& event )
+{
+    m_DecoderOptionsDialog.Show();
 }
 
 void WeatherFaxWizard::OnPaintPhasing( wxPaintEvent& event )
@@ -202,19 +217,19 @@ void WeatherFaxWizard::OnPaintPhasing( wxPaintEvent& event )
 
     wxPaintDC dc( window );
 
-    if(!m_decoder)
+    if(!m_thDecoder)
         return;
 
     dc.SetBrush(wxBrush(*wxBLACK));
     dc.SetPen(wxPen( *wxBLACK, 1 ));
 
-    int blocksize = m_decoder->blocksize;
+    int blocksize = m_decoder.m_blocksize;
     int w, h;
     int s = 4;
     window->GetSize(&w, &h);
     for(int x = 0; x<w; x++) {
         int i = x * blocksize / w;
-        int y = h*((m_decoder->imageline ? m_decoder->datadouble[i] : 0) +(s/2))/s;
+        int y = h*((m_decoder.m_imageline ? m_decoder.datadouble[i] : 0) +(s/2))/s;
         dc.DrawLine(x, h/2, x, y);
     }
 
@@ -226,7 +241,7 @@ void WeatherFaxWizard::OnPaintPhasing( wxPaintEvent& event )
     dc.DrawLine(0, p, w, p);
     
     dc.SetPen(wxPen( wxColour(32,192,32), 1 ));
-    p = h*(m_decoder->minus_saturation_threshold+(s/2))/s;
+    p = h*(m_decoder.m_minus_saturation_threshold+(s/2))/s;
     dc.DrawLine(0, p, w, p);
 }
 

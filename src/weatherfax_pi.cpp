@@ -261,15 +261,6 @@ bool weatherfax_pi::LoadConfig(void)
         m_weatherfax_dialog_x =  pConf->Read ( _T ( "DialogPosX" ), 20L );
         m_weatherfax_dialog_y =  pConf->Read ( _T ( "DialogPosY" ), 20L );
 
-        pConf->SetPath ( _T ( "/Settings/WeatherFax/Audio" ) );
-        pConf->Read ( _T ( "ImageWidth" ), &m_ImageWidth, 576*2 );
-        pConf->Read ( _T ( "BitsPerPixel" ), &m_BitsPerPixel, 8 );
-        pConf->Read ( _T ( "Carrier" ), &m_Carrier, 1900 );
-        pConf->Read ( _T ( "Deviation" ), &m_Deviation, 400 );
-        pConf->Read ( _T ( "Filter" ), &m_Filter, 1 );
-        pConf->Read ( _T ( "SkipHeaderDetection" ), &m_bSkipHeaderDetection, 0 );
-        pConf->Read ( _T ( "IncludeHeadersInImage" ), &m_bIncludeHeadersInImage, 0 );
-
         pConf->SetPath ( _T ( "/Settings/WeatherFax/Schedules" ) );
         pConf->Read ( _T ( "LoadAtStart" ), &m_bLoadSchedulesStart, 0 );
 
@@ -300,16 +291,7 @@ bool weatherfax_pi::SaveConfig(void)
     
     pConf->Write ( _T ( "DialogPosX" ),   m_weatherfax_dialog_x );
     pConf->Write ( _T ( "DialogPosY" ),   m_weatherfax_dialog_y );
-    
-    pConf->SetPath ( _T ( "/Settings/WeatherFax/Audio" ) );
-    pConf->Write ( _T ( "ImageWidth" ), m_ImageWidth );
-    pConf->Write ( _T ( "BitsPerPixel" ), m_BitsPerPixel );
-    pConf->Write ( _T ( "Carrier" ), m_Carrier );
-    pConf->Write ( _T ( "Deviation" ), m_Deviation );
-    pConf->Write ( _T ( "Filter" ), m_Filter );
-    pConf->Write ( _T ( "SkipHeaderDetection" ), m_bSkipHeaderDetection );
-    pConf->Write ( _T ( "IncludeHeadersInImage" ), m_bIncludeHeadersInImage );
-    
+        
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Schedules" ) );
     pConf->Write ( _T ( "LoadAtStart" ), m_bLoadSchedulesStart );
     
@@ -336,14 +318,6 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
                                    wxPoint( m_weatherfax_dialog_x, m_weatherfax_dialog_y),
                                    wxDefaultSize, wxDEFAULT_DIALOG_STYLE );
     
-    dialog->m_sImageWidth->SetValue(m_ImageWidth);
-    dialog->m_sBitsPerPixel->SetValue(m_BitsPerPixel);
-    dialog->m_sCarrier->SetValue(m_Carrier);
-    dialog->m_sDeviation->SetValue(m_Deviation);
-    dialog->m_cFilter->SetSelection(m_Filter);
-    dialog->m_cbSkip->SetValue(m_bSkipHeaderDetection);
-    dialog->m_cbInclude->SetValue(m_bIncludeHeadersInImage);
-
     dialog->m_cbLoadSchedulesStart->SetValue(m_bLoadSchedulesStart);
 
     dialog->m_sExportColors->SetValue(m_iExportColors);
@@ -357,14 +331,6 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
     
     if(dialog->ShowModal() == wxID_OK)
     {
-        m_ImageWidth = dialog->m_sImageWidth->GetValue();
-        m_BitsPerPixel = dialog->m_sBitsPerPixel->GetValue();
-        m_Carrier = dialog->m_sCarrier->GetValue();
-        m_Deviation = dialog->m_sDeviation->GetValue();
-        m_Filter = dialog->m_cFilter->GetSelection();
-        m_bSkipHeaderDetection = dialog->m_cbSkip->GetValue();
-        m_bIncludeHeadersInImage = dialog->m_cbInclude->GetValue();
-
         m_bLoadSchedulesStart = dialog->m_cbLoadSchedulesStart->GetValue();
 
         m_iExportColors = dialog->m_sExportColors->GetValue();

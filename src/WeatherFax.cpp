@@ -33,6 +33,7 @@
 #include "FaxDecoder.h"
 #include "WeatherFaxImage.h"
 #include "WeatherFax.h"
+#include "DecoderOptionsDialog.h"
 #include "WeatherFaxWizard.h"
 #include "AboutDialog.h"
 
@@ -244,18 +245,6 @@ void WeatherFax::OpenWav(wxString filename, wxString station, wxString area)
     int whitetransparency = m_sWhiteTransparency->GetValue();
     bool invert = m_cInvert->GetValue();
 
-    FaxDecoder decoder(*this,
-                       m_weatherfax_pi.m_ImageWidth,
-                       m_weatherfax_pi.m_BitsPerPixel,
-                       m_weatherfax_pi.m_Carrier,
-                       m_weatherfax_pi.m_Deviation,
-                       (enum Bandwidth)m_weatherfax_pi.m_Filter,
-                       m_weatherfax_pi.m_bSkipHeaderDetection,
-                       m_weatherfax_pi.m_bIncludeHeadersInImage);
-    
-    if(!decoder.DecodeFaxFromFilename(filename))
-        return;
-
     WeatherFaxImage *img = new WeatherFaxImage(wxNullImage, transparency, whitetransparency, invert);
 
     for(unsigned int i=0; i<m_Coords.GetCount(); i++)
@@ -263,7 +252,7 @@ void WeatherFax::OpenWav(wxString filename, wxString station, wxString area)
            area.size() && m_Coords[i]->Area == area)
             img->m_Coords = m_Coords[i];
 
-    WeatherFaxWizard wizard(*img, &decoder, *this, m_Coords,
+    WeatherFaxWizard wizard(*img, true, filename, *this, m_Coords,
                             station.size() && area.size() ? (station + _T(" - ") + area) : _T(""));
     
     if(wizard.RunWizard(wizard.m_pages[0])) {
@@ -290,7 +279,7 @@ void WeatherFax::OpenImage(wxString filename)
     wxImage wimg;
     if(wimg.LoadFile(filename)) {
         WeatherFaxImage *img = new WeatherFaxImage(wimg, transparency, whitetransparency, invert);
-        WeatherFaxWizard wizard(*img, NULL, *this, m_Coords, _T(""));
+        WeatherFaxWizard wizard(*img, false, _T(""), *this, m_Coords, _T(""));
         
         if(wizard.RunWizard(wizard.m_pages[1])) {
             wxFileName filenamec(filename);
@@ -357,7 +346,7 @@ void WeatherFax::OnEdit( wxCommandEvent& event )
 
     WeatherFaxImage &image = *m_Faxes[selection];
     WeatherFaxImage backupimage = image;
-    WeatherFaxWizard wizard(image, NULL, *this, m_Coords, _T(""));
+    WeatherFaxWizard wizard(image, false, _T(""), *this, m_Coords, _T(""));
     if(wizard.RunWizard(wizard.m_pages[0])) {
         wizard.StoreCoords();
         wizard.StoreMappingParams();
@@ -438,43 +427,7 @@ void WeatherFax::OnInvert( wxCommandEvent& event )
 
 void WeatherFax::OnCapture( wxCommandEvent& event )
 {
-    int transparency = m_sTransparency->GetValue();
-    int whitetransparency = m_sWhiteTransparency->GetValue();
-    bool invert = m_cInvert->GetValue();
-
-     FaxDecoder decoder(*this,
-                        m_weatherfax_pi.m_ImageWidth,
-                        m_weatherfax_pi.m_BitsPerPixel,
-                        m_weatherfax_pi.m_Carrier,
-                        m_weatherfax_pi.m_Deviation,
-                        (enum Bandwidth)m_weatherfax_pi.m_Filter,
-                        m_weatherfax_pi.m_bSkipHeaderDetection,
-                        /*m_weatherfax_pi.m_bIncludeHeadersInImage*/true);
-
-     decoder.SetSampleRate(8000);
-
-     if(!decoder.DecodeFaxFromPortAudio() && !decoder.DecodeFaxFromDSP()) {
-         wxMessageDialog w( this, _("Failed to set stuff up with portaudio or dsp\nCapture failed."),
-                            _("Failure"), wxOK | wxICON_ERROR );
-         w.ShowModal();
-         return;
-     }
-
-     WeatherFaxImage *img = new WeatherFaxImage(wxNullImage, transparency, whitetransparency, invert);
-     WeatherFaxWizard wizard(*img, &decoder, *this, m_Coords, _T(""));
-
-    if(wizard.RunWizard(wizard.m_pages[0])) {
-        static int capture_count;
-        m_lFaxes->Append(_T("Capture - ") + wxString::Format(_T("%d"), capture_count++));
-        m_Faxes.push_back(img);
-
-        wizard.StoreCoords();
-        wizard.StoreMappingParams();
-
-        RequestRefresh( m_parent );
-        UpdateMenuStates();
-    } else
-        delete img;
+    OpenWav(_T(""));
 }
 
 void WeatherFax::OnSchedules( wxCommandEvent& event )

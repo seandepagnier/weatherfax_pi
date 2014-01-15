@@ -37,61 +37,60 @@
     #include <portaudio.h>
 #endif
 
-enum Bandwidth {NARROW, MIDDLE, WIDE};
-
-struct firfilter {
-    firfilter() {}
-    firfilter(enum Bandwidth b) : bandwidth(b), current(0)
-        { for(int i=0; i<17; i++) buffer[i] = 0; }
-    enum Bandwidth bandwidth;
-    double buffer[17];
-    int current;
-};
-
 class FaxDecoder
 {
 public:
 
-    FaxDecoder(wxWindow &parent, int imagewidth, int BitsPerPixel, int carrier,
-               int deviation, enum Bandwidth bandwidth,
-               bool bSkipHeaderDetection, bool bIncludeHeadersInImages)
-        : m_bEndDecoding(false), m_imagewidth(imagewidth), m_parent(parent), m_BitsPerPixel(BitsPerPixel),
-        m_carrier(carrier), m_deviation(deviation),
-        m_bSkipHeaderDetection(bSkipHeaderDetection),
-        m_bIncludeHeadersInImages(bIncludeHeadersInImages),
-        m_imagecolors(3), m_faxcolors(1), m_lpm(120), m_bFM(true),
-        m_StartFrequency(300), m_StopFrequency(450),
-        m_StartLength(5), m_StopLength(5), m_phasingLines(40)
-    {
-        firfilters[0] = firfilter(bandwidth);
-        firfilters[1] = firfilter(bandwidth);
-    }
+    struct firfilter {
+        enum Bandwidth {NARROW, MIDDLE, WIDE};
+        firfilter() {}
+    firfilter(enum Bandwidth b) : bandwidth(b), current(0)
+        { for(int i=0; i<17; i++) buffer[i] = 0; }
+        enum Bandwidth bandwidth;
+        double buffer[17];
+        int current;
+    };
+
+    FaxDecoder(wxWindow &parent, wxString filename)
+        : m_bEndDecoding(false), m_imagewidth(-1),
+        m_inputtype(NONE), datadouble(NULL),
+        m_SampleRate(0), m_parent(parent),
+        m_Filename(filename), sample(NULL), data(NULL), phasingPos(NULL) {}
+    bool Configure(int imagewidth, int BitsPerPixel, int carrier,
+                   int deviation, enum firfilter::Bandwidth bandwidth,
+                   double minus_saturation_threshold,
+                   bool bSkipHeaderDetection, bool bIncludeHeadersInImages,
+                   int SampleRate, int SampleRateCorrection, int blocklines);
 
     bool DecodeFaxFromFilename(wxString filename);
     bool DecodeFaxFromDSP();
     bool DecodeFaxFromPortAudio();
 
-    void SetSampleRate(int rate) { sampleRate = rate; }
+    void InitializeImage();
+    void CloseInput();
 
-    void SetupToDecode();
-    void CleanUp();
-    bool DecodeFax();
+    void SetupBuffers();
+    void CleanUpBuffers();
 
-    bool m_bEndDecoding;
+    bool DecodeFax(); /* thread main function */
 
-    wxMutex m_DecoderMutex;
+    bool m_bEndDecoding; /* flag to end decoding thread */
 
-    wxUint8 *imgdata;
-    int imageline;
-    int blocksize, blocklines;
+    wxMutex m_DecoderMutex, m_DecoderStopMutex;
+
+    wxUint8 *m_imgdata;
+    int m_imageline;
+    int m_blocksize, m_blocklines;
     int m_imagewidth;
-    double minus_saturation_threshold;
+    double m_minus_saturation_threshold;
+    enum InputType {NONE, FILENAME, DSP, PORTAUDIO} m_inputtype;
     double *datadouble;
+    int m_SampleRate;
 
 private:
-    int samplesize;
+    wxWindow &m_parent;
 
-    enum InputType {FILENAME, DSP, PORTAUDIO} inputtype;
+    int m_SampleSize;
 
     int dsp;
 
@@ -100,7 +99,7 @@ private:
 
 #ifdef OCPN_USE_PORTAUDIO
     PaStream *pa_stream;
-    int16_t *pa_data;
+//    int16_t *pa_data;
 #endif
 
     enum Header {IMAGE, START, STOP};
@@ -112,10 +111,8 @@ private:
     void DecodeImageLine(wxUint8* buffer, int buffer_len, wxUint8 *image);
     int FaxPhasingLinePosition(wxUint8 *image, int imagewidth);
 
-    wxWindow &m_parent;
-
     /* fax settings */
-    int sampleRate;
+    int m_SampleRateCorrected;
     int m_BitsPerPixel;
     double m_carrier, m_deviation;
     struct firfilter firfilters[2];
@@ -127,6 +124,8 @@ private:
     int m_StartFrequency, m_StopFrequency;
     int m_StartLength, m_StopLength;
     int m_phasingLines;
+
+    wxString m_Filename;
 
     /* internal state machine */
     wxInt16 *sample;

@@ -98,9 +98,6 @@ public:
       wxString m_path, m_export_path;
 
       /* audio decoding options */
-      int m_ImageWidth, m_BitsPerPixel, m_Carrier, m_Deviation, m_Filter;
-      bool m_bSkipHeaderDetection, m_bIncludeHeadersInImage;
-
       bool m_bLoadSchedulesStart;
 
       int m_iExportColors;

@@ -213,8 +213,7 @@ class WeatherFaxWizardBase : public wxWizard
 	protected:
 		wxScrolledWindow* m_swFaxArea1;
 		wxButton* m_bStopDecoding;
-		wxStaticText* m_staticText212;
-		wxSpinCtrl* m_sMinusSaturationThreshold;
+		wxButton* m_bDecoderOptions;
 		wxScrolledWindow* m_bPhasingArea;
 		wxStaticText* m_staticText16;
 		wxChoice* m_cFilter;
@@ -279,6 +278,7 @@ class WeatherFaxWizardBase : public wxWizard
 		virtual void OnBitmapClickPage1( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnPaintImage( wxPaintEvent& event ) { event.Skip(); }
 		virtual void OnStopDecoding( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnDecoderOptions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnPaintPhasing( wxPaintEvent& event ) { event.Skip(); }
 		virtual void UpdatePage1( wxCommandEvent& event ) { event.Skip(); }
 		virtual void UpdatePage1( wxScrollEvent& event ) { event.Skip(); }
@@ -314,11 +314,6 @@ class WeatherFaxPrefsDialog : public wxDialog
 	private:
 	
 	protected:
-		wxStaticText* m_staticText29;
-		wxStaticText* m_staticText30;
-		wxStaticText* m_staticText31;
-		wxStaticText* m_staticText32;
-		wxStaticText* m_staticText33;
 		wxStaticText* m_staticText36;
 		wxStaticText* m_staticText37;
 		wxStaticText* m_staticText38;
@@ -327,13 +322,6 @@ class WeatherFaxPrefsDialog : public wxDialog
 		wxButton* m_sdbSizer1Cancel;
 	
 	public:
-		wxSpinCtrl* m_sImageWidth;
-		wxSpinCtrl* m_sBitsPerPixel;
-		wxSpinCtrl* m_sCarrier;
-		wxSpinCtrl* m_sDeviation;
-		wxChoice* m_cFilter;
-		wxCheckBox* m_cbSkip;
-		wxCheckBox* m_cbInclude;
 		wxCheckBox* m_cbLoadSchedulesStart;
 		wxSpinCtrl* m_sExportColors;
 		wxRadioButton* m_rbExportDepthMeters;
@@ -342,6 +330,49 @@ class WeatherFaxPrefsDialog : public wxDialog
 		
 		WeatherFaxPrefsDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax Preferences"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxCAPTION|wxDEFAULT_DIALOG_STYLE ); 
 		~WeatherFaxPrefsDialog();
+	
+};
+
+///////////////////////////////////////////////////////////////////////////////
+/// Class DecoderOptionsDialogBase
+///////////////////////////////////////////////////////////////////////////////
+class DecoderOptionsDialogBase : public wxDialog 
+{
+	private:
+	
+	protected:
+		wxStaticText* m_staticText29;
+		wxStaticText* m_staticText30;
+		wxStaticText* m_staticText31;
+		wxStaticText* m_staticText32;
+		wxStaticText* m_staticText33;
+		wxStaticText* m_staticText41;
+		wxStaticText* m_staticText39;
+		wxChoice* m_cSampleRate;
+		wxStaticText* m_staticText40;
+		wxSpinCtrl* m_sSampleRateCorrection;
+		wxStaticText* m_staticText401;
+		wxSpinCtrl* m_sBlockLines;
+		wxButton* m_bDone;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OnOptions( wxSpinEvent& event ) { event.Skip(); }
+		virtual void OnOptions( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnDone( wxCommandEvent& event ) { event.Skip(); }
+		
+	
+	public:
+		wxSpinCtrl* m_sImageWidth;
+		wxSpinCtrl* m_sBitsPerPixel;
+		wxSpinCtrl* m_sCarrier;
+		wxSpinCtrl* m_sDeviation;
+		wxChoice* m_cFilter;
+		wxSpinCtrl* m_sMinusSaturationThreshold;
+		wxCheckBox* m_cbSkip;
+		wxCheckBox* m_cbInclude;
+		
+		DecoderOptionsDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Fax Decoding Options"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
+		~DecoderOptionsDialogBase();
 	
 };
 

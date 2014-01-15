@@ -34,7 +34,8 @@ class FaxDecoder;
 class WeatherFaxWizard : public WeatherFaxWizardBase
 {
 public:
-    WeatherFaxWizard( WeatherFaxImage &img, FaxDecoder *decoder,
+    WeatherFaxWizard( WeatherFaxImage &img,
+                      bool use_decoder, wxString decoder_filename,
                       WeatherFax &parent,
                       WeatherFaxImageCoordinateList &coords,
                       wxString newcoordbasename);
@@ -43,7 +44,9 @@ public:
 
     wxTimer m_tDecoder;
     DecoderThread *m_thDecoder;
-    FaxDecoder *m_decoder;
+    FaxDecoder m_decoder;
+    bool m_bDecoderStopped;
+    DecoderOptionsDialog m_DecoderOptionsDialog;
 
     void MakeNewCoordinates();
     void OnDecoderTimer( wxTimerEvent & );
@@ -51,6 +54,7 @@ public:
     void OnSetSizes( wxInitDialogEvent& event );
     void UpdateMappingControls();
     void OnStopDecoding( wxCommandEvent& event );
+    void OnDecoderOptions( wxCommandEvent& event );
     void OnPaintPhasing( wxPaintEvent& event );
     void OnWizardPageChanged( wxWizardEvent& event );
     void OnMappingChoice( wxCommandEvent& event );

@@ -729,21 +729,8 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	m_bStopDecoding = new wxButton( m_wizPage1, wxID_ANY, _("Stop"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer18->Add( m_bStopDecoding, 0, wxALL, 5 );
 	
-	wxFlexGridSizer* fgSizer20;
-	fgSizer20 = new wxFlexGridSizer( 1, 2, 0, 0 );
-	fgSizer20->AddGrowableCol( 1 );
-	fgSizer20->SetFlexibleDirection( wxBOTH );
-	fgSizer20->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-	
-	m_staticText212 = new wxStaticText( m_wizPage1, wxID_ANY, _("Sat"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText212->Wrap( -1 );
-	fgSizer20->Add( m_staticText212, 0, wxALL, 5 );
-	
-	m_sMinusSaturationThreshold = new wxSpinCtrl( m_wizPage1, wxID_ANY, wxT("12"), wxDefaultPosition, wxSize( 40,-1 ), wxSP_ARROW_KEYS, 0, 30, 0 );
-	fgSizer20->Add( m_sMinusSaturationThreshold, 0, wxALL|wxEXPAND, 5 );
-	
-	
-	fgSizer18->Add( fgSizer20, 1, wxEXPAND, 5 );
+	m_bDecoderOptions = new wxButton( m_wizPage1, wxID_ANY, _("Options"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer18->Add( m_bDecoderOptions, 0, wxALL, 5 );
 	
 	
 	fgSizer19->Add( fgSizer18, 1, wxEXPAND, 5 );
@@ -1135,6 +1122,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	m_swFaxArea1->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( WeatherFaxWizardBase::OnBitmapClickPage1 ), NULL, this );
 	m_swFaxArea1->Connect( wxEVT_PAINT, wxPaintEventHandler( WeatherFaxWizardBase::OnPaintImage ), NULL, this );
 	m_bStopDecoding->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxWizardBase::OnStopDecoding ), NULL, this );
+	m_bDecoderOptions->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxWizardBase::OnDecoderOptions ), NULL, this );
 	m_bPhasingArea->Connect( wxEVT_PAINT, wxPaintEventHandler( WeatherFaxWizardBase::OnPaintPhasing ), NULL, this );
 	m_cFilter->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( WeatherFaxWizardBase::UpdatePage1 ), NULL, this );
 	m_sPhasing->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxWizardBase::UpdatePage1 ), NULL, this );
@@ -1188,6 +1176,7 @@ WeatherFaxWizardBase::~WeatherFaxWizardBase()
 	m_swFaxArea1->Disconnect( wxEVT_LEFT_DOWN, wxMouseEventHandler( WeatherFaxWizardBase::OnBitmapClickPage1 ), NULL, this );
 	m_swFaxArea1->Disconnect( wxEVT_PAINT, wxPaintEventHandler( WeatherFaxWizardBase::OnPaintImage ), NULL, this );
 	m_bStopDecoding->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxWizardBase::OnStopDecoding ), NULL, this );
+	m_bDecoderOptions->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxWizardBase::OnDecoderOptions ), NULL, this );
 	m_bPhasingArea->Disconnect( wxEVT_PAINT, wxPaintEventHandler( WeatherFaxWizardBase::OnPaintPhasing ), NULL, this );
 	m_cFilter->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( WeatherFaxWizardBase::UpdatePage1 ), NULL, this );
 	m_sPhasing->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxWizardBase::UpdatePage1 ), NULL, this );
@@ -1248,72 +1237,6 @@ WeatherFaxPrefsDialog::WeatherFaxPrefsDialog( wxWindow* parent, wxWindowID id, c
 	fgSizer55 = new wxFlexGridSizer( 0, 2, 0, 0 );
 	fgSizer55->SetFlexibleDirection( wxBOTH );
 	fgSizer55->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-	
-	wxStaticBoxSizer* sbSizer6;
-	sbSizer6 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Audio Decoding Options") ), wxVERTICAL );
-	
-	wxFlexGridSizer* fgSizer12;
-	fgSizer12 = new wxFlexGridSizer( 0, 1, 0, 0 );
-	fgSizer12->SetFlexibleDirection( wxBOTH );
-	fgSizer12->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-	
-	wxFlexGridSizer* fgSizer10;
-	fgSizer10 = new wxFlexGridSizer( 0, 2, 0, 0 );
-	fgSizer10->SetFlexibleDirection( wxBOTH );
-	fgSizer10->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-	
-	m_staticText29 = new wxStaticText( this, wxID_ANY, _("Image Width"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText29->Wrap( -1 );
-	fgSizer10->Add( m_staticText29, 0, wxALL, 5 );
-	
-	m_sImageWidth = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 16384, 576 );
-	fgSizer10->Add( m_sImageWidth, 0, wxALL, 5 );
-	
-	m_staticText30 = new wxStaticText( this, wxID_ANY, _("Bits per Pixel"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText30->Wrap( -1 );
-	fgSizer10->Add( m_staticText30, 0, wxALL, 5 );
-	
-	m_sBitsPerPixel = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 8, 8 );
-	fgSizer10->Add( m_sBitsPerPixel, 0, wxALL, 5 );
-	
-	m_staticText31 = new wxStaticText( this, wxID_ANY, _("Carrier"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText31->Wrap( -1 );
-	fgSizer10->Add( m_staticText31, 0, wxALL, 5 );
-	
-	m_sCarrier = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 10000, 1900 );
-	fgSizer10->Add( m_sCarrier, 0, wxALL, 5 );
-	
-	m_staticText32 = new wxStaticText( this, wxID_ANY, _("Deviation"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText32->Wrap( -1 );
-	fgSizer10->Add( m_staticText32, 0, wxALL, 5 );
-	
-	m_sDeviation = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 10000, 400 );
-	fgSizer10->Add( m_sDeviation, 0, wxALL, 5 );
-	
-	m_staticText33 = new wxStaticText( this, wxID_ANY, _("Filter"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText33->Wrap( -1 );
-	fgSizer10->Add( m_staticText33, 0, wxALL, 5 );
-	
-	wxString m_cFilterChoices[] = { _("narrow"), _("middle"), _("wide") };
-	int m_cFilterNChoices = sizeof( m_cFilterChoices ) / sizeof( wxString );
-	m_cFilter = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_cFilterNChoices, m_cFilterChoices, 0 );
-	m_cFilter->SetSelection( 1 );
-	fgSizer10->Add( m_cFilter, 0, wxALL, 5 );
-	
-	
-	fgSizer12->Add( fgSizer10, 1, wxEXPAND, 5 );
-	
-	m_cbSkip = new wxCheckBox( this, wxID_ANY, _("Skip start, stop and \nphasing detection"), wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer12->Add( m_cbSkip, 0, wxALL, 5 );
-	
-	m_cbInclude = new wxCheckBox( this, wxID_ANY, _("Include header data in image"), wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer12->Add( m_cbInclude, 0, wxALL, 5 );
-	
-	
-	sbSizer6->Add( fgSizer12, 1, wxEXPAND, 5 );
-	
-	
-	fgSizer55->Add( sbSizer6, 1, wxEXPAND, 5 );
 	
 	wxFlexGridSizer* fgSizer56;
 	fgSizer56 = new wxFlexGridSizer( 0, 1, 0, 0 );
@@ -1430,6 +1353,178 @@ WeatherFaxPrefsDialog::WeatherFaxPrefsDialog( wxWindow* parent, wxWindowID id, c
 
 WeatherFaxPrefsDialog::~WeatherFaxPrefsDialog()
 {
+}
+
+DecoderOptionsDialogBase::DecoderOptionsDialogBase( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
+{
+	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	
+	wxFlexGridSizer* fgSizer57;
+	fgSizer57 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer57->SetFlexibleDirection( wxBOTH );
+	fgSizer57->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	wxStaticBoxSizer* sbSizer6;
+	sbSizer6 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Audio Decoding Options") ), wxVERTICAL );
+	
+	wxFlexGridSizer* fgSizer12;
+	fgSizer12 = new wxFlexGridSizer( 0, 1, 0, 0 );
+	fgSizer12->SetFlexibleDirection( wxBOTH );
+	fgSizer12->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	wxFlexGridSizer* fgSizer10;
+	fgSizer10 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer10->SetFlexibleDirection( wxBOTH );
+	fgSizer10->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_staticText29 = new wxStaticText( this, wxID_ANY, _("Image Width"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText29->Wrap( -1 );
+	fgSizer10->Add( m_staticText29, 0, wxALL, 5 );
+	
+	m_sImageWidth = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 16384, 1024 );
+	fgSizer10->Add( m_sImageWidth, 0, wxALL, 5 );
+	
+	m_staticText30 = new wxStaticText( this, wxID_ANY, _("Bits per Pixel"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText30->Wrap( -1 );
+	fgSizer10->Add( m_staticText30, 0, wxALL, 5 );
+	
+	m_sBitsPerPixel = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 8, 8 );
+	fgSizer10->Add( m_sBitsPerPixel, 0, wxALL, 5 );
+	
+	m_staticText31 = new wxStaticText( this, wxID_ANY, _("Carrier"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText31->Wrap( -1 );
+	fgSizer10->Add( m_staticText31, 0, wxALL, 5 );
+	
+	m_sCarrier = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 10000, 1900 );
+	fgSizer10->Add( m_sCarrier, 0, wxALL, 5 );
+	
+	m_staticText32 = new wxStaticText( this, wxID_ANY, _("Deviation"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText32->Wrap( -1 );
+	fgSizer10->Add( m_staticText32, 0, wxALL, 5 );
+	
+	m_sDeviation = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 10000, 400 );
+	fgSizer10->Add( m_sDeviation, 0, wxALL, 5 );
+	
+	m_staticText33 = new wxStaticText( this, wxID_ANY, _("Filter"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText33->Wrap( -1 );
+	fgSizer10->Add( m_staticText33, 0, wxALL, 5 );
+	
+	wxString m_cFilterChoices[] = { _("narrow"), _("middle"), _("wide") };
+	int m_cFilterNChoices = sizeof( m_cFilterChoices ) / sizeof( wxString );
+	m_cFilter = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_cFilterNChoices, m_cFilterChoices, 0 );
+	m_cFilter->SetSelection( 1 );
+	fgSizer10->Add( m_cFilter, 0, wxALL, 5 );
+	
+	m_staticText41 = new wxStaticText( this, wxID_ANY, _("Saturation Threshold"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText41->Wrap( 100 );
+	fgSizer10->Add( m_staticText41, 0, wxALL, 5 );
+	
+	m_sMinusSaturationThreshold = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 30, 15 );
+	fgSizer10->Add( m_sMinusSaturationThreshold, 0, wxALL, 5 );
+	
+	
+	fgSizer12->Add( fgSizer10, 1, wxEXPAND, 5 );
+	
+	m_cbSkip = new wxCheckBox( this, wxID_ANY, _("Skip start, stop and \nphasing detection"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer12->Add( m_cbSkip, 0, wxALL, 5 );
+	
+	m_cbInclude = new wxCheckBox( this, wxID_ANY, _("Include header data in image"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer12->Add( m_cbInclude, 0, wxALL, 5 );
+	
+	
+	sbSizer6->Add( fgSizer12, 1, wxEXPAND, 5 );
+	
+	
+	fgSizer57->Add( sbSizer6, 1, wxEXPAND, 5 );
+	
+	wxFlexGridSizer* fgSizer59;
+	fgSizer59 = new wxFlexGridSizer( 0, 1, 0, 0 );
+	fgSizer59->AddGrowableRow( 1 );
+	fgSizer59->SetFlexibleDirection( wxBOTH );
+	fgSizer59->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	wxStaticBoxSizer* sbSizer19;
+	sbSizer19 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Audio Capture Options") ), wxVERTICAL );
+	
+	wxFlexGridSizer* fgSizer58;
+	fgSizer58 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer58->SetFlexibleDirection( wxBOTH );
+	fgSizer58->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_staticText39 = new wxStaticText( this, wxID_ANY, _("Sample Rate"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText39->Wrap( -1 );
+	fgSizer58->Add( m_staticText39, 0, wxALL, 5 );
+	
+	wxString m_cSampleRateChoices[] = { _("8000"), _("16000"), _("48000") };
+	int m_cSampleRateNChoices = sizeof( m_cSampleRateChoices ) / sizeof( wxString );
+	m_cSampleRate = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_cSampleRateNChoices, m_cSampleRateChoices, 0 );
+	m_cSampleRate->SetSelection( 0 );
+	fgSizer58->Add( m_cSampleRate, 0, wxALL, 5 );
+	
+	m_staticText40 = new wxStaticText( this, wxID_ANY, _("Sample Rate correction term  (large skew errors)"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText40->Wrap( 140 );
+	fgSizer58->Add( m_staticText40, 0, wxALL, 5 );
+	
+	m_sSampleRateCorrection = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -1000, 1000, 0 );
+	fgSizer58->Add( m_sSampleRateCorrection, 0, wxALL, 5 );
+	
+	m_staticText401 = new wxStaticText( this, wxID_ANY, _("Lines per block"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText401->Wrap( -1 );
+	fgSizer58->Add( m_staticText401, 0, wxALL, 5 );
+	
+	m_sBlockLines = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 64, 1 );
+	fgSizer58->Add( m_sBlockLines, 0, wxALL, 5 );
+	
+	
+	sbSizer19->Add( fgSizer58, 1, wxEXPAND, 5 );
+	
+	
+	fgSizer59->Add( sbSizer19, 1, wxEXPAND, 5 );
+	
+	m_bDone = new wxButton( this, wxID_ANY, _("Done"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer59->Add( m_bDone, 0, wxALIGN_BOTTOM|wxALIGN_RIGHT|wxALL, 5 );
+	
+	
+	fgSizer57->Add( fgSizer59, 1, wxEXPAND, 5 );
+	
+	
+	this->SetSizer( fgSizer57 );
+	this->Layout();
+	fgSizer57->Fit( this );
+	
+	this->Centre( wxBOTH );
+	
+	// Connect Events
+	m_sImageWidth->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_sBitsPerPixel->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_sCarrier->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_sDeviation->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_cFilter->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_sMinusSaturationThreshold->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_cbSkip->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_cbInclude->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_cSampleRate->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_sSampleRateCorrection->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_sBlockLines->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_bDone->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( DecoderOptionsDialogBase::OnDone ), NULL, this );
+}
+
+DecoderOptionsDialogBase::~DecoderOptionsDialogBase()
+{
+	// Disconnect Events
+	m_sImageWidth->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_sBitsPerPixel->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_sCarrier->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_sDeviation->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_cFilter->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_sMinusSaturationThreshold->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_cbSkip->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_cbInclude->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_cSampleRate->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_sSampleRateCorrection->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_sBlockLines->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
+	m_bDone->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( DecoderOptionsDialogBase::OnDone ), NULL, this );
+	
 }
 
 AboutDialogBase::AboutDialogBase( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
