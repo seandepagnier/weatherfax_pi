@@ -349,10 +349,6 @@ class DecoderOptionsDialogBase : public wxDialog
 		wxStaticText* m_staticText41;
 		wxStaticText* m_staticText39;
 		wxChoice* m_cSampleRate;
-		wxStaticText* m_staticText40;
-		wxSpinCtrl* m_sSampleRateCorrection;
-		wxStaticText* m_staticText401;
-		wxSpinCtrl* m_sBlockLines;
 		wxButton* m_bDone;
 		
 		// Virtual event handlers, overide them in your derived class

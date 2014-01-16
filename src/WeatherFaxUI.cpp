@@ -1461,20 +1461,6 @@ DecoderOptionsDialogBase::DecoderOptionsDialogBase( wxWindow* parent, wxWindowID
 	m_cSampleRate->SetSelection( 0 );
 	fgSizer58->Add( m_cSampleRate, 0, wxALL, 5 );
 	
-	m_staticText40 = new wxStaticText( this, wxID_ANY, _("Sample Rate correction term  (large skew errors)"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText40->Wrap( 140 );
-	fgSizer58->Add( m_staticText40, 0, wxALL, 5 );
-	
-	m_sSampleRateCorrection = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -1000, 1000, 0 );
-	fgSizer58->Add( m_sSampleRateCorrection, 0, wxALL, 5 );
-	
-	m_staticText401 = new wxStaticText( this, wxID_ANY, _("Lines per block"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText401->Wrap( -1 );
-	fgSizer58->Add( m_staticText401, 0, wxALL, 5 );
-	
-	m_sBlockLines = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 64, 1 );
-	fgSizer58->Add( m_sBlockLines, 0, wxALL, 5 );
-	
 	
 	sbSizer19->Add( fgSizer58, 1, wxEXPAND, 5 );
 	
@@ -1504,8 +1490,6 @@ DecoderOptionsDialogBase::DecoderOptionsDialogBase( wxWindow* parent, wxWindowID
 	m_cbSkip->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
 	m_cbInclude->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
 	m_cSampleRate->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
-	m_sSampleRateCorrection->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
-	m_sBlockLines->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
 	m_bDone->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( DecoderOptionsDialogBase::OnDone ), NULL, this );
 }
 
@@ -1521,8 +1505,6 @@ DecoderOptionsDialogBase::~DecoderOptionsDialogBase()
 	m_cbSkip->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
 	m_cbInclude->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
 	m_cSampleRate->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
-	m_sSampleRateCorrection->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
-	m_sBlockLines->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
 	m_bDone->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( DecoderOptionsDialogBase::OnDone ), NULL, this );
 	
 }

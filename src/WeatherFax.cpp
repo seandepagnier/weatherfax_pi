@@ -255,7 +255,8 @@ void WeatherFax::OpenWav(wxString filename, wxString station, wxString area)
     WeatherFaxWizard wizard(*img, true, filename, *this, m_Coords,
                             station.size() && area.size() ? (station + _T(" - ") + area) : _T(""));
     
-    if(wizard.RunWizard(wizard.m_pages[0])) {
+    if(wizard.m_decoder.m_inputtype != FaxDecoder::NONE &&
+       wizard.RunWizard(wizard.m_pages[0])) {
         int selection = m_lFaxes->Append(area.size() ? (station + _T(" - ") + area) : filename );
         m_Faxes.push_back(img);
         

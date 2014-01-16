@@ -35,18 +35,11 @@
 #include <math.h>
 #include <complex>
 
-#if 0
-#ifdef OCPN_USE_PORTAUDIO
-wxMutex Pa_mutex;
-bool Pa_havedata;
-#endif
-#endif
-
 bool FaxDecoder::Configure(int imagewidth, int BitsPerPixel, int carrier,
                            int deviation, enum firfilter::Bandwidth bandwidth,
                            double minus_saturation_threshold,
                            bool bSkipHeaderDetection, bool bIncludeHeadersInImages,
-                           int SampleRate, int SampleRateCorrection, int blocklines)
+                           int SampleRate)
 {
     /* pause decoder */
     m_DecoderStopMutex.Lock();
@@ -74,34 +67,34 @@ bool FaxDecoder::Configure(int imagewidth, int BitsPerPixel, int carrier,
 
     m_minus_saturation_threshold = minus_saturation_threshold;
 
-    /* must reset if image width changes */
-    if(imagewidth != m_imagewidth || m_blocklines != blocklines) {
-        CleanUpBuffers();
-        m_imagewidth = imagewidth;
-        m_blocklines = blocklines;
-        SetupBuffers();
-    }
-
-    int SampleRateCorrected = m_SampleRate + SampleRateCorrection;
     bool ret = true;
-    if(m_SampleRateCorrected != SampleRateCorrected) {
-        m_SampleRateCorrected = SampleRateCorrected;
+    if(m_SampleRate != SampleRate) {
+        CleanUpBuffers();
         m_SampleRate = SampleRate;
+        SetupBuffers();
 
+        m_DecoderReloadMutex.Lock();
         CloseInput();
-        InitializeImage();
-        
         if(m_Filename.empty()) {
             if(!DecodeFaxFromPortAudio())
                 if(!DecodeFaxFromDSP())
                     ret = false;
-        } else {
+        } else
             if(!DecodeFaxFromFilename(m_Filename))
                 ret = false;
-        }
+        m_DecoderReloadMutex.Unlock();
+    }
+
+    /* must reset if image width changes */
+    if(m_imagewidth != imagewidth) {
+        FreeImage();
+        m_imagewidth = imagewidth;
+        InitializeImage();
     }
 
     m_DecoderStopMutex.Unlock();
+
+    m_bEndDecoding = !ret;
     return ret;
 }
 
@@ -158,7 +151,7 @@ void FaxDecoder::DemodulateData(int n)
      int i;
 
      for(i=0; i<n; i++) {
-          f += (double)m_carrier/m_SampleRateCorrected;
+          f += (double)m_carrier/m_SampleRate;
 
           wxInt16 samplei = m_SampleSize == 2 ? sample[i] : ((wxInt8*)sample)[i];
 
@@ -171,7 +164,7 @@ void FaxDecoder::DemodulateData(int n)
                qfirout/=mag;
                if(mag>10000) {
                     double y=qfirold*ifirout-ifirold*qfirout;
-                    double x=m_SampleRateCorrected/m_deviation*asin(y)/2.0/M_PI;
+                    double x=m_SampleRate/m_deviation*asin(y)/2.0/M_PI;
                     datadouble[i] = x; /* for demod display */
                     if(x<m_minus_saturation_threshold)
                         x = 1;
@@ -253,12 +246,12 @@ int FaxDecoder::FaxPhasingLinePosition(wxUint8 *image, int imagewidth)
 }
 
 /* decode a single line of fax data from buffer placing it in image pointer
-   buffer should contain m_SampleRateCorrected*60.0/m_lpm*colors bytes
+   buffer should contain m_SampleRate*60.0/m_lpm*colors bytes
    image will contain imagewidth*colors bytes
 */
 void FaxDecoder::DecodeImageLine(wxUint8* buffer, int buffer_len, wxUint8 *image)
 {
-     int n = m_SampleRateCorrected*60.0/m_lpm;
+     int n = m_SampleRate*60.0/m_lpm;
 
      if(buffer_len != n*m_faxcolors)
          wxLogMessage(_("DecodeImageLine requires specific buffer length"));
@@ -283,7 +276,7 @@ void FaxDecoder::DecodeImageLine(wxUint8* buffer, int buffer_len, wxUint8 *image
 
 void FaxDecoder::InitializeImage()
 {
-    height = size / 2 / m_SampleRateCorrected / 60.0 * m_lpm / m_faxcolors;
+    height = size / 2 / m_SampleRate / 60.0 * m_lpm / m_faxcolors;
     imgpos = 0;
 
     if(height == 0) /* for unknown size, start out at 256 */
@@ -298,11 +291,14 @@ void FaxDecoder::InitializeImage()
     gotstart = false;
 }
 
-void FaxDecoder::CloseInput()
+void FaxDecoder::FreeImage()
 {
      free(m_imgdata);
      m_imageline = 0;
+}
 
+void FaxDecoder::CloseInput()
+{
      switch(m_inputtype) {
      case DSP:
          close(dsp);
@@ -323,7 +319,7 @@ void FaxDecoder::CloseInput()
 
 void FaxDecoder::SetupBuffers()
 {
-    m_blocksize = m_SampleRateCorrected*60.0/m_lpm*m_faxcolors * m_blocklines;
+    m_blocksize = m_SampleRate*60.0/m_lpm*m_faxcolors;
     
     sample = new wxInt16[m_blocksize];
     data = new wxUint8[m_blocksize];
@@ -343,7 +339,8 @@ void FaxDecoder::CleanUpBuffers()
 
 bool FaxDecoder::DecodeFax()
 {
-    for(;;) {
+    while(!m_bEndDecoding) {
+        m_DecoderReloadMutex.Lock();
         int len;
         switch(m_inputtype) {
         case DSP:
@@ -363,24 +360,11 @@ bool FaxDecoder::DecodeFax()
 #ifdef OCPN_USE_PORTAUDIO
         case PORTAUDIO:
         {
-//            bool gotdata;
             for(;;) {
-#if 0
-                if(Pa_mutex.Lock() == wxMUTEX_NO_ERROR) {
-                    if((gotdata = Pa_havedata))
-                        memcpy(sample, pa_data, 2 * m_blocksize);
-                    Pa_havedata = false;
-                    Pa_mutex.Unlock();
-                }
-                if(gotdata)
-                    break;
-                wxThread::Sleep(1);
-#else
                 PaError err = Pa_ReadStream( pa_stream, sample, m_blocksize);
                 if(err == paInputOverflow)
                     wxLogMessage(_("Port audio overflow on input, some data lost!"));
                 break;
-#endif
             }
             len = m_blocksize;
         } break;
@@ -388,6 +372,9 @@ bool FaxDecoder::DecodeFax()
         default:
             goto done;
         }
+        m_DecoderReloadMutex.Unlock();
+
+        m_DecoderStopMutex.Lock();
 
         DemodulateData(len);
         
@@ -446,30 +433,22 @@ bool FaxDecoder::DecodeFax()
                     height *= 2;
                     m_imgdata = (wxUint8*)realloc(m_imgdata, m_imagewidth*height*3);
                 }
-
-                int linelen = m_blocksize / m_blocklines;
-                for(int l = 0; l < m_blocklines; l++) {
-                    DecodeImageLine(data + l*linelen, linelen, m_imgdata+imgpos);
+               
+                DecodeImageLine(data, m_blocksize, m_imgdata+imgpos);
                 
-                    int skiplen = ((phasingSkipData-phasingSkippedData)%len)*m_imagewidth/len;
-                    phasingSkippedData = phasingSkipData; /* reset skipped position */
+                int skiplen = ((phasingSkipData-phasingSkippedData)%len)*m_imagewidth/len;
+                phasingSkippedData = phasingSkipData; /* reset skipped position */
                     
-                    imgpos += (m_imagewidth-skiplen)*m_imagecolors;
-                    m_imageline++;
-                }
+                imgpos += (m_imagewidth-skiplen)*m_imagecolors;
+                m_imageline++;
+
                 m_DecoderMutex.Unlock();
             }
         }
 
-        if(m_DecoderStopMutex.Lock() == wxMUTEX_NO_ERROR)
-            m_DecoderStopMutex.Unlock();
-
-        if(m_bEndDecoding)
-            break;
+        m_DecoderStopMutex.Unlock();
      }
 done:
-
-     delete [] phasingPos;
 
      /* put left overdata into an image */
      if((m_bIncludeHeadersInImages || gotstart) &&
@@ -483,6 +462,7 @@ done:
      }
 
      CleanUpBuffers();
+     FreeImage();
      CloseInput();
 
      return true;
@@ -500,7 +480,6 @@ bool FaxDecoder::DecodeFaxFromFilename(wxString fileName)
         return Error(_("sample size not 8 or 16 bit: ") + wxString::Format(_T("%d"), m_SampleSize));
     
     m_SampleRate = afGetRate(aFile,AF_DEFAULT_TRACK);
-    m_SampleRateCorrected = m_SampleRate; /* no need for correction */
     
     size = afGetTrackBytes (aFile, AF_DEFAULT_TRACK);
     if(size < 0 || size == 0x80000000)
@@ -510,43 +489,17 @@ bool FaxDecoder::DecodeFaxFromFilename(wxString fileName)
     return true;
 }
 
-#if 0
-static int SoundCallback( const void *inputBuffer, void *outputBuffer,
-                          unsigned long framesPerBuffer,
-                          const PaStreamCallbackTimeInfo* timeInfo,
-                          PaStreamCallbackFlags statusFlags,
-                          void *userData )
-{
-    uint16_t* data = (uint16_t*)userData;
-    if(Pa_mutex.TryLock() == wxMUTEX_NO_ERROR) {
-        if(Pa_havedata)
-            wxLogMessage(_("Port audio overflow on input, some data lost!"));
-
-        memcpy(data, inputBuffer, 2*framesPerBuffer);
-        Pa_havedata = true;
-        Pa_mutex.Unlock();
-    }
-    return 0;
-}
-#endif
-
 bool FaxDecoder::DecodeFaxFromPortAudio()
 {
 #ifdef OCPN_USE_PORTAUDIO
-    m_inputtype = PORTAUDIO;
-    size = 0;
-
-//    pa_data = new int16_t[m_blocksize];
-
     PaError err = Pa_Initialize();
     if( err != paNoError ) {
         printf( "PortAudio CTOR error: %s\n", Pa_GetErrorText( err ) );
         return false;
     }
 
-//    Pa_havedata = false;
-
     PaSampleFormat sampleformat;
+    m_SampleSize = 2; /* for now hardcode */
     switch(m_SampleSize) {
     case 1: sampleformat = paInt8; break;
     case 2: sampleformat = paInt16; break;
@@ -561,7 +514,6 @@ bool FaxDecoder::DecodeFaxFromPortAudio()
                                 sampleformat, 
                                 m_SampleRate,
                                 m_blocksize,
-//                                SoundCallback, pa_data ); /* no callback or data */
                                 0, 0);
     if( err != paNoError ) {
         printf( "PortAudio Create() error: %s\n", Pa_GetErrorText( err ) );
@@ -574,6 +526,9 @@ bool FaxDecoder::DecodeFaxFromPortAudio()
         printf( "PortAudio Start() error: %s\n", Pa_GetErrorText( err ) );
         return false;
     }
+
+    m_inputtype = PORTAUDIO;
+    size = 0;
 
     return true;
 #else

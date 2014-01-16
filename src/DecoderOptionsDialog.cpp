@@ -32,6 +32,8 @@
 DecoderOptionsDialog::DecoderOptionsDialog(wxWindow *parent, FaxDecoder &decoder)
     : DecoderOptionsDialogBase(parent), m_decoder(decoder)
 {
+    Hide();
+
     wxFileConfig *pConf = GetOCPNConfigObject();
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Audio" ) );
 
@@ -47,7 +49,6 @@ DecoderOptionsDialog::DecoderOptionsDialog(wxWindow *parent, FaxDecoder &decoder
 
     bool capture = m_decoder.m_inputtype != FaxDecoder::FILENAME;
     m_cSampleRate->Enable(capture);
-    m_sSampleRateCorrection->Enable(capture);
 
     if(!capture) {
         m_cSampleRate->Insert(wxString::Format(_T("%d"), m_decoder.m_SampleRate), 0);
@@ -68,6 +69,8 @@ void DecoderOptionsDialog::OnDone( wxCommandEvent& event )
     pConf->Write ( _T ( "Filter" ), m_cFilter->GetSelection());
     pConf->Write ( _T ( "SkipHeaderDetection" ), m_cbSkip->GetValue());
     pConf->Write ( _T ( "IncludeHeadersInImage" ), m_cbInclude->GetValue());
+
+    Hide();
 }
 
 void DecoderOptionsDialog::ConfigureDecoder()
@@ -79,10 +82,9 @@ void DecoderOptionsDialog::ConfigureDecoder()
            m_sImageWidth->GetValue(), m_sBitsPerPixel->GetValue(),
            m_sCarrier->GetValue(), m_sDeviation->GetValue(),
            (enum FaxDecoder::firfilter::Bandwidth)m_cFilter->GetSelection(),
-           (double)m_sMinusSaturationThreshold->GetValue()/10 - 1,
+           (double)-m_sMinusSaturationThreshold->GetValue()/10 - 1,
            m_cbSkip->GetValue(), m_cbInclude->GetValue(),
-           samplerate, m_sSampleRateCorrection->GetValue(),
-           m_sBlockLines->GetValue())) {
+           samplerate)) {
         wxMessageDialog w( this, _("Failed to configure capture."),
                            _("Failure"), wxOK | wxICON_ERROR );
         w.ShowModal();

@@ -62,6 +62,8 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
         m_tDecoder.Connect(wxEVT_TIMER, wxTimerEventHandler( WeatherFaxWizard::OnDecoderTimer ), NULL, this);
         m_tDecoder.Start(1000, wxTIMER_ONE_SHOT);
 
+        m_bDecoderStopped = false;
+
         /* run decoder in a separate thread */
         m_thDecoder = new DecoderThread(m_decoder);
         m_thDecoder->Run();
@@ -195,12 +197,12 @@ void WeatherFaxWizard::OnDecoderTimer( wxTimerEvent & )
 
 void WeatherFaxWizard::OnStopDecoding( wxCommandEvent& event )
 {
-    if(m_bDecoderStopped) {
-        m_bStopDecoding->SetLabel(_("Stop"));
-        m_decoder.m_DecoderStopMutex.Unlock();
-    } else {
+    if((m_bDecoderStopped = !m_bDecoderStopped)) {
         m_bStopDecoding->SetLabel(_("Start"));
         m_decoder.m_DecoderStopMutex.Lock();
+    } else {
+        m_bStopDecoding->SetLabel(_("Stop"));
+        m_decoder.m_DecoderStopMutex.Unlock();
     }
 }
 
