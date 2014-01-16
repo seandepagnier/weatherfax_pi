@@ -34,8 +34,6 @@
 #include "AboutDialog.h"
 #include "weatherfax_pi.h"
 
-#define ABOUT_AUTHOR_URL ""
-
 AboutDialog::AboutDialog( wxWindow *parent ) : AboutDialogBase(parent)
 {
     m_stVersion->SetLabel(wxString::Format(_T("%d.%d"), PLUGIN_VERSION_MAJOR, PLUGIN_VERSION_MINOR));
