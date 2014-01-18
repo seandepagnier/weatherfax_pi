@@ -269,7 +269,7 @@ static inline int HistDist(Color32 a, Color32 b)
    c = a.q.rgbBlue - b.q.rgbBlue;
    r += c*c;
 
-   return sqrt(r);
+   return sqrt((double)r);
 }
 
 static int HistReduceDist(reduce *r, histogram *h, histogram *e, int cote, int level)
@@ -353,7 +353,7 @@ static void HistReduceLevel(reduce *r, histogram *h, int level)
             r->nbout++;
 
             cote = (int32_t)(pow((double)((1<<24)/(double)r->colorsout),1.0/3.0)/2)-1;
-            r->maxcote = sqrt(3*cote*cote);
+            r->maxcote = sqrt(3.0*cote*cote);
 
             curv = 0;
             nbcolors = (r->colorsin +r->colorsout -1)/r->colorsout;
@@ -362,7 +362,7 @@ static void HistReduceLevel(reduce *r, histogram *h, int level)
             {
                 curv += nbcolors - r->nbin;
                 cote = (int32_t)(pow(curv,1.0/3.0)/2) - 1;
-                cote = sqrt(3*cote*cote);
+                cote = sqrt(3.0*cote*cote);
 
                 if (r->nextcote > cote)
                     cote = r->nextcote;
@@ -422,9 +422,9 @@ static int HistReduce(histogram *h, int colorsin, int colorsout)
     r.colorsin = colorsin;
     r.colorsout = colorsout;
 
-    r.limcote[2] = sqrt(3*3*3) ;
-    r.limcote[4] = sqrt(3*15*15) ;
-    r.limcote[6] = sqrt(3*63*63) ;
+    r.limcote[2] = sqrt((double)3*3*3) ;
+    r.limcote[4] = sqrt((double)3*15*15) ;
+    r.limcote[6] = sqrt((double)3*63*63) ;
 
     HistReduceLevel(&r,h,6);
 
@@ -809,7 +809,7 @@ static int writewximgkap(FILE *out, wxImage &img, uint16_t widthout, uint16_t he
     /* reduce colors */
     num_colors = HistReduce(hist,num_colors,max_colors);
 
-    bits_out = ceil(log2(num_colors));
+    bits_out = ceil(log2((double)num_colors));
 
     /* if possible do not use colors 0 */
     len = ((1<<bits_out) > num_colors);

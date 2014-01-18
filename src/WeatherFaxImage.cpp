@@ -33,6 +33,7 @@
 
 #include <wx/progdlg.h>
 
+#include "defs.h"
 #include "WeatherFaxImage.h"
 WX_DEFINE_LIST(WeatherFaxImageCoordinateList);
 
