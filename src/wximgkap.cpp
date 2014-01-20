@@ -809,7 +809,7 @@ static int writewximgkap(FILE *out, wxImage &img, uint16_t widthout, uint16_t he
     /* reduce colors */
     num_colors = HistReduce(hist,num_colors,max_colors);
 
-    bits_out = ceil(log2((double)num_colors));
+    bits_out = ceil(log((double)num_colors) / log(2.0));
 
     /* if possible do not use colors 0 */
     len = ((1<<bits_out) > num_colors);
