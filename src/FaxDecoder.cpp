@@ -452,7 +452,7 @@ done:
 
      /* put left overdata into an image */
      if((m_bIncludeHeadersInImages || gotstart) &&
-        m_imageline > 10 /* throw away really short images */) {
+        m_imageline > 10) { /* throw away really short images */
          int is = m_imagewidth*m_imageline*3;
          unsigned char *id = (unsigned char *)malloc(is); /* wximage needs malloc */
          memcpy(id, m_imgdata, is);

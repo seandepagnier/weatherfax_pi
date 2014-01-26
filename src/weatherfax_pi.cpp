@@ -245,7 +245,9 @@ wxString weatherfax_pi::StandardPath()
     wxString stdPath  = std_path.GetUserConfigDir();   // should be ~/Library/Preferences	
 #endif
 
-    return stdPath + wxFileName::GetPathSeparator();
+    return stdPath + wxFileName::GetPathSeparator() +
+        _T("plugins") + wxFileName::GetPathSeparator() +
+        _T("weatherfax") +  wxFileName::GetPathSeparator();
 }
 
 bool weatherfax_pi::LoadConfig(void)

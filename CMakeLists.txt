@@ -79,6 +79,11 @@ SET(SRC_WEATHERFAX
             src/wximgkap.h
             src/wximgkap.cpp
 
+	    ../../../include/tinyxml.h
+            ../../../src/tinyxml.cpp
+            ../../../src/tinyxmlparser.cpp
+            ../../../src/tinyxmlerror.cpp
+
             src/libaudiofile/aupv.c
             src/libaudiofile/error.c
             src/libaudiofile/extended.c
