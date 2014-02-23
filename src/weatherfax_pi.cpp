@@ -25,15 +25,6 @@
  ***************************************************************************
  */
 
-
-#include "wx/wxprec.h"
-
-#ifndef  WX_PRECOMP
-  #include "wx/wx.h"
-#endif //precompiled headers
-
-#include <wx/stdpaths.h>
-
 #include "weatherfax_pi.h"
 #include "WeatherFaxImage.h"
 #include "WeatherFax.h"

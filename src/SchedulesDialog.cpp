@@ -219,7 +219,7 @@ void SchedulesDialog::Load()
 
     s = wxFileName::GetPathSeparator();
     OpenXML(*GetpSharedDataLocation() + _T("plugins")
-            + s + _T("weatherfax") + s + _T("data") + s
+            + s + _T("weatherfax_pi") + s + _T("data") + s
             + _T("WeatherFaxSchedules.xml"));
 
     m_lStations->DeselectAll();
