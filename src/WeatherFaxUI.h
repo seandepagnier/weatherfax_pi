@@ -65,7 +65,6 @@ class WeatherFaxBase : public wxFrame
 		wxMenu* m_menu3;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void OnClose( wxCloseEvent& event ) { event.Skip(); }
 		virtual void OnFaxes( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnFaxesToggled( wxCommandEvent& event ) { event.Skip(); }
 		virtual void TransparencyChanged( wxScrollEvent& event ) { event.Skip(); }
@@ -147,7 +146,7 @@ class SchedulesDialogBase : public wxDialog
 		virtual void OnReset( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAllStations( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNoStations( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnFilter( wxSpinEvent& event ) { event.Skip(); }
+		virtual void OnFilterSpin( wxSpinEvent& event ) { event.Skip(); }
 		virtual void OnAllFrequencies( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
 		
@@ -181,6 +180,10 @@ class InternetRetrievalDialogBase : public wxDialog
 		wxButton* m_bNone;
 		wxPanel* m_panel5;
 		wxStaticText* m_staticText34;
+		wxStaticText* m_staticText41;
+		wxStaticText* m_staticText42;
+		wxTextCtrl* m_textCtrl11;
+		wxTextCtrl* m_textCtrl14;
 		wxButton* m_bRetrieve;
 		wxButton* m_bClose;
 		
@@ -281,7 +284,7 @@ class WeatherFaxWizardBase : public wxWizard
 		virtual void OnDecoderOptions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnPaintPhasing( wxPaintEvent& event ) { event.Skip(); }
 		virtual void UpdatePage1( wxCommandEvent& event ) { event.Skip(); }
-		virtual void UpdatePage1( wxScrollEvent& event ) { event.Skip(); }
+		virtual void UpdatePage1Scroll( wxScrollEvent& event ) { event.Skip(); }
 		virtual void UpdatePage1Rotation( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnCoordSet( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnCoordText( wxCommandEvent& event ) { event.Skip(); }
@@ -290,7 +293,7 @@ class WeatherFaxWizardBase : public wxWizard
 		virtual void OnBitmapClickPage2( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnMappingChoice( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnUpdateMapping( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnUpdateMapping( wxSpinEvent& event ) { event.Skip(); }
+		virtual void OnUpdateMappingSpin( wxSpinEvent& event ) { event.Skip(); }
 		virtual void OnGetMapping( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnGetEquator( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnInformation( wxCommandEvent& event ) { event.Skip(); }
@@ -352,7 +355,7 @@ class DecoderOptionsDialogBase : public wxDialog
 		wxButton* m_bDone;
 		
 		// Virtual event handlers, overide them in your derived class
-		virtual void OnOptions( wxSpinEvent& event ) { event.Skip(); }
+		virtual void OnOptionsSpin( wxSpinEvent& event ) { event.Skip(); }
 		virtual void OnOptions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnDone( wxCommandEvent& event ) { event.Skip(); }
 		

@@ -26,14 +26,15 @@ SET(SRC_WEATHERFAX
             src/WeatherFaxWizard.cpp
             src/WeatherFaxUI.cpp
             src/WeatherFaxImage.cpp
-            src/SchedulesDialog.h
-            src/InternetRetrievalDialog.h
+            src/SchedulesDialog.cpp
+            src/InternetRetrievalDialog.cpp
             src/AboutDialog.cpp
             src/icons.cpp
 
             src/wximgkap.cpp
 
             src/tinyxml/tinyxml.cpp
+            src/tinyxml/tinystr.cpp
             src/tinyxml/tinyxmlparser.cpp
             src/tinyxml/tinyxmlerror.cpp
 

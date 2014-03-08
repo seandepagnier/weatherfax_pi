@@ -38,7 +38,7 @@
 #include <functional>
 #include <stdio.h>
 
-#if defined (_WIN32)
+#if defined (__MSVC__)
 static inline long long llrint(double x){return (long long)(x > 0.0 ? x + 0.5 : x - 0.5);}
 #endif
 

@@ -72,7 +72,7 @@ public:
     
     void SetUnMappedCoordRanges();
     void SetCoordRanges();
-    void OnUpdateMapping( wxSpinEvent& event ) { Refresh(); }
+    void OnUpdateMappingSpin( wxSpinEvent& event ) { Refresh(); }
     void OnUpdateMapping( wxCommandEvent& event ) { Refresh(); }
     void OnInformation( wxCommandEvent& event );
 
@@ -82,8 +82,8 @@ protected:
 
     void UpdatePage1();
     void UpdatePage1Rotation ( wxCommandEvent& event );
-    void UpdatePage1( wxCommandEvent& event );
-    void UpdatePage1( wxScrollEvent& event );
+    void UpdatePage1( wxCommandEvent& event ) { UpdatePage1(); }
+    void UpdatePage1Scroll( wxScrollEvent& event ) { UpdatePage1(); }
 
     wxString NewCoordName();
     void SetCoords(int index);

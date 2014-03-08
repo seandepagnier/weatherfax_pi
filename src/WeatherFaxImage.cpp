@@ -25,17 +25,16 @@
  ***************************************************************************
  */
 
-#include "wx/wxprec.h"
-
-#ifndef  WX_PRECOMP
-  #include "wx/wx.h"
-#endif //precompiled headers
-
+#include <wx/wx.h>
 #include <wx/progdlg.h>
 
 #include "defs.h"
 #include "WeatherFaxImage.h"
 WX_DEFINE_LIST(WeatherFaxImageCoordinateList);
+
+#if defined(__MINGW32__) && !defined(GL_TEXTURE_RECTANGLE_ARB)
+#define GL_TEXTURE_RECTANGLE_ARB          0x84F5
+#endif
 
 wxString WeatherFaxImageCoordinates::MapName(MapType type)
 {
@@ -624,7 +623,6 @@ void WeatherFaxImage::RenderImageGL(PlugIn_ViewPort *vp)
     glEnable(GL_TEXTURE_RECTANGLE_ARB);
     glEnable( GL_BLEND );
     glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-    glDisable( GL_MULTISAMPLE );
     glTexEnvi( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_BLEND);
     glColor4ub(255, 255, 255, 255-m_iTransparency);
 

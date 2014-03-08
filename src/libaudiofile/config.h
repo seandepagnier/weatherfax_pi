@@ -1,4 +1,4 @@
-#if defined(_WIN32)
+#if defined(__MSVC__)
   #include <BaseTsd.h>
   typedef int ssize_t;
   #define snprintf  _snprintf

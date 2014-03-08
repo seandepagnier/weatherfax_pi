@@ -786,16 +786,6 @@ void WeatherFaxWizard::UpdatePage1Rotation ( wxCommandEvent& event )
     m_swFaxArea1->SetScrollbars(1, 1, m_wfimg.m_phasedimg.GetWidth(), m_wfimg.m_phasedimg.GetHeight());
 }
 
-void WeatherFaxWizard::UpdatePage1( wxCommandEvent& event )
-{
-    UpdatePage1();
-}
-
-void WeatherFaxWizard::UpdatePage1( wxScrollEvent& event )
-{
-    UpdatePage1();
-}
-
 void WeatherFaxWizard::StoreCoords()
 {
     m_curCoords->p1.x = m_sCoord1X->GetValue();

@@ -83,11 +83,11 @@ public:
     void OnSchedulesLeftDown( wxMouseEvent& event );
     void OnSchedulesSort( wxListEvent& event );
     void OnFilter( wxCommandEvent& event ) { Filter(); }
+    void OnFilterSpin( wxSpinEvent& event ) { Filter(); }
     void OnBoatPosition( wxCommandEvent& event );
     void OnReset( wxCommandEvent& event );
     void OnAllStations( wxCommandEvent& event );
     void OnNoStations( wxCommandEvent& event );
-    void OnFilter( wxSpinEvent& event ) { Filter(); }
     void OnAllFrequencies( wxCommandEvent& event );
     void OnClose( wxCommandEvent& event );
 

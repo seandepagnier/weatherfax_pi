@@ -69,7 +69,6 @@ public:
     ~WeatherFax();
 
     void EnableDisplayControls(bool enable);
-    void OnClose( wxCloseEvent& event ) { Hide(); }
     void OnFaxes( wxCommandEvent& event );
     void OnFaxesToggled( wxCommandEvent& event );
     void TransparencyChanged( wxScrollEvent& event );
@@ -80,7 +79,7 @@ public:
     void OnDelete( wxCommandEvent& event );
     void OnExport( wxCommandEvent& event );
     void OnPreferences( wxCommandEvent& event ) { m_weatherfax_pi.ShowPreferencesDialog( this ); }
-    void OnClose( wxCommandEvent& event ) { Show(false); }
+    void OnClose( wxCommandEvent& event ) { Hide(); }
     void OnCapture( wxCommandEvent& event );
     void OnSchedules( wxCommandEvent& event );
     void OnInternet( wxCommandEvent& event );

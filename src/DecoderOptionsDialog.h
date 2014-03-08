@@ -32,7 +32,7 @@ class DecoderOptionsDialog : public DecoderOptionsDialogBase
 public:
     DecoderOptionsDialog(wxWindow *parent, FaxDecoder &decoder);
 
-    void OnOptions( wxSpinEvent& event ) { ConfigureDecoder(); }
+    void OnOptionsSpin( wxSpinEvent& event ) { ConfigureDecoder(); }
     void OnOptions( wxCommandEvent& event ) { ConfigureDecoder(); }
     void OnDone( wxCommandEvent& event );
     void ConfigureDecoder();

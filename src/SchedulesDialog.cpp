@@ -31,7 +31,7 @@
 
 #include <list>
 
-#include "../../../include/tinyxml.h"
+#include "tinyxml/tinyxml.h"
 
 #include "weatherfax_pi.h"
 #include "WeatherFaxImage.h"
