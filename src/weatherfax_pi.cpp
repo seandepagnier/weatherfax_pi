@@ -106,13 +106,10 @@ bool weatherfax_pi::DeInit(void)
     SetWeatherFaxY(p.y);
 
     m_pWeatherFax->Close();
-    delete m_pWeatherFax;
-    m_pWeatherFax = NULL;
 
     SaveConfig();
 
     RemovePlugInTool(m_leftclick_tool_id);
-
     return true;
 }
 

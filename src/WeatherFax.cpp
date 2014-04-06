@@ -201,11 +201,8 @@ WeatherFax::~WeatherFax()
     }
 
     wxString filename = coordinatesets_path + coordinatesets;
-    if(!doc.SaveFile(filename.mb_str())) {
-        wxMessageDialog mdlg(this, _("Failed to save xml file: ") + filename,
-                             _("Weather Fax"), wxOK | wxICON_ERROR);
-        mdlg.ShowModal();
-    }
+    if(!doc.SaveFile(filename.mb_str()))
+        wxLogMessage(_("Weather Fax") + wxString(_T(": ")) + _("Failed to save xml file: ") + filename);
 
     for(unsigned int i=0; i<m_Faxes.size(); i++)
         delete m_Faxes[i];
@@ -297,11 +294,8 @@ void WeatherFax::OpenImage(wxString filename)
             UpdateMenuStates();
         } else
             delete img;
-    } else {
-        wxMessageDialog w( this, _("Failed to load input file: ") + filename, _("Failed"),
-                           wxOK | wxICON_ERROR );
-        w.ShowModal();
-    }
+    } else
+        wxLogMessage(_("Weather Fax") + wxString(_T(": ")) + _("Failed to load input file: ") + filename);
 }
 
 void WeatherFax::Export(wxString filename)
