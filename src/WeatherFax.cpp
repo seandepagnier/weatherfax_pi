@@ -141,8 +141,9 @@ WeatherFax::WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
 
     return;
 failed:
-    wxMessageDialog mdlg(NULL, error, _("Weather Fax"), wxOK | wxICON_ERROR);
-    mdlg.ShowModal();
+    wxLogMessage(_("Weather Fax") + wxString(_T(" : ")) + error);
+//    wxMessageDialog mdlg(NULL, error, _("Weather Fax"), wxOK | wxICON_ERROR);
+//    mdlg.ShowModal();
 }
 
 WeatherFax::~WeatherFax()
