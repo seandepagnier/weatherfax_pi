@@ -244,7 +244,7 @@ void WeatherFaxImage::InputToMercator(double px, double py, double &mx, double &
     dy = py - m_Coords->inputpole.y;
 
     /* map coordinates */
-    double theta, pp, x, y;
+    double theta, pp = 0, x = 0, y = 0;
     switch(m_Coords->mapping) {
     case WeatherFaxImageCoordinates::MERCATOR:
         x = dx;
@@ -307,7 +307,7 @@ void WeatherFaxImage::MercatorToInput(double mx, double my, double &px, double &
     }
 
     /* unmap coordinates */
-    double dx, dy;
+    double dx = 0, dy = 0;
     switch(m_Coords->mapping) {
     case WeatherFaxImageCoordinates::MERCATOR:
         dx = x;
