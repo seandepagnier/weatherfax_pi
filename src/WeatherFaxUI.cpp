@@ -515,6 +515,8 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	
 	wxFlexGridSizer* fgSizer38;
 	fgSizer38 = new wxFlexGridSizer( 0, 1, 0, 0 );
+	fgSizer38->AddGrowableCol( 0 );
+	fgSizer38->AddGrowableRow( 0 );
 	fgSizer38->SetFlexibleDirection( wxBOTH );
 	fgSizer38->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
@@ -608,7 +610,7 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	m_panel4->SetSizer( fgSizer39 );
 	m_panel4->Layout();
 	fgSizer39->Fit( m_panel4 );
-	m_notebook2->AddPage( m_panel4, _("Url"), false );
+	m_notebook2->AddPage( m_panel4, _("Url"), true );
 	m_panel5 = new wxPanel( m_notebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer60;
 	fgSizer60 = new wxFlexGridSizer( 0, 1, 0, 0 );
@@ -655,7 +657,7 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	m_panel5->SetSizer( fgSizer60 );
 	m_panel5->Layout();
 	fgSizer60->Fit( m_panel5 );
-	m_notebook2->AddPage( m_panel5, _("Email"), true );
+	m_notebook2->AddPage( m_panel5, _("Email"), false );
 	
 	fgSizer38->Add( m_notebook2, 1, wxEXPAND | wxALL, 5 );
 	
@@ -682,7 +684,7 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	
 	// Connect Events
 	m_lUrls->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( InternetRetrievalDialogBase::OnUrlsLeftDown ), NULL, this );
-	m_lUrls->Connect( wxEVT_COMMAND_LIST_COL_CLICK, wxListEventHandler( InternetRetrievalDialogBase::OnUrlsSor ), NULL, this );
+	m_lUrls->Connect( wxEVT_COMMAND_LIST_COL_CLICK, wxListEventHandler( InternetRetrievalDialogBase::OnUrlsSort ), NULL, this );
 	m_tContainsLat->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
 	m_tContainsLon->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
 	m_bBoatPosition->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnBoatPosition ), NULL, this );
@@ -698,7 +700,7 @@ InternetRetrievalDialogBase::~InternetRetrievalDialogBase()
 {
 	// Disconnect Events
 	m_lUrls->Disconnect( wxEVT_LEFT_DOWN, wxMouseEventHandler( InternetRetrievalDialogBase::OnUrlsLeftDown ), NULL, this );
-	m_lUrls->Disconnect( wxEVT_COMMAND_LIST_COL_CLICK, wxListEventHandler( InternetRetrievalDialogBase::OnUrlsSor ), NULL, this );
+	m_lUrls->Disconnect( wxEVT_COMMAND_LIST_COL_CLICK, wxListEventHandler( InternetRetrievalDialogBase::OnUrlsSort ), NULL, this );
 	m_tContainsLat->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
 	m_tContainsLon->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
 	m_bBoatPosition->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnBoatPosition ), NULL, this );

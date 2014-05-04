@@ -88,7 +88,7 @@ WeatherFax::WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
     wxString coordinatesets_path = weatherfax_pi::StandardPath();
     wxString s = wxFileName::GetPathSeparator();
     wxString default_coordinatesets_path = *GetpSharedDataLocation() + _T("plugins")
-        + s + _T("weatherfax") + s + _T("data") + _T("/");
+        + s + _T("weatherfax") + s + _T("data") + s;
     wxString coordinatesets = _T("WeatherFaxCoordinateSets.xml");
     
     TiXmlDocument doc;

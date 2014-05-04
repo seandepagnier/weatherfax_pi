@@ -189,7 +189,7 @@ class InternetRetrievalDialogBase : public wxDialog
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnUrlsLeftDown( wxMouseEvent& event ) { event.Skip(); }
-		virtual void OnUrlsSor( wxListEvent& event ) { event.Skip(); }
+		virtual void OnUrlsSort( wxListEvent& event ) { event.Skip(); }
 		virtual void OnFilter( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnBoatPosition( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnReset( wxCommandEvent& event ) { event.Skip(); }

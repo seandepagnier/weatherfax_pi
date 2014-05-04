@@ -28,6 +28,8 @@
 #include <wx/wx.h>
 #include <wx/imaglist.h>
 #include <wx/progdlg.h>
+#include <wx/url.h>
+#include <wx/wfstream.h>
 
 #include <list>
 
@@ -209,6 +211,8 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
 
             if(!strcmp(e->Value(), "Server")) {
                 wxString server = wxString::FromUTF8(e->Attribute("Name"));
+                wxString server_url = wxString::FromUTF8(e->Attribute("Url"));
+
                 m_lServers->Append(server);
                 std::list<FaxUrl> urls;
                 std::list<FaxArea> Areas;
@@ -220,8 +224,9 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                         url.Selected = false;
                         url.Server = server;
                          
-                        url.Url = wxString::FromUTF8(f->Attribute("Url"));
+                        url.Url = server_url + wxString::FromUTF8(f->Attribute("Url"));
                         url.Contents = wxString::FromUTF8(f->Attribute("Contents"));
+                        url.area_name = wxString::FromUTF8(f->Attribute("Area"));
 
                         urls.push_back(url);
                     } else if(!strcmp(f->Value(), "Area")) {
@@ -379,7 +384,38 @@ void InternetRetrievalDialog::OnNoServers( wxCommandEvent& event )
 
 void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
 {
-    
+//    int i = 0;
+//    while((i = m_lUrls->GetNextItem(i, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED)) != -1) {
+    for(int i=0; i < m_lUrls->GetItemCount(); i++) {
+        FaxUrl *url = reinterpret_cast<FaxUrl*>
+            (wxUIntToPtr(m_lUrls->GetItemData(i)));
+
+        if(!url->Selected)
+            continue;
+
+//        wxUrl u(url->Url);
+        wxInputStream *input;// = u.GetInputStream();
+        int size = input->GetSize();
+        wxProgressDialog progressdialog(_("WeatherFax InternetRetrieval"), _("Downloading..."), size, this,
+                        wxPD_CAN_ABORT | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
+
+        wxString path = weatherfax_pi::StandardPath();
+
+        int lastslash = url->Url.rfind(_T("/"));
+        wxString filename = url->Url.substr(lastslash + 1);
+
+        wxFileOutputStream output(path + wxFileName::GetPathSeparator() + filename);
+        int position = 0;
+        while(input->Eof()) {
+            char buffer[1024];
+            input->Read(buffer, sizeof buffer);
+            int lastread = input->LastRead();
+            output.Write(buffer, lastread);
+            position += lastread;
+            progressdialog.Update(lastread);
+        }
+        
+    }
 }
 
 void InternetRetrievalDialog::OnClose( wxCommandEvent& event )
@@ -409,7 +445,7 @@ void InternetRetrievalDialog::Filter()
 
     for(std::list<FaxUrl*>::iterator it = m_InternetRetrieval.begin();
         it != m_InternetRetrieval.end(); it++)
-        (*it)->Filtered = !(/*(*it)->Area.ContainsLat(lat) && (*it)->Area.ContainsLon(lon) &&*/
+        (*it)->Filtered = !((*it)->Area.ContainsLat(lat) && (*it)->Area.ContainsLon(lon) &&
                             HasServer((*it)->Server));
     RebuildList();
 }
@@ -450,11 +486,11 @@ void InternetRetrievalDialog::UpdateItem(long index)
     m_lUrls->SetColumnWidth(SELECTED, 50);
 
     m_lUrls->SetItem(index, SERVER, url->Server);
-    m_lUrls->SetColumnWidth(SERVER, 100 /*wxLIST_AUTOSIZE*/);
+    m_lUrls->SetColumnWidth(SERVER, 150 /*wxLIST_AUTOSIZE*/);
 
     m_lUrls->SetItem(index, CONTENTS, url->Contents);
     m_lUrls->SetColumnWidth(CONTENTS, 350 /*wxLIST_AUTOSIZE*/);
 
-    m_lUrls->SetItem(index, MAP_AREA, _T("")/*url->Area.AreaDescription()*/);
+    m_lUrls->SetItem(index, MAP_AREA, url->Area.AreaDescription());
     m_lUrls->SetColumnWidth(MAP_AREA, 150);
 }
