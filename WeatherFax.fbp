@@ -4194,7 +4194,7 @@
             <property name="minimum_size"></property>
             <property name="name">InternetRetrievalDialogBase</property>
             <property name="pos"></property>
-            <property name="size"></property>
+            <property name="size">640,400</property>
             <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Internet Retrieval</property>

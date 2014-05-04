@@ -40,7 +40,7 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
                                     WeatherFaxImageCoordinateList &coords,
                                     wxString newcoordbasename)
     : WeatherFaxWizardBase( &parent ), m_decoder(*this, decoder_filename),
-      m_DecoderOptionsDialog(this, m_decoder),
+      m_DecoderOptionsDialog(use_decoder ? new DecoderOptionsDialog(this, m_decoder) : NULL),
       m_parent(parent), m_wfimg(img), m_curCoords(img.m_Coords),
       m_NewCoordBaseName(newcoordbasename.empty() ? wxString(_("New Coord")) : newcoordbasename),
       m_Coords(coords)
@@ -71,7 +71,10 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
         m_thDecoder = NULL;
         m_bStopDecoding->Disable();
 
-        m_DecoderOptionsDialog.m_sMinusSaturationThreshold->Disable();
+        if(m_DecoderOptionsDialog)
+            m_DecoderOptionsDialog->m_sMinusSaturationThreshold->Disable();
+        else
+            m_bDecoderOptions->Disable();
     }
 }
 
@@ -86,6 +89,8 @@ WeatherFaxWizard::~WeatherFaxWizard()
         m_thDecoder->Wait(); /* wait for decoder thread to end */
         delete m_thDecoder;
     }
+
+    delete m_DecoderOptionsDialog;
 
     wxFileConfig *pConf = GetOCPNConfigObject();
     pConf->SetPath ( _T ( "/Settings/WeatherFax" ) );
@@ -208,7 +213,7 @@ void WeatherFaxWizard::OnStopDecoding( wxCommandEvent& event )
 
 void WeatherFaxWizard::OnDecoderOptions( wxCommandEvent& event )
 {
-    m_DecoderOptionsDialog.Show();
+    m_DecoderOptionsDialog->Show();
 }
 
 void WeatherFaxWizard::OnPaintPhasing( wxPaintEvent& event )

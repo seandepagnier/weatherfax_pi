@@ -46,7 +46,7 @@ public:
     DecoderThread *m_thDecoder;
     FaxDecoder m_decoder;
     bool m_bDecoderStopped;
-    DecoderOptionsDialog m_DecoderOptionsDialog;
+    DecoderOptionsDialog *m_DecoderOptionsDialog;
 
     void MakeNewCoordinates();
     void OnDecoderTimer( wxTimerEvent & );

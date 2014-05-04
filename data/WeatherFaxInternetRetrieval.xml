@@ -117,4 +117,102 @@
     <Area Name="6" lat1="5N" lat2="60N" lon1="0W" lon2="100W" />
   </Server>
 
+  <Server Name="NOAA Kodiak Alaska" Url="http://weather.noaa.gov/pub/fax/">
+    <Map Url="PTCA89.TIF" Contents="SEA ICE ANALYSIS" Area="6" />
+    <Map Url="PYCA10.TIF" Contents="SURFACE ANALYSIS" Area="2" />
+    <Map Url="PJBA99.TIF" Contents="SEA STATE ANALYSIS" Area="1" />
+    <Map Url="evpn99.jpg" Contents="GOES IR SATELLITE IMAGE" Area="5" />
+    <Map Url="PPBA10.TIF" Contents="500 MB ANALYSIS" Area="1" />
+    <Map Url="PLBZ06.TIF" Contents="SYMBOLS AND CONTRACTIONS" Area="" />
+    <Map Url="PPBE11.TIF" Contents="24HR 500 MB FORECAST" Area="1" />
+    <Map Url="PJBE10.TIF" Contents="24HR WIND/WAVE FORECAST" Area="3" />
+    <Map Url="PYBE10.TIF" Contents="24HR SURFACE FORECAST" Area="3" />
+    <Map Url="PWBI10.TIF" Contents="48HR SURFACE FORECAST" Area="1" />
+    <Map Url="PJBI10.TIF" Contents="48HR WIND/WAVE FORECAST" Area="1" />
+    <Map Url="PTCO89.TIF" Contents="5-DAY SEA ICE FORECAST" Area="6" />
+    <Map Url="evpn99.jpg" Contents="GOES IR SATELLITE IMAGE" Area="5" />
+    <Map Url="PJBI20.TIF" Contents="48HR WAVE PERIOD, SWELL DIRECTION" Area="1" />
+    <Map Url="PPBI10.TIF" Contents="48HR 500 MB FORECAST" Area="1" />
+    <Map Url="PTCA88.TIF" Contents="SEA SURFACE TEMPERATURE ANALYSIS" Area="4" />
+    <Map Url="PTCA87.TIF" Contents="COOK INLET SEA ICE FORECAST" Area="7" />
+    <Map Url="PWBM99.TIF" Contents="96HR SURFACE FORECAST" Area="1" />
+    <Map Url="PJBM98.TIF" Contents="96HR WIND/WAVE FORECAST" Area="1" />
+    <Map Url="PJBM88.TIF" Contents="96HR WAVE PERIOD, SWELL DIRECTION" Area="1" />
+    <Map Url="PPBM50.TIF" Contents="96HR 500 MB FORECAST" Area="1" />
+
+    <Area Name="1" lat1="20N" lat2="70N" lon1="115W" lon2="135E" />
+    <Area Name="2" lat1="40N" lat2="70N" lon1="125W" lon2="150E" />
+    <Area Name="3" lat1="40N" lat2="70N" lon1="115W" lon2="170E" />
+    <Area Name="4" lat1="40N" lat2="60N" lon1="125W" lon2="160E" />
+    <Area Name="5" lat1="5N" lat2="60N" lon1="110W" lon2="160W" />
+    <Area Name="6" Description="ICE COVERED AK WATERS" />
+    <Area Name="7" Description="COOK INLET" />
+  </Server>
+
+  <Server Name="NOAA Honolulu Hawaii" Url="http://weather.noaa.gov/pub/fax/">
+    <Map Url="PBFA11.TIF" Contents="SIGNIFICANT CLOUD FEATURES" Area="D" />
+    <Map Url="PWFK12.TIF" Contents="CYCLONE DANGER AREA" Area="E" />
+    <Map Url="PWFA11.TIF" Contents="STREAMLINE ANALYSIS" Area="B" />
+    <Map Url="PPBA11.TIF" Contents="SURFACE ANALYSIS" Area="C" />
+    <Map Url="evpz11.jpg" Contents="EAST PACIFIC GOES IR SATELLITE IMAGE" Area="G" />
+    <Map Url="evps11.jpg" Contents="SW PACIFIC GOES IR SATELLITE IMAGE" Area="H" />
+    <Map Url="PYFE11.TIF" Contents="24HR SURFACE FORECAST" Area="A" />
+    <Map Url="PYFI11.TIF" Contents="48HR SURFACE FORECAST" Area="A" />
+    <Map Url="PYFK11.TIF" Contents="72HR SURFACE FORECAST" Area="A" />
+    <Map Url="PJFB10.TIF" Contents="WIND/WAVE ANALYSIS" Area="B" />
+    <Map Url="PWFE11.TIF" Contents="24HR WIND/WAVE FORECAST" Area="B" />
+    <Map Url="PWBE10.TIF" Contents="24HR WIND/WAVE FORECAST" Area="4" />
+    <Map Url="PWBI10.TIF" Contents="48HR SURFACE FORECAST" Area="1" />
+    <Map Url="PJBI10.TIF" Contents="48HR WIND/WAVE FORECAST" Area="1" />
+    <Map Url="PJBI20.TIF" Contents="48HR WAVE PERIOD,SWELL DIRECTION" Area="1" />
+    <Map Url="PJBM88.TIF" Contents="96HR WAVE PERIOD,SWELL DIRECTION" Area="1" />
+    <Map Url="evpn99.jpg" Contents="PACIFIC GOES IR SATELLITE IMAGE" Area="5" />
+    <Map Url="PYBA90.TIF" Contents="SURFACE ANALYSIS (PART 1 NE PACIFIC)" Area="2" />
+    <Map Url="PYBA91.TIF" Contents="SURFACE ANALYSIS (PART 2 NW PACIFIC)" Area="3" />
+    <Map Url="evpn10.jpg" Contents="TROPICAL GOES IR SATELLITE IMAGE" Area="Y" />
+    <Map Url="PYFA90.TIF" Contents="TROPICAL SURFACE ANALYSIS" Area="Z" />
+    <Map Url="PWFE10.TIF" Contents="24HR TROPICAL WIND/WAVE FORECAST" Area="Z" />
+    <Map Url="PWFK12.TIF" Contents="CYCLONE DANGER AREA" Area="E" />
+    <Map Url="PJFI10.TIF" Contents="48HR WIND/WAVE FORECAST" Area="B" />
+    <Map Url="PJFK10.TIF" Contents="72HR WIND/WAVE FORECAST" Area="B" />
+    <Map Url="PTFA88.TIF" Contents="SEA SURFACE TEMPS" Area="F" />
+    <Map Url="PLBZ08.TIF" Contents="SYMBOLS OR PRODUCT NOTICE BULLETIN" Area="" />
+    <Map Url="PYFE10.TIF" Contents="24HR TROPICAL SURFACE FORECAST" Area="Z" />
+    <Map Url="PYFI10.TIF" Contents="48HR TROPICAL SURFACE FORECAST" Area="Z" />
+    <Map Url="PYFK10.TIF" Contents="72HR TROPICAL SURFACE FORECAST" Area="Z" />
+    <Map Url="PJFI11.TIF" Contents="48HR TROPICAL WAVE PERIOD,SWELL DIR" Area="Z" />
+    <Map Url="PJFK93.TIF" Contents="72HR TROPICAL WAVE PERIOD,SWELL DIR" Area="Z" />
+    <Map Url="PKFA10.TIF" Contents="TROPICAL SEA STATE ANALYSIS" Area="Z" />
+    <Map Url="PWFI10.TIF" Contents="48HR TROPICAL WIND/WAVE FORECAST" Area="Z" />
+    <Map Url="PWFK10.TIF" Contents="72HR TROPICAL WIND/WAVE FORECAST" Area="Z" />
+
+    <Area Name="A" lat1="30S" lat2="50N" lon1="110W" lon2="130E" />
+    <Area Name="B" lat1="30S" lat2="30N" lon1="110W" lon2="160E" />
+    <Area Name="C" lat1="0N" lat2="50N" lon1="110W" lon2="130E" />
+    <Area Name="D" lat1="30S" lat2="50N" lon1="110W" lon2="160E" />
+    <Area Name="E" lat1="0N" lat2="40N" lon1="80W" lon2="170E" />
+    <Area Name="F" lat1="0N" lat2="55N" lon1="110W" lon2="160E" />
+    <Area Name="G" lat1="5S" lat2="55N" lon1="110W" lon2="155E" />
+    <Area Name="H" lat1="40S" lat2="5N" lon1="130W" lon2="165E" />
+
+    <Area Name="1" lat1="20N" lat2="70N" lon1="115W" lon2="135E" />
+    <Area Name="2" lat1="20N" lat2="70N" lon1="115W" lon2="175W" />
+    <Area Name="3" lat1="20N" lat2="70N" lon1="175W" lon2="135W" />
+    <Area Name="4" lat1="18N" lat2="62N" />
+    <Area Name="5" lat1="5N" lat2="55N" />
+    <Area Name="Y" lat1="5N" lat2="32N" />
+    <Area Name="Z" lat1="20S" lat2="30N" />
+  </Server>
+
+   <!-- Example for how we can support passage weather.. not completed! -->
+  <Server Name="Passage Weather China Sea" Url="http://passageweather.com/maps/chinasea/">
+
+    <Map Url="wind/000.png" Contents="South China Sea Wind 000" Area="1" />
+    <Map Url="press/000.png" Contents="South China Sea Pressure 000" Area="1" />
+    <Map Url="waves/000.png" Contents="South China Sea Waves 000" Area="1" />
+
+    <Area Name="1" lat1="8N" lat2="24N" lon1="100W" lon2="130E" />
+
+  </Server>
+
 </OCPNWeatherFaxInternetRetrieval>

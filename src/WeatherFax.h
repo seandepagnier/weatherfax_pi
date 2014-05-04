@@ -29,7 +29,6 @@
 
 #include "WeatherFaxUI.h"
 
-
 class FaxArea
 {
 public:
@@ -61,7 +60,7 @@ public:
 
 class weatherfax_pi;
 
-class WeatherFax: public WeatherFaxBase
+class WeatherFax : public WeatherFaxBase
 {
 public:
     WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent);

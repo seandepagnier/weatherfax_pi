@@ -678,7 +678,6 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	
 	this->SetSizer( fgSizer38 );
 	this->Layout();
-	fgSizer38->Fit( this );
 	
 	this->Centre( wxBOTH );
 	
