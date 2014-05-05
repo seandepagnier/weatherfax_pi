@@ -176,8 +176,11 @@ class InternetRetrievalDialogBase : public wxDialog
 		wxButton* m_bBoatPosition;
 		wxButton* m_bReset;
 		wxListBox* m_lServers;
-		wxButton* m_bAll;
-		wxButton* m_bNone;
+		wxButton* m_bAllServers;
+		wxButton* m_bNoServers;
+		wxListBox* m_lRegions;
+		wxButton* m_bAllRegions;
+		wxButton* m_bNoRegions;
 		wxPanel* m_panel5;
 		wxStaticText* m_staticText34;
 		wxStaticText* m_staticText41;
@@ -193,15 +196,18 @@ class InternetRetrievalDialogBase : public wxDialog
 		virtual void OnFilter( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnBoatPosition( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnReset( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnFilterServers( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAllServers( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNoServers( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnAllRegions( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnNoRegions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnRetrieve( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
 		
-		InternetRetrievalDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Internet Retrieval"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 640,400 ), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER ); 
+		InternetRetrievalDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Internet Retrieval"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 640,470 ), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER ); 
 		~InternetRetrievalDialogBase();
 	
 };

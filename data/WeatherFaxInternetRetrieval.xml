@@ -1,217 +1,232 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <OCPNWeatherFaxInternetRetrieval>
-  <Server Name="NOAA Boston" Url="http://weather.noaa.gov/pub/fax/">
+  <Server Name="NOAA" Url="http://weather.noaa.gov/pub/fax/">
 
-    <!-- wind/wave charts -->
-    <Map Url="PWAA90.TIF" Contents="WIND/WAVE ANALYSIS" Area="8" />
-    <Map Url="PJAA99.TIF" Contents="SEA STATE ANALYSIS" Area="4" />
-    <Map Url="PWAE10.TIF" Contents="24HR WIND/WAVE FORECAST" Area="8" />
-    <Map Url="PJAI10.TIF" Contents="48HR WIND/WAVE FORECAST" Area="4" />
-    <Map Url="PJAI20.TIF" Contents="48HR WAVE PERIOD FORECAST" Area="4" />
-    <Map Url="PJAM98.TIF" Contents="96 HR WIND/WAVE FORECAST" Area="4" />
-    <Map Url="PJAM88.TIF" Contents="96 HR WAVE PERIOD FORECAST" Area="4" />
+    <Region Name="Boston">
 
-    <!-- surface charts -->
-    <Map Url="PYAD10.TIF" Contents="PRELIMINARY SURFACE ANALYSIS" Area="1" />
-    <Map Url="QDTM10.TIF" Contents="48HR SURFACE FORECAST" Area="4" />
-    <Map Url="PYAA11.TIF" Contents="SURFACE ANALYSIS (PART 1 NE ATLANTIC)" Area="2" />
-    <Map Url="PYAA12.TIF" Contents="SURFACE ANALYSIS (PART 2 NW ATLANTIC)" Area="3" />
-    <Map Url="PPAE10.TIF" Contents="24HR SURFACE FORECAST" Area="8" />
-    <Map Url="PWAM99.TIF" Contents="96 HR SURFACE FORECAST" Area="4" />
+      <!-- wind/wave charts -->
+      <Map Url="PWAA90.TIF" Contents="WIND/WAVE ANALYSIS" Area="8" />
+      <Map Url="PJAA99.TIF" Contents="SEA STATE ANALYSIS" Area="4" />
+      <Map Url="PWAE10.TIF" Contents="24HR WIND/WAVE FORECAST" Area="8" />
+      <Map Url="PJAI10.TIF" Contents="48HR WIND/WAVE FORECAST" Area="4" />
+      <Map Url="PJAI20.TIF" Contents="48HR WAVE PERIOD FORECAST" Area="4" />
+      <Map Url="PJAM98.TIF" Contents="96 HR WIND/WAVE FORECAST" Area="4" />
+      <Map Url="PJAM88.TIF" Contents="96 HR WAVE PERIOD FORECAST" Area="4" />
 
-    <!-- upper air charts -->
-    <Map Url="PPAA10.TIF" Contents="00Z 500MB Analysis 10E-95W NW Atlantic" Area="4" />
-    <Map Url="PPAE11.TIF" Contents="24HR 500MB Forecast VT00Z 10E-95W NW Atlantic" Area="4" />
-    <Map Url="PPAG11.TIF" Contents="36HR 500MB Forecast VT00Z 10E-95W NW Atlantic" Area="4" />
-    <Map Url="PPAI10.TIF" Contents="48HR 500MB Forecast VT00Z 10E-95W NW Atlantic" Area="4" />
-    <Map Url="PPAM50.TIF" Contents="96HR 500MB Forecast VT12Z 10E-95W NW Atlantic" Area="4" />
+      <!-- surface charts -->
+      <Map Url="PYAD10.TIF" Contents="PRELIMINARY SURFACE ANALYSIS" Area="1" />
+      <Map Url="QDTM10.TIF" Contents="48HR SURFACE FORECAST" Area="4" />
+      <Map Url="PYAA11.TIF" Contents="SURFACE ANALYSIS (PART 1 NE ATLANTIC)" Area="2" />
+      <Map Url="PYAA12.TIF" Contents="SURFACE ANALYSIS (PART 2 NW ATLANTIC)" Area="3" />
+      <Map Url="PPAE10.TIF" Contents="24HR SURFACE FORECAST" Area="8" />
+      <Map Url="PWAM99.TIF" Contents="96 HR SURFACE FORECAST" Area="4" />
 
-    <!-- cyclone/high waves -->
-    <Map Url="PWEK11.TIF" Contents="Tropical Cyclone Danger Area VT03/09/15/21Z 05N-60N 00W-100W" Area="7" />
+      <!-- upper air charts -->
+      <Map Url="PPAA10.TIF" Contents="00Z 500MB Analysis 10E-95W NW Atlantic" Area="4" />
+      <Map Url="PPAE11.TIF" Contents="24HR 500MB Forecast VT00Z 10E-95W NW Atlantic" Area="4" />
+      <Map Url="PPAG11.TIF" Contents="36HR 500MB Forecast VT00Z 10E-95W NW Atlantic" Area="4" />
+      <Map Url="PPAI10.TIF" Contents="48HR 500MB Forecast VT00Z 10E-95W NW Atlantic" Area="4" />
+      <Map Url="PPAM50.TIF" Contents="96HR 500MB Forecast VT12Z 10E-95W NW Atlantic" Area="4" />
 
-    <!-- ice chart -->
-    <Map Url="PIEA88.TIF" Contents="Latest USCG Ice Limits Chart (During Ice Season)" Area="6" />
+      <!-- cyclone/high waves -->
+      <Map Url="PWEK11.TIF" Contents="Tropical Cyclone Danger Area VT03/09/15/21Z 05N-60N 00W-100W" Area="7" />
 
-    <!-- satellite imagery -->
-    <Map Url="evnt99.jpg" Contents="GOES IR Satellite Image, West Atlantic or Atlantic" Area="5" />
-    
-    <Area Name="1" lat1="28N" lat2="52N" lon1="45W" lon2="85W" />
-    <Area Name="2" lat1="18N" lat2="65N" lon1="10E" lon2="45W" />
-    <Area Name="3" lat1="18N" lat2="65N" lon1="40W" lon2="95W" />
-    <Area Name="4" lat1="18N" lat2="65N" lon1="10E" lon2="95W" />
-    <Area Name="5" lat1="20N" lat2="55N" lon1="55W" lon2="95W" />
-    <Area Name="6" lat1="60N" lat2="65N" lon1="40W" lon2="130W" />
-    <Area Name="7" lat1="05N" lat2="60N" lon1="0W" lon2="100W" />
-    <Area Name="8" lat1="22N" lat2="51N" lon1="40W" lon2="98W" />
+      <!-- ice chart -->
+      <Map Url="PIEA88.TIF" Contents="Latest USCG Ice Limits Chart (During Ice Season)" Area="6" />
 
-  </Server>
+      <!-- satellite imagery -->
+      <Map Url="evnt99.jpg" Contents="GOES IR Satellite Image, West Atlantic or Atlantic" Area="5" />
+      
+      <Area Name="1" lat1="28N" lat2="52N" lon1="45W" lon2="85W" />
+      <Area Name="2" lat1="18N" lat2="65N" lon1="10E" lon2="45W" />
+      <Area Name="3" lat1="18N" lat2="65N" lon1="40W" lon2="95W" />
+      <Area Name="4" lat1="18N" lat2="65N" lon1="10E" lon2="95W" />
+      <Area Name="5" lat1="20N" lat2="55N" lon1="55W" lon2="95W" />
+      <Area Name="6" lat1="60N" lat2="65N" lon1="40W" lon2="130W" />
+      <Area Name="7" lat1="05N" lat2="60N" lon1="0W" lon2="100W" />
+      <Area Name="8" lat1="22N" lat2="51N" lon1="40W" lon2="98W" />
 
-  <Server Name="NOAA PT. REYES" Url="http://weather.noaa.gov/pub/fax/">
-    <Map Url="evpn98.jpg" Contents="NE PACIFIC GOES IR SATELLITE IMAGE" Area="6" />
-    <Map Url="evpn99.jpg" Contents="PACIFIC GOES IR SATELLITE IMAGE" Area="5" />
-    <Map Url="PKFA10.TIF" Contents="TROPICAL SEA STATE ANALYSIS" Area="4" />
-    <Map Url="PYFI10.TIF" Contents="TROPICAL 48HR SURFACE FORECAST" Area="4" />
-    <Map Url="PWFI10.TIF" Contents="TROPICAL 48HR WIND/WAVE FORECAST" Area="4" />
-    <Map Url="PWFK10.TIF" Contents="TROPICAL 72HR WIND/WAVE FORECAST" Area="4" />
-    <Map Url="PPBA10.TIF" Contents="500MB ANALYSIS" Area="1" />
-    <Map Url="PJBA99.TIF" Contents="SEA STATE ANALYSIS, WIND/WAVE ANALYSIS" Area="1" />
-    <Map Url="PYBA90.TIF" Contents="SEA STATE ANALYSIS, WIND/WAVE ANALYSIS" Area="2" />
-    <Map Url="PYBA91.TIF" Contents="FINAL  SURFACE ANALYSIS(PART 2 NW PAC)" Area="3" />
-    <Map Url="PWFK11.TIF" Contents="CYCLONE DANGER AREA* or HIGH WIND/WAVES" Area="10" />
-    <Map Url="PYFA90.TIF" Contents="TROPICAL SURFACE ANALYSIS" Area="4" />
-    <Map Url="PTBA88.TIF" Contents="SST ANALYSIS" Area="9" />
-    <Map Url="PTBA89.TIF" Contents="SST ANALYSIS" Area="6" />
-    <Map Url="evpn10.jpg" Contents="TROPICAL GOES IR SATELLITE IMAGE" Area="7" />
-    <Map Url="PWBA90.TIF" Contents="WIND/WAVE ANALYSIS" Area="8" />
-    <Map Url="PPBE11.TIF" Contents="24HR 500MB FORECAST" Area="1" />
-    <Map Url="PPBE10.TIF" Contents="24HR SURFACE FORECAST" Area="8" />
-    <Map Url="PWBE10.TIF" Contents="24HR WIND/WAVE FORECAST" Area="8" />
-    <Map Url="PPBI10.TIF" Contents="48HR 500MB FORECAST" Area="1" />
-    <Map Url="PWBI10.TIF" Contents="8HR SURFACE FORECAST" Area="1" />
-    <Map Url="PJBI10.TIF" Contents="48HR WIND/WAVE FORECAST" Area="1" />
-    <Map Url="PJBI20.TIF" Contents="48HR WAVE PERIOD/SWELL DIRECTION" Area="1" />
-    <Map Url="PPBM50.TIF" Contents="96HR 500MB FORECAST" Area="1" />
-    <Map Url="PPBM99.TIF" Contents="96HR SURFACE FORECAST" Area="1" />
-    <Map Url="PJBM98.TIF" Contents="96HR WIND/WAVE FORECAST" Area="1" />
-    <Map Url="PJBM88.TIF" Contents="96HR WAVE PERIOD/SWELL DIRECTION" Area="1" />
+    </Region>
 
-    <Area Name="1" lat1="20N" lat2="70N" lon1="115W" lon2="135E" />
-    <Area Name="2" lat1="20N" lat2="70N" lon1="115W" lon2="175W" />
-    <Area Name="3" lat1="20N" lat2="70N" lon1="175W" lon2="135E" />
-    <Area Name="4" lat1="20S" lat2="40N" lon1="70W" lon2="140W" />
-    <Area Name="5" lat1="10N" lat2="60N" lon1="180W" lon2="80W" />
-    <Area Name="6" lat1="20N" lat2="40N" lon1="40W" lon2="130W" />
-    <Area Name="7" lat1="0N" lat2="32N" lon1="78W" lon2="126W" />
-    <Area Name="8" lat1="22N" lat2="51N" lon1="105W" lon2="135W" />
-    <Area Name="9" lat1="40N" lat2="53N" lon1="125W" lon2="135W" />
-    <Area Name="10" lat1="0N" lat2="40N" lon1="80W" lon2="180W" />
+    <Region Name="Pt. Reyes">
+      <Map Url="evpn98.jpg" Contents="NE PACIFIC GOES IR SATELLITE IMAGE" Area="6" />
+      <Map Url="evpn99.jpg" Contents="PACIFIC GOES IR SATELLITE IMAGE" Area="5" />
+      <Map Url="PKFA10.TIF" Contents="TROPICAL SEA STATE ANALYSIS" Area="4" />
+      <Map Url="PYFI10.TIF" Contents="TROPICAL 48HR SURFACE FORECAST" Area="4" />
+      <Map Url="PWFI10.TIF" Contents="TROPICAL 48HR WIND/WAVE FORECAST" Area="4" />
+      <Map Url="PWFK10.TIF" Contents="TROPICAL 72HR WIND/WAVE FORECAST" Area="4" />
+      <Map Url="PPBA10.TIF" Contents="500MB ANALYSIS" Area="1" />
+      <Map Url="PJBA99.TIF" Contents="SEA STATE ANALYSIS, WIND/WAVE ANALYSIS" Area="1" />
+      <Map Url="PYBA90.TIF" Contents="SEA STATE ANALYSIS, WIND/WAVE ANALYSIS" Area="2" />
+      <Map Url="PYBA91.TIF" Contents="FINAL  SURFACE ANALYSIS(PART 2 NW PAC)" Area="3" />
+      <Map Url="PWFK11.TIF" Contents="CYCLONE DANGER AREA* or HIGH WIND/WAVES" Area="10" />
+      <Map Url="PYFA90.TIF" Contents="TROPICAL SURFACE ANALYSIS" Area="4" />
+      <Map Url="PTBA88.TIF" Contents="SST ANALYSIS" Area="9" />
+      <Map Url="PTBA89.TIF" Contents="SST ANALYSIS" Area="6" />
+      <Map Url="evpn10.jpg" Contents="TROPICAL GOES IR SATELLITE IMAGE" Area="7" />
+      <Map Url="PWBA90.TIF" Contents="WIND/WAVE ANALYSIS" Area="8" />
+      <Map Url="PPBE11.TIF" Contents="24HR 500MB FORECAST" Area="1" />
+      <Map Url="PPBE10.TIF" Contents="24HR SURFACE FORECAST" Area="8" />
+      <Map Url="PWBE10.TIF" Contents="24HR WIND/WAVE FORECAST" Area="8" />
+      <Map Url="PPBI10.TIF" Contents="48HR 500MB FORECAST" Area="1" />
+      <Map Url="PWBI10.TIF" Contents="8HR SURFACE FORECAST" Area="1" />
+      <Map Url="PJBI10.TIF" Contents="48HR WIND/WAVE FORECAST" Area="1" />
+      <Map Url="PJBI20.TIF" Contents="48HR WAVE PERIOD/SWELL DIRECTION" Area="1" />
+      <Map Url="PPBM50.TIF" Contents="96HR 500MB FORECAST" Area="1" />
+      <Map Url="PPBM99.TIF" Contents="96HR SURFACE FORECAST" Area="1" />
+      <Map Url="PJBM98.TIF" Contents="96HR WIND/WAVE FORECAST" Area="1" />
+      <Map Url="PJBM88.TIF" Contents="96HR WAVE PERIOD/SWELL DIRECTION" Area="1" />
 
-  </Server>
+      <Area Name="1" lat1="20N" lat2="70N" lon1="115W" lon2="135E" />
+      <Area Name="2" lat1="20N" lat2="70N" lon1="115W" lon2="175W" />
+      <Area Name="3" lat1="20N" lat2="70N" lon1="175W" lon2="135E" />
+      <Area Name="4" lat1="20S" lat2="40N" lon1="70W" lon2="140W" />
+      <Area Name="5" lat1="10N" lat2="60N" lon1="180W" lon2="80W" />
+      <Area Name="6" lat1="20N" lat2="40N" lon1="40W" lon2="130W" />
+      <Area Name="7" lat1="0N" lat2="32N" lon1="78W" lon2="126W" />
+      <Area Name="8" lat1="22N" lat2="51N" lon1="105W" lon2="135W" />
+      <Area Name="9" lat1="40N" lat2="53N" lon1="125W" lon2="135W" />
+      <Area Name="10" lat1="0N" lat2="40N" lon1="80W" lon2="180W" />
 
-  <Server Name="NOAA New Orleans" Url="http://weather.noaa.gov/pub/fax/">
+    </Region>
 
-    <Map Url="PYEB11.TIF" Contents="U.S./TROPICAL SURFACE ANALYSIS (W HALF)" Area="1" />
-    <Map Url="PYEA11.TIF" Contents="TROPICAL SURFACE ANALYSIS (E HALF)" Area="2" />
-    <Map Url="PWEK11.TIF" Contents="CYCLONE DANGER AREA* or HIGH WIND/WAVES" Area="6" />
-    <Map Url="PWED98.TIF" Contents="36 HR WIND/WAVE FORECAST" Area="3" />
-    <Map Url="evst99.jpg" Contents="GOES IR TROPICAL SATELLITE IMAGE" Area="4" />
-    <Map Url="PJEA11.TIF" Contents="SEA STATE ANALYSIS" Area="3" />
-    <Map Url="PLEZ02.TIF" Contents="REQUEST FOR COMMENTS/PRODUCT NOTICE" Area="" />
-    <Map Url="PLEA10.TIF" Contents="HIGH SEAS FORECAST (IN ENGLISH)" Area="5" />
-    <Map Url="PJEI11.TIF" Contents="48 HR WAVE PERIOD/SWELL DIRECTION" Area="3" />
-    <Map Url="PYEE10.TIF" Contents="24 HR SURFACE FORECAST" Area="3" />
-    <Map Url="PYEI10.TIF" Contents="48 HR SURFACE FORECAST" Area="3" />
-    <Map Url="PYEK10.TIF" Contents="72 HR SURFACE FORECAST" Area="3" />
-    <Map Url="PWEE11.TIF" Contents="24 HR WIND/WAVE FORECAST" Area="3" />
-    <Map Url="PWEK11.TIF" Contents="CYCLONE DANGER AREA* or HIGH WIND/WAVES" Area="6" />
-    <Map Url="PWEI11.TIF" Contents="48 HR WIND/WAVE FORECAST" Area="3" />
-    <Map Url="evst99.jpg" Contents="GOES IR TROPICAL SATELLITE IMAGE" Area="4" />
-    <Map Url="PJEK11.TIF" Contents="72 HR WIND/WAVE FORECAST" Area="3" />
-    <Map Url="PKEK88.TIF" Contents="72 HR WAVE PERIOD/SWELL DIRECTION" Area="3" />
+    <Region Name="New Orleans">
 
-    <Area Name="1" lat1="5S" lat2="50N" lon1="55W" lon2="125W" />
-    <Area Name="2" lat1="5S" lat2="50N" lon1="0W" lon2="70W" />
-    <Area Name="3" lat1="0N" lat2="31N" lon1="35W" lon2="100W" />
-    <Area Name="4" lat1="12S" lat2="44N" lon1="28W" lon2="112W" />
-    <Area Name="5" lat1="7N" lat2="31N" lon1="35W" lon2="98W" />
-    <Area Name="6" lat1="5N" lat2="60N" lon1="0W" lon2="100W" />
-  </Server>
+      <Map Url="PYEB11.TIF" Contents="U.S./TROPICAL SURFACE ANALYSIS (W HALF)" Area="1" />
+      <Map Url="PYEA11.TIF" Contents="TROPICAL SURFACE ANALYSIS (E HALF)" Area="2" />
+      <Map Url="PWEK11.TIF" Contents="CYCLONE DANGER AREA* or HIGH WIND/WAVES" Area="6" />
+      <Map Url="PWED98.TIF" Contents="36 HR WIND/WAVE FORECAST" Area="3" />
+      <Map Url="evst99.jpg" Contents="GOES IR TROPICAL SATELLITE IMAGE" Area="4" />
+      <Map Url="PJEA11.TIF" Contents="SEA STATE ANALYSIS" Area="3" />
+      <Map Url="PLEZ02.TIF" Contents="REQUEST FOR COMMENTS/PRODUCT NOTICE" Area="" />
+      <Map Url="PLEA10.TIF" Contents="HIGH SEAS FORECAST (IN ENGLISH)" Area="5" />
+      <Map Url="PJEI11.TIF" Contents="48 HR WAVE PERIOD/SWELL DIRECTION" Area="3" />
+      <Map Url="PYEE10.TIF" Contents="24 HR SURFACE FORECAST" Area="3" />
+      <Map Url="PYEI10.TIF" Contents="48 HR SURFACE FORECAST" Area="3" />
+      <Map Url="PYEK10.TIF" Contents="72 HR SURFACE FORECAST" Area="3" />
+      <Map Url="PWEE11.TIF" Contents="24 HR WIND/WAVE FORECAST" Area="3" />
+      <Map Url="PWEK11.TIF" Contents="CYCLONE DANGER AREA* or HIGH WIND/WAVES" Area="6" />
+      <Map Url="PWEI11.TIF" Contents="48 HR WIND/WAVE FORECAST" Area="3" />
+      <Map Url="evst99.jpg" Contents="GOES IR TROPICAL SATELLITE IMAGE" Area="4" />
+      <Map Url="PJEK11.TIF" Contents="72 HR WIND/WAVE FORECAST" Area="3" />
+      <Map Url="PKEK88.TIF" Contents="72 HR WAVE PERIOD/SWELL DIRECTION" Area="3" />
 
-  <Server Name="NOAA Kodiak Alaska" Url="http://weather.noaa.gov/pub/fax/">
-    <Map Url="PTCA89.TIF" Contents="SEA ICE ANALYSIS" Area="6" />
-    <Map Url="PYCA10.TIF" Contents="SURFACE ANALYSIS" Area="2" />
-    <Map Url="PJBA99.TIF" Contents="SEA STATE ANALYSIS" Area="1" />
-    <Map Url="evpn99.jpg" Contents="GOES IR SATELLITE IMAGE" Area="5" />
-    <Map Url="PPBA10.TIF" Contents="500 MB ANALYSIS" Area="1" />
-    <Map Url="PLBZ06.TIF" Contents="SYMBOLS AND CONTRACTIONS" Area="" />
-    <Map Url="PPBE11.TIF" Contents="24HR 500 MB FORECAST" Area="1" />
-    <Map Url="PJBE10.TIF" Contents="24HR WIND/WAVE FORECAST" Area="3" />
-    <Map Url="PYBE10.TIF" Contents="24HR SURFACE FORECAST" Area="3" />
-    <Map Url="PWBI10.TIF" Contents="48HR SURFACE FORECAST" Area="1" />
-    <Map Url="PJBI10.TIF" Contents="48HR WIND/WAVE FORECAST" Area="1" />
-    <Map Url="PTCO89.TIF" Contents="5-DAY SEA ICE FORECAST" Area="6" />
-    <Map Url="evpn99.jpg" Contents="GOES IR SATELLITE IMAGE" Area="5" />
-    <Map Url="PJBI20.TIF" Contents="48HR WAVE PERIOD, SWELL DIRECTION" Area="1" />
-    <Map Url="PPBI10.TIF" Contents="48HR 500 MB FORECAST" Area="1" />
-    <Map Url="PTCA88.TIF" Contents="SEA SURFACE TEMPERATURE ANALYSIS" Area="4" />
-    <Map Url="PTCA87.TIF" Contents="COOK INLET SEA ICE FORECAST" Area="7" />
-    <Map Url="PWBM99.TIF" Contents="96HR SURFACE FORECAST" Area="1" />
-    <Map Url="PJBM98.TIF" Contents="96HR WIND/WAVE FORECAST" Area="1" />
-    <Map Url="PJBM88.TIF" Contents="96HR WAVE PERIOD, SWELL DIRECTION" Area="1" />
-    <Map Url="PPBM50.TIF" Contents="96HR 500 MB FORECAST" Area="1" />
+      <Area Name="1" lat1="5S" lat2="50N" lon1="55W" lon2="125W" />
+      <Area Name="2" lat1="5S" lat2="50N" lon1="0W" lon2="70W" />
+      <Area Name="3" lat1="0N" lat2="31N" lon1="35W" lon2="100W" />
+      <Area Name="4" lat1="12S" lat2="44N" lon1="28W" lon2="112W" />
+      <Area Name="5" lat1="7N" lat2="31N" lon1="35W" lon2="98W" />
+      <Area Name="6" lat1="5N" lat2="60N" lon1="0W" lon2="100W" />
+    </Region>
 
-    <Area Name="1" lat1="20N" lat2="70N" lon1="115W" lon2="135E" />
-    <Area Name="2" lat1="40N" lat2="70N" lon1="125W" lon2="150E" />
-    <Area Name="3" lat1="40N" lat2="70N" lon1="115W" lon2="170E" />
-    <Area Name="4" lat1="40N" lat2="60N" lon1="125W" lon2="160E" />
-    <Area Name="5" lat1="5N" lat2="60N" lon1="110W" lon2="160W" />
-    <Area Name="6" Description="ICE COVERED AK WATERS" />
-    <Area Name="7" Description="COOK INLET" />
-  </Server>
+    <Region Name="Kodiak Alaska">
+      <Map Url="PTCA89.TIF" Contents="SEA ICE ANALYSIS" Area="6" />
+      <Map Url="PYCA10.TIF" Contents="SURFACE ANALYSIS" Area="2" />
+      <Map Url="PJBA99.TIF" Contents="SEA STATE ANALYSIS" Area="1" />
+      <Map Url="evpn99.jpg" Contents="GOES IR SATELLITE IMAGE" Area="5" />
+      <Map Url="PPBA10.TIF" Contents="500 MB ANALYSIS" Area="1" />
+      <Map Url="PLBZ06.TIF" Contents="SYMBOLS AND CONTRACTIONS" Area="" />
+      <Map Url="PPBE11.TIF" Contents="24HR 500 MB FORECAST" Area="1" />
+      <Map Url="PJBE10.TIF" Contents="24HR WIND/WAVE FORECAST" Area="3" />
+      <Map Url="PYBE10.TIF" Contents="24HR SURFACE FORECAST" Area="3" />
+      <Map Url="PWBI10.TIF" Contents="48HR SURFACE FORECAST" Area="1" />
+      <Map Url="PJBI10.TIF" Contents="48HR WIND/WAVE FORECAST" Area="1" />
+      <Map Url="PTCO89.TIF" Contents="5-DAY SEA ICE FORECAST" Area="6" />
+      <Map Url="evpn99.jpg" Contents="GOES IR SATELLITE IMAGE" Area="5" />
+      <Map Url="PJBI20.TIF" Contents="48HR WAVE PERIOD, SWELL DIRECTION" Area="1" />
+      <Map Url="PPBI10.TIF" Contents="48HR 500 MB FORECAST" Area="1" />
+      <Map Url="PTCA88.TIF" Contents="SEA SURFACE TEMPERATURE ANALYSIS" Area="4" />
+      <Map Url="PTCA87.TIF" Contents="COOK INLET SEA ICE FORECAST" Area="7" />
+      <Map Url="PWBM99.TIF" Contents="96HR SURFACE FORECAST" Area="1" />
+      <Map Url="PJBM98.TIF" Contents="96HR WIND/WAVE FORECAST" Area="1" />
+      <Map Url="PJBM88.TIF" Contents="96HR WAVE PERIOD, SWELL DIRECTION" Area="1" />
+      <Map Url="PPBM50.TIF" Contents="96HR 500 MB FORECAST" Area="1" />
 
-  <Server Name="NOAA Honolulu Hawaii" Url="http://weather.noaa.gov/pub/fax/">
-    <Map Url="PBFA11.TIF" Contents="SIGNIFICANT CLOUD FEATURES" Area="D" />
-    <Map Url="PWFK12.TIF" Contents="CYCLONE DANGER AREA" Area="E" />
-    <Map Url="PWFA11.TIF" Contents="STREAMLINE ANALYSIS" Area="B" />
-    <Map Url="PPBA11.TIF" Contents="SURFACE ANALYSIS" Area="C" />
-    <Map Url="evpz11.jpg" Contents="EAST PACIFIC GOES IR SATELLITE IMAGE" Area="G" />
-    <Map Url="evps11.jpg" Contents="SW PACIFIC GOES IR SATELLITE IMAGE" Area="H" />
-    <Map Url="PYFE11.TIF" Contents="24HR SURFACE FORECAST" Area="A" />
-    <Map Url="PYFI11.TIF" Contents="48HR SURFACE FORECAST" Area="A" />
-    <Map Url="PYFK11.TIF" Contents="72HR SURFACE FORECAST" Area="A" />
-    <Map Url="PJFB10.TIF" Contents="WIND/WAVE ANALYSIS" Area="B" />
-    <Map Url="PWFE11.TIF" Contents="24HR WIND/WAVE FORECAST" Area="B" />
-    <Map Url="PWBE10.TIF" Contents="24HR WIND/WAVE FORECAST" Area="4" />
-    <Map Url="PWBI10.TIF" Contents="48HR SURFACE FORECAST" Area="1" />
-    <Map Url="PJBI10.TIF" Contents="48HR WIND/WAVE FORECAST" Area="1" />
-    <Map Url="PJBI20.TIF" Contents="48HR WAVE PERIOD,SWELL DIRECTION" Area="1" />
-    <Map Url="PJBM88.TIF" Contents="96HR WAVE PERIOD,SWELL DIRECTION" Area="1" />
-    <Map Url="evpn99.jpg" Contents="PACIFIC GOES IR SATELLITE IMAGE" Area="5" />
-    <Map Url="PYBA90.TIF" Contents="SURFACE ANALYSIS (PART 1 NE PACIFIC)" Area="2" />
-    <Map Url="PYBA91.TIF" Contents="SURFACE ANALYSIS (PART 2 NW PACIFIC)" Area="3" />
-    <Map Url="evpn10.jpg" Contents="TROPICAL GOES IR SATELLITE IMAGE" Area="Y" />
-    <Map Url="PYFA90.TIF" Contents="TROPICAL SURFACE ANALYSIS" Area="Z" />
-    <Map Url="PWFE10.TIF" Contents="24HR TROPICAL WIND/WAVE FORECAST" Area="Z" />
-    <Map Url="PWFK12.TIF" Contents="CYCLONE DANGER AREA" Area="E" />
-    <Map Url="PJFI10.TIF" Contents="48HR WIND/WAVE FORECAST" Area="B" />
-    <Map Url="PJFK10.TIF" Contents="72HR WIND/WAVE FORECAST" Area="B" />
-    <Map Url="PTFA88.TIF" Contents="SEA SURFACE TEMPS" Area="F" />
-    <Map Url="PLBZ08.TIF" Contents="SYMBOLS OR PRODUCT NOTICE BULLETIN" Area="" />
-    <Map Url="PYFE10.TIF" Contents="24HR TROPICAL SURFACE FORECAST" Area="Z" />
-    <Map Url="PYFI10.TIF" Contents="48HR TROPICAL SURFACE FORECAST" Area="Z" />
-    <Map Url="PYFK10.TIF" Contents="72HR TROPICAL SURFACE FORECAST" Area="Z" />
-    <Map Url="PJFI11.TIF" Contents="48HR TROPICAL WAVE PERIOD,SWELL DIR" Area="Z" />
-    <Map Url="PJFK93.TIF" Contents="72HR TROPICAL WAVE PERIOD,SWELL DIR" Area="Z" />
-    <Map Url="PKFA10.TIF" Contents="TROPICAL SEA STATE ANALYSIS" Area="Z" />
-    <Map Url="PWFI10.TIF" Contents="48HR TROPICAL WIND/WAVE FORECAST" Area="Z" />
-    <Map Url="PWFK10.TIF" Contents="72HR TROPICAL WIND/WAVE FORECAST" Area="Z" />
+      <Area Name="1" lat1="20N" lat2="70N" lon1="115W" lon2="135E" />
+      <Area Name="2" lat1="40N" lat2="70N" lon1="125W" lon2="150E" />
+      <Area Name="3" lat1="40N" lat2="70N" lon1="115W" lon2="170E" />
+      <Area Name="4" lat1="40N" lat2="60N" lon1="125W" lon2="160E" />
+      <Area Name="5" lat1="5N" lat2="60N" lon1="110W" lon2="160W" />
+      <Area Name="6" Description="ICE COVERED AK WATERS" />
+      <Area Name="7" Description="COOK INLET" />
+    </Region>
 
-    <Area Name="A" lat1="30S" lat2="50N" lon1="110W" lon2="130E" />
-    <Area Name="B" lat1="30S" lat2="30N" lon1="110W" lon2="160E" />
-    <Area Name="C" lat1="0N" lat2="50N" lon1="110W" lon2="130E" />
-    <Area Name="D" lat1="30S" lat2="50N" lon1="110W" lon2="160E" />
-    <Area Name="E" lat1="0N" lat2="40N" lon1="80W" lon2="170E" />
-    <Area Name="F" lat1="0N" lat2="55N" lon1="110W" lon2="160E" />
-    <Area Name="G" lat1="5S" lat2="55N" lon1="110W" lon2="155E" />
-    <Area Name="H" lat1="40S" lat2="5N" lon1="130W" lon2="165E" />
+    <Region Name="Honolulu Hawaii">
+      <Map Url="PBFA11.TIF" Contents="SIGNIFICANT CLOUD FEATURES" Area="D" />
+      <Map Url="PWFK12.TIF" Contents="CYCLONE DANGER AREA" Area="E" />
+      <Map Url="PWFA11.TIF" Contents="STREAMLINE ANALYSIS" Area="B" />
+      <Map Url="PPBA11.TIF" Contents="SURFACE ANALYSIS" Area="C" />
+      <Map Url="evpz11.jpg" Contents="EAST PACIFIC GOES IR SATELLITE IMAGE" Area="G" />
+      <Map Url="evps11.jpg" Contents="SW PACIFIC GOES IR SATELLITE IMAGE" Area="H" />
+      <Map Url="PYFE11.TIF" Contents="24HR SURFACE FORECAST" Area="A" />
+      <Map Url="PYFI11.TIF" Contents="48HR SURFACE FORECAST" Area="A" />
+      <Map Url="PYFK11.TIF" Contents="72HR SURFACE FORECAST" Area="A" />
+      <Map Url="PJFB10.TIF" Contents="WIND/WAVE ANALYSIS" Area="B" />
+      <Map Url="PWFE11.TIF" Contents="24HR WIND/WAVE FORECAST" Area="B" />
+      <Map Url="PWBE10.TIF" Contents="24HR WIND/WAVE FORECAST" Area="4" />
+      <Map Url="PWBI10.TIF" Contents="48HR SURFACE FORECAST" Area="1" />
+      <Map Url="PJBI10.TIF" Contents="48HR WIND/WAVE FORECAST" Area="1" />
+      <Map Url="PJBI20.TIF" Contents="48HR WAVE PERIOD,SWELL DIRECTION" Area="1" />
+      <Map Url="PJBM88.TIF" Contents="96HR WAVE PERIOD,SWELL DIRECTION" Area="1" />
+      <Map Url="evpn99.jpg" Contents="PACIFIC GOES IR SATELLITE IMAGE" Area="5" />
+      <Map Url="PYBA90.TIF" Contents="SURFACE ANALYSIS (PART 1 NE PACIFIC)" Area="2" />
+      <Map Url="PYBA91.TIF" Contents="SURFACE ANALYSIS (PART 2 NW PACIFIC)" Area="3" />
+      <Map Url="evpn10.jpg" Contents="TROPICAL GOES IR SATELLITE IMAGE" Area="Y" />
+      <Map Url="PYFA90.TIF" Contents="TROPICAL SURFACE ANALYSIS" Area="Z" />
+      <Map Url="PWFE10.TIF" Contents="24HR TROPICAL WIND/WAVE FORECAST" Area="Z" />
+      <Map Url="PWFK12.TIF" Contents="CYCLONE DANGER AREA" Area="E" />
+      <Map Url="PJFI10.TIF" Contents="48HR WIND/WAVE FORECAST" Area="B" />
+      <Map Url="PJFK10.TIF" Contents="72HR WIND/WAVE FORECAST" Area="B" />
+      <Map Url="PTFA88.TIF" Contents="SEA SURFACE TEMPS" Area="F" />
+      <Map Url="PLBZ08.TIF" Contents="SYMBOLS OR PRODUCT NOTICE BULLETIN" Area="" />
+      <Map Url="PYFE10.TIF" Contents="24HR TROPICAL SURFACE FORECAST" Area="Z" />
+      <Map Url="PYFI10.TIF" Contents="48HR TROPICAL SURFACE FORECAST" Area="Z" />
+      <Map Url="PYFK10.TIF" Contents="72HR TROPICAL SURFACE FORECAST" Area="Z" />
+      <Map Url="PJFI11.TIF" Contents="48HR TROPICAL WAVE PERIOD,SWELL DIR" Area="Z" />
+      <Map Url="PJFK93.TIF" Contents="72HR TROPICAL WAVE PERIOD,SWELL DIR" Area="Z" />
+      <Map Url="PKFA10.TIF" Contents="TROPICAL SEA STATE ANALYSIS" Area="Z" />
+      <Map Url="PWFI10.TIF" Contents="48HR TROPICAL WIND/WAVE FORECAST" Area="Z" />
+      <Map Url="PWFK10.TIF" Contents="72HR TROPICAL WIND/WAVE FORECAST" Area="Z" />
 
-    <Area Name="1" lat1="20N" lat2="70N" lon1="115W" lon2="135E" />
-    <Area Name="2" lat1="20N" lat2="70N" lon1="115W" lon2="175W" />
-    <Area Name="3" lat1="20N" lat2="70N" lon1="175W" lon2="135W" />
-    <Area Name="4" lat1="18N" lat2="62N" />
-    <Area Name="5" lat1="5N" lat2="55N" />
-    <Area Name="Y" lat1="5N" lat2="32N" />
-    <Area Name="Z" lat1="20S" lat2="30N" />
+      <Area Name="A" lat1="30S" lat2="50N" lon1="110W" lon2="130E" />
+      <Area Name="B" lat1="30S" lat2="30N" lon1="110W" lon2="160E" />
+      <Area Name="C" lat1="0N" lat2="50N" lon1="110W" lon2="130E" />
+      <Area Name="D" lat1="30S" lat2="50N" lon1="110W" lon2="160E" />
+      <Area Name="E" lat1="0N" lat2="40N" lon1="80W" lon2="170E" />
+      <Area Name="F" lat1="0N" lat2="55N" lon1="110W" lon2="160E" />
+      <Area Name="G" lat1="5S" lat2="55N" lon1="110W" lon2="155E" />
+      <Area Name="H" lat1="40S" lat2="5N" lon1="130W" lon2="165E" />
+
+      <Area Name="1" lat1="20N" lat2="70N" lon1="115W" lon2="135E" />
+      <Area Name="2" lat1="20N" lat2="70N" lon1="115W" lon2="175W" />
+      <Area Name="3" lat1="20N" lat2="70N" lon1="175W" lon2="135W" />
+      <Area Name="4" lat1="18N" lat2="62N" />
+      <Area Name="5" lat1="5N" lat2="55N" />
+      <Area Name="Y" lat1="5N" lat2="32N" />
+      <Area Name="Z" lat1="20S" lat2="30N" />
+    </Region>
   </Server>
 
    <!-- Example for how we can support passage weather.. not completed! -->
-  <Server Name="Passage Weather China Sea" Url="http://passageweather.com/maps/chinasea/">
+  <Server Name="Passage Weather" Url="http://passageweather.com/maps/">
 
-    <Map Url="wind/000.png" Contents="South China Sea Wind 000" Area="1" />
-    <Map Url="press/000.png" Contents="South China Sea Pressure 000" Area="1" />
-    <Map Url="waves/000.png" Contents="South China Sea Waves 000" Area="1" />
+    <Region Name="South China Sea" Url="chinasea/">
 
-    <Area Name="1" lat1="8N" lat2="24N" lon1="100W" lon2="130E" />
+      <Map Url="wind/000.png" Contents="South China Sea Wind 000" Area="1" />
+      <Map Url="press/000.png" Contents="South China Sea Pressure 000" Area="1" />
+      <Map Url="waves/000.png" Contents="South China Sea Waves 000" Area="1" />
+
+      <Area Name="1" lat1="8N" lat2="24N" lon1="100W" lon2="130E" />
+    </Region>
+
+    <Region Name="Strait of Malacca" Url="malacca/">
+
+      <Map Url="wind/000.png" Contents="South China Sea Wind 000" Area="1" />
+      <Map Url="press/000.png" Contents="South China Sea Pressure 000" Area="1" />
+      <Map Url="waves/000.png" Contents="South China Sea Waves 000" Area="1" />
+
+      <Area Name="1" lat1="5S" lat2="15N" lon1="85E" lon2="120E" />
+    </Region>
 
   </Server>
 

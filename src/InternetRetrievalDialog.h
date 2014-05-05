@@ -41,6 +41,7 @@ public:
     bool Selected;
 
     wxString Server;
+    wxString Region;
     wxString Url;
     wxString Contents;
     wxString area_name;
@@ -48,10 +49,16 @@ public:
     FaxArea Area;
 };
 
+struct FaxRegion
+{
+    wxString Name;
+    wxString Server;
+};
+
 class InternetRetrievalDialog: public InternetRetrievalDialogBase
 {
 public:
-    enum {SELECTED, SERVER, CONTENTS, MAP_AREA};
+    enum {SELECTED, SERVER, REGION, CONTENTS, MAP_AREA};
 
     InternetRetrievalDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent);
     ~InternetRetrievalDialog();
@@ -63,15 +70,19 @@ public:
     void OnUrlsLeftDown( wxMouseEvent& event );
     void OnUrlsSort( wxListEvent& event );
     void OnFilter( wxCommandEvent& event ) { Filter(); }
+    void OnFilterServers( wxCommandEvent& event ) { FilterServers(); }
     void OnBoatPosition( wxCommandEvent& event );
     void OnReset( wxCommandEvent& event );
     void OnAllServers( wxCommandEvent& event );
     void OnNoServers( wxCommandEvent& event );
+    void OnAllRegions( wxCommandEvent& event );
+    void OnNoRegions( wxCommandEvent& event );
     void OnRetrieve( wxCommandEvent& event );
     void OnClose( wxCommandEvent& event );
 
-    bool HasServer(wxString server);
+    bool HasRegion(wxString region);
     void Filter();
+    void FilterServers();
     void RebuildList();
     void UpdateItem(long index);
 
@@ -81,8 +92,9 @@ private:
 
     weatherfax_pi &m_weatherfax_pi;
 
+    std::list<FaxRegion> m_Regions;
+
     std::list<FaxUrl*> m_InternetRetrieval;
-    std::list<FaxUrl*> m_CaptureInternetRetrieval;
 
     bool m_bLoaded, m_bDisableFilter;
     bool m_bKilled;

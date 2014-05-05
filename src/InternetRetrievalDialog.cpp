@@ -80,8 +80,6 @@ InternetRetrievalDialog::InternetRetrievalDialog( weatherfax_pi &_weatherfax_pi,
 
 InternetRetrievalDialog::~InternetRetrievalDialog()
 {
-    ClearInternetRetrieval();
-
     wxFileConfig *pConf = m_weatherfax_pi.m_pconfig;
 
     /* remove from config all cordinate sets */
@@ -96,6 +94,22 @@ InternetRetrievalDialog::~InternetRetrievalDialog()
             servers += m_lServers->GetString(i) + _T(";");
 
     pConf->Write ( _T ( "Servers" ), servers);
+
+    wxString regions;
+    for(unsigned int i=0; i < m_lRegions->GetCount(); i++)
+        if(m_lRegions->IsSelected(i))
+            regions += m_lRegions->GetString(i) + _T(";");
+
+    pConf->Write ( _T ( "Regions" ), regions);
+
+    wxString selected;
+    for(std::list<FaxUrl*>::iterator it = m_InternetRetrieval.begin();
+        it != m_InternetRetrieval.end(); it++)
+        if((*it)->Selected)
+            selected += (*it)->Url + _T(";");
+    pConf->Write ( _T ( "selected" ), selected );
+
+    ClearInternetRetrieval();
 }
 
 void InternetRetrievalDialog::Load()
@@ -112,6 +126,7 @@ void InternetRetrievalDialog::Load()
 
     m_lUrls->InsertColumn(SELECTED, _("Selected"));
     m_lUrls->InsertColumn(SERVER, _("Server"));
+    m_lUrls->InsertColumn(REGION, _("Region"));
     m_lUrls->InsertColumn(CONTENTS, _("Contents"));
     m_lUrls->InsertColumn(MAP_AREA, _("Map Area"));
 
@@ -136,6 +151,25 @@ void InternetRetrievalDialog::Load()
         servers = servers.AfterFirst(';');
     }
 
+    wxString regions;
+    pConf->Read ( _T ( "Regions" ), &regions, _T(""));
+
+    /* split at each ; to get all the names in a list */
+    std::list<wxString> regionlist;
+    while(regions.size()) {
+        regionlist.push_back(regions.BeforeFirst(';'));
+        regions = regions.AfterFirst(';');
+    }
+
+    wxString selected;
+    pConf->Read ( _T ( "selected" ), &selected, _T("") );
+    std::list<wxString> selectedlist;
+    /* split at each ; to get all the names in a list */
+    while(selected.size()) {
+        selectedlist.push_back(selected.BeforeFirst(';'));
+        selected = selected.AfterFirst(';');
+    }
+
     s = wxFileName::GetPathSeparator();
     OpenXML(*GetpSharedDataLocation() + _T("plugins")
             + s + _T("weatherfax_pi") + s + _T("data") + s
@@ -147,6 +181,21 @@ void InternetRetrievalDialog::Load()
             it != serverlist.end(); it++)
             if(m_lServers->GetString(i) == *it)
                 m_lServers->SetSelection(i);
+
+    FilterServers();
+
+    for(unsigned int i=0; i < m_lRegions->GetCount(); i++)
+        for(std::list<wxString>::iterator it = regionlist.begin();
+            it != regionlist.end(); it++)
+            if(m_lRegions->GetString(i) == *it)
+                m_lRegions->SetSelection(i);
+
+    for(std::list<wxString>::iterator it = selectedlist.begin();
+        it != selectedlist.end(); it++)
+        for(std::list<FaxUrl*>::iterator it2 = m_InternetRetrieval.begin();
+            it2 != m_InternetRetrieval.end(); it2++)
+            if((*it) == (*it2)->Url)
+                (*it2)->Selected = true;
 
     m_bDisableFilter = false;
     Filter();
@@ -214,53 +263,68 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                 wxString server_url = wxString::FromUTF8(e->Attribute("Url"));
 
                 m_lServers->Append(server);
-                std::list<FaxUrl> urls;
-                std::list<FaxArea> Areas;
 
                 for(TiXmlElement* f = e->FirstChildElement(); f; f = f->NextSiblingElement()) {
-                    if(!strcmp(f->Value(), "Map")) {
-                        FaxUrl url;
+                    if(!strcmp(f->Value(), "Region")) {
+                        FaxRegion region;
+                        region.Name = wxString::FromUTF8(f->Attribute("Name"));
+                        region.Server = server;
+
+                        m_Regions.push_back(region);
+
+                        wxString region_url = server_url + wxString::FromUTF8(f->Attribute("Url"));
+
+                        std::list<FaxUrl> urls;
+                        std::list<FaxArea> Areas;
+
+                        for(TiXmlElement* g = f->FirstChildElement(); g; g = g->NextSiblingElement()) {
+                            if(!strcmp(g->Value(), "Map")) {
+                                FaxUrl url;
                                     
-                        url.Selected = false;
-                        url.Server = server;
+                                url.Selected = false;
+                                url.Server = server;
+                                url.Region = region.Name;
                          
-                        url.Url = server_url + wxString::FromUTF8(f->Attribute("Url"));
-                        url.Contents = wxString::FromUTF8(f->Attribute("Contents"));
-                        url.area_name = wxString::FromUTF8(f->Attribute("Area"));
+                                url.Url = region_url + wxString::FromUTF8(g->Attribute("Url"));
+                                url.Contents = wxString::FromUTF8(g->Attribute("Contents"));
+                                url.area_name = wxString::FromUTF8(g->Attribute("Area"));
 
-                        urls.push_back(url);
-                    } else if(!strcmp(f->Value(), "Area")) {
-                        FaxArea Area;
-                        Area.name = wxString::FromUTF8(f->Attribute("Name"));
-                        Area.description = wxString::FromUTF8(f->Attribute("Description"));
+                                urls.push_back(url);
+                            } else if(!strcmp(g->Value(), "Area")) {
+                                FaxArea Area;
+                                Area.name = wxString::FromUTF8(g->Attribute("Name"));
+                                Area.description = wxString::FromUTF8(g->Attribute("Description"));
                         
-                        Area.lat1 = ParseLatLon(wxString::FromUTF8(f->Attribute("lat1")));
-                        Area.lat2 = ParseLatLon(wxString::FromUTF8(f->Attribute("lat2")));
-                        Area.lon1 = ParseLatLon(wxString::FromUTF8(f->Attribute("lon1")));
-                        Area.lon2 = ParseLatLon(wxString::FromUTF8(f->Attribute("lon2")));
+                                Area.lat1 = ParseLatLon(wxString::FromUTF8(g->Attribute("lat1")));
+                                Area.lat2 = ParseLatLon(wxString::FromUTF8(g->Attribute("lat2")));
+                                Area.lon1 = ParseLatLon(wxString::FromUTF8(g->Attribute("lon1")));
+                                Area.lon2 = ParseLatLon(wxString::FromUTF8(g->Attribute("lon2")));
 
-                        Areas.push_back(Area);
-                    } else
-                        FAIL(_("Unrecognized xml node"));
-                }
+                                Areas.push_back(Area);
+                            } else
+                                FAIL(_("Unrecognized xml node: ") + wxString::FromUTF8(g->Value()));
+                        }
 
-                for(std::list<FaxUrl>::iterator it = urls.begin();
-                    it != urls.end(); it++) {
-                    if((*it).area_name.size()) {
-                        for(std::list<FaxArea>::iterator it2 = Areas.begin();
-                            it2 != Areas.end(); it2++)
-                            if((*it).area_name == (*it2).name) {
-                                (*it).Area = *it2;
-                                goto resolved;
+                        for(std::list<FaxUrl>::iterator it = urls.begin();
+                            it != urls.end(); it++) {
+                            if((*it).area_name.size()) {
+                                for(std::list<FaxArea>::iterator it2 = Areas.begin();
+                                    it2 != Areas.end(); it2++)
+                                    if((*it).area_name == (*it2).name) {
+                                        (*it).Area = *it2;
+                                        goto resolved;
+                                    }
+                                FAIL(_("Failed to match Area: ") + (*it).area_name);
                             }
-                        FAIL(_("Failed to match Area: ") + (*it).area_name);
-                    }
-                resolved:
-                    FaxUrl *s = new FaxUrl(*it);
-                    m_InternetRetrieval.push_back(s);
+                        resolved:
+                            FaxUrl *s = new FaxUrl(*it);
+                            m_InternetRetrieval.push_back(s);
+                        }
+                    } else
+                        FAIL(_("Unrecognized xml node: ") + wxString::FromUTF8(f->Value()));
                 }
             } else
-                FAIL(_("Unrecognized xml node"));
+                FAIL(_("Unrecognized xml node: ") + wxString::FromUTF8(e->Value()));
         }
     }
 
@@ -333,17 +397,13 @@ void InternetRetrievalDialog::OnUrlsSort( wxListEvent& event )
     sortorder = -sortorder;
 
     if(sortcol == 0) {
-#if 0
-        m_SelectedInternetRetrieval.clear();
-        for(std::list<FaxUrl*>::iterator it = m_InternetRetrieval.begin();
-            it != m_InternetRetrieval.end(); it++) {
-            (*it)->Selected = sortorder == 1;
-            if(sortorder == 1)
-                m_SelectedInternetRetrieval.push_back(*it);
-        }
+        for(int i=0; i < m_lUrls->GetItemCount(); i++) {
+            FaxUrl *faxurl = reinterpret_cast<FaxUrl*>
+                (wxUIntToPtr(m_lUrls->GetItemData(i)));
 
-        RebuildList();
-#endif
+            faxurl->Selected = sortorder == 1;
+            UpdateItem(i);
+        }
     } else
         if(m_lUrls->GetItemCount() > 500)  {
             wxMessageDialog mdlg(this, _("Sorting this many urls might take too long"),
@@ -373,17 +433,46 @@ void InternetRetrievalDialog::OnAllServers( wxCommandEvent& event )
 {
     for(unsigned int i=0; i < m_lServers->GetCount(); i++)
         m_lServers->SetSelection(i);
-    Filter();
+    FilterServers();
 }
 
 void InternetRetrievalDialog::OnNoServers( wxCommandEvent& event )
 {
     m_lServers->DeselectAll();
+    FilterServers();
+}
+
+void InternetRetrievalDialog::OnAllRegions( wxCommandEvent& event )
+{
+    for(unsigned int i=0; i < m_lRegions->GetCount(); i++)
+        m_lRegions->SetSelection(i);
+    Filter();
+}
+
+void InternetRetrievalDialog::OnNoRegions( wxCommandEvent& event )
+{
+    m_lRegions->DeselectAll();
     Filter();
 }
 
 void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
 {
+    /* inform user if no faxes are selected */
+    for(int i=0; ; i++) {
+        if(i == m_lUrls->GetItemCount()) {
+            wxMessageDialog mdlg(this, _("No Faxes selected.\
+ Try clicking the selected (first) column"), _("Weather Fax"), wxOK | wxICON_INFORMATION);
+            mdlg.ShowModal();
+            return;
+        }
+
+        FaxUrl *faxurl = reinterpret_cast<FaxUrl*>
+            (wxUIntToPtr(m_lUrls->GetItemData(i)));
+
+        if(faxurl->Selected)
+            break;
+    }
+
     for(int i=0; i < m_lUrls->GetItemCount(); i++) {
         FaxUrl *faxurl = reinterpret_cast<FaxUrl*>
             (wxUIntToPtr(m_lUrls->GetItemData(i)));
@@ -460,10 +549,10 @@ void InternetRetrievalDialog::OnClose( wxCommandEvent& event )
     Hide();
 }
 
-bool InternetRetrievalDialog::HasServer(wxString server)
+bool InternetRetrievalDialog::HasRegion(wxString region)
 {
-    for(unsigned int i=0; i < m_lServers->GetCount(); i++)
-        if(m_lServers->IsSelected(i) && m_lServers->GetString(i) == server)
+    for(unsigned int i=0; i < m_lRegions->GetCount(); i++)
+        if(m_lRegions->IsSelected(i) && m_lRegions->GetString(i) == region)
             return true;
 
     return false;
@@ -483,8 +572,21 @@ void InternetRetrievalDialog::Filter()
     for(std::list<FaxUrl*>::iterator it = m_InternetRetrieval.begin();
         it != m_InternetRetrieval.end(); it++)
         (*it)->Filtered = !((*it)->Area.ContainsLat(lat) && (*it)->Area.ContainsLon(lon) &&
-                            HasServer((*it)->Server));
+                            HasRegion((*it)->Region));
     RebuildList();
+}
+
+void InternetRetrievalDialog::FilterServers()
+{
+    m_lRegions->Clear();
+    for(std::list<FaxRegion>::iterator it = m_Regions.begin(); it != m_Regions.end(); it++)
+        for(unsigned int i=0; i < m_lServers->GetCount(); i++)
+            if(m_lServers->IsSelected(i) && m_lServers->GetString(i) == it->Server) {
+                m_lRegions->Append(it->Name);
+                break;
+            }
+
+    Filter();
 }
 
 void InternetRetrievalDialog::RebuildList()
@@ -497,14 +599,14 @@ void InternetRetrievalDialog::RebuildList()
 
     m_lUrls->DeleteAllItems();
 
-    wxProgressDialog progressdialog(_("WeatherFax InternetRetrieval"), 
-                                    _("Populating List"), m_InternetRetrieval.size(),
-                                    this, wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
+    //   wxProgressDialog progressdialog(_("WeatherFax InternetRetrieval"), 
+//                                    _("Populating List"), m_InternetRetrieval.size(),
+//                                    this, wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
     int i=0;
     for(std::list<FaxUrl*>::iterator it = m_InternetRetrieval.begin();
         it != m_InternetRetrieval.end(); it++, i++) {
-        if(i%100 == 0)
-            progressdialog.Update(i);
+        //      if(i%100 == 0)
+//            progressdialog.Update(i);
         if(!(*it)->Filtered) {
             wxListItem item;
             item.SetData(*it);
@@ -523,7 +625,10 @@ void InternetRetrievalDialog::UpdateItem(long index)
     m_lUrls->SetColumnWidth(SELECTED, 50);
 
     m_lUrls->SetItem(index, SERVER, url->Server);
-    m_lUrls->SetColumnWidth(SERVER, 150 /*wxLIST_AUTOSIZE*/);
+    m_lUrls->SetColumnWidth(SERVER, 120 /*wxLIST_AUTOSIZE*/);
+
+    m_lUrls->SetItem(index, REGION, url->Region);
+    m_lUrls->SetColumnWidth(REGION, 120 /*wxLIST_AUTOSIZE*/);
 
     m_lUrls->SetItem(index, CONTENTS, url->Contents);
     m_lUrls->SetColumnWidth(CONTENTS, 350 /*wxLIST_AUTOSIZE*/);
