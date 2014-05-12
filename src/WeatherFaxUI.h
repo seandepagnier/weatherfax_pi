@@ -181,16 +181,19 @@ class InternetRetrievalDialogBase : public wxDialog
 		wxListBox* m_lRegions;
 		wxButton* m_bAllRegions;
 		wxButton* m_bNoRegions;
+		wxButton* m_bRetrieve;
+		wxButton* m_bRetrieveSelected;
+		wxButton* m_bClose;
 		wxPanel* m_panel5;
 		wxStaticText* m_staticText34;
 		wxStaticText* m_staticText41;
 		wxStaticText* m_staticText42;
 		wxTextCtrl* m_textCtrl11;
 		wxTextCtrl* m_textCtrl14;
-		wxButton* m_bRetrieve;
-		wxButton* m_bClose;
+		wxStaticText* m_staticText421;
 		
 		// Virtual event handlers, overide them in your derived class
+		virtual void OnRetrieve( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnUrlsLeftDown( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnUrlsSort( wxListEvent& event ) { event.Skip(); }
 		virtual void OnFilter( wxCommandEvent& event ) { event.Skip(); }

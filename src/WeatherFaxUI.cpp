@@ -529,7 +529,7 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	fgSizer39->SetFlexibleDirection( wxBOTH );
 	fgSizer39->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_lUrls = new wxListCtrl( m_panel4, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT|wxLC_SINGLE_SEL );
+	m_lUrls = new wxListCtrl( m_panel4, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT );
 	fgSizer39->Add( m_lUrls, 0, wxALL|wxEXPAND, 5 );
 	
 	wxFlexGridSizer* fgSizer42;
@@ -638,6 +638,24 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	
 	fgSizer39->Add( fgSizer42, 1, wxEXPAND, 5 );
 	
+	wxFlexGridSizer* fgSizer40;
+	fgSizer40 = new wxFlexGridSizer( 0, 3, 0, 0 );
+	fgSizer40->AddGrowableCol( 1 );
+	fgSizer40->SetFlexibleDirection( wxBOTH );
+	fgSizer40->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_bRetrieve = new wxButton( m_panel4, wxID_ANY, _("Retrieve"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer40->Add( m_bRetrieve, 0, wxALL, 5 );
+	
+	m_bRetrieveSelected = new wxButton( m_panel4, wxID_ANY, _("Retrieve Selected"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer40->Add( m_bRetrieveSelected, 0, wxALL, 5 );
+	
+	m_bClose = new wxButton( m_panel4, wxID_ANY, _("Close"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer40->Add( m_bClose, 0, wxALIGN_RIGHT|wxALL, 5 );
+	
+	
+	fgSizer39->Add( fgSizer40, 1, wxEXPAND, 5 );
+	
 	
 	m_panel4->SetSizer( fgSizer39 );
 	m_panel4->Layout();
@@ -682,6 +700,10 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	
 	sbSizer20->Add( m_textCtrl14, 0, wxALL|wxEXPAND, 5 );
 	
+	m_staticText421 = new wxStaticText( m_panel5, wxID_ANY, _("Note:   Email retrieval implementation is not working and incomplete"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText421->Wrap( -1 );
+	sbSizer20->Add( m_staticText421, 0, wxALL, 5 );
+	
 	
 	fgSizer60->Add( sbSizer20, 1, wxEXPAND, 5 );
 	
@@ -693,21 +715,6 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	
 	fgSizer38->Add( m_notebook2, 1, wxEXPAND | wxALL, 5 );
 	
-	wxFlexGridSizer* fgSizer40;
-	fgSizer40 = new wxFlexGridSizer( 0, 2, 0, 0 );
-	fgSizer40->AddGrowableCol( 1 );
-	fgSizer40->SetFlexibleDirection( wxBOTH );
-	fgSizer40->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-	
-	m_bRetrieve = new wxButton( this, wxID_ANY, _("Retrieve"), wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer40->Add( m_bRetrieve, 0, wxALL, 5 );
-	
-	m_bClose = new wxButton( this, wxID_ANY, _("Close"), wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer40->Add( m_bClose, 0, wxALIGN_RIGHT|wxALL, 5 );
-	
-	
-	fgSizer38->Add( fgSizer40, 1, wxEXPAND, 5 );
-	
 	
 	this->SetSizer( fgSizer38 );
 	this->Layout();
@@ -715,6 +722,7 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	this->Centre( wxBOTH );
 	
 	// Connect Events
+	m_lUrls->Connect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
 	m_lUrls->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( InternetRetrievalDialogBase::OnUrlsLeftDown ), NULL, this );
 	m_lUrls->Connect( wxEVT_COMMAND_LIST_COL_CLICK, wxListEventHandler( InternetRetrievalDialogBase::OnUrlsSort ), NULL, this );
 	m_tContainsLat->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
@@ -728,12 +736,14 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	m_bAllRegions->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnAllRegions ), NULL, this );
 	m_bNoRegions->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnNoRegions ), NULL, this );
 	m_bRetrieve->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
+	m_bRetrieveSelected->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
 	m_bClose->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnClose ), NULL, this );
 }
 
 InternetRetrievalDialogBase::~InternetRetrievalDialogBase()
 {
 	// Disconnect Events
+	m_lUrls->Disconnect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
 	m_lUrls->Disconnect( wxEVT_LEFT_DOWN, wxMouseEventHandler( InternetRetrievalDialogBase::OnUrlsLeftDown ), NULL, this );
 	m_lUrls->Disconnect( wxEVT_COMMAND_LIST_COL_CLICK, wxListEventHandler( InternetRetrievalDialogBase::OnUrlsSort ), NULL, this );
 	m_tContainsLat->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
@@ -747,6 +757,7 @@ InternetRetrievalDialogBase::~InternetRetrievalDialogBase()
 	m_bAllRegions->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnAllRegions ), NULL, this );
 	m_bNoRegions->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnNoRegions ), NULL, this );
 	m_bRetrieve->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
+	m_bRetrieveSelected->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
 	m_bClose->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnClose ), NULL, this );
 	
 }

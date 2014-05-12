@@ -278,7 +278,40 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                         std::list<FaxArea> Areas;
 
                         for(TiXmlElement* g = f->FirstChildElement(); g; g = g->NextSiblingElement()) {
-                            if(!strcmp(g->Value(), "Map")) {
+                            if(!strcmp(g->Value(), "Iterator")) {
+                                wxString s_start = wxString::FromUTF8(g->Attribute("From"));
+                                wxString s_to = wxString::FromUTF8(g->Attribute("To"));
+                                wxString s_by = wxString::FromUTF8(g->Attribute("By"));
+
+                                if(s_start.size() == 0 || s_to.size() == 0 || s_by.size() == 0)
+                                    FAIL(_("Invalid iterator: ") + wxString::FromUTF8(g->Value()));
+                                
+                                long start, to, by;
+                                s_start.ToLong(&start);
+                                s_to.ToLong(&to);
+                                s_by.ToLong(&by);
+
+                                for(TiXmlElement* h = g->FirstChildElement(); h; h = h->NextSiblingElement()) {
+                                    if(!strcmp(h->Value(), "Map")) {
+                                        FaxUrl url;
+                                    
+                                        url.Selected = false;
+                                        url.Server = server;
+                                        url.Region = region.Name;
+                         
+                                        for(long index = start; index <= to; index += by) {
+                                            url.Url = region_url + wxString::Format
+                                                (wxString::FromUTF8(h->Attribute("Url")), index);
+                                            url.Contents = wxString::Format
+                                                (wxString::FromUTF8(h->Attribute("Contents")), index);
+                                            url.area_name = wxString::FromUTF8(h->Attribute("Area"));
+                                        
+                                            urls.push_back(url);
+                                        }
+                                    } else
+                                        FAIL(_("Unrecognized xml node: ") + wxString::FromUTF8(g->Value()));
+                                }
+                            } else if(!strcmp(g->Value(), "Map")) {
                                 FaxUrl url;
                                     
                                 url.Selected = false;
@@ -457,28 +490,19 @@ void InternetRetrievalDialog::OnNoRegions( wxCommandEvent& event )
 
 void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
 {
-    /* inform user if no faxes are selected */
-    for(int i=0; ; i++) {
-        if(i == m_lUrls->GetItemCount()) {
-            wxMessageDialog mdlg(this, _("No Faxes selected.\
- Try clicking the selected (first) column"), _("Weather Fax"), wxOK | wxICON_INFORMATION);
-            mdlg.ShowModal();
-            return;
-        }
-
-        FaxUrl *faxurl = reinterpret_cast<FaxUrl*>
-            (wxUIntToPtr(m_lUrls->GetItemData(i)));
-
-        if(faxurl->Selected)
-            break;
-    }
-
+    int count = 0;
     for(int i=0; i < m_lUrls->GetItemCount(); i++) {
         FaxUrl *faxurl = reinterpret_cast<FaxUrl*>
             (wxUIntToPtr(m_lUrls->GetItemData(i)));
 
-        if(!faxurl->Selected)
-            continue;
+        if(event.GetEventObject() == m_bRetrieve) {
+            if(!faxurl->Selected)
+                continue;
+        } else
+            if(m_lUrls->GetNextItem(i - 1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED) != i)
+                continue;
+
+        count++;
 
         wxURL url(faxurl->Url);
 
@@ -495,7 +519,9 @@ void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
         if(!input) {
             wxMessageDialog mdlg(this, _("Timed out waiting for headers for: ") +
                                  faxurl->Contents + _T("\n") +
-                                 _("Verify there is a working internet connection."),
+                                 faxurl->Url + _T("\n") +
+                                 _("Verify there is a working internet connection.") +
+                                 _("If the url is incorrect please edit the xml and/or post a bug report."),
                                  _("Weather Fax"), wxOK | wxICON_ERROR);
             mdlg.ShowModal();
             return;
@@ -541,6 +567,15 @@ void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
             if(!progressdialog2.Update(position))
                 return;
         }
+    }
+    
+    /* inform user if no faxes were selected */
+    if(count == 0) {
+        wxMessageDialog mdlg(this, _("No Faxes selected.") + wxString(_T("\n")) +
+                             wxString(event.GetEventObject() == m_bRetrieve ?
+                                      _(" Try clicking the selected (first) column") :
+                                      _T("")), _("Weather Fax"), wxOK | wxICON_INFORMATION);
+        mdlg.ShowModal();
     }
 }
 

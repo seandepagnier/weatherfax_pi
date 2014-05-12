@@ -77,6 +77,7 @@ public:
     void OnNoServers( wxCommandEvent& event );
     void OnAllRegions( wxCommandEvent& event );
     void OnNoRegions( wxCommandEvent& event );
+    void OnRetrieve( wxMouseEvent& event ) { wxCommandEvent evt; OnRetrieve(evt); }
     void OnRetrieve( wxCommandEvent& event );
     void OnClose( wxCommandEvent& event );
 
