@@ -32,7 +32,7 @@
 #include "WeatherFaxImage.h"
 WX_DEFINE_LIST(WeatherFaxImageCoordinateList);
 
-#if defined(__MINGW32__) && !defined(GL_TEXTURE_RECTANGLE_ARB)
+#if !defined(GL_TEXTURE_RECTANGLE_ARB)
 #define GL_TEXTURE_RECTANGLE_ARB          0x84F5
 #endif
 
@@ -590,11 +590,6 @@ void WeatherFaxImage::RenderImageGL(PlugIn_ViewPort *vp)
                 glTexParameteri( GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
                 glTexParameteri( GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
         
-#if 1 /* I think we can delete these */
-                glPixelStorei( GL_UNPACK_ALIGNMENT, 1 );
-                glPixelStorei( GL_UNPACK_SKIP_PIXELS, 0 );
-                glPixelStorei( GL_UNPACK_SKIP_ROWS, 0 );
-#endif
                 unsigned char *data = img.GetData();
                 for(unsigned int y=0; y<th; y++) {
                     for(unsigned int x=0; x<tw; x++) {
