@@ -206,8 +206,27 @@
       <Area Name="Z" lat1="20S" lat2="30N" />
     </Region>
   </Server>
+http://aviationweather.gov/data/obs/sat/intl/ir_ICAO-B1_bw.jpg
+  <Server Name="Aviation Weather" Url="http://aviationweather.gov/data/obs/sat/intl/">
+    <Region Name="Aviation Satellite Imagery">
+      <Map Url="ir_ICAO-A_bw.jpg" Contents="Americas" Area="A" />
+      <Map Url="ir_ICAO-B1_bw.jpg" Contents="Atlantic" Area="B1" />
+      <Map Url="ir_ICAO-C_bw.jpg" Contents="Europe Africa" Area="C" />
+      <Map Url="ir_ICAO-D_bw.jpg" Contents="Europe Africa Asia" Area="D" />
+      <Map Url="ir_ICAO-E_bw.jpg" Contents="Indian Ocean and Oceania" Area="E" />
+      <Map Url="ir_ICAO-F_bw.jpg" Contents="Pacific" Area="F" />
+      <Map Url="ir_ICAO-M_bw.jpg" Contents="North Pacific" Area="M" />
 
-   <!-- Example for how we can support passage weather.. not completed! -->
+      <Area Name="A" lat1="50S" lat2="70N" lon1="130W" lon2="30W" />
+      <Area Name="B1" lat1="45S" lat2="63N" lon1="120W" lon2="40E" />
+      <Area Name="C" lat1="40S" lat2="75N" lon1="35W" lon2="70E" />
+      <Area Name="D" lat1="20S" lat2="62N" lon1="10W" lon2="130E" />
+      <Area Name="E" lat1="50S" lat2="40N" lon1="26E" lon2="180" />
+      <Area Name="F" lat1="50S" lat2="50N" lon1="100E" lon2="110W" />
+      <Area Name="M" lat1="10S" lat2="70N" lon1="100E" lon2="110W" />
+    </Region>
+  </Server>
+
   <Server Name="Passage Weather" Url="http://passageweather.com/maps/">
 
     <Region Name="South China Sea" Url="chinasea/">
