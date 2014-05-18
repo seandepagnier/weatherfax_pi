@@ -255,7 +255,9 @@ void WeatherFax::OpenWav(wxString filename, wxString station, wxString area)
     
     if(wizard.m_decoder.m_inputtype != FaxDecoder::NONE &&
        wizard.RunWizard(wizard.m_pages[0])) {
-        int selection = m_lFaxes->Append(area.size() ? (station + _T(" - ") + area) : filename );
+        int selection = m_lFaxes->Append(area.size() ? (station + _T(" - ") + area) :
+                                         filename.size() ? filename :
+                                         wxString(_("Audio Capture") ) );
         m_Faxes.push_back(img);
         
         wizard.StoreCoords();

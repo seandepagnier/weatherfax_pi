@@ -213,7 +213,7 @@ void WeatherFaxWizard::OnStopDecoding( wxCommandEvent& event )
 
 void WeatherFaxWizard::OnDecoderOptions( wxCommandEvent& event )
 {
-    m_DecoderOptionsDialog->Show();
+    m_DecoderOptionsDialog->ShowModal();
 }
 
 void WeatherFaxWizard::OnPaintPhasing( wxPaintEvent& event )

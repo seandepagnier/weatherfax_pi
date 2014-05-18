@@ -80,53 +80,53 @@ WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString&
 	m_menubar1 = new wxMenuBar( 0 );
 	m_menu1 = new wxMenu();
 	wxMenuItem* m_menuItem1;
-	m_menuItem1 = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("Open") ) + wxT('\t') + wxT("Ctrl+o"), wxEmptyString, wxITEM_NORMAL );
+	m_menuItem1 = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("&Open") ) + wxT('\t') + wxT("Ctrl+o"), wxEmptyString, wxITEM_NORMAL );
 	m_menu1->Append( m_menuItem1 );
 	
-	m_mEdit = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("Edit") ) + wxT('\t') + wxT("Ctrl+e"), wxEmptyString, wxITEM_NORMAL );
+	m_mEdit = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("&Edit") ) + wxT('\t') + wxT("Ctrl+e"), wxEmptyString, wxITEM_NORMAL );
 	m_menu1->Append( m_mEdit );
 	
-	m_mExport = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("Export") ) + wxT('\t') + wxT("Ctrl+x"), wxEmptyString, wxITEM_NORMAL );
+	m_mExport = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("E&xport") ) + wxT('\t') + wxT("Ctrl+x"), wxEmptyString, wxITEM_NORMAL );
 	m_menu1->Append( m_mExport );
 	
-	m_mDelete = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("Delete") ) + wxT('\t') + wxT("Ctrl+d"), wxEmptyString, wxITEM_NORMAL );
+	m_mDelete = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("&Delete") ) + wxT('\t') + wxT("Ctrl+d"), wxEmptyString, wxITEM_NORMAL );
 	m_menu1->Append( m_mDelete );
 	
 	m_menu1->AppendSeparator();
 	
 	wxMenuItem* m_menuItem9;
-	m_menuItem9 = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("Preferences") ) + wxT('\t') + wxT("Ctrl+p"), wxEmptyString, wxITEM_NORMAL );
+	m_menuItem9 = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("&Preferences") ) + wxT('\t') + wxT("Ctrl+p"), wxEmptyString, wxITEM_NORMAL );
 	m_menu1->Append( m_menuItem9 );
 	
 	m_menu1->AppendSeparator();
 	
 	wxMenuItem* m_menuItem4;
-	m_menuItem4 = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("Close") ) , wxEmptyString, wxITEM_NORMAL );
+	m_menuItem4 = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("&Close") ) , wxEmptyString, wxITEM_NORMAL );
 	m_menu1->Append( m_menuItem4 );
 	
-	m_menubar1->Append( m_menu1, _("File") ); 
+	m_menubar1->Append( m_menu1, _("&File") ); 
 	
 	m_menu2 = new wxMenu();
 	wxMenuItem* m_menuItem8;
-	m_menuItem8 = new wxMenuItem( m_menu2, wxID_ANY, wxString( _("Audio Capture") ) + wxT('\t') + wxT("Ctrl+a"), wxEmptyString, wxITEM_NORMAL );
+	m_menuItem8 = new wxMenuItem( m_menu2, wxID_ANY, wxString( _("&Audio Capture") ) + wxT('\t') + wxT("Ctrl+a"), wxEmptyString, wxITEM_NORMAL );
 	m_menu2->Append( m_menuItem8 );
 	
 	wxMenuItem* m_menuItem5;
-	m_menuItem5 = new wxMenuItem( m_menu2, wxID_ANY, wxString( _("HF Radio Schedules") ) + wxT('\t') + wxT("ctrl+h"), wxEmptyString, wxITEM_NORMAL );
+	m_menuItem5 = new wxMenuItem( m_menu2, wxID_ANY, wxString( _("&HF Radio Schedules") ) + wxT('\t') + wxT("ctrl+h"), wxEmptyString, wxITEM_NORMAL );
 	m_menu2->Append( m_menuItem5 );
 	
 	wxMenuItem* m_menuItem6;
-	m_menuItem6 = new wxMenuItem( m_menu2, wxID_ANY, wxString( _("Internet") ) + wxT('\t') + wxT("ctrl+i"), wxEmptyString, wxITEM_NORMAL );
+	m_menuItem6 = new wxMenuItem( m_menu2, wxID_ANY, wxString( _("&Internet") ) + wxT('\t') + wxT("ctrl+i"), wxEmptyString, wxITEM_NORMAL );
 	m_menu2->Append( m_menuItem6 );
 	
-	m_menubar1->Append( m_menu2, _("Retrieve") ); 
+	m_menubar1->Append( m_menu2, _("&Retrieve") ); 
 	
 	m_menu3 = new wxMenu();
 	wxMenuItem* m_menuItem7;
-	m_menuItem7 = new wxMenuItem( m_menu3, wxID_ANY, wxString( _("About") ) + wxT('\t') + wxT("F1"), wxEmptyString, wxITEM_NORMAL );
+	m_menuItem7 = new wxMenuItem( m_menu3, wxID_ANY, wxString( _("&About") ) + wxT('\t') + wxT("F1"), wxEmptyString, wxITEM_NORMAL );
 	m_menu3->Append( m_menuItem7 );
 	
-	m_menubar1->Append( m_menu3, _("Help") ); 
+	m_menubar1->Append( m_menu3, _("&Help") ); 
 	
 	this->SetMenuBar( m_menubar1 );
 	
