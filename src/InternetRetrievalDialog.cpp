@@ -504,69 +504,88 @@ void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
 
         count++;
 
-        wxURL url(faxurl->Url);
-
-        if(url.GetError() != wxURL_NOERR)
-            continue;
-
-        wxProgressDialog progressdialog(_("WeatherFax InternetRetrieval"),
-                                        _("Reading Headers: ")+ faxurl->Contents, 1, this,
-                                        wxPD_CAN_ABORT | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
-        progressdialog.Update();
-
-        wxInputStream *input = url.GetInputStream();
-
-        if(!input) {
-            wxMessageDialog mdlg(this, _("Timed out waiting for headers for: ") +
-                                 faxurl->Contents + _T("\n") +
-                                 faxurl->Url + _T("\n") +
-                                 _("Verify there is a working internet connection.") +
-                                 _("If the url is incorrect please edit the xml and/or post a bug report."),
-                                 _("Weather Fax"), wxOK | wxICON_ERROR);
-            mdlg.ShowModal();
-            return;
-        }
-
-        if(!progressdialog.Update(0, _("Reading Size: ") + faxurl->Contents))
-            return;
-
-        int size = input->GetSize();
-
-        progressdialog.Hide();
-        wxProgressDialog progressdialog2(_("WeatherFax InternetRetrieval"),
-                                         _("Receiving: ")+ faxurl->Contents, size, this,
-                                         wxPD_CAN_ABORT | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
-
         wxString path = weatherfax_pi::StandardPath();
 
         int lastslash = faxurl->Url.rfind(_T("/"));
         wxString filename = faxurl->Url.substr(lastslash + 1);
 
-        wxFileName fn(path);
-        if(!fn.DirExists())
-            fn.Mkdir();
+        wxFileName dir(path);
+        if(!dir.DirExists())
+            dir.Mkdir();
 
         filename = path + wxFileName::GetPathSeparator() + filename;
-        wxFileOutputStream output(filename);
-        int position = 0;
-        while(!input->Eof() ) {
-            if(input->CanRead()) {
-                char buffer[16384];
-                input->Read(buffer, sizeof buffer);
-                int lastread = input->LastRead();
-                output.Write(buffer, lastread);
-                position += lastread;
-            } else
-                wxThread::Sleep(100);
 
-            if(position >= size) {
-                m_weatherfax_pi.m_pWeatherFax->OpenImage(filename);
+        wxFileName fn(filename);
+        if(fn.FileExists() && (fn.GetModificationTime() - wxDateTime::Now()).GetMinutes() < 60) {
+            wxMessageDialog mdlg(this, _("Fax already retrieved less than 60 minutes ago.\n\
+Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxOK);
+            switch(mdlg.ShowModal()) {
+            case wxID_YES:
+                goto loadimage;
+            case wxID_NO:
                 break;
+            default:
+                return;
+            }
+        }
+
+        {
+            wxURL url(faxurl->Url);
+
+            if(url.GetError() != wxURL_NOERR)
+                continue;
+
+            wxProgressDialog progressdialog(_("WeatherFax InternetRetrieval"),
+                                            _("Reading Headers: ")+ faxurl->Contents, 1, this,
+                                            wxPD_CAN_ABORT | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
+            progressdialog.Update();
+
+            wxInputStream *input = url.GetInputStream();
+
+            if(!input) {
+                wxMessageDialog mdlg(this, _("Timed out waiting for headers for: ") +
+                                     faxurl->Contents + _T("\n") +
+                                     faxurl->Url + _T("\n") +
+                                     _("Verify there is a working internet connection.") +
+                                     _("If the url is incorrect please edit the xml and/or post a bug report."),
+                                     _("Weather Fax"), wxOK | wxICON_ERROR);
+                mdlg.ShowModal();
+                return;
             }
 
-            if(!progressdialog2.Update(position))
+            if(!progressdialog.Update(0, _("Reading Size: ") + faxurl->Contents))
                 return;
+
+            int size = input->GetSize();
+
+            progressdialog.Hide();
+            wxProgressDialog progressdialog2(_("WeatherFax InternetRetrieval"),
+                                             _("Receiving: ")+ faxurl->Contents, size, this,
+                                             wxPD_CAN_ABORT | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
+
+            wxFileOutputStream output(filename);
+            int position = 0;
+            while(!input->Eof() ) {
+                if(input->CanRead()) {
+                    char buffer[16384];
+                    input->Read(buffer, sizeof buffer);
+                    int lastread = input->LastRead();
+                    output.Write(buffer, lastread);
+                    position += lastread;
+                } else
+                    wxThread::Sleep(100);
+
+                if(position >= size)
+                    break;
+
+                if(!progressdialog2.Update(position))
+                    return;
+            }
         }
+
+    loadimage:
+        m_weatherfax_pi.m_pWeatherFax->OpenImage
+            (filename, faxurl->Server + _T(" - ") + faxurl->Region, faxurl->area_name);
     }
     
     /* inform user if no faxes were selected */

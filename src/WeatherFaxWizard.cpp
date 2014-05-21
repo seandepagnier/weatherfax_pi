@@ -693,7 +693,7 @@ void WeatherFaxWizard::StoreMappingParams()
 bool WeatherFaxWizard::ApplyMapping()
 {
     if(!m_wfimg.m_mappedimg.IsOk())
-        if(!m_wfimg.MakeMappedImage(this, false))
+        if(!m_wfimg.MakeMappedImage(this))
             return false;
 
     double x1 = m_sCoord1XUnMapped->GetValue(), y1 = m_sCoord1YUnMapped->GetValue(), mx1, my1;

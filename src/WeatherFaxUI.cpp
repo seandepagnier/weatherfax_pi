@@ -359,7 +359,7 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	m_panel1->SetSizer( fgSizer26 );
 	m_panel1->Layout();
 	fgSizer26->Fit( m_panel1 );
-	m_notebook1->AddPage( m_panel1, _("Filter"), true );
+	m_notebook1->AddPage( m_panel1, _("Filter"), false );
 	m_panel2 = new wxPanel( m_notebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer31;
 	fgSizer31 = new wxFlexGridSizer( 1, 0, 0, 0 );
@@ -409,16 +409,16 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	m_rbManualCapture = new wxRadioButton( m_panel3, wxID_ANY, _("Manual Capture (with external program) automatic Open File"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer30->Add( m_rbManualCapture, 0, wxALL, 5 );
 	
-	m_rbAlsaCapture = new wxRadioButton( m_panel3, wxID_ANY, _("Alsa Capture"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_rbAlsaCapture->Enable( false );
+	m_rbAudioCapture = new wxRadioButton( m_panel3, wxID_ANY, _("Audio Capture (portaudio library)"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_rbAudioCapture->Enable( false );
 	
-	fgSizer30->Add( m_rbAlsaCapture, 0, wxALL, 5 );
+	fgSizer30->Add( m_rbAudioCapture, 0, wxALL, 5 );
 	
 	
 	m_panel3->SetSizer( fgSizer30 );
 	m_panel3->Layout();
 	fgSizer30->Fit( m_panel3 );
-	m_notebook1->AddPage( m_panel3, _("Capture Options"), false );
+	m_notebook1->AddPage( m_panel3, _("Capture Options"), true );
 	m_panel7 = new wxPanel( m_notebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer49;
 	fgSizer49 = new wxFlexGridSizer( 0, 2, 0, 0 );

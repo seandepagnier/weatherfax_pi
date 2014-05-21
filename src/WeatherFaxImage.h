@@ -114,7 +114,7 @@ public:
     /* page 2 */
     void InputToMercator(double px, double py, double &mx, double &my);
     void MercatorToInput(double mx, double my, double &px, double &py);
-    bool MakeMappedImage(wxWindow *parent, bool paramsonly);
+    bool MakeMappedImage(wxWindow *parent, bool paramsonly=false);
 
     double inputheight, aspectratio; /* used internally */
     wxPoint mercatoroffset;

@@ -85,12 +85,12 @@ public:
     void OnAbout( wxCommandEvent& event );
 
     void OpenWav(wxString filename, wxString station=_T(""), wxString area=_T(""));
-    void OpenImage(wxString filename);
+    void OpenImage(wxString filename, wxString station=_T(""), wxString area=_T(""));
     void Export(wxString filename);
 
     void UpdateMenuStates();
 
-    WeatherFaxImageCoordinateList m_Coords;
+    WeatherFaxImageCoordinateList m_BuiltinCoords, m_UserCoords;
 
     std::vector<WeatherFaxImage*>m_Faxes;
 

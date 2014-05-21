@@ -131,7 +131,7 @@ class SchedulesDialogBase : public wxDialog
 		wxRadioButton* m_rbExternalCapture;
 		wxTextCtrl* m_tExternalCapture;
 		wxRadioButton* m_rbManualCapture;
-		wxRadioButton* m_rbAlsaCapture;
+		wxRadioButton* m_rbAudioCapture;
 		wxPanel* m_panel7;
 		wxStaticText* m_staticText33;
 		wxStaticText* m_stCaptureStatus;

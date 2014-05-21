@@ -206,7 +206,7 @@
       <Area Name="Z" lat1="20S" lat2="30N" />
     </Region>
   </Server>
-http://aviationweather.gov/data/obs/sat/intl/ir_ICAO-B1_bw.jpg
+
   <Server Name="Aviation Weather" Url="http://aviationweather.gov/data/obs/sat/intl/">
     <Region Name="Aviation Satellite Imagery">
       <Map Url="ir_ICAO-A_bw.jpg" Contents="Americas" Area="A" />

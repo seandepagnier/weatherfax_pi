@@ -76,22 +76,15 @@ int AttributeInt(TiXmlElement *e, const char *name, int def)
 }
 
 #define FAIL(X) do { error = X; goto failed; } while(0)
-WeatherFax::WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
-    : WeatherFaxBase( parent ),
-      m_SchedulesDialog(_weatherfax_pi, this),
-      m_InternetRetrievalDialog(_weatherfax_pi, this),
-      m_weatherfax_pi(_weatherfax_pi)
+static void LoadCoordinatesFromXml(WeatherFaxImageCoordinateList &coords, wxString coordinatesets)
 {
-    UpdateMenuStates();
+    TiXmlDocument doc;
 
     wxString error;
     wxString coordinatesets_path = weatherfax_pi::StandardPath();
     wxString s = wxFileName::GetPathSeparator();
     wxString default_coordinatesets_path = *GetpSharedDataLocation() + _T("plugins")
         + s + _T("weatherfax") + s + _T("data") + s;
-    wxString coordinatesets = _T("WeatherFaxCoordinateSets.xml");
-    
-    TiXmlDocument doc;
 
     if(!doc.LoadFile((coordinatesets_path + coordinatesets).mb_str()) &&
        !doc.LoadFile((default_coordinatesets_path + coordinatesets).mb_str()))
@@ -101,7 +94,7 @@ WeatherFax::WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
 
         if(strcmp(root.Element()->Value(), "WeatherFaxCoordinates"))
             FAIL(_("Invalid xml file"));
-        
+
         for(TiXmlElement* e = root.FirstChild().Element(); e; e = e->NextSiblingElement())
             if(!strcmp(e->Value(), "Coordinate")) {
                 wxString name = wxString::FromUTF8(e->Attribute("Name"));
@@ -132,13 +125,10 @@ WeatherFax::WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
                 coord->Station = wxString::FromUTF8(e->Attribute("Station"));
                 coord->Area = wxString::FromUTF8(e->Attribute("Area"));
 
-                m_Coords.Append(coord);
-            }
+                coords.Append(coord);
+            } else
+                FAIL(_("Unrecognized xml node: ") + wxString::FromUTF8(e->Value()));
     }
-
-    if(m_weatherfax_pi.m_bLoadSchedulesStart)
-        m_SchedulesDialog.Load();
-
     return;
 failed:
     wxLogMessage(_("Weather Fax") + wxString(_T(" : ")) + error);
@@ -146,11 +136,23 @@ failed:
 //    mdlg.ShowModal();
 }
 
-WeatherFax::~WeatherFax()
+WeatherFax::WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
+    : WeatherFaxBase( parent ),
+      m_SchedulesDialog(_weatherfax_pi, this),
+      m_InternetRetrievalDialog(_weatherfax_pi, this),
+      m_weatherfax_pi(_weatherfax_pi)
 {
-    wxString coordinatesets_path = weatherfax_pi::StandardPath();
-    wxString coordinatesets = _T("WeatherFaxCoordinateSets.xml");
-    
+    UpdateMenuStates();
+
+    LoadCoordinatesFromXml(m_BuiltinCoords, _T("CoordinateSets.xml"));
+    LoadCoordinatesFromXml(m_UserCoords, _T("UserCoordinateSets.xml"));
+
+    if(m_weatherfax_pi.m_bLoadSchedulesStart)
+        m_SchedulesDialog.Load();
+}
+
+static void SaveCoordinatesToXml(WeatherFaxImageCoordinateList &coords, wxString filename)
+{
     TiXmlDocument doc;
     TiXmlDeclaration* decl = new TiXmlDeclaration( "1.0", "utf-8", "" );
     doc.LinkEndChild( decl );
@@ -158,52 +160,58 @@ WeatherFax::~WeatherFax()
     TiXmlElement * root = new TiXmlElement( "WeatherFaxCoordinates" );
     doc.LinkEndChild( root );
 
-    for(unsigned int i=0; i<m_Coords.GetCount(); i++) {
+    for(unsigned int i=0; i<coords.GetCount(); i++) {
         TiXmlElement *c = new TiXmlElement( "Coordinate" );
 
-        c->SetAttribute("Name", m_Coords[i]->name.mb_str());
+        c->SetAttribute("Name", coords[i]->name.mb_str());
 
-        c->SetAttribute("X1", wxString::Format(_T("%d"), m_Coords[i]->p1.x).mb_str());
-        c->SetAttribute("Y1", wxString::Format(_T("%d"), m_Coords[i]->p1.y).mb_str());
-        c->SetAttribute("Lat1", wxString::Format(_T("%.5f"), m_Coords[i]->lat1).mb_str());
-        c->SetAttribute("Lon1", wxString::Format(_T("%.5f"), m_Coords[i]->lon1).mb_str());
+        c->SetAttribute("X1", wxString::Format(_T("%d"), coords[i]->p1.x).mb_str());
+        c->SetAttribute("Y1", wxString::Format(_T("%d"), coords[i]->p1.y).mb_str());
+        c->SetAttribute("Lat1", wxString::Format(_T("%.5f"), coords[i]->lat1).mb_str());
+        c->SetAttribute("Lon1", wxString::Format(_T("%.5f"), coords[i]->lon1).mb_str());
+        
+        c->SetAttribute("X2", wxString::Format(_T("%d"), coords[i]->p2.x).mb_str());
+        c->SetAttribute("Y2", wxString::Format(_T("%d"), coords[i]->p2.y).mb_str());
+        c->SetAttribute("Lat2", wxString::Format(_T("%.5f"), coords[i]->lat2).mb_str());
+        c->SetAttribute("Lon2", wxString::Format(_T("%.5f"), coords[i]->lon2).mb_str());
+    
+        c->SetAttribute("Mapping", WeatherFaxImageCoordinates::MapName(coords[i]->mapping).mb_str());
 
-        c->SetAttribute("X2", wxString::Format(_T("%d"), m_Coords[i]->p2.x).mb_str());
-        c->SetAttribute("Y2", wxString::Format(_T("%d"), m_Coords[i]->p2.y).mb_str());
-        c->SetAttribute("Lat2", wxString::Format(_T("%.5f"), m_Coords[i]->lat2).mb_str());
-        c->SetAttribute("Lon2", wxString::Format(_T("%.5f"), m_Coords[i]->lon2).mb_str());
-
-        c->SetAttribute("Mapping", WeatherFaxImageCoordinates::MapName(m_Coords[i]->mapping).mb_str());
-
-        if(m_Coords[i]->mapping != WeatherFaxImageCoordinates::MERCATOR) {
-            if(m_Coords[i]->mapping != WeatherFaxImageCoordinates::FIXED_FLAT)
+        if(coords[i]->mapping != WeatherFaxImageCoordinates::MERCATOR) {
+            if(coords[i]->mapping != WeatherFaxImageCoordinates::FIXED_FLAT)
                 c->SetAttribute("InputPoleX", wxString::Format
-                                (_T("%d"), m_Coords[i]->inputpole.x).mb_str());
+                                (_T("%d"), coords[i]->inputpole.x).mb_str());
             c->SetAttribute("InputPoleY", wxString::Format
-                            (_T("%d"), m_Coords[i]->inputpole.y).mb_str());
+                            (_T("%d"), coords[i]->inputpole.y).mb_str());
             c->SetAttribute("InputEquator", wxString::Format
-                            (_T("%.5f"), m_Coords[i]->inputequator).mb_str());
+                            (_T("%.5f"), coords[i]->inputequator).mb_str());
             c->SetAttribute("InputTrueRatio", wxString::Format
-                            (_T("%.4f"), m_Coords[i]->inputtrueratio).mb_str());
-
-            if(!m_Coords[i]->Station.empty())
-                c->SetAttribute("Station", m_Coords[i]->Station.mb_str());
-            if(!m_Coords[i]->Area.empty())
-                c->SetAttribute("Area", m_Coords[i]->Area.mb_str());
-
+                            (_T("%.4f"), coords[i]->inputtrueratio).mb_str());
+        
+            if(!coords[i]->Station.empty())
+                c->SetAttribute("Station", coords[i]->Station.mb_str());
+            if(!coords[i]->Area.empty())
+                c->SetAttribute("Area", coords[i]->Area.mb_str());
+        
         }
 
         c->SetAttribute("MappingMultiplier", wxString::Format
-                        (_T("%.4f"), m_Coords[i]->mappingmultiplier).mb_str());
+                        (_T("%.4f"), coords[i]->mappingmultiplier).mb_str());
         c->SetAttribute("MappingRatio", wxString::Format
-                        (_T("%.4f"), m_Coords[i]->mappingratio).mb_str());
+                        (_T("%.4f"), coords[i]->mappingratio).mb_str());
 
         root->LinkEndChild(c);
     }
 
-    wxString filename = coordinatesets_path + coordinatesets;
-    if(!doc.SaveFile(filename.mb_str()))
+    wxString coordinatesets_path = weatherfax_pi::StandardPath();
+    if(!doc.SaveFile((coordinatesets_path + filename).mb_str()))
         wxLogMessage(_("Weather Fax") + wxString(_T(": ")) + _("Failed to save xml file: ") + filename);
+}
+
+WeatherFax::~WeatherFax()
+{
+    SaveCoordinatesToXml(m_BuiltinCoords, _T("CoordinateSets.xml"));
+    SaveCoordinatesToXml(m_UserCoords, _T("UserCoordinateSets.xml"));
 
     for(unsigned int i=0; i<m_Faxes.size(); i++)
         delete m_Faxes[i];
@@ -244,14 +252,16 @@ void WeatherFax::OpenWav(wxString filename, wxString station, wxString area)
     bool invert = m_cInvert->GetValue();
 
     WeatherFaxImage *img = new WeatherFaxImage(wxNullImage, transparency, whitetransparency, invert);
+    WeatherFaxImageCoordinateList BuiltinCoordList;
 
-    for(unsigned int i=0; i<m_Coords.GetCount(); i++)
-        if(station.size() && m_Coords[i]->Station == station &&
-           area.size() && m_Coords[i]->Area == area)
-            img->m_Coords = m_Coords[i];
+    wxString name = station.size() && area.size() ? (station + _T(" - ") + area) : _T("");
 
-    WeatherFaxWizard wizard(*img, true, filename, *this, m_Coords,
-                            station.size() && area.size() ? (station + _T(" - ") + area) : _T(""));
+    for(unsigned int i=0; i<m_BuiltinCoords.GetCount(); i++)
+        if(station.size() && m_BuiltinCoords[i]->Station == station &&
+           area.size() && m_BuiltinCoords[i]->Area == area)
+            img->m_Coords = m_BuiltinCoords[i];
+
+    WeatherFaxWizard wizard(*img, false, _T(""), *this, name.size() ? BuiltinCoordList : m_UserCoords, name);
     
     if(wizard.m_decoder.m_inputtype != FaxDecoder::NONE &&
        wizard.RunWizard(wizard.m_pages[0])) {
@@ -271,34 +281,58 @@ void WeatherFax::OpenWav(wxString filename, wxString station, wxString area)
         delete img;
 }
 
-void WeatherFax::OpenImage(wxString filename)
+void WeatherFax::OpenImage(wxString filename, wxString station, wxString area)
 {
     int transparency = m_sTransparency->GetValue();
     int whitetransparency = m_sWhiteTransparency->GetValue();
     bool invert = m_cInvert->GetValue();
 
     wxImage wimg;
-    if(wimg.LoadFile(filename)) {
-        WeatherFaxImage *img = new WeatherFaxImage(wimg, transparency, whitetransparency, invert);
-        WeatherFaxWizard wizard(*img, false, _T(""), *this, m_Coords, _T(""));
-        
-        if(wizard.RunWizard(wizard.m_pages[1])) {
-            wxFileName filenamec(filename);
+    WeatherFaxImageCoordinateList BuiltinCoordList;
+    if(!wimg.LoadFile(filename)) {
+        wxLogMessage(_("Weather Fax") + wxString(_T(": ")) + _("Failed to load input file: ") + filename);
+        return;
+    }
 
-            int selection = m_lFaxes->Append(filenamec.GetFullName());
-            m_Faxes.push_back(img);
-            
+    WeatherFaxImage *img = new WeatherFaxImage(wimg, transparency, whitetransparency, invert);
+    wxString name = station.size() && area.size() ? (station + _T(" - ") + area) : _T("");
+
+    for(unsigned int i=0; i<m_BuiltinCoords.GetCount(); i++)
+        if(station.size() && m_BuiltinCoords[i]->Station == station &&
+           area.size() && m_BuiltinCoords[i]->Area == area) {
+            img->m_Coords = m_BuiltinCoords[i];
+            if(img->MakeMappedImage(this))
+                goto wizarddone;
+        }
+
+    {
+        WeatherFaxWizard wizard(*img, false, _T(""), *this, name.size() ? BuiltinCoordList : m_UserCoords, name);
+
+        if(wizard.RunWizard(wizard.m_pages[1])) {
+            if(name.size() == 0) {
+                wxFileName filenamec(filename);
+                name = filenamec.GetFullName();
+            }
+
             wizard.StoreCoords();
             wizard.StoreMappingParams();
-            
-            m_lFaxes->SetSelection(selection);
-
-            RequestRefresh( m_parent );
-            UpdateMenuStates();
-        } else
+        } else {
             delete img;
-    } else
-        wxLogMessage(_("Weather Fax") + wxString(_T(": ")) + _("Failed to load input file: ") + filename);
+            return;
+        }
+    }
+
+wizarddone:
+    int selection = m_lFaxes->Append(name);
+    m_Faxes.push_back(img);
+
+    m_lFaxes->SetSelection(selection);
+
+    RequestRefresh( m_parent );
+    UpdateMenuStates();
+
+    if(BuiltinCoordList.GetCount())
+        m_BuiltinCoords.Append(BuiltinCoordList[0]);
 }
 
 void WeatherFax::Export(wxString filename)
@@ -344,7 +378,16 @@ void WeatherFax::OnEdit( wxCommandEvent& event )
 
     WeatherFaxImage &image = *m_Faxes[selection];
     WeatherFaxImage backupimage = image;
-    WeatherFaxWizard wizard(image, false, _T(""), *this, m_Coords, _T(""));
+
+    bool builtin=false;
+    WeatherFaxImageCoordinateList BuiltinCoordList;
+    for(unsigned int i=0; i<m_BuiltinCoords.GetCount(); i++)
+        if(m_BuiltinCoords[i] == image.m_Coords) {
+            BuiltinCoordList.Append(image.m_Coords);
+            builtin = true;
+        }
+
+    WeatherFaxWizard wizard(image, false, _T(""), *this, builtin ? BuiltinCoordList : m_UserCoords, _T(""));
     if(wizard.RunWizard(wizard.m_pages[0])) {
         wizard.StoreCoords();
         wizard.StoreMappingParams();
