@@ -131,11 +131,13 @@ WeatherFaxWizard::~WeatherFaxWizard()
 
 void WeatherFaxWizard::MakeNewCoordinates()
 {
-    if(m_curCoords && !m_curCoords->Station.empty() && !m_curCoords->Area.empty()) {
+#if 0
+    if(m_curCoords && m_curCoords.size() == 1) {
         m_bRemoveCoordSet->Disable();        
         m_cbCoordSet->Append(m_curCoords->name);
         return;
     }
+#endif
 
     /* make a new coord, yet making sure it has a unique name */
     wxString newcoordname;

@@ -518,7 +518,7 @@ void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
         wxFileName fn(filename);
         if(fn.FileExists() && (fn.GetModificationTime() - wxDateTime::Now()).GetMinutes() < 60) {
             wxMessageDialog mdlg(this, _("Fax already retrieved less than 60 minutes ago.\n\
-Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxOK);
+Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
             switch(mdlg.ShowModal()) {
             case wxID_YES:
                 goto loadimage;
@@ -536,7 +536,7 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxOK);
                 continue;
 
             wxProgressDialog progressdialog(_("WeatherFax InternetRetrieval"),
-                                            _("Reading Headers: ")+ faxurl->Contents, 1, this,
+                                            _("Reading Headers: ") + faxurl->Contents, 1, this,
                                             wxPD_CAN_ABORT | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
             progressdialog.Update();
 

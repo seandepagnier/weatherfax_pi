@@ -122,9 +122,6 @@ static void LoadCoordinatesFromXml(WeatherFaxImageCoordinateList &coords, wxStri
                 coord->mappingmultiplier = AttributeDouble(e, "MappingMultiplier", 1.0);
                 coord->mappingratio = AttributeDouble(e, "MappingRatio", 1.0);
 
-                coord->Station = wxString::FromUTF8(e->Attribute("Station"));
-                coord->Area = wxString::FromUTF8(e->Attribute("Area"));
-
                 coords.Append(coord);
             } else
                 FAIL(_("Unrecognized xml node: ") + wxString::FromUTF8(e->Value()));
@@ -187,12 +184,6 @@ static void SaveCoordinatesToXml(WeatherFaxImageCoordinateList &coords, wxString
                             (_T("%.5f"), coords[i]->inputequator).mb_str());
             c->SetAttribute("InputTrueRatio", wxString::Format
                             (_T("%.4f"), coords[i]->inputtrueratio).mb_str());
-        
-            if(!coords[i]->Station.empty())
-                c->SetAttribute("Station", coords[i]->Station.mb_str());
-            if(!coords[i]->Area.empty())
-                c->SetAttribute("Area", coords[i]->Area.mb_str());
-        
         }
 
         c->SetAttribute("MappingMultiplier", wxString::Format
@@ -257,8 +248,7 @@ void WeatherFax::OpenWav(wxString filename, wxString station, wxString area)
     wxString name = station.size() && area.size() ? (station + _T(" - ") + area) : _T("");
 
     for(unsigned int i=0; i<m_BuiltinCoords.GetCount(); i++)
-        if(station.size() && m_BuiltinCoords[i]->Station == station &&
-           area.size() && m_BuiltinCoords[i]->Area == area)
+        if(name == m_BuiltinCoords[i]->name)
             img->m_Coords = m_BuiltinCoords[i];
 
     WeatherFaxWizard wizard(*img, false, _T(""), *this, name.size() ? BuiltinCoordList : m_UserCoords, name);
@@ -298,9 +288,9 @@ void WeatherFax::OpenImage(wxString filename, wxString station, wxString area)
     wxString name = station.size() && area.size() ? (station + _T(" - ") + area) : _T("");
 
     for(unsigned int i=0; i<m_BuiltinCoords.GetCount(); i++)
-        if(station.size() && m_BuiltinCoords[i]->Station == station &&
-           area.size() && m_BuiltinCoords[i]->Area == area) {
+        if(name == m_BuiltinCoords[i]->name) {
             img->m_Coords = m_BuiltinCoords[i];
+            img->MakePhasedImage();
             if(img->MakeMappedImage(this))
                 goto wizarddone;
         }

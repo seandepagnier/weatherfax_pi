@@ -45,8 +45,6 @@ WeatherFaxImageCoordinates(wxString n) : name(n),
     double inputequator, /* y value */ inputtrueratio;
     double mappingmultiplier, mappingratio;
 
-    wxString Station, Area;
-
 /*
   (p1.x - x) / (lat1 - lat(x)) = (p2.x - p1.x) / (lat2 - lat1)
   lat1 - lat(x) = (p1.x - x) * (lat2 - lat1) / (p2.x - p1.x)
