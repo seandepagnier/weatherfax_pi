@@ -427,28 +427,6 @@
       <Area Name="1" lat1="25S" lat2="40N" lon1="175W" lon2="75W" />
    </Region>
 
-   <Region Name="Tahiti" Url="tahiti/">
-      <Iterator From="0" To="48" By="3">
-        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
-        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
-        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
-      </Iterator>
-
-      <Iterator From="54" To="72" By="6">
-        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
-        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
-        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
-      </Iterator>
-
-      <Iterator From="84" To="180" By="12">
-        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
-        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
-        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
-      </Iterator>
-
-      <Area Name="1" lat1="25S" lat2="40N" lon1="175W" lon2="75W" />
-   </Region>
-
    <Region Name="Mexico" Url="mexico/">
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
