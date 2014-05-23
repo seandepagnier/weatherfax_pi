@@ -978,6 +978,10 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	
 	m_fgSizer434->Add( fgSizer7, 1, wxEXPAND, 5 );
 	
+	m_staticText43 = new wxStaticText( m_wizPage2, wxID_ANY, _("+ Lat/Lon for N/E\n- Lat/Lon for S/W"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText43->Wrap( -1 );
+	m_fgSizer434->Add( m_staticText43, 0, wxALL, 5 );
+	
 	
 	sbSizer4->Add( m_fgSizer434, 1, 0, 5 );
 	

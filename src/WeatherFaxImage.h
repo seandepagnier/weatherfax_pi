@@ -31,13 +31,16 @@ struct WeatherFaxImageCoordinates
 {
 WeatherFaxImageCoordinates(wxString n) : name(n),
         p1(wxPoint(0, 0)), p2(wxPoint(0, 0)), lat1(0), lon1(0), lat2(0), lon2(0),
-        mapping(MERCATOR), inputpole(wxPoint(0,0)), inputequator(0), inputtrueratio(1),
+        rotation(NONE), mapping(MERCATOR), inputpole(wxPoint(0,0)), inputequator(0), inputtrueratio(1),
         mappingmultiplier(1), mappingratio(1)
         {}
 
     wxString name;
     wxPoint p1, p2;
     double lat1, lon1, lat2, lon2;
+
+    enum RotationType {NONE, CCW, CW, R180};
+    RotationType rotation;
 
     enum MapType {MERCATOR, POLAR, CONIC, FIXED_FLAT, MAP_TYPES};
     MapType mapping;
@@ -86,7 +89,7 @@ class WeatherFaxImage
 public:
         WeatherFaxImage(wxImage img, int transparency, int whitetransparency, bool invert)
             : m_origimg(img),
-        phasing(0), skew(0), filter(0), rotation(0),
+        phasing(0), skew(0), filter(0),
         m_Coords(NULL),
         m_CacheBitmap(NULL), m_gltextures(NULL), m_numgltexturesw(0), m_numgltexturesh(0),
         m_iTransparency(transparency), m_iWhiteTransparency(whitetransparency), m_bInvert(invert)
@@ -106,7 +109,7 @@ public:
 
     /* page 1 */
     void MakePhasedImage();
-    int phasing, skew, filter, rotation;
+    int phasing, skew, filter;
     wxImage m_phasedimg;
 
     /* page 2 */

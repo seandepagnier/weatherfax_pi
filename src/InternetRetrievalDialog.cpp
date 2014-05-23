@@ -124,7 +124,7 @@ void InternetRetrievalDialog::Load()
     imglist->Add(wxBitmap(check_xpm));
     m_lUrls->AssignImageList(imglist, wxIMAGE_LIST_SMALL);
 
-    m_lUrls->InsertColumn(SELECTED, _("Selected"));
+    m_lUrls->InsertColumn(SCHEDULED, _("Scheduled"));
     m_lUrls->InsertColumn(SERVER, _("Server"));
     m_lUrls->InsertColumn(REGION, _("Region"));
     m_lUrls->InsertColumn(CONTENTS, _("Contents"));
@@ -506,8 +506,9 @@ void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
 
         wxString path = weatherfax_pi::StandardPath();
 
-        int lastslash = faxurl->Url.rfind(_T("/"));
-        wxString filename = faxurl->Url.substr(lastslash + 1);
+        wxString filename = faxurl->Url;
+        for(unsigned int pos = 0; pos < filename.size(); pos = filename.find('/', pos))
+            filename.replace(pos, 1, _T("!"));
 
         wxFileName dir(path);
         if(!dir.DirExists())
@@ -538,7 +539,7 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
             wxProgressDialog progressdialog(_("WeatherFax InternetRetrieval"),
                                             _("Reading Headers: ") + faxurl->Contents, 1, this,
                                             wxPD_CAN_ABORT | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
-            progressdialog.Update();
+            progressdialog.Update(0);
 
             wxInputStream *input = url.GetInputStream();
 
@@ -676,7 +677,7 @@ void InternetRetrievalDialog::UpdateItem(long index)
         (wxUIntToPtr(m_lUrls->GetItemData(index)));
 
     m_lUrls->SetItemImage(index, url->Selected ? 0 : -1);
-    m_lUrls->SetColumnWidth(SELECTED, 50);
+    m_lUrls->SetColumnWidth(SCHEDULED, 50);
 
     m_lUrls->SetItem(index, SERVER, url->Server);
     m_lUrls->SetColumnWidth(SERVER, 120 /*wxLIST_AUTOSIZE*/);

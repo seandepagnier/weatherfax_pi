@@ -170,14 +170,15 @@ void WeatherFaxImage::MakePhasedImage()
 #endif
 
     /* apply rotation */
-    switch(rotation) {
-    case 1:
+    switch(m_Coords->rotation) {
+    case WeatherFaxImageCoordinates::CCW:
         m_phasedimg = m_phasedimg.Rotate90(false);
         break;
-    case 3:
+    case WeatherFaxImageCoordinates::R180:
         m_phasedimg = m_phasedimg.Rotate90(true);
-    case 2:
+    case WeatherFaxImageCoordinates::CW:
         m_phasedimg = m_phasedimg.Rotate90(true);
+    default:
         break;
     }
 
@@ -282,8 +283,8 @@ void WeatherFaxImage::InputToMercator(double px, double py, double &mx, double &
     }
 
     /* apply scale */
-    x*=m_Coords->mappingmultiplier*aspectratio;
-    y*=m_Coords->mappingmultiplier;
+    x*=m_Coords->mappingmultiplier;
+    y*=m_Coords->mappingmultiplier/aspectratio;
 
     /* apply offsets */
     mx = mercatoroffset.x + x;
@@ -300,8 +301,8 @@ void WeatherFaxImage::MercatorToInput(double mx, double my, double &px, double &
     y = my - mercatoroffset.y;
 
     /* apply scale */
-    x /= m_Coords->mappingmultiplier*aspectratio;
-    y /= m_Coords->mappingmultiplier;
+    x /= m_Coords->mappingmultiplier;
+    y /= m_Coords->mappingmultiplier/aspectratio;
 
     /* if not mercator, it is fixed and needs conversion here */
     double pp;
@@ -434,12 +435,12 @@ Try changing size parameter to a smaller value. (less than %.2f)\naborting\n"),
     m_mappedimg.Create(mw, mh);
     wxProgressDialog progressdialog(
         _("Mapping Weather Fax Image"), _("Weather Fax Mapper"), mw, parent,
-        wxPD_SMOOTH | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME | wxPD_CAN_ABORT);
+        wxPD_SMOOTH | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
 
     unsigned char *d = m_phasedimg.GetData(), *md = m_mappedimg.GetData();
     for(int x=0; x<mw; x++) {
-//        if(x%200 == 0 && !progressdialog.Update(x))
-//            return false;
+        if(x%200 == 0 && !progressdialog.Update(x))
+            return false;
 
         for(int y=0; y<mh; y++) {
             double px, py;
@@ -448,14 +449,7 @@ Try changing size parameter to a smaller value. (less than %.2f)\naborting\n"),
             MercatorToInput(x, y, px, py);
 
             if(px >= 0 && py >= 0 && px < w-1 && py < h-1)
-#if 0 /* mono with interpolation for speed */
-                ImageInterpolatedValueMono
-#elif 1                
-                ImageInterpolatedValue
-#else /* faster without interpolation, looks like crap */
-                ImageValue
-#endif
-                    (d, w, px, py, cd);
+                ImageInterpolatedValue(d, w, px, py, cd);
             else
                 cd[0] = cd[1] = cd[2] = 255;
         }

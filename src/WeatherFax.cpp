@@ -111,6 +111,16 @@ static void LoadCoordinatesFromXml(WeatherFaxImageCoordinateList &coords, wxStri
                 coord->lat2 = AttributeDouble(e, "Lat2", 0);
                 coord->lon2 = AttributeDouble(e, "Lon2", 0);
 
+                wxString rotation = wxString::FromUTF8(e->Attribute("Rotation"));
+                if(rotation == _T("CW"))
+                    coord->rotation = WeatherFaxImageCoordinates::CW;
+                else if(rotation == _T("CCW"))
+                    coord->rotation = WeatherFaxImageCoordinates::CCW;
+                else if(rotation == _T("180"))
+                    coord->rotation = WeatherFaxImageCoordinates::R180;
+                else
+                    coord->rotation = WeatherFaxImageCoordinates::NONE;
+
                 coord->mapping = WeatherFaxImageCoordinates::GetMapType
                     (wxString::FromUTF8(e->Attribute("Mapping")));
   
@@ -171,6 +181,13 @@ static void SaveCoordinatesToXml(WeatherFaxImageCoordinateList &coords, wxString
         c->SetAttribute("Y2", wxString::Format(_T("%d"), coords[i]->p2.y).mb_str());
         c->SetAttribute("Lat2", wxString::Format(_T("%.5f"), coords[i]->lat2).mb_str());
         c->SetAttribute("Lon2", wxString::Format(_T("%.5f"), coords[i]->lon2).mb_str());
+
+        switch(coords[i]->rotation) {
+        case WeatherFaxImageCoordinates::CW:  c->SetAttribute("Rotation", "CW"); break;
+        case WeatherFaxImageCoordinates::CCW: c->SetAttribute("Rotation", "CCW"); break;
+        case WeatherFaxImageCoordinates::R180: c->SetAttribute("Rotation", "180"); break;
+        default: break;
+        }
     
         c->SetAttribute("Mapping", WeatherFaxImageCoordinates::MapName(coords[i]->mapping).mb_str());
 

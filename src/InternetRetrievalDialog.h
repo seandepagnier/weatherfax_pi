@@ -58,7 +58,7 @@ struct FaxRegion
 class InternetRetrievalDialog: public InternetRetrievalDialogBase
 {
 public:
-    enum {SELECTED, SERVER, REGION, CONTENTS, MAP_AREA};
+    enum {SCHEDULED, SERVER, REGION, CONTENTS, MAP_AREA};
 
     InternetRetrievalDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent);
     ~InternetRetrievalDialog();

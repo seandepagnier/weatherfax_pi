@@ -251,6 +251,7 @@ class WeatherFaxWizardBase : public wxWizard
 		wxSpinCtrl* m_sCoord2LatUnMapped;
 		wxSpinCtrl* m_sCoord2XUnMapped;
 		wxSpinCtrl* m_sCoord2LonUnMapped;
+		wxStaticText* m_staticText43;
 		wxScrolledWindow* m_swFaxArea2;
 		wxStaticText* m_staticText15;
 		wxChoice* m_cMapping;

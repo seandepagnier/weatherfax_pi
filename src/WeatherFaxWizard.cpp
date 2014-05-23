@@ -48,14 +48,15 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
     m_sPhasing->SetValue(m_wfimg.phasing);
     m_sSkew->SetValue(m_wfimg.skew);
     m_cFilter->SetSelection(m_wfimg.filter);
-    m_cRotation->SetSelection(m_wfimg.rotation);
-    m_wfimg.MakePhasedImage();
 
     m_sPhasing->SetRange(0, m_wfimg.m_phasedimg.GetWidth()-1);
 
     m_swFaxArea1->SetScrollbars(1, 1, m_wfimg.m_phasedimg.GetWidth(), m_wfimg.m_phasedimg.GetHeight());
 
     MakeNewCoordinates();
+    
+    m_cRotation->SetSelection(m_curCoords->rotation);
+    m_wfimg.MakePhasedImage();
 
     if(use_decoder) {
         /* periodically check for updates */
@@ -324,10 +325,10 @@ void WeatherFaxWizard::UpdateMappingControls()
 {
     switch((WeatherFaxImageCoordinates::MapType)m_cMapping->GetSelection()) {
     case WeatherFaxImageCoordinates::MERCATOR: /* nomapping */
-        m_sMappingPoleX->Disable();
-        m_sMappingPoleY->Disable();
-        m_sMappingEquatorY->Disable();
-        m_tTrueRatio->Disable();
+        m_sMappingPoleX->Disable(),    m_sMappingPoleX->SetValue(0);
+        m_sMappingPoleY->Disable(),    m_sMappingPoleY->SetValue(0);
+        m_sMappingEquatorY->Disable(), m_sMappingEquatorY->SetValue(0);
+        m_tTrueRatio->Disable(),       m_tTrueRatio->SetValue(_T("1.0"));
         m_bGetMapping->Disable();
         m_bGetEquator->Disable();
         break;
@@ -673,6 +674,7 @@ void WeatherFaxWizard::OnRemoveCoords( wxCommandEvent& event )
 
 void WeatherFaxWizard::StoreMappingParams()
 {
+    m_curCoords->rotation = (WeatherFaxImageCoordinates::RotationType)m_cRotation->GetSelection();
     m_curCoords->mapping = (WeatherFaxImageCoordinates::MapType)m_cMapping->GetSelection();
 
     m_curCoords->inputpole.x = m_sMappingPoleX->GetValue();
@@ -782,7 +784,7 @@ void WeatherFaxWizard::UpdatePage1()
     m_wfimg.phasing = m_sPhasing->GetValue();
     m_wfimg.skew = m_sSkew->GetValue();
     m_wfimg.filter = m_cFilter->GetSelection();
-    m_wfimg.rotation = m_cRotation->GetSelection();
+    m_curCoords->rotation = (WeatherFaxImageCoordinates::RotationType)m_cRotation->GetSelection();
     m_wfimg.MakePhasedImage();
     Refresh();
 }
