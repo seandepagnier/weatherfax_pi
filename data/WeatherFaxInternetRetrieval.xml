@@ -962,6 +962,21 @@
     </Region>
   </Server>
 
+  <Server Name="Meteorological Service Singapore" Url="http://www.weather.gov.sg/wip/pp/">
+<!-- requires month/day/hour http://www.weather.gov.sg/wip/pp/aseangif/ai052507.jpg -->
+
+    <Region Name="Singapore">
+      <Map Url="rndops/web/ship/gif/swind01.gif" Contents="Surface Wind Forecast 24hr" Area="1" />
+      <Map Url="rndops/web/ship/gif/swind02.gif" Contents="Surface Wind Forecast 48hr" Area="1" />
+      <Map Url="rndops/web/ship/gif/ship01.gif" Contents="Significant Wave Forecast 24hr" Area="1" />
+      <Map Url="rndops/web/ship/gif/ship02.gif" Contents="Significant Wave Forecast 48hr" Area="1" />
+      <Map Url="rndops/web/ship/gif/wxchart.gif" Contents="Region Weather Chart" Area="2" />
+
+      <Area Name="1" lat1="20S" lat2="40N" lon1="80E" lon2="150E" />
+      <Area Name="2" lat1="15S" lat2="35N" lon1="90E" lon2="130E" />
+    </Region>
+  </Server>
+
 <!-- www.mar.mil.br requires year month day time
 http://www.mar.mil.br/dhn/chm/meteo/prev/cartas/C14051612.jpg
 -->
@@ -987,5 +1002,6 @@ http://www.jma.go.jp/en/gms/imgs/0/infrared/1/201405241015-00.png
   </Server>
 
 <Server Name="NZ met service" Url="">
+
 -->
 </OCPNWeatherFaxInternetRetrieval>
