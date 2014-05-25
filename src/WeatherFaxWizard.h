@@ -60,8 +60,10 @@ public:
     void OnMappingChoice( wxCommandEvent& event );
     void GetMappingPolar(bool onlyequator);
     void GetMappingFixedFlat();
+    void GetAspectRatio();
     void OnGetMapping( wxCommandEvent& event );
     void OnGetEquator( wxCommandEvent& event );
+    void OnGetAspectRatio( wxCommandEvent& event );
     void OnBitmapClickPage2( wxMouseEvent& event );
     void OnBitmapClickPage3( wxMouseEvent& event );
     void OnCoordSet( wxCommandEvent& event );

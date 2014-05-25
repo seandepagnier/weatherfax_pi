@@ -105,9 +105,7 @@
       <Map Url="PYEI10.TIF" Contents="48 HR SURFACE FORECAST" Area="3" />
       <Map Url="PYEK10.TIF" Contents="72 HR SURFACE FORECAST" Area="3" />
       <Map Url="PWEE11.TIF" Contents="24 HR WIND/WAVE FORECAST" Area="3" />
-      <Map Url="PWEK11.TIF" Contents="CYCLONE DANGER AREA* or HIGH WIND/WAVES" Area="6" />
       <Map Url="PWEI11.TIF" Contents="48 HR WIND/WAVE FORECAST" Area="3" />
-      <Map Url="evst99.jpg" Contents="GOES IR TROPICAL SATELLITE IMAGE" Area="4" />
       <Map Url="PJEK11.TIF" Contents="72 HR WIND/WAVE FORECAST" Area="3" />
       <Map Url="PKEK88.TIF" Contents="72 HR WAVE PERIOD/SWELL DIRECTION" Area="3" />
 
@@ -132,7 +130,6 @@
       <Map Url="PWBI10.TIF" Contents="48HR SURFACE FORECAST" Area="1" />
       <Map Url="PJBI10.TIF" Contents="48HR WIND/WAVE FORECAST" Area="1" />
       <Map Url="PTCO89.TIF" Contents="5-DAY SEA ICE FORECAST" Area="6" />
-      <Map Url="evpn99.jpg" Contents="GOES IR SATELLITE IMAGE" Area="5" />
       <Map Url="PJBI20.TIF" Contents="48HR WAVE PERIOD, SWELL DIRECTION" Area="1" />
       <Map Url="PPBI10.TIF" Contents="48HR 500 MB FORECAST" Area="1" />
       <Map Url="PTCA88.TIF" Contents="SEA SURFACE TEMPERATURE ANALYSIS" Area="4" />
@@ -148,7 +145,7 @@
       <Area Name="4" lat1="40N" lat2="60N" lon1="125W" lon2="160E" />
       <Area Name="5" lat1="5N" lat2="60N" lon1="110W" lon2="160W" />
       <Area Name="6" Description="ICE COVERED AK WATERS" />
-      <Area Name="7" Description="COOK INLET" />
+      <Area Name="7" Description="COOK INLET" lat1="58N" lat2="62N" lon1="154W" lon2="150W" />
     </Region>
 
     <Region Name="Honolulu Hawaii">
@@ -203,7 +200,7 @@
       <Area Name="4" lat1="18N" lat2="62N" />
       <Area Name="5" lat1="5N" lat2="55N" />
       <Area Name="Y" lat1="5N" lat2="32N" />
-      <Area Name="Z" lat1="20S" lat2="30N" />
+      <Area Name="Z" lat1="20S" lat2="30N" lon1="140W" lon2="80W" />
     </Region>
   </Server>
 
@@ -757,28 +754,6 @@
       <Area Name="1" lat1="75S" lat2="10S" lon1="10E" lon2="130E" />
    </Region>
 
-   <Region Name="Southern Indian Ocean" Url="sindian/">
-      <Iterator From="0" To="48" By="3">
-        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
-        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
-        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
-      </Iterator>
-
-      <Iterator From="54" To="72" By="6">
-        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
-        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
-        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
-      </Iterator>
-
-      <Iterator From="84" To="180" By="12">
-        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
-        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
-        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
-      </Iterator>
-
-      <Area Name="1" lat1="75S" lat2="10S" lon1="10E" lon2="130E" />
-   </Region>
-
    <Region Name="South Atlantic Ocean" Url="satlantic/">
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
@@ -952,6 +927,53 @@
       <Area Name="1" lat1="35S" lat2="10N" lon1="150E" lon2="180W" />
     </Region>
   </Server>
+
+  <Server Name="India Meteorological Dep" Url="http://www.imd.gov.in/section/satmet/img/">
+    <Region Name="Asia Sector">
+      <Map Url="3Dasiasec_vis.jpg" Contents="Visible" Area="1" />
+      <Map Url="3Dasiasec_swir.jpg" Contents="Short Wave IR" Area="1" />
+      <Map Url="3Dasiasec_mir.jpg" Contents="Mid IR" Area="1" />
+      <Map Url="3Dasiasec_wv.jpg" Contents="Water Vapor" Area="1" />
+      <Map Url="3Dasiasec_ir1.jpg" Contents="IR 10.3-11.3 um" Area="1" />
+      <Map Url="3Dasiasec_ir2.jpg" Contents="IR 11.5-12.5 um" Area="1" />
+      <Map Url="3Dasiasec_rgb.jpg" Contents="Colour Composite" Area="1" />
+      <Area Name="1" lat1="10S" lat2="45N" lon1="45E" lon2="105E" />
+    </Region>
+    <Region Name="NWQ">
+      <Map Url="3Dnwqsec_vis.jpg" Contents="Visible" Area="1" />
+      <Map Url="3Dnwqsec_swir.jpg" Contents="Short Wave IR" Area="1" />
+      <Map Url="3Dnwqsec_mir.jpg" Contents="Mid IR" Area="1" />
+      <Map Url="3Dnwqsec_wv.jpg" Contents="Water Vapor" Area="1" />
+      <Map Url="3Dnwqsec_ir1.jpg" Contents="IR 10.3-11.3 um" Area="1" />
+      <Map Url="3Dnwqsec_ir2.jpg" Contents="IR 11.5-12.5 um" Area="1" />
+      <Map Url="3Dnwqsec_rgb.jpg" Contents="Colour Composite" Area="1" />
+      <Area Name="1" lat1="20S" lat2="45N" lon1="15E" lon2="85E" />
+    </Region>
+    <Region Name="NEQ">
+      <Map Url="3Dneqsec_vis.jpg" Contents="Visible Radar" Area="1" />
+      <Map Url="3Dneqsec_vis.jpg" Contents="Visible" Area="1" />
+      <Map Url="3Dneqsec_swir.jpg" Contents="Short Wave IR" Area="1" />
+      <Map Url="3Dneqsec_mir.jpg" Contents="Mid IR" Area="1" />
+      <Map Url="3Dneqsec_wv.jpg" Contents="Water Vapor" Area="1" />
+      <Map Url="3Dneqsec_ir1.jpg" Contents="IR 10.3-11.3 um" Area="1" />
+      <Map Url="3Dneqsec_ir2.jpg" Contents="IR 11.5-12.5 um" Area="1" />
+      <Map Url="3Dneqsec_rgb.jpg" Contents="Colour Composite" Area="1" />
+      <Area Name="1" lat1="5N" lat2="35N" lon1="75E" lon2="105E" />
+    </Region>
+  </Server>
+-->
+
+<!-- Metoffice requires year month day time to set correct url
+http://www.metoffice.gov.uk/weather/images/namerica_sat_201405240600.jpg
+http://www.metoffice.gov.uk/weather/images/namerica_sat_201405240000.jpg
+http://www.metoffice.gov.uk/weather/images/namerica_sat_201405231800.jpg
+
+  http://www.metoffice.gov.uk/weather/images/samerica_sat_201405240600.jpg
+-->
+
+<!-- www.jma.go.jp requires year month day time for url 
+http://www.jma.go.jp/en/gms/imgs/0/infrared/1/201405241015-00.png
+-->
 
 <!--  incomplete since these services use changing urls and are therefore not easily supported
   <Server Name="meteo france" Url="http://www.meteofrance.com/integration/sim-portail/generated/integration/img/produits/mer/">

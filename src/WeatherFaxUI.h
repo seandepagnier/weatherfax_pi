@@ -271,6 +271,7 @@ class WeatherFaxWizardBase : public wxWizard
 		wxSpinCtrl* m_sMappingEquatorY;
 		wxButton* m_bGetMapping;
 		wxButton* m_bGetEquator;
+		wxButton* m_bGetAspectRatio;
 		wxButton* m_bInformation;
 		wxRadioButton* m_rbCoord1;
 		wxStaticText* m_staticText61;
@@ -307,6 +308,7 @@ class WeatherFaxWizardBase : public wxWizard
 		virtual void OnUpdateMappingSpin( wxSpinEvent& event ) { event.Skip(); }
 		virtual void OnGetMapping( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnGetEquator( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnGetAspectRatio( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnInformation( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnBitmapClickPage3( wxMouseEvent& event ) { event.Skip(); }
 		

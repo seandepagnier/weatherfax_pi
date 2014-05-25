@@ -117,7 +117,7 @@ public:
     void MercatorToInput(double mx, double my, double &px, double &py);
     bool MakeMappedImage(wxWindow *parent, bool paramsonly=false);
 
-    double inputheight, aspectratio; /* used internally */
+    double inputheight; /* used internally */
     wxPoint mercatoroffset;
 
     wxImage m_mappedimg;
@@ -125,7 +125,7 @@ public:
 
     /* rendering */
     void FreeData();
-    bool GetOverlayCoords(PlugIn_ViewPort *vp, wxPoint &p0, wxPoint &pwh, int &w, int &h);
+    bool GetOverlayCoords(PlugIn_ViewPort *vp, wxPoint p[3], int &w, int &h);
     void RenderImage(wxDC &dc, PlugIn_ViewPort *vp);
     void RenderImageGL(PlugIn_ViewPort *vp);
 

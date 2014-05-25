@@ -284,7 +284,7 @@ void WeatherFaxImage::InputToMercator(double px, double py, double &mx, double &
 
     /* apply scale */
     x*=m_Coords->mappingmultiplier;
-    y*=m_Coords->mappingmultiplier/aspectratio;
+    y*=m_Coords->mappingmultiplier/m_Coords->mappingratio;
 
     /* apply offsets */
     mx = mercatoroffset.x + x;
@@ -302,7 +302,7 @@ void WeatherFaxImage::MercatorToInput(double mx, double my, double &px, double &
 
     /* apply scale */
     x /= m_Coords->mappingmultiplier;
-    y /= m_Coords->mappingmultiplier/aspectratio;
+    y /= m_Coords->mappingmultiplier/m_Coords->mappingratio;
 
     /* if not mercator, it is fixed and needs conversion here */
     double pp;
@@ -354,15 +354,6 @@ bool WeatherFaxImage::MakeMappedImage(wxWindow *parent, bool paramsonly)
 
     double p1x, p2x, p3x, p4x, p5x, p6x;
     double p1y, p2y, p3y, p4y, p5y, p6y;
-
-    /* calculate aspect ratio to give 1:1 along equator so if the image is
-       saved as a kap file it can be displayed as mercator without needing to
-       change he aspect ratio, this method is not numerically perfect but
-       I think it is close enough in practice */
-    aspectratio = 1;
-    InputToMercator(m_Coords->inputpole.x + 1/4.0, m_Coords->inputequator, p2x, p2y);
-    InputToMercator(m_Coords->inputpole.x, m_Coords->inputequator + 1/4.0, p3x, p3y);
-    aspectratio = p3y / p2x * m_Coords->mappingratio;
 
     /* four corners of input */
     InputToMercator(0, 0, p1x, p1y);
@@ -457,7 +448,7 @@ Try changing size parameter to a smaller value. (less than %.2f)\naborting\n"),
     return true;
 }
 
-bool WeatherFaxImage::GetOverlayCoords(PlugIn_ViewPort *vp, wxPoint &p0, wxPoint &pwh, int &w, int &h)
+bool WeatherFaxImage::GetOverlayCoords(PlugIn_ViewPort *vp, wxPoint p[3], int &w, int &h)
 {
     if(!m_Coords)
         return false;
@@ -470,43 +461,34 @@ bool WeatherFaxImage::GetOverlayCoords(PlugIn_ViewPort *vp, wxPoint &p0, wxPoint
     w=img.GetWidth();
     h=img.GetHeight();
 
-    double lon0 = m_Coords->lon(0), lonw = m_Coords->lon(w);
+    double lat0 = m_Coords->lat(0), lon0 = m_Coords->lon(0);
+    double lat1 = m_Coords->lat(h), lon1 = m_Coords->lon(w);
 
     /* skip coordinates that go the long way around the world */
-    if(lon0+180 < vp->clon && lonw+180 > vp->clon)
+    if(lon0+180 < vp->clon && lon1+180 > vp->clon)
         return false;
-    if(lon0-180 < vp->clon && lonw-180 > vp->clon)
+    if(lon0-180 < vp->clon && lon1-180 > vp->clon)
         return false;
 
-    double lat1 = m_Coords->lat1, lon1 = m_Coords->lon1;
-    double lat2 = m_Coords->lat2, lon2 = m_Coords->lon2;
-    
-    wxPoint p1, p2;
-    GetCanvasPixLL( vp, &p1, lat1, lon1 );
-    GetCanvasPixLL( vp, &p2, lat2, lon2 );
+    /* prefer double precision version when it is available */
+    GetCanvasPixLL( vp, &p[0], lat0, lon0 );
+    GetCanvasPixLL( vp, &p[1], lat0, lon1 );
+    GetCanvasPixLL( vp, &p[2], lat1, lon0 );
 
-    /* now extrapolate to 0-w and 0-h from p1 p2 pa etc.. 
-    (m_Coords->p2.x-m_Coords->p1.x)/(p2.x-p1.x) = (m_Coords->p1.x - 0) / (p1.x - p0.x)
-    p0.x = p1.x - (p2.x-p1.x) * (m_Coords->p1.x - 0) /
-    (m_Coords->p2.x-m_Coords->p1.x)
-    */
-
-    double divx = (m_Coords->p2.x-m_Coords->p1.x);
-    double divy = (m_Coords->p2.y-m_Coords->p1.y);
-    p0.x = p1.x - (p2.x-p1.x) * (m_Coords->p1.x - 0) / divx;
-    p0.y = p1.y - (p2.y-p1.y) * (m_Coords->p1.y - 0) / divy;
-
-    pwh.x = p1.x - (p2.x-p1.x) * (m_Coords->p1.x - w) / divx;
-    pwh.y = p1.y - (p2.y-p1.y) * (m_Coords->p1.y - h) / divy;
     return true;
 }
 
 void WeatherFaxImage::RenderImage(wxDC &dc, PlugIn_ViewPort *vp)
 {
-    wxPoint p1, p2;
+    wxPoint p[4];
     int w, h;
-    if(!GetOverlayCoords(vp, p1, p2, w, h))
+    if(vp->rotation)
         return;
+
+    if(!GetOverlayCoords(vp, p, w, h))
+        return;
+
+    wxPoint p1 = p[0], p2 = wxPoint(p[1].x, p[2].y);
 
     wxImage &img = m_mappedimg;
 
@@ -559,9 +541,9 @@ void WeatherFaxImage::RenderImageGL(PlugIn_ViewPort *vp)
 {
     const int maxtexsize = 1024; /* all gfx should support at least this */
 
-    wxPoint p1, p2;
+    wxPoint p[3];
     int w, h;
-    if(!GetOverlayCoords(vp, p1, p2, w, h))
+    if(!GetOverlayCoords(vp, p, w, h))
         return;
 
     wxImage &img = m_mappedimg;
@@ -626,16 +608,21 @@ void WeatherFaxImage::RenderImageGL(PlugIn_ViewPort *vp)
 
             glBindTexture(GL_TEXTURE_RECTANGLE_ARB, m_gltextures[ty*m_numgltexturesw + tx]);
     
-            wxPoint p1u = wxPoint(p1.x + (p2.x-p1.x)*maxtexsize*tx/w,
-                                  p1.y + (p2.y-p1.y)*maxtexsize*ty/h);
-            wxPoint p2u = wxPoint(p1.x + (p2.x-p1.x)*(maxtexsize*tx+tw)/w,
-                                  p1.y + (p2.y-p1.y)*(maxtexsize*ty+th)/h);
+            /* interpolate coordinates correctly even with rotation */
+            double mtx = maxtexsize*tx, mty = maxtexsize*ty;
+            wxPoint p1 = p[0], p2 = p[1], p3 = p[2];
+            double q1x = p2.x-p1.x, q2x = p3.x-p1.x, q1y = p2.y-p1.y, q2y = p3.y-p1.y;
+            double f1x = mtx/w, f2x = (mtx+tw)/w, f1y = mty/h, f2y = (mty+th)/h;
+            double vx1x = q1x*f1x, vx1y = q1y*f1x, vx2x = q1x*f2x, vx2y = q1y*f2x;
+            double vy1x = q2x*f1y, vy1y = q2y*f1y, vy2x = q2x*f2y, vy2y = q2y*f2y;
+            double pu1x = p1.x+vx1x+vy1x, pu2x = p1.x+vx2x+vy1x, pu3x = p1.x+vx2x+vy2x, pu4x = p1.x+vx1x+vy2x;
+            double pu1y = p1.y+vx1y+vy1y, pu2y = p1.y+vx2y+vy1y, pu3y = p1.y+vx2y+vy2y, pu4y = p1.y+vx1y+vy2y;
 
             glBegin(GL_QUADS);
-            glTexCoord2i(0,   0), glVertex2i(p1u.x, p1u.y);
-            glTexCoord2i(tw,  0), glVertex2i(p2u.x, p1u.y);
-            glTexCoord2i(tw, th), glVertex2i(p2u.x, p2u.y);
-            glTexCoord2i(0,  th), glVertex2i(p1u.x, p2u.y);
+            glTexCoord2i(0,   0), glVertex2d(pu1x, pu1y);
+            glTexCoord2i(tw,  0), glVertex2d(pu2x, pu2y);
+            glTexCoord2i(tw, th), glVertex2d(pu3x, pu3y);
+            glTexCoord2i(0,  th), glVertex2d(pu4x, pu4y);
             glEnd();
         }
     }

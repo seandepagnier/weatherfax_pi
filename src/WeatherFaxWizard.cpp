@@ -566,6 +566,45 @@ void WeatherFaxWizard::GetMappingFixedFlat()
     m_sMappingEquatorY->SetValue(inputequator);
 }
 
+void WeatherFaxWizard::GetAspectRatio()
+{
+    /* calculate aspect ratio so that resulting image is mercator and can be
+       easily exported to a kap file */
+
+    wxPoint p1, p2;
+    double mapping1lat = m_sCoord1LatUnMapped->GetValue();
+    double mapping2lat = m_sCoord2LatUnMapped->GetValue();
+    double mapping1lon = m_sCoord1LonUnMapped->GetValue();
+    double mapping2lon = m_sCoord2LonUnMapped->GetValue();
+
+    PlugIn_ViewPort smvp;
+    smvp.clat = 0, smvp.clon = 0, smvp.view_scale_ppm = 1, smvp.skew = 0, smvp.rotation = 0;
+    smvp.m_projection_type = PI_PROJECTION_MERCATOR;
+    smvp.pix_width = smvp.pix_height = 1024;
+    if(fabs(mapping1lon - mapping2lon) > 180)
+        smvp.clon = 180;
+
+    GetCanvasPixLL(&smvp, &p1, mapping1lat, mapping1lon);
+    GetCanvasPixLL(&smvp, &p2, mapping2lat, mapping2lon);
+
+    double p1x, p1y, p2x, p2y;
+
+    double x1 = m_sCoord1XUnMapped->GetValue(), y1 = m_sCoord1YUnMapped->GetValue();
+    double x2 = m_sCoord2XUnMapped->GetValue(), y2 = m_sCoord2YUnMapped->GetValue();
+
+    double dx1 = p2.x - p1.x, dy1 = p2.y - p1.y;
+    WeatherFaxImageCoordinates oldcoords = *m_curCoords; /* don't clobber incase of cancel */
+    StoreMappingParams();
+    m_curCoords->mappingratio = 1;
+    m_wfimg.MakeMappedImage(this, true);
+    m_wfimg.InputToMercator(x1, y1, p1x, p1y);
+    m_wfimg.InputToMercator(x2, y2, p2x, p2y);
+    double dx2 = p2x - p1x, dy2 = p2y - p1y;
+    *m_curCoords = oldcoords; /* restore coordinates */
+
+    m_tMappingRatio->SetValue(wxString::Format(_T("%.4f"), dx1 / dy1 * dy2 / dx2));
+}
+
 void WeatherFaxWizard::OnGetMapping( wxCommandEvent& event )
 {
     switch((WeatherFaxImageCoordinates::MapType)m_cMapping->GetSelection()) {
@@ -582,6 +621,7 @@ void WeatherFaxWizard::OnGetMapping( wxCommandEvent& event )
         w.ShowModal();
         return;
     }
+    GetAspectRatio();
     Refresh();
 }
 
@@ -599,6 +639,11 @@ void WeatherFaxWizard::OnGetEquator( wxCommandEvent& event )
         return;
     }
     Refresh();
+}
+
+void WeatherFaxWizard::OnGetAspectRatio( wxCommandEvent& event )
+{
+    GetAspectRatio();
 }
 
 void WeatherFaxWizard::OnBitmapClickPage2( wxMouseEvent& event )
@@ -712,7 +757,7 @@ bool WeatherFaxWizard::ApplyMapping()
     m_wfimg.InputToMercator(x2, y2, mx2, my2);
     m_sCoord2X->SetValue(mx2);
     m_sCoord2Y->SetValue(my2);
-    
+
     m_sCoord1Lat->SetValue(m_sCoord1LatUnMapped->GetValue());
     m_sCoord1Lon->SetValue(m_sCoord1LonUnMapped->GetValue());
     m_sCoord2Lat->SetValue(m_sCoord2LatUnMapped->GetValue());
