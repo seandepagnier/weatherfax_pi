@@ -74,7 +74,8 @@ static const char * check_xpm[] = {
 
 InternetRetrievalDialog::InternetRetrievalDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
     : InternetRetrievalDialogBase( parent ), m_weatherfax_pi(_weatherfax_pi),
-      m_bLoaded(false), m_bDisableFilter(true), m_bRebuilding(false)
+      m_bLoaded(false), m_bDisableServers(false), m_bDisableRegions(false),
+      m_bDisableFilter(true), m_bRebuilding(false)
 {
 }
 
@@ -175,15 +176,13 @@ void InternetRetrievalDialog::Load()
             + s + _T("weatherfax_pi") + s + _T("data") + s
             + _T("WeatherFaxInternetRetrieval.xml"));
 
-    m_lServers->DeselectAll();
     for(unsigned int i=0; i < m_lServers->GetCount(); i++)
         for(std::list<wxString>::iterator it = serverlist.begin();
             it != serverlist.end(); it++)
             if(m_lServers->GetString(i) == *it)
                 m_lServers->SetSelection(i);
 
-    FilterServers();
-
+    RebuildRegions();
     for(unsigned int i=0; i < m_lRegions->GetCount(); i++)
         for(std::list<wxString>::iterator it = regionlist.begin();
             it != regionlist.end(); it++)
@@ -259,16 +258,19 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
             }
 
             if(!strcmp(e->Value(), "Server")) {
-                wxString server = wxString::FromUTF8(e->Attribute("Name"));
-                wxString server_url = wxString::FromUTF8(e->Attribute("Url"));
+                FaxServer server;
+                server.Name = wxString::FromUTF8(e->Attribute("Name"));
 
-                m_lServers->Append(server);
+                m_Servers.push_back(server);
+
+                wxString server_url = wxString::FromUTF8(e->Attribute("Url"));
+                m_lServers->Append(server.Name);
 
                 for(TiXmlElement* f = e->FirstChildElement(); f; f = f->NextSiblingElement()) {
                     if(!strcmp(f->Value(), "Region")) {
                         FaxRegion region;
                         region.Name = wxString::FromUTF8(f->Attribute("Name"));
-                        region.Server = server;
+                        region.Server = server.Name;
 
                         m_Regions.push_back(region);
 
@@ -296,7 +298,7 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                                         FaxUrl url;
                                     
                                         url.Selected = false;
-                                        url.Server = server;
+                                        url.Server = server.Name;
                                         url.Region = region.Name;
                          
                                         for(long index = start; index <= to; index += by) {
@@ -315,7 +317,7 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                                 FaxUrl url;
                                     
                                 url.Selected = false;
-                                url.Server = server;
+                                url.Server = server.Name;
                                 url.Region = region.Name;
                          
                                 url.Url = region_url + wxString::FromUTF8(g->Attribute("Url"));
@@ -466,13 +468,13 @@ void InternetRetrievalDialog::OnAllServers( wxCommandEvent& event )
 {
     for(unsigned int i=0; i < m_lServers->GetCount(); i++)
         m_lServers->SetSelection(i);
-    FilterServers();
+    Filter();
 }
 
 void InternetRetrievalDialog::OnNoServers( wxCommandEvent& event )
 {
     m_lServers->DeselectAll();
-    FilterServers();
+    Filter();
 }
 
 void InternetRetrievalDialog::OnAllRegions( wxCommandEvent& event )
@@ -517,8 +519,9 @@ void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
         filename = path + wxFileName::GetPathSeparator() + filename;
 
         wxFileName fn(filename);
-        if(fn.FileExists() && (fn.GetModificationTime() - wxDateTime::Now()).GetMinutes() < 60) {
-            wxMessageDialog mdlg(this, _("Fax already retrieved less than 60 minutes ago.\n\
+        int m = (wxDateTime::Now() - fn.GetModificationTime()).GetMinutes();
+        if(fn.FileExists() && m < 180) {
+            wxMessageDialog mdlg(this, _("Fax already retrieved less than 180 minutes ago.\n\
 Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
             switch(mdlg.ShowModal()) {
             case wxID_YES:
@@ -586,7 +589,7 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
 
     loadimage:
         m_weatherfax_pi.m_pWeatherFax->OpenImage
-            (filename, faxurl->Server + _T(" - ") + faxurl->Region, faxurl->area_name);
+            (filename, faxurl->Server + _T(" - ") + faxurl->Region, faxurl->area_name, faxurl->Contents);
     }
     
     /* inform user if no faxes were selected */
@@ -602,6 +605,15 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
 void InternetRetrievalDialog::OnClose( wxCommandEvent& event )
 {
     Hide();
+}
+
+bool InternetRetrievalDialog::HasServer(wxString server)
+{
+    for(unsigned int i=0; i < m_lServers->GetCount(); i++)
+        if(m_lServers->IsSelected(i) && m_lServers->GetString(i) == server)
+            return true;
+
+    return false;
 }
 
 bool InternetRetrievalDialog::HasRegion(wxString region)
@@ -624,24 +636,72 @@ void InternetRetrievalDialog::Filter()
     if(!m_tContainsLon->GetValue().ToDouble(&lon))
         lon = NAN;
 
+    /* reset filter flags */
+    for(std::list<FaxServer>::iterator it = m_Servers.begin();
+        it != m_Servers.end(); it++)
+        it->Filtered = true;
+
+    for(std::list<FaxRegion>::iterator it = m_Regions.begin();
+        it != m_Regions.end(); it++)
+        it->Filtered = true;
+
     for(std::list<FaxUrl*>::iterator it = m_InternetRetrieval.begin();
-        it != m_InternetRetrieval.end(); it++)
-        (*it)->Filtered = !((*it)->Area.ContainsLat(lat) && (*it)->Area.ContainsLon(lon) &&
-                            HasRegion((*it)->Region));
+        it != m_InternetRetrieval.end(); it++) {
+        bool boat_in_area = (*it)->Area.ContainsLat(lat) && (*it)->Area.ContainsLon(lon);
+        if(boat_in_area) {
+            for(std::list<FaxServer>::iterator it2 = m_Servers.begin();
+                it2 != m_Servers.end(); it2++)
+                if(it2->Name == (*it)->Server)
+                    it2->Filtered = false;
+
+            for(std::list<FaxRegion>::iterator it2 = m_Regions.begin();
+                it2 != m_Regions.end(); it2++)
+                if(it2->Name == (*it)->Region)
+                    it2->Filtered = false;
+        }
+            
+        (*it)->Filtered = !(boat_in_area && HasRegion((*it)->Region));
+    }
+
+    RebuildServers();
+    RebuildRegions();
     RebuildList();
 }
 
-void InternetRetrievalDialog::FilterServers()
+void InternetRetrievalDialog::RebuildServers()
 {
+    if(m_bDisableServers || m_bDisableRegions)
+        return;
+
+    for(std::list<FaxServer>::iterator it = m_Servers.begin(); it != m_Servers.end(); it++)
+        it->Selected = HasServer(it->Name);
+
+    m_bDisableFilter = true;
+    m_lServers->Clear();
+    for(std::list<FaxServer>::iterator it = m_Servers.begin(); it != m_Servers.end(); it++)
+        if(!it->Filtered)
+            m_lServers->SetSelection(m_lServers->Append(it->Name), it->Selected);
+    m_bDisableFilter = false;
+}
+
+void InternetRetrievalDialog::RebuildRegions()
+{
+    if(m_bDisableRegions)
+        return;
+
+    for(std::list<FaxRegion>::iterator it = m_Regions.begin(); it != m_Regions.end(); it++)
+        it->Selected = HasRegion(it->Name);
+
+    m_bDisableFilter = true;
     m_lRegions->Clear();
     for(std::list<FaxRegion>::iterator it = m_Regions.begin(); it != m_Regions.end(); it++)
         for(unsigned int i=0; i < m_lServers->GetCount(); i++)
-            if(m_lServers->IsSelected(i) && m_lServers->GetString(i) == it->Server) {
-                m_lRegions->Append(it->Name);
+            if(!it->Filtered && m_lServers->IsSelected(i) && m_lServers->GetString(i) == it->Server) {
+                m_lRegions->SetSelection(m_lRegions->Append(it->Name), it->Selected);
                 break;
             }
 
-    Filter();
+    m_bDisableFilter = false;
 }
 
 void InternetRetrievalDialog::RebuildList()

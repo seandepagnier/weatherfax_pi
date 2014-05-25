@@ -961,6 +961,9 @@
       <Area Name="1" lat1="5N" lat2="35N" lon1="75E" lon2="105E" />
     </Region>
   </Server>
+
+<!-- www.mar.mil.br requires year month day time
+http://www.mar.mil.br/dhn/chm/meteo/prev/cartas/C14051612.jpg
 -->
 
 <!-- Metoffice requires year month day time to set correct url

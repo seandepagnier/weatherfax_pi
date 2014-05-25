@@ -34,9 +34,8 @@
 
 class weatherfax_pi;
 
-class FaxUrl
+struct FaxUrl
 {
-public:
     bool Filtered;
     bool Selected;
 
@@ -51,8 +50,19 @@ public:
 
 struct FaxRegion
 {
+    bool Filtered;
+    bool Selected;
+
     wxString Name;
     wxString Server;
+};
+
+struct FaxServer
+{
+    bool Filtered;
+    bool Selected;
+
+    wxString Name;
 };
 
 class InternetRetrievalDialog: public InternetRetrievalDialogBase
@@ -70,7 +80,10 @@ public:
     void OnUrlsLeftDown( wxMouseEvent& event );
     void OnUrlsSort( wxListEvent& event );
     void OnFilter( wxCommandEvent& event ) { Filter(); }
-    void OnFilterServers( wxCommandEvent& event ) { FilterServers(); }
+    void OnFilterServers( wxCommandEvent& event )
+    { m_bDisableServers = true; Filter(); m_bDisableServers = false; }
+    void OnFilterRegions( wxCommandEvent& event )
+    { m_bDisableRegions = true; Filter(); m_bDisableRegions = false; }
     void OnBoatPosition( wxCommandEvent& event );
     void OnReset( wxCommandEvent& event );
     void OnAllServers( wxCommandEvent& event );
@@ -81,9 +94,11 @@ public:
     void OnRetrieve( wxCommandEvent& event );
     void OnClose( wxCommandEvent& event );
 
+    bool HasServer(wxString server);
     bool HasRegion(wxString region);
     void Filter();
-    void FilterServers();
+    void RebuildServers();
+    void RebuildRegions();
     void RebuildList();
     void UpdateItem(long index);
 
@@ -93,11 +108,12 @@ private:
 
     weatherfax_pi &m_weatherfax_pi;
 
+    std::list<FaxServer> m_Servers;
     std::list<FaxRegion> m_Regions;
-
     std::list<FaxUrl*> m_InternetRetrieval;
 
-    bool m_bLoaded, m_bDisableFilter;
+    bool m_bLoaded;
+    bool m_bDisableServers, m_bDisableRegions, m_bDisableFilter;
     bool m_bKilled;
 
     bool m_bRebuilding;

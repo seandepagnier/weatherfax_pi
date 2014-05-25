@@ -12,7 +12,7 @@
 #include <wx/xrc/xmlres.h>
 #include <wx/intl.h>
 #include <wx/string.h>
-#include <wx/checklst.h>
+#include <wx/listbox.h>
 #include <wx/gdicmn.h>
 #include <wx/font.h>
 #include <wx/colour.h>
@@ -30,7 +30,6 @@
 #include <wx/stattext.h>
 #include <wx/textctrl.h>
 #include <wx/button.h>
-#include <wx/listbox.h>
 #include <wx/spinctrl.h>
 #include <wx/panel.h>
 #include <wx/radiobut.h>
@@ -67,12 +66,12 @@ class WeatherFaxBase : public wxFrame
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnClose( wxCloseEvent& event ) { event.Skip(); }
 		virtual void OnFaxes( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnFaxesToggled( wxCommandEvent& event ) { event.Skip(); }
 		virtual void TransparencyChanged( wxScrollEvent& event ) { event.Skip(); }
 		virtual void WhiteTransparencyChanged( wxScrollEvent& event ) { event.Skip(); }
 		virtual void OnInvert( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnOpen( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnEdit( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnGoto( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnExport( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnDelete( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnPreferences( wxCommandEvent& event ) { event.Skip(); }
@@ -85,12 +84,11 @@ class WeatherFaxBase : public wxFrame
 	
 	public:
 		wxStaticBoxSizer* sbFax;
-		wxCheckListBox* m_lFaxes;
+		wxListBox* m_lFaxes;
 		wxSlider* m_sTransparency;
 		wxSlider* m_sWhiteTransparency;
-		wxCheckBox* m_cbDisplaySelected;
 		
-		WeatherFaxBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 300,300 ), long style = wxCAPTION|wxCLOSE_BOX|wxFRAME_FLOAT_ON_PARENT|wxFRAME_NO_TASKBAR|wxRESIZE_BORDER|wxTAB_TRAVERSAL );
+		WeatherFaxBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxCAPTION|wxCLOSE_BOX|wxFRAME_FLOAT_ON_PARENT|wxFRAME_NO_TASKBAR|wxRESIZE_BORDER|wxTAB_TRAVERSAL );
 		
 		~WeatherFaxBase();
 	
@@ -203,6 +201,7 @@ class InternetRetrievalDialogBase : public wxDialog
 		virtual void OnFilterServers( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAllServers( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNoServers( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnFilterRegions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAllRegions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNoRegions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnRetrieve( wxCommandEvent& event ) { event.Skip(); }

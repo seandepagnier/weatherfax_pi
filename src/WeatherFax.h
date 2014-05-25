@@ -70,12 +70,12 @@ public:
     void OnClose( wxCloseEvent& event ) { Hide(); }
     void EnableDisplayControls(bool enable);
     void OnFaxes( wxCommandEvent& event );
-    void OnFaxesToggled( wxCommandEvent& event );
     void TransparencyChanged( wxScrollEvent& event );
     void WhiteTransparencyChanged( wxScrollEvent& event );
     void OnInvert( wxCommandEvent& event );
     void OnOpen( wxCommandEvent& event );
     void OnEdit( wxCommandEvent& event );
+    void OnGoto( wxCommandEvent& event );
     void OnDelete( wxCommandEvent& event );
     void OnExport( wxCommandEvent& event );
     void OnPreferences( wxCommandEvent& event ) { m_weatherfax_pi.ShowPreferencesDialog( this ); }
@@ -85,8 +85,8 @@ public:
     void OnInternet( wxCommandEvent& event );
     void OnAbout( wxCommandEvent& event );
 
-    void OpenWav(wxString filename, wxString station=_T(""), wxString area=_T(""));
-    void OpenImage(wxString filename, wxString station=_T(""), wxString area=_T(""));
+    void OpenWav(wxString filename, wxString station=_T(""), wxString area=_T(""), wxString contents=_T(""));
+    void OpenImage(wxString filename, wxString station=_T(""), wxString area=_T(""), wxString contents=_T(""));
     void Export(wxString filename);
 
     void UpdateMenuStates();

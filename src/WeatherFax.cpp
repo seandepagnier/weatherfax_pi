@@ -236,9 +236,11 @@ void WeatherFax::OnFaxes( wxCommandEvent& event )
 {
     UpdateMenuStates();
 
-    int selection = m_lFaxes->GetSelection();
-    if(selection < 0 || selection >= (int)m_Faxes.size())
-        return;
+    /* take first selection.. we could do an average for sliders, but whatever */
+    int selection;
+    for(selection = 0; !m_lFaxes->IsSelected(selection); selection++)
+        if(selection == (int)m_Faxes.size())
+            return;
 
     WeatherFaxImage &img = *m_Faxes[selection];
     m_sTransparency->SetValue(img.m_iTransparency);
@@ -248,12 +250,7 @@ void WeatherFax::OnFaxes( wxCommandEvent& event )
     RequestRefresh( m_parent );
 }
 
-void WeatherFax::OnFaxesToggled( wxCommandEvent& event )
-{
-    RequestRefresh( m_parent );
-}
-
-void WeatherFax::OpenWav(wxString filename, wxString station, wxString area)
+void WeatherFax::OpenWav(wxString filename, wxString station, wxString area, wxString contents)
 {
     int transparency = m_sTransparency->GetValue();
     int whitetransparency = m_sWhiteTransparency->GetValue();
@@ -272,23 +269,23 @@ void WeatherFax::OpenWav(wxString filename, wxString station, wxString area)
     
     if(wizard.m_decoder.m_inputtype != FaxDecoder::NONE &&
        wizard.RunWizard(wizard.m_pages[0])) {
-        int selection = m_lFaxes->Append(area.size() ? (station + _T(" - ") + area) :
-                                         filename.size() ? filename :
-                                         wxString(_("Audio Capture") ) );
+        name = station.size() && contents.size() ? (station + _T(" - ") + contents) :
+            filename.size() ? filename : wxString(_("Audio Capture") );
+        int selection = m_lFaxes->Append(name);
         m_Faxes.push_back(img);
         
         wizard.StoreCoords();
         wizard.StoreMappingParams();
 
         m_lFaxes->SetSelection(selection);
-                
+
         RequestRefresh( m_parent );
         UpdateMenuStates();
     } else
         delete img;
 }
 
-void WeatherFax::OpenImage(wxString filename, wxString station, wxString area)
+void WeatherFax::OpenImage(wxString filename, wxString station, wxString area, wxString contents)
 {
     int transparency = m_sTransparency->GetValue();
     int whitetransparency = m_sWhiteTransparency->GetValue();
@@ -330,6 +327,7 @@ void WeatherFax::OpenImage(wxString filename, wxString station, wxString area)
     }
 
 wizarddone:
+    name = station.size() && contents.size() ? (station + _T(" - ") + contents) : filename;
     int selection = m_lFaxes->Append(name);
     m_Faxes.push_back(img);
 
@@ -344,15 +342,16 @@ wizarddone:
 
 void WeatherFax::Export(wxString filename)
 {
-    int selection = m_lFaxes->GetSelection();
-    if(selection < 0 || selection >= (int)m_Faxes.size())
-        return;
+    for(int selection = 0; selection < (int)m_Faxes.size(); selection++) {
+        if(!m_lFaxes->IsSelected(selection))
+            continue;
 
-    WeatherFaxImage &image = *m_Faxes[selection];
+        WeatherFaxImage &image = *m_Faxes[selection];
     
-    wximgtokap(image, m_weatherfax_pi.m_iExportColors,
-               m_weatherfax_pi.m_bExportDepthMeters ? METERS : FATHOMS,
-               m_weatherfax_pi.m_sExportSoundingDatum.mb_str(), filename.mb_str());
+        wximgtokap(image, m_weatherfax_pi.m_iExportColors,
+                   m_weatherfax_pi.m_bExportDepthMeters ? METERS : FATHOMS,
+                   m_weatherfax_pi.m_sExportSoundingDatum.mb_str(), filename.mb_str());
+    }
 }
 
 void WeatherFax::OnOpen( wxCommandEvent& event )
@@ -379,9 +378,11 @@ All files (*.*)|*.*" ), wxFD_OPEN);
 
 void WeatherFax::OnEdit( wxCommandEvent& event )
 {
-    int selection = m_lFaxes->GetSelection();
-    if(selection < 0 || selection >= (int)m_Faxes.size())
-        return;
+    /* take first selection.. we could instead edit all in order... */
+    int selection;
+    for(selection = 0; !m_lFaxes->IsSelected(selection); selection++)
+        if(selection == (int)m_Faxes.size())
+            return;
 
     WeatherFaxImage &image = *m_Faxes[selection];
     WeatherFaxImage backupimage = image;
@@ -407,6 +408,25 @@ void WeatherFax::OnEdit( wxCommandEvent& event )
     RequestRefresh( m_parent );
 }
 
+void WeatherFax::OnGoto( wxCommandEvent& event )
+{
+    /* take first selection.. we could instead average or something... */
+    int selection;
+    for(selection = 0; !m_lFaxes->IsSelected(selection); selection++)
+        if(selection == (int)m_Faxes.size())
+            return;
+
+    WeatherFaxImage &image = *m_Faxes[selection];
+    double lat0 = image.m_Coords->lat(0), lat1 = image.m_Coords->lat(image.m_mappedimg.GetHeight());
+    double lon0 = image.m_Coords->lon(0), lon1 = image.m_Coords->lon(image.m_mappedimg.GetWidth());
+    if(lon0 - lon1 > 180)
+        lon1 += 360;
+
+    double distance;
+    DistanceBearingMercator_Plugin(lat0, lon0, lat1, lon1, NULL, &distance);
+    JumpToPosition((lat0 + lat1) / 2, (lon0 + lon1) / 2, .5/distance);
+}
+
 void WeatherFax::OnExport( wxCommandEvent& event )
 {
     wxFileDialog saveDialog
@@ -425,52 +445,68 @@ All files (*.*)|*.*" ), wxFD_SAVE);
 
 void WeatherFax::OnDelete( wxCommandEvent& event )
 {
-    int selection = m_lFaxes->GetSelection();
-    if(selection < 0 || selection >= (int)m_Faxes.size())
-        return;
+    for(int selection = 0; selection < (int)m_Faxes.size(); selection++) {
+        if(!m_lFaxes->IsSelected(selection))
+            continue;
 
-    delete m_Faxes[selection];
-    m_Faxes.erase(m_Faxes.begin() + selection);
+        delete m_Faxes[selection];
+        m_Faxes.erase(m_Faxes.begin() + selection);
 
-    m_lFaxes->Delete(selection);
-    UpdateMenuStates();
-
-    RequestRefresh( m_parent );
+        m_lFaxes->Delete(selection);
+        UpdateMenuStates();
+        
+        RequestRefresh( m_parent );
+    }
 }
 
 void WeatherFax::TransparencyChanged( wxScrollEvent& event )
 {
-    int selection = m_lFaxes->GetSelection();
-    if(selection < 0 || selection >= (int)m_Faxes.size())
-        return;
+    bool update = false;
+    for(int selection = 0; selection < (int)m_Faxes.size(); selection++) {
+        if(!m_lFaxes->IsSelected(selection))
+            continue;
 
-    WeatherFaxImage &image = *m_Faxes[selection];
-    image.m_iTransparency = event.GetPosition();
-    RequestRefresh( m_parent );
+        WeatherFaxImage &image = *m_Faxes[selection];
+        image.m_iTransparency = event.GetPosition();
+        update = true;
+    }
+
+    if(update)
+        RequestRefresh( m_parent );
 }
 
 void WeatherFax::WhiteTransparencyChanged( wxScrollEvent& event )
 {
-    int selection = m_lFaxes->GetSelection();
-    if(selection < 0 || selection >= (int)m_Faxes.size())
-        return;
+    bool update = false;
+    for(int selection = 0; selection < (int)m_Faxes.size(); selection++) {
+        if(!m_lFaxes->IsSelected(selection))
+            continue;
 
-    WeatherFaxImage &image = *m_Faxes[selection];
-    image.m_iWhiteTransparency = event.GetPosition();
-    image.FreeData();
-    RequestRefresh( m_parent );
+        WeatherFaxImage &image = *m_Faxes[selection];
+        image.m_iWhiteTransparency = event.GetPosition();
+        image.FreeData();
+        update = true;
+    }
+
+    if(update)
+        RequestRefresh( m_parent );
 }
 
 void WeatherFax::OnInvert( wxCommandEvent& event )
 {
-    int selection = m_lFaxes->GetSelection();
-    if(selection < 0 || selection >= (int)m_Faxes.size())
-        return;
+    bool update = false;
+    for(int selection = 0; selection < (int)m_Faxes.size(); selection++) {
+        if(!m_lFaxes->IsSelected(selection))
+            continue;
 
-    WeatherFaxImage &image = *m_Faxes[selection];
-    image.m_bInvert = event.IsChecked();
-    image.FreeData();
-    RequestRefresh( m_parent );
+        WeatherFaxImage &image = *m_Faxes[selection];
+        image.m_bInvert = event.IsChecked();
+        image.FreeData();
+        update = true;
+    }
+
+    if(update)
+        RequestRefresh( m_parent );
 }
 
 void WeatherFax::OnCapture( wxCommandEvent& event )
@@ -498,17 +534,17 @@ void WeatherFax::OnAbout( wxCommandEvent& event )
 
 void WeatherFax::UpdateMenuStates()
 {
-    int selection = m_lFaxes->GetSelection();
-    if(selection < 0 || selection >= (int)m_Faxes.size()) {
-        m_mEdit->Enable(false);
-        m_mExport->Enable(false);
-        m_mDelete->Enable(false);
-        EnableDisplayControls(false);
-    } else {
+    wxArrayInt aSelections;
+    if(m_lFaxes->GetSelections(aSelections)) {
         m_mEdit->Enable();
         m_mExport->Enable();
         m_mDelete->Enable();
         EnableDisplayControls(true);
+    } else {
+        m_mEdit->Enable(false);
+        m_mExport->Enable(false);
+        m_mDelete->Enable(false);
+        EnableDisplayControls(false);
     }
 }
 

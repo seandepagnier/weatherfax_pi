@@ -781,7 +781,8 @@ void SchedulesDialog::OnCaptureTimer( wxTimerEvent & )
     } else if(m_rbAudioCapture->GetValue()) {
         m_weatherfax_pi.m_pWeatherFax->OpenWav(_T(""),
                                                m_CurrentSchedule->Station,
-                                               m_CurrentSchedule->area_name);
+                                               m_CurrentSchedule->area_name,
+                                               m_CurrentSchedule->Contents);
     }
 
     UpdateTimer();
@@ -814,7 +815,8 @@ void SchedulesDialog::OnEndCaptureTimer( wxTimerEvent & )
 
         m_weatherfax_pi.m_pWeatherFax->OpenWav(filename,
                                                m_CurrentSchedule->Station,
-                                               m_CurrentSchedule->area_name);
+                                               m_CurrentSchedule->area_name,
+                                               m_CurrentSchedule->Contents);
     }
 
     m_weatherfax_pi.m_pWeatherFax->UpdateMenuStates();
