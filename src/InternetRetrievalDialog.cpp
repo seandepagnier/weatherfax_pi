@@ -732,6 +732,7 @@ void InternetRetrievalDialog::RebuildList()
         if(!(*it)->Filtered) {
             wxListItem item;
             item.SetData(*it);
+            item.SetId(m_lUrls->GetItemCount());
             UpdateItem(m_lUrls->InsertItem(item));
         }
     }

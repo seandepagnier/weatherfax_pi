@@ -36,6 +36,7 @@
 #include <wx/notebook.h>
 #include <wx/gauge.h>
 #include <wx/dialog.h>
+#include <wx/splitter.h>
 #include <wx/scrolwin.h>
 #include <wx/choice.h>
 #include <wx/combobox.h>
@@ -167,22 +168,24 @@ class InternetRetrievalDialogBase : public wxDialog
 	protected:
 		wxNotebook* m_notebook2;
 		wxPanel* m_panel4;
+		wxSplitterWindow* m_splitter1;
+		wxPanel* m_panel7;
 		wxListCtrl* m_lUrls;
+		wxPanel* m_panel8;
 		wxStaticText* m_staticText24;
 		wxTextCtrl* m_tContainsLat;
 		wxStaticText* m_staticText25;
 		wxTextCtrl* m_tContainsLon;
 		wxButton* m_bBoatPosition;
 		wxButton* m_bReset;
+		wxButton* m_bRetrieve;
+		wxButton* m_bRetrieveSelected;
 		wxListBox* m_lServers;
 		wxButton* m_bAllServers;
 		wxButton* m_bNoServers;
 		wxListBox* m_lRegions;
 		wxButton* m_bAllRegions;
 		wxButton* m_bNoRegions;
-		wxButton* m_bRetrieve;
-		wxButton* m_bRetrieveSelected;
-		wxButton* m_bClose;
 		wxPanel* m_panel5;
 		wxStaticText* m_staticText34;
 		wxStaticText* m_staticText41;
@@ -198,20 +201,25 @@ class InternetRetrievalDialogBase : public wxDialog
 		virtual void OnFilter( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnBoatPosition( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnReset( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnRetrieve( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnFilterServers( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAllServers( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNoServers( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnFilterRegions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAllRegions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNoRegions( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnRetrieve( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
 		
 		InternetRetrievalDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Internet Retrieval"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 640,470 ), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER ); 
 		~InternetRetrievalDialogBase();
+		
+		void m_splitter1OnIdle( wxIdleEvent& )
+		{
+			m_splitter1->SetSashPosition( 195 );
+			m_splitter1->Disconnect( wxEVT_IDLE, wxIdleEventHandler( InternetRetrievalDialogBase::m_splitter1OnIdle ), NULL, this );
+		}
 	
 };
 
