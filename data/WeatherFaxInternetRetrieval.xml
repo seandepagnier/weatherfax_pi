@@ -977,6 +977,49 @@
     </Region>
   </Server>
 
+  <Server Name="Bermuda" Url="http://www.weather.bm/maps/">
+    <Region Name="Bermuda">
+      <Map Url="chart1.jpg" Contents="Day 2 Marine forecast" Area="1" />
+      <Map Url="chart2.jpg" Contents="Day 3 Marine forecast" Area="1" />
+      <Map Url="chart3.jpg" Contents="Day 4 Marine forecast" Area="1" />
+      <Map Url="chart4.jpg" Contents="Day 5 Marine forecast" Area="1" />
+      <Area Name="1" lat1="15N" lat2="45N" lon1="90W" lon2="20W" />
+    </Region>
+  </Server>
+
+  <Server Name="French Polynesia" Url="http://www.meteo.pf/bulletins/marines/">
+    <Region Name="South Pacific">
+      <Map Url="preiso36.png" Contents="Day 1 Wind" Area="1" />
+      <Map Url="preiso60.png" Contents="Day 2 Wind" Area="1" />
+      <Map Url="etatmer12.png" Contents="Waves Today" Area="2" />
+      <Map Url="etatmer36.png" Contents="Waves Day 1" Area="2" />
+      <Map Url="etatmer60.png" Contents="Waves Day 2" Area="2" />
+      <Map Url="houle12.png" Contents="Swell Today" Area="2" />
+      <Map Url="houle36.png" Contents="Swell Day 1" Area="2" />
+      <Map Url="houle60.png" Contents="Swell Day 2" Area="2" />
+
+      <Area Name="1" lat1="45S" lat2="0N" lon1="175W" lon2="130W" />
+      <Area Name="2" lat1="45S" lat2="0N" lon1="175W" lon2="130W" />
+    </Region>
+  </Server>
+
+  <Server Name="Chile Meterological" Url="http://web.directemar.cl/met/jturno/">
+    <Region Name="Chile">
+      <Map Url="cartas/carta.jpg" Contents="Streamline Analysis" Area="1" />
+      <Map Url="pub/Csuperficie12.jpg" Contents="Streamline 1000-500hPa" Area="2" />
+      <Area Name="1" lat1="80S" lat2="5S" lon1="120W" lon2="40W" />
+      <Area Name="2" lat1="75S" lat2="15S" lon1="130W" lon2="55W" />
+    </Region>
+  </Server>
+
+  <Server Name="Weather SA" Url="http://www.weathersa.co.za/web/images/Articles/">
+    <Region Name="South Africa">
+      <Map Url="ma_sy.gif" Contents="Streamline Analysis" Area="1" />
+      <Area Name="1" lat1="65S" lat2="30S" lon1="40W" lon2="80E" />
+    </Region>
+  </Server>
+  
+
 <!-- www.mar.mil.br requires year month day time
 http://www.mar.mil.br/dhn/chm/meteo/prev/cartas/C14051612.jpg
 -->

@@ -660,7 +660,7 @@ void InternetRetrievalDialog::Filter()
                     it2->Filtered = false;
         }
             
-        (*it)->Filtered = !(boat_in_area && HasRegion((*it)->Region));
+        (*it)->Filtered = !(boat_in_area && HasServer((*it)->Server) && HasRegion((*it)->Region));
     }
 
     RebuildServers();
@@ -694,12 +694,19 @@ void InternetRetrievalDialog::RebuildRegions()
 
     m_bDisableFilter = true;
     m_lRegions->Clear();
-    for(std::list<FaxRegion>::iterator it = m_Regions.begin(); it != m_Regions.end(); it++)
+    for(std::list<FaxRegion>::iterator it = m_Regions.begin(); it != m_Regions.end(); it++) {
+        /* avoid duplicate regions from different servers */
+        for(unsigned int i=0; i < m_lRegions->GetCount(); i++)
+            if(m_lRegions->GetString(i) == it->Name)
+                goto skip;
+
         for(unsigned int i=0; i < m_lServers->GetCount(); i++)
             if(!it->Filtered && m_lServers->IsSelected(i) && m_lServers->GetString(i) == it->Server) {
                 m_lRegions->SetSelection(m_lRegions->Append(it->Name), it->Selected);
                 break;
             }
+    skip:;
+    }
 
     m_bDisableFilter = false;
 }
