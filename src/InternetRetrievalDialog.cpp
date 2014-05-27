@@ -512,10 +512,6 @@ void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
         for(unsigned int pos = 0; pos < filename.size(); pos = filename.find('/', pos))
             filename.replace(pos, 1, _T("!"));
 
-        wxFileName dir(path);
-        if(!dir.DirExists())
-            dir.Mkdir();
-
         filename = path + wxFileName::GetPathSeparator() + filename;
 
         wxFileName fn(filename);

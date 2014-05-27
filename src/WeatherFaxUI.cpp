@@ -29,7 +29,7 @@ WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString&
 	fgSizer7->SetFlexibleDirection( wxBOTH );
 	fgSizer7->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_lFaxes = new wxListBox( this, wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), 0, NULL, wxLB_MULTIPLE ); 
+	m_lFaxes = new wxListBox( this, wxID_ANY, wxDefaultPosition, wxSize( -1,100 ), 0, NULL, wxLB_MULTIPLE ); 
 	fgSizer7->Add( m_lFaxes, 0, wxALL|wxEXPAND, 5 );
 	
 	
@@ -56,6 +56,7 @@ WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString&
 	fgSizer24->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
 	m_cInvert = new wxCheckBox( this, wxID_ANY, _("Invert"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_cInvert->SetValue(true); 
 	fgSizer24->Add( m_cInvert, 0, wxALL, 5 );
 	
 	

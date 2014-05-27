@@ -84,7 +84,7 @@ static void LoadCoordinatesFromXml(WeatherFaxImageCoordinateList &coords, wxStri
     wxString coordinatesets_path = weatherfax_pi::StandardPath();
     wxString s = wxFileName::GetPathSeparator();
     wxString default_coordinatesets_path = *GetpSharedDataLocation() + _T("plugins")
-        + s + _T("weatherfax") + s + _T("data") + s;
+        + s + _T("weatherfax_pi") + s + _T("data") + s;
 
     if(!doc.LoadFile((coordinatesets_path + coordinatesets).mb_str()) &&
        !doc.LoadFile((default_coordinatesets_path + coordinatesets).mb_str()))
@@ -277,7 +277,9 @@ void WeatherFax::OpenWav(wxString filename, wxString station, wxString area, wxS
         wizard.StoreCoords();
         wizard.StoreMappingParams();
 
+        m_lFaxes->DeselectAll();
         m_lFaxes->SetSelection(selection);
+        Goto(selection);
 
         RequestRefresh( m_parent );
         UpdateMenuStates();
@@ -294,7 +296,9 @@ void WeatherFax::OpenImage(wxString filename, wxString station, wxString area, w
     wxImage wimg;
     WeatherFaxImageCoordinateList BuiltinCoordList;
     if(!wimg.LoadFile(filename)) {
-        wxLogMessage(_("Weather Fax") + wxString(_T(": ")) + _("Failed to load input file: ") + filename);
+        wxMessageDialog mdlg(this, _("Failed to load input file: ") + filename,
+                             _("Weather Fax"), wxOK | wxICON_ERROR);
+        mdlg.ShowModal();
         return;
     }
 
@@ -331,13 +335,28 @@ wizarddone:
     int selection = m_lFaxes->Append(name);
     m_Faxes.push_back(img);
 
+    m_lFaxes->DeselectAll();
     m_lFaxes->SetSelection(selection);
+    Goto(selection);
 
     RequestRefresh( m_parent );
     UpdateMenuStates();
 
     if(BuiltinCoordList.GetCount())
         m_BuiltinCoords.Append(BuiltinCoordList[0]);
+}
+
+void WeatherFax::Goto(int selection)
+{
+    WeatherFaxImage &image = *m_Faxes[selection];
+    double lat0 = image.m_Coords->lat(0), lat1 = image.m_Coords->lat(image.m_mappedimg.GetHeight());
+    double lon0 = image.m_Coords->lon(0), lon1 = image.m_Coords->lon(image.m_mappedimg.GetWidth());
+    if(lon0 - lon1 > 180)
+        lon1 += 360;
+
+    double distance;
+    DistanceBearingMercator_Plugin(lat0, lon0, lat1, lon1, NULL, &distance);
+    JumpToPosition((lat0 + lat1) / 2, (lon0 + lon1) / 2, .5/distance);
 }
 
 void WeatherFax::Export(wxString filename)
@@ -416,15 +435,7 @@ void WeatherFax::OnGoto( wxCommandEvent& event )
         if(selection == (int)m_Faxes.size())
             return;
 
-    WeatherFaxImage &image = *m_Faxes[selection];
-    double lat0 = image.m_Coords->lat(0), lat1 = image.m_Coords->lat(image.m_mappedimg.GetHeight());
-    double lon0 = image.m_Coords->lon(0), lon1 = image.m_Coords->lon(image.m_mappedimg.GetWidth());
-    if(lon0 - lon1 > 180)
-        lon1 += 360;
-
-    double distance;
-    DistanceBearingMercator_Plugin(lat0, lon0, lat1, lon1, NULL, &distance);
-    JumpToPosition((lat0 + lat1) / 2, (lon0 + lon1) / 2, .5/distance);
+    Goto(selection);
 }
 
 void WeatherFax::OnExport( wxCommandEvent& event )

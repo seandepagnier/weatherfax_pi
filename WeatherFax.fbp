@@ -175,7 +175,7 @@
                                         <property name="pos"></property>
                                         <property name="resize">Resizable</property>
                                         <property name="show">1</property>
-                                        <property name="size">-1,-1</property>
+                                        <property name="size">-1,100</property>
                                         <property name="style">wxLB_MULTIPLE</property>
                                         <property name="subclass"></property>
                                         <property name="toolbar_pane">0</property>
@@ -482,7 +482,7 @@
                                 <property name="caption"></property>
                                 <property name="caption_visible">1</property>
                                 <property name="center_pane">0</property>
-                                <property name="checked">0</property>
+                                <property name="checked">1</property>
                                 <property name="close_button">1</property>
                                 <property name="context_help"></property>
                                 <property name="context_menu">1</property>
