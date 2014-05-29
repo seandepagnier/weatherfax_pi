@@ -918,7 +918,7 @@
       <Area Name="1" lat1="15S" lat2="10N" lon1="125E" lon2="165E" />
     </Region>
 
-    <Region Name="South West Pacific">
+    <Region Name="South Pacific">
       <Iterator From="00" To="150" By="06">
         <Map Url="IDY20112/current/mslp-precip/IDY20112.mslp-precip.%03d.png" Contents="Surface Pressure & Rainfall t+%03d" Area="1" />
         <Map Url="IDY20112/current/windbarb/10m/IDY20112.windbarb-10m.%03d.png" Contents="Wind Speed & Direction t+%03d" Area="1" />
@@ -1018,8 +1018,17 @@
       <Area Name="1" lat1="65S" lat2="30S" lon1="40W" lon2="80E" />
     </Region>
   </Server>
-  
 
+  <Server Name="Fiji Meterological" Url="http://www.met.gov.fj/aifs_prods/">
+    <Region Name="South Pacific">
+      <Map Url="0990.jpg" Contents="Mean Sea Level Analysis 6am" Area="1" />
+      <Map Url="0991.jpg" Contents="Mean Sea Level Analysis 12am" Area="1" />
+      <Map Url="0992.jpg" Contents="Mean Sea Level Analysis 3pm Color" Area="1" />
+
+      <Area Name="1" lat1="35S" lat2="5S" lon1="150E" lon2="155W" />
+    </Region>
+  </Server>
+  
 <!-- www.mar.mil.br requires year month day time
 http://www.mar.mil.br/dhn/chm/meteo/prev/cartas/C14051612.jpg
 -->
