@@ -467,6 +467,7 @@ void WeatherFax::OnDelete( wxCommandEvent& event )
         UpdateMenuStates();
         
         RequestRefresh( m_parent );
+        selection--;
     }
 }
 
