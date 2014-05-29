@@ -132,14 +132,6 @@ WeatherFaxWizard::~WeatherFaxWizard()
 
 void WeatherFaxWizard::MakeNewCoordinates()
 {
-#if 0
-    if(m_curCoords && m_curCoords.size() == 1) {
-        m_bRemoveCoordSet->Disable();        
-        m_cbCoordSet->Append(m_curCoords->name);
-        return;
-    }
-#endif
-
     /* make a new coord, yet making sure it has a unique name */
     wxString newcoordname;
     int cc = m_Coords.GetCount();
@@ -167,6 +159,11 @@ void WeatherFaxWizard::MakeNewCoordinates()
     m_newCoords = new WeatherFaxImageCoordinates(newcoordname);
 
     SetCoords(sel);
+
+    if(m_Coords.GetCount() == 0) {
+//        m_bRemoveCoordSet->Disable();        
+        m_cbCoordSet->Disable();
+    }
 }
 
 
