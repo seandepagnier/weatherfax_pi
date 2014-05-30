@@ -70,9 +70,16 @@ WeatherFaxImageCoordinates(wxString n) : name(n),
         // y1*p2.y - y1*eq = y2*p1.y - y2*eq;
         double eq = (y1*p2.y - y2*p1.y) / (y1 - y2);
 
-        //        y1/(p1.y-eq) = yy/(y-eq);
-        //        y1*(y-eq)/(p1.y-eq) = yy;
-        double yy = y1*(y-eq)/(p1.y-eq);
+        double yy;
+        // for accuracy use reference furthest from equator,
+        // and to avoid case where p1.y-eq == 0
+        if(fabsf(p1.y - eq) > fabsf(p2.y - eq))
+            //        y1/(p1.y-eq) = yy/(y-eq);
+            //        y1*(y-eq)/(p1.y-eq) = yy;
+            yy = y1*(y-eq)/(p1.y-eq);
+        else
+            //        y2*(y-eq)/(p2.y-eq) = yy;
+            yy = y2*(y-eq)/(p2.y-eq);
 
         return 90*(4/M_PI*atan(exp(yy)) - 1);
     }

@@ -272,7 +272,13 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                         region.Name = wxString::FromUTF8(f->Attribute("Name"));
                         region.Server = server.Name;
 
+                        for(std::list<FaxRegion>::iterator it = m_Regions.begin();
+                            it != m_Regions.end(); it++)
+                            if(it->Name == region.Name && it->Server == region.Server)
+                                goto duplicate_region;
+
                         m_Regions.push_back(region);
+                    duplicate_region:
 
                         wxString region_url = server_url + wxString::FromUTF8(f->Attribute("Url"));
 

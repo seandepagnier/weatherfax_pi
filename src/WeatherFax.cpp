@@ -356,7 +356,8 @@ void WeatherFax::Goto(int selection)
 
     double distance;
     DistanceBearingMercator_Plugin(lat0, lon0, lat1, lon1, NULL, &distance);
-    JumpToPosition((lat0 + lat1) / 2, (lon0 + lon1) / 2, .5/distance);
+    if(!isnan(distance))
+        JumpToPosition((lat0 + lat1) / 2, (lon0 + lon1) / 2, .5/distance);
 }
 
 void WeatherFax::Export(wxString filename)
