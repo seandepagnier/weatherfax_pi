@@ -1028,6 +1028,15 @@
       <Area Name="1" lat1="35S" lat2="5S" lon1="150E" lon2="155W" />
     </Region>
   </Server>
+
+  <Server Name="Mauritius Meterological" Url="http://metservice.intnet.mu/">
+    <Region Name="Mauritius">
+      <Map Url="synopticimages/satellite.jpg" Contents="Satellite Image" Area="1" />
+      <Map Url="mmsimages/chart.jpg" Contents="Synoptic chart" Area="2" />
+      <Area Name="1" lat1="37S" lat2="4S" lon1="37E" lon2="90W" />
+      <Area Name="2" lat1="40S" lat2="0S" lon1="40E" lon2="95E" />
+    </Region>
+  </Server>
   
 <!-- www.mar.mil.br requires year month day time
 http://www.mar.mil.br/dhn/chm/meteo/prev/cartas/C14051612.jpg
