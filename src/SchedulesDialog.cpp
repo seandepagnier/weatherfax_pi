@@ -698,7 +698,7 @@ void SchedulesDialog::UpdateProgress()
             Schedule *f = m_CaptureSchedules.front();
             l = f->Contents
                 + wxString(_T("\n")) +
-                + _("starting in");
+                + wxString(_("starting in"));
             int ss = f->StartSeconds();
             if(ss < 60)
                 l += wxString::Format( _T(" %ld "), ss) + _("second(s)");
