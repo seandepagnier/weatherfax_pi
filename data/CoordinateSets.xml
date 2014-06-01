@@ -122,4 +122,5 @@
     <Coordinate Name="Passage Weather - Atlantic - 1" X1="77" Y1="103" Lat1="42.00000" Lon1="-65.00000" X2="591" Y2="397" Lat2="12.00000" Lon2="-5.00000" Mapping="FixedFlat" InputPoleY="-416" InputEquator="528.00000" InputTrueRatio="1.0000" MappingMultiplier="1.0000" MappingRatio="0.9784" />
     <Coordinate Name="Passage Weather - Atlantic - 2" X1="83" Y1="84" Lat1="33.00000" Lon1="-65.00000" X2="568" Y2="306" Lat2="12.00000" Lon2="-15.00000" Mapping="FixedFlat" InputPoleY="-707" InputEquator="565.00000" InputTrueRatio="1.0000" MappingMultiplier="1.0000" MappingRatio="0.8640" />
     <Coordinate Name="Meteorological Service Singapore - Singapore - 3" X1="150" Y1="410" Lat1="30.00000" Lon1="70.00000" X2="648" Y2="706" Lat2="-10.00000" Lon2="140.00000" Mapping="FixedFlat" InputPoleY="-169" InputEquator="469.00000" InputTrueRatio="1.0000" MappingMultiplier="1.0000" MappingRatio="1.9650" />
+    <Coordinate Name="Fiji Meterological - South Pacific - 2" X1="224" Y1="225" Lat1="-10.00000" Lon1="150.00000" X2="1114" Y2="702" Lat2="-30.00000" Lon2="-170.00000" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
 </WeatherFaxCoordinates>

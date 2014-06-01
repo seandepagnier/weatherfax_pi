@@ -2064,8 +2064,10 @@
       <Map Url="0990.jpg" Contents="Mean Sea Level Analysis 6am" Area="1" />
       <Map Url="0991.jpg" Contents="Mean Sea Level Analysis 12am" Area="1" />
       <Map Url="0992.jpg" Contents="Mean Sea Level Analysis 3pm Color" Area="1" />
+      <Map Url="gms_vis.gif" Contents="Visible" Area="2" />
 
       <Area Name="1" lat1="35S" lat2="5S" lon1="150E" lon2="155W" />
+      <Area Name="2" lat1="40S" lat2="0S" lon1="140E" lon2="160W" />
     </Region>
   </Server>
 
