@@ -14,7 +14,7 @@ WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString&
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
 	wxFlexGridSizer* fgSizer8;
-	fgSizer8 = new wxFlexGridSizer( 2, 1, 0, 0 );
+	fgSizer8 = new wxFlexGridSizer( 0, 1, 0, 0 );
 	fgSizer8->AddGrowableCol( 0 );
 	fgSizer8->AddGrowableRow( 0 );
 	fgSizer8->SetFlexibleDirection( wxBOTH );
@@ -542,14 +542,14 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	m_panel8 = new wxPanel( m_splitter1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer42;
 	fgSizer42 = new wxFlexGridSizer( 0, 3, 0, 0 );
+	fgSizer42->AddGrowableCol( 1 );
+	fgSizer42->AddGrowableCol( 2 );
 	fgSizer42->AddGrowableRow( 0 );
 	fgSizer42->SetFlexibleDirection( wxBOTH );
 	fgSizer42->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
 	wxFlexGridSizer* fgSizer64;
 	fgSizer64 = new wxFlexGridSizer( 0, 1, 0, 0 );
-	fgSizer64->AddGrowableCol( 1 );
-	fgSizer64->AddGrowableCol( 2 );
 	fgSizer64->AddGrowableRow( 0 );
 	fgSizer64->SetFlexibleDirection( wxBOTH );
 	fgSizer64->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );

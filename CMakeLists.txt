@@ -11,8 +11,6 @@ PROJECT(weatherfax_pi)
 SET(PACKAGE_NAME weatherfax_pi)
 SET(CPACK_PACKAGE_CONTACT "Sean D'Epagnier ")
 
-MESSAGE (STATUS "*** Building ${PACKAGE_NAME} ***")
-
 SET(VERSION_MAJOR "0")
 SET(VERSION_MINOR "10")
 
@@ -43,10 +41,6 @@ SET(SRC_WEATHERFAX
             src/icons.cpp
 
             src/wximgkap.cpp
-
-            src/tinyxml/tinyxml.cpp
-            src/tinyxml/tinyxmlparser.cpp
-            src/tinyxml/tinyxmlerror.cpp
 
             src/libaudiofile/aupv.c
             src/libaudiofile/error.c
@@ -97,7 +91,17 @@ SET(SRC_WEATHERFAX
             src/libaudiofile/modules/RebufferModule.cpp
             src/libaudiofile/modules/SimpleModule.cpp
 	)
-ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX})
+
+IF(WIN32)
+SET(SRC_TINYXML
+            src/tinyxml/tinyxml.cpp
+            src/tinyxml/tinyxmlparser.cpp
+            src/tinyxml/tinyxmlerror.cpp
+)
+ENDIF(WIN32)
+
+ADD_DEFINITIONS(-DTIXML_USE_STL)
+ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_TINYXML})
 
 INCLUDE_DIRECTORIES(${PLUGIN_SOURCE_DIR}/src/libaudiofile)
 

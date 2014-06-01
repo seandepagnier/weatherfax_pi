@@ -307,9 +307,10 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                                         url.Server = server.Name;
                                         url.Region = region.Name;
                          
-                                        for(long index = start; index <= to; index += by) {
+                                        for(int index = start; index <= to; index += by) {
+                                            wxString iurl = h->Attribute("Url");
                                             url.Url = region_url + wxString::Format
-                                                (wxString::FromUTF8(h->Attribute("Url")), index);
+                                                (iurl, index);
                                             url.Contents = wxString::Format
                                                 (wxString::FromUTF8(h->Attribute("Contents")), index);
                                             url.area_name = wxString::FromUTF8(h->Attribute("Area"));
@@ -521,8 +522,7 @@ void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
         filename = path + wxFileName::GetPathSeparator() + filename;
 
         wxFileName fn(filename);
-        int m = (wxDateTime::Now() - fn.GetModificationTime()).GetMinutes();
-        if(fn.FileExists() && m < 180) {
+        if(fn.FileExists() && (wxDateTime::Now() - fn.GetModificationTime()).GetMinutes() < 180) {
             wxMessageDialog mdlg(this, _("Fax already retrieved less than 180 minutes ago.\n\
 Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
             switch(mdlg.ShowModal()) {
