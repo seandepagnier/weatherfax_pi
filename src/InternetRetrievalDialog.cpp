@@ -308,7 +308,7 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                                         url.Region = region.Name;
                          
                                         for(int index = start; index <= to; index += by) {
-                                            wxString iurl = h->Attribute("Url");
+                                            wxString iurl = wxString::FromUTF8(h->Attribute("Url"));
                                             url.Url = region_url + wxString::Format
                                                 (iurl, index);
                                             url.Contents = wxString::Format
