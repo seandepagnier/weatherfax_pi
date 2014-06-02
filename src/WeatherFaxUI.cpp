@@ -924,7 +924,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	wxStaticBoxSizer* sbSizer4;
 	sbSizer4 = new wxStaticBoxSizer( new wxStaticBox( m_wizPage2, wxID_ANY, _("Image Coordinates") ), wxVERTICAL );
 	
-	m_fgSizer434 = new wxFlexGridSizer( 2, 1, 0, 0 );
+	m_fgSizer434 = new wxFlexGridSizer( 0, 1, 0, 0 );
 	m_fgSizer434->SetFlexibleDirection( wxBOTH );
 	m_fgSizer434->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	

@@ -49,14 +49,14 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
     m_sSkew->SetValue(m_wfimg.skew);
     m_cFilter->SetSelection(m_wfimg.filter);
 
-    m_sPhasing->SetRange(0, m_wfimg.m_phasedimg.GetWidth()-1);
+    m_wfimg.MakePhasedImage();
 
+    m_sPhasing->SetRange(0, m_wfimg.m_phasedimg.GetWidth()-1);
     m_swFaxArea1->SetScrollbars(1, 1, m_wfimg.m_phasedimg.GetWidth(), m_wfimg.m_phasedimg.GetHeight());
 
     MakeNewCoordinates();
     
     m_cRotation->SetSelection(m_curCoords->rotation);
-    m_wfimg.MakePhasedImage();
 
     if(use_decoder) {
         /* periodically check for updates */

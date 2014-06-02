@@ -265,7 +265,7 @@ void WeatherFax::OpenWav(wxString filename, wxString station, wxString area, wxS
         if(name == m_BuiltinCoords[i]->name)
             img->m_Coords = m_BuiltinCoords[i];
 
-    WeatherFaxWizard wizard(*img, false, _T(""), *this, name.size() ? BuiltinCoordList : m_UserCoords, name);
+    WeatherFaxWizard wizard(*img, true, _T(""), *this, name.size() ? BuiltinCoordList : m_UserCoords, name);
     
     if(wizard.m_decoder.m_inputtype != FaxDecoder::NONE &&
        wizard.RunWizard(wizard.m_pages[0])) {
