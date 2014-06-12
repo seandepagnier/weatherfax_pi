@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: weatherfax_pi 3.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-12 13:10+0800\n"
+"POT-Creation-Date: 2014-06-12 19:40+0800\n"
 "PO-Revision-Date: 2013-04-16 18:20+0100\n"
 "Last-Translator: CarCode <carcode@me.com>\n"
 "Language-Team: CarCode <carcode@me.com>\n"
@@ -20,7 +20,60 @@ msgstr ""
 msgid " Conflicts with already scheduled fax: "
 msgstr ""
 #
+msgid " Try clicking the selected (first) column"
+msgstr ""
+#
 msgid " disable this fax? "
+msgstr ""
+#
+msgid "&About"
+msgstr ""
+#
+#, fuzzy
+msgid "&Audio Capture"
+msgstr "Empfangen"
+#
+msgid "&Close"
+msgstr ""
+#
+#, fuzzy
+msgid "&Delete"
+msgstr "Löschen"
+#
+#, fuzzy
+msgid "&Edit"
+msgstr "Editieren"
+#
+msgid "&File"
+msgstr ""
+#
+msgid "&Goto"
+msgstr ""
+#
+#, fuzzy
+msgid "&HF Radio Schedules"
+msgstr "WetterFax Einstellungen"
+#
+msgid "&Help"
+msgstr ""
+#
+msgid "&Internet"
+msgstr ""
+#
+#, fuzzy
+msgid "&Open"
+msgstr "Öffnen"
+#
+#, fuzzy
+msgid "&Preferences"
+msgstr "WetterFax Einstellungen"
+#
+msgid "&Retrieve"
+msgstr ""
+#
+msgid ""
+"+ Lat/Lon for N/E\n"
+"- Lat/Lon for S/W"
 msgstr ""
 #
 msgid "1"
@@ -29,10 +82,16 @@ msgstr "1"
 msgid "1 minute alarm"
 msgstr ""
 #
+msgid "16000"
+msgstr ""
+#
 msgid "180"
 msgstr "180"
 #
-msgid "About"
+msgid "48000"
+msgstr ""
+#
+msgid "8000"
 msgstr ""
 #
 #, fuzzy
@@ -49,11 +108,14 @@ msgid "Already capturing, cannot capture: "
 msgstr ""
 #
 #, fuzzy
-msgid "Alsa Capture"
+msgid "Audio Capture"
 msgstr "Empfangen"
 #
+msgid "Audio Capture (portaudio library)"
+msgstr ""
+#
 #, fuzzy
-msgid "Audio Capture"
+msgid "Audio Capture Options"
 msgstr "Empfangen"
 #
 msgid "Audio Decoding Options"
@@ -134,26 +196,26 @@ msgstr "fax_decode_image_line erfordert spezifische Speichergröße"
 msgid "Decoder"
 msgstr "Dekoder"
 #
-msgid "Delete"
-msgstr "Löschen"
-#
 msgid "Depth"
 msgstr ""
 #
 msgid "Deviation"
 msgstr "Deviation"
 #
-msgid "Display Selected"
+msgid "Done"
 msgstr ""
 #
 #, fuzzy
 msgid "Duration"
 msgstr "Deviation"
 #
-msgid "Edit"
-msgstr "Editieren"
+msgid "E&xport"
+msgstr ""
 #
 msgid "Email"
+msgstr ""
+#
+msgid "Email Contents"
 msgstr ""
 #
 msgid "Equator Y"
@@ -206,15 +268,6 @@ msgstr "Fehler bei Laden Eingangsdatei: "
 msgid "Failed to save xml file: "
 msgstr "Fehler bei Laden Eingangsdatei: "
 #
-#, fuzzy
-msgid ""
-"Failed to set stuff up with portaudio or dsp\n"
-"Capture failed."
-msgstr "Fehler bei Verwendung von dsp, das geht nur mit Linux"
-#
-msgid "Failure"
-msgstr "Fehler"
-#
 msgid "Failure Decoding Fax: "
 msgstr "Fehler Fax-Dekodierung: "
 #
@@ -224,7 +277,13 @@ msgstr ""
 msgid "Fax"
 msgstr "Fax"
 #
-msgid "File"
+#, fuzzy
+msgid "Fax Decoding Options"
+msgstr "Audio Dekodier-Optionen"
+#
+msgid ""
+"Fax already retrieved less than 180 minutes ago.\n"
+"Use existing file?"
 msgstr ""
 #
 msgid "Filter"
@@ -239,6 +298,9 @@ msgstr "Hole Äquator"
 msgid "Get Mapping "
 msgstr "Hole Zeichnung"
 #
+msgid "GetAspectRatio"
+msgstr ""
+#
 msgid "HF Radio Schedules"
 msgstr ""
 #
@@ -251,7 +313,7 @@ msgstr ""
 msgid "Has Valid Time"
 msgstr ""
 #
-msgid "Help"
+msgid "If the url is incorrect please edit the xml and/or post a bug report."
 msgstr ""
 #
 msgid "Image Coordinates"
@@ -272,10 +334,10 @@ msgstr "Information"
 msgid "Input Type"
 msgstr "Eingangstyp"
 #
-msgid "Internet"
+msgid "Internet Retrieval"
 msgstr ""
 #
-msgid "Internet Retrieval"
+msgid "Invalid iterator: "
 msgstr ""
 #
 msgid "Invalid xml file"
@@ -387,20 +449,24 @@ msgstr ""
 msgid "No Capture Set"
 msgstr "Empfangen"
 #
+msgid "No Faxes selected."
+msgstr ""
+#
 msgid "No Filter"
 msgstr "Kein Filter"
 #
 msgid "None"
 msgstr "Kein"
 #
-msgid "Not Implemented"
+msgid "Note:   Email retrieval implementation is not working and incomplete"
 msgstr ""
-#
-msgid "Open"
-msgstr "Öffnen"
 #
 msgid "Open Weather Fax Input File"
 msgstr "Öffne WetterFax Eingangsdatei"
+#
+#, fuzzy
+msgid "Options"
+msgstr "Rotation"
 #
 msgid "Output Type"
 msgstr "Ausgangstyp"
@@ -420,11 +486,22 @@ msgstr ""
 msgid "Port audio overflow on input, some data lost!"
 msgstr ""
 #
-#, fuzzy
-msgid "Preferences"
-msgstr "WetterFax Einstellungen"
+msgid "Reading Headers: "
+msgstr ""
+#
+msgid "Reading Size: "
+msgstr ""
+#
+msgid "Receiving: "
+msgstr ""
 #
 msgid "Reduce to"
+msgstr ""
+#
+msgid "Region"
+msgstr ""
+#
+msgid "Regions"
 msgstr ""
 #
 msgid "Removal 1"
@@ -435,6 +512,9 @@ msgstr "Entfernt 2"
 #
 msgid "Remove"
 msgstr "Entfernen"
+#
+msgid "Reply to:"
+msgstr ""
 #
 msgid "Reset"
 msgstr ""
@@ -452,15 +532,24 @@ msgstr ""
 msgid "Retrieve"
 msgstr ""
 #
+msgid "Retrieve Selected"
+msgstr ""
+#
 msgid "Rotation"
 msgstr "Rotation"
 #
-msgid "Sat"
-msgstr "Sat"
+msgid "Sample Rate"
+msgstr ""
+#
+msgid "Saturation Threshold"
+msgstr ""
 #
 #, fuzzy
 msgid "Save Weather Fax To KAP"
 msgstr "WetterFax"
+#
+msgid "Scheduled"
+msgstr ""
 #
 msgid ""
 "Select fax images by clicking in the capture (first) column\n"
@@ -476,13 +565,13 @@ msgid ""
 "be implemented."
 msgstr ""
 #
-msgid "Selected"
-msgstr ""
-#
 msgid "Server"
 msgstr ""
 #
 msgid "Servers"
+msgstr ""
+#
+msgid "Service"
 msgstr ""
 #
 msgid "Size"
@@ -502,6 +591,9 @@ msgid "Sorting this many schedules might take too long"
 msgstr ""
 #
 msgid "Sorting this many urls might take too long"
+msgstr ""
+#
+msgid "Start"
 msgstr ""
 #
 #, fuzzy
@@ -537,7 +629,8 @@ msgid ""
 "This includes a fax decoder, which converts radio fax audio into images.\n"
 "\n"
 "To get started, open either an image or recorded wav audio file of a ssb "
-"radio fax transmission.\n"
+"radio fax transmission from the file menu, or select an option from the "
+"retrieve menu.\n"
 "\n"
 "Source Code:\n"
 "https://github.com/seandepagnier/weatherfax_pi\n"
@@ -546,6 +639,9 @@ msgid ""
 msgstr ""
 #
 msgid "Time (UTC)"
+msgstr ""
+#
+msgid "Timed out waiting for headers for: "
 msgstr ""
 #
 msgid "Transparency"
@@ -558,6 +654,9 @@ msgid "Tune ssb radio to"
 msgstr ""
 #
 msgid "Unrecognized xml node"
+msgstr ""
+#
+msgid "Unrecognized xml node: "
 msgstr ""
 #
 msgid "Url"
@@ -574,6 +673,9 @@ msgstr "Wert 2"
 #
 msgid "Value 3"
 msgstr "Wert 3"
+#
+msgid "Verify there is a working internet connection."
+msgstr ""
 #
 msgid "W/H"
 msgstr "W/H"
@@ -657,6 +759,9 @@ msgstr ""
 msgid "fixed-flat"
 msgstr "fixed-flat"
 #
+msgid "ftpmail@ftpmail.nws.noaa.gov"
+msgstr ""
+#
 msgid "hour(s)"
 msgstr ""
 #
@@ -707,29 +812,58 @@ msgstr ""
 msgid "wide"
 msgstr "weit"
 #
+#
 #~ msgid " %d"
 #~ msgstr " %d"
+#
 #
 #~ msgid "%.2f"
 #~ msgstr "%.2f"
 #
+#
 #~ msgid ";"
 #~ msgstr ";"
+#
+#
+#, fuzzy
+#~ msgid "Alsa Capture"
+#~ msgstr "Empfangen"
+#
+#
+#, fuzzy
+#~ msgid ""
+#~ "Failed to set stuff up with portaudio or dsp\n"
+#~ "Capture failed."
+#~ msgstr "Fehler bei Verwendung von dsp, das geht nur mit Linux"
+#
+#
+#~ msgid "Failure"
+#~ msgstr "Fehler"
+#
 #
 #~ msgid "New Coord %d"
 #~ msgstr "Neue Koord %d"
 #
+#
 #~ msgid "Resulting image larger than %dMB, aborting\n"
 #~ msgstr "Resultierendes Bild größer als %dMB, Abbruch\n"
+#
+#
+#~ msgid "Sat"
+#~ msgstr "Sat"
+#
 #
 #~ msgid "WAV"
 #~ msgstr "WAV"
 #
+#
 #~ msgid "cannot deal with incomplete input file"
 #~ msgstr "Kann unvollständige Eingangsdatei nicht verarbeiten"
 #
+#
 #~ msgid "dsp - "
 #~ msgstr "dsp - "
+#
 #
 #~ msgid "wav"
 #~ msgstr "wav"

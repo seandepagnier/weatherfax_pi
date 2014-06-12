@@ -5,56 +5,110 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: weatherfax_pi 3.2.0\n"
+"Project-Id-Version: Complément weatherfax_pi pour OpenCPN\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-12 13:10+0800\n"
-"PO-Revision-Date: 2013-04-16 18:20+0100\n"
-"Last-Translator: Gilletarom <gilletarom@netpratique.fr>\n"
+"POT-Creation-Date: 2014-06-12 20:58+0800\n"
+"PO-Revision-Date: 2014-03-13 15:30+0100\n"
+"Last-Translator: Gilletarom <contact@gilletarom.fr>\n"
 "Language-Team: Gilletarom <contactàgilletarom;fr>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.6.4\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 #
 msgid " Conflicts with already scheduled fax: "
+msgstr "Conflit avec fax déjà programmé :"
+#
+msgid " Try clicking the selected (first) column"
 msgstr ""
 #
 msgid " disable this fax? "
+msgstr "désactiver ce fax ?"
+#
+msgid "&About"
+msgstr "&Au sujet de"
+#
+msgid "&Audio Capture"
+msgstr "&Réception audio"
+#
+msgid "&Close"
+msgstr "&Fermer"
+#
+msgid "&Delete"
+msgstr "&Supprimer"
+#
+msgid "&Edit"
+msgstr "&Editer"
+#
+msgid "&File"
+msgstr "&Fichier"
+#
+msgid "&Goto"
+msgstr ""
+#
+msgid "&HF Radio Schedules"
+msgstr "Horaires des émissions radio &HF"
+#
+msgid "&Help"
+msgstr "&Aide"
+#
+msgid "&Internet"
+msgstr "&Internet"
+#
+msgid "&Open"
+msgstr "&Ouvrir"
+#
+msgid "&Preferences"
+msgstr "&Préférences"
+#
+msgid "&Retrieve"
+msgstr "&Récupérer"
+#
+msgid ""
+"+ Lat/Lon for N/E\n"
+"- Lat/Lon for S/W"
 msgstr ""
 #
 msgid "1"
 msgstr "1"
 #
 msgid "1 minute alarm"
+msgstr "Alarme 1 minute"
+#
+msgid "16000"
 msgstr ""
 #
 msgid "180"
 msgstr "180"
 #
-msgid "About"
+msgid "48000"
 msgstr ""
 #
-#, fuzzy
+msgid "8000"
+msgstr ""
+#
 msgid "About Weatherfax"
-msgstr "WeatherFax"
+msgstr "Au sujet de WeatherFax"
 #
 msgid "About the Author"
-msgstr ""
+msgstr "Au sujet de l'auteur"
 #
 msgid "All"
-msgstr ""
+msgstr "Tout"
 #
 msgid "Already capturing, cannot capture: "
+msgstr "Réception déjà en cours, ne peut recevoir :"
+#
+msgid "Audio Capture"
+msgstr "Réception audio"
+#
+msgid "Audio Capture (portaudio library)"
 msgstr ""
 #
-#, fuzzy
-msgid "Alsa Capture"
-msgstr "Capturer"
-#
-#, fuzzy
-msgid "Audio Capture"
-msgstr "Capturer"
+msgid "Audio Capture Options"
+msgstr "Options de capture"
 #
 msgid "Audio Decoding Options"
 msgstr "Options de décodage audio"
@@ -63,7 +117,7 @@ msgid "Bits per Pixel"
 msgstr "Bits par pixel"
 #
 msgid "Boat Position"
-msgstr ""
+msgstr "Position du bateau"
 #
 msgid "CCW"
 msgstr "CCW"
@@ -71,9 +125,8 @@ msgstr "CCW"
 msgid "CW"
 msgstr "CW"
 #
-#, fuzzy
 msgid "Calculating Equator not yet supported.\n"
-msgstr "Calculating Equator not yet supported.\n"
+msgstr "Calcul au niveau de l'équateur non encore supporté.\n"
 #
 msgid ""
 "Calculating Mapping Failed.\n"
@@ -82,7 +135,7 @@ msgid ""
 msgstr ""
 "Echec de la réalisation de la carte.\n"
 "Peut être avez vous choisi un type erroné de carte pour cette image, à moins "
-"que les coordonnées spécifiées sont incorrectes\n"
+"que les coordonnées spécifiées soient incorrectes\n"
 #
 msgid "Calculating Mapping not yet supported.\n"
 msgstr "Les calculs de cartographie ne sont pas encore pris en charge.\n"
@@ -90,16 +143,14 @@ msgstr "Les calculs de cartographie ne sont pas encore pris en charge.\n"
 msgid "Capture"
 msgstr "Capturer"
 #
-#, fuzzy
 msgid "Capture Options"
-msgstr "Capturer"
+msgstr "Options de capture"
 #
-#, fuzzy
 msgid "Capture Status"
-msgstr "Capturer"
+msgstr "Etat de capture"
 #
 msgid "Capturing fax: "
-msgstr ""
+msgstr "Capture de fax :"
 #
 # Autre traduction :
 # TRansporteur
@@ -107,153 +158,148 @@ msgid "Carrier"
 msgstr "Porteuse"
 #
 msgid "Close"
-msgstr ""
+msgstr "Fermer"
 #
 msgid "Colors"
-msgstr ""
+msgstr "Couleurs"
 #
 msgid "Constraints"
-msgstr ""
+msgstr "Contraintes"
 #
 msgid "Contains"
-msgstr ""
+msgstr "Contient"
 #
 msgid "Contents"
-msgstr ""
+msgstr "Contenus"
 #
 msgid "Coord Y/X"
 msgstr "Coord Y/X"
 #
-#, fuzzy
 msgid "Coordinates Mapping Correction"
-msgstr "Correction des coordonnées cartographque"
+msgstr "Correction des coordonnées cartographiques"
 #
 msgid "Current fax: "
-msgstr ""
+msgstr "Fax courant :"
 #
-#, fuzzy
 msgid "DecodeImageLine requires specific buffer length"
-msgstr "fax_decode_image_line necéssite un tampon de longueur spécifique"
+msgstr "DecodeImageLine nécessite une longueur de buffer définie"
 #
 msgid "Decoder"
 msgstr "Décodeur"
 #
-msgid "Delete"
-msgstr "Supprimer"
-#
 msgid "Depth"
-msgstr ""
+msgstr "Profondeur"
 #
 msgid "Deviation"
 msgstr "Déviation"
 #
-msgid "Display Selected"
+msgid "Done"
 msgstr ""
 #
-#, fuzzy
 msgid "Duration"
-msgstr "Déviation"
+msgstr "Durée"
 #
-msgid "Edit"
-msgstr "Editer"
+msgid "E&xport"
+msgstr "E&xporter"
 #
 msgid "Email"
-msgstr ""
+msgstr "Email"
+#
+msgid "Email Contents"
+msgstr "Contenus"
 #
 msgid "Equator Y"
 msgstr "Equateur Y"
 #
 msgid "Export"
-msgstr ""
+msgstr "Exporter"
 #
 msgid "External Alarm"
-msgstr ""
+msgstr "Alarm externe"
 #
 msgid "External Capture Execution failed"
-msgstr ""
+msgstr "Echec de l'exécution d'une capture extérieure"
 #
 msgid "External Command"
-msgstr ""
+msgstr "Commande extérieure"
 #
 msgid "Failed"
 msgstr "Echec"
 #
+# mapping
 msgid ""
 "Failed to apply mapping\n"
 "Check Mapping Correction Parameters"
 msgstr ""
+"Impossible de cartographier\n"
+"Vérifiez les paramètres de correction de la cartographie"
 #
 msgid "Failed to find Duration for: "
-msgstr ""
+msgstr "Impossible de trouver la durée pour :"
 #
 msgid "Failed to launch: "
-msgstr ""
+msgstr "Impossible de lancer :"
 #
 msgid "Failed to load coordinate sets"
-msgstr ""
+msgstr "Impossible de charger l'ensemble des coordonnées"
 #
 msgid "Failed to load file: "
-msgstr ""
+msgstr "Impossible de charger le fichier :"
 #
-#, fuzzy
 msgid "Failed to load input file: "
-msgstr "Impossible d'ouvrir le fichier en entrée"
+msgstr "Impossible de charger le fichier en entrée :"
 #
 msgid "Failed to match Area: "
-msgstr ""
+msgstr "Impossible de faire correspondre la région :"
 #
 msgid "Failed to save xml file: "
-msgstr ""
-#
-#, fuzzy
-msgid ""
-"Failed to set stuff up with portaudio or dsp\n"
-"Capture failed."
-msgstr ""
-"Impossible de définir des trucs avec DSP, cela ne fonctionne qu'avec linux"
-#
-#, fuzzy
-msgid "Failure"
-msgstr "Echec"
+msgstr "Impossible de sauvegarder le fichier xml :"
 #
 msgid "Failure Decoding Fax: "
 msgstr "Echec du décodage du fax : "
 #
 msgid "Fathoms"
-msgstr ""
+msgstr "Brasses"
 #
 msgid "Fax"
 msgstr "Fax"
 #
-msgid "File"
+msgid "Fax Decoding Options"
+msgstr "Options de décodage audio"
+#
+msgid ""
+"Fax already retrieved less than 180 minutes ago.\n"
+"Use existing file?"
 msgstr ""
 #
 msgid "Filter"
 msgstr "Filtrer"
 #
 msgid "Frequency"
-msgstr ""
+msgstr "Fréquence"
 #
-#, fuzzy
 msgid "Get Equator"
 msgstr "Obtenir l'équateur"
 #
 msgid "Get Mapping "
 msgstr "Obtenir la cartographie"
 #
-msgid "HF Radio Schedules"
+msgid "GetAspectRatio"
 msgstr ""
+#
+msgid "HF Radio Schedules"
+msgstr "Horaires des émissions radio HF"
 #
 msgid "HF Schedules"
-msgstr ""
+msgstr "Horaires des HF"
 #
 msgid "Has Area"
-msgstr ""
+msgstr "Correspond à une région"
 #
 msgid "Has Valid Time"
-msgstr ""
+msgstr "A une heure valide"
 #
-msgid "Help"
+msgid "If the url is incorrect please edit the xml and/or post a bug report."
 msgstr ""
 #
 msgid "Image Coordinates"
@@ -272,42 +318,42 @@ msgid "Information"
 msgstr "Information"
 #
 msgid "Input Type"
-msgstr "Entrée le type"
-#
-msgid "Internet"
-msgstr ""
+msgstr "Type d'entrée"
 #
 msgid "Internet Retrieval"
+msgstr "Récupération d'internet"
+#
+msgid "Invalid iterator: "
 msgstr ""
 #
 msgid "Invalid xml file"
-msgstr ""
+msgstr "Fichier xml invalide"
 #
 msgid "Invert"
 msgstr "Inverser"
 #
-#, fuzzy
 msgid "Lat"
-msgstr "Sat"
+msgstr "Lat"
 #
 msgid "Lat/Lon"
 msgstr "Lat/Lon"
 #
 msgid "Load Schedules at Startup"
-msgstr ""
+msgstr "Charger la programmation au démarrage"
 #
 msgid "Loading"
-msgstr ""
+msgstr "Chargement en cours"
 #
-#, fuzzy
 msgid "Lon"
-msgstr "Lat/Lon"
+msgstr "Lon"
 #
 msgid "Manual Capture (with external program) automatic Open File"
 msgstr ""
+"Capture manuelle  (avec un programme externe) et ouverture automatique du "
+"fichier"
 #
 msgid "Map Area"
-msgstr ""
+msgstr "Aire de la carte"
 #
 msgid "Mapping"
 msgstr "Cartographie"
@@ -316,7 +362,7 @@ msgid "Mapping Failed"
 msgstr "Echec de la cartographie"
 #
 msgid "Mapping Weather Fax Image"
-msgstr "Mapping Weather Fax Image"
+msgstr "Cartographie de l'image d'un fax météo"
 #
 msgid ""
 "Mapping allows for scaling, and conversion between coordinate systems\n"
@@ -343,9 +389,10 @@ msgid ""
 "back to this step and get the mapping parameters again to improve the "
 "estimate."
 msgstr ""
-"Mapping permet la mise à l'échelle et la conversion entre les systèmes de "
-"coordonnées \n"
-"Latitudes sont + N-S, Longitudes + E-W \n"
+"Cette cartographie permet la mise à l'échelle et la conversion entre les "
+"systèmes de coordonnées \n"
+"Pour les latitudes, mettre + pour N et - pour S. pour les longitudes, mettre  "
+"+ pour E et - pour O \n"
 "\n"
 "Pour le mode de cartographie polaire: \n"
 "Obtenir les paramètres de cartographie calcule la cartographie à partir des "
@@ -367,28 +414,30 @@ msgstr ""
 "coordonnées peuvent être modifiées si nécessaire. Si cela est correct la "
 "largeur est très proche de 1.0. Il devrait probablement être exactement "
 "1,0. \n"
-"Il est également possible de passer à l'étape suivante, ajustez les "
-"coordonnées, puis revenez à cette étape et obtenir de nouveau les paramètres "
-"de mappage pour améliorer l'estimation."
+"Il est également possible de passer à l'étape suivante, d'ajuster les "
+"coordonnées, puis de revenir à cette étape et d'obtenir de nouveau les "
+"paramètres de mappage pour améliorer l'estimation."
 #
 msgid "Mercator"
 msgstr "Mercator"
 #
 msgid "Message Box"
-msgstr ""
+msgstr "Boîte à message"
 #
 msgid "Meters"
-msgstr ""
+msgstr "Mètres"
 #
 msgid "New Coord"
-msgstr "Nouveau coord"
+msgstr "Nouvelles coord"
 #
 msgid "No Action"
-msgstr ""
+msgstr "Pas d'action"
 #
-#, fuzzy
 msgid "No Capture Set"
-msgstr "Capturer"
+msgstr "Pas de capture réalisée"
+#
+msgid "No Faxes selected."
+msgstr ""
 #
 msgid "No Filter"
 msgstr "Ne pas filtrer"
@@ -396,14 +445,15 @@ msgstr "Ne pas filtrer"
 msgid "None"
 msgstr "Aucun"
 #
-msgid "Not Implemented"
+msgid "Note:   Email retrieval implementation is not working and incomplete"
 msgstr ""
 #
-msgid "Open"
-msgstr "ouvrir"
-#
 msgid "Open Weather Fax Input File"
-msgstr "Ouvrir le fichier d'entrée de Weather Fax"
+msgstr "Ouvrir le fichier d'entrée du fax météo"
+#
+#, fuzzy
+msgid "Options"
+msgstr "Stations"
 #
 msgid "Output Type"
 msgstr "Type en sortie"
@@ -412,7 +462,7 @@ msgstr "Type en sortie"
 # Suppression
 # Elimination
 msgid "Phasing"
-msgstr "Phasing"
+msgstr "Calage de la phase"
 #
 msgid "Pole X"
 msgstr "Pole X"
@@ -421,16 +471,27 @@ msgid "Pole Y"
 msgstr "Pole Y"
 #
 msgid "Populating List"
-msgstr ""
+msgstr "Liste à remplir"
 #
 msgid "Port audio overflow on input, some data lost!"
+msgstr "Dépassement de capacité du port audio. Certaines données sont perdues !"
+#
+msgid "Reading Headers: "
 msgstr ""
 #
-#, fuzzy
-msgid "Preferences"
-msgstr "Préférences"
+msgid "Reading Size: "
+msgstr ""
+#
+msgid "Receiving: "
+msgstr ""
 #
 msgid "Reduce to"
+msgstr "Réduire à"
+#
+msgid "Region"
+msgstr ""
+#
+msgid "Regions"
 msgstr ""
 #
 msgid "Removal 1"
@@ -442,8 +503,11 @@ msgstr "Suppression 2"
 msgid "Remove"
 msgstr "Retirer"
 #
-msgid "Reset"
+msgid "Reply to:"
 msgstr ""
+#
+msgid "Reset"
+msgstr "Remettre à zéro"
 #
 msgid "Resulting image has negative dimensions, aborting\n"
 msgstr "L'image résultante a des dimensions négatives. Abandon\n"
@@ -454,19 +518,30 @@ msgid ""
 "Try changing size parameter to a smaller value. (less than %.2f)\n"
 "aborting\n"
 msgstr ""
+"Taille de l'image résultante supérieure à %dMB\n"
+"Essayez de réduire la taille dans les paramètres. (moins que %.2f)\n"
+"Abandon\n"
 #
 msgid "Retrieve"
-msgstr ""
+msgstr "Récupérer"
+#
+msgid "Retrieve Selected"
+msgstr "Récupérer Selected"
 #
 msgid "Rotation"
-msgstr "rotation"
+msgstr "Rotation"
 #
-msgid "Sat"
-msgstr "Sat"
+msgid "Sample Rate"
+msgstr ""
 #
-#, fuzzy
+msgid "Saturation Threshold"
+msgstr ""
+#
 msgid "Save Weather Fax To KAP"
-msgstr "Fax météo"
+msgstr "Sauvegarder le fax météo au format KAP"
+#
+msgid "Scheduled"
+msgstr "Horaires des HF"
 #
 msgid ""
 "Select fax images by clicking in the capture (first) column\n"
@@ -481,59 +556,71 @@ msgid ""
 "only has a tecsun pl-600.  If a suitable radio can be donated, support will "
 "be implemented."
 msgstr ""
-#
-msgid "Selected"
-msgstr ""
+"Sélectionner une image fax en cliquant dans la (première) colonne \"capture"
+"\" \n"
+"\n"
+"Les horaires peuvent être triés en cliquant en tête de la colonne\n"
+"\n"
+"Les horaires doivent être testés car je ne peux recevoir que quelques "
+"stations.  Les corrections peuvent être apportées en modifiant le fichier "
+"WeatherFaxSchedules.xml. Les patch peuvent être soumis par l'intermédiaire du "
+"github.\n"
+"\n"
+"Une radio BLU à contrôle automatique est souhaitable. Mais l'auteur ne "
+"dispose que d'une radio Tecsun PL-600. En cas de don d'une radio appropriée, "
+"une aide sera accordée."
 #
 msgid "Server"
-msgstr ""
+msgstr "Serveur"
 #
 msgid "Servers"
-msgstr ""
+msgstr "Serveurs"
+#
+msgid "Service"
+msgstr "Serveur"
 #
 msgid "Size"
-msgstr "taille"
+msgstr "Taille"
 #
 msgid "Skew"
-msgstr "Oblique"
+msgstr "Inclinaison"
 #
 msgid ""
 "Skip start, stop and \n"
 "phasing detection"
 msgstr ""
-"Skip start, stop and \n"
-"phasing detection"
+"Sauter le démarrage, stop et \n"
+"le calage de la phase"
 #
 msgid "Sorting this many schedules might take too long"
-msgstr ""
+msgstr "Trier ces nombreux horaires risque de prendre un temps trop long"
 #
 msgid "Sorting this many urls might take too long"
+msgstr "Trier ces nombreuses URL risque de prendre un temps trop long"
+#
+msgid "Start"
 msgstr ""
 #
-#, fuzzy
 msgid "Station"
-msgstr "rotation"
+msgstr "Station"
 #
-#, fuzzy
 msgid "Stations"
-msgstr "rotation"
+msgstr "Stations"
 #
 msgid "Stop"
 msgstr "Arrêter"
 #
-#, fuzzy
 msgid ""
 "Supported Files|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;*.TIF;*.tif;*.TIFF;*.tiff;"
 "*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;*.PCX;*.pcx;*."
 "PICT;*.pict;*.TGA;*.tga;*.WAV;*.wav|All files (*.*)|*.*"
 msgstr ""
-"Types d'image supportés|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;*.TIF;*.tif;*."
-"TIFF;*.tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;*."
-"PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga|WAV files (*.wav)|*.WAV;*.wav|All files "
-"(*.*)|*.*"
+"Fichiers supportés|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;*.TIF;*.tif;*.TIFF;*."
+"tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;*.PCX;*."
+"pcx;*.PICT;*.pict;*.TGA;*.tga;*.WAV;*.wav|All files (*.*)|*.*"
 #
 msgid "Supported Files|*.KAP;*.kap|All files (*.*)|*.*"
-msgstr ""
+msgstr "Fichiers supportés : |*.KAP;*.kap|All files (*.*)|*.*"
 #
 msgid ""
 "The weatherfax plugin for opencpn is intended to reduce the amount of user "
@@ -543,15 +630,33 @@ msgid ""
 "This includes a fax decoder, which converts radio fax audio into images.\n"
 "\n"
 "To get started, open either an image or recorded wav audio file of a ssb "
-"radio fax transmission.\n"
+"radio fax transmission from the file menu, or select an option from the "
+"retrieve menu.\n"
 "\n"
 "Source Code:\n"
 "https://github.com/seandepagnier/weatherfax_pi\n"
 "\n"
 "Many thanks to translators and testers."
 msgstr ""
+"Le complément WeatherFax pour OpenCPN est destiné à réduire le nombre "
+"d'interventions de l'utilisateur lors de la reception d'un fax météo et de sa "
+"superposition optionnelle sur les cartes.\n"
+"\n"
+"Ceci nécessite un décodeur de fax qui convertit les fax météo radio en "
+"images.\n"
+"\n"
+"Pour commencer, ouvrez soit une image soit un fichier audio wav enregistré "
+"avec une récepteur BLU  de fax.\n"
+"\n"
+"Code source :\n"
+"https://github.com/seandepagnier/weatherfax_pi\n"
+"\n"
+"Remerciements aux traducteurs et aux testeurs."
 #
 msgid "Time (UTC)"
+msgstr "Temps (UTC)"
+#
+msgid "Timed out waiting for headers for: "
 msgstr ""
 #
 msgid "Transparency"
@@ -561,16 +666,19 @@ msgid "True Width Ratio"
 msgstr "Ratio longueur vrai"
 #
 msgid "Tune ssb radio to"
-msgstr ""
+msgstr "Accorder le récepteur BLU sur"
 #
 msgid "Unrecognized xml node"
-msgstr ""
+msgstr "Node xml non reconnu"
+#
+msgid "Unrecognized xml node: "
+msgstr "Node xml non reconnu"
 #
 msgid "Url"
-msgstr ""
+msgstr "URL"
 #
 msgid "Valid Time"
-msgstr ""
+msgstr "Horaire valide"
 #
 msgid "Value 1"
 msgstr "Valeur 1"
@@ -581,11 +689,14 @@ msgstr "valeur 2"
 msgid "Value 3"
 msgstr "valeur 3"
 #
+msgid "Verify there is a working internet connection."
+msgstr ""
+#
 msgid "W/H"
 msgstr "W/H"
 #
 msgid "WAV files (*.wav)|*.WAV;*.wav|All files (*.*)|*.*"
-msgstr ""
+msgstr "Fichiers WAV (*.wav)|*.WAV;*.wav|All files (*.*)|*.*"
 #
 msgid ""
 "Warning, latitudes on different sides of equator not recommended because of "
@@ -601,10 +712,10 @@ msgid "Weather Fax Image"
 msgstr "Image du fax météo"
 #
 msgid "Weather Fax Mapper"
-msgstr "Weather Fax Mapper"
+msgstr "Cartographe de météo fax"
 #
 msgid "Weather Fax PlugIn for OpenCPN"
-msgstr "Weather Fax PlugIn for OpenCPN"
+msgstr "Complément Weather Fax pour OpenCPN"
 #
 msgid ""
 "Weather Fax PlugIn for OpenCPN\n"
@@ -614,42 +725,40 @@ msgid ""
 "\n"
 "The Weather Fax plugin was written by Sean D'Epagnier\n"
 msgstr ""
-"Weather Fax PlugIn for OpenCPN\n"
-"Read weather fax encoded data as audio or image. \n"
-"Overlay this on top of charts. \n"
-"Enable OpenGL (in Display options) for best results. \n"
+"Le complément Weather Fax pour OpenCPN\n"
+"Lit et code les données d'un fax météo au format audio ou image. \n"
+"et le supperpose sur les cartes. \n"
+"Permettre OpenGL (dans les options d'affichage)  pour avoir un meilleur "
+"résultat. \n"
 "\n"
-"The Weather Fax plugin was written by Sean D'Epagnier\n"
+"Le complément Weather Fax a été écrit par Sean D'Epagnier\n"
 #
-#, fuzzy
 msgid "Weather Fax Plugin Version"
-msgstr "Weather Fax PlugIn for OpenCPN"
+msgstr "Version du complément WeatherFax "
 #
 msgid "Weather Fax Preferences"
-msgstr "Préférences du Weather Fax"
+msgstr "Préférences du WeatherFax"
 #
 msgid "Weather Fax Schedule Beginning Soon"
-msgstr ""
+msgstr "Horaire des fax météo commençant bientôt"
 #
 msgid "WeatherFax"
 msgstr "WeatherFax"
 #
-#, fuzzy
 msgid "WeatherFax InternetRetrieval"
-msgstr "Préférences"
+msgstr "Récupération sur internet d'un fax météo"
 #
 msgid "WeatherFax Preferences"
-msgstr "Préférences"
+msgstr "Préférences du fax météo"
 #
-#, fuzzy
 msgid "WeatherFax Schedules"
-msgstr "Préférences"
+msgstr "Horaires des fax météo"
 #
 msgid "aplay /usr/local/share/opencpn/sounds/2bells.wav"
-msgstr ""
+msgstr "appliquer /usr/local/share/opencpn/sounds/2bells.wav"
 #
 msgid "arecord -f S16_LE"
-msgstr ""
+msgstr "arecord -f S16_LE"
 #
 msgid "conic"
 msgstr "conique"
@@ -658,19 +767,22 @@ msgid "could not open input file: "
 msgstr "Impossible d'ouvrir le fichier en entrée"
 #
 msgid "fix sounding datum"
-msgstr ""
+msgstr "Fixer le datum des sondes"
 #
 msgid "fixed-flat"
 msgstr "fixed-flat"
 #
-msgid "hour(s)"
+msgid "ftpmail@ftpmail.nws.noaa.gov"
 msgstr ""
+#
+msgid "hour(s)"
+msgstr "Heure(s)"
 #
 msgid "khz max"
-msgstr ""
+msgstr "khz max"
 #
 msgid "khz min"
-msgstr ""
+msgstr "khz min"
 #
 msgid "mercator"
 msgstr "mercator"
@@ -679,7 +791,7 @@ msgid "middle"
 msgstr "milieu"
 #
 msgid "minute(s)"
-msgstr ""
+msgstr "minute(s)"
 #
 msgid "narrow"
 msgstr "étroit"
@@ -690,52 +802,56 @@ msgstr "polaire"
 msgid "removal 3"
 msgstr "suppression 3"
 #
-#, fuzzy
 msgid "sample size not 8 or 16 bit: "
-msgstr "L'échantillonage n'est pas 16 bit"
+msgstr "L'échantillonnage n'est pas 8 ou 16 bit :"
 #
 msgid "second(s)"
-msgstr ""
+msgstr "seconde(s)"
 #
 msgid "starting in"
-msgstr ""
+msgstr "commencement à"
 #
 msgid "to receive fax for"
-msgstr ""
+msgstr "pour recevoir un fax de"
 #
-#, fuzzy
 msgid "weatherfax"
-msgstr "WeatherFax"
+msgstr "fax météo"
 #
 msgid "weatherfax schedules"
-msgstr ""
+msgstr "Horaires des météo fax"
 #
 msgid "wide"
 msgstr "large"
 #
-#~ msgid " %d"
-#~ msgstr " %d"
 #
-#~ msgid "%.2f"
-#~ msgstr "%.2f"
+#~ msgid "Alsa Capture"
+#~ msgstr "Capture alsa"
 #
-#~ msgid ";"
-#~ msgstr ";"
 #
-#~ msgid "New Coord %d"
-#~ msgstr "Nouveau coord %d"
+#~ msgid "Display Selected"
+#~ msgstr "Affichage sélectionné"
 #
-#~ msgid "Resulting image larger than %dMB, aborting\n"
-#~ msgstr "L'image résultante est plus large que  %dMB, abandon\n"
 #
-#~ msgid "WAV"
-#~ msgstr "WAV"
+#~ msgid ""
+#~ "Failed to set stuff up with portaudio or dsp\n"
+#~ "Capture failed."
+#~ msgstr ""
+#~ "Impossible de définir quelque chose avec un port audio ou le dsp.\n"
+#~ "Echec de la capture."
 #
-#~ msgid "cannot deal with incomplete input file"
-#~ msgstr "traitement impossible avec un fichier incomplet en entrée"
 #
-#~ msgid "dsp - "
-#~ msgstr "dsp - "
+#~ msgid "Failure"
+#~ msgstr "Echec"
 #
-#~ msgid "wav"
-#~ msgstr "wav"
+#
+#~ msgid "Not Implemented"
+#~ msgstr "Non implémenté"
+#
+#
+#
+#~ msgid "Sat"
+#~ msgstr "Sat"
+#
+#
+#~ msgid "Selected"
+#~ msgstr "Sélectionné"
