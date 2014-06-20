@@ -2080,6 +2080,116 @@
     </Region>
   </Server>
   
+  <Server Name="metoffice.gov.uk" Url="http://www.metoffice.gov.uk/weather/charts/">
+    <Region Name="UK">
+      <Map Url="FSXX00T_00.jpg" Contents="Analysis Chart 00z" Area="1" />
+      <Map Url="FSXX00T_12.jpg" Contents="Forecast Chart 12z" Area="1" />
+      <Map Url="FSXX00T_24.jpg" Contents="Forecast Chart 24z" Area="1" />
+      <Map Url="FSXX00T_36.jpg" Contents="Forecast Chart 36z" Area="1" />
+      <Map Url="FSXX00T_48.jpg" Contents="Forecast Chart 48z" Area="1" />
+      <Map Url="FSXX00T_60.jpg" Contents="Forecast Chart 60z" Area="1" />
+      <Map Url="FSXX00T_72.jpg" Contents="Forecast Chart 72z" Area="1" />
+      <Map Url="FSXX00T_84.jpg" Contents="Forecast Chart 84z" Area="1" />
+
+      <Area Name="1" lat1="20N" lat2="60N" lon1="40W" lon2="30E" />
+    </Region>
+  </Server>
+
+  <Server Name="weathercharts.org" Url="http://www.weathercharts.net/">
+    <Region Name="UK">
+      <Map Url="noaa_ukmo_analysis/previous/PPVA89_fullsize_00z_last.gif" Contents="MSLP Analysis 00z" Area="1" />
+      <Map Url="noaa_ukmo_analysis/previous/PPVA89_fullsize_06z_last.gif" Contents="MSLP Analysis 06z" Area="1" />
+      <Map Url="noaa_ukmo_analysis/previous/PPVA89_fullsize_12z_last.gif" Contents="MSLP Analysis 12z" Area="1" />
+      <Map Url="noaa_ukmo_analysis/previous/PPVA89_fullsize_18z_last.gif" Contents="MSLP Analysis 18z" Area="1" />
+      
+      <Map Url="northwood_analysis/northwood_analysis.png" Contents="Surface Analysis" Area="2" />
+      <Map Url="noaa_ukmo_prognosis/PPVE89_fullsize.gif" Contents="36 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVG89_fullsize.gif" Contents="48 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVJ89_fullsize.gif" Contents="60 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVK89_fullsize.gif" Contents="72 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVL89_fullsize.gif" Contents="84 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVM89_fullsize.gif" Contents="96 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVO89_fullsize.gif" Contents="120 Hour MSLP" Area="3" />
+
+      <Area Name="1" lat1="40N" lat2="70N" lon1="50W" lon2="50E" />
+      <Area Name="2" lat1="40N" lat2="70N" lon1="60W" lon2="40E" />
+      <Area Name="3" lat1="40N" lat2="70N" lon1="50W" lon2="50E" />
+    </Region>
+  </Server>
+
+  <Server Name="NOAA Ocean Prediction Center" Url="http://www.opc.ncep.noaa.gov/">
+    <Region Name="Atlantic">
+      <Map Url="A_sfc_full_ocean.jpg" Contents="Atlatic ocean analysis" Area="1" />
+      <Map Url="A_sfc_full_ocean_color.png" Contents="Atlantic ocean Analysis - color" Area="1" />
+      <Map Url="shtml/A_24hr500bw.gif" Contents="24-hour 500 MB Forecast" Area="2" />
+      <Map Url="shtml/A_48hr500bw.gif" Contents="48-hour 500 MB Forecast" Area="2" />
+      <Map Url="shtml/A_96hr500bw.gif" Contents="96-hour 500 MB Forecast" Area="2" />
+      <Map Url="shtml/A_24hrbw.gif" Contents="24-hour Surface Forecast" Area="2" />
+      <Map Url="shtml/A_48hrbw.gif" Contents="48-hour Surface Forecast" Area="2" />
+      <Map Url="shtml/A_96hrbw.gif" Contents="96-hour Surface Forecast" Area="2" />
+      <Map Url="shtml/A_48hrwind_wave.gif" Contents="48-hour Wind Wave Forecast" Area="2" />
+      <Map Url="shtml/A_96hrwind_wave.gif" Contents="96-hour Wind Wave Forecast" Area="2" />
+      <Map Url="shtml/A_024hrwper_color.gif" Contents="24-hour Wave Forecast" Area="3" />
+      <Map Url="shtml/A_048hrwper_color.gif" Contents="48-hour Wave Forecast" Area="3" />
+      <Map Url="shtml/A_096hrwper_color.gif" Contents="96-hour Wave Forecast" Area="3" />
+      <Map Url="shtml/ira1.gif" Contents="Wind/Wave Analysis (FEET)" Area="4" />
+      <Map Url="A_w_sfc_color.png" Contents="West Atlantic Surface Analysis" Area="5" />
+      <Map Url="A_e_sfc_color.png" Contents="East Atlantic Surface Analysis" Area="6" />
+      <Map Url="sst/images/gulfstream/ncomhrCurrWatlGS.png" Contents="Gulf Stream Currents" Area="7" />
+      <Map Url="sst/images/gulfstream/GScomp_NCOMHR.png" Contents="Gulf Stream Sea Surface Temperature" Area="8" />
+      <Map Url="images/regions/rtofs/rtofssstAtl.jpg" Contents="RTOFS SST in the Atlantic" Area="9" />
+      <Map Url="images/regions/oisst/OISSTAtl.jpg" Contents="Ol SST in the Atlantic" Area="9" />
+      <Map Url="images/regions/rtofs/rtofssstGM.jpg" Contents="RTOFS SST in the Gulf of Mexico" Area="10" />
+
+      <Area Name="1" lat1="20N" lat2="65N" lon1="100W" lon2="10E" />
+      <Area Name="2" lat1="20N" lat2="50N" lon1="95W" lon2="40W" />
+      <Area Name="3" lat1="20N" lat2="55N" lon1="95W" lon2="10E" />
+      <Area Name="4" lat1="20N" lat2="50N" lon1="100W" lon2="40W" />
+      <Area Name="5" lat1="20N" lat2="65N" lon1="100W" lon2="40W" />
+      <Area Name="6" lat1="20N" lat2="65N" lon1="50W" lon2="10E" />
+      <Area Name="7" lat1="25N" lat2="42N" lon1="82W" lon2="64W" />
+      <Area Name="8" lat1="25N" lat2="42N" lon1="82W" lon2="64W" />
+      <Area Name="9" lat1="25S" lat2="70N" lon1="105W" lon2="20E" />
+      <Area Name="10" lat1="15N" lat2="30N" lon1="100W" lon2="80W" />
+    </Region>
+
+    <Region Name="Pacific">
+      <Map Url="P_sfc_full_ocean.jpg" Contents="Pacific ocean Analysis" Area="1" />
+      <Map Url="P_sfc_full_ocean_color.png" Contents="Pacific ocean Analysis - color" Area="1" />
+      <Map Url="shtml/P_24hr500bw.gif" Contents="24-hour 500 MB Forecast" Area="3" />
+      <Map Url="shtml/P_48hr500bw.gif" Contents="48-hour 500 MB Forecast" Area="3" />
+      <Map Url="shtml/P_96hr500bw.gif" Contents="96-hour 500 MB Forecast" Area="3" />
+      <Map Url="shtml/P_24hrbw.gif" Contents="24-hour Surface Forecast" Area="2" />
+      <Map Url="shtml/P_48hrbw.gif" Contents="48-hour Surface Forecast" Area="3" />
+      <Map Url="shtml/P_96hrbw.gif" Contents="96-hour Surface Forecast" Area="3" />
+      <Map Url="shtml/P_24hrwind_wave.gif" Contents="24-hour Wind Wave Forecast" Area="2" />
+      <Map Url="shtml/P_48hrwind_wave.gif" Contents="48-hour Wind Wave Forecast" Area="3" />
+      <Map Url="shtml/P_96hrwind_wave.gif" Contents="96-hour Wind Wave Forecast" Area="3" />
+      <Map Url="shtml/P_024hrwper_color.gif" Contents="24-hour Wave Forecast" Area="4" />
+      <Map Url="shtml/P_048hrwper_color.gif" Contents="48-hour Wave Forecast" Area="4" />
+      <Map Url="shtml/P_096hrwper_color.gif" Contents="96-hour Wave Forecast" Area="4" />
+      <Map Url="shtml/irp1.gif" Contents="Wind/Wave Analysis (FEET)" Area="5" />
+
+      <Map Url="P_w_sfc_color.png" Contents="West Pacific Surface Analysis" Area="6" />
+      <Map Url="P_e_sfc_color.png" Contents="East Pacific Surface Analysis" Area="7" />
+      <Map Url="UA/Pac_Tropics.gif" Contents="Tropical North Pacific analysis" Area="8" />
+
+      <Area Name="1" lat1="16N" lat2="65N" lon1="135E" lon2="115W" />
+      <Area Name="2" lat1="20N" lat2="60N" lon1="155W" lon2="110W" />
+      <Area Name="3" lat1="20N" lat2="65N" lon1="140E" lon2="120W" />
+      <Area Name="4" lat1="20N" lat2="65N" lon1="140E" lon2="120W" />
+      <Area Name="5" lat1="20N" lat2="65N" lon1="110W" lon2="155W" />
+      <Area Name="6" lat1="16N" lat2="65N" lon1="135E" lon2="165W" />
+      <Area Name="7" lat1="16N" lat2="65N" lon1="175W" lon2="115W" />
+      <Area Name="8" lat1="0N" lat2="30N" lon1="130E" lon2="110W" />
+    </Region>
+  </Server>
+
+<!--
+    ecowatch incomplete
+      <Map Url="http://ecowatch.ncddc.noaa.gov/JAG/Navy/data/satellite_analysis/gsnofa.gif?id=3110
+-->
+
 <!-- www.mar.mil.br requires year month day time
 http://www.mar.mil.br/dhn/chm/meteo/prev/cartas/C14051612.jpg
 -->

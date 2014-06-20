@@ -49,12 +49,12 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
     m_sSkew->SetValue(m_wfimg.skew);
     m_cFilter->SetSelection(m_wfimg.filter);
 
+    MakeNewCoordinates();
+
     m_wfimg.MakePhasedImage();
 
     m_sPhasing->SetRange(0, m_wfimg.m_phasedimg.GetWidth()-1);
     m_swFaxArea1->SetScrollbars(1, 1, m_wfimg.m_phasedimg.GetWidth(), m_wfimg.m_phasedimg.GetHeight());
-
-    MakeNewCoordinates();
     
     m_cRotation->SetSelection(m_curCoords->rotation);
 
@@ -155,15 +155,11 @@ void WeatherFaxWizard::MakeNewCoordinates()
         m_cbCoordSet->Append(m_Coords[i]->name);
     }
 
-    m_cbCoordSet->SetSelection(sel);
     m_newCoords = new WeatherFaxImageCoordinates(newcoordname);
-
     SetCoords(sel);
 
-    if(m_Coords.GetCount() == 0) {
-//        m_bRemoveCoordSet->Disable();        
+    if(m_Coords.GetCount() == 0)
         m_cbCoordSet->Disable();
-    }
 }
 
 
@@ -698,13 +694,18 @@ void WeatherFaxWizard::OnCoordText( wxCommandEvent& event )
     else if(index != m_SelectedIndex)
         return;
 
-    m_cbCoordSet->SetString(m_SelectedIndex, event.GetString());
+    static bool recursion = false;
+    if(!recursion) {
+        recursion = true;
+        m_cbCoordSet->SetString(m_SelectedIndex, event.GetString());
+    }
+    recursion = false;
     m_curCoords->name = event.GetString();
 }
 
 void WeatherFaxWizard::OnRemoveCoords( wxCommandEvent& event )
 {
-    int selection = m_SelectedIndex;//m_cbCoordSet->GetSelection();
+    int selection = m_SelectedIndex;
     if(selection == 0) /* don't delete first item, button should be disabled anyway */
         return;
 
@@ -760,7 +761,9 @@ bool WeatherFaxWizard::ApplyMapping()
     m_sCoord2Lat->SetValue(m_sCoord2LatUnMapped->GetValue());
     m_sCoord2Lon->SetValue(m_sCoord2LonUnMapped->GetValue());
 
+#if !wxCHECK_VERSION(3, 0, 0)
     m_cbCoordSet->SetValue(m_curCoords->name);
+#endif
 
     Refresh();
     return true;
@@ -768,14 +771,13 @@ bool WeatherFaxWizard::ApplyMapping()
 
 void WeatherFaxWizard::SetUnMappedCoordRanges()
 {
-    int w = m_wfimg.m_phasedimg.GetWidth(), h = m_wfimg.m_phasedimg.GetHeight();
+    int w = m_wfimg.m_origimg.GetWidth(), h = m_wfimg.m_origimg.GetHeight();
     m_sCoord1XUnMapped->SetRange(0, w);
     m_sCoord2XUnMapped->SetRange(0, w);
     m_sCoord1YUnMapped->SetRange(0, h);
     m_sCoord2YUnMapped->SetRange(0, h);
 
-    m_swFaxArea2->SetScrollbars
-        (1, 1, m_wfimg.m_phasedimg.GetWidth(), m_wfimg.m_phasedimg.GetHeight());
+    m_swFaxArea2->SetScrollbars(1, 1, w, h);
 }
 
 void WeatherFaxWizard::SetCoordRanges()
@@ -863,7 +865,9 @@ void WeatherFaxWizard::SetCoords(int index)
 
     m_SelectedIndex = index;
 
+#if !wxCHECK_VERSION(3, 0, 0)
     m_cbCoordSet->SetValue(m_curCoords->name);
+#endif
 
     double x1 = m_curCoords->p1.x, y1 = m_curCoords->p1.y;
     double x2 = m_curCoords->p2.x, y2 = m_curCoords->p2.y;

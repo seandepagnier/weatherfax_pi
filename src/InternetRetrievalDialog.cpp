@@ -5,7 +5,7 @@
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
- *   Copyright (C) 2013 by Sean D'Epagnier                                 *
+ *   Copyright (C) 2014 by Sean D'Epagnier                                 *
  *   sean at depagnier dot com                                             *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -552,7 +552,7 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
                 wxMessageDialog mdlg(this, _("Timed out waiting for headers for: ") +
                                      faxurl->Contents + _T("\n") +
                                      faxurl->Url + _T("\n") +
-                                     _("Verify there is a working internet connection.") +
+                                     _("Verify there is a working internet connection.") + _T("\n") +
                                      _("If the url is incorrect please edit the xml and/or post a bug report."),
                                      _("Weather Fax"), wxOK | wxICON_ERROR);
                 mdlg.ShowModal();
@@ -563,10 +563,16 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
                 return;
 
             int size = input->GetSize();
+            if(size < 0) {
+                wxMessageDialog mdlg(this, _("Failed to read file size aborting."),
+                                     _("Weather Fax"), wxOK | wxICON_INFORMATION);
+                mdlg.ShowModal();
+                return;
+            }
 
             progressdialog.Hide();
             wxProgressDialog progressdialog2(_("WeatherFax InternetRetrieval"),
-                                             _("Receiving: ")+ faxurl->Contents, size, this,
+                                             _("Receiving: ") + faxurl->Contents, size, this,
                                              wxPD_CAN_ABORT | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
 
             wxFileOutputStream output(filename);
@@ -658,7 +664,7 @@ void InternetRetrievalDialog::Filter()
 
             for(std::list<FaxRegion>::iterator it2 = m_Regions.begin();
                 it2 != m_Regions.end(); it2++)
-                if(it2->Name == (*it)->Region)
+                if(it2->Name == (*it)->Region && it2->Server == (*it)->Server)
                     it2->Filtered = false;
         }
             
@@ -691,6 +697,7 @@ void InternetRetrievalDialog::RebuildRegions()
     if(m_bDisableRegions)
         return;
 
+    /* remember which regions are selected */
     for(std::list<FaxRegion>::iterator it = m_Regions.begin(); it != m_Regions.end(); it++)
         it->Selected = HasRegion(it->Name);
 
