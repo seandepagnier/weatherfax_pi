@@ -87,7 +87,7 @@ WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString&
 	m_menu1->AppendSeparator();
 	
 	wxMenuItem* m_menuItem9;
-	m_menuItem9 = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("Preferences") ) + wxT('\t') + wxT("Ctrl+p"), wxEmptyString, wxITEM_NORMAL );
+	m_menuItem9 = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("&Preferences") ) + wxT('\t') + wxT("Ctrl+p"), wxEmptyString, wxITEM_NORMAL );
 	m_menu1->Append( m_menuItem9 );
 	
 	m_menu1->AppendSeparator();
@@ -265,7 +265,7 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	fgSizer28->SetFlexibleDirection( wxBOTH );
 	fgSizer28->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_lStations = new wxListBox( m_panel1, wxID_ANY, wxDefaultPosition, wxSize( 150,100 ), 0, NULL, wxLB_MULTIPLE ); 
+	m_lStations = new wxListBox( m_panel1, wxID_ANY, wxDefaultPosition, wxSize( 150,100 ), 0, NULL, wxLB_EXTENDED ); 
 	fgSizer28->Add( m_lStations, 0, wxALL|wxEXPAND, 5 );
 	
 	wxFlexGridSizer* fgSizer29;
@@ -351,7 +351,7 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	m_panel1->SetSizer( fgSizer26 );
 	m_panel1->Layout();
 	fgSizer26->Fit( m_panel1 );
-	m_notebook1->AddPage( m_panel1, _("Filter"), false );
+	m_notebook1->AddPage( m_panel1, _("Filter"), true );
 	m_panel2 = new wxPanel( m_notebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer31;
 	fgSizer31 = new wxFlexGridSizer( 1, 0, 0, 0 );
@@ -410,7 +410,7 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	m_panel3->SetSizer( fgSizer30 );
 	m_panel3->Layout();
 	fgSizer30->Fit( m_panel3 );
-	m_notebook1->AddPage( m_panel3, _("Capture Options"), true );
+	m_notebook1->AddPage( m_panel3, _("Capture Options"), false );
 	m_panel7 = new wxPanel( m_notebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer49;
 	fgSizer49 = new wxFlexGridSizer( 0, 2, 0, 0 );

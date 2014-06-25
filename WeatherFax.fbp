@@ -1054,7 +1054,7 @@
                         <object class="notebookpage" expanded="0">
                             <property name="bitmap"></property>
                             <property name="label">Filter</property>
-                            <property name="select">0</property>
+                            <property name="select">1</property>
                             <object class="wxPanel" expanded="0">
                                 <property name="BottomDockable">1</property>
                                 <property name="LeftDockable">1</property>
@@ -1775,7 +1775,7 @@
                                                             <property name="resize">Resizable</property>
                                                             <property name="show">1</property>
                                                             <property name="size">150,100</property>
-                                                            <property name="style">wxLB_MULTIPLE</property>
+                                                            <property name="style">wxLB_EXTENDED</property>
                                                             <property name="subclass"></property>
                                                             <property name="toolbar_pane">0</property>
                                                             <property name="tooltip"></property>
@@ -3063,7 +3063,7 @@
                         <object class="notebookpage" expanded="0">
                             <property name="bitmap"></property>
                             <property name="label">Capture Options</property>
-                            <property name="select">1</property>
+                            <property name="select">0</property>
                             <object class="wxPanel" expanded="0">
                                 <property name="BottomDockable">1</property>
                                 <property name="LeftDockable">1</property>

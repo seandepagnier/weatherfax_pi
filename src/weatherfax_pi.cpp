@@ -185,6 +185,11 @@ void weatherfax_pi::OnToolbarToolCallback(int id)
 {
     m_pWeatherFax->Show(!m_pWeatherFax->IsShown());
 
+    if(!m_pWeatherFax->IsShown()) {
+        m_pWeatherFax->m_SchedulesDialog.Hide();
+        m_pWeatherFax->m_InternetRetrievalDialog.Hide();
+    }
+
     RearrangeWindow();
 
     wxPoint p = m_pWeatherFax->GetPosition();

@@ -591,6 +591,7 @@ void SchedulesDialog::RebuildList()
         if(!(*it)->Filtered) {
             wxListItem item;
             item.SetData(*it);
+            item.SetId(m_lSchedules->GetItemCount());
             UpdateItem(m_lSchedules->InsertItem(item));
         }
     }

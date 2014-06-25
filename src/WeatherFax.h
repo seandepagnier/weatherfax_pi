@@ -95,11 +95,10 @@ public:
     WeatherFaxImageCoordinateList m_BuiltinCoords, m_UserCoords;
 
     std::vector<WeatherFaxImage*>m_Faxes;
-
-protected:
     SchedulesDialog m_SchedulesDialog;
     InternetRetrievalDialog m_InternetRetrievalDialog;
 
+protected:
     weatherfax_pi &m_weatherfax_pi;
 };
 
