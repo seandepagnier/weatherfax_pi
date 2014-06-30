@@ -2082,7 +2082,7 @@
   
   <Server Name="metoffice.gov.uk" Url="http://www.metoffice.gov.uk/weather/charts/">
     <Region Name="UK">
-      <Map Url="FSXX00T_00.jpg" Contents="Analysis Chart 00z" Area="1" />
+      <Map Url="FSXX00T_00.jpg" Contents="Analysis Chart 00z" Area="2" />
       <Map Url="FSXX00T_12.jpg" Contents="Forecast Chart 12z" Area="1" />
       <Map Url="FSXX00T_24.jpg" Contents="Forecast Chart 24z" Area="1" />
       <Map Url="FSXX00T_36.jpg" Contents="Forecast Chart 36z" Area="1" />
@@ -2091,7 +2091,8 @@
       <Map Url="FSXX00T_72.jpg" Contents="Forecast Chart 72z" Area="1" />
       <Map Url="FSXX00T_84.jpg" Contents="Forecast Chart 84z" Area="1" />
 
-      <Area Name="1" lat1="20N" lat2="60N" lon1="40W" lon2="30E" />
+      <Area Name="1" lat1="40N" lat2="70N" lon1="60W" lon2="40E" />
+      <Area Name="2" lat1="40N" lat2="70N" lon1="60W" lon2="40E" />
     </Region>
   </Server>
 

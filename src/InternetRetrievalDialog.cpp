@@ -497,6 +497,63 @@ void InternetRetrievalDialog::OnNoRegions( wxCommandEvent& event )
     Filter();
 }
 
+/* put download in a thread because the wx routines are all blocking
+   this allows the user to cancel interactively
+ */
+class DownloadThread : public wxThread
+{
+public:
+    DownloadThread(wxString fu, wxString fn)
+        : url(fu), filename(fn),
+          position(0), size(0), exitcode(0)
+        {
+            Create();
+        }
+
+    void *Entry()
+        {
+            wxURL wxurl(url);
+
+            if(wxurl.GetError() != wxURL_NOERR) {
+                exitcode = 1;
+                return NULL;
+            }
+
+            wxInputStream *input = wxurl.GetInputStream();
+            if(!input) {
+                exitcode = 2;
+                return NULL;
+            }
+
+            size = input->GetSize();
+            if(size < 0) {
+                exitcode = 3;
+                return NULL;
+            }
+
+            wxFileOutputStream output(filename);
+            while(!input->Eof() && !TestDestroy()) {
+                if(input->CanRead()) {
+                    char buffer[16384];
+                    input->Read(buffer, sizeof buffer);
+                    int lastread = input->LastRead();
+                    output.Write(buffer, lastread);
+                    position += lastread;
+                } else
+                    wxThread::Sleep(100);
+
+                if(position >= size)
+                    break;
+            }
+            return NULL;
+        }
+
+    wxString url, filename;
+    int position, size;
+    
+    int exitcode;
+};
+
 void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
 {
     int count = 0;
@@ -536,19 +593,33 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
         }
 
         {
-            wxURL url(faxurl->Url);
-
-            if(url.GetError() != wxURL_NOERR)
-                continue;
-
             wxProgressDialog progressdialog(_("WeatherFax InternetRetrieval"),
-                                            _("Reading Headers: ") + faxurl->Contents, 1, this,
+                                            _("Reading Headers: ") + faxurl->Contents, 1000, this,
                                             wxPD_CAN_ABORT | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
             progressdialog.Update(0);
+            
+            DownloadThread *dl = new DownloadThread(faxurl->Url, filename);
+            dl->Run();
 
-            wxInputStream *input = url.GetInputStream();
+            while(dl->IsRunning()) {
+                bool ok;
+                if(dl->size)
+                    ok = progressdialog.Update(1000*dl->position / dl->size,
+                                               _("Reading") + wxString(_T(": "))
+                                               + faxurl->Contents);
+                else
+                    ok = progressdialog.Update(0);
+                if(!ok) {
+                    dl->Delete();
+                    return;
+                }
+                wxThread::Sleep(250);
+            }
 
-            if(!input) {
+            switch(dl->exitcode) {
+            case 1:
+            case 2:
+            {
                 wxMessageDialog mdlg(this, _("Timed out waiting for headers for: ") +
                                      faxurl->Contents + _T("\n") +
                                      faxurl->Url + _T("\n") +
@@ -556,42 +627,12 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
                                      _("If the url is incorrect please edit the xml and/or post a bug report."),
                                      _("Weather Fax"), wxOK | wxICON_ERROR);
                 mdlg.ShowModal();
-                return;
-            }
-
-            if(!progressdialog.Update(0, _("Reading Size: ") + faxurl->Contents))
-                return;
-
-            int size = input->GetSize();
-            if(size < 0) {
-                wxMessageDialog mdlg(this, _("Failed to read file size aborting."),
+            } return;
+            case 3:
+            { wxMessageDialog mdlg(this, _("Failed to read file size aborting."),
                                      _("Weather Fax"), wxOK | wxICON_INFORMATION);
                 mdlg.ShowModal();
-                return;
-            }
-
-            progressdialog.Hide();
-            wxProgressDialog progressdialog2(_("WeatherFax InternetRetrieval"),
-                                             _("Receiving: ") + faxurl->Contents, size, this,
-                                             wxPD_CAN_ABORT | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
-
-            wxFileOutputStream output(filename);
-            int position = 0;
-            while(!input->Eof() ) {
-                if(input->CanRead()) {
-                    char buffer[16384];
-                    input->Read(buffer, sizeof buffer);
-                    int lastread = input->LastRead();
-                    output.Write(buffer, lastread);
-                    position += lastread;
-                } else
-                    wxThread::Sleep(100);
-
-                if(position >= size)
-                    break;
-
-                if(!progressdialog2.Update(position))
-                    return;
+            } return;
             }
         }
 

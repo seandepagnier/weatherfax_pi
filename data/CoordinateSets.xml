@@ -144,4 +144,5 @@
     <Coordinate Name="NOAA Ocean Prediction Center - Pacific - 6" X1="111" Y1="249" Lat1="60.00000" Lon1="140.00000" X2="1220" Y2="1470" Lat2="20.00000" Lon2="-170.00000" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
     <Coordinate Name="NOAA Ocean Prediction Center - Pacific - 7" X1="111" Y1="249" Lat1="60.00000" Lon1="-170.00000" X2="1220" Y2="1470" Lat2="20.00000" Lon2="-120.00000" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
     <Coordinate Name="NOAA Ocean Prediction Center - Pacific - 8" X1="72" Y1="426" Lat1="30.00000" Lon1="135.00000" X2="1576" Y2="660" Lat2="15.00000" Lon2="-120.00000" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
+    <Coordinate Name="metoffice.gov.uk - UK - 2" X1="674" Y1="1055" Lat1="60.00000" Lon1="-45.00000" X2="1308" Y2="1516" Lat2="30.00000" Lon2="15.00000" Mapping="Polar" InputPoleX="155" InputPoleY="-41" InputEquator="843.00000" InputTrueRatio="0.9860" MappingMultiplier="1.0000" MappingRatio="0.6600" />
 </WeatherFaxCoordinates>
