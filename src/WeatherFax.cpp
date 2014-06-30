@@ -37,6 +37,8 @@
 #include "WeatherFaxWizard.h"
 #include "AboutDialog.h"
 
+#include "georef.h"
+
 #include "wximgkap.h"
 
 /* replace characters a in input with b */
@@ -355,7 +357,11 @@ void WeatherFax::Goto(int selection)
         lon1 += 360;
 
     double distance;
+#if 0 // for opencpn 3.3 and later
     DistanceBearingMercator_Plugin(lat0, lon0, lat1, lon1, NULL, &distance);
+#else
+    WFDistanceBearingMercator(lat0, lon0, lat1, lon1, NULL, &distance);
+#endif
     if(!isnan(distance))
         JumpToPosition((lat0 + lat1) / 2, (lon0 + lon1) / 2, .5/distance);
 }
