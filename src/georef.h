@@ -34,6 +34,42 @@
       #define PI        3.1415926535897931160E0      /* pi */
 #endif
 
+#define DEGREE    (PI/180.0)
+#define RADIAN    (180.0/PI)
+
+#define DATUM_INDEX_WGS84     100
+#define DATUM_INDEX_UNKNOWN   -1
+
+
+static const double WGS84_semimajor_axis_meters       = 6378137.0;           // WGS84 semimajor axis
+static const double mercator_k0                       = 0.9996;
+static const double WGSinvf                           = 298.257223563;       /* WGS84 1/f */
+
+static void WFtoSM_ECC(double lat, double lon, double lat0, double lon0, double *x, double *y)
+{
+      const double f = 1.0 / WGSinvf;       // WGS84 ellipsoid flattening parameter
+      const double e2 = 2 * f - f * f;      // eccentricity^2  .006700
+      const double e = sqrt(e2);
+
+      const double z = WGS84_semimajor_axis_meters * mercator_k0;
+
+      *x = (lon - lon0) * DEGREE * z;
+
+// y =.5 ln( (1 + sin t) / (1 - sin t) )
+      const double s = sin(lat * DEGREE);
+//      const double y3 = (.5 * log((1 + s) / (1 - s))) * z;
+
+      const double s0 = sin(lat0 * DEGREE);
+//      const double y30 = (.5 * log((1 + s0) / (1 - s0))) * z;
+//      const double y4 = y3 - y30;
+
+    //Add eccentricity terms
+
+      const double falsen =  z *log(tan(PI/4 + lat0 * DEGREE / 2)*pow((1. - e * s0)/(1. + e * s0), e/2.));
+      const double test =    z *log(tan(PI/4 + lat  * DEGREE / 2)*pow((1. - e * s )/(1. + e * s ), e/2.));
+      *y = test - falsen;
+}
+
 static void WFDistanceBearingMercator(double lat0, double lon0, double lat1, double lon1, double *brg, double *dist)
 {
       //    Calculate bearing by conversion to SM (Mercator) coordinates, then simple trigonometry
@@ -69,7 +105,7 @@ static void WFDistanceBearingMercator(double lat0, double lon0, double lat1, dou
           const double mlat0 = fabs(lat1 - lat0) < 1e-9 ? lat0 + 1e-9 : lat0;
 
           double east, north;
-          toSM_ECC(lat1, lon1x, mlat0, lon0x, &east, &north);
+          WFtoSM_ECC(lat1, lon1x, mlat0, lon0x, &east, &north);
           const double C = atan2(east, north);
           if(cos(C))
           {
@@ -88,7 +124,7 @@ static void WFDistanceBearingMercator(double lat0, double lon0, double lat1, dou
       if(brg)
       {
           double east, north;
-          toSM_ECC(lat1, lon1x, lat0, lon0x, &east, &north);
+          WFtoSM_ECC(lat1, lon1x, lat0, lon0x, &east, &north);
 
           const double C = atan2(east, north);
           const double brgt = 180. + (C * 180. / PI);
