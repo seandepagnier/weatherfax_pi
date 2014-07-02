@@ -59,6 +59,7 @@ class WeatherFaxBase : public wxFrame
 		wxMenuBar* m_menubar1;
 		wxMenu* m_menu1;
 		wxMenuItem* m_mEdit;
+		wxMenuItem* m_mGoto;
 		wxMenuItem* m_mExport;
 		wxMenuItem* m_mDelete;
 		wxMenu* m_menu2;

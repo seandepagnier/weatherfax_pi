@@ -553,18 +553,13 @@ void WeatherFax::OnAbout( wxCommandEvent& event )
 
 void WeatherFax::UpdateMenuStates()
 {
-    wxArrayInt aSelections;
-    if(m_lFaxes->GetSelections(aSelections)) {
-        m_mEdit->Enable();
-        m_mExport->Enable();
-        m_mDelete->Enable();
-        EnableDisplayControls(true);
-    } else {
-        m_mEdit->Enable(false);
-        m_mExport->Enable(false);
-        m_mDelete->Enable(false);
-        EnableDisplayControls(false);
-    }
+    wxArrayInt Selections;
+    bool e = m_lFaxes->GetSelections(Selections);
+    m_mEdit->Enable(e);
+    m_mGoto->Enable(e);
+    m_mExport->Enable(e);
+    m_mDelete->Enable(e);
+    EnableDisplayControls(e);
 }
 
 void *DecoderThread::Entry() {

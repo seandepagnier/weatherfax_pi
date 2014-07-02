@@ -74,7 +74,6 @@ WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString&
 	m_mEdit = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("&Edit") ) + wxT('\t') + wxT("Ctrl+e"), wxEmptyString, wxITEM_NORMAL );
 	m_menu1->Append( m_mEdit );
 	
-	wxMenuItem* m_mGoto;
 	m_mGoto = new wxMenuItem( m_menu1, wxID_ANY, wxString( _("&Goto") ) + wxT('\t') + wxT("Ctrl+g"), wxEmptyString, wxITEM_NORMAL );
 	m_menu1->Append( m_mGoto );
 	
