@@ -504,7 +504,7 @@ class DownloadThread : public wxThread
 {
 public:
     DownloadThread(wxString fu, wxString fn)
-        : url(fu), filename(fn),
+        : wxThread(wxTHREAD_JOINABLE), please_quit(false), url(fu), filename(fn),
           position(0), size(0), exitcode(0)
         {
             Create();
@@ -532,7 +532,7 @@ public:
             }
 
             wxFileOutputStream output(filename);
-            while(!input->Eof() && !TestDestroy()) {
+            while(!input->Eof() && !TestDestroy() && !please_quit) {
                 if(input->CanRead()) {
                     char buffer[16384];
                     input->Read(buffer, sizeof buffer);
@@ -548,6 +548,7 @@ public:
             return NULL;
         }
 
+    bool please_quit;
     wxString url, filename;
     int position, size;
     
@@ -610,11 +611,13 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
                 else
                     ok = progressdialog.Update(0);
                 if(!ok) {
-                    dl->Delete();
+                    dl->please_quit = true;
                     return;
                 }
                 wxThread::Sleep(250);
             }
+
+            dl->please_quit = true;
 
             switch(dl->exitcode) {
             case 1:
