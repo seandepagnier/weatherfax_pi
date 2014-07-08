@@ -541,8 +541,14 @@ void WeatherFax::OnSchedules( wxCommandEvent& event )
 
 void WeatherFax::OnInternet( wxCommandEvent& event )
 {
+#ifdef WIN32
+    wxMessageDialog mdlg(this, _("Internet Retrieval does not work if you use the Windows Operating System"),
+                         _("Weather Fax"), wxOK | wxICON_ERROR);
+    mdlg.ShowModal();
+#else
     m_InternetRetrievalDialog.Load();
     m_InternetRetrievalDialog.Show();
+#endif
 }
 
 void WeatherFax::OnAbout( wxCommandEvent& event )
