@@ -42,6 +42,19 @@ SET(SRC_WEATHERFAX
 
             src/wximgkap.cpp
 
+            src/wxcurl/base.cpp
+            src/wxcurl/dav.cpp
+            src/wxcurl/davtool.cpp
+            src/wxcurl/dialog.cpp
+            src/wxcurl/ftp.cpp
+            src/wxcurl/ftpparse.cpp
+            src/wxcurl/ftptool.cpp
+            src/wxcurl/http.cpp
+            src/wxcurl/panel.cpp
+            src/wxcurl/telnet.cpp
+            src/wxcurl/thread.cpp
+            src/wxcurl/utils.cpp
+
             src/libaudiofile/aupv.c
             src/libaudiofile/error.c
             src/libaudiofile/extended.c
@@ -91,6 +104,13 @@ SET(SRC_WEATHERFAX
             src/libaudiofile/modules/RebufferModule.cpp
             src/libaudiofile/modules/SimpleModule.cpp
 	)
+
+INCLUDE_DIRECTORIES(src/wxcurl)
+
+IF(UNIX)
+    FIND_PACKAGE(CURL REQUIRED)
+    INCLUDE_DIRECTORIES(${CURL_INCLUDE_DIR})
+ENDIF(UNIX)
 
 IF(WIN32)
 SET(SRC_TINYXML
