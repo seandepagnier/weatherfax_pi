@@ -497,6 +497,7 @@ void InternetRetrievalDialog::OnNoRegions( wxCommandEvent& event )
     Filter();
 }
 
+#if 0
 /* put download in a thread because the wx routines are all blocking
    this allows the user to cancel interactively
  */
@@ -554,7 +555,9 @@ public:
     
     int exitcode;
 };
+#endif
 
+#include "wx/curl/dialog.h"
 void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
 {
     int count = 0;
@@ -594,6 +597,7 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
         }
 
         {
+#if 0
             wxProgressDialog progressdialog(_("WeatherFax InternetRetrieval"),
                                             _("Reading Headers: ") + faxurl->Contents, 1000, this,
                                             wxPD_CAN_ABORT | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
@@ -637,11 +641,35 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
                 mdlg.ShowModal();
             } return;
             }
+#else
+
+        wxFileOutputStream output(filename);
+        wxCurlDownloadDialog ddlg(faxurl->Url, &output, _("WeatherFax InternetRetrieval"),
+                                  _("Reading Headers: ") + faxurl->Contents, wxNullBitmap, this,
+                                  wxCTDS_CAN_PAUSE|wxCTDS_CAN_ABORT|wxCTDS_SHOW_ALL|wxCTDS_AUTO_CLOSE);
+
+        switch(ddlg.RunModal()) {
+        case wxCDRF_SUCCESS: break;
+        case wxCDRF_FAILED:
+        {
+            wxMessageDialog mdlg(this, _("Failed to Download: ") +
+                                 faxurl->Contents + _T("\n") +
+                                 faxurl->Url + _T("\n") +
+                                 _("Verify there is a working internet connection.") + _T("\n") +
+                                 _("If the url is incorrect please edit the xml and/or post a bug report."),
+                                 _("Weather Fax"), wxOK | wxICON_ERROR);
+            mdlg.ShowModal();
+            wxRemoveFile( filename );
         }
+        case wxCDRF_USER_ABORTED: return;
+        }
+#endif
+    }
 
     loadimage:
         m_weatherfax_pi.m_pWeatherFax->OpenImage
             (filename, faxurl->Server + _T(" - ") + faxurl->Region, faxurl->area_name, faxurl->Contents);
+
     }
     
     /* inform user if no faxes were selected */
