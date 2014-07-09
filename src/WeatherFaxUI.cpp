@@ -1430,6 +1430,10 @@ WeatherFaxPrefsDialog::WeatherFaxPrefsDialog( wxWindow* parent, wxWindowID id, c
 	
 	fgSizer53->Add( fgSizer511, 1, wxEXPAND, 5 );
 	
+	m_staticText45 = new wxStaticText( this, wxID_ANY, _("Recommended 4, 16, 64, or 256"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText45->Wrap( -1 );
+	fgSizer53->Add( m_staticText45, 0, wxALL, 5 );
+	
 	wxStaticBoxSizer* sbSizer181;
 	sbSizer181 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Depth") ), wxVERTICAL );
 	

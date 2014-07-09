@@ -348,6 +348,7 @@ class WeatherFaxPrefsDialog : public wxDialog
 	protected:
 		wxStaticText* m_staticText36;
 		wxStaticText* m_staticText37;
+		wxStaticText* m_staticText45;
 		wxStaticText* m_staticText38;
 		wxStdDialogButtonSizer* m_sdbSizer1;
 		wxButton* m_sdbSizer1OK;
