@@ -81,6 +81,10 @@ public:
     void StoreCoords();
 
 protected:
+    void ReadMappingLatLon(double &mapping1lat, double &mapping1lon,
+                           double &mapping2lat, double &mapping2lon);
+    void WriteMappingLatLon(double mapping1lat, double mapping1lon,
+                           double mapping2lat, double mapping2lon);
 
     void UpdatePage1();
     void UpdatePage1Rotation ( wxCommandEvent& event );
@@ -90,6 +94,7 @@ protected:
     wxString NewCoordName();
     void SetCoords(int index);
     void OnSpin( wxSpinEvent& event );
+    void OnShowLatLonMinutes( wxCommandEvent& event );
     void OnPaintImage( wxPaintEvent& event);
 
     WeatherFax &m_parent;

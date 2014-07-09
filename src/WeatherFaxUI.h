@@ -247,18 +247,25 @@ class WeatherFaxWizardBase : public wxWizard
 		wxFlexGridSizer* m_fgSizerUnMappedCoords;
 		wxComboBox* m_cbCoordSet;
 		wxButton* m_bRemoveCoordSet;
+		wxFlexGridSizer* m_fgSizerLatLonUnMapped;
 		wxRadioButton* m_rbCoord1UnMapped;
 		wxStaticText* m_staticText6;
+		wxStaticText* m_stMinutes;
 		wxSpinCtrl* m_sCoord1YUnMapped;
 		wxSpinCtrl* m_sCoord1LatUnMapped;
+		wxTextCtrl* m_tCoord1LatMinutesUnMapped;
 		wxSpinCtrl* m_sCoord1XUnMapped;
 		wxSpinCtrl* m_sCoord1LonUnMapped;
+		wxTextCtrl* m_tCoord1LonMinutesUnMapped;
 		wxRadioButton* m_rbCoord2UnMapped;
 		wxStaticText* m_staticText8;
 		wxSpinCtrl* m_sCoord2YUnMapped;
 		wxSpinCtrl* m_sCoord2LatUnMapped;
+		wxTextCtrl* m_tCoord2LatMinutesUnMapped;
 		wxSpinCtrl* m_sCoord2XUnMapped;
 		wxSpinCtrl* m_sCoord2LonUnMapped;
+		wxTextCtrl* m_tCoord2LonMinutesUnMapped;
+		wxCheckBox* m_cbShowLatLonMinutes;
 		wxStaticText* m_staticText43;
 		wxScrolledWindow* m_swFaxArea2;
 		wxStaticText* m_staticText15;
@@ -284,15 +291,15 @@ class WeatherFaxWizardBase : public wxWizard
 		wxRadioButton* m_rbCoord1;
 		wxStaticText* m_staticText61;
 		wxSpinCtrl* m_sCoord1Y;
-		wxSpinCtrl* m_sCoord1Lat;
+		wxTextCtrl* m_tCoord1Lat;
 		wxSpinCtrl* m_sCoord1X;
-		wxSpinCtrl* m_sCoord1Lon;
+		wxTextCtrl* m_tCoord1Lon;
 		wxRadioButton* m_rbCoord2;
 		wxStaticText* m_staticText81;
 		wxSpinCtrl* m_sCoord2Y;
-		wxSpinCtrl* m_sCoord2Lat;
+		wxTextCtrl* m_tCoord2Lat;
 		wxSpinCtrl* m_sCoord2X;
-		wxSpinCtrl* m_sCoord2Lon;
+		wxTextCtrl* m_tCoord2Lon;
 		wxScrolledWindow* m_swFaxArea3;
 		
 		// Virtual event handlers, overide them in your derived class
@@ -310,6 +317,7 @@ class WeatherFaxWizardBase : public wxWizard
 		virtual void OnCoordText( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnRemoveCoords( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnSpin( wxSpinEvent& event ) { event.Skip(); }
+		virtual void OnShowLatLonMinutes( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnBitmapClickPage2( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnMappingChoice( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnUpdateMapping( wxCommandEvent& event ) { event.Skip(); }

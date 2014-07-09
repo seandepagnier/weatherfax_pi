@@ -154,7 +154,7 @@ wxString weatherfax_pi::GetLongDescription()
 Can open image files directly, or decode audio faxes to an image.\n\
 With simple calibration, resulting image is overlaid on top of charts.\n\
 Converts images in mercator, polar, conic and uniform coordinates.\n\
-Can export resulting image to a kap (raster chart format) file.\n\
+Can convert any image into a raster chart.\n\
 Builtin database for HF radio fax stations via SSB.\n\
 Builtin database for internet retrieval from meterological sites.\n\
 ");

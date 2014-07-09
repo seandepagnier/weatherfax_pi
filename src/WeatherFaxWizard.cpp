@@ -267,10 +267,12 @@ void WeatherFaxWizard::OnWizardPageChanged( wxWizardEvent& event )
             m_sCoord2XUnMapped->SetValue(round(mx2));
             m_sCoord2YUnMapped->SetValue(round(my2));
     
-            m_sCoord1LatUnMapped->SetValue(m_sCoord1Lat->GetValue());
-            m_sCoord1LonUnMapped->SetValue(m_sCoord1Lon->GetValue());
-            m_sCoord2LatUnMapped->SetValue(m_sCoord2Lat->GetValue());
-            m_sCoord2LonUnMapped->SetValue(m_sCoord2Lon->GetValue());
+            double coord1lat, coord1lon, coord2lat, coord2lon;
+            m_tCoord1Lat->GetValue().ToDouble(&coord1lat);
+            m_tCoord1Lon->GetValue().ToDouble(&coord1lon);
+            m_tCoord2Lat->GetValue().ToDouble(&coord2lat);
+            m_tCoord2Lon->GetValue().ToDouble(&coord2lon);
+            WriteMappingLatLon(coord1lat, coord1lon, coord2lat, coord2lon);
         }
 
         SetUnMappedCoordRanges();
@@ -364,10 +366,8 @@ void WeatherFaxWizard::GetMappingPolar(bool onlyequator)
     double mapping1x = m_sCoord1XUnMapped->GetValue(), mapping1y = m_sCoord1YUnMapped->GetValue();
     double mapping2x = m_sCoord2XUnMapped->GetValue(), mapping2y = m_sCoord2YUnMapped->GetValue();
 
-    double mapping1lat = m_sCoord1LatUnMapped->GetValue();
-    double mapping2lat = m_sCoord2LatUnMapped->GetValue();
-    double mapping1lon = m_sCoord1LonUnMapped->GetValue();
-    double mapping2lon = m_sCoord2LonUnMapped->GetValue();
+    double mapping1lat, mapping1lon, mapping2lat, mapping2lon;
+    ReadMappingLatLon(mapping1lat, mapping1lon, mapping2lat, mapping2lon);
 
     bool south = false;
     if(mapping1lat * mapping2lat < 0) {
@@ -534,8 +534,8 @@ or the coordinates specified are not correct\n"),
 
 void WeatherFaxWizard::GetMappingFixedFlat()
 {
-    double mapping1lat = m_sCoord1LatUnMapped->GetValue();
-    double mapping2lat = m_sCoord2LatUnMapped->GetValue();
+    double mapping1lat, mapping1lon, mapping2lat, mapping2lon;
+    ReadMappingLatLon(mapping1lat, mapping1lon, mapping2lat, mapping2lon);
 
     double pp1 = 1 - mapping1lat / 90;
     double pp2 = 1 - mapping2lat / 90;
@@ -565,10 +565,8 @@ void WeatherFaxWizard::GetAspectRatio()
        easily exported to a kap file */
 
     wxPoint p1, p2;
-    double mapping1lat = m_sCoord1LatUnMapped->GetValue();
-    double mapping2lat = m_sCoord2LatUnMapped->GetValue();
-    double mapping1lon = m_sCoord1LonUnMapped->GetValue();
-    double mapping2lon = m_sCoord2LonUnMapped->GetValue();
+    double mapping1lat, mapping1lon, mapping2lat, mapping2lon;
+    ReadMappingLatLon(mapping1lat, mapping1lon, mapping2lat, mapping2lon);
 
     PlugIn_ViewPort smvp;
     smvp.clat = 0, smvp.clon = 0, smvp.view_scale_ppm = 1, smvp.skew = 0, smvp.rotation = 0;
@@ -756,10 +754,13 @@ bool WeatherFaxWizard::ApplyMapping()
     m_sCoord2X->SetValue(mx2);
     m_sCoord2Y->SetValue(my2);
 
-    m_sCoord1Lat->SetValue(m_sCoord1LatUnMapped->GetValue());
-    m_sCoord1Lon->SetValue(m_sCoord1LonUnMapped->GetValue());
-    m_sCoord2Lat->SetValue(m_sCoord2LatUnMapped->GetValue());
-    m_sCoord2Lon->SetValue(m_sCoord2LonUnMapped->GetValue());
+    double mapping1lat, mapping1lon, mapping2lat, mapping2lon;
+    ReadMappingLatLon(mapping1lat, mapping1lon, mapping2lat, mapping2lon);
+
+    m_tCoord1Lat->SetValue(wxString::Format(_T("%.6f"), mapping1lat));
+    m_tCoord1Lon->SetValue(wxString::Format(_T("%.6f"), mapping1lon));
+    m_tCoord2Lat->SetValue(wxString::Format(_T("%.6f"), mapping2lat));
+    m_tCoord2Lon->SetValue(wxString::Format(_T("%.6f"), mapping2lon));
 
 #if !wxCHECK_VERSION(3, 0, 0)
     m_cbCoordSet->SetValue(m_curCoords->name);
@@ -823,6 +824,40 @@ back to this step and get the mapping parameters again to improve the estimate.\
     w.ShowModal();
 }
 
+void WeatherFaxWizard::ReadMappingLatLon(double &mapping1lat, double &mapping1lon,
+                                          double &mapping2lat, double &mapping2lon)
+{
+    double mapping1latminutes, mapping1lonminutes, mapping2latminutes, mapping2lonminutes;
+    mapping1lat = m_sCoord1LatUnMapped->GetValue();
+    m_tCoord1LatMinutesUnMapped->GetValue().ToDouble(&mapping1latminutes);
+    mapping1lat += ((mapping1lat > 0) ? mapping1latminutes : - mapping1latminutes) / 60;
+
+    mapping1lon = m_sCoord1LonUnMapped->GetValue();
+    m_tCoord1LonMinutesUnMapped->GetValue().ToDouble(&mapping1lonminutes);
+    mapping1lon += ((mapping1lon > 0) ? mapping1lonminutes : - mapping1lonminutes) / 60;
+
+    mapping2lat = m_sCoord2LatUnMapped->GetValue();
+    m_tCoord2LatMinutesUnMapped->GetValue().ToDouble(&mapping2latminutes);
+    mapping2lat += ((mapping2lat > 0) ? mapping2latminutes : - mapping2latminutes) / 60;
+
+    mapping2lon = m_sCoord2LonUnMapped->GetValue();
+    m_tCoord2LonMinutesUnMapped->GetValue().ToDouble(&mapping2lonminutes);
+    mapping2lon += ((mapping2lon > 0) ? mapping2lonminutes : - mapping2lonminutes) / 60;
+}
+
+void WeatherFaxWizard::WriteMappingLatLon(double mapping1lat, double mapping1lon,
+                                          double mapping2lat, double mapping2lon)
+{
+    m_sCoord1LatUnMapped->SetValue(trunc(mapping1lat)), mapping1lat -= trunc(mapping1lat);
+    m_tCoord1LatMinutesUnMapped->SetValue(wxString::Format(_T("%.4f"), 60*fabsf(mapping1lat)));
+    m_sCoord1LonUnMapped->SetValue(trunc(mapping1lon)), mapping1lon -= trunc(mapping1lon);
+    m_tCoord1LonMinutesUnMapped->SetValue(wxString::Format(_T("%.4f"), 60*fabsf(mapping1lon)));
+    m_sCoord2LatUnMapped->SetValue(trunc(mapping2lat)), mapping2lat -= trunc(mapping2lat);
+    m_tCoord2LatMinutesUnMapped->SetValue(wxString::Format(_T("%.4f"), 60*fabsf(mapping2lat)));
+    m_sCoord2LonUnMapped->SetValue(trunc(mapping2lon)), mapping2lon -= trunc(mapping2lon);
+    m_tCoord2LonMinutesUnMapped->SetValue(wxString::Format(_T("%.4f"), 60*fabsf(mapping2lon)));
+}
+
 void WeatherFaxWizard::UpdatePage1()
 {
     m_wfimg.phasing = m_sPhasing->GetValue();
@@ -843,12 +878,12 @@ void WeatherFaxWizard::StoreCoords()
 {
     m_curCoords->p1.x = m_sCoord1X->GetValue();
     m_curCoords->p1.y = m_sCoord1Y->GetValue();
-    m_curCoords->lat1 = m_sCoord1Lat->GetValue();
-    m_curCoords->lon1 = m_sCoord1Lon->GetValue();
+    m_tCoord1Lat->GetValue().ToDouble(&m_curCoords->lat1);
+    m_tCoord1Lon->GetValue().ToDouble(&m_curCoords->lon1);
     m_curCoords->p2.x = m_sCoord2X->GetValue();
     m_curCoords->p2.y = m_sCoord2Y->GetValue();
-    m_curCoords->lat2 = m_sCoord2Lat->GetValue();
-    m_curCoords->lon2 = m_sCoord2Lon->GetValue();
+    m_tCoord2Lat->GetValue().ToDouble(&m_curCoords->lat2);
+    m_tCoord2Lon->GetValue().ToDouble(&m_curCoords->lon2);
 }
 
 void WeatherFaxWizard::SetCoords(int index)
@@ -885,11 +920,7 @@ void WeatherFaxWizard::SetCoords(int index)
     m_sCoord2XUnMapped->SetValue(mx2);
     m_sCoord2YUnMapped->SetValue(my2);
     
-    m_sCoord1LatUnMapped->SetValue(m_curCoords->lat1);
-    m_sCoord1LonUnMapped->SetValue(m_curCoords->lon1);
-    
-    m_sCoord2LatUnMapped->SetValue(m_curCoords->lat2);
-    m_sCoord2LonUnMapped->SetValue(m_curCoords->lon2);
+    WriteMappingLatLon(m_curCoords->lat1, m_curCoords->lon1, m_curCoords->lat2, m_curCoords->lon2);
     
     m_cMapping->SetSelection((int)m_curCoords->mapping);
     UpdateMappingControls();
@@ -911,6 +942,22 @@ void WeatherFaxWizard::SetCoords(int index)
 void WeatherFaxWizard::OnSpin( wxSpinEvent& event )
 {
     Refresh();
+}
+
+void WeatherFaxWizard::OnShowLatLonMinutes( wxCommandEvent& event )
+{
+    bool b = event.IsChecked();
+    m_stMinutes->Show(b);
+    m_tCoord1LatMinutesUnMapped->Show(b);
+    m_tCoord1LonMinutesUnMapped->Show(b);
+    m_tCoord2LatMinutesUnMapped->Show(b);
+    m_tCoord2LonMinutesUnMapped->Show(b);
+
+    // why this works, I will probably never know
+    int w, h;
+    GetSize(&w, &h);
+    SetSize(w + 1, h);
+    SetSize(w - 1, h);
 }
 
 void WeatherFaxWizard::OnPaintImage( wxPaintEvent& event)
