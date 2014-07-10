@@ -18,7 +18,8 @@
 #ifdef WXMAKINGDLL_WXCURL
     #define WXDLLIMPEXP_CURL WXEXPORT
 #elif defined(WXUSINGDLL)
-    #define WXDLLIMPEXP_CURL WXIMPORT
+//    #define WXDLLIMPEXP_CURL WXIMPORT
+    #define WXDLLIMPEXP_CURL
 #else // not making nor using DLL
     #define WXDLLIMPEXP_CURL
 

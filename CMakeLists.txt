@@ -105,14 +105,13 @@ SET(SRC_WEATHERFAX
             src/libaudiofile/modules/SimpleModule.cpp
 	)
 
-INCLUDE_DIRECTORIES(src/wxcurl)
-
 IF(WIN32)
 SET(SRC_TINYXML
             src/tinyxml/tinyxml.cpp
             src/tinyxml/tinyxmlparser.cpp
             src/tinyxml/tinyxmlerror.cpp
 )
+
 ENDIF(WIN32)
 
 ADD_DEFINITIONS(-DTIXML_USE_STL)
@@ -121,12 +120,6 @@ ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_TINYXML})
 INCLUDE_DIRECTORIES(${PLUGIN_SOURCE_DIR}/src/libaudiofile)
 
 INCLUDE("cmake/PluginInstall.cmake")
-
-IF(UNIX)
-    FIND_PACKAGE(CURL REQUIRED)
-    INCLUDE_DIRECTORIES(${CURL_INCLUDE_DIR})
-    TARGET_LINK_LIBRARIES( ${PACKAGE_NAME} ${CURL_LIBRARIES} )
-ENDIF(UNIX)
-
+INCLUDE("cmake/PluginCurl.cmake")
 INCLUDE("cmake/PluginLocalization.cmake")
 INCLUDE("cmake/PluginPackage.cmake")

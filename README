@@ -9,6 +9,9 @@ Compiling
 
 Under windows, you must find the file "opencpn.lib" (Visual Studio) or "libopencpn.dll.a" (mingw) which is built in the build directory after compiling opencpn.  This file must be copied to the plugin directory.
 
+Also for windows, you must download the libcurl.dll file into the buildwin directory:
+http://sourceforge.net/projects/opencpnplugins/files/weatherfax_pi/libcurl.dll/download
+
 Build as normally:
 
 * cd ..
