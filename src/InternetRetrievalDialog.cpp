@@ -577,8 +577,8 @@ void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
         wxString path = weatherfax_pi::StandardPath();
 
         wxString filename = faxurl->Url;
-        for(unsigned int pos = 0; pos < filename.size(); pos = filename.find('/', pos))
-            filename.replace(pos, 1, _T("!"));
+        filename.Replace(_T("/"), _T("!"));
+        filename.Replace(_T(":"), _T("!"));
 
         filename = path + wxFileName::GetPathSeparator() + filename;
 
