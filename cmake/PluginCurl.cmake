@@ -8,10 +8,20 @@
 
 INCLUDE_DIRECTORIES(src/wxcurl)
 IF(WIN32)
+  IF(MSVC)
+    SET(CURL_LIBRARIES "../buildwin/curllib")
+    INSTALL(FILES "buildwin/curllib.dll" DESTINATION ".")
+    INSTALL(FILES "buildwin/libeay32.dll" DESTINATION ".")
+    INSTALL(FILES "buildwin/openldap.dll" DESTINATION ".")
+    INSTALL(FILES "buildwin/ssleay.dll" DESTINATION ".")
+    INSTALL(FILES "buildwin/libsasl.dll" DESTINATION ".")
+  ELSE(MSVC) ## mingw
     SET(CURL_LIBRARIES "curl.dll")
-    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${CURL_LIBRARIES})
-    INCLUDE_DIRECTORIES(src/wxcurl/include)
     INSTALL(FILES "buildwin/libcurl.dll" DESTINATION ".")
+  ENDIF(MSVC)
+    
+  TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${CURL_LIBRARIES})
+  INCLUDE_DIRECTORIES(src/wxcurl/include)
 ENDIF(WIN32)
 
 IF(UNIX)
