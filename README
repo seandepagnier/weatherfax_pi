@@ -16,6 +16,8 @@ http://sourceforge.net/projects/opencpnplugins/files/weatherfax_pi/wf_depends.7z
 For Mingw, only a single file is needed:
 http://sourceforge.net/projects/opencpnplugins/files/weatherfax_pi/libcurl.dll/download
 
+Under other operating systems the libcurl4-dev (libcurl4-gnutls-dev) package should be installed.
+
 Build as normally:
 
 * cd ..
