@@ -5,7 +5,7 @@
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
- *   Copyright (C) 2013 by Sean D'Epagnier                                 *
+ *   Copyright (C) 2014 by Sean D'Epagnier                                 *
  *   sean at depagnier dot com                                             *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -39,6 +39,40 @@ WX_DEFINE_LIST(WeatherFaxImageCoordinateList);
 #if !defined(GL_TEXTURE_RECTANGLE_ARB)
 #define GL_TEXTURE_RECTANGLE_ARB          0x84F5
 #endif
+
+static int texture_format;
+
+static GLboolean QueryExtension( const char *extName )
+{
+    /*
+     ** Search for extName in the extensions string. Use of strstr()
+     ** is not sufficient because extension names can be prefixes of
+     ** other extension names. Could use strtok() but the constant
+     ** string returned by glGetString might be in read-only memory.
+     */
+    char *p;
+    char *end;
+    int extNameLen;
+
+    extNameLen = strlen( extName );
+
+    p = (char *) glGetString( GL_EXTENSIONS );
+    if( NULL == p ) {
+        return GL_FALSE;
+    }
+
+    end = p + strlen( p );
+
+    while( p < end ) {
+        int n = strcspn( p, " " );
+        if( ( extNameLen == n ) && ( strncmp( extName, p, n ) == 0 ) ) {
+            return GL_TRUE;
+        }
+        p += ( n + 1 );
+    }
+    return GL_FALSE;
+}
+
 
 wxString WeatherFaxImageCoordinates::MapName(MapType type)
 {
@@ -549,6 +583,24 @@ void WeatherFaxImage::RenderImageGL(PlugIn_ViewPort *vp)
     wxImage &img = m_mappedimg;
 
     if(!m_gltextures) {
+        if(!texture_format) {
+            if( QueryExtension( "GL_ARB_texture_non_power_of_two" ) ||
+                QueryExtension( "GL_OES_texture_npot" ) )
+                texture_format = GL_TEXTURE_2D;
+            else if( QueryExtension( "GL_ARB_texture_rectangle" ) )
+                texture_format = GL_TEXTURE_RECTANGLE_ARB;
+            else {
+                static bool once = false;
+                if(!once) {
+                    wxMessageDialog w( NULL, _("Graphics hardware not supported (Disable OpenGL)\n"),
+                                   _("Weather Fax"), wxOK | wxICON_ERROR );
+                    w.ShowModal();
+                    once = true;
+                }
+                return;
+            }
+        }
+
         m_numgltexturesh = ceil((double)h/maxtexsize);
         m_numgltexturesw = ceil((double)w/maxtexsize);
         m_gltextures = new unsigned int[m_numgltexturesh*m_numgltexturesw];
@@ -563,12 +615,12 @@ void WeatherFaxImage::RenderImageGL(PlugIn_ViewPort *vp)
                 int tox = tx*maxtexsize;
                 int toy = ty*maxtexsize;
 
-                glBindTexture(GL_TEXTURE_RECTANGLE_ARB, m_gltextures[ty*m_numgltexturesw + tx]);
+                glBindTexture(texture_format, m_gltextures[ty*m_numgltexturesw + tx]);
         
-                glTexParameteri( GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
-                glTexParameteri( GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
-                glTexParameteri( GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-                glTexParameteri( GL_TEXTURE_RECTANGLE_ARB, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+                glTexParameteri( texture_format, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
+                glTexParameteri( texture_format, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
+                glTexParameteri( texture_format, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+                glTexParameteri( texture_format, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
         
                 unsigned char *data = img.GetData();
                 for(unsigned int y=0; y<th; y++) {
@@ -586,7 +638,7 @@ void WeatherFaxImage::RenderImageGL(PlugIn_ViewPort *vp)
                     }
                 }
 
-                glTexImage2D(GL_TEXTURE_RECTANGLE_ARB, 0, GL_RGBA,
+                glTexImage2D(texture_format, 0, GL_RGBA,
                          tw, th, 0, GL_RGBA, GL_UNSIGNED_BYTE, idata);
             }
         }
@@ -595,7 +647,7 @@ void WeatherFaxImage::RenderImageGL(PlugIn_ViewPort *vp)
         
     glPushAttrib(GL_COLOR_BUFFER_BIT | GL_ENABLE_BIT | GL_POLYGON_BIT | GL_TEXTURE_BIT);
 
-    glEnable(GL_TEXTURE_RECTANGLE_ARB);
+    glEnable(texture_format);
     glEnable( GL_BLEND );
     glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
     glTexEnvi( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_BLEND);
@@ -606,7 +658,7 @@ void WeatherFaxImage::RenderImageGL(PlugIn_ViewPort *vp)
             unsigned int th = (ty == m_numgltexturesh-1) ? h - ty*maxtexsize : maxtexsize;
             unsigned int tw = (tx == m_numgltexturesw-1) ? w - tx*maxtexsize : maxtexsize;
 
-            glBindTexture(GL_TEXTURE_RECTANGLE_ARB, m_gltextures[ty*m_numgltexturesw + tx]);
+            glBindTexture(texture_format, m_gltextures[ty*m_numgltexturesw + tx]);
     
             /* interpolate coordinates correctly even with rotation */
             double mtx = maxtexsize*tx, mty = maxtexsize*ty;
@@ -617,6 +669,9 @@ void WeatherFaxImage::RenderImageGL(PlugIn_ViewPort *vp)
             double vy1x = q2x*f1y, vy1y = q2y*f1y, vy2x = q2x*f2y, vy2y = q2y*f2y;
             double pu1x = p1.x+vx1x+vy1x, pu2x = p1.x+vx2x+vy1x, pu3x = p1.x+vx2x+vy2x, pu4x = p1.x+vx1x+vy2x;
             double pu1y = p1.y+vx1y+vy1y, pu2y = p1.y+vx2y+vy1y, pu3y = p1.y+vx2y+vy2y, pu4y = p1.y+vx1y+vy2y;
+
+            if(texture_format == GL_TEXTURE_2D)
+                tw = th = 1;
 
             glBegin(GL_QUADS);
             glTexCoord2i(0,   0), glVertex2d(pu1x, pu1y);
