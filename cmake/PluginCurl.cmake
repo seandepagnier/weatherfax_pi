@@ -13,7 +13,7 @@ IF(WIN32)
     INSTALL(FILES "buildwin/curllib.dll" DESTINATION ".")
     INSTALL(FILES "buildwin/libeay32.dll" DESTINATION ".")
     INSTALL(FILES "buildwin/openldap.dll" DESTINATION ".")
-    INSTALL(FILES "buildwin/ssleay.dll" DESTINATION ".")
+    INSTALL(FILES "buildwin/ssleay32.dll" DESTINATION ".")
     INSTALL(FILES "buildwin/libsasl.dll" DESTINATION ".")
   ELSE(MSVC) ## mingw
     SET(CURL_LIBRARIES "curl.dll")
