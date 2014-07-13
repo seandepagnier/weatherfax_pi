@@ -230,7 +230,7 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
     TiXmlDocument doc;
     wxString error;
     wxProgressDialog *progressdialog = NULL;
-//    wxDateTime start = wxDateTime::Now();
+    wxDateTime start = wxDateTime::Now();
 
     if(!doc.LoadFile(filename.mb_str()))
         FAIL(_("Failed to load file: ") + filename);
@@ -249,8 +249,8 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                 if(!progressdialog->Update(i))
                     return true;
             } else {
-//                wxDateTime now = wxDateTime::Now();
-                if(1/*(now-start).GetMilliseconds() > 1000 && i < count/2*/) {
+                wxDateTime now = wxDateTime::Now();
+                if((now-start).GetMilliseconds() > 500 && i < count/3) {
                     progressdialog = new wxProgressDialog(
                         _("WeatherFax InternetRetrieval"), _("Loading"), count, this,
                         wxPD_CAN_ABORT | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);

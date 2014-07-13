@@ -282,7 +282,7 @@ bool SchedulesDialog::OpenXML(wxString filename)
     TiXmlDocument doc;
     wxString error;
     wxProgressDialog *progressdialog = NULL;
-//    wxDateTime start = wxDateTime::Now();
+    wxDateTime start = wxDateTime::Now();
 
     if(!doc.LoadFile(filename.mb_str()))
         FAIL(_("Failed to load file: ") + filename);
@@ -301,8 +301,8 @@ bool SchedulesDialog::OpenXML(wxString filename)
                 if(!progressdialog->Update(i))
                     return true;
             } else {
-//                wxDateTime now = wxDateTime::Now();
-                if(1/*(now-start).GetMilliseconds() > 1000 && i < count/2*/) {
+                wxDateTime now = wxDateTime::Now();
+                if((now-start).GetMilliseconds() > 500 && i < count/3) {
                     progressdialog = new wxProgressDialog(
                         _("WeatherFax Schedules"), _("Loading"), count, this,
                         wxPD_CAN_ABORT | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
@@ -312,7 +312,6 @@ bool SchedulesDialog::OpenXML(wxString filename)
             if(!strcmp(e->Value(), "Station")) {
                 wxString station = wxString::FromUTF8(e->Attribute("Name"));
 
-//                m_lStations->SetSelection(m_lStations->Append(station));
                 m_lStations->Append(station);
                 std::list<Schedule> schedules;
                 std::list<FaxArea> Areas;
