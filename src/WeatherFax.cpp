@@ -295,8 +295,10 @@ void WeatherFax::OpenImage(wxString filename, wxString station, wxString area, w
     int whitetransparency = m_sWhiteTransparency->GetValue();
     bool invert = m_cInvert->GetValue();
 
-    wxImage wimg;
     WeatherFaxImageCoordinateList BuiltinCoordList;
+    wxImage wimg;
+    if (!wimg.CanRead(filename))                                                                                                                
+        ::wxInitAllImageHandlers();   
     if(!wimg.LoadFile(filename)) {
         wxMessageDialog mdlg(this, _("Failed to load input file: ") + filename,
                              _("Weather Fax"), wxOK | wxICON_ERROR);
