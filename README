@@ -5,18 +5,9 @@ Implement weather fax ability for opencpn.  This includes retrieval via sound ca
 Compiling
 =========
 
+Normally the libcurl4-dev (libcurl4-gnutls-dev) package should be installed, for Windows operating system, see below
+
 * git clone git://github.com/seandepagnier/weatherfax_pi.git
-
-Under windows, you must find the file "opencpn.lib" (Visual Studio) or "libopencpn.dll.a" (mingw) which is built in the build directory after compiling opencpn.  This file must be copied to the plugin directory.
-
-Also for windows, you must download the curl library files.
-For visual studio, extract this into the buildwin directory:
-http://sourceforge.net/projects/opencpnplugins/files/weatherfax_pi/wf_depends.7z/download
-
-For Mingw, only a single file is needed:
-http://sourceforge.net/projects/opencpnplugins/files/weatherfax_pi/libcurl.dll/download
-
-Under other operating systems the libcurl4-dev (libcurl4-gnutls-dev) package should be installed.
 
 Build as normally:
 
@@ -25,6 +16,16 @@ Build as normally:
 * cmake ..
 * make
 * make install
+
+Windows Specific Libraries
+==========================
+
+Under windows, you must find the file "opencpn.lib" (Visual Studio) or "libopencpn.dll.a" (mingw) which is built in the build directory after compiling opencpn.  This file must be copied to the plugin directory.
+
+There are also some libraries and an external program needed:
+http://sourceforge.net/projects/opencpnplugins/files/weatherfax_pi/wf_depends.7z/download
+
+For Mingw, only a single file "libcurl.dll" is needed for libcurl, for visual studio, several files.
 
 License
 =======

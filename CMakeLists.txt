@@ -112,6 +112,7 @@ SET(SRC_TINYXML
             src/tinyxml/tinyxmlerror.cpp
 )
 
+INSTALL(FILES "buildwin/PVW32Con.exe" DESTINATION "plugins\\\\${PACKAGE_NAME}")
 ENDIF(WIN32)
 
 ADD_DEFINITIONS(-DTIXML_USE_STL)

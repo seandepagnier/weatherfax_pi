@@ -298,12 +298,27 @@ void WeatherFax::OpenImage(wxString filename, wxString station, wxString area, w
     WeatherFaxImageCoordinateList BuiltinCoordList;
     wxImage wimg;
     if (!wimg.CanRead(filename))                                                                                                                
-        ::wxInitAllImageHandlers();   
+        ::wxInitAllImageHandlers();
+
     if(!wimg.LoadFile(filename)) {
-        wxMessageDialog mdlg(this, _("Failed to load input file: ") + filename,
-                             _("Weather Fax"), wxOK | wxICON_ERROR);
-        mdlg.ShowModal();
-        return;
+#ifdef WIN32
+        // attempt to convert using PVW32Con.exe
+        wxString s = wxFileName::GetPathSeparator();
+        wxString pvw32con = *GetpSharedDataLocation() + _T("plugins")
+            + s + _T("weatherfax_pi") + s + _T("PVW32Con.exe");
+        wxString cmd = pvw32con + _T(" \"") + filename + _T("\" -t --o \"" + filename + _T("\""));
+
+        int ret = ::wxExecute(cmd, wxEXEC_SYNC);
+
+        wxLogMessage(_("try to execute :") + cmd + _T("\nreturn code ") + wxString::Format(_T("%d"), ret));
+        if(!wimg.LoadFile(filename))
+#endif
+        {
+            wxMessageDialog mdlg(this, _("Failed to load input file: ") + filename,
+                                 _("Weather Fax"), wxOK | wxICON_ERROR);
+            mdlg.ShowModal();
+            return;
+        }
     }
 
     WeatherFaxImage *img = new WeatherFaxImage(wimg, transparency, whitetransparency, invert);
