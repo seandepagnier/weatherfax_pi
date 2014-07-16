@@ -571,7 +571,7 @@ void WeatherFax::OnAbout( wxCommandEvent& event )
 void WeatherFax::UpdateMenuStates()
 {
     wxArrayInt Selections;
-    bool e = m_lFaxes->GetSelections(Selections);
+    bool e = m_lFaxes->GetSelections(Selections) != 0;
     m_mEdit->Enable(e);
     m_mGoto->Enable(e);
     m_mExport->Enable(e);
