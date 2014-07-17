@@ -90,7 +90,7 @@ class WeatherFaxBase : public wxFrame
 		wxSlider* m_sTransparency;
 		wxSlider* m_sWhiteTransparency;
 		
-		WeatherFaxBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxCAPTION|wxCLOSE_BOX|wxFRAME_FLOAT_ON_PARENT|wxFRAME_NO_TASKBAR|wxRESIZE_BORDER|wxTAB_TRAVERSAL );
+		WeatherFaxBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxCAPTION|wxCLOSE_BOX|wxFRAME_FLOAT_ON_PARENT|wxFRAME_NO_TASKBAR|wxRESIZE_BORDER|wxSYSTEM_MENU|wxTAB_TRAVERSAL );
 		
 		~WeatherFaxBase();
 	
@@ -179,7 +179,7 @@ class InternetRetrievalDialogBase : public wxDialog
 		wxTextCtrl* m_tContainsLon;
 		wxButton* m_bBoatPosition;
 		wxButton* m_bReset;
-		wxButton* m_bRetrieve;
+		wxButton* m_bRetrieveScheduled;
 		wxButton* m_bRetrieveSelected;
 		wxListBox* m_lServers;
 		wxButton* m_bAllServers;
@@ -199,6 +199,7 @@ class InternetRetrievalDialogBase : public wxDialog
 		virtual void OnRetrieve( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnUrlsLeftDown( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnUrlsSort( wxListEvent& event ) { event.Skip(); }
+		virtual void OnUrlSelected( wxListEvent& event ) { event.Skip(); }
 		virtual void OnFilter( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnBoatPosition( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnReset( wxCommandEvent& event ) { event.Skip(); }

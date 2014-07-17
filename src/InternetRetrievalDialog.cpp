@@ -42,35 +42,58 @@
 #include "FaxDecoder.h"
 
 /* XPM */
+static const char * box_xpm[] = {
+"20 20 3 1",
+" 	c None",
+".	c #FFFFFF",
+"+	c #333333",
+"....................",
+".++++++++++++++++++.",
+".+................+.",
+".+................+.",
+".+................+.",
+".+................+.",
+".+................+.",
+".+................+.",
+".+................+.",
+".+................+.",
+".+................+.",
+".+................+.",
+".+................+.",
+".+................+.",
+".+................+.",
+".+................+.",
+".+................+.",
+".+................+.",
+".++++++++++++++++++.",
+"...................."};
+
+/* XPM */
 static const char * check_xpm[] = {
-"20 20 7 1",
-" 	c #595959",
-".	c #676767",
-"+	c #818181",
-"@	c #868686",
-"#	c #969696",
-"$	c #AAAAAA",
-"%	c #E3E3E3",
-"$%%%%%%%%%%%%%%$%%%%",
-"%%%%%%%%%%%%%%%%%%%+",
-"%%%%%%%%%%%%%%%%%+  ",
-"%%%%%%%%%%%%%%%%+ +$",
-"%%%%%%%%%%%%%%%%  $%",
-"%%%%%%%%%%%%%%%  +%%",
-"%%%%%%%%%%%%%%   %%%",
-"%%%%%%%%%%%%%   .%%%",
-"%%%+%%%%%%%%   +%%%%",
-"%%+ +%%%%%%+  +%%%%%",
-"%%+  +%%%%+  +%%%%%%",
-"%%+   +%%+  +%%%%%%%",
-"%%%    ++   %%%%%%%%",
-"%%%%       +%%%%%%%%",
-"%%%%%     +%%%%%%%%%",
-"%%%%%+   +%%%%%%%%%%",
-"%%%%%%%%%%%%%%%%%%%%",
-"%%%%%%%%%%%%%%%%%%%%",
-"%%%%%%%%%%%%%%%%$%%%",
-"%%%%%%%%%%%%%%%%%%%%"};
+"20 20 3 1",
+" 	c None",
+".	c #FFFFFF",
+"+	c #333333",
+"....................",
+".++++++++++++++++++.",
+".+................+.",
+".+.++..........++.+.",
+".+.+++........+++.+.",
+".+..+++......+++..+.",
+".+...+++....+++...+.",
+".+....+++..+++....+.",
+".+.....++++++.....+.",
+".+......++++......+.",
+".+......++++......+.",
+".+.....++++++.....+.",
+".+....+++..+++....+.",
+".+...+++....+++...+.",
+".+..+++......+++..+.",
+".+.+++........+++.+.",
+".+.++..........++.+.",
+".+................+.",
+".++++++++++++++++++.",
+"...................."};
 
 InternetRetrievalDialog::InternetRetrievalDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
     : InternetRetrievalDialogBase( parent ), m_weatherfax_pi(_weatherfax_pi),
@@ -103,12 +126,12 @@ InternetRetrievalDialog::~InternetRetrievalDialog()
 
     pConf->Write ( _T ( "Regions" ), regions);
 
-    wxString selected;
+    wxString scheduled;
     for(std::list<FaxUrl*>::iterator it = m_InternetRetrieval.begin();
         it != m_InternetRetrieval.end(); it++)
-        if((*it)->Selected)
-            selected += (*it)->Url + _T(";");
-    pConf->Write ( _T ( "selected" ), selected );
+        if((*it)->Scheduled)
+            scheduled += (*it)->Url + _T(";");
+    pConf->Write ( _T ( "scheduled" ), scheduled );
 
     ClearInternetRetrieval();
 }
@@ -121,7 +144,8 @@ void InternetRetrievalDialog::Load()
     m_bLoaded = true;
 
     // create a image list for the list with check
-    wxImageList *imglist = new wxImageList(20, 20, true, 1);
+    wxImageList *imglist = new wxImageList(20, 20);
+    imglist->Add(wxBitmap(box_xpm));
     imglist->Add(wxBitmap(check_xpm));
     m_lUrls->AssignImageList(imglist, wxIMAGE_LIST_SMALL);
 
@@ -162,13 +186,13 @@ void InternetRetrievalDialog::Load()
         regions = regions.AfterFirst(';');
     }
 
-    wxString selected;
-    pConf->Read ( _T ( "selected" ), &selected, _T("") );
-    std::list<wxString> selectedlist;
+    wxString scheduled;
+    pConf->Read ( _T ( "scheduled" ), &scheduled, _T("") );
+    std::list<wxString> scheduledlist;
     /* split at each ; to get all the names in a list */
-    while(selected.size()) {
-        selectedlist.push_back(selected.BeforeFirst(';'));
-        selected = selected.AfterFirst(';');
+    while(scheduled.size()) {
+        scheduledlist.push_back(scheduled.BeforeFirst(';'));
+        scheduled = scheduled.AfterFirst(';');
     }
 
     s = wxFileName::GetPathSeparator();
@@ -189,12 +213,12 @@ void InternetRetrievalDialog::Load()
             if(m_lRegions->GetString(i) == *it)
                 m_lRegions->SetSelection(i);
 
-    for(std::list<wxString>::iterator it = selectedlist.begin();
-        it != selectedlist.end(); it++)
+    for(std::list<wxString>::iterator it = scheduledlist.begin();
+        it != scheduledlist.end(); it++)
         for(std::list<FaxUrl*>::iterator it2 = m_InternetRetrieval.begin();
             it2 != m_InternetRetrieval.end(); it2++)
             if((*it) == (*it2)->Url)
-                (*it2)->Selected = true;
+                (*it2)->Scheduled = true;
 
     m_bDisableFilter = false;
     Filter();
@@ -303,7 +327,7 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                                     if(!strcmp(h->Value(), "Map")) {
                                         FaxUrl url;
                                     
-                                        url.Selected = false;
+                                        url.Scheduled = false;
                                         url.Server = server.Name;
                                         url.Region = region.Name;
                          
@@ -323,7 +347,7 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                             } else if(!strcmp(g->Value(), "Map")) {
                                 FaxUrl url;
                                     
-                                url.Selected = false;
+                                url.Scheduled = false;
                                 url.Server = server.Name;
                                 url.Region = region.Name;
                          
@@ -393,9 +417,19 @@ void InternetRetrievalDialog::OnUrlsLeftDown( wxMouseEvent& event )
         // Process the clicked item
         FaxUrl *url =
             reinterpret_cast<FaxUrl*>(wxUIntToPtr(m_lUrls->GetItemData(index)));
-        url->Selected = !url->Selected;
+        url->Scheduled = !url->Scheduled;
 
-        m_lUrls->SetItemImage(index, url->Selected ? 0 : -1);
+        m_lUrls->SetItemImage(index, url->Scheduled ? 1 : 0);
+
+        bool enable = url->Scheduled;
+        if(!enable)
+            for(int i=0; i < m_lUrls->GetItemCount(); i++) {
+                FaxUrl *faxurl = reinterpret_cast<FaxUrl*>
+                    (wxUIntToPtr(m_lUrls->GetItemData(i)));
+                if(faxurl->Scheduled)
+                    enable = true;
+            }
+        m_bRetrieveScheduled->Enable(enable);
     }
 
     // Allow wx to process...
@@ -443,7 +477,7 @@ void InternetRetrievalDialog::OnUrlsSort( wxListEvent& event )
             FaxUrl *faxurl = reinterpret_cast<FaxUrl*>
                 (wxUIntToPtr(m_lUrls->GetItemData(i)));
 
-            faxurl->Selected = sortorder == 1;
+            faxurl->Scheduled = sortorder == 1;
             UpdateItem(i);
         }
     } else
@@ -453,6 +487,11 @@ void InternetRetrievalDialog::OnUrlsSort( wxListEvent& event )
             mdlg.ShowModal();
         } else
             m_lUrls->SortItems(SortUrl, (long)m_lUrls);
+}
+
+void InternetRetrievalDialog::OnUrlSelected( wxListEvent& event )
+{
+    m_bRetrieveSelected->Enable(m_lUrls->GetSelectedItemCount() != 0);
 }
 
 void InternetRetrievalDialog::OnBoatPosition( wxCommandEvent& event )
@@ -565,8 +604,8 @@ void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
         FaxUrl *faxurl = reinterpret_cast<FaxUrl*>
             (wxUIntToPtr(m_lUrls->GetItemData(i)));
 
-        if(event.GetEventObject() == m_bRetrieve) {
-            if(!faxurl->Selected)
+        if(event.GetEventObject() == m_bRetrieveScheduled) {
+            if(!faxurl->Scheduled)
                 continue;
         } else
             if(m_lUrls->GetNextItem(i - 1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED) != i)
@@ -675,7 +714,7 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
     /* inform user if no faxes were selected */
     if(count == 0) {
         wxMessageDialog mdlg(this, _("No Faxes selected.") + wxString(_T("\n")) +
-                             wxString(event.GetEventObject() == m_bRetrieve ?
+                             wxString(event.GetEventObject() == m_bRetrieveScheduled ?
                                       _(" Try clicking the selected (first) column") :
                                       _T("")), _("Weather Fax"), wxOK | wxICON_INFORMATION);
         mdlg.ShowModal();
@@ -806,6 +845,7 @@ void InternetRetrievalDialog::RebuildList()
 //                                    _("Populating List"), m_InternetRetrieval.size(),
 //                                    this, wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
     int i=0;
+    bool enable = false;
     for(std::list<FaxUrl*>::iterator it = m_InternetRetrieval.begin();
         it != m_InternetRetrieval.end(); it++, i++) {
         //      if(i%100 == 0)
@@ -815,8 +855,15 @@ void InternetRetrievalDialog::RebuildList()
             item.SetData(*it);
             item.SetId(m_lUrls->GetItemCount());
             UpdateItem(m_lUrls->InsertItem(item));
+
+            if((*it)->Scheduled)
+                enable = true;
         }
     }
+
+    m_bRetrieveScheduled->Enable(enable);
+    m_bRetrieveSelected->Enable(m_lUrls->GetSelectedItemCount() != 0);
+
     m_bRebuilding = false;
 }
 
@@ -825,7 +872,7 @@ void InternetRetrievalDialog::UpdateItem(long index)
     FaxUrl *url = reinterpret_cast<FaxUrl*>
         (wxUIntToPtr(m_lUrls->GetItemData(index)));
 
-    m_lUrls->SetItemImage(index, url->Selected ? 0 : -1);
+    m_lUrls->SetItemImage(index, url->Scheduled ? 1 : 0);
     m_lUrls->SetColumnWidth(SCHEDULED, 50);
 
     m_lUrls->SetItem(index, SERVER, url->Server);

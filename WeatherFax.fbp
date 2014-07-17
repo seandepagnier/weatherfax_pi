@@ -43,7 +43,7 @@
             <property name="name">WeatherFaxBase</property>
             <property name="pos"></property>
             <property name="size">-1,-1</property>
-            <property name="style">wxCAPTION|wxCLOSE_BOX|wxFRAME_FLOAT_ON_PARENT|wxFRAME_NO_TASKBAR|wxRESIZE_BORDER</property>
+            <property name="style">wxCAPTION|wxCLOSE_BOX|wxFRAME_FLOAT_ON_PARENT|wxFRAME_NO_TASKBAR|wxRESIZE_BORDER|wxSYSTEM_MENU</property>
             <property name="subclass"></property>
             <property name="title">Weather Fax</property>
             <property name="tooltip"></property>
@@ -4589,11 +4589,11 @@
                                                                 <event name="OnListEndLabelEdit"></event>
                                                                 <event name="OnListInsertItem"></event>
                                                                 <event name="OnListItemActivated"></event>
-                                                                <event name="OnListItemDeselected"></event>
+                                                                <event name="OnListItemDeselected">OnUrlSelected</event>
                                                                 <event name="OnListItemFocused"></event>
                                                                 <event name="OnListItemMiddleClick"></event>
                                                                 <event name="OnListItemRightClick"></event>
-                                                                <event name="OnListItemSelected"></event>
+                                                                <event name="OnListItemSelected">OnUrlSelected</event>
                                                                 <event name="OnListKeyDown"></event>
                                                                 <event name="OnMiddleDClick"></event>
                                                                 <event name="OnMiddleDown"></event>
@@ -5321,7 +5321,7 @@
                                                                                 <property name="gripper">0</property>
                                                                                 <property name="hidden">0</property>
                                                                                 <property name="id">wxID_ANY</property>
-                                                                                <property name="label">Retrieve</property>
+                                                                                <property name="label">Retrieve Scheduled</property>
                                                                                 <property name="max_size"></property>
                                                                                 <property name="maximize_button">0</property>
                                                                                 <property name="maximum_size"></property>
@@ -5329,7 +5329,7 @@
                                                                                 <property name="minimize_button">0</property>
                                                                                 <property name="minimum_size"></property>
                                                                                 <property name="moveable">1</property>
-                                                                                <property name="name">m_bRetrieve</property>
+                                                                                <property name="name">m_bRetrieveScheduled</property>
                                                                                 <property name="pane_border">1</property>
                                                                                 <property name="pane_position"></property>
                                                                                 <property name="pane_size"></property>

@@ -37,7 +37,7 @@ class weatherfax_pi;
 struct FaxUrl
 {
     bool Filtered;
-    bool Selected;
+    bool Scheduled;
 
     wxString Server;
     wxString Region;
@@ -79,6 +79,7 @@ public:
 
     void OnUrlsLeftDown( wxMouseEvent& event );
     void OnUrlsSort( wxListEvent& event );
+    void OnUrlSelected( wxListEvent& event );
     void OnFilter( wxCommandEvent& event ) { Filter(); }
     void OnFilterServers( wxCommandEvent& event )
     { m_bDisableServers = true; Filter(); m_bDisableServers = false; }

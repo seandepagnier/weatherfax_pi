@@ -5,7 +5,7 @@
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
- *   Copyright (C) 2013 by Sean D'Epagnier                                 *
+ *   Copyright (C) 2014 by Sean D'Epagnier                                 *
  *   sean at depagnier dot com                                             *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -302,7 +302,7 @@ bool SchedulesDialog::OpenXML(wxString filename)
                     return true;
             } else {
                 wxDateTime now = wxDateTime::Now();
-                if((now-start).GetMilliseconds() > 500 && i < count/3) {
+                if((now-start).GetMilliseconds() > 800 && i < count/4) {
                     progressdialog = new wxProgressDialog(
                         _("WeatherFax Schedules"), _("Loading"), count, this,
                         wxPD_CAN_ABORT | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);

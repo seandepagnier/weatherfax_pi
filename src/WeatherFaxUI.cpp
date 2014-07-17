@@ -592,8 +592,8 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	fgSizer65->SetFlexibleDirection( wxBOTH );
 	fgSizer65->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_bRetrieve = new wxButton( m_panel8, wxID_ANY, _("Retrieve"), wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer65->Add( m_bRetrieve, 0, wxALL, 5 );
+	m_bRetrieveScheduled = new wxButton( m_panel8, wxID_ANY, _("Retrieve Scheduled"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer65->Add( m_bRetrieveScheduled, 0, wxALL, 5 );
 	
 	m_bRetrieveSelected = new wxButton( m_panel8, wxID_ANY, _("Retrieve Selected"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer65->Add( m_bRetrieveSelected, 0, wxALL, 5 );
@@ -746,11 +746,13 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	m_lUrls->Connect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
 	m_lUrls->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( InternetRetrievalDialogBase::OnUrlsLeftDown ), NULL, this );
 	m_lUrls->Connect( wxEVT_COMMAND_LIST_COL_CLICK, wxListEventHandler( InternetRetrievalDialogBase::OnUrlsSort ), NULL, this );
+	m_lUrls->Connect( wxEVT_COMMAND_LIST_ITEM_DESELECTED, wxListEventHandler( InternetRetrievalDialogBase::OnUrlSelected ), NULL, this );
+	m_lUrls->Connect( wxEVT_COMMAND_LIST_ITEM_SELECTED, wxListEventHandler( InternetRetrievalDialogBase::OnUrlSelected ), NULL, this );
 	m_tContainsLat->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
 	m_tContainsLon->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
 	m_bBoatPosition->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnBoatPosition ), NULL, this );
 	m_bReset->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnReset ), NULL, this );
-	m_bRetrieve->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
+	m_bRetrieveScheduled->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
 	m_bRetrieveSelected->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
 	m_lServers->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilterServers ), NULL, this );
 	m_bAllServers->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnAllServers ), NULL, this );
@@ -766,11 +768,13 @@ InternetRetrievalDialogBase::~InternetRetrievalDialogBase()
 	m_lUrls->Disconnect( wxEVT_LEFT_DCLICK, wxMouseEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
 	m_lUrls->Disconnect( wxEVT_LEFT_DOWN, wxMouseEventHandler( InternetRetrievalDialogBase::OnUrlsLeftDown ), NULL, this );
 	m_lUrls->Disconnect( wxEVT_COMMAND_LIST_COL_CLICK, wxListEventHandler( InternetRetrievalDialogBase::OnUrlsSort ), NULL, this );
+	m_lUrls->Disconnect( wxEVT_COMMAND_LIST_ITEM_DESELECTED, wxListEventHandler( InternetRetrievalDialogBase::OnUrlSelected ), NULL, this );
+	m_lUrls->Disconnect( wxEVT_COMMAND_LIST_ITEM_SELECTED, wxListEventHandler( InternetRetrievalDialogBase::OnUrlSelected ), NULL, this );
 	m_tContainsLat->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
 	m_tContainsLon->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
 	m_bBoatPosition->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnBoatPosition ), NULL, this );
 	m_bReset->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnReset ), NULL, this );
-	m_bRetrieve->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
+	m_bRetrieveScheduled->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
 	m_bRetrieveSelected->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
 	m_lServers->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilterServers ), NULL, this );
 	m_bAllServers->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnAllServers ), NULL, this );
