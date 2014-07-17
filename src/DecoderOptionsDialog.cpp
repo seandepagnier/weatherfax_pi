@@ -85,7 +85,7 @@ void DecoderOptionsDialog::ConfigureDecoder()
            (double)-m_sMinusSaturationThreshold->GetValue()/10 - 1,
            m_cbSkip->GetValue(), m_cbInclude->GetValue(),
            samplerate)) {
-        wxMessageDialog w( this, _("Failed to configure capture."),
+        wxMessageDialog w( NULL, _("Failed to configure capture."),
                            _("Failure"), wxOK | wxICON_ERROR );
         w.ShowModal();
     }

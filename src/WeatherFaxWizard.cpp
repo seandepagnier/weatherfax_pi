@@ -58,7 +58,7 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
     
     m_cRotation->SetSelection(m_curCoords->rotation);
 
-    if(use_decoder) {
+    if(use_decoder && m_decoder.m_inputtype != FaxDecoder::NONE) {
         /* periodically check for updates */
         m_tDecoder.Connect(wxEVT_TIMER, wxTimerEventHandler( WeatherFaxWizard::OnDecoderTimer ), NULL, this);
         m_tDecoder.Start(1000, wxTIMER_ONE_SHOT);
@@ -606,9 +606,8 @@ void WeatherFaxWizard::OnGetMapping( wxCommandEvent& event )
         GetMappingFixedFlat();
         break;
     default:
-        wxMessageDialog w
-            ( this, _("Calculating Mapping not yet supported.\n"),
-              _("Mapping"), wxOK | wxICON_WARNING );
+        wxMessageDialog w( this, _("Calculating Mapping not yet supported.\n"),
+                           _("Mapping"), wxOK | wxICON_WARNING );
         w.ShowModal();
         return;
     }
@@ -623,9 +622,8 @@ void WeatherFaxWizard::OnGetEquator( wxCommandEvent& event )
         GetMappingPolar(true);
         break;
     default:
-        wxMessageDialog w
-            ( this, _("Calculating Equator not yet supported.\n"),
-              _("Mapping"), wxOK | wxICON_WARNING );
+        wxMessageDialog w( this, _("Calculating Equator not yet supported.\n"),
+                           _("Mapping"), wxOK | wxICON_WARNING );
         w.ShowModal();
         return;
     }

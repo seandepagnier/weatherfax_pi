@@ -557,7 +557,7 @@ void SchedulesDialog::RebuildList()
     int count = m_Schedules.size();
     for(std::list<Schedule*>::iterator it = m_Schedules.begin();
         it != m_Schedules.end(); it++, i++) {
-        if(i%100 == 0) {
+        if(i%250 == 0) {
             if(progressdialog)
                 progressdialog->Update(i);
             else {
