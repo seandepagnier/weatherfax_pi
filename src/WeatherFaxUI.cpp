@@ -864,7 +864,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	m_staticText16->Wrap( -1 );
 	fgSizer10->Add( m_staticText16, 0, wxALL, 5 );
 	
-	wxString m_cFilterChoices[] = { _("No Filter"), _("Removal 1"), _("Removal 2"), _("removal 3"), _("Value 1"), _("Value 2"), _("Value 3") };
+	wxString m_cFilterChoices[] = { _("No Filter"), _("Removal 1"), _("Removal 2"), _("Removal 3"), _("Value 1"), _("Value 2"), _("Value 3") };
 	int m_cFilterNChoices = sizeof( m_cFilterChoices ) / sizeof( wxString );
 	m_cFilter = new wxChoice( m_wizPage1, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_cFilterNChoices, m_cFilterChoices, 0 );
 	m_cFilter->SetSelection( 0 );

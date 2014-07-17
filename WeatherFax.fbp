@@ -6747,7 +6747,7 @@
                 </object>
             </object>
         </object>
-        <object class="Wizard" expanded="0">
+        <object class="Wizard" expanded="1">
             <property name="bg"></property>
             <property name="bitmap"></property>
             <property name="center">wxBOTH</property>
@@ -7398,7 +7398,7 @@
                                                     <property name="caption"></property>
                                                     <property name="caption_visible">1</property>
                                                     <property name="center_pane">0</property>
-                                                    <property name="choices">&quot;No Filter&quot; &quot;Removal 1&quot; &quot;Removal 2&quot; &quot;removal 3&quot; &quot;Value 1&quot; &quot;Value 2&quot; &quot;Value 3&quot;</property>
+                                                    <property name="choices">&quot;No Filter&quot; &quot;Removal 1&quot; &quot;Removal 2&quot; &quot;Removal 3&quot; &quot;Value 1&quot; &quot;Value 2&quot; &quot;Value 3&quot;</property>
                                                     <property name="close_button">1</property>
                                                     <property name="context_help"></property>
                                                     <property name="context_menu">1</property>
