@@ -176,7 +176,7 @@
                                         <property name="resize">Resizable</property>
                                         <property name="show">1</property>
                                         <property name="size">-1,100</property>
-                                        <property name="style">wxLB_MULTIPLE</property>
+                                        <property name="style">wxLB_EXTENDED</property>
                                         <property name="subclass"></property>
                                         <property name="toolbar_pane">0</property>
                                         <property name="tooltip"></property>
@@ -790,7 +790,7 @@
                 </object>
             </object>
         </object>
-        <object class="Dialog" expanded="1">
+        <object class="Dialog" expanded="0">
             <property name="aui_managed">0</property>
             <property name="aui_manager_style">wxAUI_MGR_DEFAULT</property>
             <property name="bg"></property>
@@ -5546,7 +5546,7 @@
                                                                                 <property name="resize">Resizable</property>
                                                                                 <property name="show">1</property>
                                                                                 <property name="size">150,90</property>
-                                                                                <property name="style">wxLB_MULTIPLE</property>
+                                                                                <property name="style">wxLB_EXTENDED</property>
                                                                                 <property name="subclass"></property>
                                                                                 <property name="toolbar_pane">0</property>
                                                                                 <property name="tooltip"></property>
@@ -5860,7 +5860,7 @@
                                                                                 <property name="resize">Resizable</property>
                                                                                 <property name="show">1</property>
                                                                                 <property name="size">150,90</property>
-                                                                                <property name="style">wxLB_MULTIPLE</property>
+                                                                                <property name="style">wxLB_EXTENDED</property>
                                                                                 <property name="subclass"></property>
                                                                                 <property name="toolbar_pane">0</property>
                                                                                 <property name="tooltip"></property>

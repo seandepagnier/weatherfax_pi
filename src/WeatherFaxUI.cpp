@@ -29,7 +29,7 @@ WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString&
 	fgSizer7->SetFlexibleDirection( wxBOTH );
 	fgSizer7->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_lFaxes = new wxListBox( this, wxID_ANY, wxDefaultPosition, wxSize( -1,100 ), 0, NULL, wxLB_MULTIPLE ); 
+	m_lFaxes = new wxListBox( this, wxID_ANY, wxDefaultPosition, wxSize( -1,100 ), 0, NULL, wxLB_EXTENDED ); 
 	fgSizer7->Add( m_lFaxes, 0, wxALL|wxEXPAND, 5 );
 	
 	
@@ -614,7 +614,7 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	fgSizer28->SetFlexibleDirection( wxBOTH );
 	fgSizer28->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_lServers = new wxListBox( m_panel8, wxID_ANY, wxDefaultPosition, wxSize( 150,90 ), 0, NULL, wxLB_MULTIPLE ); 
+	m_lServers = new wxListBox( m_panel8, wxID_ANY, wxDefaultPosition, wxSize( 150,90 ), 0, NULL, wxLB_EXTENDED ); 
 	fgSizer28->Add( m_lServers, 0, wxALL|wxEXPAND, 5 );
 	
 	wxFlexGridSizer* fgSizer29;
@@ -647,7 +647,7 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	fgSizer281->SetFlexibleDirection( wxBOTH );
 	fgSizer281->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_lRegions = new wxListBox( m_panel8, wxID_ANY, wxDefaultPosition, wxSize( 150,90 ), 0, NULL, wxLB_MULTIPLE ); 
+	m_lRegions = new wxListBox( m_panel8, wxID_ANY, wxDefaultPosition, wxSize( 150,90 ), 0, NULL, wxLB_EXTENDED ); 
 	fgSizer281->Add( m_lRegions, 0, wxALL|wxEXPAND, 5 );
 	
 	wxFlexGridSizer* fgSizer291;
