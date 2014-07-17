@@ -5,7 +5,7 @@
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
- *   Copyright (C) 2013 by Sean D'Epagnier                                 *
+ *   Copyright (C) 2014 by Sean D'Epagnier                                 *
  *   sean at depagnier dot com                                             *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -28,6 +28,9 @@
 #include <vector>
 
 #include "WeatherFaxUI.h"
+
+extern const char * box_xpm[];
+extern const char * check_xpm[];
 
 class FaxArea
 {

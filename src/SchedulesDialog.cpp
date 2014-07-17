@@ -39,37 +39,6 @@
 
 #include "FaxDecoder.h"
 
-/* XPM */
-static const char * check_xpm[] = {
-"20 20 7 1",
-" 	c #595959",
-".	c #676767",
-"+	c #818181",
-"@	c #868686",
-"#	c #969696",
-"$	c #AAAAAA",
-"%	c #E3E3E3",
-"$%%%%%%%%%%%%%%$%%%%",
-"%%%%%%%%%%%%%%%%%%%+",
-"%%%%%%%%%%%%%%%%%+  ",
-"%%%%%%%%%%%%%%%%+ +$",
-"%%%%%%%%%%%%%%%%  $%",
-"%%%%%%%%%%%%%%%  +%%",
-"%%%%%%%%%%%%%%   %%%",
-"%%%%%%%%%%%%%   .%%%",
-"%%%+%%%%%%%%   +%%%%",
-"%%+ +%%%%%%+  +%%%%%",
-"%%+  +%%%%+  +%%%%%%",
-"%%+   +%%+  +%%%%%%%",
-"%%%    ++   %%%%%%%%",
-"%%%%       +%%%%%%%%",
-"%%%%%     +%%%%%%%%%",
-"%%%%%+   +%%%%%%%%%%",
-"%%%%%%%%%%%%%%%%%%%%",
-"%%%%%%%%%%%%%%%%%%%%",
-"%%%%%%%%%%%%%%%%$%%%",
-"%%%%%%%%%%%%%%%%%%%%"};
-
 SchedulesDialog::SchedulesDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
     : SchedulesDialogBase( parent ), m_weatherfax_pi(_weatherfax_pi),
       m_ExternalCaptureProcess(NULL), m_CurrentSchedule(NULL),
@@ -137,7 +106,8 @@ void SchedulesDialog::Load()
     m_bLoaded = true;
 
     // create a image list for the list with check
-    wxImageList *imglist = new wxImageList(20, 20, true, 1);
+    wxImageList *imglist = new wxImageList(20, 20);
+    imglist->Add(wxBitmap(box_xpm));
     imglist->Add(wxBitmap(check_xpm));
     m_lSchedules->AssignImageList(imglist, wxIMAGE_LIST_SMALL);
 
@@ -425,7 +395,7 @@ void SchedulesDialog::OnSchedulesLeftDown( wxMouseEvent& event )
         else
             AddScheduleToCapture(schedule);
 
-        m_lSchedules->SetItemImage(index, schedule->Capture ? 0 : -1);
+        m_lSchedules->SetItemImage(index, schedule->Capture ? 1 : 0);
         UpdateProgress();
     }
 
@@ -580,13 +550,25 @@ void SchedulesDialog::RebuildList()
 
     m_lSchedules->DeleteAllItems();
 
-    wxProgressDialog progressdialog(_("WeatherFax Schedules"), _("Populating List"), m_Schedules.size(), this,
-                                    wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
+    wxProgressDialog *progressdialog = NULL;
+    wxDateTime start = wxDateTime::UNow();
+
     int i=0;
+    int count = m_Schedules.size();
     for(std::list<Schedule*>::iterator it = m_Schedules.begin();
         it != m_Schedules.end(); it++, i++) {
-        if(i%100 == 0)
-            progressdialog.Update(i);
+        if(i%100 == 0) {
+            if(progressdialog)
+                progressdialog->Update(i);
+            else {
+                wxDateTime now = wxDateTime::UNow();
+                if((now-start).GetMilliseconds() > 500 && i < count/3)
+                    progressdialog = new wxProgressDialog
+                        (_("WeatherFax Schedules"), _("Populating List"), m_Schedules.size(), this,
+                         wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
+            }
+        }
+
         if(!(*it)->Filtered) {
             wxListItem item;
             item.SetData(*it);
@@ -594,6 +576,8 @@ void SchedulesDialog::RebuildList()
             UpdateItem(m_lSchedules->InsertItem(item));
         }
     }
+
+    delete progressdialog;
     m_bRebuilding = false;
 }
 
@@ -602,7 +586,7 @@ void SchedulesDialog::UpdateItem(long index)
     Schedule *schedule = reinterpret_cast<Schedule*>
         (wxUIntToPtr(m_lSchedules->GetItemData(index)));
 
-    m_lSchedules->SetItemImage(index, schedule->Capture ? 0 : -1);
+    m_lSchedules->SetItemImage(index, schedule->Capture ? 1 : 0);
     m_lSchedules->SetColumnWidth(CAPTURE, 50);
 
     m_lSchedules->SetItem(index, STATION, schedule->Station);
@@ -640,7 +624,7 @@ void SchedulesDialog::AddScheduleToCapture(Schedule *s)
                     Schedule *schedule = reinterpret_cast<Schedule*>
                         (wxUIntToPtr(m_lSchedules->GetItemData(i)));
                     if(schedule == *it) {
-                        m_lSchedules->SetItemImage(i, -1);
+                        m_lSchedules->SetItemImage(i, 0);
                         break;
                     }
                 }
