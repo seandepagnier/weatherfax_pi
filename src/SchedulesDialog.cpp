@@ -282,7 +282,7 @@ bool SchedulesDialog::OpenXML(wxString filename)
     TiXmlDocument doc;
     wxString error;
     wxProgressDialog *progressdialog = NULL;
-    wxDateTime start = wxDateTime::Now();
+    wxDateTime start = wxDateTime::UNow();
 
     if(!doc.LoadFile(filename.mb_str()))
         FAIL(_("Failed to load file: ") + filename);
@@ -301,8 +301,8 @@ bool SchedulesDialog::OpenXML(wxString filename)
                 if(!progressdialog->Update(i))
                     return true;
             } else {
-                wxDateTime now = wxDateTime::Now();
-                if((now-start).GetMilliseconds() > 800 && i < count/4) {
+                wxDateTime now = wxDateTime::UNow();
+                if((now-start).GetMilliseconds() > 500 && i < count/3) {
                     progressdialog = new wxProgressDialog(
                         _("WeatherFax Schedules"), _("Loading"), count, this,
                         wxPD_CAN_ABORT | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
