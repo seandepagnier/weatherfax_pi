@@ -82,6 +82,7 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
 WeatherFaxWizard::~WeatherFaxWizard()
 {
     if(m_thDecoder) {
+        m_tDecoder.Stop();
         m_decoder.m_bEndDecoding = true;
 
         if(m_bDecoderStopped)
