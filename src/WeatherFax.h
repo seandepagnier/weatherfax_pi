@@ -62,6 +62,7 @@ public:
 #include "InternetRetrievalDialog.h"
 
 class weatherfax_pi;
+class WeatherFaxWizard;
 
 class WeatherFax : public WeatherFaxBase
 {
@@ -88,6 +89,8 @@ public:
     void OnInternet( wxCommandEvent& event );
     void OnAbout( wxCommandEvent& event );
 
+    void WizardFinished(WeatherFaxWizard *wizard);
+    bool WizardCleanup(WeatherFaxWizard *wizard);
     void OpenWav(wxString filename, wxString station=_T(""), wxString area=_T(""), wxString contents=_T(""));
     void OpenImage(wxString filename, wxString station=_T(""), wxString area=_T(""), wxString contents=_T(""));
     void Goto(int selection);
@@ -102,6 +105,13 @@ public:
     InternetRetrievalDialog m_InternetRetrievalDialog;
 
 protected:
+    void OnDeleteWizardTimer( wxTimerEvent & );
+
+    WeatherFaxWizard *m_CurrentWizard;
+    wxString m_CurrentWizardFaxName;
+    WeatherFaxImageCoordinateList m_CurrentWizardBuiltinCoordList;
+    wxTimer m_tDeleteCurrentWizard;
+
     weatherfax_pi &m_weatherfax_pi;
 };
 

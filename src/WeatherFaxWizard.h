@@ -51,6 +51,8 @@ public:
     void MakeNewCoordinates();
     void OnDecoderTimer( wxTimerEvent & );
 
+    void OnWizardCancel( wxWizardEvent& event );
+    void OnWizardFinished( wxWizardEvent& event );
     void OnSetSizes( wxInitDialogEvent& event );
     void UpdateMappingControls();
     void OnStopDecoding( wxCommandEvent& event );
@@ -79,6 +81,8 @@ public:
     void OnInformation( wxCommandEvent& event );
 
     void StoreCoords();
+
+    WeatherFaxImage &GetImage() { return m_wfimg; }
 
 protected:
     void ReadMappingLatLon(double &mapping1lat, double &mapping1lon,

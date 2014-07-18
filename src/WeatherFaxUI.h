@@ -63,6 +63,7 @@ class WeatherFaxBase : public wxFrame
 		wxMenuItem* m_mExport;
 		wxMenuItem* m_mDelete;
 		wxMenu* m_menu2;
+		wxMenuItem* m_mAudioCapture;
 		wxMenu* m_menu3;
 		
 		// Virtual event handlers, overide them in your derived class
@@ -305,6 +306,8 @@ class WeatherFaxWizardBase : public wxWizard
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnSetSizes( wxInitDialogEvent& event ) { event.Skip(); }
+		virtual void OnWizardCancel( wxWizardEvent& event ) { event.Skip(); }
+		virtual void OnWizardFinished( wxWizardEvent& event ) { event.Skip(); }
 		virtual void OnWizardPageChanged( wxWizardEvent& event ) { event.Skip(); }
 		virtual void OnBitmapClickPage1( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnPaintImage( wxPaintEvent& event ) { event.Skip(); }
@@ -333,7 +336,7 @@ class WeatherFaxWizardBase : public wxWizard
 	public:
 		wxFlexGridSizer* m_fgSizer434;
 		
-		WeatherFaxWizardBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax Image"), const wxBitmap& bitmap = wxNullBitmap, const wxPoint& pos = wxDefaultPosition, long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxRESIZE_BORDER );
+		WeatherFaxWizardBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax Image"), const wxBitmap& bitmap = wxNullBitmap, const wxPoint& pos = wxDefaultPosition, long style = wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER|wxSYSTEM_MENU );
 		WizardPages m_pages;
 		~WeatherFaxWizardBase();
 	
