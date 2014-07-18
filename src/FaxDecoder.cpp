@@ -61,6 +61,7 @@ bool FaxDecoder::Configure(int imagewidth, int BitsPerPixel, int carrier,
     m_StartLength = 5;
     m_StopLength = 5;
     m_phasingLines = 40;
+    size = 0;
 
     firfilters[0] = firfilter(bandwidth);
     firfilters[1] = firfilter(bandwidth);
