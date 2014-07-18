@@ -520,7 +520,9 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	fgSizer61->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
 	m_splitter1 = new wxSplitterWindow( m_panel4, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D );
+	m_splitter1->SetSashGravity( 1 );
 	m_splitter1->Connect( wxEVT_IDLE, wxIdleEventHandler( InternetRetrievalDialogBase::m_splitter1OnIdle ), NULL, this );
+	m_splitter1->SetMinimumPaneSize( 160 );
 	
 	m_panel7 = new wxPanel( m_splitter1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer39;
@@ -673,7 +675,7 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	m_panel8->SetSizer( fgSizer42 );
 	m_panel8->Layout();
 	fgSizer42->Fit( m_panel8 );
-	m_splitter1->SplitHorizontally( m_panel7, m_panel8, 195 );
+	m_splitter1->SplitHorizontally( m_panel7, m_panel8, 300 );
 	fgSizer61->Add( m_splitter1, 1, wxEXPAND, 5 );
 	
 	

@@ -215,12 +215,12 @@ class InternetRetrievalDialogBase : public wxDialog
 	
 	public:
 		
-		InternetRetrievalDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Internet Retrieval"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 640,470 ), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER ); 
+		InternetRetrievalDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Internet Retrieval"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 680,480 ), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER ); 
 		~InternetRetrievalDialogBase();
 		
 		void m_splitter1OnIdle( wxIdleEvent& )
 		{
-			m_splitter1->SetSashPosition( 195 );
+			m_splitter1->SetSashPosition( 300 );
 			m_splitter1->Disconnect( wxEVT_IDLE, wxIdleEventHandler( InternetRetrievalDialogBase::m_splitter1OnIdle ), NULL, this );
 		}
 	

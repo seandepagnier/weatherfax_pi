@@ -46,6 +46,7 @@ InternetRetrievalDialog::InternetRetrievalDialog( weatherfax_pi &_weatherfax_pi,
       m_bLoaded(false), m_bDisableServers(false), m_bDisableRegions(false),
       m_bDisableFilter(true), m_bRebuilding(false)
 {
+    m_panel8->Fit();
 }
 
 InternetRetrievalDialog::~InternetRetrievalDialog()
@@ -77,7 +78,7 @@ InternetRetrievalDialog::~InternetRetrievalDialog()
         it != m_InternetRetrieval.end(); it++)
         if((*it)->Scheduled)
             scheduled += (*it)->Url + _T(";");
-    pConf->Write ( _T ( "scheduled" ), scheduled );
+    pConf->Write ( _T ( "Scheduled" ), scheduled );
 
     ClearInternetRetrieval();
 }
@@ -133,7 +134,7 @@ void InternetRetrievalDialog::Load()
     }
 
     wxString scheduled;
-    pConf->Read ( _T ( "scheduled" ), &scheduled, _T("") );
+    pConf->Read ( _T ( "Scheduled" ), &scheduled, _T("") );
     std::list<wxString> scheduledlist;
     /* split at each ; to get all the names in a list */
     while(scheduled.size()) {
@@ -613,9 +614,9 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
             case 2:
             {
                 wxMessageDialog mdlg(this, _("Timed out waiting for headers for: ") +
-                                     faxurl->Contents + _T("\n") +
-                                     faxurl->Url + _T("\n") +
+                                     faxurl->Contents + _T("\n") + faxurl->Url + _T("\n") +
                                      _("Verify there is a working internet connection.") + _T("\n") +
+                                     _("Possibly the server is down temporarily.") + _T("\n") +
                                      _("If the url is incorrect please edit the xml and/or post a bug report."),
                                      _("Weather Fax"), wxOK | wxICON_ERROR);
                 mdlg.ShowModal();
