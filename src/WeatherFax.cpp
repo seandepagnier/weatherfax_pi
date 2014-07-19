@@ -659,6 +659,14 @@ void WeatherFax::OnAbout( wxCommandEvent& event )
     dlg.ShowModal();
 }
 
+bool WeatherFax::Show( bool show )
+{
+    for(std::list<WeatherFaxWizard *>::iterator it = m_AudioWizards.begin();
+        it != m_AudioWizards.end(); it++)
+        (*it)->Show(show);
+    return WeatherFaxBase::Show(show);
+}
+
 void WeatherFax::UpdateMenuStates()
 {
     wxArrayInt Selections;

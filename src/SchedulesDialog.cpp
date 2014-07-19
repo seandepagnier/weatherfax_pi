@@ -735,10 +735,8 @@ void SchedulesDialog::UpdateProgress()
         m_gCaptureStatus->SetValue(seconds);
     }
 
-    if(m_stCaptureStatus->GetLabel() != l) {
+    if(m_stCaptureStatus->GetLabel() != l)
         m_stCaptureStatus->SetLabel(l);
-        Fit();
-    }
 
     m_bClearCaptures->Enable(m_CaptureSchedules.size() > 0);
 }
@@ -763,20 +761,16 @@ void SchedulesDialog::OnAlarmTimer( wxTimerEvent & )
         wxProcess::Open(m_tExternalAlarmCommand->GetValue());
 }
 
-void SchedulesDialog::OnCaptureTimer( wxTimerEvent & )
+void SchedulesDialog::OnCaptureTimer( wxTimerEvent &event )
 {
-    if(m_CurrentSchedule) {
-        wxMessageDialog mdlg(this, _("Already capturing, cannot capture: ") +
-                             m_CaptureSchedules.front()->Contents, _("weatherfax"), wxOK | wxICON_ERROR);
-        mdlg.ShowModal();
-        return;
-    }
+    if(m_CurrentSchedule)
+        OnEndCaptureTimer( event );
 
     m_CurrentSchedule = m_CaptureSchedules.front();
     m_CaptureSchedules.pop_front();
 
     /* end 10 seconds early to ensure it ends before next starting fax */
-    m_EndCaptureTimer.Start(1000 * 60 * m_CurrentSchedule->Duration - 10);
+    m_EndCaptureTimer.Start(1000 * 60 * m_CurrentSchedule->Duration);
 
     if(m_rbExternalCapture->GetValue()) {
         if(m_ExternalCaptureProcess) {

@@ -68,7 +68,6 @@ class WeatherFax : public WeatherFaxBase
 {
 public:
     WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent);
-
     ~WeatherFax();
 
     void OnClose( wxCloseEvent& event ) { Hide(); }
@@ -89,6 +88,7 @@ public:
     void OnInternet( wxCommandEvent& event );
     void OnAbout( wxCommandEvent& event );
 
+    bool Show( bool show = true );
     void WizardFinished(WeatherFaxWizard *wizard);
     bool WizardCleanup(WeatherFaxWizard *wizard);
     WeatherFaxWizard *OpenWav(wxString filename, wxString station=_T(""), wxString area=_T(""), wxString contents=_T(""));
