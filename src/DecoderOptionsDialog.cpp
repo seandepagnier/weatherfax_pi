@@ -42,8 +42,8 @@ DecoderOptionsDialog::DecoderOptionsDialog(wxWindow *parent, FaxDecoder &decoder
     m_sCarrier->SetValue(pConf->Read ( _T ( "Carrier" ), 1900L ));
     m_sDeviation->SetValue(pConf->Read ( _T ( "Deviation" ), 400L ));
     m_cFilter->SetSelection(pConf->Read ( _T ( "Filter" ), FaxDecoder::firfilter::MIDDLE ));
-    m_cbSkip->SetValue(pConf->Read ( _T ( "SkipHeaderDetection" ), 0L ));
-    m_cbInclude->SetValue(pConf->Read ( _T ( "IncludeHeadersInImage" ), 0L ));
+    m_cbSkip->SetValue((bool)pConf->Read ( _T ( "SkipHeaderDetection" ), 0L ));
+    m_cbInclude->SetValue((bool)pConf->Read ( _T ( "IncludeHeadersInImage" ), 0L ));
 
     ConfigureDecoder();
 
