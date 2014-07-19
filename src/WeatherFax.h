@@ -91,12 +91,13 @@ public:
 
     void WizardFinished(WeatherFaxWizard *wizard);
     bool WizardCleanup(WeatherFaxWizard *wizard);
-    void OpenWav(wxString filename, wxString station=_T(""), wxString area=_T(""), wxString contents=_T(""));
+    WeatherFaxWizard *OpenWav(wxString filename, wxString station=_T(""), wxString area=_T(""), wxString contents=_T(""));
     void OpenImage(wxString filename, wxString station=_T(""), wxString area=_T(""), wxString contents=_T(""));
     void Goto(int selection);
     void Export(wxString filename);
 
     void UpdateMenuStates();
+    void StopDecoder(WeatherFaxWizard *wizard);
 
     WeatherFaxImageCoordinateList m_BuiltinCoords, m_UserCoords;
 
@@ -107,10 +108,8 @@ public:
 protected:
     void OnDeleteWizardTimer( wxTimerEvent & );
 
-    WeatherFaxWizard *m_CurrentWizard;
-    wxString m_CurrentWizardFaxName;
-    WeatherFaxImageCoordinateList m_CurrentWizardBuiltinCoordList;
-    wxTimer m_tDeleteCurrentWizard;
+    std::list<WeatherFaxWizard *> m_AudioWizards;
+    wxTimer m_tDeleteAudioWizard;
 
     weatherfax_pi &m_weatherfax_pi;
 };

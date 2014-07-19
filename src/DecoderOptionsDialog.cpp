@@ -27,10 +27,12 @@
 
 #include "weatherfax_pi.h"
 #include "FaxDecoder.h"
+#include "WeatherFaxImage.h"
+#include "WeatherFaxWizard.h"
 #include "DecoderOptionsDialog.h"
 
-DecoderOptionsDialog::DecoderOptionsDialog(wxWindow *parent, FaxDecoder &decoder)
-    : DecoderOptionsDialogBase(parent), m_decoder(decoder)
+DecoderOptionsDialog::DecoderOptionsDialog(WeatherFaxWizard &wizard)
+    : DecoderOptionsDialogBase(&wizard), m_wizard(wizard)
 {
     Hide();
 
@@ -41,17 +43,21 @@ DecoderOptionsDialog::DecoderOptionsDialog(wxWindow *parent, FaxDecoder &decoder
     m_sBitsPerPixel->SetValue(pConf->Read ( _T ( "BitsPerPixel" ), 8L ));
     m_sCarrier->SetValue(pConf->Read ( _T ( "Carrier" ), 1900L ));
     m_sDeviation->SetValue(pConf->Read ( _T ( "Deviation" ), 400L ));
+    m_sMinusSaturationThreshold->SetValue(pConf->Read ( _T ( "MinusSaturationThreshold" ), 15L ));
     m_cFilter->SetSelection(pConf->Read ( _T ( "Filter" ), FaxDecoder::firfilter::MIDDLE ));
     m_cbSkip->SetValue((bool)pConf->Read ( _T ( "SkipHeaderDetection" ), 0L ));
     m_cbInclude->SetValue((bool)pConf->Read ( _T ( "IncludeHeadersInImage" ), 0L ));
 
-    ConfigureDecoder();
+    origwidth = m_sImageWidth->GetValue();
 
-    bool capture = m_decoder.m_inputtype != FaxDecoder::FILENAME;
+    ConfigureDecoder(true);
+
+    FaxDecoder &decoder = m_wizard.m_decoder;
+    bool capture = decoder.m_inputtype != FaxDecoder::FILENAME;
     m_cSampleRate->Enable(capture);
 
     if(!capture) {
-        m_cSampleRate->Insert(wxString::Format(_T("%d"), m_decoder.m_SampleRate), 0);
+        m_cSampleRate->Insert(wxString::Format(_T("%d"), decoder.m_SampleRate), 0);
         m_cSampleRate->SetSelection(0);
     }
 }
@@ -62,29 +68,60 @@ void DecoderOptionsDialog::OnDone( wxCommandEvent& event )
 
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Audio" ) );
 
+    bool spin_options_changed =
+        m_sBitsPerPixel->GetValue() != pConf->Read ( _T ( "BitsPerPixel" ), 8L ) ||
+        m_sCarrier->GetValue() != pConf->Read ( _T ( "Carrier" ), 1900L ) ||
+        m_sDeviation->GetValue() != pConf->Read ( _T ( "Deviation" ), 400L ) ||
+        m_sMinusSaturationThreshold->GetValue() != pConf->Read ( _T ( "MinusSaturationThreshold" ), 15L );
+
     pConf->Write ( _T ( "ImageWidth" ), m_sImageWidth->GetValue());
     pConf->Write ( _T ( "BitsPerPixel" ), m_sBitsPerPixel->GetValue());
     pConf->Write ( _T ( "Carrier" ), m_sCarrier->GetValue());
     pConf->Write ( _T ( "Deviation" ), m_sDeviation->GetValue());
+    pConf->Write ( _T ( "MinusSaturationThreshold" ), m_sMinusSaturationThreshold->GetValue());
     pConf->Write ( _T ( "Filter" ), m_cFilter->GetSelection());
     pConf->Write ( _T ( "SkipHeaderDetection" ), m_cbSkip->GetValue());
     pConf->Write ( _T ( "IncludeHeadersInImage" ), m_cbInclude->GetValue());
 
     Hide();
+
+    FaxDecoder &decoder = m_wizard.m_decoder;
+    if(origwidth != m_sImageWidth->GetValue() ||
+       (decoder.m_inputtype == FaxDecoder::FILENAME && spin_options_changed)) {
+        origwidth = m_sImageWidth->GetValue();
+        ResetDecoder();
+    }
 }
 
-void DecoderOptionsDialog::ConfigureDecoder()
+void DecoderOptionsDialog::ResetDecoder()
+{
+    m_wizard.StopDecoder();
+    ConfigureDecoder(true);
+    m_wizard.StartDecoder();
+}
+
+void DecoderOptionsDialog::ConfigureResetDecoder()
+{
+    FaxDecoder &decoder = m_wizard.m_decoder;
+    if(decoder.m_inputtype == FaxDecoder::FILENAME)
+        ResetDecoder();
+    else
+        ConfigureDecoder(false);
+}
+
+void DecoderOptionsDialog::ConfigureDecoder(bool reset)
 {
     long samplerate;
     m_cSampleRate->GetStringSelection().ToLong(&samplerate);
 
-    if(!m_decoder.Configure(
-           m_sImageWidth->GetValue(), m_sBitsPerPixel->GetValue(),
+    FaxDecoder &decoder = m_wizard.m_decoder;
+    if(!decoder.Configure(
+           origwidth, m_sBitsPerPixel->GetValue(),
            m_sCarrier->GetValue(), m_sDeviation->GetValue(),
            (enum FaxDecoder::firfilter::Bandwidth)m_cFilter->GetSelection(),
            (double)-m_sMinusSaturationThreshold->GetValue()/10 - 1,
            m_cbSkip->GetValue(), m_cbInclude->GetValue(),
-           samplerate)) {
+           samplerate, reset)) {
         wxMessageDialog w( NULL, _("Failed to configure capture."),
                            _("Failure"), wxOK | wxICON_ERROR );
         w.ShowModal();

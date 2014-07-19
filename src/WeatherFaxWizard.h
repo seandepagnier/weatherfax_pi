@@ -5,7 +5,7 @@
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
- *   Copyright (C) 2013 by Sean D'Epagnier                                 *
+ *   Copyright (C) 2014 by Sean D'Epagnier                                 *
  *   sean at depagnier dot com                                             *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -31,13 +31,14 @@ class WeatherFax;
 class DecoderThread;
 class FaxDecoder;
 
+class DecoderOptionsDialog;
 class WeatherFaxWizard : public WeatherFaxWizardBase
 {
 public:
     WeatherFaxWizard( WeatherFaxImage &img,
                       bool use_decoder, wxString decoder_filename,
                       WeatherFax &parent,
-                      WeatherFaxImageCoordinateList &coords,
+                      WeatherFaxImageCoordinateList *coords,
                       wxString newcoordbasename);
 
     ~WeatherFaxWizard();
@@ -48,6 +49,8 @@ public:
     bool m_bDecoderStopped;
     DecoderOptionsDialog *m_DecoderOptionsDialog;
 
+    void StartDecoder();
+    void StopDecoder();
     void MakeNewCoordinates();
     void OnDecoderTimer( wxTimerEvent & );
 
@@ -83,6 +86,9 @@ public:
     void StoreCoords();
 
     WeatherFaxImage &GetImage() { return m_wfimg; }
+    WeatherFaxImageCoordinateList &GetBuiltinCoords() { return m_BuiltinCoords; }
+    
+    wxString FaxName;
 
 protected:
     void ReadMappingLatLon(double &mapping1lat, double &mapping1lon,
@@ -109,6 +115,7 @@ protected:
 
     WeatherFaxImageCoordinates *m_newCoords;
     WeatherFaxImageCoordinateList &m_Coords;
+    WeatherFaxImageCoordinateList m_BuiltinCoords;
 
     bool m_skippaint;
 

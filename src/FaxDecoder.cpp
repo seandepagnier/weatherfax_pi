@@ -39,7 +39,7 @@ bool FaxDecoder::Configure(int imagewidth, int BitsPerPixel, int carrier,
                            int deviation, enum firfilter::Bandwidth bandwidth,
                            double minus_saturation_threshold,
                            bool bSkipHeaderDetection, bool bIncludeHeadersInImages,
-                           int SampleRate)
+                           int SampleRate, bool reset)
 {
     /* pause decoder */
     m_DecoderStopMutex.Lock();
@@ -69,26 +69,28 @@ bool FaxDecoder::Configure(int imagewidth, int BitsPerPixel, int carrier,
     m_minus_saturation_threshold = minus_saturation_threshold;
 
     bool ret = true;
-    if(m_SampleRate != SampleRate) {
+    if(m_SampleRate != SampleRate || reset) {
         CleanUpBuffers();
         m_SampleRate = SampleRate;
-        SetupBuffers();
 
         m_DecoderReloadMutex.Lock();
         CloseInput();
         if(m_Filename.empty()) {
+            SetupBuffers();
             if(!DecodeFaxFromPortAudio())
                 if(!DecodeFaxFromDSP())
                     ret = false;
         } else
             if(!DecodeFaxFromFilename(m_Filename))
                 ret = false;
+            else
+                SetupBuffers();
+
         m_DecoderReloadMutex.Unlock();
     }
 
     /* must reset if image width changes */
-    if(m_imagewidth != imagewidth) {
-        FreeImage();
+    if(m_imagewidth != imagewidth || reset) {
         m_imagewidth = imagewidth;
         InitializeImage();
     }
@@ -193,8 +195,7 @@ double FaxDecoder::FourierTransformSub(wxUint8* buffer, int buffer_len, int freq
 {
     double k = -2 * M_PI * freq * 60.0 / m_lpm / buffer_len;
     double retr = 0, reti = 0;
-    int n;
-    for(n=0; n<buffer_len; n++) {
+    for(int n=0; n<buffer_len; n++) {
         retr += buffer[n]*cos(k*n);
         reti += buffer[n]*sin(k*n);
     }
@@ -283,6 +284,7 @@ void FaxDecoder::InitializeImage()
     if(height == 0) /* for unknown size, start out at 256 */
         height = 256;
 
+    FreeImage();
     m_imgdata = (wxUint8*)malloc(m_imagewidth*height*3);
 
     m_imageline = 0;
@@ -315,7 +317,7 @@ void FaxDecoder::CloseInput()
 #endif
      default:;
      }
-     m_inputtype = NONE;
+//     m_inputtype = NONE;
 }
 
 void FaxDecoder::SetupBuffers()
@@ -352,12 +354,6 @@ bool FaxDecoder::DecodeFax()
                     break;
             len /= 2;
         } break;
-        case FILENAME:
-        {
-            if((len = afReadFrames(aFile, AF_DEFAULT_TRACK, sample, m_blocksize)) != m_blocksize)
-                /* end of file, end decoding */
-                goto done;
-        } break;
 #ifdef OCPN_USE_PORTAUDIO
         case PORTAUDIO:
         {
@@ -370,7 +366,11 @@ bool FaxDecoder::DecodeFax()
             len = m_blocksize;
         } break;
 #endif
+        case FILENAME:
+            if((len = afReadFrames(aFile, AF_DEFAULT_TRACK, sample, m_blocksize)) == m_blocksize)
+                break;
         default:
+            m_DecoderReloadMutex.Unlock();
             goto done;
         }
         m_DecoderReloadMutex.Unlock();
@@ -448,7 +448,7 @@ bool FaxDecoder::DecodeFax()
         }
 
         m_DecoderStopMutex.Unlock();
-     }
+    }
 done:
 
      /* put left overdata into an image */
@@ -462,8 +462,6 @@ done:
          memset(id+imgpos, 0, m_imagewidth*m_imageline*m_imagecolors - imgpos);
      }
 
-     CleanUpBuffers();
-     FreeImage();
      CloseInput();
 
      return true;
@@ -480,7 +478,7 @@ bool FaxDecoder::DecodeFaxFromFilename(wxString fileName)
     if(m_SampleSize!=1 && m_SampleSize!=2)
         return Error(_("sample size not 8 or 16 bit: ") + wxString::Format(_T("%d"), m_SampleSize));
     
-    m_SampleRate = afGetRate(aFile,AF_DEFAULT_TRACK);
+    m_SampleRate = afGetRate(aFile, AF_DEFAULT_TRACK);
     
     size = afGetTrackBytes (aFile, AF_DEFAULT_TRACK);
     if(size < 0 || size == 0x80000000)

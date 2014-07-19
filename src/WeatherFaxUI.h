@@ -32,6 +32,7 @@
 #include <wx/button.h>
 #include <wx/spinctrl.h>
 #include <wx/panel.h>
+#include <wx/filepicker.h>
 #include <wx/radiobut.h>
 #include <wx/notebook.h>
 #include <wx/gauge.h>
@@ -124,16 +125,19 @@ class SchedulesDialogBase : public wxDialog
 		wxButton* m_bAllFrequencies;
 		wxCheckBox* m_cbHasArea;
 		wxCheckBox* m_cbHasValidTime;
+		wxButton* m_bClearCaptures;
 		wxPanel* m_panel2;
 		wxCheckBox* m_cbMessageBox;
+		wxCheckBox* m_cbSound;
+		wxFilePickerCtrl* m_fpSound;
 		wxCheckBox* m_cbExternalAlarm;
 		wxTextCtrl* m_tExternalAlarmCommand;
 		wxPanel* m_panel3;
 		wxRadioButton* m_rbNoAction;
+		wxRadioButton* m_rbAudioCapture;
 		wxRadioButton* m_rbExternalCapture;
 		wxTextCtrl* m_tExternalCapture;
 		wxRadioButton* m_rbManualCapture;
-		wxRadioButton* m_rbAudioCapture;
 		wxPanel* m_panel7;
 		wxStaticText* m_staticText33;
 		wxStaticText* m_stCaptureStatus;
@@ -150,12 +154,13 @@ class SchedulesDialogBase : public wxDialog
 		virtual void OnNoStations( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnFilterSpin( wxSpinEvent& event ) { event.Skip(); }
 		virtual void OnAllFrequencies( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnClearCaptures( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
 		
-		SchedulesDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("HF Radio Schedules"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER ); 
+		SchedulesDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("HF Radio Schedules"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER ); 
 		~SchedulesDialogBase();
 	
 };
@@ -390,6 +395,7 @@ class DecoderOptionsDialogBase : public wxDialog
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnOptionsSpin( wxSpinEvent& event ) { event.Skip(); }
+		virtual void OnResetOptions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnOptions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnDone( wxCommandEvent& event ) { event.Skip(); }
 		

@@ -63,14 +63,12 @@ InternetRetrievalDialog::~InternetRetrievalDialog()
     for(unsigned int i=0; i < m_lServers->GetCount(); i++)
         if(m_lServers->IsSelected(i))
             servers += m_lServers->GetString(i) + _T(";");
-
     pConf->Write ( _T ( "Servers" ), servers);
 
     wxString regions;
     for(unsigned int i=0; i < m_lRegions->GetCount(); i++)
         if(m_lRegions->IsSelected(i))
             regions += m_lRegions->GetString(i) + _T(";");
-
     pConf->Write ( _T ( "Regions" ), regions);
 
     wxString scheduled;

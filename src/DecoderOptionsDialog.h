@@ -30,13 +30,18 @@
 class DecoderOptionsDialog : public DecoderOptionsDialogBase
 {
 public:
-    DecoderOptionsDialog(wxWindow *parent, FaxDecoder &decoder);
+    DecoderOptionsDialog(WeatherFaxWizard &wizard);
 
-    void OnOptionsSpin( wxSpinEvent& event ) { ConfigureDecoder(); }
-    void OnOptions( wxCommandEvent& event ) { ConfigureDecoder(); }
+    void OnOptionsSpin( wxSpinEvent& event ) { ConfigureDecoder(false); }
+    void OnOptions( wxCommandEvent& event ) { ConfigureDecoder(false); }
+    void OnResetOptions( wxCommandEvent& event ) { ConfigureResetDecoder(); }
     void OnDone( wxCommandEvent& event );
-    void ConfigureDecoder();
+    void ResetDecoder();
+    void ConfigureResetDecoder();
+    void ConfigureDecoder(bool reset);
 
 private:
-    FaxDecoder &m_decoder;
+    int origwidth;
+
+    WeatherFaxWizard &m_wizard;
 };
