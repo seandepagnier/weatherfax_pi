@@ -33,6 +33,7 @@
 
 #include <list>
 
+#include "wx/curl/dialog.h"
 #include "tinyxml/tinyxml.h"
 
 #include "weatherfax_pi.h"
@@ -541,7 +542,6 @@ public:
 };
 #endif
 
-#include "wx/curl/dialog.h"
 void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
 {
     int count = 0;

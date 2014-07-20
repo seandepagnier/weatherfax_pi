@@ -41,6 +41,9 @@
 #include <wx/wfstream.h>
 #include <wx/filename.h>
 #include <wx/statline.h>
+
+//class WXDLLIMPEXP_CORE wxTextCtrl;
+class WXDLLIMPEXP_CORE wxCheckBox;
 #include "wx/curl/dialog.h"
 
 
@@ -93,12 +96,11 @@ bool wxCurlTransferDialog::Create(const wxString &url, const wxString& title, co
              wxS("If both these flags are missing the user will be unable to close the dialog window!"));
 
     // do we need to use wxCurlConnectionSettingsDialog?
-    bool needsConnSettings = HasFlag(wxCTDS_CONN_SETTINGS_AUTH) ||
-                             HasFlag(wxCTDS_CONN_SETTINGS_PORT) ||
-                             HasFlag(wxCTDS_CONN_SETTINGS_PROXY);
-    wxASSERT_MSG(!needsConnSettings || HasFlag(wxCTDS_CAN_START),
-             wxS("the connection settings may only be changed before the transfer starts; if wxCTDS_CAN_START ")
-             wxS("is missing the user will be unable to use the connection settings button!"));
+    wxASSERT_MSG(!(HasFlag(wxCTDS_CONN_SETTINGS_AUTH) ||
+                   HasFlag(wxCTDS_CONN_SETTINGS_PORT) ||
+                   HasFlag(wxCTDS_CONN_SETTINGS_PROXY)) || HasFlag(wxCTDS_CAN_START),
+                 wxS("the connection settings may only be changed before the transfer starts; if wxCTDS_CAN_START ")
+                 wxS("is missing the user will be unable to use the connection settings button!"));
 
     // set up our controls
     CreateControls(url, message, sizeLabel, bitmap);

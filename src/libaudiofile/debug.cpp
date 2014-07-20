@@ -53,7 +53,7 @@ void _af_print_pvlist (AUpvlist list)
 	assert(list);
 
 	printf("list.valid: %d\n", list->valid);
-	printf("list.count: %zu\n", list->count);
+	printf("list.count: %lu\n", (unsigned long)list->count);
 
 	for (unsigned i=0; i<list->count; i++)
 	{
@@ -155,24 +155,24 @@ void _af_print_tracks (AFfilehandle filehandle)
 		_af_print_audioformat(&track->f);
 		printf(" virtual format\n");
 		_af_print_audioformat(&track->v);
-		printf(" total file frames: %jd\n",
+		printf(" total file frames: %"PRId64"\n",
 			(intmax_t) track->totalfframes);
-		printf(" total virtual frames: %jd\n",
+		printf(" total virtual frames: %"PRId64"\n",
 			(intmax_t) track->totalvframes);
-		printf(" next file frame: %jd\n",
+		printf(" next file frame: %"PRId64"\n",
 			(intmax_t) track->nextfframe);
-		printf(" next virtual frame: %jd\n",
+		printf(" next virtual frame: %"PRId64"\n",
 			(intmax_t) track->nextvframe);
-		printf(" frames to ignore: %jd\n",
+		printf(" frames to ignore: %"PRId64"\n",
 			(intmax_t) track->frames2ignore);
 
-		printf(" data_size: %jd\n",
+		printf(" data_size: %"PRId64"\n",
 			(intmax_t) track->data_size);
-		printf(" fpos_first_frame: %jd\n",
+		printf(" fpos_first_frame: %"PRId64"\n",
 			(intmax_t) track->fpos_first_frame);
-		printf(" fpos_next_frame: %jd\n",
+		printf(" fpos_next_frame: %"PRId64"\n",
 			(intmax_t) track->fpos_next_frame);
-		printf(" fpos_after_data: %jd\n",
+		printf(" fpos_after_data: %"PRId64"\n",
 			(intmax_t) track->fpos_after_data);
 
 		printf(" channel matrix:");
@@ -250,7 +250,7 @@ void _af_print_frame (AFframecount frameno, double *frame, int nchannels,
 	linebuf[wavewidth-1] = '|';
 	linebuf[wavewidth] = 0;
 
-	printf("%05jd ", (intmax_t) frameno);
+	printf("%05"PRId64" ", (intmax_t) frameno);
 
 	for (c=0; c < nchannels; c++)
 	{

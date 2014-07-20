@@ -16,10 +16,10 @@
 #include "wx/curl/panel.h"
 
 // forward declarations
-class WXDLLIMPEXP_CORE wxStaticText;
-class WXDLLIMPEXP_CORE wxTextCtrl;
-class WXDLLIMPEXP_CORE wxGauge;
-class WXDLLIMPEXP_CORE wxStaticBitmap;
+//class WXDLLIMPEXP_CORE wxStaticText;
+//class WXDLLIMPEXP_CORE wxTextCtrl;
+//class WXDLLIMPEXP_CORE wxGauge;
+//class WXDLLIMPEXP_CORE wxStaticBitmap;
 
 
 //! Possible wxCurlTransferDialog styles.

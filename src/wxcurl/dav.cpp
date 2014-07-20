@@ -103,7 +103,7 @@ bool wxCurlDAV::Propfind(wxInputStream& buffer, const wxString& szRemoteLoc /*= 
 
 	if(m_pCURL && buffer.IsOk())
 	{
-		if(iSize == (~(size_t)0))	// wxCurlDAV does not know how to upload unknown length streams.
+		if(iSize == (~(ssize_t)0))	// wxCurlDAV does not know how to upload unknown length streams.
 			return false;
 
 		SetCurlHandleToDefaults(szRemoteLoc);
@@ -149,7 +149,7 @@ bool wxCurlDAV::Proppatch(wxInputStream& buffer, const wxString& szRemoteLoc /*=
 
 	if(m_pCURL && buffer.IsOk())
 	{
-		if(iSize == (~(size_t)0))	// wxCurlDAV does not know how to upload unknown length streams.
+		if(iSize == (~(ssize_t)0))	// wxCurlDAV does not know how to upload unknown length streams.
 			return false;
 
 		SetCurlHandleToDefaults(szRemoteLoc);

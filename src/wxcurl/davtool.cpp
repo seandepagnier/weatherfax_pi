@@ -339,8 +339,8 @@ bool wxCurlDAVTool::ParsePropsXml(wxCurlDAVFs& fsItem, wxXmlNode* pNode)
 
 		bool bFoundCreationDate = false;
 		bool bFoundLastModified = false;
-		bool bFoundGetContentLength = false;
-		bool bFoundGetContentType = false;
+//		bool bFoundGetContentLength = false;
+//		bool bFoundGetContentType = false;
 
 		while(pChild)
 		{
@@ -391,7 +391,7 @@ bool wxCurlDAVTool::ParsePropsXml(wxCurlDAVFs& fsItem, wxXmlNode* pNode)
 						wxString szVal = pText->GetContent();
 
 						if(szVal.ToLong(&fsItem.m_iContentLength))
-							bFoundGetContentLength = true;
+                                                    ;//	bFoundGetContentLength = true;
 					}
 
 					pText = pText->GetNext();
@@ -407,7 +407,7 @@ bool wxCurlDAVTool::ParsePropsXml(wxCurlDAVFs& fsItem, wxXmlNode* pNode)
 					if(pText->GetType() == wxXML_TEXT_NODE)
 					{
 						fsItem.m_szContentType = pText->GetContent();
-						bFoundGetContentType = true;
+						//bFoundGetContentType = true;
 					}
 
 					pText = pText->GetNext();

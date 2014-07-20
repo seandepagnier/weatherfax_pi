@@ -15,10 +15,10 @@
 #include "wx/curl/base.h"
 
 // forward declarations
-class WXDLLIMPEXP_CORE wxStaticText;
-class WXDLLIMPEXP_CORE wxTextCtrl;
-class WXDLLIMPEXP_CORE wxCheckBox;
-class WXDLLIMPEXP_CORE wxStaticBitmap;
+//class WXDLLIMPEXP_CORE wxStaticText;
+//class WXDLLIMPEXP_CORE wxTextCtrl;
+//class WXDLLIMPEXP_CORE wxCheckBox;
+//class WXDLLIMPEXP_CORE wxStaticBitmap;
 
 // ----------------------------------------------------------------------------
 // wxCurlConnectionSettingsPanel

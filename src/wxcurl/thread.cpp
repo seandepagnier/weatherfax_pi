@@ -258,6 +258,8 @@ void *wxCurlDownloadThread::Entry()
 
         case wxCP_FTP:
             return (void*)wx_static_cast(wxCurlFTP*, m_pCurl)->Get(m_output, m_url);
+
+        default: break;
     }
 
     return NULL;
@@ -351,6 +353,8 @@ void *wxCurlUploadThread::Entry()
 
         case wxCP_FTP:
             return (void*)wx_static_cast(wxCurlFTP*, m_pCurl)->Put(m_input, m_url);
+            
+        default: break;
     }
 
     return NULL;

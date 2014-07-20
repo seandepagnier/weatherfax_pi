@@ -89,7 +89,7 @@ void *_af_malloc (size_t size)
 
 	if (size <= 0)
 	{
-		_af_error(AF_BAD_MALLOC, "bad memory allocation size request %zd", size);
+            _af_error(AF_BAD_MALLOC, "bad memory allocation size request %lu", (unsigned long)size);
 		return NULL;
 	}
 
@@ -102,7 +102,7 @@ void *_af_malloc (size_t size)
 
 	if (p == NULL)
 	{
-		_af_error(AF_BAD_MALLOC, "allocation of %zd bytes failed", size);
+            _af_error(AF_BAD_MALLOC, "allocation of %lu bytes failed", (unsigned long)size);
 		return NULL;
 	}
 
@@ -123,7 +123,7 @@ void *_af_realloc (void *p, size_t size)
 {
 	if (size <= 0)
 	{
-		_af_error(AF_BAD_MALLOC, "bad memory allocation size request %zd", size);
+            _af_error(AF_BAD_MALLOC, "bad memory allocation size request %lu", (unsigned long)size);
 		return NULL;
 	}
 
@@ -131,7 +131,7 @@ void *_af_realloc (void *p, size_t size)
 
 	if (p == NULL)
 	{
-		_af_error(AF_BAD_MALLOC, "allocation of %zd bytes failed", size);
+            _af_error(AF_BAD_MALLOC, "allocation of %lu bytes failed", (unsigned long)size);
 		return NULL;
 	}
 
@@ -145,7 +145,7 @@ void *_af_calloc (size_t nmemb, size_t size)
 	if (nmemb <= 0 || size <= 0)
 	{
 		_af_error(AF_BAD_MALLOC, "bad memory allocation size request "
-			"%zd elements of %zd bytes each", nmemb, size);
+                          "%lu elements of %lu bytes each", (unsigned long)nmemb, (unsigned long)size);
 		return NULL;
 	}
 
@@ -153,8 +153,8 @@ void *_af_calloc (size_t nmemb, size_t size)
 
 	if (p == NULL)
 	{
-		_af_error(AF_BAD_MALLOC, "allocation of %zd bytes failed",
-			nmemb*size);
+		_af_error(AF_BAD_MALLOC, "allocation of %lu bytes failed",
+                          (unsigned long)nmemb*size);
 		return NULL;
 	}
 
