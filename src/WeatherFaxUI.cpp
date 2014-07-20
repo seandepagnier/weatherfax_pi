@@ -532,15 +532,6 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
-	wxFlexGridSizer* fgSizer38;
-	fgSizer38 = new wxFlexGridSizer( 0, 1, 0, 0 );
-	fgSizer38->AddGrowableCol( 0 );
-	fgSizer38->AddGrowableRow( 0 );
-	fgSizer38->SetFlexibleDirection( wxBOTH );
-	fgSizer38->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-	
-	m_notebook2 = new wxNotebook( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
-	m_panel4 = new wxPanel( m_notebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer61;
 	fgSizer61 = new wxFlexGridSizer( 0, 2, 0, 0 );
 	fgSizer61->AddGrowableCol( 0 );
@@ -548,7 +539,7 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	fgSizer61->SetFlexibleDirection( wxBOTH );
 	fgSizer61->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_splitter1 = new wxSplitterWindow( m_panel4, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D );
+	m_splitter1 = new wxSplitterWindow( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxSP_3D );
 	m_splitter1->SetSashGravity( 1 );
 	m_splitter1->Connect( wxEVT_IDLE, wxIdleEventHandler( InternetRetrievalDialogBase::m_splitter1OnIdle ), NULL, this );
 	m_splitter1->SetMinimumPaneSize( 160 );
@@ -708,66 +699,7 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	fgSizer61->Add( m_splitter1, 1, wxEXPAND, 5 );
 	
 	
-	m_panel4->SetSizer( fgSizer61 );
-	m_panel4->Layout();
-	fgSizer61->Fit( m_panel4 );
-	m_notebook2->AddPage( m_panel4, _("Url"), true );
-	m_panel5 = new wxPanel( m_notebook2, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
-	wxFlexGridSizer* fgSizer60;
-	fgSizer60 = new wxFlexGridSizer( 0, 1, 0, 0 );
-	fgSizer60->AddGrowableCol( 0 );
-	fgSizer60->AddGrowableRow( 1 );
-	fgSizer60->SetFlexibleDirection( wxBOTH );
-	fgSizer60->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-	
-	wxFlexGridSizer* fgSizer48;
-	fgSizer48 = new wxFlexGridSizer( 0, 2, 0, 0 );
-	fgSizer48->SetFlexibleDirection( wxBOTH );
-	fgSizer48->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-	
-	m_staticText34 = new wxStaticText( m_panel5, wxID_ANY, _("Service"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText34->Wrap( -1 );
-	fgSizer48->Add( m_staticText34, 0, wxALL, 5 );
-	
-	m_staticText41 = new wxStaticText( m_panel5, wxID_ANY, _("ftpmail@ftpmail.nws.noaa.gov"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText41->Wrap( -1 );
-	fgSizer48->Add( m_staticText41, 0, wxALL, 5 );
-	
-	m_staticText42 = new wxStaticText( m_panel5, wxID_ANY, _("Reply to:"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText42->Wrap( -1 );
-	fgSizer48->Add( m_staticText42, 0, wxALL, 5 );
-	
-	m_textCtrl11 = new wxTextCtrl( m_panel5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
-	fgSizer48->Add( m_textCtrl11, 0, wxALL|wxEXPAND, 5 );
-	
-	
-	fgSizer60->Add( fgSizer48, 1, wxEXPAND, 5 );
-	
-	wxStaticBoxSizer* sbSizer20;
-	sbSizer20 = new wxStaticBoxSizer( new wxStaticBox( m_panel5, wxID_ANY, _("Email Contents") ), wxVERTICAL );
-	
-	m_textCtrl14 = new wxTextCtrl( m_panel5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( -1,-1 ), wxTE_MULTILINE|wxTE_READONLY );
-	m_textCtrl14->SetMinSize( wxSize( -1,80 ) );
-	
-	sbSizer20->Add( m_textCtrl14, 0, wxALL|wxEXPAND, 5 );
-	
-	m_staticText421 = new wxStaticText( m_panel5, wxID_ANY, _("Note:   Email retrieval implementation is not working and incomplete"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText421->Wrap( -1 );
-	sbSizer20->Add( m_staticText421, 0, wxALL, 5 );
-	
-	
-	fgSizer60->Add( sbSizer20, 1, wxEXPAND, 5 );
-	
-	
-	m_panel5->SetSizer( fgSizer60 );
-	m_panel5->Layout();
-	fgSizer60->Fit( m_panel5 );
-	m_notebook2->AddPage( m_panel5, _("Email"), false );
-	
-	fgSizer38->Add( m_notebook2, 1, wxEXPAND | wxALL, 5 );
-	
-	
-	this->SetSizer( fgSizer38 );
+	this->SetSizer( fgSizer61 );
 	this->Layout();
 	
 	this->Centre( wxBOTH );

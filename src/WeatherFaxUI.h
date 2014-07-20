@@ -173,8 +173,6 @@ class InternetRetrievalDialogBase : public wxDialog
 	private:
 	
 	protected:
-		wxNotebook* m_notebook2;
-		wxPanel* m_panel4;
 		wxSplitterWindow* m_splitter1;
 		wxPanel* m_panel7;
 		wxListCtrl* m_lUrls;
@@ -193,13 +191,6 @@ class InternetRetrievalDialogBase : public wxDialog
 		wxListBox* m_lRegions;
 		wxButton* m_bAllRegions;
 		wxButton* m_bNoRegions;
-		wxPanel* m_panel5;
-		wxStaticText* m_staticText34;
-		wxStaticText* m_staticText41;
-		wxStaticText* m_staticText42;
-		wxTextCtrl* m_textCtrl11;
-		wxTextCtrl* m_textCtrl14;
-		wxStaticText* m_staticText421;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnRetrieve( wxMouseEvent& event ) { event.Skip(); }
