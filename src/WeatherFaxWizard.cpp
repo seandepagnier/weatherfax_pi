@@ -50,7 +50,6 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
     wxIcon icon;
     icon.CopyFromBitmap(*_img_weatherfax);
     SetIcon(icon);
-    m_DecoderOptionsDialog->SetIcon(icon);
 
     m_sPhasing->SetValue(m_wfimg.phasing);
     m_sSkew->SetValue(m_wfimg.skew);
@@ -66,6 +65,7 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
     m_cRotation->SetSelection(m_curCoords->rotation);
 
     if(use_decoder && m_decoder.m_inputtype != FaxDecoder::NONE) {
+        m_DecoderOptionsDialog->SetIcon(icon);
         StartDecoder();
     } else {
         m_thDecoder = NULL;
