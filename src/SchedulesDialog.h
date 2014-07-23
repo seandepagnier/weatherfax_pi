@@ -34,12 +34,12 @@
 
 class weatherfax_pi;
 
+static const int seconds_in_a_day = 24*60*60;
+
 class Schedule
 {
 public:
-    bool Filtered;
-
-    bool Capture;
+    bool Filtered, Capture;
 
     wxString Station;
     double Frequency;
@@ -53,21 +53,22 @@ public:
 
     long StartSeconds() {
         wxDateTime t(Time/100, Time%100);
-        long seconds = (t - wxDateTime::Now().ToUTC()).GetSeconds().ToLong();
+        long seconds = (t - wxDateTime::Now().ToUTC()).GetSeconds().ToLong()%seconds_in_a_day;
         if(seconds < 0) /* already happened today */
-            seconds += 86400; /* try next day */
+            seconds += seconds_in_a_day; /* try next day */
         return seconds;
     }
 
     long Seconds() {
         wxDateTime t(Time/100, Time%100);
-        long seconds = (wxDateTime::Now().ToUTC() - t).GetSeconds().ToLong();
+        long seconds = (wxDateTime::Now().ToUTC() - t).GetSeconds().ToLong()%seconds_in_a_day;
         if(seconds < 0) /* already happened today */
-            seconds += 86400; /* try next day */
+            seconds += seconds_in_a_day; /* try next day */
         return seconds;
     }
 };
 
+class WeatherFaxWizard;
 class SchedulesDialog: public SchedulesDialogBase
 {
 public:
@@ -89,6 +90,7 @@ public:
     void OnAllStations( wxCommandEvent& event );
     void OnNoStations( wxCommandEvent& event );
     void OnAllFrequencies( wxCommandEvent& event );
+    void OnClearCaptures( wxCommandEvent& event );
     void OnClose( wxCommandEvent& event );
 
     bool HasStation(wxString station);
@@ -99,6 +101,8 @@ public:
     void RemoveScheduleToCapture(Schedule *s);
     void UpdateTimer();
     void UpdateProgress();
+
+    WeatherFaxWizard *m_CaptureWizard;
 
 private:
     void OnAlarmTimer( wxTimerEvent & );

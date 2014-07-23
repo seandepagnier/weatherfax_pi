@@ -62,12 +62,12 @@ public:
 #include "InternetRetrievalDialog.h"
 
 class weatherfax_pi;
+class WeatherFaxWizard;
 
 class WeatherFax : public WeatherFaxBase
 {
 public:
     WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent);
-
     ~WeatherFax();
 
     void OnClose( wxCloseEvent& event ) { Hide(); }
@@ -88,12 +88,16 @@ public:
     void OnInternet( wxCommandEvent& event );
     void OnAbout( wxCommandEvent& event );
 
-    void OpenWav(wxString filename, wxString station=_T(""), wxString area=_T(""), wxString contents=_T(""));
+    bool Show( bool show = true );
+    void WizardFinished(WeatherFaxWizard *wizard);
+    bool WizardCleanup(WeatherFaxWizard *wizard);
+    WeatherFaxWizard *OpenWav(wxString filename, wxString station=_T(""), wxString area=_T(""), wxString contents=_T(""));
     void OpenImage(wxString filename, wxString station=_T(""), wxString area=_T(""), wxString contents=_T(""));
     void Goto(int selection);
     void Export(wxString filename);
 
     void UpdateMenuStates();
+    void StopDecoder(WeatherFaxWizard *wizard);
 
     WeatherFaxImageCoordinateList m_BuiltinCoords, m_UserCoords;
 
@@ -102,6 +106,11 @@ public:
     InternetRetrievalDialog m_InternetRetrievalDialog;
 
 protected:
+    void OnDeleteWizardTimer( wxTimerEvent & );
+
+    std::list<WeatherFaxWizard *> m_AudioWizards;
+    wxTimer m_tDeleteAudioWizard;
+
     weatherfax_pi &m_weatherfax_pi;
 };
 

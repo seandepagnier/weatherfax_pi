@@ -5,7 +5,7 @@
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
- *   Copyright (C) 2013 by Sean D'Epagnier                                 *
+ *   Copyright (C) 2014 by Sean D'Epagnier                                 *
  *   sean at depagnier dot com                                             *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -52,16 +52,17 @@ public:
     };
 
     FaxDecoder(wxWindow &parent, wxString filename)
-        : m_bEndDecoding(true), m_imgdata(NULL), m_imagewidth(-1),
+        : m_imgdata(NULL), m_imagewidth(-1),
         m_inputtype(NONE), datadouble(NULL),
         m_SampleRate(0), m_parent(parent),
         m_Filename(filename), sample(NULL), data(NULL), phasingPos(NULL) {}
+    ~FaxDecoder() { FreeImage(); CleanUpBuffers(); }
 
     bool Configure(int imagewidth, int BitsPerPixel, int carrier,
                    int deviation, enum firfilter::Bandwidth bandwidth,
                    double minus_saturation_threshold,
                    bool bSkipHeaderDetection, bool bIncludeHeadersInImages,
-                   int SampleRate);
+                   int SampleRate, bool reset);
 
     bool DecodeFaxFromFilename(wxString filename);
     bool DecodeFaxFromDSP();

@@ -5,7 +5,7 @@
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
- *   Copyright (C) 2013 by Sean D'Epagnier                                 *
+ *   Copyright (C) 2014 by Sean D'Epagnier                                 *
  *   sean at depagnier dot com                                             *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
@@ -33,18 +33,24 @@
 #include "WeatherFax.h"
 #include "DecoderOptionsDialog.h"
 #include "WeatherFaxWizard.h"
+#include "icons.h"
 
 WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
                                     bool use_decoder, wxString decoder_filename,
                                     WeatherFax &parent,
-                                    WeatherFaxImageCoordinateList &coords,
+                                    WeatherFaxImageCoordinateList *coords,
                                     wxString newcoordbasename)
     : WeatherFaxWizardBase( &parent ), m_decoder(*this, decoder_filename),
-      m_DecoderOptionsDialog(use_decoder ? new DecoderOptionsDialog(this, m_decoder) : NULL),
+      m_DecoderOptionsDialog(use_decoder ? new DecoderOptionsDialog(*this) : NULL),
       m_parent(parent), m_wfimg(img), m_curCoords(img.m_Coords),
       m_NewCoordBaseName(newcoordbasename.empty() ? wxString(_("New Coord")) : newcoordbasename),
-      m_Coords(coords)
+      m_Coords(coords ? *coords : m_BuiltinCoords)
 {
+
+    wxIcon icon;
+    icon.CopyFromBitmap(*_img_weatherfax);
+    SetIcon(icon);
+
     m_sPhasing->SetValue(m_wfimg.phasing);
     m_sSkew->SetValue(m_wfimg.skew);
     m_cFilter->SetSelection(m_wfimg.filter);
@@ -59,15 +65,8 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
     m_cRotation->SetSelection(m_curCoords->rotation);
 
     if(use_decoder && m_decoder.m_inputtype != FaxDecoder::NONE) {
-        /* periodically check for updates */
-        m_tDecoder.Connect(wxEVT_TIMER, wxTimerEventHandler( WeatherFaxWizard::OnDecoderTimer ), NULL, this);
-        m_tDecoder.Start(1000, wxTIMER_ONE_SHOT);
-
-        m_bDecoderStopped = false;
-
-        /* run decoder in a separate thread */
-        m_thDecoder = new DecoderThread(m_decoder);
-        m_thDecoder->Run();
+        m_DecoderOptionsDialog->SetIcon(icon);
+        StartDecoder();
     } else {
         m_thDecoder = NULL;
         m_bStopDecoding->Disable();
@@ -81,16 +80,7 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
 
 WeatherFaxWizard::~WeatherFaxWizard()
 {
-    if(m_thDecoder) {
-        m_decoder.m_bEndDecoding = true;
-
-        if(m_bDecoderStopped)
-            m_decoder.m_DecoderStopMutex.Unlock();
-
-        m_thDecoder->Wait(); /* wait for decoder thread to end */
-        delete m_thDecoder;
-    }
-
+    StopDecoder();
     delete m_DecoderOptionsDialog;
 
     wxFileConfig *pConf = GetOCPNConfigObject();
@@ -103,31 +93,43 @@ WeatherFaxWizard::~WeatherFaxWizard()
     wxSize s = GetSize();
     pConf->Write ( _T ( "WizardW" ), s.x);
     pConf->Write ( _T ( "WizardH" ), s.y);
+}
 
-    /* add coordinates to set if it is the new one, but make
-       sure it has a unique name */
-    int sel = m_cbCoordSet->GetSelection();
-    if(sel == -1)
-        sel = m_SelectedIndex;
+void WeatherFaxWizard::StartDecoder()
+{
+    /* reset image */
+    m_wfimg.m_origimg.Create(1, 1); /* small image; so orig image is always ok to work with */
 
-    if(sel == 0 && GetReturnCode() != wxID_CANCEL) {
-        int cc = m_Coords.GetCount();
-        wxString newname = m_newCoords->name, newnumberedname;
-        for(int n=0, i=-1; i != cc; n++) {
-            newnumberedname = newname;
-            if(n)
-                newnumberedname += wxString::Format(_T(" %d"), n);
+    /* periodically check for updates */
+    m_tDecoder.Connect(wxEVT_TIMER, wxTimerEventHandler( WeatherFaxWizard::OnDecoderTimer ), NULL, this);
+    m_tDecoder.Start(1000, wxTIMER_ONE_SHOT);
 
-            if(!cc)
-                break;
-            for(i=0; i<cc; i++)
-                if(m_Coords[i]->name == newnumberedname)
-                    break;
-        }
-        m_newCoords->name = newnumberedname;
-        m_Coords.Append(m_newCoords);
-    } else
-        delete m_newCoords;
+    m_bDecoderStopped = false;
+
+    /* run decoder in a separate thread */
+    m_thDecoder = new DecoderThread(m_decoder);
+    m_thDecoder->Run();
+
+    m_bStopDecoding->SetLabel(_("Stop"));
+    m_bStopDecoding->Enable();
+}
+
+void WeatherFaxWizard::StopDecoder()
+{
+    if(!m_thDecoder)
+        return;
+
+    m_tDecoder.Stop();
+    m_decoder.m_bEndDecoding = true;
+
+    m_bStopDecoding->Disable();
+
+    if(m_bDecoderStopped)
+        m_decoder.m_DecoderStopMutex.Unlock();
+
+    m_thDecoder->Wait(); /* wait for decoder thread to end */
+    delete m_thDecoder;
+    m_thDecoder = NULL;
 }
 
 void WeatherFaxWizard::MakeNewCoordinates()
@@ -162,10 +164,12 @@ void WeatherFaxWizard::MakeNewCoordinates()
         m_cbCoordSet->Disable();
 }
 
-
 void WeatherFaxWizard::OnDecoderTimer( wxTimerEvent & )
 {
     if(m_decoder.m_DecoderMutex.Lock() == wxMUTEX_NO_ERROR) {
+        if(!m_thDecoder->IsRunning())
+            m_bStopDecoding->Disable();
+
         int w = m_decoder.m_imagewidth, h = m_decoder.m_imageline;
         if(h && (!m_wfimg.m_origimg.IsOk() || h != m_wfimg.m_origimg.GetHeight())) {
             m_wfimg.m_origimg = wxImage( w, h );
@@ -295,9 +299,55 @@ void WeatherFaxWizard::OnWizardPageChanged( wxWizardEvent& event )
             ShowPage(m_pages[1], true);
         } else if(m_curCoords->mapping == WeatherFaxImageCoordinates::MERCATOR &&
                 m_curCoords->mappingmultiplier == 1 &&
-                m_curCoords->mappingratio == 1)
+                  m_curCoords->mappingratio == 1) {
+            wxWizardEvent dummy;
+            OnWizardFinished( dummy );
             EndModal(wxID_OK);
+        }
     }
+}
+
+void WeatherFaxWizard::OnWizardCancel( wxWizardEvent& event )
+{
+    delete m_newCoords;
+
+    if(m_parent.WizardCleanup(this)) {
+        m_tDecoder.Stop();
+        delete &m_wfimg;
+    }
+}
+
+void WeatherFaxWizard::OnWizardFinished( wxWizardEvent& event )
+{
+    /* add coordinates to set if it is the new one, but make
+       sure it has a unique name */
+    int sel = m_cbCoordSet->GetSelection();
+    if(sel == -1)
+        sel = m_SelectedIndex;
+
+    if(sel == 0) {
+        int cc = m_Coords.GetCount();
+        wxString newname = m_newCoords->name, newnumberedname;
+        for(int n=0, i=-1; i != cc; n++) {
+            newnumberedname = newname;
+            if(n)
+                newnumberedname += wxString::Format(_T(" %d"), n);
+
+            if(!cc)
+                break;
+            for(i=0; i<cc; i++)
+                if(m_Coords[i]->name == newnumberedname)
+                    break;
+        }
+        m_newCoords->name = newnumberedname;
+        m_Coords.Append(m_newCoords);
+    }
+
+    StoreCoords();
+    StoreMappingParams();
+
+    if(m_parent.WizardCleanup(this))
+        m_parent.WizardFinished(this);
 }
 
 void WeatherFaxWizard::OnSetSizes( wxInitDialogEvent& event )

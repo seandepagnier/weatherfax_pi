@@ -98,7 +98,7 @@ public:
       bool m_bLoadSchedulesStart;
 
       int m_iExportColors;
-      int m_bExportDepthMeters;
+      bool m_bExportDepthMeters;
       wxString m_sExportSoundingDatum;
 
       wxFileConfig     *m_pconfig;

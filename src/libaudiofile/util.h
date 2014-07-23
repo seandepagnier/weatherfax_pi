@@ -31,6 +31,14 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#ifdef __MSVC__
+#define PRId64 "I64d"
+#define PRIi64 "I64i"
+#else
+#define __STDC_FORMAT_MACROS
+#include <inttypes.h>
+#endif
+
 #include "audiofile.h"
 #include "afinternal.h"
 

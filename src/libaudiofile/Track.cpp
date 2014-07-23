@@ -118,15 +118,15 @@ Track::~Track()
 
 void Track::print()
 {
-	fprintf(stderr, "totalfframes %jd\n", (intmax_t) totalfframes);
-	fprintf(stderr, "nextfframe %jd\n", (intmax_t) nextfframe);
-	fprintf(stderr, "frames2ignore %jd\n", (intmax_t) frames2ignore);
-	fprintf(stderr, "fpos_first_frame %jd\n", (intmax_t) fpos_first_frame);
-	fprintf(stderr, "fpos_next_frame %jd\n", (intmax_t) fpos_next_frame);
-	fprintf(stderr, "fpos_after_data %jd\n", (intmax_t) fpos_after_data);
-	fprintf(stderr, "totalvframes %jd\n", (intmax_t) totalvframes);
-	fprintf(stderr, "nextvframe %jd\n", (intmax_t) nextvframe);
-	fprintf(stderr, "data_size %jd\n", (intmax_t) data_size);
+	fprintf(stderr, "totalfframes %"PRId64"\n", (intmax_t) totalfframes);
+	fprintf(stderr, "nextfframe %"PRId64"\n", (intmax_t) nextfframe);
+	fprintf(stderr, "frames2ignore %"PRId64"\n", (intmax_t) frames2ignore);
+	fprintf(stderr, "fpos_first_frame %"PRId64"\n", (intmax_t) fpos_first_frame);
+	fprintf(stderr, "fpos_next_frame %"PRId64"\n", (intmax_t) fpos_next_frame);
+	fprintf(stderr, "fpos_after_data %"PRId64"\n", (intmax_t) fpos_after_data);
+	fprintf(stderr, "totalvframes %"PRId64"\n", (intmax_t) totalvframes);
+	fprintf(stderr, "nextvframe %"PRId64"\n", (intmax_t) nextvframe);
+	fprintf(stderr, "data_size %"PRId64"\n", (intmax_t) data_size);
 }
 
 Marker *Track::getMarker(int markerID)

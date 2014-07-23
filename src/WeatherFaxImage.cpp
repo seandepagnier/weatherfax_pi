@@ -112,7 +112,7 @@ void WeatherFaxImage::FreeData()
 void WeatherFaxImage::MakePhasedImage()
 {
     if(!m_origimg.IsOk()) {
-        m_phasedimg.Create(1, 1); /* small image; so phased image is always ok to work with */
+        m_origimg.Create(1, 1); /* small image; so orig image is always ok to work with */
         return;
     }
 
