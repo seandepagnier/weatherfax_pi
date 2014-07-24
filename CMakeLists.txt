@@ -12,7 +12,7 @@ SET(PACKAGE_NAME weatherfax_pi)
 SET(CPACK_PACKAGE_CONTACT "Sean D'Epagnier ")
 
 SET(VERSION_MAJOR "1")
-SET(VERSION_MINOR "2")
+SET(VERSION_MINOR "3")
 
 IF (UNIX)
 INCLUDE("cmake/FindPortaudio.cmake")
