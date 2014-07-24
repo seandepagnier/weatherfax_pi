@@ -302,7 +302,10 @@ void WeatherFaxWizard::OnWizardPageChanged( wxWizardEvent& event )
                   m_curCoords->mappingratio == 1) {
             wxWizardEvent dummy;
             OnWizardFinished( dummy );
-            EndModal(wxID_OK);
+            if(IsModal())
+                EndModal(wxID_OK);
+            else
+                Hide();
         }
     }
 }
