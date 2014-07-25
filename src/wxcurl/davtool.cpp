@@ -27,6 +27,7 @@
     #include <wx/msw/msvcrt.h>      // useful to catch memory leaks when compiling under MSVC 
 #endif
 
+
 #include <wx/mstream.h>
 #include <wx/sstream.h>
 #include <wx/xml/xml.h>
@@ -379,7 +380,7 @@ bool wxCurlDAVTool::ParsePropsXml(wxCurlDAVFs& fsItem, wxXmlNode* pNode)
 					pText = pText->GetNext();
 				}
 			}
-
+#if 0
 			if(pChild->GetName().Find(wxS("getcontentlength")) != -1)
 			{
 				wxXmlNode* pText = pChild->GetChildren();
@@ -397,7 +398,7 @@ bool wxCurlDAVTool::ParsePropsXml(wxCurlDAVFs& fsItem, wxXmlNode* pNode)
 					pText = pText->GetNext();
 				}
 			}
-
+#endif
 			if(pChild->GetName().Find(wxS("getcontenttype")) != -1)
 			{
 				wxXmlNode* pText = pChild->GetChildren();
