@@ -471,20 +471,6 @@ void WeatherFax::Goto(int selection)
         JumpToPosition((lat0 + lat1) / 2, (lon0 + lon1) / 2, .5/distance);
 }
 
-void WeatherFax::Export(wxString filename)
-{
-    for(int selection = 0; selection < (int)m_Faxes.size(); selection++) {
-        if(!m_lFaxes->IsSelected(selection))
-            continue;
-
-        WeatherFaxImage &image = *m_Faxes[selection];
-    
-        wximgtokap(image, m_weatherfax_pi.m_iExportColors,
-                   m_weatherfax_pi.m_bExportDepthMeters ? METERS : FATHOMS,
-                   m_weatherfax_pi.m_sExportSoundingDatum.mb_str(), filename.mb_str());
-    }
-}
-
 void WeatherFax::OnOpen( wxCommandEvent& event )
 {
     wxFileDialog openDialog
@@ -510,6 +496,34 @@ All files (*.*)|*.*" ), wxFD_OPEN);
             OpenWav(filename);
         } else
             OpenImage(filename);
+    }
+}
+
+void WeatherFax::OnSaveAs( wxCommandEvent& event )
+{
+    for(int selection = 0; selection < (int)m_Faxes.size(); selection++) {
+        if(!m_lFaxes->IsSelected(selection))
+            continue;
+
+        WeatherFaxImage &image = *m_Faxes[selection];
+
+        wxFileDialog saveDialog
+            ( this, _( "Save Weather Fax To Image" ),
+              m_weatherfax_pi.m_export_path, image.m_Coords->name + _T(".png"),
+              _ ( "\
+Image Files|*.BMP;*.bmp|*.PNG;*.png|*.TIFF;*.tiff\
+All files (*.*)|*.*" ), wxFD_SAVE);
+
+        if( saveDialog.ShowModal() == wxID_OK ) {
+            wxString filename = saveDialog.GetPath();
+            m_weatherfax_pi.m_export_path = saveDialog.GetDirectory();        
+
+            if(!image.m_mappedimg.SaveFile(filename)) {
+                wxMessageDialog mdlg(this, _("Failed to save file: ") + filename,
+                                 _("Weather Fax"), wxOK | wxICON_ERROR);
+                mdlg.ShowModal();
+            }
+        }
     }
 }
 
@@ -555,17 +569,28 @@ void WeatherFax::OnGoto( wxCommandEvent& event )
 
 void WeatherFax::OnExport( wxCommandEvent& event )
 {
-    wxFileDialog saveDialog
-        ( this, _( "Save Weather Fax To KAP" ),
-          m_weatherfax_pi.m_export_path, wxT ( "" ),
-          _ ( "\
-Supported Files|*.KAP;*.kap|\
+    for(int selection = 0; selection < (int)m_Faxes.size(); selection++) {
+        if(!m_lFaxes->IsSelected(selection))
+            continue;
+
+        WeatherFaxImage &image = *m_Faxes[selection];
+    
+        wxFileDialog saveDialog
+            ( this, _( "Save Weather Fax To KAP" ),
+              m_weatherfax_pi.m_export_path, image.m_Coords->name + _T(".kap"),
+              _ ( "\
+KAP Files|*.KAP;*.kap|\
 All files (*.*)|*.*" ), wxFD_SAVE);
 
-    if( saveDialog.ShowModal() == wxID_OK ) {
-        wxString filename = saveDialog.GetPath();
-        m_weatherfax_pi.m_export_path = saveDialog.GetDirectory();        
-        Export(filename);
+        if( saveDialog.ShowModal() == wxID_OK ) {
+            wxString filename = saveDialog.GetPath();
+            m_weatherfax_pi.m_export_path = saveDialog.GetDirectory();        
+
+            wximgtokap(image, m_weatherfax_pi.m_iExportColors,
+                       m_weatherfax_pi.m_bExportDepthMeters ? METERS : FATHOMS,
+                       m_weatherfax_pi.m_sExportSoundingDatum.mb_str(), filename.mb_str());
+        } else
+            break;
     }
 }
 
@@ -671,6 +696,7 @@ void WeatherFax::UpdateMenuStates()
 {
     wxArrayInt Selections;
     bool e = m_lFaxes->GetSelections(Selections) != 0;
+    m_mSaveAs->Enable(e);
     m_mEdit->Enable(e);
     m_mGoto->Enable(e);
     m_mExport->Enable(e);

@@ -245,7 +245,7 @@
         <Map Url="waves/%03d.png" Contents="South China Sea Waves %03d" Area="1" />
       </Iterator>
 
-      <Area Name="1" lat1="8N" lat2="24N" lon1="100W" lon2="130E" />
+      <Area Name="1" lat1="8N" lat2="24N" lon1="100E" lon2="130E" />
     </Region>
 
     <Region Name="Strait of Malacca" Url="malacca/">

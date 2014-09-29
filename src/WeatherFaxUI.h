@@ -59,6 +59,7 @@ class WeatherFaxBase : public wxFrame
 		wxCheckBox* m_cInvert;
 		wxMenuBar* m_menubar1;
 		wxMenu* m_menu1;
+		wxMenuItem* m_mSaveAs;
 		wxMenuItem* m_mEdit;
 		wxMenuItem* m_mGoto;
 		wxMenuItem* m_mExport;
@@ -74,6 +75,7 @@ class WeatherFaxBase : public wxFrame
 		virtual void WhiteTransparencyChanged( wxScrollEvent& event ) { event.Skip(); }
 		virtual void OnInvert( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnOpen( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnSaveAs( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnEdit( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnGoto( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnExport( wxCommandEvent& event ) { event.Skip(); }

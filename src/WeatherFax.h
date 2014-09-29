@@ -77,6 +77,7 @@ public:
     void WhiteTransparencyChanged( wxScrollEvent& event );
     void OnInvert( wxCommandEvent& event );
     void OnOpen( wxCommandEvent& event );
+    void OnSaveAs( wxCommandEvent& event );
     void OnEdit( wxCommandEvent& event );
     void OnGoto( wxCommandEvent& event );
     void OnDelete( wxCommandEvent& event );
@@ -94,7 +95,6 @@ public:
     WeatherFaxWizard *OpenWav(wxString filename, wxString station=_T(""), wxString area=_T(""), wxString contents=_T(""));
     void OpenImage(wxString filename, wxString station=_T(""), wxString area=_T(""), wxString contents=_T(""));
     void Goto(int selection);
-    void Export(wxString filename);
 
     void UpdateMenuStates();
     void StopDecoder(WeatherFaxWizard *wizard);
