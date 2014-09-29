@@ -2052,7 +2052,7 @@
     </Region>
   </Server>
 
-  <Server Name="Weather SA" Url="http://www.weathersa.co.za/web/images/Articles/">
+  <Server Name="Weather SA" Url="http://www.weathersa.co.za/media/data/marine/">
     <Region Name="South Africa">
       <Map Url="ma_sy.gif" Contents="Streamline Analysis" Area="1" />
       <Area Name="1" lat1="65S" lat2="30S" lon1="40W" lon2="80E" />
