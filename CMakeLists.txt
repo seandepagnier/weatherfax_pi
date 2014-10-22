@@ -9,6 +9,8 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.6.2)
 
 PROJECT(weatherfax_pi)
 SET(PACKAGE_NAME weatherfax_pi)
+SET(VERBOSE_NAME WeatherFax)
+SET(TITLE_NAME WEATHERFAX)
 SET(CPACK_PACKAGE_CONTACT "Sean D'Epagnier ")
 
 SET(VERSION_MAJOR "1")
@@ -129,8 +131,10 @@ ADD_DEFINITIONS(-DTIXML_USE_STL)
 ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_TINYXML})
 
 INCLUDE_DIRECTORIES(${PLUGIN_SOURCE_DIR}/src/libaudiofile)
+SET(PLUGIN_PACKAGE_DEPS "curl")
 
 INCLUDE("cmake/PluginInstall.cmake")
 INCLUDE("cmake/PluginCurl.cmake")
 INCLUDE("cmake/PluginLocalization.cmake")
 INCLUDE("cmake/PluginPackage.cmake")
+
