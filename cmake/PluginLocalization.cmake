@@ -76,3 +76,31 @@ if(GETTEXT_MSGFMT_EXECUTABLE)
   ADD_CUSTOM_TARGET(${I18N_NAME}-i18n COMMENT "${PACKAGE_NAME}-i18n: Done." DEPENDS ${_gmoFiles})
   ADD_DEPENDENCIES(${PACKAGE_NAME} ${I18N_NAME}-i18n)
 ENDIF(GETTEXT_MSGFMT_EXECUTABLE)
+
+IF(APPLE)
+SET(_txtFiles)
+MACRO(GETTEXT_BUILD_TXT)
+  FOREACH (_txtFile ${ARGN})
+    GET_FILENAME_COMPONENT(_absFile ${_txtFile} ABSOLUTE)
+    GET_FILENAME_COMPONENT(_txtBasename ${_absFile} NAME)
+    SET(_txtFile ${CMAKE_CURRENT_BINARY_DIR}/${_txtBasename})
+
+    ADD_CUSTOM_COMMAND(
+      OUTPUT ${_txtFile}
+      COMMAND ${CMAKE_COMMAND} -E copy ${_absFile} "SharedSupport/plugins/${PACKAGE_NAME}/data/${_txtBasename}"
+      DEPENDS ${_absFile}
+      COMMENT "Textfile [${_txtBasename}]: Created data file."
+      )
+
+
+    SET(_txtFiles ${_txtFiles} ${_txtFile})
+  ENDFOREACH (_txtFile )
+ENDMACRO(GETTEXT_BUILD_TXT)
+
+if(GETTEXT_MSGFMT_EXECUTABLE)
+  FILE(GLOB PACKAGE_TXT_FILES data/*)
+  GETTEXT_BUILD_TXT(${PACKAGE_TXT_FILES})
+  ADD_CUSTOM_TARGET(${I18N_NAME}-txt COMMENT "${PACKAGE_NAME}-txt: Done." DEPENDS ${_txtFiles})
+  ADD_DEPENDENCIES(${PACKAGE_NAME} ${I18N_NAME}-txt)
+ENDIF(GETTEXT_MSGFMT_EXECUTABLE)
+ENDIF(APPLE)
