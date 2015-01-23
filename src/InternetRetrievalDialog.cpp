@@ -34,7 +34,7 @@
 #include <list>
 
 #include "wx/curl/dialog.h"
-#include "tinyxml/tinyxml.h"
+#include "tinyxml.h"
 
 #include "weatherfax_pi.h"
 #include "WeatherFaxImage.h"

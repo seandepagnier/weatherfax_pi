@@ -27,6 +27,8 @@ IF (PORTAUDIO_FOUND)
 ELSE (PORTAUDIO_FOUND)
     MESSAGE (STATUS "Portaudio Not Found...")
 ENDIF (PORTAUDIO_FOUND)
+INCLUDE("cmake/FindTinyXML.cmake")
+FIND_PACKAGE(TinyXML QUIET)
 ELSE (UNIX)
     INCLUDE_DIRECTORIES(${PLUGIN_SOURCE_DIR}/include)
     SET(EXTRA_LIBS ${EXTRA_LIBS} ../buildwin/portaudio_x86)
@@ -118,17 +120,25 @@ SET(SRC_WEATHERFAX
 	)
 
 IF(WIN32)
-SET(SRC_LTINYXML
-            src/tinyxml/tinyxml.cpp
-            src/tinyxml/tinyxmlparser.cpp
-            src/tinyxml/tinyxmlerror.cpp
-)
-
 INSTALL(FILES "buildwin/PVW32Con.exe" DESTINATION "plugins\\\\${PACKAGE_NAME}")
 ENDIF(WIN32)
 
 ADD_DEFINITIONS(-DTIXML_USE_STL)
-ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_LTINYXML})
+IF(TINYXML_FOUND)
+    message (STATUS "Building with system tinyxml")
+    INCLUDE_DIRECTORIES(${TINYXML_INCLUDE_DIR})
+    ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX})
+    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${TINYXML_LIBRARIES} )
+ELSE(TINYXML_FOUND)
+    message (STATUS "Building with embedded tinyxml")
+    INCLUDE_DIRECTORIES(src/tinyxml/)
+    SET(SRC_LTINYXML
+            src/tinyxml/tinyxml.cpp
+            src/tinyxml/tinyxmlparser.cpp
+            src/tinyxml/tinyxmlerror.cpp
+    )
+    ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_LTINYXML})
+ENDIF(TINYXML_FOUND)
 
 INCLUDE_DIRECTORIES(${PLUGIN_SOURCE_DIR}/src/libaudiofile)
 SET(PLUGIN_PACKAGE_DEPS "curl")
