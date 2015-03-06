@@ -298,7 +298,7 @@ void WeatherFaxImage::InputToMercator(double px, double py, double &mx, double &
         theta = atan2(dx, fabs(dy));
         x = theta*m_phasedimg.GetWidth();
 
-        double z = hypot(dx, dy) / inputheight;
+        double z = sqrt(dx*dx + dy*dy) / inputheight;
         double q = 4/M_PI*atan(z);
         pp = q + (inputheight > 0 ? -1 : 1); /* inputheight < 0 for south polar */
     } break;

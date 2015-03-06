@@ -199,7 +199,7 @@ double FaxDecoder::FourierTransformSub(wxUint8* buffer, int buffer_len, int freq
         retr += buffer[n]*cos(k*n);
         reti += buffer[n]*sin(k*n);
     }
-    return hypot(retr, reti);
+    return sqrt(retr*retr + reti*reti);
 }
 
 /* see if the fourier transform at the start and stop frequencies reveils header */
