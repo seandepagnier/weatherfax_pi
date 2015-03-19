@@ -222,7 +222,7 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                 wxDateTime now = wxDateTime::UNow();
                 if((now-start).GetMilliseconds() > 500 && i < count/3) {
                     progressdialog = new wxProgressDialog(
-                        _("WeatherFax InternetRetrieval"), _("Loading"), count, this,
+                        _("WeatherFax Internet Retrieval"), _("Loading"), count, this,
                         wxPD_CAN_ABORT | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
                 }
             }
