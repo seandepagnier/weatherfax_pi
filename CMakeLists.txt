@@ -118,21 +118,36 @@ SET(SRC_WEATHERFAX
             src/libaudiofile/modules/SimpleModule.cpp
 	)
 
-IF(WIN32)
-SET(SRC_LTINYXML
+IF(UNIX)
+ INCLUDE("cmake/FindTinyXML.cmake")
+ FIND_PACKAGE(TinyXML QUIET)
+ENDIF(UNIX)
+
+IF(TINYXML_FOUND)
+ message (STATUS "Building with system tinyxml")
+ INCLUDE_DIRECTORIES(${TINYXML_INCLUDE_DIR})
+ ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX})
+ TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${TINYXML_LIBRARIES})
+ELSE(TINYXML_FOUND)
+ message (STATUS "Building with embedded tinyxml")
+ INCLUDE_DIRECTORIES(src/tinyxml/)
+ SET(SRC_LTINYXML
             src/tinyxml/tinyxml.cpp
             src/tinyxml/tinyxmlparser.cpp
             src/tinyxml/tinyxmlerror.cpp
-)
+ )
+ ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_LTINYXML})
+ENDIF(TINYXML_FOUND)
+ADD_DEFINITIONS(-DTIXML_USE_STL)
 
-INSTALL(FILES "buildwin/PVW32Con.exe" DESTINATION "plugins\\\\${PACKAGE_NAME}")
+
+IF(WIN32)
+ INSTALL(FILES "buildwin/PVW32Con.exe" DESTINATION "plugins\\\\${PACKAGE_NAME}")
 ENDIF(WIN32)
 
 ADD_DEFINITIONS(-DTIXML_USE_STL)
-ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_LTINYXML})
 
 INCLUDE_DIRECTORIES(${PLUGIN_SOURCE_DIR}/src/libaudiofile)
-SET(PLUGIN_PACKAGE_DEPS "curl")
 
 INCLUDE("cmake/PluginInstall.cmake")
 INCLUDE("cmake/PluginCurl.cmake")
