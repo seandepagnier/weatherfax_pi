@@ -121,7 +121,6 @@ private:
       int               m_leftclick_tool_id;
 
       void              RearrangeWindow();
-      wxString          m_weatherfax_dir;
 };
 
 #endif

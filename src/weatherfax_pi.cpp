@@ -253,30 +253,25 @@ bool weatherfax_pi::LoadConfig(void)
 {
     wxFileConfig *pConf = m_pconfig;
 
-    if(pConf)
-    {
-        pConf->SetPath ( _T( "/Settings/WeatherFax" ) );
-        pConf->Read ( _T( "Path" ),  &m_path, _T ( "" ) );
-        pConf->Read ( _T( "ExportPath" ),  &m_export_path, _T ( "" ) );
-
-        m_weatherfax_dialog_x =  pConf->Read ( _T ( "DialogPosX" ), 20L );
-        m_weatherfax_dialog_y =  pConf->Read ( _T ( "DialogPosY" ), 20L );
-
-        pConf->SetPath ( _T ( "/Settings/WeatherFax/Schedules" ) );
-        pConf->Read ( _T ( "LoadAtStart" ), &m_bLoadSchedulesStart, 0 );
-
-        pConf->SetPath ( _T ( "/Settings/WeatherFax/Export" ) );
-        pConf->Read ( _T ( "Colors" ), &m_iExportColors, 64 );
-        pConf->Read ( _T ( "DepthMeters" ), &m_bExportDepthMeters, true );
-        pConf->Read ( _T ( "SoundingDatum" ), &m_sExportSoundingDatum, _T("LOWEST LOW WATER"));
-
-        pConf->SetPath ( _T ( "/Directories" ) );
-        wxString def;
-        def = ::wxGetCwd() + _T("/plugins");
-        pConf->Read ( _T ( "WeatherFaxDataLocation" ), &m_weatherfax_dir, def);
-        return true;
-    } else
+    if(!pConf)
         return false;
+
+    pConf->SetPath ( _T( "/Settings/WeatherFax" ) );
+    pConf->Read ( _T( "Path" ),  &m_path, _T ( "" ) );
+    pConf->Read ( _T( "ExportPath" ),  &m_export_path, _T ( "" ) );
+
+    m_weatherfax_dialog_x =  pConf->Read ( _T ( "DialogPosX" ), 20L );
+    m_weatherfax_dialog_y =  pConf->Read ( _T ( "DialogPosY" ), 20L );
+
+    pConf->SetPath ( _T ( "/Settings/WeatherFax/Schedules" ) );
+    pConf->Read ( _T ( "LoadAtStart" ), &m_bLoadSchedulesStart, 0 );
+
+    pConf->SetPath ( _T ( "/Settings/WeatherFax/Export" ) );
+    pConf->Read ( _T ( "Colors" ), &m_iExportColors, 64 );
+    pConf->Read ( _T ( "DepthMeters" ), &m_bExportDepthMeters, true );
+    pConf->Read ( _T ( "SoundingDatum" ), &m_sExportSoundingDatum, _T("LOWEST LOW WATER"));
+
+    return true;
 }
 
 bool weatherfax_pi::SaveConfig(void)
@@ -300,9 +295,6 @@ bool weatherfax_pi::SaveConfig(void)
     pConf->Write ( _T ( "Colors" ), m_iExportColors );
     pConf->Write ( _T ( "DepthMeters" ), m_bExportDepthMeters );
     pConf->Write ( _T ( "SoundingDatum" ), m_sExportSoundingDatum );
-
-    pConf->SetPath ( _T ( "/Directories" ) );
-    pConf->Write ( _T ( "WeatherFaxDataLocation" ), m_weatherfax_dir );
 
     return true;
 }
