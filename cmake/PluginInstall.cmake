@@ -1,6 +1,6 @@
 ##---------------------------------------------------------------------------
-## Author:      Sean D'Epagnier
-## Copyright:   
+## Author:      Pavel Kalian (Based on the work of Sean D'Epagnier)
+## Copyright:   2014
 ## License:     GPLv3+
 ##---------------------------------------------------------------------------
 
