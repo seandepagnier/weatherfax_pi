@@ -84,6 +84,7 @@ void DecoderOptionsDialog::OnDone( wxCommandEvent& event )
     pConf->Write ( _T ( "IncludeHeadersInImage" ), m_cbInclude->GetValue());
 
     Hide();
+	EndModal(wxID_OK);
 
     FaxDecoder &decoder = m_wizard.m_decoder;
     if(origwidth != m_sImageWidth->GetValue() ||
