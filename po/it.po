@@ -1,21 +1,20 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: weatherfax_pi 1.3\n"
+"Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-23 10:22-0500\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2015-04-23 13:12-0400\n"
+"Last-Translator: nohal <pavel@kalian.cz>\n"
+"Language-Team: Italian\n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: crowdin.com\n"
+"X-Crowdin-Project: opencpn\n"
+"X-Crowdin-Language: it\n"
+"X-Crowdin-File: /plugins/weatherfax_pi/po/weatherfax_pi.pot\n"
 
 #: src/WeatherFaxUI.h:97 src/InternetRetrievalDialog.cpp:349
 #: src/InternetRetrievalDialog.cpp:572 src/InternetRetrievalDialog.cpp:619
@@ -24,47 +23,47 @@ msgstr ""
 #: src/WeatherFax.cpp:198 src/WeatherFax.cpp:280 src/WeatherFax.cpp:410
 #: src/WeatherFax.cpp:492 src/WeatherFax.cpp:523 src/WeatherFaxImage.cpp:596
 msgid "Weather Fax"
-msgstr ""
+msgstr "Meteo Fax"
 
 #: src/WeatherFaxUI.h:165
 msgid "HF Radio Schedules"
-msgstr ""
+msgstr "Programmi Radio HF"
 
 #: src/WeatherFaxUI.h:216
 msgid "Internet Retrieval"
-msgstr ""
+msgstr "Ricezione via Internet"
 
 #: src/WeatherFaxUI.h:337
 msgid "Weather Fax Image"
-msgstr ""
+msgstr "Immagine Meteo Fax"
 
 #: src/WeatherFaxUI.h:366
 msgid "Weather Fax Preferences"
-msgstr ""
+msgstr "Impostazioni Meteo Fax"
 
 #: src/WeatherFaxUI.h:406
 msgid "Fax Decoding Options"
-msgstr ""
+msgstr "Opzioni di decodifica"
 
 #: src/WeatherFaxUI.h:432
 msgid "About Weatherfax"
-msgstr ""
+msgstr "Circa Meteo Fax"
 
 #: src/WeatherFaxUI.cpp:23
 msgid "Fax"
-msgstr ""
+msgstr "Fax"
 
 #: src/WeatherFaxUI.cpp:42
 msgid "Transparency"
-msgstr ""
+msgstr "Trasparenza"
 
 #: src/WeatherFaxUI.cpp:58
 msgid "Invert"
-msgstr ""
+msgstr "Inverti"
 
 #: src/WeatherFaxUI.cpp:71
 msgid "&Open"
-msgstr ""
+msgstr "Lat"
 
 #: src/WeatherFaxUI.cpp:74
 msgid "Save &As"
@@ -72,113 +71,113 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:77
 msgid "&Edit"
-msgstr ""
+msgstr "&Modifica"
 
 #: src/WeatherFaxUI.cpp:80
 msgid "&Goto"
-msgstr ""
+msgstr "&Vai a"
 
 #: src/WeatherFaxUI.cpp:83
 msgid "E&xport"
-msgstr ""
+msgstr "E&sporta"
 
 #: src/WeatherFaxUI.cpp:86
 msgid "&Delete"
-msgstr ""
+msgstr "&Cancella"
 
 #: src/WeatherFaxUI.cpp:92
 msgid "&Preferences"
-msgstr ""
+msgstr "&Impostazioni"
 
 #: src/WeatherFaxUI.cpp:98
 msgid "&Close"
-msgstr ""
+msgstr "&Chiudi"
 
 #: src/WeatherFaxUI.cpp:101
 msgid "&File"
-msgstr ""
+msgstr "&File"
 
 #: src/WeatherFaxUI.cpp:104
 msgid "&Audio Capture"
-msgstr ""
+msgstr "&Acquisizione Audio"
 
 #: src/WeatherFaxUI.cpp:108
 msgid "&HF Radio Schedules"
-msgstr ""
+msgstr "&Programmi Radio HF"
 
 #: src/WeatherFaxUI.cpp:112
 msgid "&Internet"
-msgstr ""
+msgstr "&Internet"
 
 #: src/WeatherFaxUI.cpp:115
 msgid "&Retrieve"
-msgstr ""
+msgstr "&Ricevi"
 
 #: src/WeatherFaxUI.cpp:119
 msgid "&About"
-msgstr ""
+msgstr "&Circa"
 
 #: src/WeatherFaxUI.cpp:122
 msgid "&Help"
-msgstr ""
+msgstr "&Guida"
 
 #: src/WeatherFaxUI.cpp:229 src/WeatherFaxUI.cpp:583
 msgid "Contains"
-msgstr ""
+msgstr "Contiene"
 
 #: src/WeatherFaxUI.cpp:236 src/WeatherFaxUI.cpp:590
 msgid "Lat"
-msgstr ""
+msgstr "Lat"
 
 #: src/WeatherFaxUI.cpp:243 src/WeatherFaxUI.cpp:597
 msgid "Lon"
-msgstr ""
+msgstr "Lon"
 
 #: src/WeatherFaxUI.cpp:250 src/WeatherFaxUI.cpp:604
 msgid "Boat Position"
-msgstr ""
+msgstr "Posizione Natante"
 
 #: src/WeatherFaxUI.cpp:253 src/WeatherFaxUI.cpp:607
 msgid "Reset"
-msgstr ""
+msgstr "Ripristina"
 
 #: src/WeatherFaxUI.cpp:263
 msgid "Stations"
-msgstr ""
+msgstr "Stazioni"
 
 #: src/WeatherFaxUI.cpp:279 src/WeatherFaxUI.cpp:316 src/WeatherFaxUI.cpp:651
 #: src/WeatherFaxUI.cpp:684
 msgid "All"
-msgstr ""
+msgstr "Tutti"
 
 #: src/WeatherFaxUI.cpp:282 src/WeatherFaxUI.cpp:654 src/WeatherFaxUI.cpp:687
 #: src/WeatherFaxUI.cpp:851
 msgid "None"
-msgstr ""
+msgstr "Nessuno"
 
 #: src/WeatherFaxUI.cpp:295 src/SchedulesDialog.cpp:121
 msgid "Frequency"
-msgstr ""
+msgstr "Frequenza"
 
 #: src/WeatherFaxUI.cpp:305
 msgid "khz min"
-msgstr ""
+msgstr "khz min"
 
 #: src/WeatherFaxUI.cpp:312
 msgid "khz max"
-msgstr ""
+msgstr "khz max"
 
 #: src/WeatherFaxUI.cpp:331
 msgid "Constraints"
-msgstr ""
+msgstr "Vincoli"
 
 #: src/WeatherFaxUI.cpp:338
 msgid "Has Area"
-msgstr ""
+msgstr "Area presente"
 
 #: src/WeatherFaxUI.cpp:341
 msgid "Has Valid Time"
-msgstr ""
+msgstr "Ora valida"
 
 #: src/WeatherFaxUI.cpp:350
 msgid "Clear Captures"
@@ -186,11 +185,11 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:360 src/WeatherFaxUI.cpp:830 src/WeatherFaxUI.cpp:1530
 msgid "Filter"
-msgstr ""
+msgstr "Filtra"
 
 #: src/WeatherFaxUI.cpp:368
 msgid "Message Box"
-msgstr ""
+msgstr "Casella Messaggi"
 
 #: src/WeatherFaxUI.cpp:377
 msgid "Sound"
@@ -202,19 +201,19 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:392
 msgid "External Alarm"
-msgstr ""
+msgstr "Allarme Esterno"
 
 #: src/WeatherFaxUI.cpp:395
 msgid "aplay /usr/local/share/opencpn/sounds/2bells.wav"
-msgstr ""
+msgstr "aplay /usr/local/share/opencpn/sounds/2bells.wav"
 
 #: src/WeatherFaxUI.cpp:405
 msgid "1 minute alarm"
-msgstr ""
+msgstr "Allarme 1 minuto"
 
 #: src/WeatherFaxUI.cpp:413
 msgid "No Action"
-msgstr ""
+msgstr "Nessuna Azione"
 
 #: src/WeatherFaxUI.cpp:416 src/WeatherFax.cpp:376
 msgid "Audio Capture"
@@ -222,11 +221,11 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:427
 msgid "External Command"
-msgstr ""
+msgstr "Comando esterno"
 
 #: src/WeatherFaxUI.cpp:430
 msgid "arecord -f S16_LE"
-msgstr ""
+msgstr "arecord -f S16_LE"
 
 #: src/WeatherFaxUI.cpp:436
 msgid "Manual Capture (with external program) automatic Open File"
@@ -234,35 +233,24 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:443
 msgid "Capture Options"
-msgstr ""
+msgstr "Opzioni di Acquisizione"
 
 #: src/WeatherFaxUI.cpp:450
-msgid ""
-"Select fax images by clicking in the capture (first) column\n"
-"\n"
-"Schedules can be sorted by clicking the header column\n"
-"\n"
-"The schedules need testing as I can only receive from a few of the possible "
-"stations.  Corrections can be made by modifying the WeatherFaxSchedules.xml "
-"file. Patches can be submitted via github.\n"
-"\n"
-"Automatic control of a ssb radio is desireable as well, however the author "
-"only has a tecsun pl-600.  If a suitable radio can be donated, support will "
-"be implemented."
-msgstr ""
+msgid "Select fax images by clicking in the capture (first) column\n\nSchedules can be sorted by clicking the header column\n\nThe schedules need testing as I can only receive from a few of the possible stations.  Corrections can be made by modifying the WeatherFaxSchedules.xml file. Patches can be submitted via github.\n\nAutomatic control of a ssb radio is desireable as well, however the author only has a tecsun pl-600.  If a suitable radio can be donated, support will be implemented."
+msgstr "Seleziona immagini fax facendo click sulla (prima) colonna di acquisizione\n\nGli orari possono essere ordinati facendo click sull'intestazione della colonna\n\nGli orari vanno verificati, in quanto io posso solo ricevere alcune delle possibili stazioni. Le correzioni possono essere verificate modificando il file WeatherFaxSchedules.xml. Le patch possono essere rese disponibili via Github.\n\nIl controllo automatico della radio BLU sarebbe auspicabile, tuttavia l'autore dispone solamente di un Tecsun pl-600. Qualora qualcuno volesse donare un'altro tipo di radio, implementerò il supporto per quel modello."
 
 #: src/WeatherFaxUI.cpp:458 src/WeatherFaxUI.cpp:1108
 #: src/WeatherFaxWizard.cpp:874
 msgid "Information"
-msgstr ""
+msgstr "Informazioni"
 
 #: src/WeatherFaxUI.cpp:463
 msgid "Capture Status"
-msgstr ""
+msgstr "Stato di Acquisizione"
 
 #: src/WeatherFaxUI.cpp:479 src/WeatherFaxUI.cpp:1671
 msgid "Close"
-msgstr ""
+msgstr "Chiudi"
 
 #: src/WeatherFaxUI.cpp:621
 msgid "Retrieve Scheduled"
@@ -270,44 +258,44 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:624
 msgid "Retrieve Selected"
-msgstr ""
+msgstr "Ricevi le selezioni"
 
 #: src/WeatherFaxUI.cpp:634
 msgid "Servers"
-msgstr ""
+msgstr "Servers"
 
 #: src/WeatherFaxUI.cpp:667
 msgid "Regions"
-msgstr ""
+msgstr "Regioni"
 
 #: src/WeatherFaxUI.cpp:784
 msgid "Decoder"
-msgstr ""
+msgstr "Decodificatore"
 
 #: src/WeatherFaxUI.cpp:800 src/WeatherFaxWizard.cpp:113
 #: src/WeatherFaxWizard.cpp:209
 msgid "Stop"
-msgstr ""
+msgstr "Stop"
 
 #: src/WeatherFaxUI.cpp:803
 msgid "Options"
-msgstr ""
+msgstr "Opzioni"
 
 #: src/WeatherFaxUI.cpp:822
 msgid "Image Correction"
-msgstr ""
+msgstr "Correzione delle immagini"
 
 #: src/WeatherFaxUI.cpp:834
 msgid "No Filter"
-msgstr ""
+msgstr "Nessun filtro"
 
 #: src/WeatherFaxUI.cpp:834
 msgid "Removal 1"
-msgstr ""
+msgstr "Rimozione q"
 
 #: src/WeatherFaxUI.cpp:834
 msgid "Removal 2"
-msgstr ""
+msgstr "Rimozione 2"
 
 #: src/WeatherFaxUI.cpp:834
 msgid "Removal 3"
@@ -315,57 +303,57 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:834
 msgid "Value 1"
-msgstr ""
+msgstr "Valore 1"
 
 #: src/WeatherFaxUI.cpp:834
 msgid "Value 2"
-msgstr ""
+msgstr "Valore 2"
 
 #: src/WeatherFaxUI.cpp:834
 msgid "Value 3"
-msgstr ""
+msgstr "Valore 3"
 
 #: src/WeatherFaxUI.cpp:840
 msgid "Phasing"
-msgstr ""
+msgstr "Messa in fase"
 
 #: src/WeatherFaxUI.cpp:847
 msgid "Rotation"
-msgstr ""
+msgstr "Rotazione"
 
 #: src/WeatherFaxUI.cpp:851
 msgid "CCW"
-msgstr ""
+msgstr "CCW"
 
 #: src/WeatherFaxUI.cpp:851
 msgid "CW"
-msgstr ""
+msgstr "CW"
 
 #: src/WeatherFaxUI.cpp:851
 msgid "180"
-msgstr ""
+msgstr "180"
 
 #: src/WeatherFaxUI.cpp:857
 msgid "Skew"
-msgstr ""
+msgstr "Inclinazione"
 
 #: src/WeatherFaxUI.cpp:895 src/WeatherFaxUI.cpp:1142
 msgid "Image Coordinates"
-msgstr ""
+msgstr "Coordinate immagine"
 
 #: src/WeatherFaxUI.cpp:909
 msgid "Remove"
-msgstr ""
+msgstr "Rimuovi"
 
 #: src/WeatherFaxUI.cpp:920 src/WeatherFaxUI.cpp:959 src/WeatherFaxUI.cpp:1154
 #: src/WeatherFaxUI.cpp:1177
 msgid "Coord Y/X"
-msgstr ""
+msgstr "Coord Y / X"
 
 #: src/WeatherFaxUI.cpp:925 src/WeatherFaxUI.cpp:964 src/WeatherFaxUI.cpp:1159
 #: src/WeatherFaxUI.cpp:1182
 msgid "Lat/Lon"
-msgstr ""
+msgstr "Lat/Lon"
 
 #: src/WeatherFaxUI.cpp:931
 msgid "Minutes"
@@ -376,38 +364,36 @@ msgid "Show Lat/Lon Minutes"
 msgstr ""
 
 #: src/WeatherFaxUI.cpp:1001
-msgid ""
-"+ Lat/Lon for N/E\n"
-"- Lat/Lon for S/W"
-msgstr ""
+msgid "+ Lat/Lon for N/E\n- Lat/Lon for S/W"
+msgstr "+ Lat/Lon per N/E\n-Lat/Lon per S/O"
 
 #: src/WeatherFaxUI.cpp:1019
 msgid "Coordinates Mapping Correction"
-msgstr ""
+msgstr "Coordinate di mappatura correzione"
 
 #: src/WeatherFaxUI.cpp:1031
 msgid "Input Type"
-msgstr ""
+msgstr "Tipo di Inserimento"
 
 #: src/WeatherFaxUI.cpp:1035
 msgid "mercator"
-msgstr ""
+msgstr "Mercatore"
 
 #: src/WeatherFaxUI.cpp:1035
 msgid "polar"
-msgstr ""
+msgstr "Polare"
 
 #: src/WeatherFaxUI.cpp:1035
 msgid "conic"
-msgstr ""
+msgstr "conica"
 
 #: src/WeatherFaxUI.cpp:1035
 msgid "fixed-flat"
-msgstr ""
+msgstr "fix-flat"
 
 #: src/WeatherFaxUI.cpp:1041
 msgid "Output Type"
-msgstr ""
+msgstr "Tipo di output"
 
 #: src/WeatherFaxUI.cpp:1045
 msgid "Mercator"
@@ -531,9 +517,7 @@ msgid "Saturation Threshold"
 msgstr ""
 
 #: src/WeatherFaxUI.cpp:1550
-msgid ""
-"Skip start, stop and \n"
-"phasing detection"
+msgid "Skip start, stop and \nphasing detection"
 msgstr ""
 
 #: src/WeatherFaxUI.cpp:1553
@@ -569,21 +553,7 @@ msgid "Weather Fax Plugin Version"
 msgstr ""
 
 #: src/WeatherFaxUI.cpp:1659
-msgid ""
-"The weatherfax plugin for opencpn is intended to reduce the amount of user "
-"interaction to receive weather faxes and optionally overlay them directly "
-"onto charts.\n"
-"\n"
-"This includes a fax decoder, which converts radio fax audio into images.\n"
-"\n"
-"To get started, open either an image or recorded wav audio file of a ssb "
-"radio fax transmission from the file menu, or select an option from the "
-"retrieve menu.\n"
-"\n"
-"Source Code:\n"
-"https://github.com/seandepagnier/weatherfax_pi\n"
-"\n"
-"Many thanks to translators and testers."
+msgid "The weatherfax plugin for opencpn is intended to reduce the amount of user interaction to receive weather faxes and optionally overlay them directly onto charts.\n\nThis includes a fax decoder, which converts radio fax audio into images.\n\nTo get started, open either an image or recorded wav audio file of a ssb radio fax transmission from the file menu, or select an option from the retrieve menu.\n\nSource Code:\nhttps://github.com/seandepagnier/weatherfax_pi\n\nMany thanks to translators and testers."
 msgstr ""
 
 #: src/WeatherFaxUI.cpp:1668
@@ -626,7 +596,7 @@ msgstr ""
 
 #: src/InternetRetrievalDialog.cpp:225 src/SchedulesDialog.cpp:295
 msgid "Loading"
-msgstr ""
+msgstr "Caricamento in corso"
 
 #: src/InternetRetrievalDialog.cpp:265
 msgid "Invalid iterator: "
@@ -636,31 +606,29 @@ msgstr ""
 #: src/InternetRetrievalDialog.cpp:336 src/InternetRetrievalDialog.cpp:339
 #: src/WeatherFax.cpp:194
 msgid "Unrecognized xml node: "
-msgstr ""
+msgstr "Modalità XML non identificata"
 
 #: src/InternetRetrievalDialog.cpp:329 src/SchedulesDialog.cpp:377
 msgid "Failed to match Area: "
-msgstr ""
+msgstr "impossibile trovare area corrispondente:"
 
 #: src/InternetRetrievalDialog.cpp:431
 msgid "Sorting this many urls might take too long"
-msgstr ""
+msgstr "Ordinare così tante URL potrebbe richiedere troppo tempo"
 
 #: src/InternetRetrievalDialog.cpp:432 src/SchedulesDialog.cpp:481
 #: src/SchedulesDialog.cpp:780 src/SchedulesDialog.cpp:793
 #: src/SchedulesDialog.cpp:800 src/SchedulesDialog.cpp:864
 msgid "weatherfax"
-msgstr ""
+msgstr "meteofax"
 
 #: src/InternetRetrievalDialog.cpp:571
-msgid ""
-"Fax already retrieved less than 180 minutes ago.\n"
-"Use existing file?"
-msgstr ""
+msgid "Fax already retrieved less than 180 minutes ago.\nUse existing file?"
+msgstr "Fax già ricevuto meno di 180 minuti fa. \nUsa file esistente?"
 
 #: src/InternetRetrievalDialog.cpp:586 src/InternetRetrievalDialog.cpp:632
 msgid "Reading Headers: "
-msgstr ""
+msgstr "Intestazioni di lettura:"
 
 #: src/InternetRetrievalDialog.cpp:597
 msgid "Reading"
@@ -668,11 +636,11 @@ msgstr ""
 
 #: src/InternetRetrievalDialog.cpp:614
 msgid "Timed out waiting for headers for: "
-msgstr ""
+msgstr "Raggiunto tempo massimo di attesa per intestazioni"
 
 #: src/InternetRetrievalDialog.cpp:616 src/InternetRetrievalDialog.cpp:642
 msgid "Verify there is a working internet connection."
-msgstr ""
+msgstr "Verificare la presenza di collegamento a Internet"
 
 #: src/InternetRetrievalDialog.cpp:617
 msgid "Possibly the server is down temporarily."
@@ -680,7 +648,7 @@ msgstr ""
 
 #: src/InternetRetrievalDialog.cpp:618 src/InternetRetrievalDialog.cpp:643
 msgid "If the url is incorrect please edit the xml and/or post a bug report."
-msgstr ""
+msgstr "Se l'url non è corretto si prega modificare il file xml o inviare una segnalazione di bug."
 
 #: src/InternetRetrievalDialog.cpp:623
 msgid "Failed to read file size aborting."
@@ -692,103 +660,73 @@ msgstr ""
 
 #: src/InternetRetrievalDialog.cpp:661
 msgid "No Faxes selected."
-msgstr ""
+msgstr "Nessun fax selezionato."
 
 #: src/InternetRetrievalDialog.cpp:663
 msgid " Try clicking the selected (first) column"
-msgstr ""
+msgstr "Fai click sulla (prima) colonna selezionata"
 
 #: src/WeatherFaxWizard.cpp:46
 msgid "New Coord"
-msgstr ""
+msgstr "Nuove coord."
 
 #: src/WeatherFaxWizard.cpp:206
 msgid "Start"
-msgstr ""
+msgstr "Inizia"
 
 #: src/WeatherFaxWizard.cpp:296
-msgid ""
-"Failed to apply mapping\n"
-"Check Mapping Correction Parameters"
-msgstr ""
+msgid "Failed to apply mapping\nCheck Mapping Correction Parameters"
+msgstr "Impossibile applicare mappatura\nVerifica parametri di correzione mappatura"
 
 #: src/WeatherFaxWizard.cpp:297 src/WeatherFaxWizard.cpp:430
 #: src/WeatherFaxWizard.cpp:574 src/WeatherFaxWizard.cpp:663
 #: src/WeatherFaxWizard.cpp:679
 msgid "Mapping"
-msgstr ""
+msgstr "Mappatura"
 
 #: src/WeatherFaxWizard.cpp:428
-msgid ""
-"Warning, latitudes on different sides of equator not recommended because of "
-"ambiguity of north or south pole"
-msgstr ""
+msgid "Warning, latitudes on different sides of equator not recommended because of ambiguity of north or south pole"
+msgstr "Avviso, latitudini su lati diversi dell'equatore non raccomandata a causa dell'ambiguità fra polo Nord/Sud"
 
 #: src/WeatherFaxWizard.cpp:571
-msgid ""
-"Calculating Mapping Failed.\n"
-"Perhaps you have chosen the wrong mapping type for this image, or the "
-"coordinates specified are not correct\n"
-msgstr ""
+msgid "Calculating Mapping Failed.\nPerhaps you have chosen the wrong mapping type for this image, or the coordinates specified are not correct\n"
+msgstr "Calcolo mappatura non riuscito.\nHai possibilmente selezionato il tipo di mappatura sbagliata per questa immagine, o le coordinate specificate non sono corrette\n"
 
 #: src/WeatherFaxWizard.cpp:662
 msgid "Calculating Mapping not yet supported.\n"
-msgstr ""
+msgstr "Calcolo mappatura non ancora supportato\n"
 
 #: src/WeatherFaxWizard.cpp:678
 msgid "Calculating Equator not yet supported.\n"
-msgstr ""
+msgstr "Calcolo dell'equatore non ancora supportato\n"
 
 #: src/WeatherFaxWizard.cpp:849
-msgid ""
-"Mapping allows for scaling, and conversion between coordinate systems\n"
-"Latitudes are +N -S, Longitudes +E -W\n"
-"\n"
-"For polar mapping mode:\n"
-"Get Mapping parameters calculates the mapping from the coordinates given, but "
-"the first coordinate's X value (vertical red line) must align with the pole "
-"in polar mode on the vertical meridian\n"
-"Once the coordinates are entered, the mapping should make the the blue "
-"latitudes align.  If they are far off, check the input coordinates.\n"
-"Once they are close:\n"
-"First adjust pole X to center the latitudes. Next adjust the Pole Y value "
-"until the blue latitude curve closest to the pole is correct. Now, if the "
-"second blue latitude is too wide, then the true width ratio needs to be "
-"increased, otherwise it should be decreased. Repeat adjusting the Pole Y and "
-"true width ratio until both align. It is easiest to calibrate correctly if "
-"you use the farthest spaced latitudes available.\n"
-"Once the blue latitudes align perfectly, recompute the equator to ensure the "
-"resulting mapping is correct. At this point, the coordinates can be changed "
-"to better locations if needed. If true width is very close to 1.0 it probably "
-"should be exactly 1.0.\n"
-"It is also possible to go to the next step, adjust the coordinates, then come "
-"back to this step and get the mapping parameters again to improve the "
-"estimate."
-msgstr ""
+msgid "Mapping allows for scaling, and conversion between coordinate systems\nLatitudes are +N -S, Longitudes +E -W\n\nFor polar mapping mode:\nGet Mapping parameters calculates the mapping from the coordinates given, but the first coordinate's X value (vertical red line) must align with the pole in polar mode on the vertical meridian\nOnce the coordinates are entered, the mapping should make the the blue latitudes align.  If they are far off, check the input coordinates.\nOnce they are close:\nFirst adjust pole X to center the latitudes. Next adjust the Pole Y value until the blue latitude curve closest to the pole is correct. Now, if the second blue latitude is too wide, then the true width ratio needs to be increased, otherwise it should be decreased. Repeat adjusting the Pole Y and true width ratio until both align. It is easiest to calibrate correctly if you use the farthest spaced latitudes available.\nOnce the blue latitudes align perfectly, recompute the equator to ensure the resulting mapping is correct. At this point, the coordinates can be changed to better locations if needed. If true width is very close to 1.0 it probably should be exactly 1.0.\nIt is also possible to go to the next step, adjust the coordinates, then come back to this step and get the mapping parameters again to improve the estimate."
+msgstr "La mappatura consente il ridimensionamento e conversione tra sistemi di coordinate\nLe latitudini sono del tipo + N -S, le longitudini + E -O\n\nPer modalità polare: \nI parametri di Get Mapping calcola la mappatura partendo dalle coordinate fornite, tuttavia l'ascissa della prima coordinata (la linea rossa verticale) deve essere allineata con il polo sul meridiano.Una volta inserite le coordinate, la mappatura dovrebbe allineare le latitudini blu.  Se queste si scostano eccessivamente, verifica le coordinate inserite.\nUna volta raggiunto l'allineamento:\nRegola il polo X in modo da centrare le latitudini. Successivamente, regola il valore del Polo Y fino la curva di latitudine blu più prossima al polo è corretta. A questo punto, se la seconda latitudine blu è troppo larga il rapporto di ampiezza vera (true width) deve essere aumentato, in caso contrario diminuito. Ripetere il procedimento regolando il Polo Y e il rapporto di ampiezza vera fino a quando sono entrambe allineate. E' più semplice calibrare correttamente se si latitudini maggiormente distanziate fra quelle disponibili.\nUna volta perfettamente allineate le latitudini, ricalcolare l'equatore per assicurarsi che la mappatura risultante sia corretta. A questo punto le coordinate possono essere modificate a piacimento, se necessario. Se l'ampiezza vera é molto prossima a 1.0, dovrebbe probabilmente essere esattamente 1.0.\nE' anche possibile procedere al passo successivo, regolare le coordinate, e ritornare a questo passo e ottenere i parametri di mappatura per migliorare la stima.  "
 
 #: src/FaxDecoder.cpp:110
 msgid "Failure Decoding Fax: "
-msgstr ""
+msgstr "Errore decodifica Fax: "
 
 #: src/FaxDecoder.cpp:110
 msgid "Failed"
-msgstr ""
+msgstr "Non riuscito"
 
 #: src/FaxDecoder.cpp:259
 msgid "DecodeImageLine requires specific buffer length"
-msgstr ""
+msgstr "DecodeImageLine richiede la lunghezza del buffer specifico"
 
 #: src/FaxDecoder.cpp:363
 msgid "Port audio overflow on input, some data lost!"
-msgstr ""
+msgstr "Overflow del buffer audio in ingresso: alcuni dati persi!"
 
 #: src/FaxDecoder.cpp:475
 msgid "could not open input file: "
-msgstr ""
+msgstr "Impossibile aprire il file di input: "
 
 #: src/FaxDecoder.cpp:479
 msgid "sample size not 8 or 16 bit: "
-msgstr ""
+msgstr "Campionatura non a 8 o 16 bit:"
 
 #: src/SchedulesDialog.cpp:119
 msgid "Capture"
@@ -796,40 +734,40 @@ msgstr ""
 
 #: src/SchedulesDialog.cpp:120
 msgid "Station"
-msgstr ""
+msgstr "Stazione"
 
 #: src/SchedulesDialog.cpp:122
 msgid "Time (UTC)"
-msgstr ""
+msgstr "Ora (UTC)"
 
 #: src/SchedulesDialog.cpp:124
 msgid "Valid Time"
-msgstr ""
+msgstr "Ora valida"
 
 #: src/SchedulesDialog.cpp:125
 msgid "Duration"
-msgstr ""
+msgstr "Durata"
 
 #: src/SchedulesDialog.cpp:295 src/SchedulesDialog.cpp:597
 msgid "WeatherFax Schedules"
-msgstr ""
+msgstr "Orari FaxMeteo"
 
 #: src/SchedulesDialog.cpp:348 src/SchedulesDialog.cpp:363
 #: src/SchedulesDialog.cpp:384
 msgid "Unrecognized xml node"
-msgstr ""
+msgstr "Modalità XML non riconosciuta"
 
 #: src/SchedulesDialog.cpp:369
 msgid "Failed to find Duration for: "
-msgstr ""
+msgstr "Impossibile trovare la durata per: "
 
 #: src/SchedulesDialog.cpp:480
 msgid "Sorting this many schedules might take too long"
-msgstr ""
+msgstr "L'ordinamento di cosi tanti orari potrebbe richiedere troppo tempo"
 
 #: src/SchedulesDialog.cpp:597
 msgid "Populating List"
-msgstr ""
+msgstr "Compilazione elenco"
 
 #: src/SchedulesDialog.cpp:647
 msgid "Capturing fax: "
@@ -837,15 +775,15 @@ msgstr ""
 
 #: src/SchedulesDialog.cpp:648
 msgid " Conflicts with already scheduled fax: "
-msgstr ""
+msgstr "Orario coincide con altro fax programmato:"
 
 #: src/SchedulesDialog.cpp:649
 msgid " disable this fax? "
-msgstr ""
+msgstr " disabilitare questo fax? "
 
 #: src/SchedulesDialog.cpp:650
 msgid "weatherfax schedules"
-msgstr ""
+msgstr "orari MeteoFax"
 
 #: src/SchedulesDialog.cpp:710
 msgid "No Capture Set"
@@ -853,35 +791,35 @@ msgstr ""
 
 #: src/SchedulesDialog.cpp:713
 msgid "starting in"
-msgstr ""
+msgstr "inizia tra"
 
 #: src/SchedulesDialog.cpp:716
 msgid "second(s)"
-msgstr ""
+msgstr "secondo(i)"
 
 #: src/SchedulesDialog.cpp:720
 msgid "hour(s)"
-msgstr ""
+msgstr "ora(e)"
 
 #: src/SchedulesDialog.cpp:723
 msgid "minute(s)"
-msgstr ""
+msgstr "minuto(i)"
 
 #: src/SchedulesDialog.cpp:728
 msgid "Current fax: "
-msgstr ""
+msgstr "Fax in corso:"
 
 #: src/SchedulesDialog.cpp:750
 msgid "Tune ssb radio to"
-msgstr ""
+msgstr "Sintonizzare la radio BLU (SSB) su"
 
 #: src/SchedulesDialog.cpp:752
 msgid "to receive fax for"
-msgstr ""
+msgstr "per ricevere fax per"
 
 #: src/SchedulesDialog.cpp:753
 msgid "Weather Fax Schedule Beginning Soon"
-msgstr ""
+msgstr "MeteoFax in programma tra breve:"
 
 #: src/SchedulesDialog.cpp:779
 msgid "Already capturing, cannot capture: "
@@ -892,14 +830,12 @@ msgid "Failed to launch: "
 msgstr ""
 
 #: src/SchedulesDialog.cpp:799
-msgid ""
-"Fault in weather fax plugin\n"
-"Currently capturing hf weather fax."
+msgid "Fault in weather fax plugin\nCurrently capturing hf weather fax."
 msgstr ""
 
 #: src/SchedulesDialog.cpp:829 src/WeatherFax.cpp:477
 msgid "Open Weather Fax Input File"
-msgstr ""
+msgstr "Apri meteo Fax File di Input"
 
 #: src/SchedulesDialog.cpp:831
 msgid "WAV files (*.wav)|*.WAV;*.wav|All files (*.*)|*.*"
@@ -926,10 +862,7 @@ msgid "Failed to load input file: "
 msgstr ""
 
 #: src/WeatherFax.cpp:479
-msgid ""
-"Supported Files|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;*.TIF;*.tif;*.TIFF;*.tiff;"
-"*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;*.PCX;*.pcx;*."
-"PICT;*.pict;*.TGA;*.tga;*.WAV;*.wav|All files (*.*)|*.*"
+msgid "Supported Files|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;*.TIF;*.tif;*.TIFF;*.tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;*.PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga;*.WAV;*.wav|All files (*.*)|*.*"
 msgstr ""
 
 #: src/WeatherFax.cpp:491
@@ -966,10 +899,7 @@ msgstr ""
 
 #: src/WeatherFaxImage.cpp:451
 #, c-format
-msgid ""
-"Resulting image larger than %dMB\n"
-"Try changing size parameter to a smaller value. (less than %.2f)\n"
-"aborting\n"
+msgid "Resulting image larger than %dMB\nTry changing size parameter to a smaller value. (less than %.2f)\naborting\n"
 msgstr ""
 
 #: src/WeatherFaxImage.cpp:462
@@ -993,16 +923,10 @@ msgid "Weather Fax PlugIn for OpenCPN"
 msgstr ""
 
 #: src/weatherfax_pi.cpp:153
-msgid ""
-"Weather Fax PlugIn for OpenCPN\n"
-"Can open image files directly, or decode audio faxes to an image.\n"
-"With simple calibration, resulting image is overlaid on top of charts.\n"
-"Converts images in mercator, polar, conic and uniform coordinates.\n"
-"Can convert any image into a raster chart.\n"
-"Builtin database for HF radio fax stations via SSB.\n"
-"Builtin database for internet retrieval from meterological sites.\n"
+msgid "Weather Fax PlugIn for OpenCPN\nCan open image files directly, or decode audio faxes to an image.\nWith simple calibration, resulting image is overlaid on top of charts.\nConverts images in mercator, polar, conic and uniform coordinates.\nCan convert any image into a raster chart.\nBuiltin database for HF radio fax stations via SSB.\nBuiltin database for internet retrieval from meterological sites.\n"
 msgstr ""
 
 #: src/weatherfax_pi.cpp:318
 msgid "WeatherFax Preferences"
 msgstr ""
+

@@ -74,6 +74,22 @@
 												</dict>
 												<dict>
 													<key>CHILDREN</key>
+													<array/>
+													<key>GID</key>
+													<integer>80</integer>
+													<key>PATH</key>
+													<string>Resources</string>
+													<key>PATH_TYPE</key>
+													<integer>3</integer>
+													<key>PERMISSIONS</key>
+													<integer>493</integer>
+													<key>TYPE</key>
+													<integer>3</integer>
+													<key>UID</key>
+													<integer>0</integer>
+												</dict>
+												<dict>
+													<key>CHILDREN</key>
 													<array>
 														<dict>
 															<key>CHILDREN</key>
@@ -83,69 +99,20 @@
 																	<array>
 																		<dict>
 																			<key>CHILDREN</key>
-																			<array>
-																				<dict>
-																					<key>CHILDREN</key>
-																					<array/>
-																					<key>GID</key>
-																					<integer>80</integer>
-																					<key>PATH</key>
-																					<string>../data/CoordinateSets.xml</string>
-																					<key>PATH_TYPE</key>
-																					<integer>3</integer>
-																					<key>PERMISSIONS</key>
-																					<integer>420</integer>
-																					<key>TYPE</key>
-																					<integer>3</integer>
-																					<key>UID</key>
-																					<integer>0</integer>
-																				</dict>	
-																				<dict>
-																					<key>CHILDREN</key>
-																					<array/>
-																					<key>GID</key>
-																					<integer>80</integer>
-																					<key>PATH</key>
-																					<string>../data/WeatherFaxInternetRetrieval.xml</string>
-																					<key>PATH_TYPE</key>
-																					<integer>3</integer>
-																					<key>PERMISSIONS</key>
-																					<integer>420</integer>
-																					<key>TYPE</key>
-																					<integer>3</integer>
-																					<key>UID</key>
-																					<integer>0</integer>
-																				</dict>	
-																				<dict>
-																					<key>CHILDREN</key>
-																					<array/>
-																					<key>GID</key>
-																					<integer>80</integer>
-																					<key>PATH</key>
-																					<string>../data/WeatherFaxSchedules.xml</string>
-																					<key>PATH_TYPE</key>
-																					<integer>3</integer>
-																					<key>PERMISSIONS</key>
-																					<integer>420</integer>
-																					<key>TYPE</key>
-																					<integer>3</integer>
-																					<key>UID</key>
-																					<integer>0</integer>
-																				</dict>	
-																			</array>
+																			<array/>
 																			<key>GID</key>
 																			<integer>80</integer>
 																			<key>PATH</key>
-																			<string>data</string>
+																			<string>../data</string>
 																			<key>PATH_TYPE</key>
-																			<integer>0</integer>
+																			<integer>3</integer>
 																			<key>PERMISSIONS</key>
-																			<integer>509</integer>
+																			<integer>493</integer>
 																			<key>TYPE</key>
-																			<integer>2</integer>
+																			<integer>3</integer>
 																			<key>UID</key>
 																			<integer>0</integer>
-																		</dict>	
+																		</dict>
 																	</array>
 																	<key>GID</key>
 																	<integer>80</integer>
@@ -159,7 +126,6 @@
 																	<integer>2</integer>
 																	<key>UID</key>
 																	<integer>0</integer>
-
 																</dict>
 															</array>
 															<key>GID</key>
@@ -180,122 +146,6 @@
 													<integer>80</integer>
 													<key>PATH</key>
 													<string>SharedSupport</string>
-													<key>PATH_TYPE</key>
-													<integer>0</integer>
-													<key>PERMISSIONS</key>
-													<integer>509</integer>
-													<key>TYPE</key>
-													<integer>2</integer>
-													<key>UID</key>
-													<integer>0</integer>
-												</dict>
-												<dict>
-													<key>CHILDREN</key>
-													<array>
-														<dict>
-															<key>CHILDREN</key>
-															<array>
-																<dict>
-																	<key>CHILDREN</key>
-																	<array/>
-																	<key>GID</key>
-																	<integer>80</integer>
-																	<key>PATH</key>
-																	<string>Resources/de.lproj/opencpn-${PACKAGE_NAME}.mo</string>
-																	<key>PATH_TYPE</key>
-																	<integer>3</integer>
-																	<key>PERMISSIONS</key>
-																	<integer>420</integer>
-																	<key>TYPE</key>
-																	<integer>3</integer>
-																	<key>UID</key>
-																	<integer>0</integer>
-																</dict>
-															</array>
-															<key>GID</key>
-															<integer>80</integer>
-															<key>PATH</key>
-															<string>de.lproj</string>
-															<key>PATH_TYPE</key>
-															<integer>0</integer>
-															<key>PERMISSIONS</key>
-															<integer>509</integer>
-															<key>TYPE</key>
-															<integer>2</integer>
-															<key>UID</key>
-															<integer>0</integer>
-														</dict>
-														<dict>
-															<key>CHILDREN</key>
-															<array>
-																<dict>
-																	<key>CHILDREN</key>
-																	<array/>
-																	<key>GID</key>
-																	<integer>80</integer>
-																	<key>PATH</key>
-																	<string>Resources/es.lproj/opencpn-${PACKAGE_NAME}.mo</string>
-																	<key>PATH_TYPE</key>
-																	<integer>3</integer>
-																	<key>PERMISSIONS</key>
-																	<integer>420</integer>
-																	<key>TYPE</key>
-																	<integer>3</integer>
-																	<key>UID</key>
-																	<integer>0</integer>
-																</dict>
-															</array>
-															<key>GID</key>
-															<integer>80</integer>
-															<key>PATH</key>
-															<string>es.lproj</string>
-															<key>PATH_TYPE</key>
-															<integer>0</integer>
-															<key>PERMISSIONS</key>
-															<integer>509</integer>
-															<key>TYPE</key>
-															<integer>2</integer>
-															<key>UID</key>
-															<integer>0</integer>
-														</dict>
-														<dict>
-															<key>CHILDREN</key>
-															<array>
-																<dict>
-																	<key>CHILDREN</key>
-																	<array/>
-																	<key>GID</key>
-																	<integer>80</integer>
-																	<key>PATH</key>
-																	<string>Resources/fr.lproj/opencpn-${PACKAGE_NAME}.mo</string>
-																	<key>PATH_TYPE</key>
-																	<integer>3</integer>
-																	<key>PERMISSIONS</key>
-																	<integer>420</integer>
-																	<key>TYPE</key>
-																	<integer>3</integer>
-																	<key>UID</key>
-																	<integer>0</integer>
-																</dict>
-															</array>
-															<key>GID</key>
-															<integer>80</integer>
-															<key>PATH</key>
-															<string>fr.lproj</string>
-															<key>PATH_TYPE</key>
-															<integer>0</integer>
-															<key>PERMISSIONS</key>
-															<integer>509</integer>
-															<key>TYPE</key>
-															<integer>2</integer>
-															<key>UID</key>
-															<integer>0</integer>
-														</dict>
-													</array>
-													<key>GID</key>
-													<integer>80</integer>
-													<key>PATH</key>
-													<string>Resources</string>
 													<key>PATH_TYPE</key>
 													<integer>0</integer>
 													<key>PERMISSIONS</key>

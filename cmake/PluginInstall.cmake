@@ -1,12 +1,16 @@
 ##---------------------------------------------------------------------------
-## Author:      Sean D'Epagnier
-## Copyright:   
+## Author:      Pavel Kalian (Based on the work of Sean D'Epagnier)
+## Copyright:   2014
 ## License:     GPLv3+
 ##---------------------------------------------------------------------------
 
 IF(NOT APPLE)
   TARGET_LINK_LIBRARIES( ${PACKAGE_NAME} ${wxWidgets_LIBRARIES} ${EXTRA_LIBS} )
 ENDIF(NOT APPLE)
+
+IF(APPLE)
+  TARGET_LINK_LIBRARIES( ${PACKAGE_NAME} ${PORTAUDIO_LIBRARIES} )
+ENDIF(APPLE)
 
 IF(WIN32)
   SET(PARENT "opencpn")
