@@ -69,7 +69,7 @@
       <Map Url="PPBE10.TIF" Contents="24HR SURFACE FORECAST" Area="8" />
       <Map Url="PWBE10.TIF" Contents="24HR WIND/WAVE FORECAST" Area="8" />
       <Map Url="PPBI10.TIF" Contents="48HR 500MB FORECAST" Area="1" />
-      <Map Url="PWBI10.TIF" Contents="8HR SURFACE FORECAST" Area="1" />
+      <Map Url="PWBI10.TIF" Contents="48HR SURFACE FORECAST" Area="1" />
       <Map Url="PJBI10.TIF" Contents="48HR WIND/WAVE FORECAST" Area="1" />
       <Map Url="PJBI20.TIF" Contents="48HR WAVE PERIOD/SWELL DIRECTION" Area="1" />
       <Map Url="PPBM50.TIF" Contents="96HR 500MB FORECAST" Area="1" />
