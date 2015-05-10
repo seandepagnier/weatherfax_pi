@@ -1583,6 +1583,13 @@ DecoderOptionsDialogBase::DecoderOptionsDialogBase( wxWindow* parent, wxWindowID
 	m_cSampleRate->SetSelection( 0 );
 	fgSizer58->Add( m_cSampleRate, 0, wxALL, 5 );
 	
+	m_staticText42 = new wxStaticText( this, wxID_ANY, _("Device Index"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText42->Wrap( -1 );
+	fgSizer58->Add( m_staticText42, 0, wxALL, 5 );
+	
+	m_sDeviceIndex = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -1, 10, 0 );
+	fgSizer58->Add( m_sDeviceIndex, 0, wxALL, 5 );
+	
 	
 	sbSizer19->Add( fgSizer58, 1, wxEXPAND, 5 );
 	

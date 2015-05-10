@@ -39,7 +39,7 @@ bool FaxDecoder::Configure(int imagewidth, int BitsPerPixel, int carrier,
                            int deviation, enum firfilter::Bandwidth bandwidth,
                            double minus_saturation_threshold,
                            bool bSkipHeaderDetection, bool bIncludeHeadersInImages,
-                           int SampleRate, bool reset)
+                           int SampleRate, int DeviceIndex, bool reset)
 {
     /* pause decoder */
     m_DecoderStopMutex.Lock();
@@ -69,9 +69,10 @@ bool FaxDecoder::Configure(int imagewidth, int BitsPerPixel, int carrier,
     m_minus_saturation_threshold = minus_saturation_threshold;
 
     bool ret = true;
-    if(m_SampleRate != SampleRate || reset) {
+    if(m_SampleRate != SampleRate || m_DeviceIndex != DeviceIndex || reset) {
         CleanUpBuffers();
         m_SampleRate = SampleRate;
+        m_DeviceIndex = DeviceIndex;
 
         m_DecoderReloadMutex.Lock();
         CloseInput();
@@ -101,10 +102,18 @@ bool FaxDecoder::Configure(int imagewidth, int BitsPerPixel, int carrier,
     return ret;
 }
 
-/* Note: the decoding algorithms are adapted from yahfax (on sourceforge)
-   which was an improved adaptation of hamfax.
-*/
+int FaxDecoder::DeviceCount()
+{
+     switch(m_inputtype) {
+#ifdef OCPN_USE_PORTAUDIO
+     case PORTAUDIO: return Pa_GetDeviceCount();
+#endif
+     default: return 1;
+     }
+}
 
+/* Note: the decoding algorithms are adapted from yahfax (on sourceforge)
+   which was an improved adaptation of hamfax. */
 bool FaxDecoder::Error(wxString error)
 {
     wxMessageDialog w( &m_parent, _("Failure Decoding Fax: ") + error, _("Failed"),
@@ -312,7 +321,6 @@ void FaxDecoder::CloseInput()
 #ifdef OCPN_USE_PORTAUDIO
      case PORTAUDIO:
          Pa_CloseStream( pa_stream );
-//         delete [] pa_data;
          break;
 #endif
      default:;
@@ -493,7 +501,7 @@ bool FaxDecoder::DecodeFaxFromPortAudio()
 #ifdef OCPN_USE_PORTAUDIO
     PaError err = Pa_Initialize();
     if( err != paNoError ) {
-        printf( "PortAudio CTOR error: %s\n", Pa_GetErrorText( err ) );
+        printf( "PortAudio Initialize() error: %s\n", Pa_GetErrorText( err ) );
         return false;
     }
 
@@ -503,36 +511,51 @@ bool FaxDecoder::DecodeFaxFromPortAudio()
     case 1: sampleformat = paInt8; break;
     case 2: sampleformat = paInt16; break;
     default:
-        printf( "invalid sample size: %d\n", m_SampleSize);
+        printf( "invalid sample size for capture: %d\n", m_SampleSize);
         return false;
     }
 
-    err = Pa_OpenDefaultStream( &pa_stream,
-                                1, /* mono input */
-                                0, /* no output channels */
-                                sampleformat, 
-                                m_SampleRate,
-                                m_blocksize,
-                                0, 0);
-    if( err != paNoError ) {
-        printf( "PortAudio Create() error: %s\n", Pa_GetErrorText( err ) );
-        return false;
+    int i = Pa_GetDeviceCount();
+
+    if(m_DeviceIndex == -1)
+        m_DeviceIndex = Pa_GetDefaultInputDevice();
+
+    while(m_DeviceIndex < Pa_GetDeviceCount()) {
+        PaStreamParameters inputParameters =
+            { .device = m_DeviceIndex,
+              .channelCount = 1, /* mono input */
+              .sampleFormat = sampleformat,
+              .suggestedLatency = 0,
+              .hostApiSpecificStreamInfo = NULL };
+
+        err = Pa_OpenStream( &pa_stream,
+                             &inputParameters,
+                             NULL, /* no output channels */
+                             m_SampleRate,
+                             m_blocksize,
+                             paNoFlag,
+                             NULL, NULL);
+
+        if( err == paNoError ) {
+            err = Pa_StartStream( pa_stream );
+            if( err != paNoError ) {
+                Pa_CloseStream( pa_stream );
+                printf( "PortAudio StartStream() error: %s\n", Pa_GetErrorText( err ) );
+                return false;
+            }
+
+            m_inputtype = PORTAUDIO;
+            size = 0;
+
+            return true;
+        }
+
+        m_DeviceIndex++; // try next device
     }
 
-    err = Pa_StartStream( pa_stream );
-    if( err != paNoError ) {
-        Pa_CloseStream( pa_stream );
-        printf( "PortAudio Start() error: %s\n", Pa_GetErrorText( err ) );
-        return false;
-    }
-
-    m_inputtype = PORTAUDIO;
-    size = 0;
-
-    return true;
-#else
-    return false;
+    printf( "PortAudio OpenStream() error: %s\n", Pa_GetErrorText( err ) );
 #endif
+    return false;
 }
 
 bool FaxDecoder::DecodeFaxFromDSP()

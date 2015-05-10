@@ -701,7 +701,7 @@ int bsb_uncompress_row(int typein, FILE *in, uint8_t *buf_out, uint16_t bits_in,
 static void read_line(uint8_t *in, uint16_t bits, int width, uint8_t *colors, histogram *hist, uint8_t *out)
 {
     int i;
-    uint8_t c;
+    uint8_t c = 0;
 
     switch (bits)
     {

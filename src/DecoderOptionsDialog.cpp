@@ -50,13 +50,20 @@ DecoderOptionsDialog::DecoderOptionsDialog(WeatherFaxWizard &wizard)
 
     origwidth = m_sImageWidth->GetValue();
 
+    FaxDecoder &decoder = m_wizard.m_decoder;
+
+    if(decoder.m_Filename.empty())
+        m_sDeviceIndex->SetValue(pConf->Read ( _T ( "CaptureDeviceIndex" ), -1L ));
+
     ConfigureDecoder(true);
 
-    FaxDecoder &decoder = m_wizard.m_decoder;
     bool capture = decoder.m_inputtype != FaxDecoder::FILENAME;
     m_cSampleRate->Enable(capture);
 
-    if(!capture) {
+    m_sDeviceIndex->Enable(capture);
+    m_sDeviceIndex->SetRange(0, decoder.DeviceCount() - 1);
+
+    if(!capture)
         m_cSampleRate->Insert(wxString::Format(_T("%d"), decoder.m_SampleRate), 0);
         m_cSampleRate->SetSelection(0);
     }
@@ -83,12 +90,17 @@ void DecoderOptionsDialog::OnDone( wxCommandEvent& event )
     pConf->Write ( _T ( "SkipHeaderDetection" ), m_cbSkip->GetValue());
     pConf->Write ( _T ( "IncludeHeadersInImage" ), m_cbInclude->GetValue());
 
-    Hide();
-	EndModal(wxID_OK);
-
     FaxDecoder &decoder = m_wizard.m_decoder;
+    bool capture = decoder.m_inputtype != FaxDecoder::FILENAME;
+    if(capture)
+        pConf->Write ( _T ( "CaptureDeviceIndex" ), m_sDeviceIndex->GetValue());
+
+    Hide();
+    EndModal(wxID_OK);
+
     if(origwidth != m_sImageWidth->GetValue() ||
-       (decoder.m_inputtype == FaxDecoder::FILENAME && spin_options_changed)) {
+       decoder.m_DeviceIndex != m_sDeviceIndex->GetValue() ||
+       (!capture && spin_options_changed)) {
         origwidth = m_sImageWidth->GetValue();
         ResetDecoder();
     }
@@ -122,9 +134,11 @@ void DecoderOptionsDialog::ConfigureDecoder(bool reset)
            (enum FaxDecoder::firfilter::Bandwidth)m_cFilter->GetSelection(),
            (double)-m_sMinusSaturationThreshold->GetValue()/10 - 1,
            m_cbSkip->GetValue(), m_cbInclude->GetValue(),
-           samplerate, reset)) {
+           samplerate, m_sDeviceIndex->GetValue(), reset)) {
         wxMessageDialog w( NULL, _("Failed to configure capture."),
                            _("Failure"), wxOK | wxICON_ERROR );
         w.ShowModal();
     }
+
+    m_sDeviceIndex->SetValue(decoder.m_DeviceIndex);
 }
