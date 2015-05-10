@@ -30,6 +30,17 @@ and unpack all these files into the buildwin directory as the compile is depende
 
 For Mingw, only a single file "libcurl.dll" is needed for libcurl, for visual studio, several files.
 
+
+OSX Specific Libraries
+==========================
+The OS X compilation is dependent on these files 
+
+Under OS X the port audio library is needed.
+There is a zip file containing header and library files:
+http://sourceforge.net/projects/opencpnplugins/files/weatherfax_pi/OSXportaudiofiles.zip/download
+Download this file and unzip it in the /usr/local directory as the compile is dependent on these.
+The make create-pkg command will include the library in the package.
+
 License
 =======
 The plugin code is licensed under the terms of the GPL v3+
