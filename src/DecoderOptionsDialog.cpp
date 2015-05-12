@@ -62,7 +62,7 @@ DecoderOptionsDialog::DecoderOptionsDialog(WeatherFaxWizard &wizard)
     m_sDeviceIndex->Enable(capture);
     m_sDeviceIndex->SetRange(0, decoder.DeviceCount() - 1);
 
-    if(!capture)
+    if(!capture) {
         m_cSampleRate->Insert(wxString::Format(_T("%d"), decoder.m_SampleRate), 0);
         m_cSampleRate->SetSelection(0);
     }
