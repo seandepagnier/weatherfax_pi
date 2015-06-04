@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-23 10:22-0500\n"
-"PO-Revision-Date: 2015-05-01 14:33-0400\n"
+"PO-Revision-Date: 2015-06-02 20:34-0400\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
@@ -67,7 +67,7 @@ msgstr "&Open"
 
 #: src/WeatherFaxUI.cpp:74
 msgid "Save &As"
-msgstr ""
+msgstr "Bewaar &Als"
 
 #: src/WeatherFaxUI.cpp:77
 msgid "&Edit"
@@ -181,7 +181,7 @@ msgstr "Heeft geldige tijd"
 
 #: src/WeatherFaxUI.cpp:350
 msgid "Clear Captures"
-msgstr ""
+msgstr "Beluisterde data opschonen"
 
 #: src/WeatherFaxUI.cpp:360 src/WeatherFaxUI.cpp:830 src/WeatherFaxUI.cpp:1530
 msgid "Filter"
@@ -193,11 +193,11 @@ msgstr "Berichtvenster"
 
 #: src/WeatherFaxUI.cpp:377
 msgid "Sound"
-msgstr ""
+msgstr "Geluid"
 
 #: src/WeatherFaxUI.cpp:380
 msgid "Select a file"
-msgstr ""
+msgstr "Selecteer een bestand"
 
 #: src/WeatherFaxUI.cpp:392
 msgid "External Alarm"
@@ -236,8 +236,14 @@ msgid "Capture Options"
 msgstr "Vastlegopties"
 
 #: src/WeatherFaxUI.cpp:450
-msgid "Select fax images by clicking in the capture (first) column\n\nSchedules can be sorted by clicking the header column\n\nThe schedules need testing as I can only receive from a few of the possible stations.  Corrections can be made by modifying the WeatherFaxSchedules.xml file. Patches can be submitted via github.\n\nAutomatic control of a ssb radio is desireable as well, however the author only has a tecsun pl-600.  If a suitable radio can be donated, support will be implemented."
-msgstr "Selecteer faxafbeeldingen door te klikken in de opnamekolom (de eerste). \n\nTijdschema's kunt u sorteren door te klikken op de kolomkop.\n\nDe tijdschema's moeten wel getest worden (dit is door de ontwikkelaar slechts  gebeurd voor enkele van de te ontvangen stations).  Aanpassingen kunt u maken in het bestand WeatherFaxSchedules.xml. Patches kunnen worden ingediend via github.\n\nAutomatisch beheer van een SSB-radio is ook wenselijk (de ontwikkelaar heeft echter alleen een tecsun pl-600).  Als iemand een geschikte radio kan doneren, zal daarvoor ondersteuning geboden."
+msgid "Select fax images by clicking in the capture (first) column\n\n"
+"Schedules can be sorted by clicking the header column\n\n"
+"The schedules need testing as I can only receive from a few of the possible stations.  Corrections can be made by modifying the WeatherFaxSchedules.xml file. Patches can be submitted via github.\n\n"
+"Automatic control of a ssb radio is desireable as well, however the author only has a tecsun pl-600.  If a suitable radio can be donated, support will be implemented."
+msgstr "Selecteer faxafbeeldingen door te klikken in de opnamekolom (de eerste). \n\n"
+"Tijdschema's kunt u sorteren door te klikken op de kolomkop.\n\n"
+"De tijdschema's moeten wel getest worden (dit is door de ontwikkelaar slechts  gebeurd voor enkele van de te ontvangen stations).  Aanpassingen kunt u maken in het bestand WeatherFaxSchedules.xml. Patches kunnen worden ingediend via github.\n\n"
+"Automatisch beheer van een SSB-radio is ook wenselijk (de ontwikkelaar heeft echter alleen een tecsun pl-600).  Als iemand een geschikte radio kan doneren, zal daarvoor ondersteuning geboden."
 
 #: src/WeatherFaxUI.cpp:458 src/WeatherFaxUI.cpp:1108
 #: src/WeatherFaxWizard.cpp:874
@@ -254,7 +260,7 @@ msgstr "Sluiten"
 
 #: src/WeatherFaxUI.cpp:621
 msgid "Retrieve Scheduled"
-msgstr ""
+msgstr "Haal geplande beelden op"
 
 #: src/WeatherFaxUI.cpp:624
 msgid "Retrieve Selected"
@@ -299,7 +305,7 @@ msgstr "Verwijdering 2"
 
 #: src/WeatherFaxUI.cpp:834
 msgid "Removal 3"
-msgstr ""
+msgstr "Verwijderen 3"
 
 #: src/WeatherFaxUI.cpp:834
 msgid "Value 1"
@@ -357,15 +363,17 @@ msgstr "Breedte/Lengte"
 
 #: src/WeatherFaxUI.cpp:931
 msgid "Minutes"
-msgstr ""
+msgstr "Minuten"
 
 #: src/WeatherFaxUI.cpp:998
 msgid "Show Lat/Lon Minutes"
-msgstr ""
+msgstr "Lat/Lon minuten weergeven"
 
 #: src/WeatherFaxUI.cpp:1001
-msgid "+ Lat/Lon for N/E\n- Lat/Lon for S/W"
-msgstr "+ Br/Le voor N/O\n- Br/Le voor Z/W"
+msgid "+ Lat/Lon for N/E\n"
+"- Lat/Lon for S/W"
+msgstr "+ Br/Le voor N/O\n"
+"- Br/Le voor Z/W"
 
 #: src/WeatherFaxUI.cpp:1019
 msgid "Coordinates Mapping Correction"
@@ -462,7 +470,7 @@ msgstr "Kleuren"
 
 #: src/WeatherFaxUI.cpp:1408
 msgid "Recommended 4, 16, 64, or 256"
-msgstr ""
+msgstr "Aanbevolen 4, 16, 64 of 256"
 
 #: src/WeatherFaxUI.cpp:1413
 msgid "Depth"
@@ -517,8 +525,10 @@ msgid "Saturation Threshold"
 msgstr "Verzadigingsdrempel"
 
 #: src/WeatherFaxUI.cpp:1550
-msgid "Skip start, stop and \nphasing detection"
-msgstr "Voorkom start-, stop- en\nfasedetectie"
+msgid "Skip start, stop and \n"
+"phasing detection"
+msgstr "Voorkom start-, stop- en\n"
+"fasedetectie"
 
 #: src/WeatherFaxUI.cpp:1553
 msgid "Include header data in image"
@@ -553,9 +563,19 @@ msgid "Weather Fax Plugin Version"
 msgstr "Versie WeerFax PlugIn"
 
 #: src/WeatherFaxUI.cpp:1659
-msgid "The weatherfax plugin for opencpn is intended to reduce the amount of user interaction to receive weather faxes and optionally overlay them directly onto charts.\n\nThis includes a fax decoder, which converts radio fax audio into images.\n\nTo get started, open either an image or recorded wav audio file of a ssb radio fax transmission from the file menu, or select an option from the retrieve menu.\n\nSource Code:\nhttps://github.com/seandepagnier/weatherfax_pi\n\nMany thanks to translators and testers."
-msgstr "De weerfax plugin voor OpenCPN is bedoeld om het ontvangen van weerfaxen eenvoudiger te maken en ze optioneel over de kaart te projecteren.\n\nHet bevat een fax-decoder die audiobestanden omzet naar weerkaarten.\n\nBegin door een afbeelding of een opgenomen .wav audio-bestand van een faxbericht te openen vanuit het bestandsmenu, of selecteer een optie in het ophaal menu.\n\n\n"
-"Source Code: \nhttps://github.com/seandepagnier/weatherfax_pi \n\n Veel dank aan de vertalers en testers."
+msgid "The weatherfax plugin for opencpn is intended to reduce the amount of user interaction to receive weather faxes and optionally overlay them directly onto charts.\n\n"
+"This includes a fax decoder, which converts radio fax audio into images.\n\n"
+"To get started, open either an image or recorded wav audio file of a ssb radio fax transmission from the file menu, or select an option from the retrieve menu.\n\n"
+"Source Code:\n"
+"https://github.com/seandepagnier/weatherfax_pi\n\n"
+"Many thanks to translators and testers."
+msgstr "De weerfax plugin voor OpenCPN is bedoeld om het ontvangen van weerfaxen eenvoudiger te maken en ze optioneel over de kaart te projecteren.\n\n"
+"Het bevat een fax-decoder die audiobestanden omzet naar weerkaarten.\n\n"
+"Begin door een afbeelding of een opgenomen .wav audio-bestand van een faxbericht te openen vanuit het bestandsmenu, of selecteer een optie in het ophaal menu.\n\n"
+"\n"
+"Source Code: \n"
+"https://github.com/seandepagnier/weatherfax_pi \n\n"
+" Veel dank aan de vertalers en testers."
 
 #: src/WeatherFaxUI.cpp:1668
 msgid "About the Author"
@@ -624,8 +644,10 @@ msgid "weatherfax"
 msgstr "weerfax"
 
 #: src/InternetRetrievalDialog.cpp:571
-msgid "Fax already retrieved less than 180 minutes ago.\nUse existing file?"
-msgstr "Fax minder dan 180 minuten geleden opgehaald. \nBestaand bestand gebruiken?"
+msgid "Fax already retrieved less than 180 minutes ago.\n"
+"Use existing file?"
+msgstr "Fax minder dan 180 minuten geleden opgehaald. \n"
+"Bestaand bestand gebruiken?"
 
 #: src/InternetRetrievalDialog.cpp:586 src/InternetRetrievalDialog.cpp:632
 msgid "Reading Headers: "
@@ -633,7 +655,7 @@ msgstr "Lezen van koppen:"
 
 #: src/InternetRetrievalDialog.cpp:597
 msgid "Reading"
-msgstr ""
+msgstr "Lezen"
 
 #: src/InternetRetrievalDialog.cpp:614
 msgid "Timed out waiting for headers for: "
@@ -645,7 +667,7 @@ msgstr "Controleer of er een werkende internetverbinding is."
 
 #: src/InternetRetrievalDialog.cpp:617
 msgid "Possibly the server is down temporarily."
-msgstr ""
+msgstr "De server is wellicht tijdelijk onbeschikbaar."
 
 #: src/InternetRetrievalDialog.cpp:618 src/InternetRetrievalDialog.cpp:643
 msgid "If the url is incorrect please edit the xml and/or post a bug report."
@@ -653,11 +675,11 @@ msgstr "Als de URL onjuist is het XML-bestand bewerken en/of een bug-rapport pos
 
 #: src/InternetRetrievalDialog.cpp:623
 msgid "Failed to read file size aborting."
-msgstr ""
+msgstr "Kan bestandsgrootte niet lezen."
 
 #: src/InternetRetrievalDialog.cpp:639
 msgid "Failed to Download: "
-msgstr ""
+msgstr "Downloaden mislukt: "
 
 #: src/InternetRetrievalDialog.cpp:661
 msgid "No Faxes selected."
@@ -676,8 +698,10 @@ msgid "Start"
 msgstr "Start"
 
 #: src/WeatherFaxWizard.cpp:296
-msgid "Failed to apply mapping\nCheck Mapping Correction Parameters"
-msgstr "Kon kartering niet uitvoeren\nControleer correctieparameters kartering"
+msgid "Failed to apply mapping\n"
+"Check Mapping Correction Parameters"
+msgstr "Kon kartering niet uitvoeren\n"
+"Controleer correctieparameters kartering"
 
 #: src/WeatherFaxWizard.cpp:297 src/WeatherFaxWizard.cpp:430
 #: src/WeatherFaxWizard.cpp:574 src/WeatherFaxWizard.cpp:663
@@ -690,8 +714,10 @@ msgid "Warning, latitudes on different sides of equator not recommended because 
 msgstr "Waarschuwing: breedtes aan verschillende kanten van de evenaar niet aanbevolen (dubbelzinnigheid van N- of Z-pool)."
 
 #: src/WeatherFaxWizard.cpp:571
-msgid "Calculating Mapping Failed.\nPerhaps you have chosen the wrong mapping type for this image, or the coordinates specified are not correct\n"
-msgstr "Berekening kartering mislukt.\nMogelijk heeft u het verkeerde karteringstype voor dit beeld gekozen of zijn de gespecificeerde coördinaten niet correct.\n"
+msgid "Calculating Mapping Failed.\n"
+"Perhaps you have chosen the wrong mapping type for this image, or the coordinates specified are not correct\n"
+msgstr "Berekening kartering mislukt.\n"
+"Mogelijk heeft u het verkeerde karteringstype voor dit beeld gekozen of zijn de gespecificeerde coördinaten niet correct.\n"
 
 #: src/WeatherFaxWizard.cpp:662
 msgid "Calculating Mapping not yet supported.\n"
@@ -702,8 +728,21 @@ msgid "Calculating Equator not yet supported.\n"
 msgstr "Berekening equator nog niet ondersteund.\n"
 
 #: src/WeatherFaxWizard.cpp:849
-msgid "Mapping allows for scaling, and conversion between coordinate systems\nLatitudes are +N -S, Longitudes +E -W\n\nFor polar mapping mode:\nGet Mapping parameters calculates the mapping from the coordinates given, but the first coordinate's X value (vertical red line) must align with the pole in polar mode on the vertical meridian\nOnce the coordinates are entered, the mapping should make the the blue latitudes align.  If they are far off, check the input coordinates.\nOnce they are close:\nFirst adjust pole X to center the latitudes. Next adjust the Pole Y value until the blue latitude curve closest to the pole is correct. Now, if the second blue latitude is too wide, then the true width ratio needs to be increased, otherwise it should be decreased. Repeat adjusting the Pole Y and true width ratio until both align. It is easiest to calibrate correctly if you use the farthest spaced latitudes available.\nOnce the blue latitudes align perfectly, recompute the equator to ensure the resulting mapping is correct. At this point, the coordinates can be changed to better locations if needed. If true width is very close to 1.0 it probably should be exactly 1.0.\nIt is also possible to go to the next step, adjust the coordinates, then come back to this step and get the mapping parameters again to improve the estimate."
-msgstr "De weergave kan geschaald worden en kan conversies tussen coördinaatsystemen aan.\nNoordelijke breedtes en oostelijke lengtes zijn positief, zuidelijke breedtes en westelijke lengtes zijn negatief.\n\nVoor polaire modus geldt: de weergave wordt berekend met 'Get Mapping Parameters' maar de x-waarde van de eerste coördinaat (verticale rode lijn) moet opgelijnd zijn met met de pool op de verticale meridiaan.\nNa het invoeren van de coördinaten zullen in de weergave de blauw gekleurde breedtes moeten zijn opgelijnd. Als dit onvoldoende het geval is, dient u de invoercoördinaten te controleren.\nZodra de oplijning voldoende is, moet de x-waarde van de pool bijgesteld worden om de breedtes te centreren. vervolgens dient de y-waarde van de pool bijgesteld te worden, tot de blauwe breedtecurve die het dichtst bij de pool ligt, correct wordt weergegeven. Als nu de tweede blauwe breedtecurve te breed is, moet de 'width ratio' vergroot worden. Herhaal dit voor de y-waarde van de pool en voor de 'width ratio', tot beide zijn opgelijnd.Een goede calibratie is het makkelijkst als u breedtes gebruikt die zoveel mogelijk in afstand verschillen.\n Als de blauw gekleurde breedtes exact zijn opgelijnd, moet de equator herberekend worden. "
+msgid "Mapping allows for scaling, and conversion between coordinate systems\n"
+"Latitudes are +N -S, Longitudes +E -W\n\n"
+"For polar mapping mode:\n"
+"Get Mapping parameters calculates the mapping from the coordinates given, but the first coordinate's X value (vertical red line) must align with the pole in polar mode on the vertical meridian\n"
+"Once the coordinates are entered, the mapping should make the the blue latitudes align.  If they are far off, check the input coordinates.\n"
+"Once they are close:\n"
+"First adjust pole X to center the latitudes. Next adjust the Pole Y value until the blue latitude curve closest to the pole is correct. Now, if the second blue latitude is too wide, then the true width ratio needs to be increased, otherwise it should be decreased. Repeat adjusting the Pole Y and true width ratio until both align. It is easiest to calibrate correctly if you use the farthest spaced latitudes available.\n"
+"Once the blue latitudes align perfectly, recompute the equator to ensure the resulting mapping is correct. At this point, the coordinates can be changed to better locations if needed. If true width is very close to 1.0 it probably should be exactly 1.0.\n"
+"It is also possible to go to the next step, adjust the coordinates, then come back to this step and get the mapping parameters again to improve the estimate."
+msgstr "De weergave kan geschaald worden en kan conversies tussen coördinaatsystemen aan.\n"
+"Noordelijke breedtes en oostelijke lengtes zijn positief, zuidelijke breedtes en westelijke lengtes zijn negatief.\n\n"
+"Voor polaire modus geldt: de weergave wordt berekend met 'Get Mapping Parameters' maar de x-waarde van de eerste coördinaat (verticale rode lijn) moet opgelijnd zijn met met de pool op de verticale meridiaan.\n"
+"Na het invoeren van de coördinaten zullen in de weergave de blauw gekleurde breedtes moeten zijn opgelijnd. Als dit onvoldoende het geval is, dient u de invoercoördinaten te controleren.\n"
+"Zodra de oplijning voldoende is, moet de x-waarde van de pool bijgesteld worden om de breedtes te centreren. vervolgens dient de y-waarde van de pool bijgesteld te worden, tot de blauwe breedtecurve die het dichtst bij de pool ligt, correct wordt weergegeven. Als nu de tweede blauwe breedtecurve te breed is, moet de 'width ratio' vergroot worden. Herhaal dit voor de y-waarde van de pool en voor de 'width ratio', tot beide zijn opgelijnd.Een goede calibratie is het makkelijkst als u breedtes gebruikt die zoveel mogelijk in afstand verschillen.\n"
+" Als de blauw gekleurde breedtes exact zijn opgelijnd, moet de equator herberekend worden. "
 
 #: src/FaxDecoder.cpp:110
 msgid "Failure Decoding Fax: "
@@ -831,8 +870,10 @@ msgid "Failed to launch: "
 msgstr "Kon niet starten: "
 
 #: src/SchedulesDialog.cpp:799
-msgid "Fault in weather fax plugin\nCurrently capturing hf weather fax."
-msgstr ""
+msgid "Fault in weather fax plugin\n"
+"Currently capturing hf weather fax."
+msgstr "Fout in weerfax plugin\n"
+"Bezig met luisteren naar HF weer fax."
 
 #: src/SchedulesDialog.cpp:829 src/WeatherFax.cpp:477
 msgid "Open Weather Fax Input File"
@@ -856,7 +897,7 @@ msgstr "Kon XML-bestand niet opslaan:"
 
 #: src/WeatherFax.cpp:405
 msgid "try to execute :"
-msgstr ""
+msgstr "Probeer uit te voeren:"
 
 #: src/WeatherFax.cpp:409
 msgid "Failed to load input file: "
@@ -868,19 +909,19 @@ msgstr "Ondersteunde bestanden| *.BMP; *.bmp; *.XBM; *.xbm; *.XPM; *.xpm; *.TIF;
 
 #: src/WeatherFax.cpp:491
 msgid "Cannot open audio weather fax already in progress."
-msgstr ""
+msgstr "Kan geen audio weer fax openen die al bezig is."
 
 #: src/WeatherFax.cpp:511
 msgid "Save Weather Fax To Image"
-msgstr ""
+msgstr "Weer fax opslaan als beeldbestand"
 
 #: src/WeatherFax.cpp:513
 msgid "Image Files|*.BMP;*.bmp|*.PNG;*.png|*.TIFF;*.tiffAll files (*.*)|*.*"
-msgstr ""
+msgstr "Beeldbestanden|*.BMP;*.bmp|*.PNG;*.png|*.TIFF;*.tiffAll files (*.*)|*.*"
 
 #: src/WeatherFax.cpp:522
 msgid "Failed to save file: "
-msgstr ""
+msgstr "Opslaan van bestand mislukt: "
 
 #: src/WeatherFax.cpp:579
 msgid "Save Weather Fax To KAP"
@@ -888,7 +929,7 @@ msgstr "Weerfax opslaan als KAP-bestand"
 
 #: src/WeatherFax.cpp:581
 msgid "KAP Files|*.KAP;*.kap|All files (*.*)|*.*"
-msgstr ""
+msgstr "KAP bestanden| *. KAP; *. kap| Alle bestanden (*. *) | *. *"
 
 #: src/WeatherFaxImage.cpp:439
 msgid "Resulting image has negative dimensions, aborting\n"
@@ -900,8 +941,12 @@ msgstr "Maken van kaart is mislukt"
 
 #: src/WeatherFaxImage.cpp:451
 #, c-format
-msgid "Resulting image larger than %dMB\nTry changing size parameter to a smaller value. (less than %.2f)\naborting\n"
-msgstr "Resulterende afbeelding groter dan %dMB\nStel grootteparameter in op een kleinere waarde (minder dan %.2f)\nstoppen\n"
+msgid "Resulting image larger than %dMB\n"
+"Try changing size parameter to a smaller value. (less than %.2f)\n"
+"aborting\n"
+msgstr "Resulterende afbeelding groter dan %dMB\n"
+"Stel grootteparameter in op een kleinere waarde (minder dan %.2f)\n"
+"stoppen\n"
 
 #: src/WeatherFaxImage.cpp:462
 msgid "Mapping Weather Fax Image"
@@ -913,7 +958,7 @@ msgstr "WeerFax kaartmaker"
 
 #: src/WeatherFaxImage.cpp:595
 msgid "Graphics hardware not supported (Disable OpenGL)\n"
-msgstr ""
+msgstr "Grafische hardware niet ondersteund (Schakel OpenGL uit)\n"
 
 #: src/weatherfax_pi.cpp:85 src/weatherfax_pi.cpp:143
 msgid "WeatherFax"
@@ -924,8 +969,20 @@ msgid "Weather Fax PlugIn for OpenCPN"
 msgstr "WeerFax PlugIn voor OpenCPN"
 
 #: src/weatherfax_pi.cpp:153
-msgid "Weather Fax PlugIn for OpenCPN\nCan open image files directly, or decode audio faxes to an image.\nWith simple calibration, resulting image is overlaid on top of charts.\nConverts images in mercator, polar, conic and uniform coordinates.\nCan convert any image into a raster chart.\nBuiltin database for HF radio fax stations via SSB.\nBuiltin database for internet retrieval from meterological sites.\n"
-msgstr ""
+msgid "Weather Fax PlugIn for OpenCPN\n"
+"Can open image files directly, or decode audio faxes to an image.\n"
+"With simple calibration, resulting image is overlaid on top of charts.\n"
+"Converts images in mercator, polar, conic and uniform coordinates.\n"
+"Can convert any image into a raster chart.\n"
+"Builtin database for HF radio fax stations via SSB.\n"
+"Builtin database for internet retrieval from meterological sites.\n"
+msgstr "Weer Fax PlugIn voor OpenCPN\n"
+"Kan beeldbestanden rechtstreeks openen, en audio bestanden decoderen naar een afbeelding. \n"
+"Met een simpele ijking kunnen beelden over de kaart gelegd worden.\n"
+"Converteert beelden in mercator, polaire, konische en uniforme coördinaatstelsels. \n"
+"Kan elke afbeelding converteren naar een raster grafiek. \n"
+"Ingebouwde database voor HF fax radiozenders via SSB.\n"
+"Ingebouwde database voor ophalen van meteorologisch sites via internet. \n"
 
 #: src/weatherfax_pi.cpp:318
 msgid "WeatherFax Preferences"

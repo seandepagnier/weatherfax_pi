@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-23 10:22-0500\n"
-"PO-Revision-Date: 2015-05-01 14:33-0400\n"
+"PO-Revision-Date: 2015-05-23 05:01-0400\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
 "Language-Team: Catalan\n"
 "Language: ca_ES\n"
@@ -236,8 +236,14 @@ msgid "Capture Options"
 msgstr "Opcions de captura"
 
 #: src/WeatherFaxUI.cpp:450
-msgid "Select fax images by clicking in the capture (first) column\n\nSchedules can be sorted by clicking the header column\n\nThe schedules need testing as I can only receive from a few of the possible stations.  Corrections can be made by modifying the WeatherFaxSchedules.xml file. Patches can be submitted via github.\n\nAutomatic control of a ssb radio is desireable as well, however the author only has a tecsun pl-600.  If a suitable radio can be donated, support will be implemented."
-msgstr "Seleccionar una imatge Fax clicant en la (primera) columna “Capturar”\n\nEls horaris es poden ordenar clicant a la capçalera de la columna\n\nEls horaris s’han de provar ja que  l’autor només pot rebre d'algunes de les emissores  possibles.  Es poden realitzar correccions modificant el fitxer WeatherFaxSchedules.xml. Els canvis es poden presentar via github.\n\nUna ràdio  BLU (Banda Lateral Única, trad. de l’anglès SSD radio) amb control automàtic és desitjable, així, no obstant això, l'autor només té una Tecsun pl-600.  Si es pot fer dnació d’una ràdio adequada pot ser donada, s'implementarà el suport."
+msgid "Select fax images by clicking in the capture (first) column\n\n"
+"Schedules can be sorted by clicking the header column\n\n"
+"The schedules need testing as I can only receive from a few of the possible stations.  Corrections can be made by modifying the WeatherFaxSchedules.xml file. Patches can be submitted via github.\n\n"
+"Automatic control of a ssb radio is desireable as well, however the author only has a tecsun pl-600.  If a suitable radio can be donated, support will be implemented."
+msgstr "Seleccionar una imatge Fax clicant en la (primera) columna “Capturar”\n\n"
+"Els horaris es poden ordenar clicant a la capçalera de la columna\n\n"
+"Els horaris s’han de provar ja que  l’autor només pot rebre d'algunes de les emissores  possibles.  Es poden realitzar correccions modificant el fitxer WeatherFaxSchedules.xml. Els canvis es poden presentar via github.\n\n"
+"Una ràdio  BLU (Banda Lateral Única, trad. de l’anglès SSD radio) amb control automàtic és desitjable, així, no obstant això, l'autor només té una Tecsun pl-600.  Si es pot fer dnació d’una ràdio adequada pot ser donada, s'implementarà el suport."
 
 #: src/WeatherFaxUI.cpp:458 src/WeatherFaxUI.cpp:1108
 #: src/WeatherFaxWizard.cpp:874
@@ -364,8 +370,10 @@ msgid "Show Lat/Lon Minutes"
 msgstr "Mostrar els minuts a Lat/Lon"
 
 #: src/WeatherFaxUI.cpp:1001
-msgid "+ Lat/Lon for N/E\n- Lat/Lon for S/W"
-msgstr "+ Lat/Lon per a N/E\n-Lat/Lon per a S/W"
+msgid "+ Lat/Lon for N/E\n"
+"- Lat/Lon for S/W"
+msgstr "+ Lat/Lon per a N/E\n"
+"-Lat/Lon per a S/W"
 
 #: src/WeatherFaxUI.cpp:1019
 msgid "Coordinates Mapping Correction"
@@ -517,8 +525,10 @@ msgid "Saturation Threshold"
 msgstr "Llindar de saturació"
 
 #: src/WeatherFaxUI.cpp:1550
-msgid "Skip start, stop and \nphasing detection"
-msgstr "Saltar començament, aturada i \ndetecció de fase"
+msgid "Skip start, stop and \n"
+"phasing detection"
+msgstr "Saltar començament, aturada i \n"
+"detecció de fase"
 
 #: src/WeatherFaxUI.cpp:1553
 msgid "Include header data in image"
@@ -550,11 +560,21 @@ msgstr "Fet"
 
 #: src/WeatherFaxUI.cpp:1648
 msgid "Weather Fax Plugin Version"
-msgstr "Versió del complement WeatherFax"
+msgstr "Versió del Connector WeatherFax"
 
 #: src/WeatherFaxUI.cpp:1659
-msgid "The weatherfax plugin for opencpn is intended to reduce the amount of user interaction to receive weather faxes and optionally overlay them directly onto charts.\n\nThis includes a fax decoder, which converts radio fax audio into images.\n\nTo get started, open either an image or recorded wav audio file of a ssb radio fax transmission from the file menu, or select an option from the retrieve menu.\n\nSource Code:\nhttps://github.com/seandepagnier/weatherfax_pi\n\nMany thanks to translators and testers."
-msgstr "El Complement Weatherfax per a OpenCPN està dissenyat per reduir el nombre d’accions de l'usuari, en rebre un fax metereològic i la superposició opcional a la cartografia.\n\nAquest inclou un descodificador que converteix els ràdio audio fax en imatges.\n\nPer començar, obrir una imatge o un arxiu de gravació d'àudio wav, d'una transmissió de fax de ràdio SSB desada al menú Arxiu, o seleccioneu una opció del menú de recuperar.\n\nCodi Font:\nhttps://github.com/seandepagnier/weatherfax_pi\n\nMoltes gràcies als traductors i provadors."
+msgid "The weatherfax plugin for opencpn is intended to reduce the amount of user interaction to receive weather faxes and optionally overlay them directly onto charts.\n\n"
+"This includes a fax decoder, which converts radio fax audio into images.\n\n"
+"To get started, open either an image or recorded wav audio file of a ssb radio fax transmission from the file menu, or select an option from the retrieve menu.\n\n"
+"Source Code:\n"
+"https://github.com/seandepagnier/weatherfax_pi\n\n"
+"Many thanks to translators and testers."
+msgstr "El Conector Weatherfax per a OpenCPN està dissenyat per reduir el nombre d’accions de l'usuari, en rebre un fax metereològic i la superposició opcional a la cartografia.\n\n"
+"Aquest inclou un descodificador que converteix els ràdio audio fax en imatges.\n\n"
+"Per començar, obrir una imatge o un arxiu de gravació d'àudio wav, d'una transmissió de fax de ràdio SSB desada al menú Arxiu, o seleccioneu una opció del menú de recuperar.\n\n"
+"Codi Font:\n"
+"https://github.com/seandepagnier/weatherfax_pi\n\n"
+"Moltes gràcies als traductors i provadors."
 
 #: src/WeatherFaxUI.cpp:1668
 msgid "About the Author"
@@ -623,8 +643,10 @@ msgid "weatherfax"
 msgstr "weatherfax"
 
 #: src/InternetRetrievalDialog.cpp:571
-msgid "Fax already retrieved less than 180 minutes ago.\nUse existing file?"
-msgstr "Fax ja recuperat fa menys de 180 minuts.\nUsar arxiu existent?"
+msgid "Fax already retrieved less than 180 minutes ago.\n"
+"Use existing file?"
+msgstr "Fax ja recuperat fa menys de 180 minuts.\n"
+"Usar arxiu existent?"
 
 #: src/InternetRetrievalDialog.cpp:586 src/InternetRetrievalDialog.cpp:632
 msgid "Reading Headers: "
@@ -675,8 +697,10 @@ msgid "Start"
 msgstr "Començar"
 
 #: src/WeatherFaxWizard.cpp:296
-msgid "Failed to apply mapping\nCheck Mapping Correction Parameters"
-msgstr "Impossible de cartografiar\nVerifiqueu els paràmetres de correcció de la cartografia"
+msgid "Failed to apply mapping\n"
+"Check Mapping Correction Parameters"
+msgstr "Impossible de cartografiar\n"
+"Verifiqueu els paràmetres de correcció de la cartografia"
 
 #: src/WeatherFaxWizard.cpp:297 src/WeatherFaxWizard.cpp:430
 #: src/WeatherFaxWizard.cpp:574 src/WeatherFaxWizard.cpp:663
@@ -689,8 +713,10 @@ msgid "Warning, latitudes on different sides of equator not recommended because 
 msgstr "Avís, latituds en ambdós costats de l'Equador no es recomanen per l'ambigüitat del Pol nord o del Pol Sud"
 
 #: src/WeatherFaxWizard.cpp:571
-msgid "Calculating Mapping Failed.\nPerhaps you have chosen the wrong mapping type for this image, or the coordinates specified are not correct\n"
-msgstr "Càlcul de mapatge fracassat.\nPotser heu seleccionat el tipus d'assignació inadequada per a aquesta imatge, o les coordenades especificades no són correctes\n"
+msgid "Calculating Mapping Failed.\n"
+"Perhaps you have chosen the wrong mapping type for this image, or the coordinates specified are not correct\n"
+msgstr "Càlcul de mapatge fracassat.\n"
+"Potser heu seleccionat el tipus d'assignació inadequada per a aquesta imatge, o les coordenades especificades no són correctes\n"
 
 #: src/WeatherFaxWizard.cpp:662
 msgid "Calculating Mapping not yet supported.\n"
@@ -701,8 +727,24 @@ msgid "Calculating Equator not yet supported.\n"
 msgstr "El càlcul de l'Equador encara no està suportat.\n"
 
 #: src/WeatherFaxWizard.cpp:849
-msgid "Mapping allows for scaling, and conversion between coordinate systems\nLatitudes are +N -S, Longitudes +E -W\n\nFor polar mapping mode:\nGet Mapping parameters calculates the mapping from the coordinates given, but the first coordinate's X value (vertical red line) must align with the pole in polar mode on the vertical meridian\nOnce the coordinates are entered, the mapping should make the the blue latitudes align.  If they are far off, check the input coordinates.\nOnce they are close:\nFirst adjust pole X to center the latitudes. Next adjust the Pole Y value until the blue latitude curve closest to the pole is correct. Now, if the second blue latitude is too wide, then the true width ratio needs to be increased, otherwise it should be decreased. Repeat adjusting the Pole Y and true width ratio until both align. It is easiest to calibrate correctly if you use the farthest spaced latitudes available.\nOnce the blue latitudes align perfectly, recompute the equator to ensure the resulting mapping is correct. At this point, the coordinates can be changed to better locations if needed. If true width is very close to 1.0 it probably should be exactly 1.0.\nIt is also possible to go to the next step, adjust the coordinates, then come back to this step and get the mapping parameters again to improve the estimate."
-msgstr "La cartografia permet  l'ampliació i conversió entre sistemes de coordenades\nLes latituds són +N -S, les longituds són + E -W\n\nPer al mode de cartografia polar:\nL’opció “Obtenir Cartografia” calcula la cartografia a partir de les coordenades donades, però el valor x de la primera coordenada (línia vermella vertical) s’han d'alinear amb el pol en el mode polar sobre el meridià\nUn cop que s'introdueixen les coordenades, el cartografiat ha de fer que les latituds blaves s’alineïn. Si estan lluny, comprovar les coordenades introduïdes.\nUn cop estan properes:\nPrimer ajustar el  pol X per centrar les latituds. A continuació ajustar el valor del pol Y fins que la corba blava de latitud més propera al pol sigui correcta. Ara, si la segona latitud blava és massa ample, llavors la relació de l’amplada veritable necessita ser augmentada, en cas contrari ha de ser disminuïda. Repetir ajustant el pol Y i la relació d’amplada veritable fins a alinear-les. És més fàcil calibrar correctament si utilitzeu les latituds més allunyades disponibles.\nUn cop  les latituds blaves s’alineen perfectament, cal tornar a calcular l'Equador per assegurar-se que la cartografia resultant és correcta. En aquest punt, es poden canviar les coordenades a millors ubicacions, si és necessari. Si l’amplada veritable és molt a prop 1.0 probablement hauria de ser exactament 1.0.\nTambé és possible anar al següent pas, ajustar les coordenades, després tornar a aquest pas i aconseguir de nou els paràmetres de cartografia per millorar l'estimació."
+msgid "Mapping allows for scaling, and conversion between coordinate systems\n"
+"Latitudes are +N -S, Longitudes +E -W\n\n"
+"For polar mapping mode:\n"
+"Get Mapping parameters calculates the mapping from the coordinates given, but the first coordinate's X value (vertical red line) must align with the pole in polar mode on the vertical meridian\n"
+"Once the coordinates are entered, the mapping should make the the blue latitudes align.  If they are far off, check the input coordinates.\n"
+"Once they are close:\n"
+"First adjust pole X to center the latitudes. Next adjust the Pole Y value until the blue latitude curve closest to the pole is correct. Now, if the second blue latitude is too wide, then the true width ratio needs to be increased, otherwise it should be decreased. Repeat adjusting the Pole Y and true width ratio until both align. It is easiest to calibrate correctly if you use the farthest spaced latitudes available.\n"
+"Once the blue latitudes align perfectly, recompute the equator to ensure the resulting mapping is correct. At this point, the coordinates can be changed to better locations if needed. If true width is very close to 1.0 it probably should be exactly 1.0.\n"
+"It is also possible to go to the next step, adjust the coordinates, then come back to this step and get the mapping parameters again to improve the estimate."
+msgstr "La cartografia permet  l'ampliació i conversió entre sistemes de coordenades\n"
+"Les latituds són +N -S, les longituds són + E -W\n\n"
+"Per al mode de cartografia polar:\n"
+"L’opció “Obtenir Cartografia” calcula la cartografia a partir de les coordenades donades, però el valor x de la primera coordenada (línia vermella vertical) s’han d'alinear amb el pol en el mode polar sobre el meridià\n"
+"Un cop que s'introdueixen les coordenades, el cartografiat ha de fer que les latituds blaves s’alineïn. Si estan lluny, comprovar les coordenades introduïdes.\n"
+"Un cop estan properes:\n"
+"Primer ajustar el  pol X per centrar les latituds. A continuació ajustar el valor del pol Y fins que la corba blava de latitud més propera al pol sigui correcta. Ara, si la segona latitud blava és massa ample, llavors la relació de l’amplada veritable necessita ser augmentada, en cas contrari ha de ser disminuïda. Repetir ajustant el pol Y i la relació d’amplada veritable fins a alinear-les. És més fàcil calibrar correctament si utilitzeu les latituds més allunyades disponibles.\n"
+"Un cop  les latituds blaves s’alineen perfectament, cal tornar a calcular l'Equador per assegurar-se que la cartografia resultant és correcta. En aquest punt, es poden canviar les coordenades a millors ubicacions, si és necessari. Si l’amplada veritable és molt a prop 1.0 probablement hauria de ser exactament 1.0.\n"
+"També és possible anar al següent pas, ajustar les coordenades, després tornar a aquest pas i aconseguir de nou els paràmetres de cartografia per millorar l'estimació."
 
 #: src/FaxDecoder.cpp:110
 msgid "Failure Decoding Fax: "
@@ -830,8 +872,10 @@ msgid "Failed to launch: "
 msgstr "Error en iniciar: "
 
 #: src/SchedulesDialog.cpp:799
-msgid "Fault in weather fax plugin\nCurrently capturing hf weather fax."
-msgstr "Culpa del complement del fax metereologia\nEn funcionament captura de fax meteorològic hf."
+msgid "Fault in weather fax plugin\n"
+"Currently capturing hf weather fax."
+msgstr "Culpa del Connector del fax metereologia\n"
+"En funcionament captura de fax meteorològic hf."
 
 #: src/SchedulesDialog.cpp:829 src/WeatherFax.cpp:477
 msgid "Open Weather Fax Input File"
@@ -899,8 +943,12 @@ msgstr "Error del cartografiat"
 
 #: src/WeatherFaxImage.cpp:451
 #, c-format
-msgid "Resulting image larger than %dMB\nTry changing size parameter to a smaller value. (less than %.2f)\naborting\n"
-msgstr "Mida de la imatge resultant més gran que %dMB\nEscolliu un valor inferior. (menys de %.2f)\navortant\n"
+msgid "Resulting image larger than %dMB\n"
+"Try changing size parameter to a smaller value. (less than %.2f)\n"
+"aborting\n"
+msgstr "Mida de la imatge resultant més gran que %dMB\n"
+"Escolliu un valor inferior. (menys de %.2f)\n"
+"avortant\n"
 
 #: src/WeatherFaxImage.cpp:462
 msgid "Mapping Weather Fax Image"
@@ -923,8 +971,20 @@ msgid "Weather Fax PlugIn for OpenCPN"
 msgstr "Connector Weather Fax per a OpenCPN"
 
 #: src/weatherfax_pi.cpp:153
-msgid "Weather Fax PlugIn for OpenCPN\nCan open image files directly, or decode audio faxes to an image.\nWith simple calibration, resulting image is overlaid on top of charts.\nConverts images in mercator, polar, conic and uniform coordinates.\nCan convert any image into a raster chart.\nBuiltin database for HF radio fax stations via SSB.\nBuiltin database for internet retrieval from meterological sites.\n"
-msgstr "El complement de Fax Meteorològic per a OpenCPN\nPodeu obrir els arxius d'imatge directament o convertir els faxos d'àudio a imatge.\nAmb una simple calibració, la imatge resultant es superposa a la part superior de les cartes.\nConverteix les imatges en mercator, polar, cònica i coordenades uniformes.\nPot convertir qualsevol imatge en una carta ràster.\nCrea una base de dades interna per a les estacions de ràdio d'alta freqüència (HF) a través de fax SSB\nCrea una base de dades interna per a la recuperació dels llocs d'internet meteorològics.\n"
+msgid "Weather Fax PlugIn for OpenCPN\n"
+"Can open image files directly, or decode audio faxes to an image.\n"
+"With simple calibration, resulting image is overlaid on top of charts.\n"
+"Converts images in mercator, polar, conic and uniform coordinates.\n"
+"Can convert any image into a raster chart.\n"
+"Builtin database for HF radio fax stations via SSB.\n"
+"Builtin database for internet retrieval from meterological sites.\n"
+msgstr "El Connector de Fax Meteorològic per a OpenCPN\n"
+"Podeu obrir els arxius d'imatge directament o convertir els faxos d'àudio a imatge.\n"
+"Amb una simple calibració, la imatge resultant es superposa a la part superior de les cartes.\n"
+"Converteix les imatges en mercator, polar, cònica i coordenades uniformes.\n"
+"Pot convertir qualsevol imatge en una carta ràster.\n"
+"Crea una base de dades interna per a les estacions de ràdio d'alta freqüència (HF) a través de fax SSB\n"
+"Crea una base de dades interna per a la recuperació dels llocs d'internet meteorològics.\n"
 
 #: src/weatherfax_pi.cpp:318
 msgid "WeatherFax Preferences"

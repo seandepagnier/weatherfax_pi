@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-23 10:22-0500\n"
-"PO-Revision-Date: 2015-05-01 14:33-0400\n"
+"PO-Revision-Date: 2015-06-02 20:34-0400\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
 "Language-Team: Finnish\n"
 "Language: fi_FI\n"
@@ -236,8 +236,14 @@ msgid "Capture Options"
 msgstr "Tallennus asetukset"
 
 #: src/WeatherFaxUI.cpp:450
-msgid "Select fax images by clicking in the capture (first) column\n\nSchedules can be sorted by clicking the header column\n\nThe schedules need testing as I can only receive from a few of the possible stations.  Corrections can be made by modifying the WeatherFaxSchedules.xml file. Patches can be submitted via github.\n\nAutomatic control of a ssb radio is desireable as well, however the author only has a tecsun pl-600.  If a suitable radio can be donated, support will be implemented."
-msgstr "Valitse Faksi kuvia klikkaamalla tallenteen (ensimmäistää) saraketta\n\nTaulukkoja voidaan lajitella napsauttamalla otsikon saraketta\n\nTaulukot tarvitsevat testejä, koska voin vastaanottaa vain muutamalta mahdolliselta asemalta.  Korjaukset voidaan tehdä muuttamalla WeatherFaxSchedules.xml tiedostoa. Paikkaukset voidaan välittää github:n kautta.\n\nAutomaattinen ssb-radion ohjaus on toivottavaa, mutta Tekijällä on vain tecsun pl-600.  Jos sopivan radion hankintaa voidaan avustaa, tuki toteutetaan."
+msgid "Select fax images by clicking in the capture (first) column\n\n"
+"Schedules can be sorted by clicking the header column\n\n"
+"The schedules need testing as I can only receive from a few of the possible stations.  Corrections can be made by modifying the WeatherFaxSchedules.xml file. Patches can be submitted via github.\n\n"
+"Automatic control of a ssb radio is desireable as well, however the author only has a tecsun pl-600.  If a suitable radio can be donated, support will be implemented."
+msgstr "Valitse Faksi kuvia klikkaamalla tallenteen (ensimmäistää) saraketta\n\n"
+"Taulukkoja voidaan lajitella napsauttamalla otsikon saraketta\n\n"
+"Taulukot tarvitsevat testejä, koska voin vastaanottaa vain muutamalta mahdolliselta asemalta.  Korjaukset voidaan tehdä muuttamalla WeatherFaxSchedules.xml tiedostoa. Paikkaukset voidaan välittää github:n kautta.\n\n"
+"Automaattinen ssb-radion ohjaus on toivottavaa, mutta Tekijällä on vain tecsun pl-600.  Jos sopivan radion hankintaa voidaan avustaa, tuki toteutetaan."
 
 #: src/WeatherFaxUI.cpp:458 src/WeatherFaxUI.cpp:1108
 #: src/WeatherFaxWizard.cpp:874
@@ -364,8 +370,10 @@ msgid "Show Lat/Lon Minutes"
 msgstr "Näytä Lat/Lon minuutit"
 
 #: src/WeatherFaxUI.cpp:1001
-msgid "+ Lat/Lon for N/E\n- Lat/Lon for S/W"
-msgstr "+ Lat/Lon N/E:lle\n-Lat/Lon S/W:lle"
+msgid "+ Lat/Lon for N/E\n"
+"- Lat/Lon for S/W"
+msgstr "+ Lat/Lon N/E:lle\n"
+"-Lat/Lon S/W:lle"
 
 #: src/WeatherFaxUI.cpp:1019
 msgid "Coordinates Mapping Correction"
@@ -517,8 +525,10 @@ msgid "Saturation Threshold"
 msgstr "Kylläisyys kynnys"
 
 #: src/WeatherFaxUI.cpp:1550
-msgid "Skip start, stop and \nphasing detection"
-msgstr "Ohita käynnistys, pysäytä ja \ntahdista tunnistus"
+msgid "Skip start, stop and \n"
+"phasing detection"
+msgstr "Ohita käynnistys, pysäytä ja \n"
+"tahdista tunnistus"
 
 #: src/WeatherFaxUI.cpp:1553
 msgid "Include header data in image"
@@ -553,8 +563,18 @@ msgid "Weather Fax Plugin Version"
 msgstr "Weather Fax lisäosanversio"
 
 #: src/WeatherFaxUI.cpp:1659
-msgid "The weatherfax plugin for opencpn is intended to reduce the amount of user interaction to receive weather faxes and optionally overlay them directly onto charts.\n\nThis includes a fax decoder, which converts radio fax audio into images.\n\nTo get started, open either an image or recorded wav audio file of a ssb radio fax transmission from the file menu, or select an option from the retrieve menu.\n\nSource Code:\nhttps://github.com/seandepagnier/weatherfax_pi\n\nMany thanks to translators and testers."
-msgstr "Opencpn:n weatherfaxlisäosan käytöllä pyritään ensisijaisesti vähentämään sääfaksien hakutiheyttä ja asettelemaan ne suoraan kartoille.\n\nTämä sisältää faxin koodaimen joka muuntaa faksin äänen kuvaksi.\n\nAloittaaksesi, avaa joko kuva tai talletettu wav-äänitiedosto, joka on saatu ssb-radion välityksellä tiedostovalikosta, tai valitse vaihtoehto hakuvalikosta.\n\nLähdekoodi:\nhttps://github.com/seandepagnier/weatherfax_pi\n\nSuurkiitokset kääntäjille ja testaajille."
+msgid "The weatherfax plugin for opencpn is intended to reduce the amount of user interaction to receive weather faxes and optionally overlay them directly onto charts.\n\n"
+"This includes a fax decoder, which converts radio fax audio into images.\n\n"
+"To get started, open either an image or recorded wav audio file of a ssb radio fax transmission from the file menu, or select an option from the retrieve menu.\n\n"
+"Source Code:\n"
+"https://github.com/seandepagnier/weatherfax_pi\n\n"
+"Many thanks to translators and testers."
+msgstr "Opencpn:n weatherfaxlisäosan käytöllä pyritään ensisijaisesti vähentämään sääfaksien hakutiheyttä ja asettelemaan ne suoraan kartoille.\n\n"
+"Tämä sisältää faxin koodaimen joka muuntaa faksin äänen kuvaksi.\n\n"
+"Aloittaaksesi, avaa joko kuva tai talletettu wav-äänitiedosto, joka on saatu ssb-radion välityksellä tiedostovalikosta, tai valitse vaihtoehto hakuvalikosta.\n\n"
+"Lähdekoodi:\n"
+"https://github.com/seandepagnier/weatherfax_pi\n\n"
+"Suurkiitokset kääntäjille ja testaajille."
 
 #: src/WeatherFaxUI.cpp:1668
 msgid "About the Author"
@@ -623,8 +643,10 @@ msgid "weatherfax"
 msgstr "weatherfax"
 
 #: src/InternetRetrievalDialog.cpp:571
-msgid "Fax already retrieved less than 180 minutes ago.\nUse existing file?"
-msgstr "Fax on haettu enintään 180 minuttia sitten.\nKäyttäisitkö olemassaolevaa tiedostoa?"
+msgid "Fax already retrieved less than 180 minutes ago.\n"
+"Use existing file?"
+msgstr "Fax on haettu enintään 180 minuttia sitten.\n"
+"Käyttäisitkö olemassaolevaa tiedostoa?"
 
 #: src/InternetRetrievalDialog.cpp:586 src/InternetRetrievalDialog.cpp:632
 msgid "Reading Headers: "
@@ -675,8 +697,10 @@ msgid "Start"
 msgstr "Aloita"
 
 #: src/WeatherFaxWizard.cpp:296
-msgid "Failed to apply mapping\nCheck Mapping Correction Parameters"
-msgstr "Mapping:ia ei onnituttu lisäämään\nTarkista kartoituksen korjausparametrit"
+msgid "Failed to apply mapping\n"
+"Check Mapping Correction Parameters"
+msgstr "Mapping:ia ei onnituttu lisäämään\n"
+"Tarkista kartoituksen korjausparametrit"
 
 #: src/WeatherFaxWizard.cpp:297 src/WeatherFaxWizard.cpp:430
 #: src/WeatherFaxWizard.cpp:574 src/WeatherFaxWizard.cpp:663
@@ -689,8 +713,10 @@ msgid "Warning, latitudes on different sides of equator not recommended because 
 msgstr "Varoitus, leveysasteita päiväntasaajan eri puolilla ei suositella Pohjoisen +merkin ja etelänavan -merkin vuoksi"
 
 #: src/WeatherFaxWizard.cpp:571
-msgid "Calculating Mapping Failed.\nPerhaps you have chosen the wrong mapping type for this image, or the coordinates specified are not correct\n"
-msgstr "Mapping laskenta epäonnistui.\nEhkä olet valinnut väärän karttatyypin tästä kuvasta tai koordinaatit eivät ole sopivia\n"
+msgid "Calculating Mapping Failed.\n"
+"Perhaps you have chosen the wrong mapping type for this image, or the coordinates specified are not correct\n"
+msgstr "Mapping laskenta epäonnistui.\n"
+"Ehkä olet valinnut väärän karttatyypin tästä kuvasta tai koordinaatit eivät ole sopivia\n"
 
 #: src/WeatherFaxWizard.cpp:662
 msgid "Calculating Mapping not yet supported.\n"
@@ -701,8 +727,24 @@ msgid "Calculating Equator not yet supported.\n"
 msgstr "Päiväntasaajalaskentaa ei vielä tueta. \n"
 
 #: src/WeatherFaxWizard.cpp:849
-msgid "Mapping allows for scaling, and conversion between coordinate systems\nLatitudes are +N -S, Longitudes +E -W\n\nFor polar mapping mode:\nGet Mapping parameters calculates the mapping from the coordinates given, but the first coordinate's X value (vertical red line) must align with the pole in polar mode on the vertical meridian\nOnce the coordinates are entered, the mapping should make the the blue latitudes align.  If they are far off, check the input coordinates.\nOnce they are close:\nFirst adjust pole X to center the latitudes. Next adjust the Pole Y value until the blue latitude curve closest to the pole is correct. Now, if the second blue latitude is too wide, then the true width ratio needs to be increased, otherwise it should be decreased. Repeat adjusting the Pole Y and true width ratio until both align. It is easiest to calibrate correctly if you use the farthest spaced latitudes available.\nOnce the blue latitudes align perfectly, recompute the equator to ensure the resulting mapping is correct. At this point, the coordinates can be changed to better locations if needed. If true width is very close to 1.0 it probably should be exactly 1.0.\nIt is also possible to go to the next step, adjust the coordinates, then come back to this step and get the mapping parameters again to improve the estimate."
-msgstr "Mapping mahdollistaa skaalauksen ja muuntamiseen koordinaattisystemien kesken\nLeveysasteet ovat + N -S, pituusasteet + E -W\n\nNapapiirimapping tila: \nGet Mapping parametrit laskee annetuista koordinaateista kartan , mutta ensimmäinen koordinaattin X arvo (punainen pystyviiva) on oltava suhteessa napaan napa tilassa pystysuorassa meridianissa\nKun koordinaatit on syötetty, mappingin pitäisi tehdä sinisten leveysasteiden sijoitus.  Jos ne ovat kaukana, tarkista syötetyt koordinaatit. \nKun ne ovat lähellä: \nEnsin säädä pole Xää keskittääksesi leveysasteita. Seuraavaksi säätää Pole Y arvoa kunnes sininen latitude käyrä lähimpänä napa on  oikein. Nyt, jos toinen sininen latitude on liian leveä, niin tosileveyden suhdelukua on lisättävä, muuten sitä olisi vähennettävä. Toista Pole Y:n säätöä  ja tosileveyden suhdetta kunnes molemmat ovat kohdallaan. On helpointa kalibroida oikein, jos käytät suurimpia  käytettävissä olevia tasaleveysasteita.\nKun siniset leveysasteet sijoittuvat täydellisesti, laske päiväntasaajaa uudelleen, niin lopullinen kartoitus on oikein. Koordinaatit voi tässä vaiheessa muuttaa paremmin paikkoihin, tarvittaessa. Jos todellinen leveys on hyvin lähellä 1.0 se luultavasti olisi juuri 1.0.\nOn myös mahdollista mennä seuraavaan vaiheeseen, säätää koordinaatit, palata takaisin tähän vaiheeseen ja saada parempia likiarvoja."
+msgid "Mapping allows for scaling, and conversion between coordinate systems\n"
+"Latitudes are +N -S, Longitudes +E -W\n\n"
+"For polar mapping mode:\n"
+"Get Mapping parameters calculates the mapping from the coordinates given, but the first coordinate's X value (vertical red line) must align with the pole in polar mode on the vertical meridian\n"
+"Once the coordinates are entered, the mapping should make the the blue latitudes align.  If they are far off, check the input coordinates.\n"
+"Once they are close:\n"
+"First adjust pole X to center the latitudes. Next adjust the Pole Y value until the blue latitude curve closest to the pole is correct. Now, if the second blue latitude is too wide, then the true width ratio needs to be increased, otherwise it should be decreased. Repeat adjusting the Pole Y and true width ratio until both align. It is easiest to calibrate correctly if you use the farthest spaced latitudes available.\n"
+"Once the blue latitudes align perfectly, recompute the equator to ensure the resulting mapping is correct. At this point, the coordinates can be changed to better locations if needed. If true width is very close to 1.0 it probably should be exactly 1.0.\n"
+"It is also possible to go to the next step, adjust the coordinates, then come back to this step and get the mapping parameters again to improve the estimate."
+msgstr "Mapping mahdollistaa skaalauksen ja muuntamiseen koordinaattisystemien kesken\n"
+"Leveysasteet ovat + N -S, pituusasteet + E -W\n\n"
+"Napapiirimapping tila: \n"
+"Get Mapping parametrit laskee annetuista koordinaateista kartan , mutta ensimmäinen koordinaattin X arvo (punainen pystyviiva) on oltava suhteessa napaan napa tilassa pystysuorassa meridianissa\n"
+"Kun koordinaatit on syötetty, mappingin pitäisi tehdä sinisten leveysasteiden sijoitus.  Jos ne ovat kaukana, tarkista syötetyt koordinaatit. \n"
+"Kun ne ovat lähellä: \n"
+"Ensin säädä pole Xää keskittääksesi leveysasteita. Seuraavaksi säätää Pole Y arvoa kunnes sininen latitude käyrä lähimpänä napa on  oikein. Nyt, jos toinen sininen latitude on liian leveä, niin tosileveyden suhdelukua on lisättävä, muuten sitä olisi vähennettävä. Toista Pole Y:n säätöä  ja tosileveyden suhdetta kunnes molemmat ovat kohdallaan. On helpointa kalibroida oikein, jos käytät suurimpia  käytettävissä olevia tasaleveysasteita.\n"
+"Kun siniset leveysasteet sijoittuvat täydellisesti, laske päiväntasaajaa uudelleen, niin lopullinen kartoitus on oikein. Koordinaatit voi tässä vaiheessa muuttaa paremmin paikkoihin, tarvittaessa. Jos todellinen leveys on hyvin lähellä 1.0 se luultavasti olisi juuri 1.0.\n"
+"On myös mahdollista mennä seuraavaan vaiheeseen, säätää koordinaatit, palata takaisin tähän vaiheeseen ja saada parempia likiarvoja."
 
 #: src/FaxDecoder.cpp:110
 msgid "Failure Decoding Fax: "
@@ -830,8 +872,10 @@ msgid "Failed to launch: "
 msgstr "Käynnistäminen epäonnistui: "
 
 #: src/SchedulesDialog.cpp:799
-msgid "Fault in weather fax plugin\nCurrently capturing hf weather fax."
-msgstr "Vika sääfaksi lisäosassa\nNyt tavoitetaan hf sääfaksia."
+msgid "Fault in weather fax plugin\n"
+"Currently capturing hf weather fax."
+msgstr "Vika sääfaksi lisäosassa\n"
+"Nyt tavoitetaan hf sääfaksia."
 
 #: src/SchedulesDialog.cpp:829 src/WeatherFax.cpp:477
 msgid "Open Weather Fax Input File"
@@ -900,8 +944,12 @@ msgstr "Mapping epäonnistui"
 
 #: src/WeatherFaxImage.cpp:451
 #, c-format
-msgid "Resulting image larger than %dMB\nTry changing size parameter to a smaller value. (less than %.2f)\naborting\n"
-msgstr "Saatu kuva on suurempi kuin %dMB\nYritä muuttaa kokoparametriä pienemmäksi. (alle %.2f)\nhylätään\n"
+msgid "Resulting image larger than %dMB\n"
+"Try changing size parameter to a smaller value. (less than %.2f)\n"
+"aborting\n"
+msgstr "Saatu kuva on suurempi kuin %dMB\n"
+"Yritä muuttaa kokoparametriä pienemmäksi. (alle %.2f)\n"
+"hylätään\n"
 
 #: src/WeatherFaxImage.cpp:462
 msgid "Mapping Weather Fax Image"
@@ -924,8 +972,20 @@ msgid "Weather Fax PlugIn for OpenCPN"
 msgstr "OpenCPN:n Weather Fax lisäosa"
 
 #: src/weatherfax_pi.cpp:153
-msgid "Weather Fax PlugIn for OpenCPN\nCan open image files directly, or decode audio faxes to an image.\nWith simple calibration, resulting image is overlaid on top of charts.\nConverts images in mercator, polar, conic and uniform coordinates.\nCan convert any image into a raster chart.\nBuiltin database for HF radio fax stations via SSB.\nBuiltin database for internet retrieval from meterological sites.\n"
-msgstr "Sää Faksi lisäosa OpenCPN:ään\nVoi avata kuvatiedostoja suoraan tai purkaa audiofakseja kuviksi.\nYksinkertaisella kalibroinnilla tuloksena on kuva kartan päälle.\nMuuntaa kuvia mercator, polar, kartio ja yhtenäiskoordinaateista. \nVoi muuntaa minkä tahansa kuvan rasterikartaksi. \nSisäisessä tietokannassa HF Faksi radioasemia SSB:n kautta.\nSisäisessä tietokannassa internet haku meterologisilta sivustoilta.\n"
+msgid "Weather Fax PlugIn for OpenCPN\n"
+"Can open image files directly, or decode audio faxes to an image.\n"
+"With simple calibration, resulting image is overlaid on top of charts.\n"
+"Converts images in mercator, polar, conic and uniform coordinates.\n"
+"Can convert any image into a raster chart.\n"
+"Builtin database for HF radio fax stations via SSB.\n"
+"Builtin database for internet retrieval from meterological sites.\n"
+msgstr "Sää Faksi lisäosa OpenCPN:ään\n"
+"Voi avata kuvatiedostoja suoraan tai purkaa audiofakseja kuviksi.\n"
+"Yksinkertaisella kalibroinnilla tuloksena on kuva kartan päälle.\n"
+"Muuntaa kuvia mercator, polar, kartio ja yhtenäiskoordinaateista. \n"
+"Voi muuntaa minkä tahansa kuvan rasterikartaksi. \n"
+"Sisäisessä tietokannassa HF Faksi radioasemia SSB:n kautta.\n"
+"Sisäisessä tietokannassa internet haku meterologisilta sivustoilta.\n"
 
 #: src/weatherfax_pi.cpp:318
 msgid "WeatherFax Preferences"
