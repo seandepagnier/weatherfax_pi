@@ -2156,7 +2156,7 @@
 
     <Region Name="Pacific">
       <Map Url="P_sfc_full_ocean.jpg" Contents="Pacific ocean Analysis" Area="1" />
-      <Map Url="P_sfc_full_ocean_color.png" Contents="Pacific ocean Analysis - color" Area="1" />
+      <Map Url="P_sfc_full_ocean_color.png" Contents="Pacific ocean Analysis - color" Area="9" />
       <Map Url="shtml/P_24hr500bw.gif" Contents="24-hour 500 MB Forecast" Area="3" />
       <Map Url="shtml/P_48hr500bw.gif" Contents="48-hour 500 MB Forecast" Area="3" />
       <Map Url="shtml/P_96hr500bw.gif" Contents="96-hour 500 MB Forecast" Area="3" />
@@ -2183,6 +2183,7 @@
       <Area Name="6" lat1="16N" lat2="65N" lon1="135E" lon2="165W" />
       <Area Name="7" lat1="16N" lat2="65N" lon1="175W" lon2="115W" />
       <Area Name="8" lat1="0N" lat2="30N" lon1="130E" lon2="110W" />
+      <Area Name="9" lat1="16N" lat2="65N" lon1="135E" lon2="115W" />
     </Region>
   </Server>
 
