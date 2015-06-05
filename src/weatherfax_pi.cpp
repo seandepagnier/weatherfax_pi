@@ -224,6 +224,8 @@ bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
 wxString weatherfax_pi::StandardPath()
 {
     wxStandardPathsBase& std_path = wxStandardPathsBase::Get();
+    wxString s = wxFileName::GetPathSeparator();
+
 #ifdef __WXMSW__
     wxString stdPath  = std_path.GetConfigDir();
 #endif
@@ -231,21 +233,30 @@ wxString weatherfax_pi::StandardPath()
     wxString stdPath  = std_path.GetUserDataDir();
 #endif
 #ifdef __WXOSX__
-    wxString stdPath  = std_path.GetUserConfigDir();   // should be ~/Library/Preferences	
+    wxString stdPath  = (std_path.GetUserConfigDir() + s + _T("opencpn"));
 #endif
 
-    wxString s = wxFileName::GetPathSeparator(), path = stdPath + s + _T("plugins") + s;
+    stdPath += s + _T("plugins");
+    if (!wxDirExists(stdPath))
+      wxMkdir(stdPath);
 
-    wxFileName dir(path);
-    if(!dir.DirExists())
-        dir.Mkdir();
+    stdPath += s + _T("weatherfax");
 
-    path += _T("weatherfax") + s;
-    wxFileName dir2(path);
-    if(!dir2.DirExists())
-        dir2.Mkdir();
+#ifdef __WXOSX__
+    // Compatibility with pre-OCPN-4.2; move config dir to
+    // ~/Library/Preferences/opencpn if it exists
+    wxString oldPath = (std_path.GetUserConfigDir() + s + _T("plugins") + s + _T("weatherfax"));
+    if (wxDirExists(oldPath) && !wxDirExists(stdPath)) {
+	wxLogMessage("weatherfax_pi: moving config dir %s to %s", oldPath, stdPath);
+	wxRenameFile(oldPath, stdPath);
+    }
+#endif
 
-    return path;
+    if (!wxDirExists(stdPath))
+      wxMkdir(stdPath);
+
+    stdPath += s; // is this necessary?
+    return stdPath;
 }
 
 bool weatherfax_pi::LoadConfig(void)
