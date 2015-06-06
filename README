@@ -25,7 +25,9 @@ The Windows compilation is dependent on these files
 Under windows, you must find the file "opencpn.lib" (Visual Studio) or "libopencpn.dll.a" (mingw) which is built in the build directory after compiling opencpn.  This file must be copied to the plugin directory.
 
 There are also some libraries and an external program needed:
-http://sourceforge.net/projects/opencpnplugins/files/weatherfax_pi/wf_depends.7z/download
+http://sourceforge.net/projects/opencpnplugins/files/opencpn_packaging_data/portaudio-vc12.7z/download
+http://sourceforge.net/projects/opencpnplugins/files/opencpn_packaging_data/cURL-vc12.7z/download
+http://sourceforge.net/projects/opencpnplugins/files/opencpn_packaging_data/PVW32Con.exe/download (not an archive, this one just copy to buildwin)
 and unpack all these files into the buildwin directory as the compile is dependent on these.
 
 For Mingw, only a single file "libcurl.dll" is needed for libcurl, for visual studio, several files.
