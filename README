@@ -14,7 +14,7 @@ Build as normally:
 
 * cd ..
 * cd build
-* cmake ..
+* cmake .. # To produce a binary compatible with Windows XP, you must set the respective toolset - use 'cmake -T v120_xp ..'
 * make
 * make install
 
