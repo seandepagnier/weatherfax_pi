@@ -514,18 +514,16 @@ bool FaxDecoder::DecodeFaxFromPortAudio()
         return false;
     }
 
-    int i = Pa_GetDeviceCount();
-
     if(m_DeviceIndex == -1)
         m_DeviceIndex = Pa_GetDefaultInputDevice();
 
     while(m_DeviceIndex < Pa_GetDeviceCount()) {
-        PaStreamParameters inputParameters =
-            { .device = m_DeviceIndex,
-              .channelCount = 1, /* mono input */
-              .sampleFormat = sampleformat,
-              .suggestedLatency = 0,
-              .hostApiSpecificStreamInfo = NULL };
+        PaStreamParameters inputParameters;
+        inputParameters.device = m_DeviceIndex;
+        inputParameters.channelCount = 1; /* mono input */
+        inputParameters.sampleFormat = sampleformat;
+        inputParameters.suggestedLatency = 0;
+        inputParameters.hostApiSpecificStreamInfo = NULL;
 
         err = Pa_OpenStream( &pa_stream,
                              &inputParameters,
