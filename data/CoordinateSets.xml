@@ -15,7 +15,7 @@
     <Coordinate Name="NOAA - Pt. Reyes - 1" X1="71" Y1="133" Lat1="60.00000" Lon1="140.00000" X2="1643" Y2="999" Lat2="20.00000" Lon2="-120.00000" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
     <Coordinate Name="NOAA - Pt. Reyes - 8" X1="51" Y1="234" Lat1="60.00000" Lon1="-155.00000" X2="1060" Y2="1468" Lat2="20.00000" Lon2="-110.00000" Rotation="CW" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
     <Coordinate Name="NOAA - Pt. Reyes - 7" X1="227" Y1="80" Lat1="30.00000" Lon1="-120.00000" X2="1665" Y2="868" Lat2="10.00000" Lon2="-80.00000" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
-    <Coordinate Name="NOAA - Pt. Reyes - 9" X1="471" Y1="624" Lat1="45.00000" Lon1="-130.00000" X2="864" Y2="1016" Lat2="40.00000" Lon2="-125.00000" Rotation="CCW" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
+    <Coordinate Name="NOAA - Pt. Reyes - 9" X1="471" Y1="625" Lat1="50.00000" Lon1="-130.00000" X2="864" Y2="1018" Lat2="45.00000" Lon2="-125.00000" Rotation="CCW" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
     <Coordinate Name="NOAA - Pt. Reyes - 4" X1="351" Y1="240" Lat1="30.00000" Lon1="-140.00000" X2="1376" Y2="949" Lat2="-10.00000" Lon2="-80.00000" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
     <Coordinate Name="NOAA - Pt. Reyes - 10" X1="173" Y1="132" Lat1="40.00000" Lon1="-170.00000" X2="1554" Y2="887" Lat2="0.00000" Lon2="-90.00000" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
     <Coordinate Name="NOAA - Pt. Reyes - 3" X1="126" Y1="262" Lat1="60.00000" Lon1="140.00000" X2="1326" Y2="1582" Lat2="20.00000" Lon2="-170.00000" Rotation="CW" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
@@ -142,4 +142,6 @@
     <Coordinate Name="NOAA Ocean Prediction Center - Pacific - 6" X1="111" Y1="249" Lat1="60.00000" Lon1="140.00000" X2="1220" Y2="1470" Lat2="20.00000" Lon2="-170.00000" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
     <Coordinate Name="NOAA Ocean Prediction Center - Pacific - 7" X1="111" Y1="249" Lat1="60.00000" Lon1="-170.00000" X2="1220" Y2="1470" Lat2="20.00000" Lon2="-120.00000" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
     <Coordinate Name="NOAA Ocean Prediction Center - Pacific - 8" X1="72" Y1="426" Lat1="30.00000" Lon1="135.00000" X2="1576" Y2="660" Lat2="15.00000" Lon2="-120.00000" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
+    <Coordinate Name="NOAA - Pt. Reyes - 6" X1="213" Y1="562" Lat1="40.00000" Lon1="-130.00000" X2="922" Y2="1094" Lat2="25.00000" Lon2="-110.00000" Rotation="CCW" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
+    <Coordinate Name="NOAA Ocean Prediction Center - Pacific - 9" X1="111" Y1="249" Lat1="60.00000" Lon1="140.00000" X2="2329" Y2="1470" Lat2="20.00000" Lon2="-120.00000" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
 </WeatherFaxCoordinates>

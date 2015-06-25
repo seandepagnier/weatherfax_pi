@@ -9,13 +9,13 @@
 INCLUDE_DIRECTORIES(src/wxcurl)
 IF(WIN32)
   IF(MSVC)
-    SET(CURL_LIBRARIES "../buildwin/curllib")
-    INSTALL(FILES "buildwin/curllib.dll" DESTINATION ".")
+    SET(CURL_LIBRARIES "../buildwin/libcurl")
+    INSTALL(FILES "buildwin/libcurl.dll" DESTINATION ".")
     INSTALL(FILES "buildwin/libeay32.dll" DESTINATION ".")
-    INSTALL(FILES "buildwin/openldap.dll" DESTINATION ".")
     INSTALL(FILES "buildwin/ssleay32.dll" DESTINATION ".")
-    INSTALL(FILES "buildwin/libsasl.dll" DESTINATION ".")
+    INSTALL(FILES "buildwin/zlib.dll" DESTINATION ".")
     INSTALL(FILES "buildwin/curl-ca-bundle.crt" DESTINATION ".")
+
   ELSE(MSVC) ## mingw
     SET(CURL_LIBRARIES "curl.dll")
     INSTALL(FILES "buildwin/libcurl.dll" DESTINATION ".")
