@@ -105,6 +105,7 @@ bool weatherfax_pi::DeInit(void)
     SetWeatherFaxY(p.y);
 
     m_pWeatherFax->Close();
+    delete m_pWeatherFax;
 
     SaveConfig();
 
