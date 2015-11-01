@@ -5,7 +5,6 @@ Implement weather fax ability for opencpn.  This includes retrieval via sound ca
 Compiling
 =========
 
-Normally the libcurl4-dev (libcurl4-gnutls-dev) package should be installed, for Windows operating system, see below
 
 * git clone git://github.com/seandepagnier/weatherfax_pi.git
 
@@ -26,12 +25,8 @@ Under windows, you must find the file "opencpn.lib" (Visual Studio) or "libopenc
 
 There are also some libraries and an external program needed:
 http://sourceforge.net/projects/opencpnplugins/files/opencpn_packaging_data/portaudio-vc12.7z/download
-http://sourceforge.net/projects/opencpnplugins/files/opencpn_packaging_data/cURL-vc12.7z/download
 http://sourceforge.net/projects/opencpnplugins/files/opencpn_packaging_data/PVW32Con.exe/download (not an archive, this one just copy to buildwin)
 and unpack all these files into the buildwin directory as the compile is dependent on these.
-
-For Mingw, only a single file "libcurl.dll" is needed for libcurl, for visual studio, several files.
-
 
 OSX Specific Libraries
 ==========================
