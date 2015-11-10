@@ -48,7 +48,7 @@ extern "C" DECL_EXP void destroy_pi(opencpn_plugin* p)
 //---------------------------------------------------------------------------------------------------------
 
 weatherfax_pi::weatherfax_pi(void *ppimgr)
-    : opencpn_plugin_18(ppimgr)
+    : opencpn_plugin_113(ppimgr)
 {
     // Create the PlugIn icons
     initialize_images();
@@ -104,8 +104,12 @@ bool weatherfax_pi::DeInit(void)
     SetWeatherFaxX(p.x);
     SetWeatherFaxY(p.y);
 
+    m_pWeatherFax->m_SchedulesDialog.Close();
+    m_pWeatherFax->m_InternetRetrievalDialog.Close();
     m_pWeatherFax->Close();
-
+    delete m_pWeatherFax;
+    m_pWeatherFax = NULL;
+    
     SaveConfig();
 
     RemovePlugInTool(m_leftclick_tool_id);

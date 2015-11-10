@@ -34,7 +34,7 @@
 #include "version.h"
 
 #define     MY_API_VERSION_MAJOR    1
-#define     MY_API_VERSION_MINOR    8
+#define     MY_API_VERSION_MINOR    13
 
 #define ABOUT_AUTHOR_URL "http://seandepagnier.users.sourceforge.net"
 
@@ -51,7 +51,7 @@
 class WeatherFaxImage;
 class WeatherFax;
 
-class weatherfax_pi : public opencpn_plugin_18
+class weatherfax_pi : public opencpn_plugin_113
 {
 public:
       weatherfax_pi(void *ppimgr);
