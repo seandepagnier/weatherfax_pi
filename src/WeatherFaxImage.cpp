@@ -29,6 +29,8 @@
 
 #include "defs.h"
 #include "WeatherFaxImage.h"
+#include <gl.h>
+
 WX_DEFINE_LIST(WeatherFaxImageCoordinateList);
 
 #if !defined(GL_CLAMP_TO_EDGE)

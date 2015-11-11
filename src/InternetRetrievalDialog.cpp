@@ -32,7 +32,6 @@
 
 #include <list>
 
-#include "wx/curl/dialog.h"
 #include "tinyxml/tinyxml.h"
 
 #include "weatherfax_pi.h"
@@ -580,60 +579,15 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
         }
 
         {
-#if 0
-            wxProgressDialog progressdialog(_("WeatherFax InternetRetrieval"),
-                                            _("Reading Headers: ") + faxurl->Contents, 1000, this,
-                                            wxPD_CAN_ABORT | wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
-            progressdialog.Update(0);
-            
-            DownloadThread *dl = new DownloadThread(faxurl->Url, filename);
-            dl->Run();
 
-            while(dl->IsRunning()) {
-                bool ok;
-                if(dl->size)
-                    ok = progressdialog.Update(1000*dl->position / dl->size,
-                                               _("Reading") + wxString(_T(": "))
-                                               + faxurl->Contents);
-                else
-                    ok = progressdialog.Update(0);
-                if(!ok) {
-                    dl->please_quit = true;
-                    return;
-                }
-                wxThread::Sleep(250);
-            }
+        _OCPN_DLStatus res = OCPN_downloadFile( faxurl->Url, filename, _("WeatherFax InternetRetrieval"),
+                              _("Reading Headers: ") + faxurl->Contents, wxNullBitmap, this,
+                                               OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|OCPN_DLDS_SHOW_ALL|OCPN_DLDS_AUTO_CLOSE, 10 );
 
-            dl->please_quit = true;
-
-            switch(dl->exitcode) {
-            case 1:
-            case 2:
-            {
-                wxMessageDialog mdlg(this, _("Timed out waiting for headers for: ") +
-                                     faxurl->Contents + _T("\n") + faxurl->Url + _T("\n") +
-                                     _("Verify there is a working internet connection.") + _T("\n") +
-                                     _("Possibly the server is down temporarily.") + _T("\n") +
-                                     _("If the url is incorrect please edit the xml and/or post a bug report."),
-                                     _("Weather Fax"), wxOK | wxICON_ERROR);
-                mdlg.ShowModal();
-            } return;
-            case 3:
-            { wxMessageDialog mdlg(this, _("Failed to read file size aborting."),
-                                     _("Weather Fax"), wxOK | wxICON_INFORMATION);
-                mdlg.ShowModal();
-            } return;
-            }
-#else
-
-        wxFileOutputStream output(filename);
-        wxCurlDownloadDialog ddlg(faxurl->Url, &output, _("WeatherFax InternetRetrieval"),
-                                  _("Reading Headers: ") + faxurl->Contents, wxNullBitmap, this,
-                                  wxCTDS_CAN_PAUSE|wxCTDS_CAN_ABORT|wxCTDS_SHOW_ALL|wxCTDS_AUTO_CLOSE);
-
-        switch(ddlg.RunModal()) {
-        case wxCDRF_SUCCESS: break;
-        case wxCDRF_FAILED:
+        switch( res )
+        {
+        case OCPN_DL_NO_ERROR: break;
+        case OCPN_DL_FAILED:
         {
             wxMessageDialog mdlg(this, _("Failed to Download: ") +
                                  faxurl->Contents + _T("\n") +
@@ -644,9 +598,8 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
             mdlg.ShowModal();
             wxRemoveFile( filename );
         }
-        case wxCDRF_USER_ABORTED: return;
+        case OCPN_DL_ABORTED: return;
         }
-#endif
     }
 
     loadimage:
