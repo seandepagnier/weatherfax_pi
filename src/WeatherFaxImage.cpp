@@ -29,7 +29,7 @@
 
 #include "defs.h"
 #include "WeatherFaxImage.h"
-#include <gl.h>
+#include <GL/gl.h>
 
 WX_DEFINE_LIST(WeatherFaxImageCoordinateList);
 
