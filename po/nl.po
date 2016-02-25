@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-01 13:52-0600\n"
-"PO-Revision-Date: 2015-11-01 14:56-0500\n"
+"PO-Revision-Date: 2016-02-25 14:14-0500\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
 "Language-Team: Dutch\n"
 "Language: nl_NL\n"
@@ -38,7 +38,7 @@ msgstr "Weerfaxbeeld"
 
 #: src/WeatherFaxUI.h:366
 msgid "Weather Fax Preferences"
-msgstr "Weerfax voorkeuren"
+msgstr "Voorkeuren Weerfax"
 
 #: src/WeatherFaxUI.h:408
 msgid "Fax Decoding Options"
@@ -62,11 +62,11 @@ msgstr "Omkeren"
 
 #: src/WeatherFaxUI.cpp:71
 msgid "&Open"
-msgstr "&Open"
+msgstr "&Openen"
 
 #: src/WeatherFaxUI.cpp:74
 msgid "Save &As"
-msgstr "Bewaren &als"
+msgstr "Opslaan &als"
 
 #: src/WeatherFaxUI.cpp:77
 msgid "&Edit"
@@ -180,7 +180,7 @@ msgstr "Heeft geldige tijd"
 
 #: src/WeatherFaxUI.cpp:350
 msgid "Clear Captures"
-msgstr "Beluisterde data opschonen"
+msgstr "Vastgelegde data opschonen"
 
 #: src/WeatherFaxUI.cpp:360 src/WeatherFaxUI.cpp:830 src/WeatherFaxUI.cpp:1530
 msgid "Filter"
@@ -228,7 +228,7 @@ msgstr "arecord -f S16_LE"
 
 #: src/WeatherFaxUI.cpp:436
 msgid "Manual Capture (with external program) automatic Open File"
-msgstr "Handmatig vastleggen (met extern programma) opent bestand automatisch"
+msgstr "Handmatig vastleggen (met extern programma), automatisch bestand openen"
 
 #: src/WeatherFaxUI.cpp:443
 msgid "Capture Options"
@@ -259,11 +259,11 @@ msgstr "Sluiten"
 
 #: src/WeatherFaxUI.cpp:621
 msgid "Retrieve Scheduled"
-msgstr "Haal geplande beelden op"
+msgstr "Ophalen geplande data"
 
 #: src/WeatherFaxUI.cpp:624
 msgid "Retrieve Selected"
-msgstr "Ophalen geselecteerd"
+msgstr "Ophalen geselecteerde data"
 
 #: src/WeatherFaxUI.cpp:634
 msgid "Servers"
@@ -328,11 +328,11 @@ msgstr "Rotatie"
 
 #: src/WeatherFaxUI.cpp:851
 msgid "CCW"
-msgstr "CCW"
+msgstr "Linksom"
 
 #: src/WeatherFaxUI.cpp:851
 msgid "CW"
-msgstr "CW"
+msgstr "Rechtsom"
 
 #: src/WeatherFaxUI.cpp:851
 msgid "180"
@@ -366,7 +366,7 @@ msgstr "Minuten"
 
 #: src/WeatherFaxUI.cpp:998
 msgid "Show Lat/Lon Minutes"
-msgstr "Breedte/Lengte minuten weergeven"
+msgstr "Breedte-/Lengteminuten weergeven"
 
 #: src/WeatherFaxUI.cpp:1001
 msgid "+ Lat/Lon for N/E\n"
@@ -376,7 +376,7 @@ msgstr "+ Br/Le voor N/O\n"
 
 #: src/WeatherFaxUI.cpp:1019
 msgid "Coordinates Mapping Correction"
-msgstr "Geografische locatie correctie"
+msgstr "Geografische locatiecorrectie"
 
 #: src/WeatherFaxUI.cpp:1031
 msgid "Input Type"
@@ -542,19 +542,19 @@ msgstr "Monsterfrequentie"
 
 #: src/WeatherFaxUI.cpp:1580
 msgid "8000"
-msgstr "8000"
+msgstr "8.000"
 
 #: src/WeatherFaxUI.cpp:1580
 msgid "16000"
-msgstr "16000"
+msgstr "16.000"
 
 #: src/WeatherFaxUI.cpp:1580
 msgid "48000"
-msgstr "48000"
+msgstr "48.000"
 
 #: src/WeatherFaxUI.cpp:1586
 msgid "Device Index"
-msgstr ""
+msgstr "Apparaatindex"
 
 #: src/WeatherFaxUI.cpp:1599
 msgid "Done"
@@ -614,7 +614,7 @@ msgstr "Ongeldig XML-bestand"
 
 #: src/InternetRetrievalDialog.cpp:223
 msgid "WeatherFax Internet Retrieval"
-msgstr ""
+msgstr "Weerfax ophalen van internet"
 
 #: src/InternetRetrievalDialog.cpp:223 src/SchedulesDialog.cpp:294
 msgid "Loading"
@@ -684,7 +684,7 @@ msgstr "Nieuwe coörd'n"
 
 #: src/WeatherFaxWizard.cpp:205
 msgid "Start"
-msgstr "Start"
+msgstr "Starten"
 
 #: src/WeatherFaxWizard.cpp:295
 msgid "Failed to apply mapping\n"
@@ -861,8 +861,8 @@ msgstr "Kon niet starten: "
 #: src/SchedulesDialog.cpp:798
 msgid "Fault in weather fax plugin\n"
 "Currently capturing hf weather fax."
-msgstr "Fout in weerfax plugin\n"
-"Bezig met luisteren naar HF weer fax."
+msgstr "Fout in Weerfax PlugIn\n"
+"Bezig met vastleggenHF weerfax."
 
 #: src/SchedulesDialog.cpp:828 src/WeatherFax.cpp:476
 msgid "Open Weather Fax Input File"
@@ -975,5 +975,5 @@ msgstr "Weerfax PlugIn voor OpenCPN \n"
 
 #: src/weatherfax_pi.cpp:324
 msgid "WeatherFax Preferences"
-msgstr "Weerfax voorkeuren"
+msgstr "Voorkeuren Weerfax"
 

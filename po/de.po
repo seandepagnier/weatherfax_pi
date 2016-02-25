@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-01 13:52-0600\n"
-"PO-Revision-Date: 2015-11-01 14:56-0500\n"
+"PO-Revision-Date: 2016-02-24 14:27-0500\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
 "Language-Team: German\n"
 "Language: de_DE\n"
@@ -26,11 +26,11 @@ msgstr "WetterFax"
 
 #: src/WeatherFaxUI.h:165
 msgid "HF Radio Schedules"
-msgstr "HF Radio Zeitpläne"
+msgstr "HF Radio Programmpläne"
 
 #: src/WeatherFaxUI.h:216
 msgid "Internet Retrieval"
-msgstr "Internet Suche"
+msgstr "Internetabruf"
 
 #: src/WeatherFaxUI.h:337
 msgid "Weather Fax Image"
@@ -50,7 +50,7 @@ msgstr "Über WetterFax"
 
 #: src/WeatherFaxUI.cpp:23
 msgid "Fax"
-msgstr ""
+msgstr "Fax"
 
 #: src/WeatherFaxUI.cpp:42
 msgid "Transparency"
@@ -138,7 +138,7 @@ msgstr "Boot Position"
 
 #: src/WeatherFaxUI.cpp:253 src/WeatherFaxUI.cpp:607
 msgid "Reset"
-msgstr ""
+msgstr "Zurücksetzen"
 
 #: src/WeatherFaxUI.cpp:263
 msgid "Stations"
@@ -160,11 +160,11 @@ msgstr "Frequenz"
 
 #: src/WeatherFaxUI.cpp:305
 msgid "khz min"
-msgstr ""
+msgstr "kHz min"
 
 #: src/WeatherFaxUI.cpp:312
 msgid "khz max"
-msgstr ""
+msgstr "kHz max"
 
 #: src/WeatherFaxUI.cpp:331
 msgid "Constraints"
@@ -184,7 +184,7 @@ msgstr "Lösche Empfang"
 
 #: src/WeatherFaxUI.cpp:360 src/WeatherFaxUI.cpp:830 src/WeatherFaxUI.cpp:1530
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 #: src/WeatherFaxUI.cpp:368
 msgid "Message Box"
@@ -204,7 +204,7 @@ msgstr "Externer Alarm"
 
 #: src/WeatherFaxUI.cpp:395
 msgid "aplay /usr/local/share/opencpn/sounds/2bells.wav"
-msgstr ""
+msgstr "aplay /usr/local/share/opencpn/sounds/2bells.wav"
 
 #: src/WeatherFaxUI.cpp:405
 msgid "1 minute alarm"
@@ -224,7 +224,7 @@ msgstr "Externer Befehl"
 
 #: src/WeatherFaxUI.cpp:430
 msgid "arecord -f S16_LE"
-msgstr ""
+msgstr "arecord -f S16_LE"
 
 #: src/WeatherFaxUI.cpp:436
 msgid "Manual Capture (with external program) automatic Open File"
@@ -247,7 +247,7 @@ msgstr "Wähle Fax Bild mit Klick in die (erste) Empfangs-Spalte\n\n"
 #: src/WeatherFaxUI.cpp:458 src/WeatherFaxUI.cpp:1108
 #: src/WeatherFaxWizard.cpp:873
 msgid "Information"
-msgstr ""
+msgstr "Information"
 
 #: src/WeatherFaxUI.cpp:463
 msgid "Capture Status"
@@ -267,7 +267,7 @@ msgstr "Suche Gewähltes"
 
 #: src/WeatherFaxUI.cpp:634
 msgid "Servers"
-msgstr ""
+msgstr "Server"
 
 #: src/WeatherFaxUI.cpp:667
 msgid "Regions"
@@ -280,7 +280,7 @@ msgstr "Dekoder"
 #: src/WeatherFaxUI.cpp:800 src/WeatherFaxWizard.cpp:112
 #: src/WeatherFaxWizard.cpp:208
 msgid "Stop"
-msgstr ""
+msgstr "Beenden"
 
 #: src/WeatherFaxUI.cpp:803
 msgid "Options"
@@ -324,15 +324,15 @@ msgstr "Phasend"
 
 #: src/WeatherFaxUI.cpp:847
 msgid "Rotation"
-msgstr ""
+msgstr "Rotation"
 
 #: src/WeatherFaxUI.cpp:851
 msgid "CCW"
-msgstr ""
+msgstr "CCW"
 
 #: src/WeatherFaxUI.cpp:851
 msgid "CW"
-msgstr ""
+msgstr "CW"
 
 #: src/WeatherFaxUI.cpp:851
 msgid "180"
@@ -358,7 +358,7 @@ msgstr "Koord Y/X"
 #: src/WeatherFaxUI.cpp:925 src/WeatherFaxUI.cpp:964 src/WeatherFaxUI.cpp:1159
 #: src/WeatherFaxUI.cpp:1182
 msgid "Lat/Lon"
-msgstr ""
+msgstr "Lat/Lon"
 
 #: src/WeatherFaxUI.cpp:931
 msgid "Minutes"
@@ -384,19 +384,19 @@ msgstr "Eingangstyp"
 
 #: src/WeatherFaxUI.cpp:1035
 msgid "mercator"
-msgstr ""
+msgstr "Mercator"
 
 #: src/WeatherFaxUI.cpp:1035
 msgid "polar"
-msgstr ""
+msgstr "Polar"
 
 #: src/WeatherFaxUI.cpp:1035
 msgid "conic"
-msgstr ""
+msgstr "Kegelschnitt"
 
 #: src/WeatherFaxUI.cpp:1035
 msgid "fixed-flat"
-msgstr ""
+msgstr "Fest-flach"
 
 #: src/WeatherFaxUI.cpp:1041
 msgid "Output Type"
@@ -404,7 +404,7 @@ msgstr "Ausgangstyp"
 
 #: src/WeatherFaxUI.cpp:1045
 msgid "Mercator"
-msgstr ""
+msgstr "Mercator-Projektion"
 
 #: src/WeatherFaxUI.cpp:1049
 msgid "Size"
@@ -416,7 +416,7 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:1056
 msgid "W/H"
-msgstr ""
+msgstr "B/H"
 
 #: src/WeatherFaxUI.cpp:1063
 msgid "True Width Ratio"
@@ -444,7 +444,7 @@ msgstr "Hole Äquator"
 
 #: src/WeatherFaxUI.cpp:1105
 msgid "GetAspectRatio"
-msgstr ""
+msgstr "GetSeitenVerhältnis"
 
 #: src/WeatherFaxUI.cpp:1365
 msgid "HF Schedules"
@@ -456,7 +456,7 @@ msgstr "Lade Zeitpläne beim Start"
 
 #: src/WeatherFaxUI.cpp:1382
 msgid "Export"
-msgstr ""
+msgstr "Exportieren"
 
 #: src/WeatherFaxUI.cpp:1394
 msgid "Reduce to"
@@ -500,11 +500,11 @@ msgstr "Bits pro Pixel"
 
 #: src/WeatherFaxUI.cpp:1516
 msgid "Carrier"
-msgstr ""
+msgstr "Träger"
 
 #: src/WeatherFaxUI.cpp:1523
 msgid "Deviation"
-msgstr ""
+msgstr "Abweichungen"
 
 #: src/WeatherFaxUI.cpp:1534
 msgid "narrow"
@@ -538,7 +538,7 @@ msgstr "Audio-Empfang Optionen"
 
 #: src/WeatherFaxUI.cpp:1576
 msgid "Sample Rate"
-msgstr ""
+msgstr "Abtastrate"
 
 #: src/WeatherFaxUI.cpp:1580
 msgid "8000"
@@ -554,7 +554,7 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:1586
 msgid "Device Index"
-msgstr ""
+msgstr "Geräteindex"
 
 #: src/WeatherFaxUI.cpp:1599
 msgid "Done"
@@ -591,11 +591,11 @@ msgstr "Zeitplan"
 
 #: src/InternetRetrievalDialog.cpp:97
 msgid "Server"
-msgstr ""
+msgstr "Server"
 
 #: src/InternetRetrievalDialog.cpp:98
 msgid "Region"
-msgstr ""
+msgstr "Region"
 
 #: src/InternetRetrievalDialog.cpp:99 src/SchedulesDialog.cpp:122
 msgid "Contents"
@@ -616,7 +616,7 @@ msgstr "Ungültige XML Datei"
 
 #: src/InternetRetrievalDialog.cpp:223
 msgid "WeatherFax Internet Retrieval"
-msgstr ""
+msgstr "WetterFax Internetabruf"
 
 #: src/InternetRetrievalDialog.cpp:223 src/SchedulesDialog.cpp:294
 msgid "Loading"
@@ -686,7 +686,7 @@ msgstr "Neue Koord"
 
 #: src/WeatherFaxWizard.cpp:205
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #: src/WeatherFaxWizard.cpp:295
 msgid "Failed to apply mapping\n"

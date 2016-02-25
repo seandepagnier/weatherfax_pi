@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-01 13:52-0600\n"
-"PO-Revision-Date: 2015-11-01 14:56-0500\n"
+"PO-Revision-Date: 2016-02-25 08:03-0500\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
 "Language-Team: Czech\n"
 "Language: cs_CZ\n"
@@ -22,185 +22,185 @@ msgstr ""
 #: src/WeatherFax.cpp:197 src/WeatherFax.cpp:279 src/WeatherFax.cpp:409
 #: src/WeatherFax.cpp:491 src/WeatherFax.cpp:522 src/WeatherFaxImage.cpp:597
 msgid "Weather Fax"
-msgstr ""
+msgstr "Weather Fax"
 
 #: src/WeatherFaxUI.h:165
 msgid "HF Radio Schedules"
-msgstr ""
+msgstr "Rozvrhy HF vysílání"
 
 #: src/WeatherFaxUI.h:216
 msgid "Internet Retrieval"
-msgstr ""
+msgstr "Stažení z Internetu"
 
 #: src/WeatherFaxUI.h:337
 msgid "Weather Fax Image"
-msgstr ""
+msgstr "Obrázek Weatherfaxu"
 
 #: src/WeatherFaxUI.h:366
 msgid "Weather Fax Preferences"
-msgstr ""
+msgstr "Nastavení Weatherfaxu"
 
 #: src/WeatherFaxUI.h:408
 msgid "Fax Decoding Options"
-msgstr ""
+msgstr "Nastavení dekódování faxu"
 
 #: src/WeatherFaxUI.h:434
 msgid "About Weatherfax"
-msgstr ""
+msgstr "O Weatherfaxu"
 
 #: src/WeatherFaxUI.cpp:23
 msgid "Fax"
-msgstr ""
+msgstr "Fax"
 
 #: src/WeatherFaxUI.cpp:42
 msgid "Transparency"
-msgstr ""
+msgstr "Průhlednost"
 
 #: src/WeatherFaxUI.cpp:58
 msgid "Invert"
-msgstr ""
+msgstr "Invertovat"
 
 #: src/WeatherFaxUI.cpp:71
 msgid "&Open"
-msgstr ""
+msgstr "&Otevřít"
 
 #: src/WeatherFaxUI.cpp:74
 msgid "Save &As"
-msgstr ""
+msgstr "Uložit J&ako"
 
 #: src/WeatherFaxUI.cpp:77
 msgid "&Edit"
-msgstr ""
+msgstr "&Upravit"
 
 #: src/WeatherFaxUI.cpp:80
 msgid "&Goto"
-msgstr ""
+msgstr "&Jít na"
 
 #: src/WeatherFaxUI.cpp:83
 msgid "E&xport"
-msgstr ""
+msgstr "E&xport"
 
 #: src/WeatherFaxUI.cpp:86
 msgid "&Delete"
-msgstr ""
+msgstr "&Smazat"
 
 #: src/WeatherFaxUI.cpp:92
 msgid "&Preferences"
-msgstr ""
+msgstr "&Předvolby"
 
 #: src/WeatherFaxUI.cpp:98
 msgid "&Close"
-msgstr ""
+msgstr "&Zavřít"
 
 #: src/WeatherFaxUI.cpp:101
 msgid "&File"
-msgstr ""
+msgstr "&Soubor"
 
 #: src/WeatherFaxUI.cpp:104
 msgid "&Audio Capture"
-msgstr ""
+msgstr "Z&achycení zvuku"
 
 #: src/WeatherFaxUI.cpp:108
 msgid "&HF Radio Schedules"
-msgstr ""
+msgstr "Rozvrhy &HF vysílání"
 
 #: src/WeatherFaxUI.cpp:112
 msgid "&Internet"
-msgstr ""
+msgstr "&Internet"
 
 #: src/WeatherFaxUI.cpp:115
 msgid "&Retrieve"
-msgstr ""
+msgstr "S&táhnout"
 
 #: src/WeatherFaxUI.cpp:119
 msgid "&About"
-msgstr ""
+msgstr "O &aplikaci"
 
 #: src/WeatherFaxUI.cpp:122
 msgid "&Help"
-msgstr ""
+msgstr "&Pomoc"
 
 #: src/WeatherFaxUI.cpp:229 src/WeatherFaxUI.cpp:583
 msgid "Contains"
-msgstr ""
+msgstr "Obsahuje"
 
 #: src/WeatherFaxUI.cpp:236 src/WeatherFaxUI.cpp:590
 msgid "Lat"
-msgstr ""
+msgstr "Zem. šířka"
 
 #: src/WeatherFaxUI.cpp:243 src/WeatherFaxUI.cpp:597
 msgid "Lon"
-msgstr ""
+msgstr "Zem. délka"
 
 #: src/WeatherFaxUI.cpp:250 src/WeatherFaxUI.cpp:604
 msgid "Boat Position"
-msgstr ""
+msgstr "Pozice lodě"
 
 #: src/WeatherFaxUI.cpp:253 src/WeatherFaxUI.cpp:607
 msgid "Reset"
-msgstr ""
+msgstr "Reset"
 
 #: src/WeatherFaxUI.cpp:263
 msgid "Stations"
-msgstr ""
+msgstr "Stanice"
 
 #: src/WeatherFaxUI.cpp:279 src/WeatherFaxUI.cpp:316 src/WeatherFaxUI.cpp:651
 #: src/WeatherFaxUI.cpp:684
 msgid "All"
-msgstr ""
+msgstr "Vše"
 
 #: src/WeatherFaxUI.cpp:282 src/WeatherFaxUI.cpp:654 src/WeatherFaxUI.cpp:687
 #: src/WeatherFaxUI.cpp:851
 msgid "None"
-msgstr ""
+msgstr "Nic"
 
 #: src/WeatherFaxUI.cpp:295 src/SchedulesDialog.cpp:120
 msgid "Frequency"
-msgstr ""
+msgstr "Frekvence"
 
 #: src/WeatherFaxUI.cpp:305
 msgid "khz min"
-msgstr ""
+msgstr "kHz min"
 
 #: src/WeatherFaxUI.cpp:312
 msgid "khz max"
-msgstr ""
+msgstr "kHz max"
 
 #: src/WeatherFaxUI.cpp:331
 msgid "Constraints"
-msgstr ""
+msgstr "Omezení"
 
 #: src/WeatherFaxUI.cpp:338
 msgid "Has Area"
-msgstr ""
+msgstr "Má oblast"
 
 #: src/WeatherFaxUI.cpp:341
 msgid "Has Valid Time"
-msgstr ""
+msgstr "Má platný čas"
 
 #: src/WeatherFaxUI.cpp:350
 msgid "Clear Captures"
-msgstr ""
+msgstr "Odstranit zachycené"
 
 #: src/WeatherFaxUI.cpp:360 src/WeatherFaxUI.cpp:830 src/WeatherFaxUI.cpp:1530
 msgid "Filter"
-msgstr ""
+msgstr "Filtr"
 
 #: src/WeatherFaxUI.cpp:368
 msgid "Message Box"
-msgstr ""
+msgstr "Okno se zprávou"
 
 #: src/WeatherFaxUI.cpp:377
 msgid "Sound"
-msgstr ""
+msgstr "Zvuk"
 
 #: src/WeatherFaxUI.cpp:380
 msgid "Select a file"
-msgstr ""
+msgstr "Vyber soubor"
 
 #: src/WeatherFaxUI.cpp:392
 msgid "External Alarm"
-msgstr ""
+msgstr "Externí Alarm"
 
 #: src/WeatherFaxUI.cpp:395
 msgid "aplay /usr/local/share/opencpn/sounds/2bells.wav"
@@ -208,19 +208,19 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:405
 msgid "1 minute alarm"
-msgstr ""
+msgstr "1 minutový alarm"
 
 #: src/WeatherFaxUI.cpp:413
 msgid "No Action"
-msgstr ""
+msgstr "Žádná akce"
 
 #: src/WeatherFaxUI.cpp:416 src/WeatherFax.cpp:375
 msgid "Audio Capture"
-msgstr ""
+msgstr "Zachycení zvuku"
 
 #: src/WeatherFaxUI.cpp:427
 msgid "External Command"
-msgstr ""
+msgstr "Vnější příkaz"
 
 #: src/WeatherFaxUI.cpp:430
 msgid "arecord -f S16_LE"
@@ -228,108 +228,111 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:436
 msgid "Manual Capture (with external program) automatic Open File"
-msgstr ""
+msgstr "Ruční zachycení (externím programem) automatické otevření souboru"
 
 #: src/WeatherFaxUI.cpp:443
 msgid "Capture Options"
-msgstr ""
+msgstr "Možnosti zachycení"
 
 #: src/WeatherFaxUI.cpp:450
 msgid "Select fax images by clicking in the capture (first) column\n\n"
 "Schedules can be sorted by clicking the header column\n\n"
 "The schedules need testing as I can only receive from a few of the possible stations.  Corrections can be made by modifying the WeatherFaxSchedules.xml file. Patches can be submitted via github.\n\n"
 "Automatic control of a ssb radio is desireable as well, however the author only has a tecsun pl-600.  If a suitable radio can be donated, support will be implemented."
-msgstr ""
+msgstr "Vyberte obrázky faxů kliknutím v digitalizařním (prvním) sloupci\n\n"
+"Rozvrhy lze seřadit kliknutím na záhlaví sloupce\n\n"
+"Rozvrhy je třebaotestovat, mohu přijímat jen z několika ze všech možných stanic.  Opravy lze provést úpravou souboru WeatherFaxSchedules.xml. Opravy mohou být zaslány prostřednictvím githubu.\n\n"
+"Automatické ovládání ssb rádia je též žádoucí, nicméně autor má k dispozici pouze tecsun pl-600.  Pokud někdo věnuje vhodné rádio, podpora bude realizována."
 
 #: src/WeatherFaxUI.cpp:458 src/WeatherFaxUI.cpp:1108
 #: src/WeatherFaxWizard.cpp:873
 msgid "Information"
-msgstr ""
+msgstr "Informace"
 
 #: src/WeatherFaxUI.cpp:463
 msgid "Capture Status"
-msgstr ""
+msgstr "Stav zachycení"
 
 #: src/WeatherFaxUI.cpp:479 src/WeatherFaxUI.cpp:1678
 msgid "Close"
-msgstr ""
+msgstr "Zavřít"
 
 #: src/WeatherFaxUI.cpp:621
 msgid "Retrieve Scheduled"
-msgstr ""
+msgstr "Plánované zachycení"
 
 #: src/WeatherFaxUI.cpp:624
 msgid "Retrieve Selected"
-msgstr ""
+msgstr "Načíst vybrané"
 
 #: src/WeatherFaxUI.cpp:634
 msgid "Servers"
-msgstr ""
+msgstr "Servery"
 
 #: src/WeatherFaxUI.cpp:667
 msgid "Regions"
-msgstr ""
+msgstr "Regiony"
 
 #: src/WeatherFaxUI.cpp:784
 msgid "Decoder"
-msgstr ""
+msgstr "Dekodér"
 
 #: src/WeatherFaxUI.cpp:800 src/WeatherFaxWizard.cpp:112
 #: src/WeatherFaxWizard.cpp:208
 msgid "Stop"
-msgstr ""
+msgstr "Konec"
 
 #: src/WeatherFaxUI.cpp:803
 msgid "Options"
-msgstr ""
+msgstr "Nastavení"
 
 #: src/WeatherFaxUI.cpp:822
 msgid "Image Correction"
-msgstr ""
+msgstr "Korekce obrazu"
 
 #: src/WeatherFaxUI.cpp:834
 msgid "No Filter"
-msgstr ""
+msgstr "Žádný filtr"
 
 #: src/WeatherFaxUI.cpp:834
 msgid "Removal 1"
-msgstr ""
+msgstr "Odstranění 1"
 
 #: src/WeatherFaxUI.cpp:834
 msgid "Removal 2"
-msgstr ""
+msgstr "Odstranění 2"
 
 #: src/WeatherFaxUI.cpp:834
 msgid "Removal 3"
-msgstr ""
+msgstr "Odstranění 3"
 
 #: src/WeatherFaxUI.cpp:834
 msgid "Value 1"
-msgstr ""
+msgstr "Hodnota 1"
 
 #: src/WeatherFaxUI.cpp:834
 msgid "Value 2"
-msgstr ""
+msgstr "Hodnota 2"
 
 #: src/WeatherFaxUI.cpp:834
 msgid "Value 3"
-msgstr ""
+msgstr "Hodnota 3"
 
 #: src/WeatherFaxUI.cpp:840
 msgid "Phasing"
-msgstr ""
+msgstr "Fázování"
 
 #: src/WeatherFaxUI.cpp:847
 msgid "Rotation"
-msgstr ""
+msgstr "Rotace"
 
 #: src/WeatherFaxUI.cpp:851
 msgid "CCW"
-msgstr ""
+msgstr "DOLEVA"
 
 #: src/WeatherFaxUI.cpp:851
 msgid "CW"
-msgstr ""
+msgstr "DOPRAVA"
 
 #: src/WeatherFaxUI.cpp:851
 msgid "180"
@@ -337,20 +340,20 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:857
 msgid "Skew"
-msgstr ""
+msgstr "Zkosení"
 
 #: src/WeatherFaxUI.cpp:895 src/WeatherFaxUI.cpp:1142
 msgid "Image Coordinates"
-msgstr ""
+msgstr "Souřadnice obrazu"
 
 #: src/WeatherFaxUI.cpp:909
 msgid "Remove"
-msgstr ""
+msgstr "Odebrat"
 
 #: src/WeatherFaxUI.cpp:920 src/WeatherFaxUI.cpp:959 src/WeatherFaxUI.cpp:1154
 #: src/WeatherFaxUI.cpp:1177
 msgid "Coord Y/X"
-msgstr ""
+msgstr "Koord Y/X"
 
 #: src/WeatherFaxUI.cpp:925 src/WeatherFaxUI.cpp:964 src/WeatherFaxUI.cpp:1159
 #: src/WeatherFaxUI.cpp:1182
@@ -359,24 +362,25 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:931
 msgid "Minutes"
-msgstr ""
+msgstr "Minuty"
 
 #: src/WeatherFaxUI.cpp:998
 msgid "Show Lat/Lon Minutes"
-msgstr ""
+msgstr "Zobraz Lat/Lon minuty"
 
 #: src/WeatherFaxUI.cpp:1001
 msgid "+ Lat/Lon for N/E\n"
 "- Lat/Lon for S/W"
-msgstr ""
+msgstr "+ Lat/Lon pro N/E\n"
+"-Lat/Lon pro S/W"
 
 #: src/WeatherFaxUI.cpp:1019
 msgid "Coordinates Mapping Correction"
-msgstr ""
+msgstr "Korekce mapování souřadnic"
 
 #: src/WeatherFaxUI.cpp:1031
 msgid "Input Type"
-msgstr ""
+msgstr "Typ vstupu"
 
 #: src/WeatherFaxUI.cpp:1035
 msgid "mercator"
@@ -396,7 +400,7 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:1041
 msgid "Output Type"
-msgstr ""
+msgstr "Typ výstupu"
 
 #: src/WeatherFaxUI.cpp:1045
 msgid "Mercator"
@@ -404,7 +408,7 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:1049
 msgid "Size"
-msgstr ""
+msgstr "Velikost"
 
 #: src/WeatherFaxUI.cpp:1053 src/WeatherFaxUI.cpp:1060 src/WeatherFaxUI.cpp:1067
 msgid "1"
@@ -412,128 +416,129 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:1056
 msgid "W/H"
-msgstr ""
+msgstr "Š/V"
 
 #: src/WeatherFaxUI.cpp:1063
 msgid "True Width Ratio"
-msgstr ""
+msgstr "Poměr skutečné šířky"
 
 #: src/WeatherFaxUI.cpp:1078
 msgid "Pole X"
-msgstr ""
+msgstr "Pól X"
 
 #: src/WeatherFaxUI.cpp:1085
 msgid "Pole Y"
-msgstr ""
+msgstr "Pól Y"
 
 #: src/WeatherFaxUI.cpp:1092
 msgid "Equator Y"
-msgstr ""
+msgstr "Rovník Y"
 
 #: src/WeatherFaxUI.cpp:1099
 msgid "Get Mapping "
-msgstr ""
+msgstr "Získat mapování "
 
 #: src/WeatherFaxUI.cpp:1102
 msgid "Get Equator"
-msgstr ""
+msgstr "Získat rovník"
 
 #: src/WeatherFaxUI.cpp:1105
 msgid "GetAspectRatio"
-msgstr ""
+msgstr "Získat poměr stran"
 
 #: src/WeatherFaxUI.cpp:1365
 msgid "HF Schedules"
-msgstr ""
+msgstr "HF rozvrhy"
 
 #: src/WeatherFaxUI.cpp:1372
 msgid "Load Schedules at Startup"
-msgstr ""
+msgstr "Nahrát rozvrhy při startu"
 
 #: src/WeatherFaxUI.cpp:1382
 msgid "Export"
-msgstr ""
+msgstr "Exportovat"
 
 #: src/WeatherFaxUI.cpp:1394
 msgid "Reduce to"
-msgstr ""
+msgstr "Omezit na"
 
 #: src/WeatherFaxUI.cpp:1401
 msgid "Colors"
-msgstr ""
+msgstr "Barvy"
 
 #: src/WeatherFaxUI.cpp:1408
 msgid "Recommended 4, 16, 64, or 256"
-msgstr ""
+msgstr "Doporučeno 4, 16, 64 nebo 256"
 
 #: src/WeatherFaxUI.cpp:1413
 msgid "Depth"
-msgstr ""
+msgstr "Hloubka"
 
 #: src/WeatherFaxUI.cpp:1420
 msgid "Meters"
-msgstr ""
+msgstr "Metry"
 
 #: src/WeatherFaxUI.cpp:1423
 msgid "Fathoms"
-msgstr ""
+msgstr "Fathomy (Sáhy)"
 
 #: src/WeatherFaxUI.cpp:1437
 msgid "fix sounding datum"
-msgstr ""
+msgstr "Opravit datum hloubek"
 
 #: src/WeatherFaxUI.cpp:1490
 msgid "Audio Decoding Options"
-msgstr ""
+msgstr "Možnosti dekódování zvuku"
 
 #: src/WeatherFaxUI.cpp:1502
 msgid "Image Width"
-msgstr ""
+msgstr "Šířka obrázku"
 
 #: src/WeatherFaxUI.cpp:1509
 msgid "Bits per Pixel"
-msgstr ""
+msgstr "Bitů na Pixel"
 
 #: src/WeatherFaxUI.cpp:1516
 msgid "Carrier"
-msgstr ""
+msgstr "Operátor"
 
 #: src/WeatherFaxUI.cpp:1523
 msgid "Deviation"
-msgstr ""
+msgstr "Odchylka"
 
 #: src/WeatherFaxUI.cpp:1534
 msgid "narrow"
-msgstr ""
+msgstr "úzké"
 
 #: src/WeatherFaxUI.cpp:1534
 msgid "middle"
-msgstr ""
+msgstr "střední"
 
 #: src/WeatherFaxUI.cpp:1534
 msgid "wide"
-msgstr ""
+msgstr "široké"
 
 #: src/WeatherFaxUI.cpp:1540
 msgid "Saturation Threshold"
-msgstr ""
+msgstr "Práh nasycení"
 
 #: src/WeatherFaxUI.cpp:1550
 msgid "Skip start, stop and \n"
 "phasing detection"
-msgstr ""
+msgstr "Přeskočit start, stop a \n"
+"detekci fázování"
 
 #: src/WeatherFaxUI.cpp:1553
 msgid "Include header data in image"
-msgstr ""
+msgstr "Zahrnout data hlavičky do obrázku"
 
 #: src/WeatherFaxUI.cpp:1569
 msgid "Audio Capture Options"
-msgstr ""
+msgstr "Možnosti zachytávání zvuku"
 
 #: src/WeatherFaxUI.cpp:1576
 msgid "Sample Rate"
-msgstr ""
+msgstr "Vzorkovací frekvence"
 
 #: src/WeatherFaxUI.cpp:1580
 msgid "8000"
@@ -549,15 +554,15 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:1586
 msgid "Device Index"
-msgstr ""
+msgstr "Index zařízení"
 
 #: src/WeatherFaxUI.cpp:1599
 msgid "Done"
-msgstr ""
+msgstr "Hotovo"
 
 #: src/WeatherFaxUI.cpp:1655
 msgid "Weather Fax Plugin Version"
-msgstr ""
+msgstr "Verze doplňku Weatherfax"
 
 #: src/WeatherFaxUI.cpp:1666
 msgid "The weatherfax plugin for opencpn is intended to reduce the amount of user interaction to receive weather faxes and optionally overlay them directly onto charts.\n\n"
@@ -570,105 +575,106 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:1675
 msgid "About the Author"
-msgstr ""
+msgstr "O autorovi"
 
 #: src/InternetRetrievalDialog.cpp:96
 msgid "Scheduled"
-msgstr ""
+msgstr "Naplánováno"
 
 #: src/InternetRetrievalDialog.cpp:97
 msgid "Server"
-msgstr ""
+msgstr "Server"
 
 #: src/InternetRetrievalDialog.cpp:98
 msgid "Region"
-msgstr ""
+msgstr "Region"
 
 #: src/InternetRetrievalDialog.cpp:99 src/SchedulesDialog.cpp:122
 msgid "Contents"
-msgstr ""
+msgstr "Obsah"
 
 #: src/InternetRetrievalDialog.cpp:100 src/SchedulesDialog.cpp:125
 msgid "Map Area"
-msgstr ""
+msgstr "Oblast mapy"
 
 #: src/InternetRetrievalDialog.cpp:204 src/SchedulesDialog.cpp:275
 msgid "Failed to load file: "
-msgstr ""
+msgstr "Nepodařilo se načíst soubor: "
 
 #: src/InternetRetrievalDialog.cpp:208 src/SchedulesDialog.cpp:279
 #: src/WeatherFax.cpp:152
 msgid "Invalid xml file"
-msgstr ""
+msgstr "Neplatný xml soubor"
 
 #: src/InternetRetrievalDialog.cpp:223
 msgid "WeatherFax Internet Retrieval"
-msgstr ""
+msgstr "WeatherFax načítání z Internetu"
 
 #: src/InternetRetrievalDialog.cpp:223 src/SchedulesDialog.cpp:294
 msgid "Loading"
-msgstr ""
+msgstr "Načítání"
 
 #: src/InternetRetrievalDialog.cpp:263
 msgid "Invalid iterator: "
-msgstr ""
+msgstr "Neplatný iterátor: "
 
 #: src/InternetRetrievalDialog.cpp:289 src/InternetRetrievalDialog.cpp:315
 #: src/InternetRetrievalDialog.cpp:334 src/InternetRetrievalDialog.cpp:337
 #: src/WeatherFax.cpp:193
 msgid "Unrecognized xml node: "
-msgstr ""
+msgstr "Nerozpoznaný xml uzel: "
 
 #: src/InternetRetrievalDialog.cpp:327 src/SchedulesDialog.cpp:376
 msgid "Failed to match Area: "
-msgstr ""
+msgstr "Nezdařilo se vyhodnotit oblast: "
 
 #: src/InternetRetrievalDialog.cpp:429
 msgid "Sorting this many urls might take too long"
-msgstr ""
+msgstr "Třídění zobrazovaných adres URL může trvat příliš dlouho"
 
 #: src/InternetRetrievalDialog.cpp:430 src/SchedulesDialog.cpp:480
 #: src/SchedulesDialog.cpp:779 src/SchedulesDialog.cpp:792
 #: src/SchedulesDialog.cpp:799 src/SchedulesDialog.cpp:863
 msgid "weatherfax"
-msgstr ""
+msgstr "weatherfax"
 
 #: src/InternetRetrievalDialog.cpp:569
 msgid "Fax already retrieved less than 180 minutes ago.\n"
 "Use existing file?"
-msgstr ""
+msgstr "Fax již stažen před méně než 180 minutami. \n"
+"Použít stávající soubor?"
 
 #: src/InternetRetrievalDialog.cpp:583
 msgid "WeatherFax InternetRetrieval"
-msgstr ""
+msgstr "WeatherFax načítání z Internetu"
 
 #: src/InternetRetrievalDialog.cpp:584
 msgid "Reading Headers: "
-msgstr ""
+msgstr "Čtení hlaviček: "
 
 #: src/InternetRetrievalDialog.cpp:592
 msgid "Failed to Download: "
-msgstr ""
+msgstr "Nepodařilo se stáhnout: "
 
 #: src/InternetRetrievalDialog.cpp:595
 msgid "Verify there is a working internet connection."
-msgstr ""
+msgstr "Ověřte, zda je funkční připojení k Internetu."
 
 #: src/InternetRetrievalDialog.cpp:596
 msgid "If the url is incorrect please edit the xml and/or post a bug report."
-msgstr ""
+msgstr "Je-li adresa URL nesprávná, uprav XML a/nebo odešli hlášení o chybě."
 
 #: src/InternetRetrievalDialog.cpp:613
 msgid "No Faxes selected."
-msgstr ""
+msgstr "Nevybrány žádné faxy."
 
 #: src/InternetRetrievalDialog.cpp:615
 msgid " Try clicking the selected (first) column"
-msgstr ""
+msgstr " Zkus kliknout na vybraný sloupec (první)"
 
 #: src/WeatherFaxWizard.cpp:45
 msgid "New Coord"
-msgstr ""
+msgstr "Nové souřadnice"
 
 #: src/WeatherFaxWizard.cpp:205
 msgid "Start"
@@ -677,30 +683,32 @@ msgstr ""
 #: src/WeatherFaxWizard.cpp:295
 msgid "Failed to apply mapping\n"
 "Check Mapping Correction Parameters"
-msgstr ""
+msgstr "Nepodařilo se použít mapování\n"
+"Zkontroluj parametry korekce mapování"
 
 #: src/WeatherFaxWizard.cpp:296 src/WeatherFaxWizard.cpp:429
 #: src/WeatherFaxWizard.cpp:573 src/WeatherFaxWizard.cpp:662
 #: src/WeatherFaxWizard.cpp:678
 msgid "Mapping"
-msgstr ""
+msgstr "Mapování"
 
 #: src/WeatherFaxWizard.cpp:427
 msgid "Warning, latitudes on different sides of equator not recommended because of ambiguity of north or south pole"
-msgstr ""
+msgstr "Varování, zeměpisné šířky na různých stranách rovníku nedoporučujeme vzhledem k nejednoznačnosti severního či jižního pólu"
 
 #: src/WeatherFaxWizard.cpp:570
 msgid "Calculating Mapping Failed.\n"
 "Perhaps you have chosen the wrong mapping type for this image, or the coordinates specified are not correct\n"
-msgstr ""
+msgstr "Výpočet mapování neúspěšný. \n"
+"Možná jste zvolili nesprávné mapování pro tento obrázek nebo určené souřadnice nejsou správné\n"
 
 #: src/WeatherFaxWizard.cpp:661
 msgid "Calculating Mapping not yet supported.\n"
-msgstr ""
+msgstr "Výpočet mapování zatím Nepodporován. \n"
 
 #: src/WeatherFaxWizard.cpp:677
 msgid "Calculating Equator not yet supported.\n"
-msgstr ""
+msgstr "Výpočet rovníku zatím Nepodporován. \n"
 
 #: src/WeatherFaxWizard.cpp:848
 msgid "Mapping allows for scaling, and conversion between coordinate systems\n"
@@ -716,224 +724,227 @@ msgstr ""
 
 #: src/FaxDecoder.cpp:118
 msgid "Failure Decoding Fax: "
-msgstr ""
+msgstr "Chyba při dekódování faxu: "
 
 #: src/FaxDecoder.cpp:118
 msgid "Failed"
-msgstr ""
+msgstr "Nezdařilo se"
 
 #: src/FaxDecoder.cpp:267
 msgid "DecodeImageLine requires specific buffer length"
-msgstr ""
+msgstr "DecodeImageLine vyžaduje konkrétní velikost vyrovnávací paměti"
 
 #: src/FaxDecoder.cpp:370
 msgid "Port audio overflow on input, some data lost!"
-msgstr ""
+msgstr "Port audio přetečení na vstupu, některá data se ztratila!"
 
 #: src/FaxDecoder.cpp:482
 msgid "could not open input file: "
-msgstr ""
+msgstr "nelze otevřít vstupní soubor: "
 
 #: src/FaxDecoder.cpp:486
 msgid "sample size not 8 or 16 bit: "
-msgstr ""
+msgstr "vzorek není velikosti 8 nebo 16 bitů: "
 
 #: src/SchedulesDialog.cpp:118
 msgid "Capture"
-msgstr ""
+msgstr "Snímat"
 
 #: src/SchedulesDialog.cpp:119
 msgid "Station"
-msgstr ""
+msgstr "Stanice"
 
 #: src/SchedulesDialog.cpp:121
 msgid "Time (UTC)"
-msgstr ""
+msgstr "Čas (UTC)"
 
 #: src/SchedulesDialog.cpp:123
 msgid "Valid Time"
-msgstr ""
+msgstr "Platný čas"
 
 #: src/SchedulesDialog.cpp:124
 msgid "Duration"
-msgstr ""
+msgstr "Doba trvání"
 
 #: src/SchedulesDialog.cpp:294 src/SchedulesDialog.cpp:596
 msgid "WeatherFax Schedules"
-msgstr ""
+msgstr "WeatherFax rozvrhy"
 
 #: src/SchedulesDialog.cpp:347 src/SchedulesDialog.cpp:362
 #: src/SchedulesDialog.cpp:383
 msgid "Unrecognized xml node"
-msgstr ""
+msgstr "Nerozpoznaný xml uzel"
 
 #: src/SchedulesDialog.cpp:368
 msgid "Failed to find Duration for: "
-msgstr ""
+msgstr "Nepodařilo se najít dobu trvání pro: "
 
 #: src/SchedulesDialog.cpp:479
 msgid "Sorting this many schedules might take too long"
-msgstr ""
+msgstr "Třídění tolika rozvrhů může trvat příliš dlouho"
 
 #: src/SchedulesDialog.cpp:596
 msgid "Populating List"
-msgstr ""
+msgstr "Vyplnění seznamu"
 
 #: src/SchedulesDialog.cpp:646
 msgid "Capturing fax: "
-msgstr ""
+msgstr "Zachycení faxu: "
 
 #: src/SchedulesDialog.cpp:647
 msgid " Conflicts with already scheduled fax: "
-msgstr ""
+msgstr " Je v konfliktu s již naplánovaným faxem: "
 
 #: src/SchedulesDialog.cpp:648
 msgid " disable this fax? "
-msgstr ""
+msgstr " zakázat tento fax? "
 
 #: src/SchedulesDialog.cpp:649
 msgid "weatherfax schedules"
-msgstr ""
+msgstr "weatherfax rozvrhy"
 
 #: src/SchedulesDialog.cpp:709
 msgid "No Capture Set"
-msgstr ""
+msgstr "Není nastaveno zachytávání"
 
 #: src/SchedulesDialog.cpp:712
 msgid "starting in"
-msgstr ""
+msgstr "začíná za"
 
 #: src/SchedulesDialog.cpp:715
 msgid "second(s)"
-msgstr ""
+msgstr "sekund"
 
 #: src/SchedulesDialog.cpp:719
 msgid "hour(s)"
-msgstr ""
+msgstr "hodin"
 
 #: src/SchedulesDialog.cpp:722
 msgid "minute(s)"
-msgstr ""
+msgstr "minut"
 
 #: src/SchedulesDialog.cpp:727
 msgid "Current fax: "
-msgstr ""
+msgstr "Aktuální fax: "
 
 #: src/SchedulesDialog.cpp:749
 msgid "Tune ssb radio to"
-msgstr ""
+msgstr "Naladit rádio SSB na"
 
 #: src/SchedulesDialog.cpp:751
 msgid "to receive fax for"
-msgstr ""
+msgstr "chcete-li přijmout fax pro"
 
 #: src/SchedulesDialog.cpp:752
 msgid "Weather Fax Schedule Beginning Soon"
-msgstr ""
+msgstr "Pravidelné vysíláni weatherfaxu brzy začne"
 
 #: src/SchedulesDialog.cpp:778
 msgid "Already capturing, cannot capture: "
-msgstr ""
+msgstr "Už zachycováno, nelze zachytit: "
 
 #: src/SchedulesDialog.cpp:791
 msgid "Failed to launch: "
-msgstr ""
+msgstr "Nepodařilo se spustit: "
 
 #: src/SchedulesDialog.cpp:798
 msgid "Fault in weather fax plugin\n"
 "Currently capturing hf weather fax."
-msgstr ""
+msgstr "Chyba v doplňku Weatherfax\n"
+"Právě zachycovaný hf weatherfax."
 
 #: src/SchedulesDialog.cpp:828 src/WeatherFax.cpp:476
 msgid "Open Weather Fax Input File"
-msgstr ""
+msgstr "Otevřít vstupní soubor Weatherfax"
 
 #: src/SchedulesDialog.cpp:830
 msgid "WAV files (*.wav)|*.WAV;*.wav|All files (*.*)|*.*"
-msgstr ""
+msgstr "WAV Soubory (*.wav)|*.WAV;*.wav|Všechny soubory (*.*)|*.*"
 
 #: src/SchedulesDialog.cpp:862
 msgid "External Capture Execution failed"
-msgstr ""
+msgstr "Spuštění externího zachytávání selhalo"
 
 #: src/WeatherFax.cpp:147
 msgid "Failed to load coordinate sets"
-msgstr ""
+msgstr "Nepodařilo se načíst sady souřadnic"
 
 #: src/WeatherFax.cpp:279
 msgid "Failed to save xml file: "
-msgstr ""
+msgstr "Uložení souboru xml se nezdařilo: "
 
 #: src/WeatherFax.cpp:404
 msgid "try to execute :"
-msgstr ""
+msgstr "pokuste se provést:"
 
 #: src/WeatherFax.cpp:408
 msgid "Failed to load input file: "
-msgstr ""
+msgstr "Nepodařilo se načíst vstupní soubor: "
 
 #: src/WeatherFax.cpp:478
 msgid "Supported Files|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;*.TIF;*.tif;*.TIFF;*.tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;*.PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga;*.WAV;*.wav|All files (*.*)|*.*"
-msgstr ""
+msgstr "Podporované soubory| *. BMP; *.bmp; *. XBM; *.xbm; *. XPM; HTML; *. TIF; *.tif; *. TIFF; *.tiff; *. GIF; *.gif; *. JPEG; *.jpeg; *. JPG; *.jpg; *. PNM; soubory; *. PNG; *.png; *. PCX; *.pcx; *. PICT; *.pict; *. TGA; *.tga; *. WAV; *. wav| Všechny soubory (*. *) | *. *"
 
 #: src/WeatherFax.cpp:490
 msgid "Cannot open audio weather fax already in progress."
-msgstr ""
+msgstr "Nelze otevřít zvuk, weatherfax již probíhá."
 
 #: src/WeatherFax.cpp:510
 msgid "Save Weather Fax To Image"
-msgstr ""
+msgstr "Uložit weatherfax jako obrázek"
 
 #: src/WeatherFax.cpp:512
 msgid "Image Files|*.BMP;*.bmp|*.PNG;*.png|*.TIFF;*.tiffAll files (*.*)|*.*"
-msgstr ""
+msgstr "Soubory obrázků| *. BMP; *. bmp| *. PNG; *. gif| *. TIFF; *.tiff | Všechny soubory (*. *) | *. *"
 
 #: src/WeatherFax.cpp:521
 msgid "Failed to save file: "
-msgstr ""
+msgstr "Uložení souboru se nezdařilo: "
 
 #: src/WeatherFax.cpp:578
 msgid "Save Weather Fax To KAP"
-msgstr ""
+msgstr "Uložení weatherfaxu do KAP"
 
 #: src/WeatherFax.cpp:580
 msgid "KAP Files|*.KAP;*.kap|All files (*.*)|*.*"
-msgstr ""
+msgstr "KAP soubory| *. KAP; *. kap| Všechny soubory (*. *) | *. *"
 
 #: src/WeatherFaxImage.cpp:440
 msgid "Resulting image has negative dimensions, aborting\n"
-msgstr ""
+msgstr "Výsledný obraz má negativní rozměry, končím\n"
 
 #: src/WeatherFaxImage.cpp:441 src/WeatherFaxImage.cpp:455
 msgid "Mapping Failed"
-msgstr ""
+msgstr "Mapování selhalo"
 
 #: src/WeatherFaxImage.cpp:452
 #, c-format
 msgid "Resulting image larger than %dMB\n"
 "Try changing size parameter to a smaller value. (less than %.2f)\n"
 "aborting\n"
-msgstr ""
+msgstr "Výsledný obraz větší než %dMB\n"
+"Zkus změnit parametr velikosti na menší hodnotu. (což je méně než %.2f) \n"
+"končím\n"
 
 #: src/WeatherFaxImage.cpp:463
 msgid "Mapping Weather Fax Image"
-msgstr ""
+msgstr "Mapování weatherfax obrázku"
 
 #: src/WeatherFaxImage.cpp:463
 msgid "Weather Fax Mapper"
-msgstr ""
+msgstr "Mapovač weatherfaxu"
 
 #: src/WeatherFaxImage.cpp:596
 msgid "Graphics hardware not supported (Disable OpenGL)\n"
-msgstr ""
+msgstr "Grafický hardware není podporován (zakázáno OpenGL) \n"
 
 #: src/weatherfax_pi.cpp:84 src/weatherfax_pi.cpp:146
 msgid "WeatherFax"
-msgstr ""
+msgstr "WeatherFax"
 
 #: src/weatherfax_pi.cpp:151
 msgid "Weather Fax PlugIn for OpenCPN"
-msgstr ""
+msgstr "Weatherfax modul pro OpenCPN"
 
 #: src/weatherfax_pi.cpp:156
 msgid "Weather Fax PlugIn for OpenCPN\n"
@@ -943,9 +954,15 @@ msgid "Weather Fax PlugIn for OpenCPN\n"
 "Can convert any image into a raster chart.\n"
 "Builtin database for HF radio fax stations via SSB.\n"
 "Builtin database for internet retrieval from meterological sites.\n"
-msgstr ""
+msgstr "Doplněk Weatherfax pro OpenCPN\n"
+"Umí přímo otevřít soubory obrázků nebo dekódovat audio faxů na obrázky.\n"
+"Po jednoduché kalibraci je výsledný obraz zobrazen přes mapu.\n"
+"Konvertuje obrázky v mercator, polární, kónické a uniformní projekci.\n"
+"Umí převést jakýkoliv obrázek na rastrovou mapu KAP.\n"
+"Obsahuje databázi rozvrhů HF weatherfax stanic přes SSB.\n"
+"Obsahuje databázi pro stahování z meteorologických serverů na internetu.\n"
 
 #: src/weatherfax_pi.cpp:324
 msgid "WeatherFax Preferences"
-msgstr ""
+msgstr "Nastavení Weatherfaxu"
 

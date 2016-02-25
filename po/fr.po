@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-01 13:52-0600\n"
-"PO-Revision-Date: 2015-11-01 14:56-0500\n"
+"PO-Revision-Date: 2016-02-25 08:03-0500\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
@@ -554,7 +554,7 @@ msgstr "48000"
 
 #: src/WeatherFaxUI.cpp:1586
 msgid "Device Index"
-msgstr ""
+msgstr "Index de l'appareil"
 
 #: src/WeatherFaxUI.cpp:1599
 msgid "Done"
@@ -613,7 +613,7 @@ msgstr "Fichier xml invalide"
 
 #: src/InternetRetrievalDialog.cpp:223
 msgid "WeatherFax Internet Retrieval"
-msgstr ""
+msgstr "Récupération sur internet d'un fax météo"
 
 #: src/InternetRetrievalDialog.cpp:223 src/SchedulesDialog.cpp:294
 msgid "Loading"
