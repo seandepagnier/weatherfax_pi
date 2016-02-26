@@ -32,7 +32,7 @@ OSX Specific Libraries
 ==========================
 The OS X compilation is dependent on these files 
 
-Under OS X the port audio library is needed.
+Under OS X the port audio library is needed. Install it using ```brew install portaudio```
 There is a zip file containing header and library files:
 http://sourceforge.net/projects/opencpnplugins/files/weatherfax_pi/OSXportaudiofiles.zip/download
 Download this file and unzip it in the /usr/local directory as the compile is dependent on these.
