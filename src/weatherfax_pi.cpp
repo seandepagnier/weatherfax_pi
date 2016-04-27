@@ -5,7 +5,7 @@
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
- *   Copyright (C) 2014 by Sean D'Epagnier                                 *
+ *   Copyright (C) 2016 by Sean D'Epagnier                                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -63,29 +63,11 @@ weatherfax_pi::weatherfax_pi(void *ppimgr)
 int weatherfax_pi::Init(void)
 {
     AddLocaleCatalog( _T("opencpn-weatherfax_pi") );
-
-    // Set some default private member parameters
-    m_weatherfax_dialog_x = 0;
-    m_weatherfax_dialog_y = 0;
-
-    ::wxDisplaySize(&m_display_width, &m_display_height);
-
-    //    Get a pointer to the opencpn display canvas, to use as a parent for the POI Manager dialog
-    m_parent_window = GetOCPNCanvasWindow();
-
-    //    Get a pointer to the opencpn configuration object
-    m_pconfig = GetOCPNConfigObject();
-
-    //    And load the configuration items
-    LoadConfig();
-
     m_leftclick_tool_id  = InsertPlugInTool(_T(""), _img_weatherfax,
                                             _img_weatherfax, wxITEM_NORMAL,
                                             _("WeatherFax"), _T(""), NULL,
                                             WEATHERFAX_TOOL_POSITION, 0, this);
-
-    m_pWeatherFax = new WeatherFax(*this, m_parent_window);
-    m_pWeatherFax->Move(wxPoint(m_weatherfax_dialog_x, m_weatherfax_dialog_y));
+    m_pWeatherFax = NULL;
 
     return (WANTS_OVERLAY_CALLBACK |
             WANTS_OPENGL_OVERLAY_CALLBACK |
@@ -187,6 +169,26 @@ void weatherfax_pi::RearrangeWindow()
 
 void weatherfax_pi::OnToolbarToolCallback(int id)
 {
+    if(!m_pWeatherFax) {
+        // Set some default private member parameters
+        m_weatherfax_dialog_x = 0;
+        m_weatherfax_dialog_y = 0;
+
+        ::wxDisplaySize(&m_display_width, &m_display_height);
+
+        //    Get a pointer to the opencpn display canvas, to use as a parent for the POI Manager dialog
+        m_parent_window = GetOCPNCanvasWindow();
+
+        //    Get a pointer to the opencpn configuration object
+        m_pconfig = GetOCPNConfigObject();
+
+        //    And load the configuration items
+        LoadConfig();
+
+        m_pWeatherFax = new WeatherFax(*this, m_parent_window);
+        m_pWeatherFax->Move(wxPoint(m_weatherfax_dialog_x, m_weatherfax_dialog_y));
+    }
+
     m_pWeatherFax->Show(!m_pWeatherFax->IsShown());
 
     if(!m_pWeatherFax->IsShown()) {
