@@ -82,15 +82,17 @@ int weatherfax_pi::Init(void)
 bool weatherfax_pi::DeInit(void)
 {
       //    Record the dialog position
-    wxPoint p = m_pWeatherFax->GetPosition();
-    SetWeatherFaxX(p.x);
-    SetWeatherFaxY(p.y);
+    if(m_pWeatherFax) {
+        wxPoint p = m_pWeatherFax->GetPosition();
+        SetWeatherFaxX(p.x);
+        SetWeatherFaxY(p.y);
 
-    m_pWeatherFax->m_SchedulesDialog.Close();
-    m_pWeatherFax->m_InternetRetrievalDialog.Close();
-    m_pWeatherFax->Close();
-    delete m_pWeatherFax;
-    m_pWeatherFax = NULL;
+        m_pWeatherFax->m_SchedulesDialog.Close();
+        m_pWeatherFax->m_InternetRetrievalDialog.Close();
+        m_pWeatherFax->Close();
+        delete m_pWeatherFax;
+        m_pWeatherFax = NULL;
+    }
     
     SaveConfig();
 
