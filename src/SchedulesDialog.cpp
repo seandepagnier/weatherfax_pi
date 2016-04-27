@@ -54,7 +54,7 @@ SchedulesDialog::SchedulesDialog( weatherfax_pi &_weatherfax_pi, wxWindow* paren
 
 SchedulesDialog::~SchedulesDialog()
 {
-    wxFileConfig *pConf = m_weatherfax_pi.m_pconfig;
+    wxFileConfig *pConf = GetOCPNConfigObject();
 
     /* remove from config all cordinate sets */
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Schedules" ) );
@@ -134,7 +134,7 @@ void SchedulesDialog::Load()
                     ( SchedulesDialog::OnProgressTimer ), NULL, this);
     m_ProgressTimer.Start(30 * 1000, false);
 
-    wxFileConfig *pConf = m_weatherfax_pi.m_pconfig;
+    wxFileConfig *pConf = GetOCPNConfigObject();
 
     /* remove from config all cordinate sets */
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Schedules" ) );

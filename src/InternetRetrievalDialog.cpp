@@ -50,7 +50,7 @@ InternetRetrievalDialog::InternetRetrievalDialog( weatherfax_pi &_weatherfax_pi,
 
 InternetRetrievalDialog::~InternetRetrievalDialog()
 {
-    wxFileConfig *pConf = m_weatherfax_pi.m_pconfig;
+    wxFileConfig *pConf = GetOCPNConfigObject();
 
     /* remove from config all cordinate sets */
     pConf->SetPath ( _T ( "/Settings/WeatherFax/InternetRetrieval" ) );
@@ -99,7 +99,7 @@ void InternetRetrievalDialog::Load()
     m_lUrls->InsertColumn(CONTENTS, _("Contents"));
     m_lUrls->InsertColumn(MAP_AREA, _("Map Area"));
 
-    wxFileConfig *pConf = m_weatherfax_pi.m_pconfig;
+    wxFileConfig *pConf = GetOCPNConfigObject();
 
     /* remove from config all cordinate sets */
     pConf->SetPath ( _T ( "/Settings/WeatherFax/InternetRetrieval" ) );

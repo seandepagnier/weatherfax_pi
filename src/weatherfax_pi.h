@@ -5,7 +5,7 @@
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
- *   Copyright (C) 2014 by Sean D'Epagnier                                 *
+ *   Copyright (C) 2016 by Sean D'Epagnier                                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -99,8 +99,6 @@ public:
       int m_iExportColors;
       bool m_bExportDepthMeters;
       wxString m_sExportSoundingDatum;
-
-      wxFileConfig     *m_pconfig;
 
       PlugIn_Position_Fix_Ex m_lastfix;
 

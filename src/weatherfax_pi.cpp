@@ -181,9 +181,6 @@ void weatherfax_pi::OnToolbarToolCallback(int id)
         //    Get a pointer to the opencpn display canvas, to use as a parent for the POI Manager dialog
         m_parent_window = GetOCPNCanvasWindow();
 
-        //    Get a pointer to the opencpn configuration object
-        m_pconfig = GetOCPNConfigObject();
-
         //    And load the configuration items
         LoadConfig();
 
@@ -269,7 +266,7 @@ wxString weatherfax_pi::StandardPath()
 
 bool weatherfax_pi::LoadConfig(void)
 {
-    wxFileConfig *pConf = m_pconfig;
+    wxFileConfig *pConf = GetOCPNConfigObject();
 
     if(!pConf)
         return false;
@@ -294,7 +291,7 @@ bool weatherfax_pi::LoadConfig(void)
 
 bool weatherfax_pi::SaveConfig(void)
 {
-    wxFileConfig *pConf = m_pconfig;
+    wxFileConfig *pConf = GetOCPNConfigObject();
 
     if(!pConf)
         return false;
