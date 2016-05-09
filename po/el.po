@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-11-01 13:52-0600\n"
-"PO-Revision-Date: 2015-11-01 14:56-0500\n"
+"PO-Revision-Date: 2016-02-18 16:08-0500\n"
 "Last-Translator: nohal <pavel@kalian.cz>\n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
@@ -26,11 +26,11 @@ msgstr ""
 
 #: src/WeatherFaxUI.h:165
 msgid "HF Radio Schedules"
-msgstr ""
+msgstr "Προγράμματα ραδιοφώνου HF"
 
 #: src/WeatherFaxUI.h:216
 msgid "Internet Retrieval"
-msgstr ""
+msgstr "Ανάκτηση από το Internet"
 
 #: src/WeatherFaxUI.h:337
 msgid "Weather Fax Image"
@@ -46,7 +46,7 @@ msgstr ""
 
 #: src/WeatherFaxUI.h:434
 msgid "About Weatherfax"
-msgstr ""
+msgstr "Σχετικά με Weatherfax"
 
 #: src/WeatherFaxUI.cpp:23
 msgid "Fax"
@@ -54,109 +54,109 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:42
 msgid "Transparency"
-msgstr ""
+msgstr "Διαφάνεια"
 
 #: src/WeatherFaxUI.cpp:58
 msgid "Invert"
-msgstr ""
+msgstr "Αντιστροφή"
 
 #: src/WeatherFaxUI.cpp:71
 msgid "&Open"
-msgstr ""
+msgstr "&Άνοιγμα"
 
 #: src/WeatherFaxUI.cpp:74
 msgid "Save &As"
-msgstr ""
+msgstr "Αποθήκευση &ως"
 
 #: src/WeatherFaxUI.cpp:77
 msgid "&Edit"
-msgstr ""
+msgstr "&Επεξεργασία"
 
 #: src/WeatherFaxUI.cpp:80
 msgid "&Goto"
-msgstr ""
+msgstr "&Goto"
 
 #: src/WeatherFaxUI.cpp:83
 msgid "E&xport"
-msgstr ""
+msgstr "E&ξαγωγή"
 
 #: src/WeatherFaxUI.cpp:86
 msgid "&Delete"
-msgstr ""
+msgstr "&Διαγραφή"
 
 #: src/WeatherFaxUI.cpp:92
 msgid "&Preferences"
-msgstr ""
+msgstr "&Προτιμήσεις"
 
 #: src/WeatherFaxUI.cpp:98
 msgid "&Close"
-msgstr ""
+msgstr "&Κλείσιμο"
 
 #: src/WeatherFaxUI.cpp:101
 msgid "&File"
-msgstr ""
+msgstr "&Αρχείο"
 
 #: src/WeatherFaxUI.cpp:104
 msgid "&Audio Capture"
-msgstr ""
+msgstr "&Καταγραφή ήχου"
 
 #: src/WeatherFaxUI.cpp:108
 msgid "&HF Radio Schedules"
-msgstr ""
+msgstr "Προγράμματα ραδιοφώνου &HF"
 
 #: src/WeatherFaxUI.cpp:112
 msgid "&Internet"
-msgstr ""
+msgstr "&Διαδίκτυο"
 
 #: src/WeatherFaxUI.cpp:115
 msgid "&Retrieve"
-msgstr ""
+msgstr "&Ανάκτηση"
 
 #: src/WeatherFaxUI.cpp:119
 msgid "&About"
-msgstr ""
+msgstr "&Περί"
 
 #: src/WeatherFaxUI.cpp:122
 msgid "&Help"
-msgstr ""
+msgstr "&Βοήθεια"
 
 #: src/WeatherFaxUI.cpp:229 src/WeatherFaxUI.cpp:583
 msgid "Contains"
-msgstr ""
+msgstr "Περιέχει"
 
 #: src/WeatherFaxUI.cpp:236 src/WeatherFaxUI.cpp:590
 msgid "Lat"
-msgstr ""
+msgstr "Πλάτος"
 
 #: src/WeatherFaxUI.cpp:243 src/WeatherFaxUI.cpp:597
 msgid "Lon"
-msgstr ""
+msgstr "Μήκος"
 
 #: src/WeatherFaxUI.cpp:250 src/WeatherFaxUI.cpp:604
 msgid "Boat Position"
-msgstr ""
+msgstr "Θέση πλοίου"
 
 #: src/WeatherFaxUI.cpp:253 src/WeatherFaxUI.cpp:607
 msgid "Reset"
-msgstr ""
+msgstr "Επαναφορά"
 
 #: src/WeatherFaxUI.cpp:263
 msgid "Stations"
-msgstr ""
+msgstr "Σταθμοί"
 
 #: src/WeatherFaxUI.cpp:279 src/WeatherFaxUI.cpp:316 src/WeatherFaxUI.cpp:651
 #: src/WeatherFaxUI.cpp:684
 msgid "All"
-msgstr ""
+msgstr "Όλα"
 
 #: src/WeatherFaxUI.cpp:282 src/WeatherFaxUI.cpp:654 src/WeatherFaxUI.cpp:687
 #: src/WeatherFaxUI.cpp:851
 msgid "None"
-msgstr ""
+msgstr "Καμία"
 
 #: src/WeatherFaxUI.cpp:295 src/SchedulesDialog.cpp:120
 msgid "Frequency"
-msgstr ""
+msgstr "Συχνότητα"
 
 #: src/WeatherFaxUI.cpp:305
 msgid "khz min"
@@ -168,7 +168,7 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:331
 msgid "Constraints"
-msgstr ""
+msgstr "Περιορισμοί"
 
 #: src/WeatherFaxUI.cpp:338
 msgid "Has Area"
@@ -184,43 +184,43 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:360 src/WeatherFaxUI.cpp:830 src/WeatherFaxUI.cpp:1530
 msgid "Filter"
-msgstr ""
+msgstr "Φίλτρο"
 
 #: src/WeatherFaxUI.cpp:368
 msgid "Message Box"
-msgstr ""
+msgstr "Πλαίσιο μηνύματος"
 
 #: src/WeatherFaxUI.cpp:377
 msgid "Sound"
-msgstr ""
+msgstr "Ήχος"
 
 #: src/WeatherFaxUI.cpp:380
 msgid "Select a file"
-msgstr ""
+msgstr "Επιλέξτε ένα αρχείο"
 
 #: src/WeatherFaxUI.cpp:392
 msgid "External Alarm"
-msgstr ""
+msgstr "Εξωτερικός συναγερμός"
 
 #: src/WeatherFaxUI.cpp:395
 msgid "aplay /usr/local/share/opencpn/sounds/2bells.wav"
-msgstr ""
+msgstr "/usr/local/share/opencpn/sounds/2bells.wav"
 
 #: src/WeatherFaxUI.cpp:405
 msgid "1 minute alarm"
-msgstr ""
+msgstr "Συναγερμός 1 λεπτού"
 
 #: src/WeatherFaxUI.cpp:413
 msgid "No Action"
-msgstr ""
+msgstr "Καμία ενέργεια"
 
 #: src/WeatherFaxUI.cpp:416 src/WeatherFax.cpp:375
 msgid "Audio Capture"
-msgstr ""
+msgstr "Καταγραφή ήχου"
 
 #: src/WeatherFaxUI.cpp:427
 msgid "External Command"
-msgstr ""
+msgstr "Εξωτερική εντολή"
 
 #: src/WeatherFaxUI.cpp:430
 msgid "arecord -f S16_LE"
@@ -400,11 +400,11 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:1045
 msgid "Mercator"
-msgstr ""
+msgstr "Μερκατορική"
 
 #: src/WeatherFaxUI.cpp:1049
 msgid "Size"
-msgstr ""
+msgstr "Μέγεθος"
 
 #: src/WeatherFaxUI.cpp:1053 src/WeatherFaxUI.cpp:1060 src/WeatherFaxUI.cpp:1067
 msgid "1"
@@ -416,27 +416,27 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:1063
 msgid "True Width Ratio"
-msgstr ""
+msgstr "Λόγος αληθινού πλάτους"
 
 #: src/WeatherFaxUI.cpp:1078
 msgid "Pole X"
-msgstr ""
+msgstr "Πόλος X"
 
 #: src/WeatherFaxUI.cpp:1085
 msgid "Pole Y"
-msgstr ""
+msgstr "Πόλος Y"
 
 #: src/WeatherFaxUI.cpp:1092
 msgid "Equator Y"
-msgstr ""
+msgstr "Ισημερινός Y"
 
 #: src/WeatherFaxUI.cpp:1099
 msgid "Get Mapping "
-msgstr ""
+msgstr "Πάρετε χαρτογράφηση "
 
 #: src/WeatherFaxUI.cpp:1102
 msgid "Get Equator"
-msgstr ""
+msgstr "Πάρτε Ισημερινό"
 
 #: src/WeatherFaxUI.cpp:1105
 msgid "GetAspectRatio"
@@ -452,31 +452,31 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:1382
 msgid "Export"
-msgstr ""
+msgstr "Εξαγωγή"
 
 #: src/WeatherFaxUI.cpp:1394
 msgid "Reduce to"
-msgstr ""
+msgstr "Μείωση σε"
 
 #: src/WeatherFaxUI.cpp:1401
 msgid "Colors"
-msgstr ""
+msgstr "Χρώματα"
 
 #: src/WeatherFaxUI.cpp:1408
 msgid "Recommended 4, 16, 64, or 256"
-msgstr ""
+msgstr "Συνιστάται 4, 16, 64 ή 256"
 
 #: src/WeatherFaxUI.cpp:1413
 msgid "Depth"
-msgstr ""
+msgstr "Βάθος"
 
 #: src/WeatherFaxUI.cpp:1420
 msgid "Meters"
-msgstr ""
+msgstr "Μέτρα"
 
 #: src/WeatherFaxUI.cpp:1423
 msgid "Fathoms"
-msgstr ""
+msgstr "Οργιές"
 
 #: src/WeatherFaxUI.cpp:1437
 msgid "fix sounding datum"
@@ -484,44 +484,45 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:1490
 msgid "Audio Decoding Options"
-msgstr ""
+msgstr "Επιλογές αποκωδικοποίησης ήχου"
 
 #: src/WeatherFaxUI.cpp:1502
 msgid "Image Width"
-msgstr ""
+msgstr "Πλάτος εικόνας"
 
 #: src/WeatherFaxUI.cpp:1509
 msgid "Bits per Pixel"
-msgstr ""
+msgstr "Bit ανά Pixel"
 
 #: src/WeatherFaxUI.cpp:1516
 msgid "Carrier"
-msgstr ""
+msgstr "Φορέας"
 
 #: src/WeatherFaxUI.cpp:1523
 msgid "Deviation"
-msgstr ""
+msgstr "Απόκλιση"
 
 #: src/WeatherFaxUI.cpp:1534
 msgid "narrow"
-msgstr ""
+msgstr "στενό"
 
 #: src/WeatherFaxUI.cpp:1534
 msgid "middle"
-msgstr ""
+msgstr "μέσο"
 
 #: src/WeatherFaxUI.cpp:1534
 msgid "wide"
-msgstr ""
+msgstr "ευρύ"
 
 #: src/WeatherFaxUI.cpp:1540
 msgid "Saturation Threshold"
-msgstr ""
+msgstr "Όριο κορεσμού"
 
 #: src/WeatherFaxUI.cpp:1550
 msgid "Skip start, stop and \n"
 "phasing detection"
-msgstr ""
+msgstr "Παράλειψη ανίχνευσης αρχής, σταματήματος\n"
+" και φάσης"
 
 #: src/WeatherFaxUI.cpp:1553
 msgid "Include header data in image"
@@ -529,11 +530,11 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:1569
 msgid "Audio Capture Options"
-msgstr ""
+msgstr "Επιλογές καταγραφής ήχου"
 
 #: src/WeatherFaxUI.cpp:1576
 msgid "Sample Rate"
-msgstr ""
+msgstr "Ρυθμός Δειγματοληψίας"
 
 #: src/WeatherFaxUI.cpp:1580
 msgid "8000"
@@ -549,11 +550,11 @@ msgstr ""
 
 #: src/WeatherFaxUI.cpp:1586
 msgid "Device Index"
-msgstr ""
+msgstr "Δείκτης συσκευής"
 
 #: src/WeatherFaxUI.cpp:1599
 msgid "Done"
-msgstr ""
+msgstr "Έγινε"
 
 #: src/WeatherFaxUI.cpp:1655
 msgid "Weather Fax Plugin Version"
@@ -566,35 +567,40 @@ msgid "The weatherfax plugin for opencpn is intended to reduce the amount of use
 "Source Code:\n"
 "https://github.com/seandepagnier/weatherfax_pi\n\n"
 "Many thanks to translators and testers."
-msgstr ""
+msgstr "Το πρόσθετο weatherfax για το OpenCPN έχει ως στόχο να μειώσει τον φόρτο του χρήστη για να παίρνει τα φαξ του καιρού και, προαιρετικά να τα απεικονίζει απευθείας πάνω στους χάρτες.\n\n"
+"Περιλαμβάνει ένα αποκωδικοποιητή φάξ, ο οποίος μετατρέπει τα ραδιοφωνικά ηχητικά φαξ σε εικόνες.\n\n"
+"Για να ξεκινήσετε, ανοίξτε είτε μια εικόνα ή ένα ηχογραφημένο αρχείο wav μιας ραδιοφωνικής μετάδοσης ssb φαξ από το μενού «file», ή ενεργοποιήστε μια επιλογή από τo μενού «retrieve».\n\n"
+"Το πρόγραμμα είναι στο:\n"
+" https://github.com/seandepagnier/weatherfax_pi \n\n"
+"Ευχαριστίες στους μεταφραστές και στους δοκιμαστές."
 
 #: src/WeatherFaxUI.cpp:1675
 msgid "About the Author"
-msgstr ""
+msgstr "Σχετικά με τον συγγραφέα"
 
 #: src/InternetRetrievalDialog.cpp:96
 msgid "Scheduled"
-msgstr ""
+msgstr "Προγραμματισμένο"
 
 #: src/InternetRetrievalDialog.cpp:97
 msgid "Server"
-msgstr ""
+msgstr "Διακομιστής"
 
 #: src/InternetRetrievalDialog.cpp:98
 msgid "Region"
-msgstr ""
+msgstr "Περιοχή"
 
 #: src/InternetRetrievalDialog.cpp:99 src/SchedulesDialog.cpp:122
 msgid "Contents"
-msgstr ""
+msgstr "Περιεχόμενα"
 
 #: src/InternetRetrievalDialog.cpp:100 src/SchedulesDialog.cpp:125
 msgid "Map Area"
-msgstr ""
+msgstr "Περιοχή χάρτη"
 
 #: src/InternetRetrievalDialog.cpp:204 src/SchedulesDialog.cpp:275
 msgid "Failed to load file: "
-msgstr ""
+msgstr "Απέτυχε η φόρτωση του αρχείου: "
 
 #: src/InternetRetrievalDialog.cpp:208 src/SchedulesDialog.cpp:279
 #: src/WeatherFax.cpp:152
@@ -943,7 +949,13 @@ msgid "Weather Fax PlugIn for OpenCPN\n"
 "Can convert any image into a raster chart.\n"
 "Builtin database for HF radio fax stations via SSB.\n"
 "Builtin database for internet retrieval from meterological sites.\n"
-msgstr ""
+msgstr "Πρόσθετο Weather Fax για το OpenCPN\n"
+"Ανοίγει αρχεία εικόνας απευθείας, ή αποκωδικοποιεί φαξ ήχου σε εικόνα.\n"
+"Με απλή βαθμονόμηση η εικόνα που προκύπτει υπερτίθεται πάνω στον χάρτη.\n"
+"Μετατρέπει εικόνες σε μερκατορικές, πολικές, κωνικές και ομοιόμορφες συντεταγμένες. \n"
+"Μετατρέπει οποιαδήποτε εικόνα σε χάρτη raster.\n"
+"Περιέχει βάση δεδομένων με ραδιοφωνικούς σταθμούς φαξ HF μέσω SSB\n"
+"και για ανάκτηση μετεωρολογικών δεδομένων μέσω του internet.\n"
 
 #: src/weatherfax_pi.cpp:324
 msgid "WeatherFax Preferences"
