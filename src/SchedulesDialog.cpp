@@ -712,14 +712,14 @@ void SchedulesDialog::UpdateProgress()
             l = f->Contents + wxString(_T("\n")) + _("starting in");
             int ss = f->StartSeconds();
             if(ss < 60)
-                l += wxString::Format( _T(" %ld "), ss) + _("second(s)");
+                l += wxString::Format( _T(" %d "), ss) + _("second(s)");
             else {
                 if(ss >= 3600) {
                     int h = ss/3600;
                     l += wxString::Format( _T(" %d "), h) + _("hour(s)");
                     ss -= h*3600;
                 }
-                l += wxString::Format( _T(" %ld "), ss/60) + _("minute(s)");
+                l += wxString::Format( _T(" %d "), ss/60) + _("minute(s)");
             }
         }
         m_gCaptureStatus->SetValue(0);
