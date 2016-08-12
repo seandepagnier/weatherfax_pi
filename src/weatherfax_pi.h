@@ -81,9 +81,6 @@ public:
       void SetColorScheme(PI_ColorScheme cs);
 
 //    Other public methods
-      void SetWeatherFaxX    (int x){ m_weatherfax_dialog_x = x;}
-      void SetWeatherFaxY    (int x){ m_weatherfax_dialog_y = x;}
-
       void OnWeatherFaxClose();
       void ShowPreferencesDialog( wxWindow* parent );
 

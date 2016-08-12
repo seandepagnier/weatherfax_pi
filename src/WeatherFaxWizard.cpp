@@ -55,7 +55,8 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
     m_cFilter->SetSelection(m_wfimg.filter);
 
     /* reset image */
-    m_wfimg.m_origimg.Create(1, 1); /* small image; so orig image is always ok to work with */
+    if(!m_wfimg.m_origimg.Ok())
+        m_wfimg.m_origimg.Create(1, 1); /* small image; so orig image is always ok to work with */
     
     MakeNewCoordinates();
 

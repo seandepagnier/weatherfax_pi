@@ -94,7 +94,7 @@ void DecoderOptionsDialog::OnDone( wxCommandEvent& event )
     if(capture)
         pConf->Write ( _T ( "CaptureDeviceIndex" ), m_sDeviceIndex->GetValue());
 
-    Hide();
+//    Hide();
     EndModal(wxID_OK);
 
     if(origwidth != m_sImageWidth->GetValue() ||

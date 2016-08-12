@@ -81,20 +81,15 @@ int weatherfax_pi::Init(void)
 
 bool weatherfax_pi::DeInit(void)
 {
-      //    Record the dialog position
+    SaveConfig();
+    //    Record the dialog position
     if(m_pWeatherFax) {
-        wxPoint p = m_pWeatherFax->GetPosition();
-        SetWeatherFaxX(p.x);
-        SetWeatherFaxY(p.y);
-
         m_pWeatherFax->m_SchedulesDialog.Close();
         m_pWeatherFax->m_InternetRetrievalDialog.Close();
         m_pWeatherFax->Close();
         delete m_pWeatherFax;
         m_pWeatherFax = NULL;
     }
-    
-    SaveConfig();
 
     RemovePlugInTool(m_leftclick_tool_id);
     return true;
@@ -299,9 +294,12 @@ bool weatherfax_pi::SaveConfig(void)
     pConf->SetPath ( _T ( "/Settings/WeatherFax" ) );
     pConf->Write ( _T ( "Path" ), m_path );
     pConf->Write ( _T ( "ExportPath" ), m_export_path );
-    
-    pConf->Write ( _T ( "DialogPosX" ),   m_weatherfax_dialog_x );
-    pConf->Write ( _T ( "DialogPosY" ),   m_weatherfax_dialog_y );
+
+    if(m_pWeatherFax) {
+        wxPoint p = m_pWeatherFax->GetPosition();
+        pConf->Write ( _T ( "DialogPosX" ),   p.x );
+        pConf->Write ( _T ( "DialogPosY" ),   p.y );
+    }
         
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Schedules" ) );
     pConf->Write ( _T ( "LoadAtStart" ), m_bLoadSchedulesStart );

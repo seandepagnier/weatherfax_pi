@@ -379,7 +379,12 @@ void WeatherFaxImage::MercatorToInput(double mx, double my, double &px, double &
 
 bool WeatherFaxImage::MakeMappedImage(wxWindow *parent, bool paramsonly)
 {
-    int w = m_origimg.GetWidth(), h = m_origimg.GetHeight();
+    if(!m_phasedimg.IsOk()) {
+        m_phasedimg.Create(1, 1); /* small image; so image is always ok to work with */
+        return false;
+    }
+
+    int w = m_phasedimg.GetWidth(), h = m_phasedimg.GetHeight();
 
     inputheight = m_Coords->inputequator - m_Coords->inputpole.y;
 
