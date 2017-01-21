@@ -91,7 +91,7 @@ public:
     bool Show( bool show = true );
     void WizardFinished(WeatherFaxWizard *wizard);
     bool WizardCleanup(WeatherFaxWizard *wizard);
-    WeatherFaxWizard *OpenWav(wxString filename, wxString station=_T(""), wxString area=_T(""), wxString contents=_T(""));
+    WeatherFaxWizard *OpenWav(wxString filename, long offset=0, wxString station=_T(""), wxString area=_T(""), wxString contents=_T(""));
     void OpenImage(wxString filename, wxString station=_T(""), wxString area=_T(""), wxString contents=_T(""));
     void Goto(int selection);
 

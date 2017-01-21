@@ -35,7 +35,7 @@ class WeatherFaxWizard : public WeatherFaxWizardBase
 {
 public:
     WeatherFaxWizard( WeatherFaxImage &img,
-                      bool use_decoder, wxString decoder_filename,
+                      bool use_decoder, wxString decoder_filename, AFframecount offset,
                       WeatherFax &parent,
                       WeatherFaxImageCoordinateList *coords,
                       wxString newcoordbasename);

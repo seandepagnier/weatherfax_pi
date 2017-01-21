@@ -50,10 +50,10 @@ public:
         int current;
     };
 
-    FaxDecoder(wxWindow &parent, wxString filename)
+    FaxDecoder(wxWindow &parent, wxString filename, AFframecount offset)
         : m_imgdata(NULL), m_imagewidth(-1),
         m_inputtype(NONE), datadouble(NULL),
-        m_SampleRate(0), m_DeviceIndex(0), m_Filename(filename),
+        m_SampleRate(0), m_DeviceIndex(0), m_Filename(filename), m_Fileoffset(offset),
         m_parent(parent), sample(NULL), data(NULL), phasingPos(NULL) {}
     ~FaxDecoder() { FreeImage(); CleanUpBuffers(); }
 
@@ -79,6 +79,7 @@ public:
     bool DecodeFax(); /* thread main function */
 
     bool m_bEndDecoding; /* flag to end decoding thread */
+    AFframecount m_stop_audio_offset; // position in stream when stop sequence was found
 
     wxMutex m_DecoderMutex, m_DecoderStopMutex, m_DecoderReloadMutex;
 
@@ -92,6 +93,7 @@ public:
     int m_SampleRate, m_DeviceIndex;
 
     wxString m_Filename;
+    AFframecount m_Fileoffset;
 
 private:
     wxWindow &m_parent;

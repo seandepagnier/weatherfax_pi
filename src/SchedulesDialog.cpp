@@ -800,7 +800,7 @@ Currently capturing hf weather fax."), _("weatherfax"), wxOK | wxICON_ERROR);
                 mdlg.ShowModal();
         } else
             m_CaptureWizard = m_weatherfax_pi.m_pWeatherFax->OpenWav
-                (_T(""), m_CurrentSchedule->Station, m_CurrentSchedule->area_name,
+                (_T(""), 0, m_CurrentSchedule->Station, m_CurrentSchedule->area_name,
                  m_CurrentSchedule->Contents);
     }
 
@@ -838,7 +838,7 @@ void SchedulesDialog::OnEndCaptureTimer( wxTimerEvent & )
 
         if(open)
             m_weatherfax_pi.m_pWeatherFax->OpenWav
-                (filename, m_CurrentSchedule->Station, m_CurrentSchedule->area_name,
+                (filename, 0, m_CurrentSchedule->Station, m_CurrentSchedule->area_name,
                  m_CurrentSchedule->Contents);
     }
 

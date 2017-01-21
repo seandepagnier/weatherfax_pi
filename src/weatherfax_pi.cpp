@@ -226,13 +226,11 @@ wxString weatherfax_pi::StandardPath()
     wxStandardPathsBase& std_path = wxStandardPathsBase::Get();
     wxString s = wxFileName::GetPathSeparator();
 
-#ifdef __WXMSW__
+#if defined(__WXMSW__)
     wxString stdPath  = std_path.GetConfigDir();
-#endif
-#ifdef __WXGTK__
+#elif defined(__WXGTK__) || defined(__WXQT__)
     wxString stdPath  = std_path.GetUserDataDir();
-#endif
-#ifdef __WXOSX__
+#elif defined(__WXOSX__)
     wxString stdPath  = (std_path.GetUserConfigDir() + s + _T("opencpn"));
 #endif
 

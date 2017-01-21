@@ -347,7 +347,7 @@ bool WeatherFax::WizardCleanup(WeatherFaxWizard *wizard)
     return true;
 }
 
-WeatherFaxWizard *WeatherFax::OpenWav(wxString filename, wxString station, wxString area, wxString contents)
+WeatherFaxWizard *WeatherFax::OpenWav(wxString filename, AFframecount offset, wxString station, wxString area, wxString contents)
 {
     int transparency = m_sTransparency->GetValue();
     int whitetransparency = m_sWhiteTransparency->GetValue();
@@ -360,8 +360,9 @@ WeatherFaxWizard *WeatherFax::OpenWav(wxString filename, wxString station, wxStr
         if(name == m_BuiltinCoords[i]->name)
             img->m_Coords = m_BuiltinCoords[i];
 
+    WeatherFaxImageCoordinateList *coords = name.size() ? NULL : &m_UserCoords;
     WeatherFaxWizard *wizard = new WeatherFaxWizard
-        (*img, true, filename, *this, name.size() ? NULL : &m_UserCoords, name);
+        (*img, true, filename, offset, *this, coords, name);
 
     if(wizard->m_decoder.m_inputtype == FaxDecoder::NONE) {
         delete img;
@@ -424,7 +425,7 @@ void WeatherFax::OpenImage(wxString filename, wxString station, wxString area, w
         }
 
     {
-        WeatherFaxWizard wizard(*img, false, _T(""), *this, name.size() ? &BuiltinCoordList : &m_UserCoords, name);
+        WeatherFaxWizard wizard(*img, false, _T(""), 0, *this, name.size() ? &BuiltinCoordList : &m_UserCoords, name);
         if(wizard.RunWizard(wizard.m_pages[1])) {
             if(name.size() == 0) {
                 wxFileName filenamec(filename);
@@ -545,7 +546,7 @@ void WeatherFax::OnEdit( wxCommandEvent& event )
             builtin = true;
         }
 
-    WeatherFaxWizard wizard(image, false, _T(""), *this, builtin ? &BuiltinCoordList : &m_UserCoords, _T(""));
+    WeatherFaxWizard wizard(image, false, _T(""), 0, *this, builtin ? &BuiltinCoordList : &m_UserCoords, _T(""));
     if(wizard.RunWizard(wizard.m_pages[0]))
         image.FreeData();
     else

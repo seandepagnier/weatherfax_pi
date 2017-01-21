@@ -35,11 +35,11 @@
 #include "icons.h"
 
 WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
-                                    bool use_decoder, wxString decoder_filename,
+                                    bool use_decoder, wxString decoder_filename, AFframecount offset,
                                     WeatherFax &parent,
                                     WeatherFaxImageCoordinateList *coords,
                                     wxString newcoordbasename)
-    : WeatherFaxWizardBase( &parent ), m_decoder(*this, decoder_filename),
+    : WeatherFaxWizardBase( &parent ), m_decoder(*this, decoder_filename, offset),
       m_DecoderOptionsDialog(use_decoder ? new DecoderOptionsDialog(*this) : NULL),
       m_parent(parent), m_wfimg(img), m_curCoords(img.m_Coords),
       m_NewCoordBaseName(newcoordbasename.empty() ? wxString(_("New Coord")) : newcoordbasename),
@@ -167,8 +167,14 @@ void WeatherFaxWizard::MakeNewCoordinates()
 void WeatherFaxWizard::OnDecoderTimer( wxTimerEvent & )
 {
     if(m_decoder.m_DecoderMutex.Lock() == wxMUTEX_NO_ERROR) {
-        if(!m_thDecoder->IsRunning())
+        if(!m_thDecoder->IsRunning()) {
             m_bStopDecoding->Disable();
+
+            if(m_decoder.m_stop_audio_offset && &m_Coords == &m_parent.m_UserCoords) {
+                m_parent.OpenWav(m_decoder.m_Filename, m_decoder.m_stop_audio_offset);
+                m_decoder.m_stop_audio_offset = 0; //prevent this running again
+            }
+        }
 
         int w = m_decoder.m_imagewidth, h = m_decoder.m_imageline;
         if(h && (!m_wfimg.m_origimg.IsOk() || h != m_wfimg.m_origimg.GetHeight())) {
@@ -194,10 +200,11 @@ void WeatherFaxWizard::OnDecoderTimer( wxTimerEvent & )
             m_swFaxArea1->SetScrollbars(1, 1, pw, ph, x, y);
             m_swFaxArea1->Refresh();
         }
+        
         m_decoder.m_DecoderMutex.Unlock();
         m_bPhasingArea->Refresh();
     }
-    m_tDecoder.Start(1000, wxTIMER_ONE_SHOT);
+    m_tDecoder.Start(500, wxTIMER_ONE_SHOT);
 }
 
 void WeatherFaxWizard::OnStopDecoding( wxCommandEvent& event )

@@ -337,6 +337,9 @@ void FaxDecoder::SetupBuffers()
 
     phasingPos = new int[m_phasingLines];
     phasingLinesLeft = phasingSkipData = phasingSkippedData = 0;
+
+    if(m_Fileoffset)
+        phasingLinesLeft = m_phasingLines;
 }
 
 void FaxDecoder::CleanUpBuffers()
@@ -407,21 +410,26 @@ bool FaxDecoder::DecodeFax()
                noise and also misalignment on first and last lines */
             const int leewaylines = 4;
 
-            if(type == START && typecount == m_StartLength*m_lpm/60.0 - leewaylines) {
-                /* image start detected, reset image at 0 lines  */
-                if(!m_bIncludeHeadersInImages) {
-                    m_imageline = 0;
-                    imgpos = 0;
-                }
+            if(typecount == m_StartLength*m_lpm/60.0 - leewaylines) {
+                if(type == START && m_imageline < 100) {
+                    /* prepare for phasing */
+                    /* image start detected, reset image at 0 lines  */
+                    if(!m_bIncludeHeadersInImages) {
+                        m_imageline = 0;
+                        imgpos = 0;
+                    }
 
-                /* prepare for phasing */
-                phasingLinesLeft = m_phasingLines;
-                gotstart = true;
-            } else
-                if(type == STOP && typecount == m_StopLength*m_lpm/60.0 - leewaylines) {
-                    if(!m_bIncludeHeadersInImages)
-                        break;
+                    phasingLinesLeft = m_phasingLines;
+                    gotstart = true;
+                } else {
+                    // cut image at start or stop
+                    if(m_inputtype == FILENAME)
+                        m_stop_audio_offset = afTellFrame (aFile, AF_DEFAULT_TRACK);
+                    else
+                        m_stop_audio_offset = 1; // used as flag to indicate stop was reached
+                    goto done;
                 }
+            }
         }
 
         /* throw away first 2 lines of phasing because we are not sure
@@ -458,6 +466,7 @@ bool FaxDecoder::DecodeFax()
     }
 done:
 
+    m_DecoderStopMutex.Lock();
      /* put left overdata into an image */
      if((m_bIncludeHeadersInImages || gotstart) &&
         m_imageline > 10) { /* throw away really short images */
@@ -468,6 +477,7 @@ done:
          /* fill rest of the line with zeros */
          memset(id+imgpos, 0, m_imagewidth*m_imageline*m_imagecolors - imgpos);
      }
+     m_DecoderStopMutex.Unlock();
 
      CloseInput();
 
@@ -486,9 +496,10 @@ bool FaxDecoder::DecodeFaxFromFilename(wxString fileName)
         return Error(_("sample size not 8 or 16 bit: ") + wxString::Format(_T("%d"), m_SampleSize));
     
     m_SampleRate = afGetRate(aFile, AF_DEFAULT_TRACK);
-    
-    size = afGetTrackBytes (aFile, AF_DEFAULT_TRACK);
-    if(size < 0 || size == 0x80000000)
+
+    afSeekFrame (aFile, AF_DEFAULT_TRACK, m_Fileoffset);
+//    size = afGetTrackBytes (aFile, AF_DEFAULT_TRACK);
+//    if(size < 0 || size == 0x80000000)
         size = 0; // file is still being written to..
 
     m_inputtype = FILENAME;
