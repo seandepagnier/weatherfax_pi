@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Oct  8 2012)
+// C++ code generated with wxFormBuilder (version Jul 15 2016)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -1378,6 +1378,75 @@ WeatherFaxPrefsDialog::WeatherFaxPrefsDialog( wxWindow* parent, wxWindowID id, c
 	
 	fgSizer56->Add( sbSizer18, 1, wxEXPAND, 5 );
 	
+	wxStaticBoxSizer* sbSizer21;
+	sbSizer21 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("capture") ), wxVERTICAL );
+	
+	m_cbCaptureType = new wxChoicebook( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxCHB_DEFAULT );
+	m_panel7 = new wxPanel( m_cbCaptureType, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxFlexGridSizer* fgSizer58;
+	fgSizer58 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer58->SetFlexibleDirection( wxBOTH );
+	fgSizer58->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_staticText39 = new wxStaticText( m_panel7, wxID_ANY, _("Sample Rate"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText39->Wrap( -1 );
+	fgSizer58->Add( m_staticText39, 0, wxALL, 5 );
+	
+	wxString m_cSampleRateChoices[] = { _("8000"), _("16000"), _("48000") };
+	int m_cSampleRateNChoices = sizeof( m_cSampleRateChoices ) / sizeof( wxString );
+	m_cSampleRate = new wxChoice( m_panel7, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_cSampleRateNChoices, m_cSampleRateChoices, 0 );
+	m_cSampleRate->SetSelection( 0 );
+	fgSizer58->Add( m_cSampleRate, 0, wxALL, 5 );
+	
+	m_staticText42 = new wxStaticText( m_panel7, wxID_ANY, _("Device Index"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText42->Wrap( -1 );
+	fgSizer58->Add( m_staticText42, 0, wxALL, 5 );
+	
+	m_sDeviceIndex = new wxSpinCtrl( m_panel7, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -1, 10, 0 );
+	fgSizer58->Add( m_sDeviceIndex, 0, wxALL, 5 );
+	
+	
+	m_panel7->SetSizer( fgSizer58 );
+	m_panel7->Layout();
+	fgSizer58->Fit( m_panel7 );
+	m_cbCaptureType->AddPage( m_panel7, _("audio"), true );
+	m_panel8 = new wxPanel( m_cbCaptureType, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
+	wxFlexGridSizer* fgSizer63;
+	fgSizer63 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer63->SetFlexibleDirection( wxBOTH );
+	fgSizer63->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_staticText451 = new wxStaticText( m_panel8, wxID_ANY, _("device index"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText451->Wrap( -1 );
+	fgSizer63->Add( m_staticText451, 0, wxALL, 5 );
+	
+	m_srtlsdr_deviceindex = new wxSpinCtrl( m_panel8, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 10, 0 );
+	fgSizer63->Add( m_srtlsdr_deviceindex, 0, wxALL, 5 );
+	
+	m_staticText46 = new wxStaticText( m_panel8, wxID_ANY, _("error ppm"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText46->Wrap( -1 );
+	fgSizer63->Add( m_staticText46, 0, wxALL, 5 );
+	
+	m_srtlsdr_errorppm = new wxSpinCtrl( m_panel8, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 10, 0 );
+	fgSizer63->Add( m_srtlsdr_errorppm, 0, wxALL, 5 );
+	
+	m_staticText47 = new wxStaticText( m_panel8, wxID_ANY, _("upconverter mhz"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText47->Wrap( -1 );
+	fgSizer63->Add( m_staticText47, 0, wxALL, 5 );
+	
+	m_srtlsdr_upconverter_mhz = new wxSpinCtrl( m_panel8, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 1000, 125 );
+	fgSizer63->Add( m_srtlsdr_upconverter_mhz, 0, wxALL, 5 );
+	
+	
+	m_panel8->SetSizer( fgSizer63 );
+	m_panel8->Layout();
+	fgSizer63->Fit( m_panel8 );
+	m_cbCaptureType->AddPage( m_panel8, _("rtlsdr"), false );
+	sbSizer21->Add( m_cbCaptureType, 1, wxEXPAND | wxALL, 5 );
+	
+	
+	fgSizer56->Add( sbSizer21, 1, wxEXPAND, 5 );
+	
 	wxStaticBoxSizer* sbSizer17;
 	sbSizer17 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Export") ), wxVERTICAL );
 	
@@ -1471,10 +1540,16 @@ WeatherFaxPrefsDialog::WeatherFaxPrefsDialog( wxWindow* parent, wxWindowID id, c
 	fgSizer51->Fit( this );
 	
 	this->Centre( wxBOTH );
+	
+	// Connect Events
+	m_cSampleRate->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( WeatherFaxPrefsDialog::OnOptions ), NULL, this );
 }
 
 WeatherFaxPrefsDialog::~WeatherFaxPrefsDialog()
 {
+	// Disconnect Events
+	m_cSampleRate->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( WeatherFaxPrefsDialog::OnOptions ), NULL, this );
+	
 }
 
 DecoderOptionsDialogBase::DecoderOptionsDialogBase( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
@@ -1482,20 +1557,15 @@ DecoderOptionsDialogBase::DecoderOptionsDialogBase( wxWindow* parent, wxWindowID
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 	
 	wxFlexGridSizer* fgSizer57;
-	fgSizer57 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer57 = new wxFlexGridSizer( 0, 1, 0, 0 );
 	fgSizer57->SetFlexibleDirection( wxBOTH );
 	fgSizer57->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
 	wxStaticBoxSizer* sbSizer6;
 	sbSizer6 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Audio Decoding Options") ), wxVERTICAL );
 	
-	wxFlexGridSizer* fgSizer12;
-	fgSizer12 = new wxFlexGridSizer( 0, 1, 0, 0 );
-	fgSizer12->SetFlexibleDirection( wxBOTH );
-	fgSizer12->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-	
 	wxFlexGridSizer* fgSizer10;
-	fgSizer10 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer10 = new wxFlexGridSizer( 0, 4, 0, 0 );
 	fgSizer10->SetFlexibleDirection( wxBOTH );
 	fgSizer10->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
@@ -1545,7 +1615,12 @@ DecoderOptionsDialogBase::DecoderOptionsDialogBase( wxWindow* parent, wxWindowID
 	fgSizer10->Add( m_sMinusSaturationThreshold, 0, wxALL, 5 );
 	
 	
-	fgSizer12->Add( fgSizer10, 1, wxEXPAND, 5 );
+	sbSizer6->Add( fgSizer10, 1, wxEXPAND, 5 );
+	
+	wxFlexGridSizer* fgSizer12;
+	fgSizer12 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer12->SetFlexibleDirection( wxBOTH );
+	fgSizer12->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
 	m_cbSkip = new wxCheckBox( this, wxID_ANY, _("Skip start, stop and \nphasing detection"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer12->Add( m_cbSkip, 0, wxALL, 5 );
@@ -1564,37 +1639,6 @@ DecoderOptionsDialogBase::DecoderOptionsDialogBase( wxWindow* parent, wxWindowID
 	fgSizer59->AddGrowableRow( 1 );
 	fgSizer59->SetFlexibleDirection( wxBOTH );
 	fgSizer59->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-	
-	wxStaticBoxSizer* sbSizer19;
-	sbSizer19 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Audio Capture Options") ), wxVERTICAL );
-	
-	wxFlexGridSizer* fgSizer58;
-	fgSizer58 = new wxFlexGridSizer( 0, 2, 0, 0 );
-	fgSizer58->SetFlexibleDirection( wxBOTH );
-	fgSizer58->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-	
-	m_staticText39 = new wxStaticText( this, wxID_ANY, _("Sample Rate"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText39->Wrap( -1 );
-	fgSizer58->Add( m_staticText39, 0, wxALL, 5 );
-	
-	wxString m_cSampleRateChoices[] = { _("8000"), _("16000"), _("48000") };
-	int m_cSampleRateNChoices = sizeof( m_cSampleRateChoices ) / sizeof( wxString );
-	m_cSampleRate = new wxChoice( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_cSampleRateNChoices, m_cSampleRateChoices, 0 );
-	m_cSampleRate->SetSelection( 0 );
-	fgSizer58->Add( m_cSampleRate, 0, wxALL, 5 );
-	
-	m_staticText42 = new wxStaticText( this, wxID_ANY, _("Device Index"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText42->Wrap( -1 );
-	fgSizer58->Add( m_staticText42, 0, wxALL, 5 );
-	
-	m_sDeviceIndex = new wxSpinCtrl( this, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -1, 10, 0 );
-	fgSizer58->Add( m_sDeviceIndex, 0, wxALL, 5 );
-	
-	
-	sbSizer19->Add( fgSizer58, 1, wxEXPAND, 5 );
-	
-	
-	fgSizer59->Add( sbSizer19, 1, wxEXPAND, 5 );
 	
 	m_bDone = new wxButton( this, wxID_ANY, _("Done"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer59->Add( m_bDone, 0, wxALIGN_BOTTOM|wxALIGN_RIGHT|wxALL, 5 );
@@ -1618,7 +1662,6 @@ DecoderOptionsDialogBase::DecoderOptionsDialogBase( wxWindow* parent, wxWindowID
 	m_sMinusSaturationThreshold->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptionsSpin ), NULL, this );
 	m_cbSkip->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( DecoderOptionsDialogBase::OnResetOptions ), NULL, this );
 	m_cbInclude->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( DecoderOptionsDialogBase::OnResetOptions ), NULL, this );
-	m_cSampleRate->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
 	m_bDone->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( DecoderOptionsDialogBase::OnDone ), NULL, this );
 }
 
@@ -1633,7 +1676,6 @@ DecoderOptionsDialogBase::~DecoderOptionsDialogBase()
 	m_sMinusSaturationThreshold->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( DecoderOptionsDialogBase::OnOptionsSpin ), NULL, this );
 	m_cbSkip->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( DecoderOptionsDialogBase::OnResetOptions ), NULL, this );
 	m_cbInclude->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( DecoderOptionsDialogBase::OnResetOptions ), NULL, this );
-	m_cSampleRate->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( DecoderOptionsDialogBase::OnOptions ), NULL, this );
 	m_bDone->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( DecoderOptionsDialogBase::OnDone ), NULL, this );
 	
 }

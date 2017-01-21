@@ -39,6 +39,7 @@
 #define ABOUT_AUTHOR_URL "http://seandepagnier.users.sourceforge.net"
 
 #include "ocpn_plugin.h"
+#include "FaxDecoder.h"
 
 #include "defs.h"
 
@@ -92,7 +93,9 @@ public:
 
       /* audio decoding options */
       bool m_bLoadSchedulesStart;
-
+      
+      FaxDecoderCaptureSettings m_CaptureSettings;
+    
       int m_iExportColors;
       bool m_bExportDepthMeters;
       wxString m_sExportSoundingDatum;

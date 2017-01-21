@@ -27,7 +27,6 @@
 #include <wx/fileconf.h>
 
 #include "weatherfax_pi.h"
-#include "FaxDecoder.h"
 #include "WeatherFaxImage.h"
 #include "WeatherFax.h"
 #include "DecoderOptionsDialog.h"
@@ -35,12 +34,13 @@
 #include "icons.h"
 
 WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
-                                    bool use_decoder, wxString decoder_filename, AFframecount offset,
+                                    FaxDecoderCaptureSettings &CaptureSettings,
                                     WeatherFax &parent,
                                     WeatherFaxImageCoordinateList *coords,
                                     wxString newcoordbasename)
-    : WeatherFaxWizardBase( &parent ), m_decoder(*this, decoder_filename, offset),
-      m_DecoderOptionsDialog(use_decoder ? new DecoderOptionsDialog(*this) : NULL),
+    : WeatherFaxWizardBase( &parent ), m_decoder(*this, CaptureSettings ),
+      m_DecoderOptionsDialog(CaptureSettings.type == FaxDecoderCaptureSettings::NONE ?
+                             NULL : new DecoderOptionsDialog(*this)),
       m_parent(parent), m_wfimg(img), m_curCoords(img.m_Coords),
       m_NewCoordBaseName(newcoordbasename.empty() ? wxString(_("New Coord")) : newcoordbasename),
       m_Coords(coords ? *coords : m_BuiltinCoords)
@@ -67,7 +67,7 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
     
     m_cRotation->SetSelection(m_curCoords->rotation);
 
-    if(use_decoder && m_decoder.m_inputtype != FaxDecoder::NONE) {
+    if(m_DecoderOptionsDialog) {
         m_DecoderOptionsDialog->SetIcon(icon);
         StartDecoder();
     } else {
@@ -171,7 +171,7 @@ void WeatherFaxWizard::OnDecoderTimer( wxTimerEvent & )
             m_bStopDecoding->Disable();
 
             if(m_decoder.m_stop_audio_offset && &m_Coords == &m_parent.m_UserCoords) {
-                m_parent.OpenWav(m_decoder.m_Filename, m_decoder.m_stop_audio_offset);
+                m_parent.OpenWav(m_decoder.m_CaptureSettings.filename, m_decoder.m_stop_audio_offset);
                 m_decoder.m_stop_audio_offset = 0; //prevent this running again
             }
         }

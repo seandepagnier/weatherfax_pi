@@ -38,8 +38,6 @@
 #include "WeatherFaxImage.h"
 #include "WeatherFax.h"
 
-#include "FaxDecoder.h"
-
 InternetRetrievalDialog::InternetRetrievalDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
     : InternetRetrievalDialogBase( parent ), m_weatherfax_pi(_weatherfax_pi),
       m_bLoaded(false), m_bDisableServers(false), m_bDisableRegions(false),

@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Oct  8 2012)
+// C++ code generated with wxFormBuilder (version Jul 15 2016)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -44,6 +44,7 @@
 #include <wx/wizard.h>
 #include <wx/dynarray.h>
 WX_DEFINE_ARRAY_PTR( wxWizardPageSimple*, WizardPages );
+#include <wx/choicebk.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -348,6 +349,13 @@ class WeatherFaxPrefsDialog : public wxDialog
 	private:
 	
 	protected:
+		wxPanel* m_panel7;
+		wxStaticText* m_staticText39;
+		wxStaticText* m_staticText42;
+		wxPanel* m_panel8;
+		wxStaticText* m_staticText451;
+		wxStaticText* m_staticText46;
+		wxStaticText* m_staticText47;
 		wxStaticText* m_staticText36;
 		wxStaticText* m_staticText37;
 		wxStaticText* m_staticText45;
@@ -355,9 +363,19 @@ class WeatherFaxPrefsDialog : public wxDialog
 		wxStdDialogButtonSizer* m_sdbSizer1;
 		wxButton* m_sdbSizer1OK;
 		wxButton* m_sdbSizer1Cancel;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OnOptions( wxCommandEvent& event ) { event.Skip(); }
+		
 	
 	public:
 		wxCheckBox* m_cbLoadSchedulesStart;
+		wxChoicebook* m_cbCaptureType;
+		wxChoice* m_cSampleRate;
+		wxSpinCtrl* m_sDeviceIndex;
+		wxSpinCtrl* m_srtlsdr_deviceindex;
+		wxSpinCtrl* m_srtlsdr_errorppm;
+		wxSpinCtrl* m_srtlsdr_upconverter_mhz;
 		wxSpinCtrl* m_sExportColors;
 		wxRadioButton* m_rbExportDepthMeters;
 		wxRadioButton* m_rbExportDepthFathoms;
@@ -382,16 +400,11 @@ class DecoderOptionsDialogBase : public wxDialog
 		wxStaticText* m_staticText32;
 		wxStaticText* m_staticText33;
 		wxStaticText* m_staticText41;
-		wxStaticText* m_staticText39;
-		wxChoice* m_cSampleRate;
-		wxStaticText* m_staticText42;
-		wxSpinCtrl* m_sDeviceIndex;
 		wxButton* m_bDone;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnOptionsSpin( wxSpinEvent& event ) { event.Skip(); }
 		virtual void OnResetOptions( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnOptions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnDone( wxCommandEvent& event ) { event.Skip(); }
 		
 	

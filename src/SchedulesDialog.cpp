@@ -36,8 +36,6 @@
 #include "WeatherFaxImage.h"
 #include "WeatherFax.h"
 
-#include "FaxDecoder.h"
-
 SchedulesDialog::SchedulesDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
     : SchedulesDialogBase( parent ), m_CaptureWizard(NULL), m_weatherfax_pi(_weatherfax_pi),
       m_ExternalCaptureProcess(NULL), m_CurrentSchedule(NULL), m_bLoaded(false),

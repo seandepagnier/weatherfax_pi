@@ -5,7 +5,7 @@
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
- *   Copyright (C) 2014 by Sean D'Epagnier                                 *
+ *   Copyright (C) 2017 by Sean D'Epagnier                                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -29,7 +29,6 @@
 #include "tinyxml/tinyxml.h"
 
 #include "weatherfax_pi.h"
-#include "FaxDecoder.h"
 #include "WeatherFaxImage.h"
 #include "WeatherFax.h"
 #include "DecoderOptionsDialog.h"
@@ -360,11 +359,18 @@ WeatherFaxWizard *WeatherFax::OpenWav(wxString filename, AFframecount offset, wx
         if(name == m_BuiltinCoords[i]->name)
             img->m_Coords = m_BuiltinCoords[i];
 
+    FaxDecoderCaptureSettings CaptureSettings = m_weatherfax_pi.m_CaptureSettings;
+    if(!CaptureSettings.filename.empty()) {
+        CaptureSettings.type = FaxDecoderCaptureSettings::FILE;
+        CaptureSettings.filename = filename;
+        CaptureSettings.offset = offset;
+    }
+    
     WeatherFaxImageCoordinateList *coords = name.size() ? NULL : &m_UserCoords;
     WeatherFaxWizard *wizard = new WeatherFaxWizard
-        (*img, true, filename, offset, *this, coords, name);
+        (*img, CaptureSettings, *this, coords, name);
 
-    if(wizard->m_decoder.m_inputtype == FaxDecoder::NONE) {
+    if(wizard->m_decoder.m_CaptureSettings.type == FaxDecoderCaptureSettings::NONE) {
         delete img;
         delete wizard;
         return NULL;
@@ -425,7 +431,10 @@ void WeatherFax::OpenImage(wxString filename, wxString station, wxString area, w
         }
 
     {
-        WeatherFaxWizard wizard(*img, false, _T(""), 0, *this, name.size() ? &BuiltinCoordList : &m_UserCoords, name);
+        FaxDecoderCaptureSettings CaptureSettings = m_weatherfax_pi.m_CaptureSettings;
+        CaptureSettings.type = FaxDecoderCaptureSettings::NONE;
+            
+        WeatherFaxWizard wizard(*img, CaptureSettings, *this, name.size() ? &BuiltinCoordList : &m_UserCoords, name);
         if(wizard.RunWizard(wizard.m_pages[1])) {
             if(name.size() == 0) {
                 wxFileName filenamec(filename);
@@ -546,7 +555,9 @@ void WeatherFax::OnEdit( wxCommandEvent& event )
             builtin = true;
         }
 
-    WeatherFaxWizard wizard(image, false, _T(""), 0, *this, builtin ? &BuiltinCoordList : &m_UserCoords, _T(""));
+    FaxDecoderCaptureSettings CaptureSettings = m_weatherfax_pi.m_CaptureSettings;
+    CaptureSettings.type = FaxDecoderCaptureSettings::NONE;
+    WeatherFaxWizard wizard(image, CaptureSettings, *this, builtin ? &BuiltinCoordList : &m_UserCoords, _T(""));
     if(wizard.RunWizard(wizard.m_pages[0]))
         image.FreeData();
     else
