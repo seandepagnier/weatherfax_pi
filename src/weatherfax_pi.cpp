@@ -284,9 +284,9 @@ bool weatherfax_pi::LoadConfig(void)
     pConf->Read ( _T ( "samplerate" ), &m_CaptureSettings.audio_samplerate, 8000);
 
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Capture/rtlsdr" ) );
-    pConf->Read ( _T ( "deviceindex" ), &m_CaptureSettings.rtlsdr_deviceindex);
-    pConf->Read ( _T ( "errorppm" ), &m_CaptureSettings.rtlsdr_errorppm);
-    pConf->Read ( _T ( "upconverter_mhz" ), &m_CaptureSettings.rtlsdr_upconverter_mhz);
+    pConf->Read ( _T ( "deviceindex" ), &m_CaptureSettings.rtlsdr_deviceindex, 0);
+    pConf->Read ( _T ( "errorppm" ), &m_CaptureSettings.rtlsdr_errorppm, 0);
+    pConf->Read ( _T ( "upconverter_mhz" ), &m_CaptureSettings.rtlsdr_upconverter_mhz, 125);
 
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Export" ) );
     pConf->Read ( _T ( "Colors" ), &m_iExportColors, 64 );

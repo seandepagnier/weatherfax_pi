@@ -34,13 +34,13 @@
 #include <wx/panel.h>
 #include <wx/filepicker.h>
 #include <wx/radiobut.h>
+#include <wx/combobox.h>
 #include <wx/notebook.h>
 #include <wx/gauge.h>
 #include <wx/dialog.h>
 #include <wx/splitter.h>
 #include <wx/scrolwin.h>
 #include <wx/choice.h>
-#include <wx/combobox.h>
 #include <wx/wizard.h>
 #include <wx/dynarray.h>
 WX_DEFINE_ARRAY_PTR( wxWizardPageSimple*, WizardPages );
@@ -66,7 +66,7 @@ class WeatherFaxBase : public wxFrame
 		wxMenuItem* m_mExport;
 		wxMenuItem* m_mDelete;
 		wxMenu* m_menu2;
-		wxMenuItem* m_mAudioCapture;
+		wxMenuItem* m_mCapture;
 		wxMenu* m_menu3;
 		
 		// Virtual event handlers, overide them in your derived class
@@ -139,7 +139,9 @@ class SchedulesDialogBase : public wxDialog
 		wxRadioButton* m_rbNoAction;
 		wxRadioButton* m_rbAudioCapture;
 		wxRadioButton* m_rbExternalCapture;
-		wxTextCtrl* m_tExternalCapture;
+		wxComboBox* m_cExternalCapture;
+		wxStaticText* m_staticText47;
+		wxTextCtrl* m_tExternalConversion;
 		wxRadioButton* m_rbManualCapture;
 		wxPanel* m_panel7;
 		wxStaticText* m_staticText33;
@@ -158,6 +160,7 @@ class SchedulesDialogBase : public wxDialog
 		virtual void OnFilterSpin( wxSpinEvent& event ) { event.Skip(); }
 		virtual void OnAllFrequencies( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnClearCaptures( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnExternalCommandChoice( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
 		
 	
@@ -237,6 +240,8 @@ class WeatherFaxWizardBase : public wxWizard
 		wxButton* m_bStopDecoding;
 		wxButton* m_bDecoderOptions;
 		wxScrolledWindow* m_bPhasingArea;
+		wxStaticText* m_staticText46;
+		wxSpinCtrl* m_sHFFrequency;
 		wxStaticText* m_staticText16;
 		wxChoice* m_cFilter;
 		wxStaticText* m_staticText9;

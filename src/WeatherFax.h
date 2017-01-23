@@ -104,13 +104,13 @@ public:
     SchedulesDialog m_SchedulesDialog;
     InternetRetrievalDialog m_InternetRetrievalDialog;
 
+    weatherfax_pi &m_weatherfax_pi;
+
 protected:
     void OnDeleteWizardTimer( wxTimerEvent & );
 
     std::list<WeatherFaxWizard *> m_AudioWizards;
     wxTimer m_tDeleteAudioWizard;
-
-    weatherfax_pi &m_weatherfax_pi;
 };
 
 class FaxDecoder;

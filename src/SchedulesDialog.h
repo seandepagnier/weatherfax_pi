@@ -90,6 +90,7 @@ public:
     void OnNoStations( wxCommandEvent& event );
     void OnAllFrequencies( wxCommandEvent& event );
     void OnClearCaptures( wxCommandEvent& event );
+    void OnExternalCommandChoice( wxCommandEvent& event );
     void OnClose( wxCommandEvent& event );
 
     bool HasStation(wxString station);

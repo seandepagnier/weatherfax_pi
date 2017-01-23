@@ -416,7 +416,7 @@ bool FaxDecoder::DecodeFax()
             const int leewaylines = 4;
 
             if(typecount == m_StartLength*m_lpm/60.0 - leewaylines) {
-                if(type == START && m_imageline < 100) {
+                if(type == START/* && m_imageline < 100*/) {
                     /* prepare for phasing */
                     /* image start detected, reset image at 0 lines  */
                     if(!m_bIncludeHeadersInImages) {
@@ -427,7 +427,7 @@ bool FaxDecoder::DecodeFax()
                     phasingLinesLeft = m_phasingLines;
                     gotstart = true;
                 } else {
-                    // cut image at start or stop
+                    // exit at stop
                     if(m_CaptureSettings.type == FaxDecoderCaptureSettings::FILE)
                         m_stop_audio_offset = afTellFrame (aFile, AF_DEFAULT_TRACK);
                     else

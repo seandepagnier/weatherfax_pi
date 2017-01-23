@@ -5,7 +5,7 @@
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
- *   Copyright (C) 2014 by Sean D'Epagnier                                 *
+ *   Copyright (C) 2017 by Sean D'Epagnier                                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -81,7 +81,8 @@ SchedulesDialog::~SchedulesDialog()
     pConf->Write ( _T ( "noaction" ), m_rbNoAction->GetValue() );
     pConf->Write ( _T ( "audiocapture" ), m_rbAudioCapture->GetValue() );
     pConf->Write ( _T ( "externalcapture" ), m_rbExternalCapture->GetValue() );
-    pConf->Write ( _T ( "externalcapturecommand" ), m_tExternalCapture->GetValue() );
+    pConf->Write ( _T ( "externalcapturecommand" ), m_cExternalCapture->GetValue() );
+    pConf->Write ( _T ( "externalconversioncommand" ), m_tExternalConversion->GetValue() );
     pConf->Write ( _T ( "manualcapture" ), m_rbExternalCapture->GetValue() );
 
     wxString captures;
@@ -191,8 +192,10 @@ void SchedulesDialog::Load()
     m_rbAudioCapture->SetValue(b);
     pConf->Read ( _T ( "externalcapture" ), &b, false );
     m_rbExternalCapture->SetValue(b);
-    pConf->Read ( _T ( "externalcapturecommand" ), &s, m_tExternalCapture->GetValue() );
-    m_tExternalCapture->SetValue(s);
+    pConf->Read ( _T ( "externalcapturecommand" ), &s, m_cExternalCapture->GetValue() );
+    m_cExternalCapture->SetValue(s);
+    pConf->Read ( _T ( "externalconversioncommand" ), &s, m_tExternalConversion->GetValue() );
+    m_tExternalConversion->SetValue(s);
     pConf->Read ( _T ( "manualcapture" ), &b, false );
     m_rbExternalCapture->SetValue(b);
 
@@ -529,6 +532,18 @@ void SchedulesDialog::OnClearCaptures( wxCommandEvent& event )
     UpdateProgress();
 }
 
+void SchedulesDialog::OnExternalCommandChoice( wxCommandEvent& event )
+{
+    switch(m_cExternalCapture->GetSelection()) {
+    case 0:
+        m_tExternalConversion->SetValue("");
+        break;
+    case 1:
+        m_tExternalConversion->SetValue("sox -b 16 -r 48k -e signed-integer -t raw -c 1 %input -r 8k");
+        break;
+    }
+}
+
 void SchedulesDialog::OnClose( wxCommandEvent& event )
 {
     Hide();
@@ -778,8 +793,11 @@ void SchedulesDialog::OnCaptureTimer( wxTimerEvent &event )
             mdlg.ShowModal();
         } else {
             m_ExternalCaptureFilename = wxFileName::CreateTempFileName(_T("OCPNWFCapture"));
-            wxString command = m_tExternalCapture->GetValue()
-                + _T(" ") + m_ExternalCaptureFilename;
+            wxString command = m_cExternalCapture->GetValue();
+
+            command.Replace("%frequency", wxString::Format(_T("%d"), (int)(m_CurrentSchedule->Frequency - 1.9 * 1000)));
+            if(!command.Replace("%output", m_ExternalCaptureFilename))
+                command += _T(" ") + m_ExternalCaptureFilename;
                         
             if((m_ExternalCaptureProcess = wxProcess::Open(command))) {
                 m_ExternalCaptureProcess->Connect(wxEVT_END_PROCESS, wxProcessEventHandler
@@ -820,9 +838,27 @@ void SchedulesDialog::OnEndCaptureTimer( wxTimerEvent & )
     } else {
         bool open = true;
         wxString filename;
-        if(m_rbExternalCapture->GetValue())
+        if(m_rbExternalCapture->GetValue()) {
             filename = m_ExternalCaptureFilename;
-        else if(m_rbManualCapture->GetValue()) {
+
+            wxString command = m_tExternalConversion->GetValue();
+            if(!command.empty()) {
+                command.Replace("%input", filename);
+                filename = wxFileName::CreateTempFileName(_T("OCPNWFCapture"));
+                if(!command.Replace("%output", filename))
+                    command += _T(" ") + filename;
+
+                wxArrayString output, error;
+                if(::wxExecute(command, output, error) != 0) {
+                    wxMessageDialog mdlg(this, _("Failed to launch: ") + command +
+                                         _("\n\nlog:\n") + ::wxJoin(output, '\n') +
+                                         _("\n\nerror log:\n") + ::wxJoin(error, '\n'),
+                                         _("weatherfax"), wxOK | wxICON_ERROR);
+                    mdlg.ShowModal();
+                    open = false;
+                }
+            }
+        } else if(m_rbManualCapture->GetValue()) {
             wxFileDialog openDialog( this, _( "Open Weather Fax Input File" ),
                                      m_weatherfax_pi.m_path, wxT ( "" ),
                                      _ ( "WAV files (*.wav)|*.WAV;*.wav|All files (*.*)|*.*" ),

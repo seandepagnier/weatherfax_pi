@@ -46,6 +46,16 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
       m_Coords(coords ? *coords : m_BuiltinCoords)
 {
 
+    // for now, only rtlsdr is tunable, in the future audio could be
+    // if we support radio control
+    if(CaptureSettings.type != FaxDecoderCaptureSettings::RTLSDR)
+        m_sHFFrequency->Disable(); // inform user, frequency isn't used
+    
+    // device index may change if it failed to open,
+    // reflect this back to the config
+    m_parent.m_weatherfax_pi.m_CaptureSettings.audio_deviceindex =
+        m_decoder.m_CaptureSettings.audio_deviceindex;
+
     wxIcon icon;
     icon.CopyFromBitmap(*_img_weatherfax);
     SetIcon(icon);
@@ -169,11 +179,12 @@ void WeatherFaxWizard::OnDecoderTimer( wxTimerEvent & )
     if(m_decoder.m_DecoderMutex.Lock() == wxMUTEX_NO_ERROR) {
         if(!m_thDecoder->IsRunning()) {
             m_bStopDecoding->Disable();
-
+#if 0
             if(m_decoder.m_stop_audio_offset && &m_Coords == &m_parent.m_UserCoords) {
                 m_parent.OpenWav(m_decoder.m_CaptureSettings.filename, m_decoder.m_stop_audio_offset);
                 m_decoder.m_stop_audio_offset = 0; //prevent this running again
             }
+#endif
         }
 
         int w = m_decoder.m_imagewidth, h = m_decoder.m_imageline;

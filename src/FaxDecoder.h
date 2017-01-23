@@ -73,7 +73,7 @@ public:
     FaxDecoder(wxWindow &parent, FaxDecoderCaptureSettings &CaptureSettings)
         : m_imgdata(NULL), m_imagewidth(-1),
         datadouble(NULL), m_CaptureSettings(CaptureSettings),
-        m_parent(parent), dsp(0),
+        m_parent(parent), dsp(0), aFile(0),
 #ifdef OCPN_USE_PORTAUDIO
         pa_stream(NULL),
 #endif

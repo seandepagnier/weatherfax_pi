@@ -340,7 +340,7 @@ bool WeatherFax::WizardCleanup(WeatherFaxWizard *wizard)
         return false;
 
     if(m_AudioWizards.size() <= 1)
-        m_mAudioCapture->Enable();
+        m_mCapture->Enable();
 
     m_tDeleteAudioWizard.Start(10, wxTIMER_ONE_SHOT);
     return true;
@@ -360,7 +360,7 @@ WeatherFaxWizard *WeatherFax::OpenWav(wxString filename, AFframecount offset, wx
             img->m_Coords = m_BuiltinCoords[i];
 
     FaxDecoderCaptureSettings CaptureSettings = m_weatherfax_pi.m_CaptureSettings;
-    if(!CaptureSettings.filename.empty()) {
+    if(!filename.empty()) {
         CaptureSettings.type = FaxDecoderCaptureSettings::FILE;
         CaptureSettings.filename = filename;
         CaptureSettings.offset = offset;
@@ -376,7 +376,7 @@ WeatherFaxWizard *WeatherFax::OpenWav(wxString filename, AFframecount offset, wx
         return NULL;
     }
 
-    m_mAudioCapture->Enable(false);
+    m_mCapture->Enable(false);
 
     wizard->FaxName  = station.size() && contents.size() ? (station + _T(" - ") + contents) :
         filename.size() ? filename : wxString(_("Audio Capture") );

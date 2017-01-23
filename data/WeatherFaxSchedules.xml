@@ -318,10 +318,10 @@
       <Map Time="1735" Contents="SEA SURFACE TEMPERATURE" Valid="00" Area="D" Duration="20" />
     </Frequency>
 
-    <Area Name="A" lat1="70S" lat2="20N" lon1="0E" lon2="90W" />
-    <Area Name="B" lat1="70S" lat2="20N" lon1="20E" lon2="90W" />
-    <Area Name="C" lat1="70S" lat2="20N" lon1="20E" lon2="90W" />
-    <Area Name="D" lat1="50S" lat2="15N" lon1="18E" lon2="72W" />
+    <Area Name="A" lat1="70S" lat2="20N" lon1="90W" lon2="0E" />
+    <Area Name="B" lat1="70S" lat2="20N" lon1="90W" lon2="20E" />
+    <Area Name="C" lat1="70S" lat2="20N" lon1="90W" lon2="20E" />
+    <Area Name="D" lat1="50S" lat2="15N" lon1="72W" lon2="18E" />
   </Station>
 
   <Station Name="Valparaiso, Playa Ancha, Chile">
@@ -339,7 +339,7 @@
       <Map Time="2325" Contents="SATELLITE IMAGE" Valid="21" Area="A" Duration="15" />
     </Frequency>
 
-    <Area Name="A" lat1="80S" lat2="10S" lon1="30W" lon2="130W" />
+    <Area Name="A" lat1="80S" lat2="10S" lon1="130W" lon2="30W" />
   </Station>
 
   <Station Name="Halifax, Nova Scotia, Canada">
@@ -378,15 +378,15 @@
       <Map Time="2301" Contents="GULF OF ST LAWRENCE ICE CHART (SEASONAL)" Valid="LATEST" Duration="20" />
     </Frequency>
 
-    <Area Name="A" lat1="34N" lat2="56N" lon1="24W" lon2="87W" />
-    <Area Name="B" lat1="08N" lat2="76N" lon1="11W" lon2="69W" />
-    <Area Name="C" lat1="30N" lat2="65N" lon1="11W" lon2="69W" />
-    <Area Name="D" lat1="43N" lat2="60N" lon1="33W" lon2="68W" />
-    <Area Name="E" lat1="34N" lat2="50N" lon1="48W" lon2="75W" />
-    <Area Name="F" lat1="28N" lat2="58N" lon1="24W" lon2="98W" />
-    <Area Name="G" lat1="28N" lat2="56N" lon1="24W" lon2="87W" />
-    <Area Name="H" lat1="15N" lat2="79N" lon1="24W" lon2="107W" />
-    <Area Name="I" lat1="28N" lat2="58N" lon1="22W" lon2="100W" />
+    <Area Name="A" lat1="34N" lat2="56N" lon1="87W" lon2="24W" />
+    <Area Name="B" lat1="08N" lat2="76N" lon1="69W" lon2="11W" />
+    <Area Name="C" lat1="30N" lat2="65N" lon1="69W" lon2="11W" />
+    <Area Name="D" lat1="43N" lat2="60N" lon1="68W" lon2="33W" />
+    <Area Name="E" lat1="34N" lat2="50N" lon1="75W" lon2="48W" />
+    <Area Name="F" lat1="28N" lat2="58N" lon1="98W" lon2="24W" />
+    <Area Name="G" lat1="28N" lat2="56N" lon1="87W" lon2="24W" />
+    <Area Name="H" lat1="15N" lat2="79N" lon1="107W" lon2="24W" />
+    <Area Name="I" lat1="28N" lat2="58N" lon1="100W" lon2="22W" />
   </Station>
 
   <Station Name="Iqaluit, N.W.T., Canada">
@@ -490,11 +490,11 @@
       <Map Time="0018" Contents="96HR 500 MB FORECAST" Valid="12" Area="1" Duration="10" />
     </Frequency>
 
-    <Area Name="1" lat1="20N" lat2="70N" lon1="115W" lon2="135E" />
-    <Area Name="2" lat1="40N" lat2="70N" lon1="125W" lon2="150E" />
-    <Area Name="3" lat1="40N" lat2="70N" lon1="115W" lon2="170E" />
-    <Area Name="4" lat1="40N" lat2="60N" lon1="125W" lon2="160E" />
-    <Area Name="5" lat1="05N" lat2="60N" lon1="110W" lon2="160W" />
+    <Area Name="1" lat1="20N" lat2="70N" lon1="135E" lon2="115W" />
+    <Area Name="2" lat1="40N" lat2="70N" lon1="150E" lon2="125W" />
+    <Area Name="3" lat1="40N" lat2="70N" lon1="170E" lon2="115W" />
+    <Area Name="4" lat1="40N" lat2="60N" lon1="160E" lon2="125W" />
+    <Area Name="5" lat1="05N" lat2="60N" lon1="160W" lon2="110W" />
     <Area Name="6" Description="Ice Covered AK Waters" />
     <Area Name="7" Description="Cook Inlet" />
   </Station>
@@ -588,16 +588,16 @@
       <Map Time="1608" Contents="TROPICAL SURFACE ANALYSIS" Valid="00" Area="4" Duration="10" />
     </Frequency>
 
-    <Area Name="1" lat1="20N" lat2="70N" lon1="115W" lon2="135E" />
-    <Area Name="2" lat1="20N" lat2="70N" lon1="115W" lon2="175W" />
-    <Area Name="3" lat1="20N" lat2="70N" lon1="175W" lon2="135E" />
+    <Area Name="1" lat1="20N" lat2="70N" lon1="135E" lon2="115W" />
+    <Area Name="2" lat1="20N" lat2="70N" lon1="175W" lon2="115W" />
+    <Area Name="3" lat1="20N" lat2="70N" lon1="135E" lon2="175W" />
     <Area Name="4" lat1="20S" lat2="30N" />
     <Area Name="5" lat1="5N" lat2="55N" />
     <Area Name="6" lat1="23N" lat2="60N" />
     <Area Name="7" lat1="05N" lat2="32N" />
     <Area Name="8" lat1="18N" lat2="62N" />
     <Area Name="9" lat1="40N" lat2="53N" />
-    <Area Name="10" lat1="0N" lat2="40N" lon1="80W" lon2="180W" />
+    <Area Name="10" lat1="0N" lat2="40N" lon1="180W" lon2="80W" />
   </Station>
 
   <Station Name="New Orleans, Louisiana, U.S.A.">
@@ -635,7 +635,7 @@
       <Map Time="0845" Contents="HIGH SEAS FORECAST (IN ENGLISH)" Valid="04" Area="5" Duration="10" />
     </Frequency>
     <Frequency khz="4317.9,8503.9,12789.9,17146.4">
-<!--      <Map Time="1200" Contents="TEST PATTERN" /> ->>
+<!--      <Map Time="1200" Contents="TEST PATTERN" /> -->
       <Map Time="1205" Contents="U.S./TROPICAL SURFACE ANALYSIS (W HALF)" Valid="06" Area="1" />
       <Map Time="1220" Contents="TROPICAL SURFACE ANALYSIS (E HALF)" Valid="06" Area="2" />
       <Map Time="1235" Contents="24 HR WIND/WAVE FORECAST" Valid="00" Area="3" />
@@ -667,11 +667,11 @@
       <Map Time="2045" Contents="HIGH SEAS FORECAST (IN ENGLISH)" Valid="16" Area="5" Duration="10" />
     </Frequency>
 
-    <Area Name="1" lat1="5S" lat2="50N" lon1="55W" lon2="125W" />
-    <Area Name="2" lat1="5S" lat2="50N" lon1="0W" lon2="70W" />
-    <Area Name="3" lat1="0N" lat2="31N" lon1="35W" lon2="100W" />
-    <Area Name="4" lat1="12S" lat2="44N" lon1="28W" lon2="112W" />
-    <Area Name="5" lat1="7N" lat2="31N" lon1="35W" lon2="98W" />
+    <Area Name="1" lat1="5S" lat2="50N" lon1="125W" lon2="55W" />
+    <Area Name="2" lat1="5S" lat2="50N" lon1="70W" lon2="0W" />
+    <Area Name="3" lat1="0N" lat2="31N" lon1="100W" lon2="35W" />
+    <Area Name="4" lat1="12S" lat2="44N" lon1="112W" lon2="28W" />
+    <Area Name="5" lat1="7N" lat2="31N" lon1="98W" lon2="35W" />
     <Area Name="6" lat1="5N" lat2="60N" lon1="0W" lon2="100W" />
   </Station>
 
@@ -751,14 +751,14 @@
       <Map Time="2228" Contents="CYCLONE DANGER AREA* or 48HR HIGH WIND/WAVES" Valid="21" Area="7" Duration="12" />
     </Frequency>
 
-    <Area Name="1" lat1="28N" lat2="52N" lon1="45W" lon2="85W" />
-    <Area Name="2" lat1="18N" lat2="65N" lon1="10E" lon2="45W" />
-    <Area Name="3" lat1="18N" lat2="65N" lon1="40W" lon2="95W" />
-    <Area Name="4" lat1="18N" lat2="65N" lon1="10E" lon2="95W" />
-    <Area Name="5" lat1="20N" lat2="55N" lon1="55W" lon2="95W" />
-    <Area Name="6" lat1="0N" lat2="60N" lon1="40W" lon2="98W" />
-    <Area Name="7" lat1="5N" lat2="60N" lon1="0W" lon2="100W" />
-    <Area Name="8" lat1="22N" lat2="51N" lon1="40W" lon2="98W" />
+    <Area Name="1" lat1="28N" lat2="52N" lon1="85W" lon2="45W" />
+    <Area Name="2" lat1="18N" lat2="65N" lon1="45W" lon2="10E" />
+    <Area Name="3" lat1="18N" lat2="65N" lon1="95W" lon2="40W" />
+    <Area Name="4" lat1="18N" lat2="65N" lon1="95W" lon2="10E" />
+    <Area Name="5" lat1="20N" lat2="55N" lon1="95W" lon2="55W" />
+    <Area Name="6" lat1="0N" lat2="60N" lon1="98W" lon2="40W" />
+    <Area Name="7" lat1="5N" lat2="60N" lon1="100W" lon2="0W" />
+    <Area Name="8" lat1="22N" lat2="51N" lon1="98W" lon2="40W" />
   </Station>
 
 <!-- Corrections to australia need to be made to both stations -->
@@ -1002,7 +1002,7 @@
     </Frequency>
     
     <Area Name="TNZ" Description="TASMAN SEA - NEW ZEALAND" />
-    <Area Name="SWP" Description="SOUTHWEST PACIFIC" lat1="55S" lat2="0N" lon1="100W" lon2="140E" />
+    <Area Name="SWP" Description="SOUTHWEST PACIFIC" lat1="55S" lat2="0N" lon1="140E" lon2="100W" />
   </Station>
     
   <Station Name="Honolulu, Hawaii, USA">
@@ -1100,17 +1100,17 @@
       <Map Time="0356" Contents="TROPICAL SURFACE ANALYSIS" Valid="12" Area="Z" Duration="13" />
     </Frequency>
 
-    <Area Name="A" lat1="30S" lat2="50N" lon1="110W" lon2="130E" />
-    <Area Name="B" lat1="30S" lat2="30N" lon1="110W" lon2="160E" />
-    <Area Name="C" lat1="0N" lat2="50N" lon1="110W" lon2="130E" />
-    <Area Name="D" lat1="30S" lat2="50N" lon1="110W" lon2="160E" />
-    <Area Name="E" lat1="0N" lat2="40N" lon1="80W" lon2="170E" />
-    <Area Name="F" lat1="0N" lat2="55N" lon1="110W" lon2="160E" />
-    <Area Name="G" lat1="5S" lat2="55N" lon1="110W" lon2="155E" />
-    <Area Name="H" lat1="40S" lat2="5N" lon1="130W" lon2="165E" />
+    <Area Name="A" lat1="30S" lat2="50N" lon1="130E" lon2="110W" />
+    <Area Name="B" lat1="30S" lat2="30N" lon1="160E" lon2="110W" />
+    <Area Name="C" lat1="0N" lat2="50N" lon1="130E" lon2="110W" />
+    <Area Name="D" lat1="30S" lat2="50N" lon1="160E" lon2="110W" />
+    <Area Name="E" lat1="0N" lat2="40N" lon1="170E" lon2="80W" />
+    <Area Name="F" lat1="0N" lat2="55N" lon1="160E" lon2="110W" />
+    <Area Name="G" lat1="5S" lat2="55N" lon1="155E" lon2="110W" />
+    <Area Name="H" lat1="40S" lat2="5N" lon1="165E" lon2="130W" />
 
-    <Area Name="1" lat1="20N" lat2="70N" lon1="115W" lon2="135E" />
-    <Area Name="2" lat1="20N" lat2="70N" lon1="115W" lon2="175W" />
+    <Area Name="1" lat1="20N" lat2="70N" lon1="135E" lon2="115W" />
+    <Area Name="2" lat1="20N" lat2="70N" lon1="175W" lon2="115W" />
     <Area Name="3" lat1="20N" lat2="70N" lon1="175W" lon2="135W" />
     <Area Name="4" lat1="18N" lat2="62N" />
     <Area Name="5" lat1="5N" lat2="55N" />

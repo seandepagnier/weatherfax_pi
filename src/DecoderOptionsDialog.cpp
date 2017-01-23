@@ -26,6 +26,7 @@
 
 #include "weatherfax_pi.h"
 #include "WeatherFaxImage.h"
+#include "WeatherFax.h"
 #include "WeatherFaxWizard.h"
 #include "DecoderOptionsDialog.h"
 
