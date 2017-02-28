@@ -430,7 +430,7 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	
 	m_cExternalCapture = new wxComboBox( m_panel3, wxID_ANY, _("arecord -f S16_LE"), wxDefaultPosition, wxDefaultSize, 0, NULL, 0 );
 	m_cExternalCapture->Append( _("arecord -f S16_LE") );
-	m_cExternalCapture->Append( _("rtl_fm -M usb -s 48k -r 48k -f %frequency -p 77") );
+	m_cExternalCapture->Append( _("rtl_fm -M usb -g 47 -s 1800k -r 8k -f %frequency -p 38") );
 	m_cExternalCapture->SetSelection( 0 );
 	fgSizer32->Add( m_cExternalCapture, 0, wxALL|wxEXPAND, 5 );
 	

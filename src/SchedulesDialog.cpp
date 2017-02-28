@@ -539,7 +539,7 @@ void SchedulesDialog::OnExternalCommandChoice( wxCommandEvent& event )
         m_tExternalConversion->SetValue("");
         break;
     case 1:
-        m_tExternalConversion->SetValue("sox -b 16 -r 48k -e signed-integer -t raw -c 1 %input -r 8k");
+        m_tExternalConversion->SetValue("sox -b 16 -r 8k -e signed-integer -t raw -c 1 %input");
         break;
     }
 }
@@ -794,8 +794,13 @@ void SchedulesDialog::OnCaptureTimer( wxTimerEvent &event )
         } else {
             m_ExternalCaptureFilename = wxFileName::CreateTempFileName(_T("OCPNWFCapture"));
             wxString command = m_cExternalCapture->GetValue();
-
-            command.Replace("%frequency", wxString::Format(_T("%d"), (int)(m_CurrentSchedule->Frequency - 1.9 * 1000)));
+            
+            int upconverter_frequency = 0;
+            if(command.contains("rtl")) {
+                FaxDecoderCaptureSettings CaptureSettings = m_weatherfax_pi.m_CaptureSettings;
+                upconverter_frequency = CaptureSettings.rtlsdr_errorppm;
+            }
+            command.Replace("%frequency", wxString::Format(_T("%d"), (int)(upconverter_frequency + 1000*m_CurrentSchedule->Frequency - 1900)));
             if(!command.Replace("%output", m_ExternalCaptureFilename))
                 command += _T(" ") + m_ExternalCaptureFilename;
                         
@@ -844,7 +849,7 @@ void SchedulesDialog::OnEndCaptureTimer( wxTimerEvent & )
             wxString command = m_tExternalConversion->GetValue();
             if(!command.empty()) {
                 command.Replace("%input", filename);
-                filename = wxFileName::CreateTempFileName(_T("OCPNWFCapture"));
+                filename = wxFileName::CreateTempFileName(_T("OCPNWFCapture")) + _T(".wav");
                 if(!command.Replace("%output", filename))
                     command += _T(" ") + filename;
 
