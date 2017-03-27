@@ -796,7 +796,7 @@ void SchedulesDialog::OnCaptureTimer( wxTimerEvent &event )
             wxString command = m_cExternalCapture->GetValue();
             
             int upconverter_frequency = 0;
-            if(command.contains("rtl")) {
+            if(command.Contains("rtl")) {
                 FaxDecoderCaptureSettings CaptureSettings = m_weatherfax_pi.m_CaptureSettings;
                 upconverter_frequency = CaptureSettings.rtlsdr_errorppm;
             }
