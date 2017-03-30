@@ -374,8 +374,9 @@ bool FaxDecoder::DecodeFax()
                 PaError err = Pa_ReadStream( pa_stream, sample, m_blocksize);
                 if(err == paInputOverflow)
                     wxLogMessage(_("Port audio overflow on input, some data lost!"));
-            }
+            
 #endif
+            }
             len = m_blocksize;
             break;
         case FaxDecoderCaptureSettings::FILE:

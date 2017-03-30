@@ -346,7 +346,7 @@ bool WeatherFax::WizardCleanup(WeatherFaxWizard *wizard)
     return true;
 }
 
-WeatherFaxWizard *WeatherFax::OpenWav(wxString filename, AFframecount offset, wxString station, wxString area, wxString contents)
+WeatherFaxWizard* WeatherFax::OpenWav(wxString filename, AFframecount offset, wxString station, wxString area, wxString contents)
 {
     int transparency = m_sTransparency->GetValue();
     int whitetransparency = m_sWhiteTransparency->GetValue();
