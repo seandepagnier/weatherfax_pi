@@ -60,9 +60,11 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
     icon.CopyFromBitmap(*_img_weatherfax);
     SetIcon(icon);
 
+    m_cbFilter->SetValue(m_wfimg.bfilter);
+    m_sFilter->SetValue(m_wfimg.filter);
     m_sPhasing->SetValue(m_wfimg.phasing);
     m_sSkew->SetValue(m_wfimg.skew);
-    m_cFilter->SetSelection(m_wfimg.filter);
+    m_cbPhaseCorrectLinebyLine->SetValue(m_wfimg.phase_correct_line_by_line);
 
     /* reset image */
     if(!m_wfimg.m_origimg.Ok())
@@ -214,6 +216,14 @@ void WeatherFaxWizard::OnDecoderTimer( wxTimerEvent & )
         
         m_decoder.m_DecoderMutex.Unlock();
         m_bPhasingArea->Refresh();
+        bool phasing;
+        switch(m_decoder.State(phasing)) {
+        case FaxDecoder::START: m_stDecoderState->SetLabel(_("Start")); break;
+        case FaxDecoder::STOP: m_stDecoderState->SetLabel(_("Stop")); break;
+        default:
+            m_stDecoderState->SetLabel(phasing ? _("Phasing") : _("Image"));
+        }
+            
     }
     m_tDecoder.Start(500, wxTIMER_ONE_SHOT);
 }
@@ -929,9 +939,11 @@ void WeatherFaxWizard::WriteMappingLatLon(double mapping1lat, double mapping1lon
 
 void WeatherFaxWizard::UpdatePage1()
 {
+    m_wfimg.bfilter = m_cbFilter->GetValue();
+    m_wfimg.filter = m_sFilter->GetValue();
     m_wfimg.phasing = m_sPhasing->GetValue();
     m_wfimg.skew = m_sSkew->GetValue();
-    m_wfimg.filter = m_cFilter->GetSelection();
+    m_wfimg.phase_correct_line_by_line = m_cbPhaseCorrectLinebyLine->GetValue();
     m_curCoords->rotation = (WeatherFaxImageCoordinates::RotationType)m_cRotation->GetSelection();
     m_wfimg.MakePhasedImage();
     Refresh();

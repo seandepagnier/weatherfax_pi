@@ -129,6 +129,7 @@ WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString&
 	// Connect Events
 	this->Connect( wxEVT_CLOSE_WINDOW, wxCloseEventHandler( WeatherFaxBase::OnClose ) );
 	m_lFaxes->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnFaxes ), NULL, this );
+	m_lFaxes->Connect( wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler( WeatherFaxBase::OnEdit ), NULL, this );
 	m_sTransparency->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
 	m_sTransparency->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
 	m_sTransparency->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
@@ -167,6 +168,7 @@ WeatherFaxBase::~WeatherFaxBase()
 	// Disconnect Events
 	this->Disconnect( wxEVT_CLOSE_WINDOW, wxCloseEventHandler( WeatherFaxBase::OnClose ) );
 	m_lFaxes->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnFaxes ), NULL, this );
+	m_lFaxes->Disconnect( wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler( WeatherFaxBase::OnEdit ), NULL, this );
 	m_sTransparency->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
 	m_sTransparency->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
 	m_sTransparency->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( WeatherFaxBase::TransparencyChanged ), NULL, this );
@@ -398,11 +400,15 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	
 	fgSizer31->Add( fgSizer63, 1, wxEXPAND, 5 );
 	
+	m_cbSkipIfPrevFax = new wxCheckBox( m_panel2, wxID_ANY, _("Skip alarm if previous fax has already tuned"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_cbSkipIfPrevFax->SetValue(true); 
+	fgSizer31->Add( m_cbSkipIfPrevFax, 0, wxALL, 5 );
+	
 	
 	m_panel2->SetSizer( fgSizer31 );
 	m_panel2->Layout();
 	fgSizer31->Fit( m_panel2 );
-	m_notebook1->AddPage( m_panel2, _("1 minute alarm"), false );
+	m_notebook1->AddPage( m_panel2, _("1 minute alarm"), true );
 	m_panel3 = new wxPanel( m_notebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer30;
 	fgSizer30 = new wxFlexGridSizer( 0, 1, 0, 0 );
@@ -451,7 +457,7 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	m_panel3->SetSizer( fgSizer30 );
 	m_panel3->Layout();
 	fgSizer30->Fit( m_panel3 );
-	m_notebook1->AddPage( m_panel3, _("Capture Options"), true );
+	m_notebook1->AddPage( m_panel3, _("Capture Options"), false );
 	m_panel7 = new wxPanel( m_notebook1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer49;
 	fgSizer49 = new wxFlexGridSizer( 0, 2, 0, 0 );
@@ -837,6 +843,10 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	m_sHFFrequency = new wxSpinCtrl( m_wizPage1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 100,-1 ), wxSP_ARROW_KEYS, 0, 100000000, 9108000 );
 	fgSizer63->Add( m_sHFFrequency, 0, wxALL, 5 );
 	
+	m_stDecoderState = new wxStaticText( m_wizPage1, wxID_ANY, _("N/A"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_stDecoderState->Wrap( -1 );
+	fgSizer63->Add( m_stDecoderState, 0, wxALL, 5 );
+	
 	
 	fgSizer19->Add( fgSizer63, 1, wxEXPAND, 5 );
 	
@@ -855,15 +865,11 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	fgSizer10->SetFlexibleDirection( wxHORIZONTAL );
 	fgSizer10->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	
-	m_staticText16 = new wxStaticText( m_wizPage1, wxID_ANY, _("Filter"), wxDefaultPosition, wxDefaultSize, 0 );
-	m_staticText16->Wrap( -1 );
-	fgSizer10->Add( m_staticText16, 0, wxALL, 5 );
+	m_cbFilter = new wxCheckBox( m_wizPage1, wxID_ANY, _("Filter"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer10->Add( m_cbFilter, 0, wxALL, 5 );
 	
-	wxString m_cFilterChoices[] = { _("No Filter"), _("Removal 1"), _("Removal 2"), _("Removal 3"), _("Value 1"), _("Value 2"), _("Value 3") };
-	int m_cFilterNChoices = sizeof( m_cFilterChoices ) / sizeof( wxString );
-	m_cFilter = new wxChoice( m_wizPage1, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_cFilterNChoices, m_cFilterChoices, 0 );
-	m_cFilter->SetSelection( 0 );
-	fgSizer10->Add( m_cFilter, 0, wxALL, 2 );
+	m_sFilter = new wxSpinCtrl( m_wizPage1, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 70,-1 ), wxSP_ARROW_KEYS, 0, 256, 128 );
+	fgSizer10->Add( m_sFilter, 0, wxALL, 5 );
 	
 	m_staticText9 = new wxStaticText( m_wizPage1, wxID_ANY, _("Phasing"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText9->Wrap( -1 );
@@ -872,25 +878,37 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	m_sPhasing = new wxSlider( m_wizPage1, wxID_ANY, 0, 0, 100, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL|wxSL_INVERSE );
 	fgSizer10->Add( m_sPhasing, 0, wxALL|wxEXPAND, 2 );
 	
+	
+	sbSizer5->Add( fgSizer10, 1, wxEXPAND, 5 );
+	
+	wxFlexGridSizer* fgSizer64;
+	fgSizer64 = new wxFlexGridSizer( 1, 0, 0, 0 );
+	fgSizer64->AddGrowableCol( 4 );
+	fgSizer64->SetFlexibleDirection( wxBOTH );
+	fgSizer64->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_cbPhaseCorrectLinebyLine = new wxCheckBox( m_wizPage1, wxID_ANY, _("phase by line"), wxDefaultPosition, wxDefaultSize, 0 );
+	fgSizer64->Add( m_cbPhaseCorrectLinebyLine, 0, wxALL, 5 );
+	
 	m_staticText17 = new wxStaticText( m_wizPage1, wxID_ANY, _("Rotation"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText17->Wrap( -1 );
-	fgSizer10->Add( m_staticText17, 0, wxALL, 5 );
+	fgSizer64->Add( m_staticText17, 0, wxALL, 5 );
 	
 	wxString m_cRotationChoices[] = { _("None"), _("CCW"), _("CW"), _("180") };
 	int m_cRotationNChoices = sizeof( m_cRotationChoices ) / sizeof( wxString );
 	m_cRotation = new wxChoice( m_wizPage1, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_cRotationNChoices, m_cRotationChoices, 0 );
 	m_cRotation->SetSelection( 0 );
-	fgSizer10->Add( m_cRotation, 0, wxALL, 2 );
+	fgSizer64->Add( m_cRotation, 0, wxALL, 2 );
 	
 	m_staticText101 = new wxStaticText( m_wizPage1, wxID_ANY, _("Skew"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText101->Wrap( -1 );
-	fgSizer10->Add( m_staticText101, 0, wxALL, 2 );
+	fgSizer64->Add( m_staticText101, 0, wxALL, 2 );
 	
-	m_sSkew = new wxSlider( m_wizPage1, wxID_ANY, 0, -1000, 1000, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
-	fgSizer10->Add( m_sSkew, 0, wxALL|wxEXPAND, 2 );
+	m_sSkew = new wxSlider( m_wizPage1, wxID_ANY, 0, -500, 500, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	fgSizer64->Add( m_sSkew, 0, wxALL|wxEXPAND, 2 );
 	
 	
-	sbSizer5->Add( fgSizer10, 1, wxEXPAND, 5 );
+	sbSizer5->Add( fgSizer64, 1, wxEXPAND, 5 );
 	
 	
 	fgSizer172->Add( sbSizer5, 1, wxEXPAND, 5 );
@@ -1264,7 +1282,8 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	m_bStopDecoding->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxWizardBase::OnStopDecoding ), NULL, this );
 	m_bDecoderOptions->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxWizardBase::OnDecoderOptions ), NULL, this );
 	m_bPhasingArea->Connect( wxEVT_PAINT, wxPaintEventHandler( WeatherFaxWizardBase::OnPaintPhasing ), NULL, this );
-	m_cFilter->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( WeatherFaxWizardBase::UpdatePage1 ), NULL, this );
+	m_cbFilter->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( WeatherFaxWizardBase::UpdatePage1 ), NULL, this );
+	m_sFilter->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( WeatherFaxWizardBase::UpdatePage1Spin ), NULL, this );
 	m_sPhasing->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxWizardBase::UpdatePage1Scroll ), NULL, this );
 	m_sPhasing->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( WeatherFaxWizardBase::UpdatePage1Scroll ), NULL, this );
 	m_sPhasing->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( WeatherFaxWizardBase::UpdatePage1Scroll ), NULL, this );
@@ -1274,6 +1293,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	m_sPhasing->Connect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( WeatherFaxWizardBase::UpdatePage1Scroll ), NULL, this );
 	m_sPhasing->Connect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( WeatherFaxWizardBase::UpdatePage1Scroll ), NULL, this );
 	m_sPhasing->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( WeatherFaxWizardBase::UpdatePage1Scroll ), NULL, this );
+	m_cbPhaseCorrectLinebyLine->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( WeatherFaxWizardBase::UpdatePage1 ), NULL, this );
 	m_cRotation->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( WeatherFaxWizardBase::UpdatePage1Rotation ), NULL, this );
 	m_sSkew->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxWizardBase::UpdatePage1Scroll ), NULL, this );
 	m_sSkew->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( WeatherFaxWizardBase::UpdatePage1Scroll ), NULL, this );
@@ -1322,7 +1342,8 @@ WeatherFaxWizardBase::~WeatherFaxWizardBase()
 	m_bStopDecoding->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxWizardBase::OnStopDecoding ), NULL, this );
 	m_bDecoderOptions->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( WeatherFaxWizardBase::OnDecoderOptions ), NULL, this );
 	m_bPhasingArea->Disconnect( wxEVT_PAINT, wxPaintEventHandler( WeatherFaxWizardBase::OnPaintPhasing ), NULL, this );
-	m_cFilter->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( WeatherFaxWizardBase::UpdatePage1 ), NULL, this );
+	m_cbFilter->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( WeatherFaxWizardBase::UpdatePage1 ), NULL, this );
+	m_sFilter->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( WeatherFaxWizardBase::UpdatePage1Spin ), NULL, this );
 	m_sPhasing->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxWizardBase::UpdatePage1Scroll ), NULL, this );
 	m_sPhasing->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( WeatherFaxWizardBase::UpdatePage1Scroll ), NULL, this );
 	m_sPhasing->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( WeatherFaxWizardBase::UpdatePage1Scroll ), NULL, this );
@@ -1332,6 +1353,7 @@ WeatherFaxWizardBase::~WeatherFaxWizardBase()
 	m_sPhasing->Disconnect( wxEVT_SCROLL_THUMBTRACK, wxScrollEventHandler( WeatherFaxWizardBase::UpdatePage1Scroll ), NULL, this );
 	m_sPhasing->Disconnect( wxEVT_SCROLL_THUMBRELEASE, wxScrollEventHandler( WeatherFaxWizardBase::UpdatePage1Scroll ), NULL, this );
 	m_sPhasing->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( WeatherFaxWizardBase::UpdatePage1Scroll ), NULL, this );
+	m_cbPhaseCorrectLinebyLine->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( WeatherFaxWizardBase::UpdatePage1 ), NULL, this );
 	m_cRotation->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( WeatherFaxWizardBase::UpdatePage1Rotation ), NULL, this );
 	m_sSkew->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( WeatherFaxWizardBase::UpdatePage1Scroll ), NULL, this );
 	m_sSkew->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( WeatherFaxWizardBase::UpdatePage1Scroll ), NULL, this );
@@ -1664,7 +1686,6 @@ DecoderOptionsDialogBase::DecoderOptionsDialogBase( wxWindow* parent, wxWindowID
 	
 	wxFlexGridSizer* fgSizer59;
 	fgSizer59 = new wxFlexGridSizer( 0, 1, 0, 0 );
-	fgSizer59->AddGrowableRow( 1 );
 	fgSizer59->SetFlexibleDirection( wxBOTH );
 	fgSizer59->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 	

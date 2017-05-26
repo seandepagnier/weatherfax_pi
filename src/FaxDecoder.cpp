@@ -427,7 +427,8 @@ bool FaxDecoder::DecodeFax()
 
                     phasingLinesLeft = m_phasingLines;
                     gotstart = true;
-                } else {
+                } else if(gotstart) // detect stop only if detected start
+                {
                     // exit at stop
                     if(m_CaptureSettings.type == FaxDecoderCaptureSettings::FILE)
                         m_stop_audio_offset = afTellFrame (aFile, AF_DEFAULT_TRACK);

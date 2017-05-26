@@ -95,7 +95,7 @@ class WeatherFaxImage
 public:
         WeatherFaxImage(wxImage img, int transparency, int whitetransparency, bool invert)
             : m_origimg(img),
-        phasing(0), skew(0), filter(0),
+        bfilter(false), filter(128), phasing(0), skew(0), phase_correct_line_by_line(false),
         m_Coords(NULL),
         m_CacheBitmap(NULL), m_gltextures(NULL), m_numgltexturesw(0), m_numgltexturesh(0),
         m_iTransparency(transparency), m_iWhiteTransparency(whitetransparency), m_bInvert(invert)
@@ -115,7 +115,9 @@ public:
 
     /* page 1 */
     void MakePhasedImage();
-    int phasing, skew, filter;
+    bool bfilter;
+    int filter, phasing, skew;
+    bool phase_correct_line_by_line;
     wxImage m_phasedimg;
 
     /* page 2 */

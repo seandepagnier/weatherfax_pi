@@ -98,6 +98,7 @@ protected:
     void UpdatePage1();
     void UpdatePage1Rotation ( wxCommandEvent& event );
     void UpdatePage1( wxCommandEvent& event ) { UpdatePage1(); }
+    void UpdatePage1Spin( wxSpinEvent& event ) { UpdatePage1(); }
     void UpdatePage1Scroll( wxScrollEvent& event ) { UpdatePage1(); }
 
     wxString NewCoordName();

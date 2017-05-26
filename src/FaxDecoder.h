@@ -59,6 +59,7 @@ struct FaxDecoderCaptureSettings
 class FaxDecoder
 {
 public:
+    enum Header {IMAGE, START, STOP};
 
     struct firfilter {
         enum Bandwidth {NARROW, MIDDLE, WIDE};
@@ -100,6 +101,7 @@ public:
     void CleanUpBuffers();
 
     bool DecodeFax(); /* thread main function */
+    Header State(bool &phasing) { phasing = phasingLinesLeft>0; return lasttype; }
 
     bool m_bEndDecoding; /* flag to end decoding thread */
     AFframecount m_stop_audio_offset; // position in stream when stop sequence was found
@@ -130,8 +132,6 @@ private:
 #ifdef OCPN_USE_PORTAUDIO
     PaStream *pa_stream;
 #endif
-
-    enum Header {IMAGE, START, STOP};
 
     bool Error(wxString error);
     double FourierTransformSub(wxUint8* buffer, int buffer_len, int freq);

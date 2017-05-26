@@ -72,12 +72,12 @@ class WeatherFaxBase : public wxFrame
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnClose( wxCloseEvent& event ) { event.Skip(); }
 		virtual void OnFaxes( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnEdit( wxCommandEvent& event ) { event.Skip(); }
 		virtual void TransparencyChanged( wxScrollEvent& event ) { event.Skip(); }
 		virtual void WhiteTransparencyChanged( wxScrollEvent& event ) { event.Skip(); }
 		virtual void OnInvert( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnOpen( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnSaveAs( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnEdit( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnGoto( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnExport( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnDelete( wxCommandEvent& event ) { event.Skip(); }
@@ -135,6 +135,7 @@ class SchedulesDialogBase : public wxDialog
 		wxFilePickerCtrl* m_fpSound;
 		wxCheckBox* m_cbExternalAlarm;
 		wxTextCtrl* m_tExternalAlarmCommand;
+		wxCheckBox* m_cbSkipIfPrevFax;
 		wxPanel* m_panel3;
 		wxRadioButton* m_rbNoAction;
 		wxRadioButton* m_rbAudioCapture;
@@ -242,10 +243,12 @@ class WeatherFaxWizardBase : public wxWizard
 		wxScrolledWindow* m_bPhasingArea;
 		wxStaticText* m_staticText46;
 		wxSpinCtrl* m_sHFFrequency;
-		wxStaticText* m_staticText16;
-		wxChoice* m_cFilter;
+		wxStaticText* m_stDecoderState;
+		wxCheckBox* m_cbFilter;
+		wxSpinCtrl* m_sFilter;
 		wxStaticText* m_staticText9;
 		wxSlider* m_sPhasing;
+		wxCheckBox* m_cbPhaseCorrectLinebyLine;
 		wxStaticText* m_staticText17;
 		wxChoice* m_cRotation;
 		wxStaticText* m_staticText101;
@@ -319,6 +322,7 @@ class WeatherFaxWizardBase : public wxWizard
 		virtual void OnDecoderOptions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnPaintPhasing( wxPaintEvent& event ) { event.Skip(); }
 		virtual void UpdatePage1( wxCommandEvent& event ) { event.Skip(); }
+		virtual void UpdatePage1Spin( wxSpinEvent& event ) { event.Skip(); }
 		virtual void UpdatePage1Scroll( wxScrollEvent& event ) { event.Skip(); }
 		virtual void UpdatePage1Rotation( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnCoordSet( wxCommandEvent& event ) { event.Skip(); }
