@@ -38,7 +38,7 @@ bool FaxDecoder::Configure(int imagewidth, int BitsPerPixel, int carrier,
                            int deviation, enum firfilter::Bandwidth bandwidth,
                            double minus_saturation_threshold,
                            bool bSkipHeaderDetection, bool bIncludeHeadersInImages,
-                           int SampleRate, int DeviceIndex, bool reset)
+                           bool reset)
 {
     /* pause decoder */
     m_DecoderStopMutex.Lock();
@@ -68,24 +68,27 @@ bool FaxDecoder::Configure(int imagewidth, int BitsPerPixel, int carrier,
     m_minus_saturation_threshold = minus_saturation_threshold;
 
     bool ret = true;
-    if(m_SampleRate != SampleRate || m_DeviceIndex != DeviceIndex || reset) {
+    if(reset) {
         CleanUpBuffers();
-        m_SampleRate = SampleRate;
-        m_DeviceIndex = DeviceIndex;
 
         m_DecoderReloadMutex.Lock();
         CloseInput();
-        if(m_Filename.empty()) {
-            SetupBuffers();
-            if(!DecodeFaxFromPortAudio())
-                if(!DecodeFaxFromDSP())
-                    ret = false;
-        } else
-            if(!DecodeFaxFromFilename(m_Filename))
-                ret = false;
-            else
-                SetupBuffers();
 
+        switch(m_CaptureSettings.type) {
+        case FaxDecoderCaptureSettings::FILE:
+            if(DecodeFaxFromFilename())
+                break;
+        case FaxDecoderCaptureSettings::RTLSDR:
+            if(DecodeFaxFromRTLSDR())
+                break;
+        case FaxDecoderCaptureSettings::AUDIO:
+            if(DecodeFaxFromPortAudio() || DecodeFaxFromDSP())
+                break;
+        default:
+            ret = false;
+        }
+
+        SetupBuffers();
         m_DecoderReloadMutex.Unlock();
     }
 
@@ -101,14 +104,12 @@ bool FaxDecoder::Configure(int imagewidth, int BitsPerPixel, int carrier,
     return ret;
 }
 
-int FaxDecoder::DeviceCount()
+int FaxDecoder::AudioDeviceCount()
 {
-     switch(m_inputtype) {
 #ifdef OCPN_USE_PORTAUDIO
-     case PORTAUDIO: return Pa_GetDeviceCount();
+     return Pa_GetDeviceCount();
 #endif
-     default: return 1;
-     }
+     return 1;
 }
 
 /* Note: the decoding algorithms are adapted from yahfax (on sourceforge)
@@ -310,18 +311,22 @@ void FaxDecoder::FreeImage()
 
 void FaxDecoder::CloseInput()
 {
-     switch(m_inputtype) {
-     case DSP:
-         close(dsp);
+     switch(m_CaptureSettings.type) {
+     case FaxDecoderCaptureSettings::AUDIO:
+#ifdef OCPN_USE_PORTAUDIO
+         Pa_CloseStream( pa_stream );
+#endif
+         if(dsp)
+             close(dsp);
          break;
-     case FILENAME:
+     case FaxDecoderCaptureSettings::FILE:
          afCloseFile(aFile);
          break;
-#ifdef OCPN_USE_PORTAUDIO
-     case PORTAUDIO:
-         Pa_CloseStream( pa_stream );
+     case FaxDecoderCaptureSettings::RTLSDR:
+#ifdef BUILTIN_RTLAIS
+         
+#endif         
          break;
-#endif
      default:;
      }
 //     m_inputtype = NONE;
@@ -337,6 +342,10 @@ void FaxDecoder::SetupBuffers()
 
     phasingPos = new int[m_phasingLines];
     phasingLinesLeft = phasingSkipData = phasingSkippedData = 0;
+
+    // we reset at start and stop, so if already offset phasing will follow
+    if(m_CaptureSettings.offset)
+        phasingLinesLeft = m_phasingLines;
 }
 
 void FaxDecoder::CleanUpBuffers()
@@ -352,30 +361,30 @@ bool FaxDecoder::DecodeFax()
     while(!m_bEndDecoding) {
         m_DecoderReloadMutex.Lock();
         int len;
-        switch(m_inputtype) {
-        case DSP:
-        {
-            int count;
-            for(len = 0; len < m_SampleSize*m_blocksize; len += count)
-                if((count = read(dsp, (char*)sample + len, m_SampleSize*m_blocksize - len)) <= 0)
-                    break;
-            len /= 2;
-        } break;
+        switch(m_CaptureSettings.type) {
+        case FaxDecoderCaptureSettings::AUDIO:
+            if(dsp) {
+                int count;
+                for(len = 0; len < m_SampleSize*m_blocksize; len += count)
+                    if((count = read(dsp, (char*)sample + len, m_SampleSize*m_blocksize - len)) <= 0)
+                        break;
+                len /= 2;
+            } else {
 #ifdef OCPN_USE_PORTAUDIO
-        case PORTAUDIO:
-        {
-            for(;;) {
                 PaError err = Pa_ReadStream( pa_stream, sample, m_blocksize);
                 if(err == paInputOverflow)
                     wxLogMessage(_("Port audio overflow on input, some data lost!"));
-                break;
+            
+#endif
             }
             len = m_blocksize;
-        } break;
-#endif
-        case FILENAME:
+            break;
+        case FaxDecoderCaptureSettings::FILE:
             if((len = afReadFrames(aFile, AF_DEFAULT_TRACK, sample, m_blocksize)) == m_blocksize)
                 break;
+#ifdef BUILTIN_RTLAIS
+        case FaxDecoderCaptureSettings::RTLSDR:
+#endif            
         default:
             m_DecoderReloadMutex.Unlock();
             goto done;
@@ -407,21 +416,27 @@ bool FaxDecoder::DecodeFax()
                noise and also misalignment on first and last lines */
             const int leewaylines = 4;
 
-            if(type == START && typecount == m_StartLength*m_lpm/60.0 - leewaylines) {
-                /* image start detected, reset image at 0 lines  */
-                if(!m_bIncludeHeadersInImages) {
-                    m_imageline = 0;
-                    imgpos = 0;
-                }
+            if(typecount == m_StartLength*m_lpm/60.0 - leewaylines) {
+                if(type == START/* && m_imageline < 100*/) {
+                    /* prepare for phasing */
+                    /* image start detected, reset image at 0 lines  */
+                    if(!m_bIncludeHeadersInImages) {
+                        m_imageline = 0;
+                        imgpos = 0;
+                    }
 
-                /* prepare for phasing */
-                phasingLinesLeft = m_phasingLines;
-                gotstart = true;
-            } else
-                if(type == STOP && typecount == m_StopLength*m_lpm/60.0 - leewaylines) {
-                    if(!m_bIncludeHeadersInImages)
-                        break;
+                    phasingLinesLeft = m_phasingLines;
+                    gotstart = true;
+                } else if(gotstart) // detect stop only if detected start
+                {
+                    // exit at stop
+                    if(m_CaptureSettings.type == FaxDecoderCaptureSettings::FILE)
+                        m_stop_audio_offset = afTellFrame (aFile, AF_DEFAULT_TRACK);
+                    else
+                        m_stop_audio_offset = 1; // used as flag to indicate stop was reached
+                    goto done;
                 }
+            }
         }
 
         /* throw away first 2 lines of phasing because we are not sure
@@ -458,6 +473,7 @@ bool FaxDecoder::DecodeFax()
     }
 done:
 
+    m_DecoderStopMutex.Lock();
      /* put left overdata into an image */
      if((m_bIncludeHeadersInImages || gotstart) &&
         m_imageline > 10) { /* throw away really short images */
@@ -468,91 +484,32 @@ done:
          /* fill rest of the line with zeros */
          memset(id+imgpos, 0, m_imagewidth*m_imageline*m_imagecolors - imgpos);
      }
+     m_DecoderStopMutex.Unlock();
 
      CloseInput();
 
      return true;
 }
 
-bool FaxDecoder::DecodeFaxFromFilename(wxString fileName)
+bool FaxDecoder::DecodeFaxFromFilename()
 {
     size = 0;
     AFfilesetup fs=0;
-    if((aFile=afOpenFile(fileName.ToUTF8(),"r",fs))==AF_NULL_FILEHANDLE)
-        return Error(_("could not open input file: ") + fileName);
+    if((aFile=afOpenFile(m_CaptureSettings.filename.ToUTF8(),"r",fs))==AF_NULL_FILEHANDLE)
+        return Error(_("could not open input file: ") + m_CaptureSettings.filename);
     
     m_SampleSize = afGetFrameSize(aFile,AF_DEFAULT_TRACK,0);
     if(m_SampleSize!=1 && m_SampleSize!=2)
         return Error(_("sample size not 8 or 16 bit: ") + wxString::Format(_T("%d"), m_SampleSize));
     
     m_SampleRate = afGetRate(aFile, AF_DEFAULT_TRACK);
-    
-    size = afGetTrackBytes (aFile, AF_DEFAULT_TRACK);
-    if(size < 0 || size == 0x80000000)
+
+    afSeekFrame (aFile, AF_DEFAULT_TRACK, m_CaptureSettings.offset);
+//    size = afGetTrackBytes (aFile, AF_DEFAULT_TRACK);
+//    if(size < 0 || size == 0x80000000)
         size = 0; // file is still being written to..
 
-    m_inputtype = FILENAME;
     return true;
-}
-
-bool FaxDecoder::DecodeFaxFromPortAudio()
-{
-#ifdef OCPN_USE_PORTAUDIO
-    PaError err = Pa_Initialize();
-    if( err != paNoError ) {
-        printf( "PortAudio Initialize() error: %s\n", Pa_GetErrorText( err ) );
-        return false;
-    }
-
-    PaSampleFormat sampleformat;
-    m_SampleSize = 2; /* for now hardcode */
-    switch(m_SampleSize) {
-    case 1: sampleformat = paInt8; break;
-    case 2: sampleformat = paInt16; break;
-    default:
-        printf( "invalid sample size for capture: %d\n", m_SampleSize);
-        return false;
-    }
-
-    if(m_DeviceIndex == -1)
-        m_DeviceIndex = Pa_GetDefaultInputDevice();
-
-    while(m_DeviceIndex < Pa_GetDeviceCount()) {
-        PaStreamParameters inputParameters;
-        inputParameters.device = m_DeviceIndex;
-        inputParameters.channelCount = 1; /* mono input */
-        inputParameters.sampleFormat = sampleformat;
-        inputParameters.suggestedLatency = 0;
-        inputParameters.hostApiSpecificStreamInfo = NULL;
-
-        err = Pa_OpenStream( &pa_stream,
-                             &inputParameters,
-                             NULL, /* no output channels */
-                             m_SampleRate,
-                             m_blocksize,
-                             paNoFlag,
-                             NULL, NULL);
-
-        if( err == paNoError ) {
-            err = Pa_StartStream( pa_stream );
-            if( err != paNoError ) {
-                Pa_CloseStream( pa_stream );
-                printf( "PortAudio StartStream() error: %s\n", Pa_GetErrorText( err ) );
-                return false;
-            }
-
-            m_inputtype = PORTAUDIO;
-            size = 0;
-
-            return true;
-        }
-
-        m_DeviceIndex++; // try next device
-    }
-
-    printf( "PortAudio OpenStream() error: %s\n", Pa_GetErrorText( err ) );
-#endif
-    return false;
 }
 
 bool FaxDecoder::DecodeFaxFromDSP()
@@ -570,16 +527,86 @@ bool FaxDecoder::DecodeFaxFromDSP()
      if(ioctl(dsp,SNDCTL_DSP_CHANNELS,&channels)==-1 || channels!=1)
          return false;
 
-     int speed=m_SampleRate;
+     int speed=m_CaptureSettings.audio_samplerate;
      if(ioctl(dsp,SNDCTL_DSP_SPEED,&speed)==-1
         || speed<m_SampleRate*0.99 || speed>m_SampleRate*1.01)
          return false;
 
-    m_inputtype = DSP;
     size = 0;
 
     return true;
 #else
     return false;
 #endif
+}
+
+bool FaxDecoder::DecodeFaxFromPortAudio()
+{
+#ifdef OCPN_USE_PORTAUDIO
+    PaError err = Pa_Initialize();
+    if( err != paNoError ) {
+        printf( "PortAudio Initialize() error: %s\n", Pa_GetErrorText( err ) );
+        return false;
+    }
+
+    m_SampleRate = m_CaptureSettings.audio_samplerate;
+    
+    PaSampleFormat sampleformat;
+    m_SampleSize = 2; /* for now hardcode */
+    switch(m_SampleSize) {
+    case 1: sampleformat = paInt8; break;
+    case 2: sampleformat = paInt16; break;
+    default:
+        printf( "invalid sample size for capture: %d\n", m_SampleSize);
+        return false;
+    }
+
+    if(m_CaptureSettings.audio_deviceindex == -1)
+        m_CaptureSettings.audio_deviceindex = Pa_GetDefaultInputDevice();
+
+    while(m_CaptureSettings.audio_deviceindex < Pa_GetDeviceCount()) {
+        PaStreamParameters inputParameters;
+        inputParameters.device = m_CaptureSettings.audio_deviceindex;
+        inputParameters.channelCount = 1; /* mono input */
+        inputParameters.sampleFormat = sampleformat;
+        inputParameters.suggestedLatency = 0;
+        inputParameters.hostApiSpecificStreamInfo = NULL;
+
+        int blocksize = m_SampleRate*60.0/m_lpm*m_faxcolors;
+        err = Pa_OpenStream( &pa_stream,
+                             &inputParameters,
+                             NULL, /* no output channels */
+                             m_SampleRate,
+                             blocksize,
+                             paNoFlag,
+                             NULL, NULL);
+
+        if( err == paNoError ) {
+            err = Pa_StartStream( pa_stream );
+            if( err != paNoError ) {
+                Pa_CloseStream( pa_stream );
+                printf( "PortAudio StartStream() error: %s\n", Pa_GetErrorText( err ) );
+                return false;
+            }
+
+            size = 0;
+
+            return true;
+        }
+
+        m_CaptureSettings.audio_deviceindex++; // try next device
+    }
+
+    printf( "PortAudio OpenStream() error: %s\n", Pa_GetErrorText( err ) );
+#endif
+    return false;
+}
+
+
+bool FaxDecoder::DecodeFaxFromRTLSDR()
+{
+#ifdef BUILTIN_RTLAIS
+    m_SampleRate = 8000;
+#endif
+    return false;
 }

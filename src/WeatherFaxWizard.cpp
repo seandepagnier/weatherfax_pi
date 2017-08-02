@@ -27,7 +27,6 @@
 #include <wx/fileconf.h>
 
 #include "weatherfax_pi.h"
-#include "FaxDecoder.h"
 #include "WeatherFaxImage.h"
 #include "WeatherFax.h"
 #include "DecoderOptionsDialog.h"
@@ -35,24 +34,37 @@
 #include "icons.h"
 
 WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
-                                    bool use_decoder, wxString decoder_filename,
+                                    FaxDecoderCaptureSettings &CaptureSettings,
                                     WeatherFax &parent,
                                     WeatherFaxImageCoordinateList *coords,
                                     wxString newcoordbasename)
-    : WeatherFaxWizardBase( &parent ), m_decoder(*this, decoder_filename),
-      m_DecoderOptionsDialog(use_decoder ? new DecoderOptionsDialog(*this) : NULL),
+    : WeatherFaxWizardBase( &parent ), m_decoder(*this, CaptureSettings ),
+      m_DecoderOptionsDialog(CaptureSettings.type == FaxDecoderCaptureSettings::NONE ?
+                             NULL : new DecoderOptionsDialog(*this)),
       m_parent(parent), m_wfimg(img), m_curCoords(img.m_Coords),
       m_NewCoordBaseName(newcoordbasename.empty() ? wxString(_("New Coord")) : newcoordbasename),
       m_Coords(coords ? *coords : m_BuiltinCoords)
 {
 
+    // for now, only rtlsdr is tunable, in the future audio could be
+    // if we support radio control
+    if(CaptureSettings.type != FaxDecoderCaptureSettings::RTLSDR)
+        m_sHFFrequency->Disable(); // inform user, frequency isn't used
+    
+    // device index may change if it failed to open,
+    // reflect this back to the config
+    m_parent.m_weatherfax_pi.m_CaptureSettings.audio_deviceindex =
+        m_decoder.m_CaptureSettings.audio_deviceindex;
+
     wxIcon icon;
     icon.CopyFromBitmap(*_img_weatherfax);
     SetIcon(icon);
 
+    m_cbFilter->SetValue(m_wfimg.bfilter);
+    m_sFilter->SetValue(m_wfimg.filter);
     m_sPhasing->SetValue(m_wfimg.phasing);
     m_sSkew->SetValue(m_wfimg.skew);
-    m_cFilter->SetSelection(m_wfimg.filter);
+    m_cbPhaseCorrectLinebyLine->SetValue(m_wfimg.phase_correct_line_by_line);
 
     /* reset image */
     if(!m_wfimg.m_origimg.Ok())
@@ -67,7 +79,7 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
     
     m_cRotation->SetSelection(m_curCoords->rotation);
 
-    if(use_decoder && m_decoder.m_inputtype != FaxDecoder::NONE) {
+    if(m_DecoderOptionsDialog) {
         m_DecoderOptionsDialog->SetIcon(icon);
         StartDecoder();
     } else {
@@ -167,8 +179,15 @@ void WeatherFaxWizard::MakeNewCoordinates()
 void WeatherFaxWizard::OnDecoderTimer( wxTimerEvent & )
 {
     if(m_decoder.m_DecoderMutex.Lock() == wxMUTEX_NO_ERROR) {
-        if(!m_thDecoder->IsRunning())
+        if(!m_thDecoder->IsRunning()) {
             m_bStopDecoding->Disable();
+#if 0
+            if(m_decoder.m_stop_audio_offset && &m_Coords == &m_parent.m_UserCoords) {
+                m_parent.OpenWav(m_decoder.m_CaptureSettings.filename, m_decoder.m_stop_audio_offset);
+                m_decoder.m_stop_audio_offset = 0; //prevent this running again
+            }
+#endif
+        }
 
         int w = m_decoder.m_imagewidth, h = m_decoder.m_imageline;
         if(h && (!m_wfimg.m_origimg.IsOk() || h != m_wfimg.m_origimg.GetHeight())) {
@@ -194,10 +213,19 @@ void WeatherFaxWizard::OnDecoderTimer( wxTimerEvent & )
             m_swFaxArea1->SetScrollbars(1, 1, pw, ph, x, y);
             m_swFaxArea1->Refresh();
         }
+        
         m_decoder.m_DecoderMutex.Unlock();
         m_bPhasingArea->Refresh();
+        bool phasing;
+        switch(m_decoder.State(phasing)) {
+        case FaxDecoder::START: m_stDecoderState->SetLabel(_("Start")); break;
+        case FaxDecoder::STOP: m_stDecoderState->SetLabel(_("Stop")); break;
+        default:
+            m_stDecoderState->SetLabel(phasing ? _("Phasing") : _("Image"));
+        }
+            
     }
-    m_tDecoder.Start(1000, wxTIMER_ONE_SHOT);
+    m_tDecoder.Start(500, wxTIMER_ONE_SHOT);
 }
 
 void WeatherFaxWizard::OnStopDecoding( wxCommandEvent& event )
@@ -911,9 +939,11 @@ void WeatherFaxWizard::WriteMappingLatLon(double mapping1lat, double mapping1lon
 
 void WeatherFaxWizard::UpdatePage1()
 {
+    m_wfimg.bfilter = m_cbFilter->GetValue();
+    m_wfimg.filter = m_sFilter->GetValue();
     m_wfimg.phasing = m_sPhasing->GetValue();
     m_wfimg.skew = m_sSkew->GetValue();
-    m_wfimg.filter = m_cFilter->GetSelection();
+    m_wfimg.phase_correct_line_by_line = m_cbPhaseCorrectLinebyLine->GetValue();
     m_curCoords->rotation = (WeatherFaxImageCoordinates::RotationType)m_cRotation->GetSelection();
     m_wfimg.MakePhasedImage();
     Refresh();

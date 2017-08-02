@@ -36,9 +36,30 @@
     #include <portaudio.h>
 #endif
 
+struct FaxDecoderCaptureSettings
+{    
+    FaxDecoderCaptureSettings() : type(NONE), offset(0) {}
+
+    enum Type {NONE, AUDIO, FILE, RTLSDR} type;
+
+    // if type == "audio"
+    int audio_deviceindex;
+    long audio_samplerate;
+    
+    // if type == "file"
+    wxString filename;
+    long offset;
+
+    // if type == "rtlsdr"
+    int rtlsdr_deviceindex;
+    int rtlsdr_errorppm;
+    int rtlsdr_upconverter_mhz;
+};
+
 class FaxDecoder
 {
 public:
+    enum Header {IMAGE, START, STOP};
 
     struct firfilter {
         enum Bandwidth {NARROW, MIDDLE, WIDE};
@@ -50,23 +71,26 @@ public:
         int current;
     };
 
-    FaxDecoder(wxWindow &parent, wxString filename)
+    FaxDecoder(wxWindow &parent, FaxDecoderCaptureSettings &CaptureSettings)
         : m_imgdata(NULL), m_imagewidth(-1),
-        m_inputtype(NONE), datadouble(NULL),
-        m_SampleRate(0), m_DeviceIndex(0), m_Filename(filename),
-        m_parent(parent), sample(NULL), data(NULL), phasingPos(NULL) {}
+        datadouble(NULL), m_CaptureSettings(CaptureSettings),
+        m_parent(parent), dsp(0), aFile(0),
+#ifdef OCPN_USE_PORTAUDIO
+        pa_stream(NULL),
+#endif
+        sample(NULL), data(NULL), phasingPos(NULL) {}
     ~FaxDecoder() { FreeImage(); CleanUpBuffers(); }
 
     bool Configure(int imagewidth, int BitsPerPixel, int carrier,
                    int deviation, enum firfilter::Bandwidth bandwidth,
                    double minus_saturation_threshold,
-                   bool bSkipHeaderDetection, bool bIncludeHeadersInImages,
-                   int SampleRate, int DeviceIndex, bool reset);
-    int DeviceCount();
+                   bool bSkipHeaderDetection, bool bIncludeHeadersInImages, bool reset);
+    static int AudioDeviceCount();
 
-    bool DecodeFaxFromFilename(wxString filename);
+    bool DecodeFaxFromFilename();
     bool DecodeFaxFromDSP();
     bool DecodeFaxFromPortAudio();
+    bool DecodeFaxFromRTLSDR();
 
     void InitializeImage();
     void FreeImage();
@@ -77,8 +101,10 @@ public:
     void CleanUpBuffers();
 
     bool DecodeFax(); /* thread main function */
+    Header State(bool &phasing) { phasing = phasingLinesLeft>0; return lasttype; }
 
     bool m_bEndDecoding; /* flag to end decoding thread */
+    AFframecount m_stop_audio_offset; // position in stream when stop sequence was found
 
     wxMutex m_DecoderMutex, m_DecoderStopMutex, m_DecoderReloadMutex;
 
@@ -87,11 +113,11 @@ public:
     int m_blocksize;
     int m_imagewidth;
     double m_minus_saturation_threshold;
-    enum InputType {NONE, FILENAME, DSP, PORTAUDIO} m_inputtype;
     double *datadouble;
-    int m_SampleRate, m_DeviceIndex;
 
-    wxString m_Filename;
+    int m_SampleRate;
+
+    FaxDecoderCaptureSettings m_CaptureSettings;
 
 private:
     wxWindow &m_parent;
@@ -106,8 +132,6 @@ private:
 #ifdef OCPN_USE_PORTAUDIO
     PaStream *pa_stream;
 #endif
-
-    enum Header {IMAGE, START, STOP};
 
     bool Error(wxString error);
     double FourierTransformSub(wxUint8* buffer, int buffer_len, int freq);

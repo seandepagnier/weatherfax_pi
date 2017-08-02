@@ -127,56 +127,50 @@ void WeatherFaxImage::MakePhasedImage()
     unsigned char *phasedimgend = dd + linelen*m_phasedimg.GetHeight();
 
     double skewpos = 0;
+    
+    int lastphase_pos;
+    unsigned char *pcb = NULL;
+    if(phase_correct_line_by_line)
+        pcb = new unsigned char[linelen];
     while(d+linelen < origimgend && dd+linelen < phasedimgend) {
-        switch(filter) {
-        case 0: memcpy(dd, d, linelen); break;
-        case 1:
-            memcpy(dd, d, 3);
-            for(int i = 3; i<linelen-3; i++)
-                if(d[i-3] > 64 && d[i+3] > 64)
-                    dd[i] = 255;
-                else
-                    dd[i] = d[i];
-            memcpy(dd + linelen-3, d + linelen-3, 3);
-            break;
-        case 2:
-            memcpy(dd, d, 6);
-            for(int i = 6; i<linelen-6; i++) {
-                int cnt = 0;
-                for(int j=-6; j<9; j+=3)
-                    if(d[i+j] > 64) cnt++;
-                if(cnt > 3)
-                    dd[i] = 255;
-                else
-                    dd[i] = d[i];
+        int phase_pos;
+        if(phase_correct_line_by_line) {
+            int n = linelen/3 * .05;
+            int i;
+            int mintotal = -1, min = 0;
+            for(i = 0; i<linelen/3; i++) {
+                // assume nominally phased
+                if(i > linelen/3*.1 && i < linelen/3*.9)
+                    continue;
+
+                int total = 0, j;
+                for(j = 0; j<n; j++)
+                    total += (n/2-abs(j-n/2))*d[3*(i+j)%linelen];
+                if(total < mintotal || mintotal == -1) {
+                    mintotal = total;
+                    min = i;
+                }
             }
-            memcpy(dd + linelen-6, d + linelen-6, 6);
-            break;
-        case 3:
-            memcpy(dd, d, 6);
-            for(int i = 6; i<linelen-6; i++) {
-                int cnt = 0;
-                for(int j=-6; j<9; j+=3)
-                    if(d[i+j] > 128) cnt++;
-                if(cnt > 2)
-                    dd[i] = 255;
-                else
-                    dd[i] = d[i];
-            }
-            memcpy(dd + linelen-6, d + linelen-6, 6);
-            break;
-        case 4:
+            //phase_pos = (min+n/2) % linelen;
+            phase_pos = min;
+
+            // don't apply small changes in phase position
+            if(abs(lastphase_pos - phase_pos) < 3)
+                phase_pos = lastphase_pos;
+            else
+                lastphase_pos = phase_pos;
+        }
+        
+        if(bfilter)
             for(int i = 0; i<linelen; i++)
-                dd[i] = d[i] < 192 ? d[i] : 255;
-            break;
-        case 5:
-            for(int i = 0; i<linelen; i++)
-                dd[i] = d[i] < 128 ? d[i] : 255;
-            break;
-        case 6:
-            for(int i = 0; i<linelen; i++)
-                dd[i] = d[i] < 64 ? d[i] : 255;
-            break;
+                dd[i] = d[i] < filter ? d[i] : 255;
+        else
+            memcpy(dd, d, linelen);
+
+        if(phase_correct_line_by_line) {
+            memcpy(pcb, dd+3*phase_pos,linelen-3*phase_pos);
+            memcpy(pcb+linelen-3*phase_pos, dd, 3*phase_pos);
+            memcpy(dd, pcb, linelen);
         }
 
         d += linelen;
@@ -194,6 +188,7 @@ void WeatherFaxImage::MakePhasedImage()
             skewpos--;
         }
     }
+    delete [] pcb;
 
     /* crop last line of phased image */
 #if 0

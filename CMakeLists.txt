@@ -107,6 +107,28 @@ SET(SRC_WEATHERFAX
             src/libaudiofile/modules/SimpleModule.cpp
 	)
 
+
+IF(UNIX AND NOT APPLE)
+  find_library(RTLSDR_LIBRARY NAMES rtlsdr
+    DOC "The rtlsdr library"
+    )
+  IF(RTLSDR_LIBRARY)
+    MESSAGE (STATUS "Found rtlsdr:  ${RTLSDR_LIBRARY}")
+
+    ADD_DEFINITIONS( "-DBUILTIN_RTLAIS" )
+
+    SET(EXTRA_LIBS ${EXTRA_LIBS} ${RTLSDR_LIBRARY})
+  ELSE()
+    MESSAGE (STATUS "")
+    MESSAGE (STATUS "================ WARNING ===================")
+    MESSAGE (STATUS "rtlsdr library not found, cannot decode from rtlsdr")
+    MESSAGE (STATUS "You may want to install librtlsdr-dev and run cmake again")
+    MESSAGE (STATUS "============================================")
+    MESSAGE (STATUS "")
+  ENDIF()
+ENDIF(UNIX AND NOT APPLE)
+
+      
 IF(UNIX)
  INCLUDE("cmake/FindTinyXML.cmake")
  FIND_PACKAGE(TinyXML QUIET)

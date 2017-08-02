@@ -41,7 +41,17 @@ public:
     bool Filtered, Capture;
 
     wxString Station;
-    double Frequency;
+    std::vector<double> Frequencies;
+    wxString frequencies_str() {
+        wxString frequencies;
+        for(unsigned int i=0; i<Frequencies.size(); i++) {
+            if(i>0)
+                frequencies += ",";
+            frequencies += wxString::Format(_T("%.1f"), Frequencies[i]);
+        }
+        return frequencies;
+    }
+
     int Time;
     wxString Contents;
     int ValidTime;
@@ -71,7 +81,7 @@ class WeatherFaxWizard;
 class SchedulesDialog: public SchedulesDialogBase
 {
 public:
-    enum {CAPTURE, STATION, FREQUENCY, TIME, CONTENTS, VALID_TIME, DURATION, MAP_AREA};
+    enum {CAPTURE, STATION, FREQUENCIES, TIME, CONTENTS, VALID_TIME, DURATION, MAP_AREA};
 
     SchedulesDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent);
     ~SchedulesDialog();
@@ -90,9 +100,11 @@ public:
     void OnNoStations( wxCommandEvent& event );
     void OnAllFrequencies( wxCommandEvent& event );
     void OnClearCaptures( wxCommandEvent& event );
+    void OnExternalCommandChoice( wxCommandEvent& event );
     void OnClose( wxCommandEvent& event );
 
     bool HasStation(wxString station);
+    bool AnyFrequency(Schedule *s);
     void Filter();
     void RebuildList();
     void UpdateItem(long index);

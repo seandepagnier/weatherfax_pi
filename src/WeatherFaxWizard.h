@@ -35,7 +35,7 @@ class WeatherFaxWizard : public WeatherFaxWizardBase
 {
 public:
     WeatherFaxWizard( WeatherFaxImage &img,
-                      bool use_decoder, wxString decoder_filename,
+                      FaxDecoderCaptureSettings &CaptureSettings,
                       WeatherFax &parent,
                       WeatherFaxImageCoordinateList *coords,
                       wxString newcoordbasename);
@@ -98,6 +98,7 @@ protected:
     void UpdatePage1();
     void UpdatePage1Rotation ( wxCommandEvent& event );
     void UpdatePage1( wxCommandEvent& event ) { UpdatePage1(); }
+    void UpdatePage1Spin( wxSpinEvent& event ) { UpdatePage1(); }
     void UpdatePage1Scroll( wxScrollEvent& event ) { UpdatePage1(); }
 
     wxString NewCoordName();

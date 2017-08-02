@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Oct  8 2012)
+// C++ code generated with wxFormBuilder (version Jul 15 2016)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -34,16 +34,17 @@
 #include <wx/panel.h>
 #include <wx/filepicker.h>
 #include <wx/radiobut.h>
+#include <wx/combobox.h>
 #include <wx/notebook.h>
 #include <wx/gauge.h>
 #include <wx/dialog.h>
 #include <wx/splitter.h>
 #include <wx/scrolwin.h>
 #include <wx/choice.h>
-#include <wx/combobox.h>
 #include <wx/wizard.h>
 #include <wx/dynarray.h>
 WX_DEFINE_ARRAY_PTR( wxWizardPageSimple*, WizardPages );
+#include <wx/choicebk.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -65,18 +66,18 @@ class WeatherFaxBase : public wxFrame
 		wxMenuItem* m_mExport;
 		wxMenuItem* m_mDelete;
 		wxMenu* m_menu2;
-		wxMenuItem* m_mAudioCapture;
+		wxMenuItem* m_mCapture;
 		wxMenu* m_menu3;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnClose( wxCloseEvent& event ) { event.Skip(); }
 		virtual void OnFaxes( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnEdit( wxCommandEvent& event ) { event.Skip(); }
 		virtual void TransparencyChanged( wxScrollEvent& event ) { event.Skip(); }
 		virtual void WhiteTransparencyChanged( wxScrollEvent& event ) { event.Skip(); }
 		virtual void OnInvert( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnOpen( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnSaveAs( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnEdit( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnGoto( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnExport( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnDelete( wxCommandEvent& event ) { event.Skip(); }
@@ -134,11 +135,14 @@ class SchedulesDialogBase : public wxDialog
 		wxFilePickerCtrl* m_fpSound;
 		wxCheckBox* m_cbExternalAlarm;
 		wxTextCtrl* m_tExternalAlarmCommand;
+		wxCheckBox* m_cbSkipIfPrevFax;
 		wxPanel* m_panel3;
 		wxRadioButton* m_rbNoAction;
 		wxRadioButton* m_rbAudioCapture;
 		wxRadioButton* m_rbExternalCapture;
-		wxTextCtrl* m_tExternalCapture;
+		wxComboBox* m_cExternalCapture;
+		wxStaticText* m_staticText47;
+		wxTextCtrl* m_tExternalConversion;
 		wxRadioButton* m_rbManualCapture;
 		wxPanel* m_panel7;
 		wxStaticText* m_staticText33;
@@ -157,6 +161,7 @@ class SchedulesDialogBase : public wxDialog
 		virtual void OnFilterSpin( wxSpinEvent& event ) { event.Skip(); }
 		virtual void OnAllFrequencies( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnClearCaptures( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnExternalCommandChoice( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
 		
 	
@@ -236,10 +241,14 @@ class WeatherFaxWizardBase : public wxWizard
 		wxButton* m_bStopDecoding;
 		wxButton* m_bDecoderOptions;
 		wxScrolledWindow* m_bPhasingArea;
-		wxStaticText* m_staticText16;
-		wxChoice* m_cFilter;
+		wxStaticText* m_staticText46;
+		wxSpinCtrl* m_sHFFrequency;
+		wxStaticText* m_stDecoderState;
+		wxCheckBox* m_cbFilter;
+		wxSpinCtrl* m_sFilter;
 		wxStaticText* m_staticText9;
 		wxSlider* m_sPhasing;
+		wxCheckBox* m_cbPhaseCorrectLinebyLine;
 		wxStaticText* m_staticText17;
 		wxChoice* m_cRotation;
 		wxStaticText* m_staticText101;
@@ -313,6 +322,7 @@ class WeatherFaxWizardBase : public wxWizard
 		virtual void OnDecoderOptions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnPaintPhasing( wxPaintEvent& event ) { event.Skip(); }
 		virtual void UpdatePage1( wxCommandEvent& event ) { event.Skip(); }
+		virtual void UpdatePage1Spin( wxSpinEvent& event ) { event.Skip(); }
 		virtual void UpdatePage1Scroll( wxScrollEvent& event ) { event.Skip(); }
 		virtual void UpdatePage1Rotation( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnCoordSet( wxCommandEvent& event ) { event.Skip(); }
@@ -348,6 +358,13 @@ class WeatherFaxPrefsDialog : public wxDialog
 	private:
 	
 	protected:
+		wxPanel* m_panel7;
+		wxStaticText* m_staticText39;
+		wxStaticText* m_staticText42;
+		wxPanel* m_panel8;
+		wxStaticText* m_staticText451;
+		wxStaticText* m_staticText46;
+		wxStaticText* m_staticText47;
 		wxStaticText* m_staticText36;
 		wxStaticText* m_staticText37;
 		wxStaticText* m_staticText45;
@@ -355,9 +372,19 @@ class WeatherFaxPrefsDialog : public wxDialog
 		wxStdDialogButtonSizer* m_sdbSizer1;
 		wxButton* m_sdbSizer1OK;
 		wxButton* m_sdbSizer1Cancel;
+		
+		// Virtual event handlers, overide them in your derived class
+		virtual void OnOptions( wxCommandEvent& event ) { event.Skip(); }
+		
 	
 	public:
 		wxCheckBox* m_cbLoadSchedulesStart;
+		wxChoicebook* m_cbCaptureType;
+		wxChoice* m_cSampleRate;
+		wxSpinCtrl* m_sDeviceIndex;
+		wxSpinCtrl* m_srtlsdr_deviceindex;
+		wxSpinCtrl* m_srtlsdr_errorppm;
+		wxSpinCtrl* m_srtlsdr_upconverter_mhz;
 		wxSpinCtrl* m_sExportColors;
 		wxRadioButton* m_rbExportDepthMeters;
 		wxRadioButton* m_rbExportDepthFathoms;
@@ -382,16 +409,11 @@ class DecoderOptionsDialogBase : public wxDialog
 		wxStaticText* m_staticText32;
 		wxStaticText* m_staticText33;
 		wxStaticText* m_staticText41;
-		wxStaticText* m_staticText39;
-		wxChoice* m_cSampleRate;
-		wxStaticText* m_staticText42;
-		wxSpinCtrl* m_sDeviceIndex;
 		wxButton* m_bDone;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnOptionsSpin( wxSpinEvent& event ) { event.Skip(); }
 		virtual void OnResetOptions( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnOptions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnDone( wxCommandEvent& event ) { event.Skip(); }
 		
 	

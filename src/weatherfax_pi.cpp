@@ -226,13 +226,11 @@ wxString weatherfax_pi::StandardPath()
     wxStandardPathsBase& std_path = wxStandardPathsBase::Get();
     wxString s = wxFileName::GetPathSeparator();
 
-#ifdef __WXMSW__
+#if defined(__WXMSW__)
     wxString stdPath  = std_path.GetConfigDir();
-#endif
-#ifdef __WXGTK__
+#elif defined(__WXGTK__) || defined(__WXQT__)
     wxString stdPath  = std_path.GetUserDataDir();
-#endif
-#ifdef __WXOSX__
+#elif defined(__WXOSX__)
     wxString stdPath  = (std_path.GetUserConfigDir() + s + _T("opencpn"));
 #endif
 
@@ -276,6 +274,20 @@ bool weatherfax_pi::LoadConfig(void)
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Schedules" ) );
     pConf->Read ( _T ( "LoadAtStart" ), &m_bLoadSchedulesStart, 0 );
 
+    pConf->SetPath ( _T ( "/Settings/WeatherFax/Capture" ) );
+    int type;
+    pConf->Read ( _T ( "type"), &type, (int)FaxDecoderCaptureSettings::AUDIO );
+    m_CaptureSettings.type = (FaxDecoderCaptureSettings::Type)type;
+
+    pConf->SetPath ( _T ( "/Settings/WeatherFax/Capture/audio" ) );
+    pConf->Read ( _T ( "deviceindex" ), &m_CaptureSettings.audio_deviceindex, 0);
+    pConf->Read ( _T ( "samplerate" ), &m_CaptureSettings.audio_samplerate, 8000);
+
+    pConf->SetPath ( _T ( "/Settings/WeatherFax/Capture/rtlsdr" ) );
+    pConf->Read ( _T ( "deviceindex" ), &m_CaptureSettings.rtlsdr_deviceindex, 0);
+    pConf->Read ( _T ( "errorppm" ), &m_CaptureSettings.rtlsdr_errorppm, 0);
+    pConf->Read ( _T ( "upconverter_mhz" ), &m_CaptureSettings.rtlsdr_upconverter_mhz, 125);
+
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Export" ) );
     pConf->Read ( _T ( "Colors" ), &m_iExportColors, 64 );
     pConf->Read ( _T ( "DepthMeters" ), &m_bExportDepthMeters, true );
@@ -303,6 +315,18 @@ bool weatherfax_pi::SaveConfig(void)
         
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Schedules" ) );
     pConf->Write ( _T ( "LoadAtStart" ), m_bLoadSchedulesStart );
+
+    pConf->SetPath ( _T ( "/Settings/WeatherFax/Capture" ) );
+    pConf->Write ( _T ( "type"), (long)m_CaptureSettings.type );
+
+    pConf->SetPath ( _T ( "/Settings/WeatherFax/Capture/audio" ) );
+    pConf->Write ( _T ( "deviceindex" ), m_CaptureSettings.audio_deviceindex);
+    pConf->Write ( _T ( "samplerate" ), m_CaptureSettings.audio_samplerate);
+
+    pConf->SetPath ( _T ( "/Settings/WeatherFax/Capture/rtlsdr" ) );
+    pConf->Write ( _T ( "deviceindex" ), m_CaptureSettings.rtlsdr_deviceindex);
+    pConf->Write ( _T ( "errorppm" ), m_CaptureSettings.rtlsdr_errorppm);
+    pConf->Write ( _T ( "upconverter_mhz" ), m_CaptureSettings.rtlsdr_upconverter_mhz);
     
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Export" ) );
     pConf->Write ( _T ( "Colors" ), m_iExportColors );
@@ -326,6 +350,16 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
     
     dialog->m_cbLoadSchedulesStart->SetValue(m_bLoadSchedulesStart);
 
+    dialog->m_sDeviceIndex->SetRange(0, FaxDecoder::AudioDeviceCount() - 1);
+
+#ifndef BUILTIN_RTLAIS
+    dialog->m_cbCaptureType->DeletePage(1);
+#endif
+    dialog->m_cbCaptureType->SetSelection(m_CaptureSettings.type == FaxDecoderCaptureSettings::RTLSDR);
+    dialog->m_srtlsdr_deviceindex->SetValue(m_CaptureSettings.rtlsdr_deviceindex);
+    dialog->m_srtlsdr_errorppm->SetValue(m_CaptureSettings.rtlsdr_errorppm);
+    dialog->m_srtlsdr_upconverter_mhz->SetValue(m_CaptureSettings.rtlsdr_upconverter_mhz);
+
     dialog->m_sExportColors->SetValue(m_iExportColors);
     dialog->m_rbExportDepthMeters->SetValue(m_bExportDepthMeters);
     dialog->m_tExportSoundingDatum->SetValue(m_sExportSoundingDatum);
@@ -338,6 +372,16 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
     if(dialog->ShowModal() == wxID_OK)
     {
         m_bLoadSchedulesStart = dialog->m_cbLoadSchedulesStart->GetValue();
+
+        wxString t = dialog->m_cbCaptureType->GetPageText(dialog->m_cbCaptureType->GetSelection());
+        if(t == "audio")
+            m_CaptureSettings.type = FaxDecoderCaptureSettings::AUDIO;
+        else if(t == "rtlsdr")
+            m_CaptureSettings.type = FaxDecoderCaptureSettings::RTLSDR;
+
+        m_CaptureSettings.rtlsdr_deviceindex = dialog->m_srtlsdr_deviceindex->GetValue();
+        m_CaptureSettings.rtlsdr_errorppm = dialog->m_srtlsdr_errorppm->GetValue();
+        m_CaptureSettings.rtlsdr_upconverter_mhz = dialog->m_srtlsdr_upconverter_mhz->GetValue();
 
         m_iExportColors = dialog->m_sExportColors->GetValue();
         m_bExportDepthMeters = dialog->m_rbExportDepthMeters->GetValue();
