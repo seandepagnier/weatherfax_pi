@@ -292,8 +292,13 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                                 url.Scheduled = false;
                                 url.Server = server.Name;
                                 url.Region = region.Name;
-                         
-                                url.Url = region_url + wxString::FromUTF8(g->Attribute("Url"));
+
+                                long offset = 0;
+                                wxString s_offset = wxString::FromUTF8(g->Attribute("DateOffset"));
+                                s_offset.ToLong(&offset);
+                                wxDateSpan dateSpan = wxDateSpan::Days(offset);
+                                wxDateTime dateUrl = wxDateTime::UNow().Add(dateSpan);
+                                url.Url = region_url + dateUrl.Format(wxString::FromUTF8(g->Attribute("Url")));
                                 url.Contents = wxString::FromUTF8(g->Attribute("Contents"));
                                 url.area_name = wxString::FromUTF8(g->Attribute("Area"));
 
