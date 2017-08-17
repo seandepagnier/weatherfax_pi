@@ -280,6 +280,7 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                                             url.Contents = wxString::Format
                                                 (wxString::FromUTF8(h->Attribute("Contents")), index);
                                             url.area_name = wxString::FromUTF8(h->Attribute("Area"));
+                                            url.Script = wxString::FromUTF8(h->Attribute("Script"));
                                         
                                             urls.push_back(url);
                                         }
@@ -301,6 +302,7 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                                 url.Url = region_url + dateUrl.Format(wxString::FromUTF8(g->Attribute("Url")));
                                 url.Contents = wxString::FromUTF8(g->Attribute("Contents"));
                                 url.area_name = wxString::FromUTF8(g->Attribute("Area"));
+                                url.Script = wxString::FromUTF8(g->Attribute("Script"));
 
                                 urls.push_back(url);
                             } else if(!strcmp(g->Value(), "Area")) {
@@ -558,6 +560,23 @@ void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
                 continue;
 
         count++;
+
+        if (! faxurl->Script.empty()) {
+	    wxString s = wxFileName::GetPathSeparator();
+	    wxString script = *GetpSharedDataLocation() + _T("plugins")
+	        + s + _T("weatherfax_pi") + s + _T("data") + s + faxurl->Script
+		+ _T(" \"") + faxurl->Server + _T("\" ")
+		+ _T(" \"") + faxurl->Region + _T("\" ")
+		+ _T(" \"") + faxurl->Contents + _T("\" ");
+	    wxArrayString output, error;
+	    if (::wxExecute(script, output, error) != 0) {
+	        wxMessageDialog mdlg(this, _("Failed to launch: ") + script,
+	                             _("weatherfax"), wxOK | wxICON_ERROR);
+	        mdlg.ShowModal();
+	        return;
+	    }
+	    faxurl->Url = output[0];
+	}
 
         wxString path = weatherfax_pi::StandardPath();
 
