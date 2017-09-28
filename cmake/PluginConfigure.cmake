@@ -28,10 +28,10 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/src)
 #  IF NOT DEBUGGING CFLAGS="-O2 -march=native"
 IF(NOT MSVC)
  IF(PROFILING)
-  ADD_DEFINITIONS( "-Wall -g -fprofile-arcs -ftest-coverage -fexceptions" )
+  ADD_DEFINITIONS( "-Wall -g -fprofile-arcs -ftest-coverage -fexceptions -fpermissive" )
  ELSE(PROFILING)
 #  ADD_DEFINITIONS( "-Wall -g -fexceptions" )
- ADD_DEFINITIONS( "-Wall -Wno-unused-result -g -fexceptions" )
+ ADD_DEFINITIONS( "-Wall -Wno-unused-result -g -fexceptions -fpermissive" )
  ENDIF(PROFILING)
 
  IF(NOT APPLE)
