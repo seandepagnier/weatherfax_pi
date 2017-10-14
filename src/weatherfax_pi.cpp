@@ -351,10 +351,11 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
     dialog->m_cbLoadSchedulesStart->SetValue(m_bLoadSchedulesStart);
 
     dialog->m_sDeviceIndex->SetRange(0, FaxDecoder::AudioDeviceCount() - 1);
-
-//#ifndef BUILTIN_RTLAIS
-//    dialog->m_cbCaptureType->DeletePage(1);
-//#endif
+	
+	#ifndef BUILTIN_RTLAIS  
+	dialog->m_cbCaptureType->RemovePage(1);
+//  dialog->m_cbCaptureType->DeletePage(1); Works better at the top, but  Error ppmlew has double up-down arrows.
+	#endif	
     dialog->m_cbCaptureType->SetSelection(m_CaptureSettings.type == FaxDecoderCaptureSettings::RTLSDR);
     dialog->m_srtlsdr_deviceindex->SetValue(m_CaptureSettings.rtlsdr_deviceindex);
     dialog->m_srtlsdr_errorppm->SetValue(m_CaptureSettings.rtlsdr_errorppm);

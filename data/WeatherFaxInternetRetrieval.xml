@@ -426,7 +426,7 @@
       <Area Name="M" lat1="10S" lat2="70N" lon1="100E" lon2="110W" />
     </Region>
   </Server>
-  
+<!--  
   <Server Name="German Weather(DWD)" Url="http://www.dwd.de/DWD/wetter/wv_spez/hobbymet/wetterkarten/">
     <Region Name="European">
       <Map Url="bwk_bodendruck_na_ana.png" Contents="Surface Anlys(4mb)" Area="A" />
@@ -447,7 +447,7 @@
 	  
 	 </Region> 
   </Server>  
-
+-->
   <Server Name="UK MET" Url="http://old.wetterzentrale.de/pics/">
     <Region Name="Central">
       <Map Url="bracka.gif" Contents="Surface Anlys" Area="A" />
