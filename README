@@ -28,6 +28,16 @@ http://sourceforge.net/projects/opencpnplugins/files/opencpn_packaging_data/port
 http://sourceforge.net/projects/opencpnplugins/files/opencpn_packaging_data/PVW32Con.exe/download (not an archive, this one just copy to buildwin)
 and unpack all these files into the buildwin directory as the compile is dependent on these.
 
+Note to Windows Users:
+To have a completely "clean" install (if you have not created any Weatherfax URLs or new CoordinateSets.
+1. Uninstall the previous version of Weatherfax_pi using "Uninstall weatherfax_pi.exe" found in the C:\Program Files (x86)\OpenCPN (version) directory.
+2. Delete the following files  from C:\ProgramData\opencpn\plugins\weatherfax
+ CoordinateSets.xml
+ UserCoordinateSets.xml
+Or you will have remnants of the previous installation and any work you have done to coordinates, which may or may not be applicable.
+3. This new version of the weatherfax XML files is very different from previous versions. Many MET urls have changed and the old ones no longer work.
+
+
 OSX Specific Libraries
 ==========================
 The OS X compilation is dependent on these files 

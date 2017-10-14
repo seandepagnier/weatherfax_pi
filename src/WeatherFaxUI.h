@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Jul 15 2016)
+// C++ code generated with wxFormBuilder (version Jun  5 2014)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -184,46 +184,46 @@ class InternetRetrievalDialogBase : public wxDialog
 		wxPanel* m_panel7;
 		wxListCtrl* m_lUrls;
 		wxPanel* m_panel8;
-		wxStaticText* m_staticText24;
-		wxTextCtrl* m_tContainsLat;
-		wxStaticText* m_staticText25;
-		wxTextCtrl* m_tContainsLon;
-		wxButton* m_bBoatPosition;
-		wxButton* m_bReset;
 		wxButton* m_bRetrieveScheduled;
 		wxButton* m_bRetrieveSelected;
-		wxListBox* m_lServers;
+		wxTextCtrl* m_tContainsLat;
+		wxStaticText* m_staticText24;
+		wxTextCtrl* m_tContainsLon;
+		wxStaticText* m_staticText25;
+		wxButton* m_bBoatPosition;
+		wxButton* m_bReset;
 		wxButton* m_bAllServers;
 		wxButton* m_bNoServers;
-		wxListBox* m_lRegions;
+		wxListBox* m_lServers;
 		wxButton* m_bAllRegions;
 		wxButton* m_bNoRegions;
+		wxListBox* m_lRegions;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnRetrieve( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnUrlsLeftDown( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnUrlsSort( wxListEvent& event ) { event.Skip(); }
 		virtual void OnUrlSelected( wxListEvent& event ) { event.Skip(); }
+		virtual void OnRetrieve( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnFilter( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnBoatPosition( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnReset( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnRetrieve( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnFilterServers( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAllServers( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNoServers( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnFilterRegions( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnFilterServers( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAllRegions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNoRegions( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnFilterRegions( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
 		
-		InternetRetrievalDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Internet Retrieval"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 680,480 ), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER ); 
+		InternetRetrievalDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Internet Retrieval"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 612,442 ), long style = wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER ); 
 		~InternetRetrievalDialogBase();
 		
 		void m_splitter1OnIdle( wxIdleEvent& )
 		{
-			m_splitter1->SetSashPosition( 300 );
+			m_splitter1->SetSashPosition( 216 );
 			m_splitter1->Disconnect( wxEVT_IDLE, wxIdleEventHandler( InternetRetrievalDialogBase::m_splitter1OnIdle ), NULL, this );
 		}
 	
