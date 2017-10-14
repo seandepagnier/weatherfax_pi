@@ -353,9 +353,10 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
     dialog->m_sDeviceIndex->SetRange(0, FaxDecoder::AudioDeviceCount() - 1);
 
 #ifndef BUILTIN_RTLAIS
-    dialog->m_cbCaptureType->DeletePage(1);
-#endif
+    dialog->m_cbCaptureType->RemovePage(1);
+#else
     dialog->m_cbCaptureType->SetSelection(m_CaptureSettings.type == FaxDecoderCaptureSettings::RTLSDR);
+#endif
     dialog->m_srtlsdr_deviceindex->SetValue(m_CaptureSettings.rtlsdr_deviceindex);
     dialog->m_srtlsdr_errorppm->SetValue(m_CaptureSettings.rtlsdr_errorppm);
     dialog->m_srtlsdr_upconverter_mhz->SetValue(m_CaptureSettings.rtlsdr_upconverter_mhz);
