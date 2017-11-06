@@ -473,6 +473,8 @@ bool FaxDecoder::DecodeFax()
     }
 done:
 
+#if 0
+    // XXX FIXME Work in progress? leak
     m_DecoderStopMutex.Lock();
      /* put left overdata into an image */
      if((m_bIncludeHeadersInImages || gotstart) &&
@@ -485,7 +487,7 @@ done:
          memset(id+imgpos, 0, m_imagewidth*m_imageline*m_imagecolors - imgpos);
      }
      m_DecoderStopMutex.Unlock();
-
+#endif
      CloseInput();
 
      return true;
