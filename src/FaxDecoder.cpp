@@ -434,6 +434,7 @@ bool FaxDecoder::DecodeFax()
                         m_stop_audio_offset = afTellFrame (aFile, AF_DEFAULT_TRACK);
                     else
                         m_stop_audio_offset = 1; // used as flag to indicate stop was reached
+                    m_DecoderStopMutex.Unlock();
                     goto done;
                 }
             }
