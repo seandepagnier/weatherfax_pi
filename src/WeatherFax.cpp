@@ -141,6 +141,7 @@ static void LoadCoordinatesFromXml(WeatherFaxImageCoordinateList &coords, wxStri
     wxString default_coordinatesets_path = *GetpSharedDataLocation() + _T("plugins")
         + s + _T("weatherfax_pi") + s + _T("data") + s;
 
+    coords.DeleteContents(true);
     if(!doc.LoadFile((coordinatesets_path + coordinatesets).mb_str()) &&
        !doc.LoadFile((default_coordinatesets_path + coordinatesets).mb_str()))
         FAIL(_("Failed to load coordinate sets"));

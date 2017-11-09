@@ -727,11 +727,18 @@ static void read_line(uint8_t *in, uint16_t bits, int width, uint8_t *colors, hi
         case 24:
         {
             Color32 cur, last;
-            last.p = 0xFFFFFFFF;
+            last.q.rgbRed = 0xFF;
+            last.q.rgbGreen = 0xFF;
+            last.q.rgbBlue = 0xFF;
+            last.q.rgbReserved = 0xFF;
 
             for (i=0;i<width;i++)
             {
-                cur.p = ( *(uint32_t *)in & RGBMASK);
+                cur.q.rgbRed      = *in;
+                cur.q.rgbGreen    = *(in +1);
+                cur.q.rgbBlue     = *(in +2);
+                cur.q.rgbReserved = 0;
+
                 if (last.p != cur.p)
                 {
                     c = HistGetColorNum(hist, cur);
@@ -763,7 +770,10 @@ static uint32_t GetHistogram(wxImage &img,uint32_t bits,uint16_t width,uint16_t 
         line = img.GetData() + i*width*3;
         for (j=0;j<width;j++)
         {
-            cur.p = *(uint32_t *)(line) & RGBMASK;
+            cur.q.rgbRed      = *line;
+            cur.q.rgbGreen    = *(line +1);
+            cur.q.rgbBlue     = *(line +2);
+            cur.q.rgbReserved = 0;
             line += 3;
             if (h->color.p == cur.p)
             {
