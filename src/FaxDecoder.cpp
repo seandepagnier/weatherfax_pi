@@ -434,6 +434,7 @@ bool FaxDecoder::DecodeFax()
                         m_stop_audio_offset = afTellFrame (aFile, AF_DEFAULT_TRACK);
                     else
                         m_stop_audio_offset = 1; // used as flag to indicate stop was reached
+                    m_DecoderStopMutex.Unlock();
                     goto done;
                 }
             }
@@ -473,6 +474,8 @@ bool FaxDecoder::DecodeFax()
     }
 done:
 
+#if 0
+    // XXX FIXME Work in progress? leak
     m_DecoderStopMutex.Lock();
      /* put left overdata into an image */
      if((m_bIncludeHeadersInImages || gotstart) &&
@@ -485,7 +488,7 @@ done:
          memset(id+imgpos, 0, m_imagewidth*m_imageline*m_imagecolors - imgpos);
      }
      m_DecoderStopMutex.Unlock();
-
+#endif
      CloseInput();
 
      return true;

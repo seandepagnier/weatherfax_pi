@@ -128,7 +128,7 @@ void WeatherFaxImage::MakePhasedImage()
 
     double skewpos = 0;
     
-    int lastphase_pos;
+    int lastphase_pos = linelen;
     unsigned char *pcb = NULL;
     if(phase_correct_line_by_line)
         pcb = new unsigned char[linelen];
