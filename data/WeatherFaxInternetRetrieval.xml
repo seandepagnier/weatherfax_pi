@@ -31,15 +31,15 @@
       <!-- satellite imagery -->
       <Map Url="evnt99.jpg" Contents="GOES IR Satellite Image, West Atlantic or Atlantic" Area="5" />
       
-      <Area Name="1" lat1="28N" lat2="52N" lon1="45W" lon2="85W" />
-      <Area Name="2" lat1="18N" lat2="65N" lon1="10E" lon2="45W" />
-      <Area Name="3" lat1="18N" lat2="65N" lon1="40W" lon2="95W" />
-      <Area Name="4" lat1="18N" lat2="65N" lon1="10E" lon2="95W" />
-      <Area Name="4a" lat1="18N" lat2="65N" lon1="10E" lon2="95W" />
-      <Area Name="5" lat1="20N" lat2="55N" lon1="55W" lon2="95W" />
-      <Area Name="6" lat1="60N" lat2="45N" lon1="40W" lon2="65W" />
-      <Area Name="7" lat1="0N" lat2="30N" lon1="40W" lon2="100W" />
-      <Area Name="8" lat1="22N" lat2="51N" lon1="40W" lon2="98W" />
+      <Area Name="1" lat1="28N" lat2="52N" lon1="85W" lon2="45W" />
+      <Area Name="2" lat1="18N" lat2="65N" lon1="45W" lon2="10E" />
+      <Area Name="3" lat1="18N" lat2="65N" lon1="95W" lon2="40W" />
+      <Area Name="4" lat1="18N" lat2="65N" lon1="95W" lon2="10E" />
+      <Area Name="4a" lat1="18N" lat2="65N" lon1="95E" lon2="10E" />
+      <Area Name="5" lat1="20N" lat2="55N" lon1="95W" lon2="55W" />
+      <Area Name="6" lat1="60N" lat2="45N" lon1="65W" lon2="40W" />
+      <Area Name="7" lat1="0N" lat2="30N" lon1="100W" lon2="40W" />
+      <Area Name="8" lat1="22N" lat2="51N" lon1="98W" lon2="40W" />
 
     </Region>
 
@@ -88,22 +88,22 @@
       <!-- miscellaneous -->  	  
 
       <Area Name="1" lat1="20N" lat2="70N" lon1="115W" lon2="135E" />
-      <Area Name="2" lat1="20N" lat2="70N" lon1="115W" lon2="175W" />
+      <Area Name="2" lat1="20N" lat2="70N" lon1="175W" lon2="115W" />
       <Area Name="3" lat1="20N" lat2="70N" lon1="175W" lon2="135E" />
-      <Area Name="4" lat1="20S" lat2="40N" lon1="70W" lon2="140W" />
-      <Area Name="4a" lat1="20S" lat2="40N" lon1="70W" lon2="140W" />
-      <Area Name="4b" lat1="20S" lat2="40N" lon1="70W" lon2="140W" />
-      <Area Name="4c" lat1="20S" lat2="30N" lon1="80W" lon2="140W" /> 
-     <Area Name="4d" lat1="20S" lat2="40N" lon1="70W" lon2="140W" /> 	  
+      <Area Name="4" lat1="20S" lat2="40N" lon1="140W" lon2="70W" />
+      <Area Name="4a" lat1="20S" lat2="40N" lon1="140W" lon2="70W" />
+      <Area Name="4b" lat1="20S" lat2="40N" lon1="140W" lon2="70W" />
+      <Area Name="4c" lat1="20S" lat2="30N" lon1="140W" lon2="80W" /> 
+     <Area Name="4d" lat1="20S" lat2="40N" lon1="140W" lon2="70W" /> 	  
       <Area Name="5" lat1="10N" lat2="60N" lon1="180W" lon2="80W" />
       <Area Name="6" lat1="20N" lat2="40N" lon1="40W" lon2="130W" />
-      <Area Name="6a" lat1="20N" lat2="40N" lon1="110W" lon2="130W" />	  
-      <Area Name="7" lat1="0N" lat2="32N" lon1="78W" lon2="126W" />
-      <Area Name="8" lat1="22N" lat2="51N" lon1="105W" lon2="135W" />
-      <Area Name="9" lat1="40N" lat2="53N" lon1="125W" lon2="135W" />
-      <Area Name="10" lat1="0N" lat2="40N" lon1="80W" lon2="180W" />
-	  <Area Name="11" lat1="5S" lat2="50N" lon1="55W" lon2="125W" />
-  	  <Area Name="12" lat1="10S" lat2="30N" lon1="90W" lon2="140W" />
+      <Area Name="6a" lat1="20N" lat2="40N" lon1="130W" lon2="110W" />	  
+      <Area Name="7" lat1="0N" lat2="32N" lon1="126W" lon2="78W" />
+      <Area Name="8" lat1="22N" lat2="51N" lon1="135W" lon2="105W" />
+      <Area Name="9" lat1="40N" lat2="53N" lon1="135W" lon2="125W" />
+      <Area Name="10" lat1="0N" lat2="40N" lon1="180W" lon2="80W" />
+	  <Area Name="11" lat1="5S" lat2="50N" lon1="125W" lon2="55W" />
+  	  <Area Name="12" lat1="10S" lat2="30N" lon1="140W" lon2="90W" />
 
     </Region>
 
@@ -129,15 +129,15 @@
       <!-- satellite imagery -->
       <Map Url="evst99.jpg" Contents="00/06/12/18Z GOES IR TROPICAL SATELLITE IMAGE" Area="4" />	  
 
-      <Area Name="1" lat1="5S" lat2="50N" lon1="55W" lon2="125W" />
-      <Area Name="2" lat1="5S" lat2="50N" lon1="0W" lon2="70W" />
-      <Area Name="3" lat1="0N" lat2="31N" lon1="35W" lon2="100W" />
-      <Area Name="4" lat1="12S" lat2="44N" lon1="28W" lon2="112W" />
-      <Area Name="5" lat1="7N" lat2="31N" lon1="35W" lon2="98W" />
-      <Area Name="6" lat1="5N" lat2="60N" lon1="0W" lon2="100W" />
-	  <Area Name="7" lat1="0N" lat2="31N" lon1="35W" lon2="100W" />
-  	  <Area Name="8" lat1="0N" lat2="31N" lon1="35W" lon2="100W" />
-  	  <Area Name="9" lat1="0N" lat2="31N" lon1="35W" lon2="100W" />	  
+      <Area Name="1" lat1="5S" lat2="50N" lon1="125W" lon2="55W" />
+      <Area Name="2" lat1="5S" lat2="50N" lon1="70W" lon2="0W" />
+      <Area Name="3" lat1="0N" lat2="31N" lon1="100W" lon2="35W" />
+      <Area Name="4" lat1="12S" lat2="44N" lon1="112W" lon2="28W" />
+      <Area Name="5" lat1="7N" lat2="31N" lon1="98W" lon2="35W" />
+      <Area Name="6" lat1="5N" lat2="60N" lon1="100W" lon2="0W" />
+	  <Area Name="7" lat1="0N" lat2="31N" lon1="100W" lon2="35W" />
+  	  <Area Name="8" lat1="0N" lat2="31N" lon1="100W" lon2="35W" />
+  	  <Area Name="9" lat1="0N" lat2="31N" lon1="100W" lon2="35W" />	  
     </Region>
 
     <Region Name="Kodiak Alaska">
@@ -171,7 +171,7 @@
       <Area Name="2" lat1="40N" lat2="70N" lon1="125W" lon2="150E" />
       <Area Name="3" lat1="40N" lat2="70N" lon1="115W" lon2="170E" />
       <Area Name="4" lat1="40N" lat2="60N" lon1="125W" lon2="160E" />
-      <Area Name="5" lat1="5N" lat2="60N" lon1="110W" lon2="160W" />
+      <Area Name="5" lat1="5N" lat2="60N" lon1="160W" lon2="110W" />
       <Area Name="6" Description="ICE COVERED AK WATERS" />
       <Area Name="7" Description="COOK INLET" lat1="58N" lat2="62N" lon1="154W" lon2="150W" />
     </Region>
@@ -256,14 +256,14 @@
 	  <Area Name="S" lat1="0N" lat2="50N" lon1="110W" lon2="130E" /> 	  
 	  <Area Name="T" lat1="5S" lat2="50N" lon1="55W" lon2="125E" /> 
 	  
-      <Area Name="Y" lat1="5N" lat2="32N" />
+      <Area Name="Y" lat1="5N" lat2="32N" lon1="120W" lon2="80W"/>
       <Area Name="Z" lat1="20S" lat2="30N" lon1="140W" lon2="80W" />
 
       <Area Name="1" lat1="20N" lat2="70N" lon1="115W" lon2="135E" />
-      <Area Name="2" lat1="20N" lat2="70N" lon1="115W" lon2="175W" />
+      <Area Name="2" lat1="20N" lat2="70N" lon1="175W" lon2="115W" />
       <Area Name="3" lat1="20N" lat2="70N" lon1="175W" lon2="135W" />
-      <Area Name="4" lat1="18N" lat2="62N" />
-      <Area Name="5" lat1="5N" lat2="55N" />
+      <Area Name="4" lat1="18N" lat2="62N" lon1="155W" lon2="110W" />
+      <Area Name="5" lat1="5N"  lat2="55N" lon1="185W" lon2="110W" />
       <Area Name="6" lat1="18N" lat2="52N" lon1="157W"  long2="" />
 
     </Region>
@@ -309,8 +309,6 @@
       <Area Name="10" lat1="15N" lat2="30N" lon1="100W" lon2="80W" />
 	  <Area Name="11" lat1="0N" lat2="55N" lon1="100W" lon2="20E" />
 	  <Area Name="12" lat1="0N" lat2="55N" lon1="100W" lon2="20E" />	  
-
-	  
     </Region>
 
     <Region Name="Pacific">
@@ -334,15 +332,15 @@
       <Map Url="P_e_sfc_color.png" Contents="East Pacific Surface Analysis" Area="7" />
       <Map Url="UA/Pac_Tropics.gif" Contents="Tropical North Pacific analysis" Area="8" />
 
-      <Area Name="1" lat1="16N" lat2="65N" lon1="135E" lon2="115W" />
+      <Area Name="1" lat1="16N" lat2="65N" lon1="115W" lon2="135E" />
       <Area Name="2" lat1="20N" lat2="60N" lon1="155W" lon2="110W" />
       <Area Name="3" lat1="20N" lat2="65N" lon1="140E" lon2="120W" />
       <Area Name="4" lat1="20N" lat2="65N" lon1="140E" lon2="120W" />
-      <Area Name="5" lat1="20N" lat2="65N" lon1="110W" lon2="155W" />
-      <Area Name="6" lat1="16N" lat2="65N" lon1="135E" lon2="165W" />
+      <Area Name="5" lat1="20N" lat2="65N" lon1="155W" lon2="110W" />
+      <Area Name="6" lat1="16N" lat2="65N" lon1="165W" lon2="135E" />
       <Area Name="7" lat1="16N" lat2="65N" lon1="175W" lon2="115W" />
-      <Area Name="8" lat1="0N" lat2="30N" lon1="130E" lon2="110W" />
-      <Area Name="9" lat1="16N" lat2="65N" lon1="135E" lon2="115W" />
+      <Area Name="8" lat1="0N" lat2="30N" lon1="110W" lon2="130E" />
+      <Area Name="9" lat1="16N" lat2="65N" lon1="115W" lon2="135E" />
     </Region>
   </Server>
   
@@ -391,28 +389,26 @@
 		<Map Url="A_048hrwper_color.gif" Contents="48-hour wave period direction" Area="9a" />
 		<Map Url="A_096hrwper_color.gif" Contents="96-hour wave period direction" Area="9a" />
 		
-		  <Area Name="1" lat1="28N" lat2="52N" lon1="45W" lon2="85W" />
-		  <Area Name="2" lat1="18N" lat2="65N" lon1="10E" lon2="95W" />
-		  <Area Name="2b" lat1="18N" lat2="65N" lon1="10E" lon2="40W" />
-		  <Area Name="3" lat1="18N" lat2="65N" lon1="40W" lon2="95W" />
-		  <Area Name="4" lat1="18N" lat2="65N" lon1="10E" lon2="95W" />
- 		  <Area Name="4a" lat1="18N" lat2="65N" lon1="10E" lon2="95W" />		  
-		  <Area Name="8" lat1="22N" lat2="51N" lon1="40W" lon2="98W" />
-		  <Area Name="9" lat1="18N" lat2="65N" lon1="10E" lon2="98W" />
-  		  <Area Name="9a" lat1="18N" lat2="65N" lon1="10E" lon2="98W" />
-   		  <Area Name="9b" lat1="30N" lat2="60N" lon1="50W" lon2="90W" />
-		  <Area Name="10" lat1="30N" lat2="50N" lon1="40W" lon2="98W" />
-		  <Area Name="11" lat1="30N" lat2="50N" lon1="40W" lon2="98W" />
-		  <Area Name="12" lat1="20N" lat2="60N" lon1="0W" lon2="90W" />
-		  <Area Name="12a" lat1="20N" lat2="60N" lon1="0W" lon2="90W" />		  		  
- 
-      </Region>
+		  <Area Name="1" lat1="28N" lat2="52N" lon1="85W" lon2="45W" />
+		  <Area Name="2" lat1="18N" lat2="65N" lon1="95W" lon2="10E" />
+		  <Area Name="2b" lat1="18N" lat2="65N" lon1="40W" lon2="10E" />
+		  <Area Name="3" lat1="18N" lat2="65N" lon1="95W" lon2="40W" />
+		  <Area Name="4" lat1="18N" lat2="65N" lon1="95W" lon2="10E" />
+ 		  <Area Name="4a" lat1="18N" lat2="65N" lon1="95W" lon2="10E" />		  
+		  <Area Name="8" lat1="22N" lat2="51N" lon1="98W" lon2="40W" />
+		  <Area Name="9" lat1="18N" lat2="65N" lon1="98W" lon2="10E" />
+  		  <Area Name="9a" lat1="18N" lat2="65N" lon1="98W" lon2="10E" />
+   		  <Area Name="9b" lat1="30N" lat2="60N" lon1="90W" lon2="50W" />
+		  <Area Name="10" lat1="30N" lat2="50N" lon1="95W" lon2="40W" />
+		  <Area Name="11" lat1="30N" lat2="50N" lon1="98W" lon2="40W" />
+		  <Area Name="12" lat1="20N" lat2="60N" lon1="90W" lon2="0W" />
+		  <Area Name="12a" lat1="20N" lat2="60N" lon1="90W" lon2="0W" />		  		  
+       </Region>
   </Server>  
- 
-  
+
   
   <Server Name="Aviation Weather" Url="http://aviationweather.gov/data/obs/sat/intl/">
-    <Region Name="Aviation Satellite Imagery">
+    <Region Name="Sat Images">
       <Map Url="ir_ICAO-A_bw.jpg" Contents="Americas" Area="A" />
       <Map Url="ir_ICAO-B1_bw.jpg" Contents="Atlantic" Area="B1" />
       <Map Url="ir_ICAO-C_bw.jpg" Contents="Europe Africa" Area="C" />
@@ -430,7 +426,44 @@
       <Area Name="M" lat1="10S" lat2="70N" lon1="100E" lon2="110W" />
     </Region>
   </Server>
-   
+  
+  <Server Name="German Weather(DWD)" Url="https://www.dwd.de/DWD/wetter/wv_spez/hobbymet/wetterkarten/">
+    <Region Name="European">
+      <Map Url="bwk_bodendruck_na_ana.png" Contents="Surface Anlys(4mb)" Area="A" />
+      <Map Url="ico_tkboden_na_024.png" Contents="24hr Forecast" Area="B" />
+      <Map Url="ico_tkboden_na_036.png" Contents="36hr Forecast" Area="B" />
+      <Map Url="ico_tkboden_na_048.png" Contents="48hr Forecast" Area="B" />
+      <Map Url="ico_tkboden_na_060.png" Contents="60hr Forecast" Area="B" />
+      <Map Url="ico_tkboden_na_084.png" Contents="84hr Forecast" Area="B" />
+      <Map Url="ico_tkboden_na_108.png" Contents="108hr Forecast" Area="B" />
+      <Map Url="ico_500ht_na_ana.png" Contents="500mb Analysis" Area="C" />
+      <Map Url="ico_500ht_na_024.png" Contents="500mb 24hr" Area="C" />
+      <Map Url="ico_500ht_na_048.png" Contents="500mb 48hr" Area="C" />
+      <Map Url="ico_500ht_na_072.png" Contents="500mb 72hr" Area="C" />
+
+      <Area Name="A" lat1="40N" lat2="60N" lon1="40E" lon2="40W" />
+      <Area Name="B" lat1="40N" lat2="60N" lon1="40E" lon2="40W" />
+      <Area Name="C" lat1="30N" lat2="70N" lon1="40E" lon2="40W" />
+	  
+	 </Region> 
+  </Server>  
+
+  <Server Name="UK MET" Url="http://old.wetterzentrale.de/pics/">
+    <Region Name="Central">
+      <Map Url="bracka.gif" Contents="Surface Anlys" Area="A" />
+      <Map Url="brack0.gif" Contents="24hr Forecast" Area="A" />
+      <Map Url="brack0a.gif" Contents="36hr Forecast" Area="A" />
+      <Map Url="brack1.gif" Contents="48hr Forecast" Area="A" />
+      <Map Url="brack1a.gif" Contents="60hr Forecast" Area="A" />
+      <Map Url="brack2.gif" Contents="72hr Forecast" Area="A" />
+      <Map Url="brack2a.gif" Contents="84hr Forecast" Area="A" />
+      <Map Url="brack3.gif" Contents="96hr Forecast" Area="A" />
+      <Map Url="brack4.gif" Contents="120hr Forecast" Area="A" />
+
+      <Area Name="A" lat1="40N" lat2="80N" lon1="40E" lon2="60W" />
+	 </Region> 
+  </Server>   
+  
   <Server Name="Passage Weather" Url="http://passageweather.com/maps/">
 
     <Region Name="South China Sea" Url="chinasea/">
@@ -2071,41 +2104,143 @@
 
   <Server Name="Australia bom" Url="http://www.bom.gov.au/charts_data/">
     <Region Name="Australia">
-      <!-- not supported yet
-      <Map Url="gms/IDE00135.%Y%M%D%H30.jpg" Contents="Satellite Image" /> -->
+ <!-- not supported yet
+ <Map Url="gms/IDE00135.%Y%M%D%H30.jpg" Contents="Satellite Image" /> -->
+<!--  
+	  http://www.bom.gov.au/marine/wind.shtml?location=wa1&tz=AEDT 
+	http://www.bom.gov.au/fwo/IDY00061/IDYAR005.aus.20170802_1500.png
+---
+Aus BOM Index
+http://www.bom.gov.au/australia/charts/index.shtml
 
+Synoptic Weather maps MSLP Past
+http://www.bom.gov.au/australia/charts/synoptic_col.shtml
+Today
+http://www.bom.gov.au/fwo/IDY00030.201708010000.png
+24hr
+http://www.bom.gov.au/fwo/IDY00030.201707310000.png
+36h5
+http://www.bom.gov.au/fwo/IDY00030.201707300000.png
+48hr
+http://www.bom.gov.au/fwo/IDY00030.201707280000.png
+
+Latest B&W MSLP Chart
+
+http://www.bom.gov.au/difacs/IDX0894.gif
+
+B&W MSLP for next 4 days
+http://www.bom.gov.au/australia/charts/4day_bw.shtml
+http://www.bom.gov.au/fwo/IDG00073.gif?2017-Aug-01-01:45:32  Multiple image
+http://www.bom.gov.au/fwo/IDG00073.gif?2017-Aug-01-01:45:32
+
+Latest Forecast 
+http://www.bom.gov.au/australia/charts/synoptic_col.shtml
+Color
+http://www.bom.gov.au/fwo/IDY00030.201708011800.png
+B&W
+http://www.bom.gov.au/difacs/IDX0894.gif
+
+Short term Forecast 36hrs
+http://www.bom.gov.au/australia/charts/msl_36hr_forecast.shtml
+http://www.bom.gov.au/fwo/IDG00104.png?2017-Aug-01-01:09:41 color
+http://www.bom.gov.au/fwo/IDG00103.png?2017-Aug-01-01:09:41 b&W
+
+Global Model Interactive Forecast Maps
+http://www.bom.gov.au/australia/charts/viewer/index.shtml?type=mslp-thick&tz=UTC&area=Au&model=G
+12utc Tues 1 Today
+http://www.bom.gov.au/charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.000.png?1501588800
+12utc Wed 2
+http://www.bom.gov.au/charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.024.png?1501588800
+12utc Thur 3
+http://www.bom.gov.au/charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.048.png?1501588800
+http://www.bom.gov.au/charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.048.png?1501588800
+Nope they are not unique.
+http://www.bom.gov.au/australia/charts/viewer/index.shtml?type=mslp-thick&tz=UTC&area=Au&model=G
+http://www.bom.gov.au/charts_data/IDY20002/current/mslp-thick/IDY20002.mslp-thick.072.png?1501588800
+It is just swapping the new image in using the same name!
+
+Southern Hemisphere MSLP Forecast Maps
+Surface Pressure & Rainfall
+http://www.bom.gov.au/australia/charts/viewer/index.shtml?type=mslp-precip&tz=AEDT&area=SH&model=G
+http://www.bom.gov.au/charts_data/IDY20001/current/mslp-precip/IDY20001.mslp-precip.006.png?1501588800
+MLSP & thickness
+http://www.bom.gov.au/australia/charts/viewer/index.shtml?type=mslp-thick&tz=AEDT&area=SH&model=G&chartSubmit=Refresh+View
+http://www.bom.gov.au/charts_data/IDY20001/current/mslp-thick/IDY20001.mslp-thick.000.png?1501588800
+
+Indian Ocean MSLP
+http://www.bom.gov.au/australia/charts/indian_ocean.shtml
+Pacific Ocean MSLP
+http://www.bom.gov.au/australia/charts/pacific_ocean.shtml
+Asia MSLP Analysis
+http://www.bom.gov.au/australia/charts/darwin_MSLP_00z.shtml
+
+Gradiant Wind Analyis 00z
+http://www.bom.gov.au/australia/charts/glw_00z.shtml
+Gradiant Windd Analysis 12z
+http://www.bom.gov.au/australia/charts/glw_12z.shtml
+Pacific Ocean Gradiant Wind 00z
+http://www.bom.gov.au/australia/charts/pacific_ocean_glw_00z.shtml
+Pacific Ocean Gradiant Wind 12z
+http://www.bom.gov.au/australia/charts/pacific_ocean_glw_12z.shtml
+Indian Ocean Gradiant Wind 00z
+http://www.bom.gov.au/australia/charts/indian_ocean_glw_00z.shtml
+Indian Ocean Gradiant Wind 12z
+http://www.bom.gov.au/australia/charts/indian_ocean_glw_12z.shtml
+
+
+---
+Marine Wind Forecast Time Zone UTC  Region - Australia  (many regions available)
+http://www.bom.gov.au/marine/wind.shtml?unit=p0&location=nt&tz=UTC
+http://www.bom.gov.au/marine/wind.shtml?unit=p0&location=aus&tz=UTC
+Interactive Wave Significant Heights  Region- Australia   Time Zone
+http://www.bom.gov.au/australia/charts/viewer/index.shtml?type=sigWaveHgt&tz=AEDT&area=Au&model=CG&chartSubmit=Refresh+View
+Surf Press & Rainfall
+http://www.bom.gov.au/australia/charts/viewer/index.shtml?type=mslp-precip&tz=ACST&area=Au&model=CG&chartSubmit=Refresh+View	
+Surface Winds
+http://www.bom.gov.au/australia/charts/viewer/index.shtml?type=windarrow&level=10m&tz=ACST&area=Au&model=CG&chartSubmit=Refresh+View
+MSLP & Thickness
+http://www.bom.gov.au/australia/charts/viewer/index.shtml?type=mslp-thick&tz=ACST&area=Au&model=CG&chartSubmit=Refresh+View
+Wind, Wave & Height & Direction
+http://www.bom.gov.au/australia/charts/viewer/index.shtml?type=windWave&tz=ACST&area=Au&model=CG&chartSubmit=Refresh+View
+---
+Typical image location
+http://www.bom.gov.au/charts_data/IDY30100/current/windWave/IDY30100.windWave.000.png?1501610400
+However this downloads typically.
+http://www.bom.gov.au/charts_data/IDY30100/current/windWave/IDY30100.windWave.000.png
+	-->
+	
       <Iterator From="3" To="72" By="3">
         <Map Url="IDY20301/current/mslp-precip/IDY20301.mslp-precip.%03d.png"
              Contents="Surface Pressure & Rainfall t+%03d" Area="Australia" />
         <Map Url="IDY20301/current/windbarb/10m/IDY20301.windbarb-10m.%03d.png"
              Contents="Wind Speed & Direction t+%03d" Area="Australia" />
 
-        <Map Url="IDY20202/current/windbarb/10m/IDY20202.windbarb-10m.%03d.png"
+        <Map Url="IDY20202/current/windbarb/10m/IDY20202.mslp-precip.%03d.png"
              Contents="Surface Pressure & Rainfall t+%03d" Area="New South Wales" />
         <Map Url="IDY20202/current/windbarb/10m/IDY20202.windbarb-10m.%03d.png"
              Contents="Wind Speed & Direction t+%03d" Area="New South Wales" />
 
-        <Map Url="IDY20114/current/windbarb/10m/IDY20114.windbarb-10m.%03d.png"
+        <Map Url="IDY20114/current/windbarb/10m/IDY20114.mslp-precip.%03d.png"
              Contents="Surface Pressure & Rainfall t+%03d" Area="Queensland" />
         <Map Url="IDY20114/current/windbarb/10m/IDY20114.windbarb-10m.%03d.png"
              Contents="Wind Speed & Direction t+%03d" Area="Queensland" />
 
-        <Map Url="IDY20115/current/windbarb/10m/IDY20115.windbarb-10m.%03d.png"
+        <Map Url="IDY20115/current/windbarb/10m/IDY20115.mslp-precip.%03d.png"
              Contents="Surface Pressure & Rainfall t+%03d" Area="Western Australia" />
         <Map Url="IDY20115/current/windbarb/10m/IDY20115.windbarb-10m.%03d.png"
              Contents="Wind Speed & Direction t+%03d" Area="Western Australia" />
 
-        <Map Url="IDY20201/current/windbarb/10m/IDY20201.windbarb-10m.%03d.png"
+        <Map Url="IDY20201/current/windbarb/10m/IDY20201.mslp-precip.%03d.png"
              Contents="Surface Pressure & Rainfall t+%03d" Area="Victoria, Tasmania" />
         <Map Url="IDY20201/current/windbarb/10m/IDY20201.windbarb-10m.%03d.png"
              Contents="Wind Speed & Direction t+%03d" Area="Victoria, Tasmania" />
 
-        <Map Url="IDY20206/current/windbarb/10m/IDY20206.windbarb-10m.%03d.png"
+        <Map Url="IDY20206/current/windbarb/10m/IDY20206.mslp-precip.%03d.png"
              Contents="Surface Pressure & Rainfall t+%03d" Area="South Australia" />
         <Map Url="IDY20206/current/windbarb/10m/IDY20206.windbarb-10m.%03d.png"
              Contents="Wind Speed & Direction t+%03d" Area="South Australia" />
 
-        <Map Url="IDY20201/current/windbarb/10m/IDY20201.windbarb-10m.%03d.png"
+        <Map Url="IDY20201/current/windbarb/10m/IDY20201.mslp-precip.%03d.png"
              Contents="Surface Pressure & Rainfall t+%03d" Area="South Australia" />
         <Map Url="IDY20201/current/windbarb/10m/IDY20201.windbarb-10m.%03d.png"
              Contents="Wind Speed & Direction t+%03d" Area="South Australia" />
@@ -2174,6 +2309,142 @@
     </Region>
   </Server>
 
+  <Server Name="Singapore Met-strftime" Url="http://www.weather.gov.sg/files/marine/">
+    <Region Name="Singapore">
+      <Map Url="surfacewinds/surfacewinds_24Hr_20170731_213000.gif" Contents="Surface Wind Forecast 24hr" Area="1" />
+      <Map Url="surfacewinds/surfacewinds_48Hr_20170731_213000.gif" Contents="Surface Wind Forecast 48hr" Area="1" />
+      <Map Url="surfacewinds/surfacewinds_72Hr_20170731_213000.gif" Contents="Surface Wind Forecast 72hr" Area="1" />
+      <Map Url="waveheight/sig_waves_height_24Hr_20170801_203000.gif" Contents="Significant Wave Forecast 24hr" Area="2" />
+      <Map Url="waveheight/sig_waves_height_48Hr_20170801_203000.gif" Contents="Significant Wave Forecast 48hr" Area="2" />
+      <Map Url="waveheight/sig_waves_height_72Hr_20170801_203000.gif" Contents="Significant Wave Forecast 72hr" Area="2" />
+      <Map Url="swell/swell_24Hr_20170731_203000.gif" Contents="Swell Wave Ht 24hr" Area="3" />
+      <Map Url="swell/swell_48Hr_20170731_203000.gif" Contents="Swell Wave Ht 48hr" Area="3" />
+      <Map Url="swell/swell_72Hr_20170731_203000.gif" Contents="Swell Wave Ht 72hr" Area="3" />
+	  
+      <Area Name="1" lat1="20S" lat2="40N" lon1="80E" lon2="150E" />
+      <Area Name="2" lat1="15S" lat2="35N" lon1="90E" lon2="130E" />
+      <Area Name="3" lat1="20S" lat2="40N" lon1="80E" lon2="150E" />
+    </Region>
+  </Server>
+
+  <Server Name="Bermuda" Url="http://www.weather.bm/">
+    <Region Name="Bermuda">
+      <Map Url="images/surfaceAnalysis/Latest/Atlantic.gif" Contents="Surface Analysis" Area="1" />
+      <Map Url="images/marineChart/Latest/Small/_chartSmall36.gif" Contents="Day 2 Marine forecast" Area="1" />
+      <Map Url="images/marineChart/Latest/Small/_chartSmall60.gif" Contents="Day 3 Marine forecast" Area="1" />
+      <Map Url="images/marineChart/Latest/Small/_chartSmall84.gif" Contents="Day 4 Marine forecast" Area="1" />
+      <Map Url="images/marineChart/Latest/Small/_chartSmall108.gif" Contents="Day 5 Marine forecast" Area="1" />
+      <Map Url="images/surfaceAnalysis/Latest/Local.gif" Contents="Local Analysis" Area="2" />
+	  
+      <Area Name="1" lat1="15N" lat2="45N" lon1="90W" lon2="20W" />
+      <Area Name="2" lat1="10N" lat2="55N" lon1="90W" lon2="10W" />
+	  
+    </Region>
+  </Server>
+
+  <Server Name="French Polynesia" Url="http://www.meteo.pf/bulletins/marines/">
+    <Region Name="South Pacific">
+      <Map Url="preiso36.png" Contents="Day 1 Wind" Area="1" />
+      <Map Url="preiso60.png" Contents="Day 2 Wind" Area="1" />
+      <Map Url="etatmer12.png" Contents="Waves Today" Area="2" />
+      <Map Url="etatmer36.png" Contents="Waves Day 1" Area="2" />
+      <Map Url="etatmer60.png" Contents="Waves Day 2" Area="2" />
+      <Map Url="houle12.png" Contents="Swell Today" Area="2" />
+      <Map Url="houle36.png" Contents="Swell Day 1" Area="2" />
+      <Map Url="houle60.png" Contents="Swell Day 2" Area="2" />
+
+      <Area Name="1" lat1="45S" lat2="0N" lon1="175W" lon2="130W" />
+      <Area Name="2" lat1="45S" lat2="0N" lon1="175W" lon2="130W" />
+    </Region>
+  </Server>
+
+  <Server Name="Chile Met" Url="http://web.directemar.cl/met/jturno/">
+    <Region Name="Chile">
+      <Map Url="cartas/carta.jpg" Contents="Streamline Analysis" Area="1" />
+      <Map Url="pub/Csuperficie12.jpg" Contents="Streamline 1000-500hPa" Area="2" />
+      <Area Name="1" lat1="80S" lat2="5S" lon1="120W" lon2="40W" />
+      <Area Name="2" lat1="75S" lat2="15S" lon1="130W" lon2="55W" />
+    </Region>
+  </Server>
+
+  <Server Name="Weather SA" Url="http://www.weathersa.co.za/media/data/marine/">
+    <Region Name="South Africa">
+      <Map Url="ma_sy.gif" Contents="Streamline Analysis" Area="1" />
+      <Area Name="1" lat1="65S" lat2="30S" lon1="40W" lon2="80E" />
+    </Region>
+  </Server>
+
+  <Server Name="Fiji Met" Url="http://www.met.gov.fj/aifs_prods/">
+    <Region Name="South Pacific">
+      <Map Url="0990.jpg" Contents="Mean Sea Level Analysis 6am" Area="1" />
+      <Map Url="0991.jpg" Contents="Mean Sea Level Analysis 12am" Area="1" />
+      <Map Url="0992.jpg" Contents="Mean Sea Level Analysis 3pm Color" Area="1" />
+      <Map Url="gms_vis.gif" Contents="Visible" Area="2" />
+
+      <Area Name="1" lat1="35S" lat2="5S" lon1="150E" lon2="155W" />
+      <Area Name="2" lat1="40S" lat2="0S" lon1="140E" lon2="160W" />
+    </Region>
+  </Server>
+
+  <Server Name="Mauritius Met" Url="http://metservice.intnet.mu/">
+    <Region Name="Mauritius">
+      <Map Url="synopticimages/satellite.jpg" Contents="Satellite Image" Area="1" />
+      <Map Url="mmsimages/chart.jpg" Contents="Synoptic chart" Area="2" />
+      <Area Name="1" lat1="37S" lat2="4S" lon1="37E" lon2="90W" />
+      <Area Name="2" lat1="40S" lat2="0S" lon1="40E" lon2="95E" />
+    </Region>
+  </Server>
+  
+  <Server Name="Weathercharts" Url="http://www.weathercharts.net/">
+    <Region Name="UK">
+      <Map Url="noaa_ukmo_analysis/previous/PPVA89_00z_last.gif" Contents="Prev MSLP Analysis 00z" Area="1" />
+      <Map Url="noaa_ukmo_analysis/previous/PPVA89_06z_last.gif" Contents="Prev MSLP Analysis 06z" Area="1" />
+      <Map Url="noaa_ukmo_analysis/previous/PPVA89_12z_last.gif" Contents="Prev MSLP Analysis 12z" Area="1" />
+      <Map Url="noaa_ukmo_analysis/previous/PPVA89_18z_last.gif" Contents="Prev MSLP Analysis 18z" Area="1" />  
+      <Map Url="noaa_ukmo_analysis/PPVA89.gif" Contents="Surface Analysis" Area="2" />
+      <Map Url="noaa_ukmo_prognosis/PPVE89.gif" Contents="24 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVG89.gif" Contents="36 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVI89.gif" Contents="48 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVJ89.gif" Contents="60 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVK89.gif" Contents="72 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVL89.gif" Contents="84 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVM89.gif" Contents="96 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVO89.gif" Contents="120 Hour MSLP" Area="3" />
+
+      <Area Name="1" lat1="40N" lat2="70N" lon1="50W" lon2="50E" />
+      <Area Name="2" lat1="40N" lat2="70N" lon1="60W" lon2="40E" />
+      <Area Name="3" lat1="40N" lat2="70N" lon1="50W" lon2="50E" />
+    </Region>
+  </Server>
+
+<!--  FRANCE Met
+incomplete since these services use changing urls and are therefore not easily supported
+http://www.meteofrance.fr/
+  <Server Name="meteo france" Url="http://www.meteofrance.com/integration/sim-portail/generated/integration/img/produits/mer/">
+    <Region Name="Atlantique" Url="atl">
+      <Map Url="vent_BC6HOI49D49.gif" Contents="0h Vent et Isobars" />
+    </Region>
+  </Server>
+<Server Name="NZ met service" Url="">
+-->  
+  
+<!-- SINGAPORE MET
+  <Server Name="Singapore Met" Url="http://www.weather.gov.sg/wip/pp/">
+    <Region Name="Singapore">
+      <Map Url="rndops/web/ship/gif/swind01.gif" Contents="Surface Wind Forecast 24hr" Area="3" />
+      <Map Url="rndops/web/ship/gif/swind02.gif" Contents="Surface Wind Forecast 48hr" Area="3" />
+      <Map Url="rndops/web/ship/gif/ship01.gif" Contents="Significant Wave Forecast 24hr" Area="1" />
+      <Map Url="rndops/web/ship/gif/ship02.gif" Contents="Significant Wave Forecast 48hr" Area="1" />
+      <Map Url="rndops/web/ship/gif/wxchart.gif" Contents="Region Weather Chart" Area="2" />
+	 
+      <Area Name="1" lat1="20S" lat2="40N" lon1="80E" lon2="150E" />
+      <Area Name="2" lat1="15S" lat2="35N" lon1="90E" lon2="130E" />
+      <Area Name="3" lat1="20S" lat2="40N" lon1="80E" lon2="150E" />
+    </Region>
+  </Server>
+-->
+  
+<!-- INDIA MET
   <Server Name="India Meteorological Dep" Url="http://www.imd.gov.in/section/satmet/img/">
     <Region Name="Asia Sector">
       <Map Url="3Dasiasec_vis.jpg" Contents="Visible" Area="1" />
@@ -2207,91 +2478,74 @@
       <Area Name="1" lat1="5N" lat2="35N" lon1="75E" lon2="105E" />
     </Region>
   </Server>
+-->  
 
-  <Server Name="Meteorological Service Singapore" Url="http://www.weather.gov.sg/wip/pp/">
-<!-- requires month/day/hour http://www.weather.gov.sg/wip/pp/aseangif/ai052507.jpg -->
+<!--  UK MET CHARTS ALTERNATIVE
+Also try  http://www1.wetter3.de/fax.html
+UK Met Polar files  Germain, Canada, Japan etc.
+-->
 
-    <Region Name="Singapore">
-      <Map Url="rndops/web/ship/gif/swind01.gif" Contents="Surface Wind Forecast 24hr" Area="3" />
-      <Map Url="rndops/web/ship/gif/swind02.gif" Contents="Surface Wind Forecast 48hr" Area="3" />
-      <Map Url="rndops/web/ship/gif/ship01.gif" Contents="Significant Wave Forecast 24hr" Area="1" />
-      <Map Url="rndops/web/ship/gif/ship02.gif" Contents="Significant Wave Forecast 48hr" Area="1" />
-      <Map Url="rndops/web/ship/gif/wxchart.gif" Contents="Region Weather Chart" Area="2" />
+<!-- UK MET
+Metoffice requires year month day time to set correct url
+http://www.metoffice.gov.uk/weather/images/namerica_sat_201405240600.jpg
+http://www.metoffice.gov.uk/weather/images/namerica_sat_201405240000.jpg
+http://www.metoffice.gov.uk/weather/images/namerica_sat_201405231800.jpg
 
-      <Area Name="1" lat1="20S" lat2="40N" lon1="80E" lon2="150E" />
-      <Area Name="2" lat1="15S" lat2="35N" lon1="90E" lon2="130E" />
-      <Area Name="3" lat1="20S" lat2="40N" lon1="80E" lon2="150E" />
-    </Region>
-  </Server>
+=======
+UK MET MOBILE  - LETS USE THESE!!  MOBILE WEBSITE
+=====================================================
+Analysis chart Issued at: 1200 on Tue 1 Aug 2017  Color
+https://www.metoffice.gov.uk/public/data/CoreProductCache/SurfacePressureChart/Item/ProductId/54062187
 
-  <Server Name="Bermuda" Url="http://www.weather.bm/">
-    <Region Name="Bermuda">
-      <Map Url="images/marineChart/Latest/Small/_chartSmall36.gif" Contents="Day 2 Marine forecast" Area="1" />
-      <Map Url="images/marineChart/Latest/Small/_chartSmall60.gif" Contents="Day 3 Marine forecast" Area="1" />
-      <Map Url="images/marineChart/Latest/Small/_chartSmall84.gif" Contents="Day 4 Marine forecast" Area="1" />
-      <Map Url="images/marineChart/Latest/Small/_chartSmall108.gif" Contents="Day 5 Marine forecast" Area="1" />
-     <Map Url="images/surfaceAnalysis/Latest/Atlantic.gif" Contents="Surface Analysis" Area="1" />
-     <Map Url="images/surfaceAnalysis/Latest/Local.gif" Contents="Local Analysis" Area="2" />
-	  
-      <Area Name="1" lat1="15N" lat2="45N" lon1="90W" lon2="20W" />
-      <Area Name="2" lat1="10N" lat2="55N" lon1="90W" lon2="10W" />
-	  
-    </Region>
-  </Server>
+Analysis chart Issued at: 1200 on Tue 1 Aug 2017  B&W
+https://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/54062186
 
-  <Server Name="French Polynesia" Url="http://www.meteo.pf/bulletins/marines/">
-    <Region Name="South Pacific">
-      <Map Url="preiso36.png" Contents="Day 1 Wind" Area="1" />
-      <Map Url="preiso60.png" Contents="Day 2 Wind" Area="1" />
-      <Map Url="etatmer12.png" Contents="Waves Today" Area="2" />
-      <Map Url="etatmer36.png" Contents="Waves Day 1" Area="2" />
-      <Map Url="etatmer60.png" Contents="Waves Day 2" Area="2" />
-      <Map Url="houle12.png" Contents="Swell Today" Area="2" />
-      <Map Url="houle36.png" Contents="Swell Day 1" Area="2" />
-      <Map Url="houle60.png" Contents="Swell Day 2" Area="2" />
+This is the chart from the main website....
+http://www.metoffice.gov.uk/public/data/CoreProductCache/SurfacePressureChart/Item/ProductId/54062187
 
-      <Area Name="1" lat1="45S" lat2="0N" lon1="175W" lon2="130W" />
-      <Area Name="2" lat1="45S" lat2="0N" lon1="175W" lon2="130W" />
-    </Region>
-  </Server>
+Forecast chart T+12  Issued at: 1200 on Tue 1 Aug 2017 Color
+https://www.metoffice.gov.uk/public/data/CoreProductCache/SurfacePressureChart/Item/ProductId/54069714
 
-  <Server Name="Chile Meterological" Url="http://web.directemar.cl/met/jturno/">
-    <Region Name="Chile">
-      <Map Url="cartas/carta.jpg" Contents="Streamline Analysis" Area="1" />
-      <Map Url="pub/Csuperficie12.jpg" Contents="Streamline 1000-500hPa" Area="2" />
-      <Area Name="1" lat1="80S" lat2="5S" lon1="120W" lon2="40W" />
-      <Area Name="2" lat1="75S" lat2="15S" lon1="130W" lon2="55W" />
-    </Region>
-  </Server>
+Analysis chart  Issued at: 1200 on Tue 1 Aug 2017 B&W
+Image Source:
+https://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/54062186
+<li class="chart0" data-value="1200 on Tue 1 Aug" style="display: list-item;">
+<h2 class="no-js" style="display: none;">1200 on Tue 1 Aug 2017</h2>
+<h2>Analysis chart</h2>
+<p>Issued at: 1200 on Tue 1 Aug 2017</p>
+<img src="https://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/54062186" alt="Surface pressure - Analysis chart">
+</li>
 
-  <Server Name="Weather SA" Url="http://www.weathersa.co.za/media/data/marine/">
-    <Region Name="South Africa">
-      <Map Url="ma_sy.gif" Contents="Streamline Analysis" Area="1" />
-      <Area Name="1" lat1="65S" lat2="30S" lon1="40W" lon2="80E" />
-    </Region>
-  </Server>
+Forecast chart T+24  Issued at: 1200 on Tue 1 Aug 2017  B&W
+https://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/54068879
 
-  <Server Name="Fiji Meterological" Url="http://www.met.gov.fj/aifs_prods/">
-    <Region Name="South Pacific">
-      <Map Url="0990.jpg" Contents="Mean Sea Level Analysis 6am" Area="1" />
-      <Map Url="0991.jpg" Contents="Mean Sea Level Analysis 12am" Area="1" />
-      <Map Url="0992.jpg" Contents="Mean Sea Level Analysis 3pm Color" Area="1" />
-      <Map Url="gms_vis.gif" Contents="Visible" Area="2" />
+Forecast chart T+36  Issued at: 1200 on Tue 1 Aug 2017  B&W
+https://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/54071232
 
-      <Area Name="1" lat1="35S" lat2="5S" lon1="150E" lon2="155W" />
-      <Area Name="2" lat1="40S" lat2="0S" lon1="140E" lon2="160W" />
-    </Region>
-  </Server>
+Forecast chart T+48  Issued at: 1200 on Tue 1 Aug 2017 B&W
+https://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/54071231
 
-  <Server Name="Mauritius Meterological" Url="http://metservice.intnet.mu/">
-    <Region Name="Mauritius">
-      <Map Url="synopticimages/satellite.jpg" Contents="Satellite Image" Area="1" />
-      <Map Url="mmsimages/chart.jpg" Contents="Synoptic chart" Area="2" />
-      <Area Name="1" lat1="37S" lat2="4S" lon1="37E" lon2="90W" />
-      <Area Name="2" lat1="40S" lat2="0S" lon1="40E" lon2="95E" />
-    </Region>
-  </Server>
-  
+Forecast chart T+60  Issued at: 1200 on Tue 1 Aug 2017  B&W
+https://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/54072110
+
+Forecast chart T+72  Issued at: 1200 on Tue 1 Aug 2017  B&W
+https://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/54072108
+
+Forecast chart T+96  Issued at: 1200 on Tue 1 Aug 2017 B&W
+https://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/54080867
+
+Forecast chart T+120  Issued at: 1200 on Tue 1 Aug 2017
+https://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/54082080
+
+Satellite
+http://www.metoffice.gov.uk/barometer/uk-storm-centre
+http://www.metoffice.gov.uk/binaries/content/gallery/mohippo/images/barometer/uk-storm-centre/name_our_storms_950x560px.jpg/name_our_storms_950x560px.jpg/mohippo%3Abarometerheroimage
+=====
+-->
+
+
+<!--
+ UK MET OFFICE
   <Server Name="metoffice.gov.uk" Url="http://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/">
     <Region Name="UK">
       <Map Url="39951127" Contents="Analysis Chart 00z" Area="2" />
@@ -2308,43 +2562,45 @@
       <Area Name="2" lat1="40N" lat2="70N" lon1="60W" lon2="40E" />
     </Region>
   </Server>
-
-  <Server Name="weathercharts.org" Url="http://www.weathercharts.net/">
-    <Region Name="UK">
-      <Map Url="noaa_ukmo_analysis/previous/PPVA89_fullsize_00z_last.gif" Contents="MSLP Analysis 00z" Area="1" />
-      <Map Url="noaa_ukmo_analysis/previous/PPVA89_fullsize_06z_last.gif" Contents="MSLP Analysis 06z" Area="1" />
-      <Map Url="noaa_ukmo_analysis/previous/PPVA89_fullsize_12z_last.gif" Contents="MSLP Analysis 12z" Area="1" />
-      <Map Url="noaa_ukmo_analysis/previous/PPVA89_fullsize_18z_last.gif" Contents="MSLP Analysis 18z" Area="1" />
-      
-      <Map Url="northwood_analysis/northwood_analysis.png" Contents="Surface Analysis" Area="2" />
-      <Map Url="noaa_ukmo_prognosis/PPVE89_fullsize.gif" Contents="36 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVG89_fullsize.gif" Contents="48 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVJ89_fullsize.gif" Contents="60 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVK89_fullsize.gif" Contents="72 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVL89_fullsize.gif" Contents="84 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVM89_fullsize.gif" Contents="96 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVO89_fullsize.gif" Contents="120 Hour MSLP" Area="3" />
-
-      <Area Name="1" lat1="40N" lat2="70N" lon1="50W" lon2="50E" />
-      <Area Name="2" lat1="40N" lat2="70N" lon1="60W" lon2="40E" />
-      <Area Name="3" lat1="40N" lat2="70N" lon1="50W" lon2="50E" />
-    </Region>
-  </Server>
-
-<!--
-    ecowatch incomplete
-      <Map Url="http://ecowatch.ncddc.noaa.gov/JAG/Navy/data/satellite_analysis/gsnofa.gif?id=3110
 -->
 
-<!-- www.mar.mil.br requires year month day time
-http://www.mar.mil.br/dhn/chm/meteo/prev/cartas/C14051612.jpg
--->
 
-<!-- Metoffice requires year month day time to set correct url
-http://www.metoffice.gov.uk/weather/images/namerica_sat_201405240600.jpg
-http://www.metoffice.gov.uk/weather/images/namerica_sat_201405240000.jpg
-http://www.metoffice.gov.uk/weather/images/namerica_sat_201405231800.jpg
+<!-- UK Met 
+Analysis & 5 days of forecast charts are updated every 12 hours around 0730 UTC and 1930 UTC, with the exception  day four and five charts which are only issued once per day at 1930 UTC.
 
+http://www.metoffice.gov.uk/public/data/CoreProductCache/SurfacePressureChart/Item/ProductId/53818112  Analysis
+http://www.metoffice.gov.uk/public/data/CoreProductCache/SurfacePressureChart/Item/ProductId/53824097  T=12
+http://www.metoffice.gov.uk/public/data/CoreProductCache/SurfacePressureChart/Item/ProductId/53824002  T=24
+http://www.metoffice.gov.uk/public/data/CoreProductCache/SurfacePressureChart/Item/ProductId/53824999  T=36
+http://www.metoffice.gov.uk/public/data/CoreProductCache/SurfacePressureChart/Item/ProductId/53824960  T=48
+http://www.metoffice.gov.uk/public/data/CoreProductCache/SurfacePressureChart/Item/ProductId/53826620  T=60
+http://www.metoffice.gov.uk/public/data/CoreProductCache/SurfacePressureChart/Item/ProductId/53826612  T=72
+http://www.metoffice.gov.uk/public/data/CoreProductCache/SurfacePressureChart/Item/ProductId/53833720  T=96
+http://www.metoffice.gov.uk/public/data/CoreProductCache/SurfacePressureChart/Item/ProductId/53833717  T=120
+
+black and white
+http://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/53818126 Analysis
+http://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/53824096 T12
+http://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/53824003 T24
+http://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/53824998 T36
+http://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/53824961 T48
+http://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/53826619 T60
+http://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/53826614 T72
+http://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/53833719 T96
+http://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/53833718 T120
+
+Issued  20:00 Thurs July 27  GMT
+http://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/53841136  Analysis
+http://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/53849078  T12
+http://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/53847914  T24
+http://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/53849794  T36
+http://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/53849792  T48
+http://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/53850434  T60
+http://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/53850421  T72
+http://www.metoffice.gov.uk/public/data/CoreProductCache/BWSurfacePressureChart/Item/ProductId/53851225  T84
+
+==
+UK MET
   http://www.metoffice.gov.uk/weather/images/samerica_sat_201405240600.jpg
   
   Surface Pressure Charts  (date dependent)
@@ -2359,37 +2615,46 @@ http://www.metoffice.gov.uk/weather/images/namerica_sat_201405231800.jpg
   
   Marine observations http://www.metoffice.gov.uk/mobile/marine/observations
   but cant use.
-  
 -->
 
-<!-- www.jma.go.jp requires year month day time for url 
-http://www.jma.go.jp/en/gms/imgs/0/infrared/1/201405241015-00.png
+<!-- JAPANESE MET
+Japanese Met  http://www.jma.go.jp/jma/indexe.html
+Same problem with numbers in the URL
+
+Surface Pressure 1800utc Aug 1
+http://www.jma.go.jp/en/g3/index.html
+http://www.jma.go.jp/en/g3/images/asia/17080203.png
+
+Surface Pressure 1200utc Aug 1
+http://www.jma.go.jp/en/g3/images/asia/17080203.png
+http://www.jma.go.jp/en/g3/images/asia/17080121.png
+
+Surface Pressure 0600utc Aug 1
+http://www.jma.go.jp/en/g3/images/asia/17080115.png
+http://www.jma.go.jp/en/g3/images/asia/17080115.png
+
+Surface Pressure 0000utc Aug 1
+http://www.jma.go.jp/en/g3/images/asia/17080109.png
+http://www.jma.go.jp/en/g3/images/asia/17080109.png
+
+--
+24hr Forecast
+http://www.jma.go.jp/en/g3/images/24h/17080121.png
+http://www.jma.go.jp/en/g3/images/24h/17080121.png
+http://www.jma.go.jp/en/g3/images/24h/17080121.png
+
+48hr Forecast
+http://www.jma.go.jp/en/g3/images/48h/17080121.png
+http://www.jma.go.jp/en/g3/images/48h/17080121.png
+
+www.jma.go.jp requires year month day time for url 
 -->
 
-<!--  incomplete since these services use changing urls and are therefore not easily supported
-  <Server Name="meteo france" Url="http://www.meteofrance.com/integration/sim-portail/generated/integration/img/produits/mer/">
-    <Region Name="Atlantique" Url="atl">
-      <Map Url="vent_BC6HOI49D49.gif" Contents="0h Vent et Isobars" />
-
-    </Region>
-  </Server>
-
-<Server Name="NZ met service" Url="">
+<!-- Ecowatch - Ocean surface temp.
+      <Map Url="http://ecowatch.ncddc.noaa.gov/JAG/Navy/data/satellite_analysis/gsnofa.gif
 -->
-<!--   Ongoing Noaa Changes
-
-They mixed fax with color gif!
-http://www.prh.noaa.gov/hnl/graphics/
-http://www.prh.noaa.gov/hnl/graphics/
-not the same server for NOAA Honalulu
-00/06/12/18  N. Pacific Surface Analysis  http://www.prh.noaa.gov/hnl/graphics/npac.gif
-http://www.prh.noaa.gov/hnl/graphics/npac_sfc_00.gif
-06
-12
-18
-etc.
 
 
--->
+
 
 </OCPNWeatherFaxInternetRetrieval>
