@@ -2401,19 +2401,17 @@ http://www.bom.gov.au/charts_data/IDY30100/current/windWave/IDY30100.windWave.00
       <Map Url="noaa_ukmo_analysis/previous/PPVA89_06z_last.gif" Contents="Prev MSLP Analysis 06z" Area="1" />
       <Map Url="noaa_ukmo_analysis/previous/PPVA89_12z_last.gif" Contents="Prev MSLP Analysis 12z" Area="1" />
       <Map Url="noaa_ukmo_analysis/previous/PPVA89_18z_last.gif" Contents="Prev MSLP Analysis 18z" Area="1" />  
-      <Map Url="noaa_ukmo_analysis/PPVA89.gif" Contents="Surface Analysis" Area="2" />
-      <Map Url="noaa_ukmo_prognosis/PPVE89.gif" Contents="24 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVG89.gif" Contents="36 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVI89.gif" Contents="48 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVJ89.gif" Contents="60 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVK89.gif" Contents="72 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVL89.gif" Contents="84 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVM89.gif" Contents="96 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVO89.gif" Contents="120 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_analysis/PPVA89.gif" Contents="Surface Analysis" Area="1" />
+      <Map Url="noaa_ukmo_prognosis/PPVE89.gif" Contents="24 Hour MSLP" Area="1" />
+      <Map Url="noaa_ukmo_prognosis/PPVG89.gif" Contents="36 Hour MSLP" Area="1" />
+      <Map Url="noaa_ukmo_prognosis/PPVI89.gif" Contents="48 Hour MSLP" Area="1" />
+      <Map Url="noaa_ukmo_prognosis/PPVJ89.gif" Contents="60 Hour MSLP" Area="1" />
+      <Map Url="noaa_ukmo_prognosis/PPVK89.gif" Contents="72 Hour MSLP" Area="1" />
+      <Map Url="noaa_ukmo_prognosis/PPVL89.gif" Contents="84 Hour MSLP" Area="1" />
+      <Map Url="noaa_ukmo_prognosis/PPVM89.gif" Contents="96 Hour MSLP" Area="1" />
+      <Map Url="noaa_ukmo_prognosis/PPVO89.gif" Contents="120 Hour MSLP" Area="1" />
 
       <Area Name="1" lat1="40N" lat2="70N" lon1="50W" lon2="50E" />
-      <Area Name="2" lat1="40N" lat2="70N" lon1="60W" lon2="40E" />
-      <Area Name="3" lat1="40N" lat2="70N" lon1="50W" lon2="50E" />
     </Region>
   </Server>
 
