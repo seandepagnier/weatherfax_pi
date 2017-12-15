@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Dec 21 2016)
+// C++ code generated with wxFormBuilder (version Oct  3 2017)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -668,7 +668,7 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	
 	wxFlexGridSizer* fgSizer28;
 	fgSizer28 = new wxFlexGridSizer( 0, 1, 0, 0 );
-	fgSizer28->AddGrowableCol( 1 );
+	fgSizer28->AddGrowableCol( 0 );
 	fgSizer28->AddGrowableRow( 0 );
 	fgSizer28->SetFlexibleDirection( wxBOTH );
 	fgSizer28->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
@@ -677,7 +677,7 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	fgSizer28->Add( m_lServers, 0, wxALL|wxEXPAND, 5 );
 	
 	
-	sbSizer12->Add( fgSizer28, 1, 0, 5 );
+	sbSizer12->Add( fgSizer28, 2, wxEXPAND, 5 );
 	
 	
 	fgSizer42->Add( sbSizer12, 1, wxEXPAND, 5 );
@@ -701,7 +701,7 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	
 	wxFlexGridSizer* fgSizer281;
 	fgSizer281 = new wxFlexGridSizer( 0, 1, 0, 0 );
-	fgSizer281->AddGrowableCol( 1 );
+	fgSizer281->AddGrowableCol( 0 );
 	fgSizer281->AddGrowableRow( 0 );
 	fgSizer281->SetFlexibleDirection( wxBOTH );
 	fgSizer281->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
@@ -710,7 +710,7 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	fgSizer281->Add( m_lRegions, 0, wxALL|wxEXPAND, 5 );
 	
 	
-	sbSizer121->Add( fgSizer281, 1, 0, 5 );
+	sbSizer121->Add( fgSizer281, 2, wxEXPAND, 5 );
 	
 	
 	fgSizer42->Add( sbSizer121, 1, wxEXPAND, 5 );
@@ -725,6 +725,7 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	
 	this->SetSizer( fgSizer61 );
 	this->Layout();
+	fgSizer61->Fit( this );
 	
 	this->Centre( wxBOTH );
 	

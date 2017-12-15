@@ -4693,7 +4693,7 @@
             <property name="minimum_size"></property>
             <property name="name">InternetRetrievalDialogBase</property>
             <property name="pos"></property>
-            <property name="size">612,442</property>
+            <property name="size">-1,-1</property>
             <property name="style">wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER</property>
             <property name="subclass"></property>
             <property name="title">Internet Retrieval</property>
@@ -6061,12 +6061,12 @@
                                             </object>
                                             <object class="sizeritem" expanded="1">
                                                 <property name="border">5</property>
-                                                <property name="flag"></property>
-                                                <property name="proportion">1</property>
+                                                <property name="flag">wxEXPAND</property>
+                                                <property name="proportion">2</property>
                                                 <object class="wxFlexGridSizer" expanded="1">
                                                     <property name="cols">1</property>
                                                     <property name="flexible_direction">wxBOTH</property>
-                                                    <property name="growablecols">1</property>
+                                                    <property name="growablecols">0</property>
                                                     <property name="growablerows">0</property>
                                                     <property name="hgap">0</property>
                                                     <property name="minimum_size"></property>
@@ -6376,12 +6376,12 @@
                                             </object>
                                             <object class="sizeritem" expanded="1">
                                                 <property name="border">5</property>
-                                                <property name="flag"></property>
-                                                <property name="proportion">1</property>
+                                                <property name="flag">wxEXPAND</property>
+                                                <property name="proportion">2</property>
                                                 <object class="wxFlexGridSizer" expanded="1">
                                                     <property name="cols">1</property>
                                                     <property name="flexible_direction">wxBOTH</property>
-                                                    <property name="growablecols">1</property>
+                                                    <property name="growablecols">0</property>
                                                     <property name="growablerows">0</property>
                                                     <property name="hgap">0</property>
                                                     <property name="minimum_size"></property>
@@ -6506,7 +6506,7 @@
             <property name="minimum_size">-1,-1</property>
             <property name="name">WeatherFaxWizardBase</property>
             <property name="pos"></property>
-            <property name="size">640,480</property>
+            <property name="size">-1,-1</property>
             <property name="style">wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER|wxSYSTEM_MENU</property>
             <property name="subclass"></property>
             <property name="title">Weather Fax Image</property>
