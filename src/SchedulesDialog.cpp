@@ -640,23 +640,28 @@ void SchedulesDialog::UpdateItem(long index)
         (wxUIntToPtr(m_lSchedules->GetItemData(index)));
 
     m_lSchedules->SetItemImage(index, schedule->Capture ? 1 : 0);
-    m_lSchedules->SetColumnWidth(CAPTURE, 50);
+    m_lSchedules->SetColumnWidth(CAPTURE, wxLIST_AUTOSIZE);
 
     m_lSchedules->SetItem(index, STATION, schedule->Station);
-    m_lSchedules->SetColumnWidth(STATION, 100 /*wxLIST_AUTOSIZE*/);
+    m_lSchedules->SetColumnWidth(STATION, wxLIST_AUTOSIZE);
 
     m_lSchedules->SetItem(index, FREQUENCIES, schedule->frequencies_str());
-//    m_lSchedules->SetColumnWidth(FREQUENCIES, wxLIST_AUTOSIZE);
+    m_lSchedules->SetColumnWidth(FREQUENCIES, wxLIST_AUTOSIZE);
 
     m_lSchedules->SetItem(index, TIME, wxString::Format(_T("%04d"),schedule->Time));
+    m_lSchedules->SetColumnWidth(TIME, wxLIST_AUTOSIZE);
 
     m_lSchedules->SetItem(index, CONTENTS, schedule->Contents);
-    m_lSchedules->SetColumnWidth(CONTENTS, 350 /*wxLIST_AUTOSIZE*/);
+    m_lSchedules->SetColumnWidth(CONTENTS, wxLIST_AUTOSIZE);
 
     m_lSchedules->SetItem(index, VALID_TIME, wxString::Format(_T("%02d"), schedule->ValidTime));
+    m_lSchedules->SetColumnWidth(VALID_TIME, wxLIST_AUTOSIZE);
+
     m_lSchedules->SetItem(index, DURATION, wxString::Format(_T("%02d"), schedule->Duration));
+    m_lSchedules->SetColumnWidth(DURATION, wxLIST_AUTOSIZE);
+
     m_lSchedules->SetItem(index, MAP_AREA, schedule->Area.AreaDescription());
-    m_lSchedules->SetColumnWidth(MAP_AREA, 150);
+    m_lSchedules->SetColumnWidth(MAP_AREA, wxLIST_AUTOSIZE);
 }
 
 void SchedulesDialog::AddScheduleToCapture(Schedule *s)
