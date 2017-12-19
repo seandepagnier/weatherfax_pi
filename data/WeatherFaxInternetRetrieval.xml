@@ -47,37 +47,37 @@
       <!-- wind/wave charts -->	
       <Map Url="PJBA99.gif" Contents="00Z SEA STATE ANALYSIS" Area="1" />
       <Map Url="PWBA90.gif" Contents="00/06/12/18Z WIND/WAVE FORECAST" Area="8" />
-      <Map Url="PWBE10.gif" Contents="24HR WIND/WAVE FORECAST" Area="8" />
+      <Map Url="PWBE10.gif" Contents="24HR WIND/WAVE FORECAST" Area="13" />
       <Map Url="PJBI10.gif" Contents="48HR WIND/WAVE FORECAST" Area="1" />
       <Map Url="PJBI20.gif" Contents="48HR WAVE PERIOD/SWELL DIRECTION" Area="1" />
       <Map Url="PJBM98.gif" Contents="96HR WIND/WAVE FORECAST" Area="1" />
       <Map Url="PJBM88.gif" Contents="96HR WAVE PERIOD/SWELL DIRECTION" Area="1" />
-      <!-- tropical wind/wave charts -->	  
- 	  <Map Url="PKFA10.gif" Contents="00/12Z Trop SEA STATE ANALYSIS" Area="4" />
-	  <Map Url="PWFE10.gif" Contents="24HR Trop WIND/WAVE" Area="4" />
-	  <Map Url="PWFI10.gif" Contents="48HR Trop WIND/WAVE" Area="4" />
-      <Map Url="PJFI11.gif" Contents="48HR Trop WAVE PERIOD/SWELL DIR" Area="4a" /> 
-      <Map Url="PWFK10.gif" Contents="72HR Trop WIND/WAVE" Area="4d" />
-      <Map Url="PJFK93.gif" Contents="72HR Trop WAVE PERIOD/SWELL DIR" Area="4c" />
-      <!-- surface charts -->	 	  
+        <!-- surface charts -->	 	  
       <Map Url="PYBA90.gif" Contents="00/06/12/18Z Sfc Analysis NE PACIFIC (Part 1)" Area="2" />
       <Map Url="PYBA91.gif" Contents="00/06/12/18Z Sfc Analysis NW PACIFIC (Part 2)" Area="3" />
       <Map Url="PPBE10.gif" Contents="24HR Sfc Forecast" Area="8" />
       <Map Url="PWBI10.gif" Contents="48HR Sfc Forecast" Area="1" />
       <Map Url="PWBM99.gif" Contents="96HR Sfc Forecast" Area="1" />
+      <!-- tropical wind/wave charts -->	  
+      <Map Url="PKFA10.gif" Contents="00/12Z Trop SEA STATE ANALYSIS" Area="4" />
+      <Map Url="PWFE10.gif" Contents="24HR Trop WIND/WAVE" Area="4" />
+      <Map Url="PWFI10.gif" Contents="48HR Trop WIND/WAVE" Area="4" />
+      <Map Url="PJFI11.gif" Contents="48HR Trop WAVE PERIOD/SWELL DIR" Area="4a" /> 
+      <Map Url="PWFK10.gif" Contents="72HR Trop WIND/WAVE" Area="4d" />
+      <Map Url="PJFK93.gif" Contents="72HR Trop WAVE PERIOD/SWELL DIR" Area="4c" />
       <!-- tropical surface charts -->		 
       <Map Url="PYFA90.gif" Contents="East Pacific Sfc Analysis" Area="4b" />
       <Map Url="PYEB11.gif" Contents="US/Tropical Sfc Analysis" Area="11" />	
       <Map Url="PYFE10.gif" Contents="24HR Trop Sfc Forecast" Area="12" />	  	  
       <Map Url="PYFI10.gif" Contents="48HR Trop Sfc Forecast" Area="12" />
       <Map Url="PYFK10.gif" Contents="72HR Trop Sfc Forecast" Area="12" />
+      <!-- tropical cyclone danger area charts -->
+      <Map Url="PWFK11.gif" Contents="00/06/12/18Z Tropical CYCLONE DANGER AREA" Area="10" />
       <!-- upper air charts -->
       <Map Url="PPBA10.gif" Contents="00/12Z 500MB ANALYSIS" Area="1" />
       <Map Url="PPBE11.gif" Contents="24HR 500MB FORECAST" Area="1" />
       <Map Url="PPBI10.gif" Contents="48HR 500MB FORECAST" Area="1" />
       <Map Url="PPBM50.gif" Contents="96HR 500MB FORECAST" Area="1" />
-      <!-- tropical cyclone danger area charts -->
-      <Map Url="PWFK11.gif" Contents="00/06/12/18Z Tropical CYCLONE DANGER AREA" Area="10" />
       <!-- sea surface temperatures -->
 	  <Map Url="PTBA88.gif" Contents="Pacific SST Chart-NW Coast" Area="9" />
       <Map Url="PTBA89.gif" Contents="Pacific SST Chart-SW Coast" Area="6a" />
@@ -102,9 +102,9 @@
       <Area Name="8" lat1="22N" lat2="51N" lon1="135W" lon2="105W" />
       <Area Name="9" lat1="40N" lat2="53N" lon1="135W" lon2="125W" />
       <Area Name="10" lat1="0N" lat2="40N" lon1="180W" lon2="80W" />
-	  <Area Name="11" lat1="5S" lat2="50N" lon1="125W" lon2="55W" />
-  	  <Area Name="12" lat1="10S" lat2="30N" lon1="140W" lon2="90W" />
-
+      <Area Name="11" lat1="5S" lat2="50N" lon1="125W" lon2="55W" />
+      <Area Name="12" lat1="10S" lat2="30N" lon1="140W" lon2="90W" />
+      <Area Name="13" lat1="20N" lat2="60N" lon1="160W" lon2="110W" />
     </Region>
 
     <Region Name="New Orleans">
@@ -182,23 +182,7 @@
       <Map Url="PWFE11.gif" Contents="24HR WIND/WAVE FORECAST EAST" Area="J" />
       <Map Url="PJFI10.gif" Contents="48HR WIND/WAVE FORECAST" Area="B" />
       <Map Url="PJFK10.gif" Contents="72HR WIND/WAVE FORECAST" Area="B" />
-     <!-- wind/wave charts southeast pacific-->
-      <Map Url="PKFA10.gif" Contents="TROPICAL SEA STATE ANALYSIS" Area="K" />
-      <Map Url="PWFE10.gif" Contents="24HR TROPICAL WIND/WAVE FORECAST" Area="T" />
-      <Map Url="PWFI10.gif" Contents="48HR TROPICAL WIND/WAVE FORECAST" Area="Z" />
-      <Map Url="PWFK10.gif" Contents="72HR TROPICAL WIND/WAVE FORECAST" Area="Z" />
-      <Map Url="PJFI11.gif" Contents="48HR TROPICAL WAVE PERIOD,SWELL DIR" Area="P" />
-      <Map Url="PJFK93.gif" Contents="72HR TROPICAL WAVE PERIOD,SWELL DIR" Area="P" />
-      <!-- wind/wave charts north pacific-->
-	  <Map Url="PJBA99.gif" Contents="North SEA STATE ANALYSIS" Area="1" />
-      <Map Url="PWBA90.gif" Contents="00/06/12/18Z WIND/WAVE ANALYSIS" Area="M" />	  
-      <Map Url="PWBE10.gif" Contents="24HR WIND/WAVE FORECAST" Area="4" />
-      <Map Url="PJBI10.gif" Contents="48HR WIND/WAVE FORECAST" Area="1" />
-      <Map Url="PJBI20.gif" Contents="48HR WAVE PERIOD,SWELL DIRECTION" Area="1" />
-      <Map Url="PJBM98.gif" Contents="48HR WIND/WAVE FORECAST" Area="1" />
-      <Map Url="PJBM88.gif" Contents="96HR WAVE PERIOD,SWELL DIRECTION" Area="1" />
       <!-- surface charts central pacific-->
-      <Map Url="PYPA00.gif" Contents="00/06/12/18Z PACIFIC PRELIM SURFACE ANALYSIS" Area="6" />  
       <Map Url="PPBA11.gif" Contents="00/06/12/18Z PACIFIC SURFACE ANALYSIS" Area="C" />
       <Map Url="PWFA11.gif" Contents="00/06/12/18Z PACIFIC STREAMLINE ANALYSIS" Area="I" />
       <Map Url="QYFA99.gif" Contents="00/06/12/18Z SURFACE ANALYSIS" Area="2" />
@@ -207,12 +191,27 @@
       <Map Url="PYFK11.gif" Contents="72HR SURFACE FORECAST" Area="A" />
       <Map Url="QWFI99.gif" Contents="24HR WIND/STREAM FORECAST" Area="R" />	  
       <Map Url="QWFQ99.gif" Contents="48HR WIND/STREAM FORECAST" Area="R" />
+     <!-- wind/wave charts southeast pacific-->
+      <Map Url="PKFA10.gif" Contents="TROPICAL SEA STATE ANALYSIS" Area="K" />
+      <Map Url="PWFE10.gif" Contents="24HR TROPICAL WIND/WAVE FORECAST" Area="T" />
+      <Map Url="PWFI10.gif" Contents="48HR TROPICAL WIND/WAVE FORECAST" Area="Z" />
+      <Map Url="PWFK10.gif" Contents="72HR TROPICAL WIND/WAVE FORECAST" Area="Z" />
+      <Map Url="PJFI11.gif" Contents="48HR TROPICAL WAVE PERIOD,SWELL DIR" Area="P" />
+      <Map Url="PJFK93.gif" Contents="72HR TROPICAL WAVE PERIOD,SWELL DIR" Area="P" />
       <!-- surface charts southeast pacific-->
       <Map Url="PYFA90.gif" Contents="EAST PACIFIC SURFACE ANALYSIS" Area="L" />
       <Map Url="PYEB11.gif" Contents="US/TROPICAL SURFACE ANALYSIS WEST" Area="S" />
       <Map Url="PYFE10.gif" Contents="24HR TROPICAL SURFACE FORECAST" Area="N" />
       <Map Url="PYFI10.gif" Contents="48HR TROPICAL SURFACE FORECAST" Area="N" />
       <Map Url="PYFK10.gif" Contents="72HR TROPICAL SURFACE FORECAST" Area="N" />
+      <!-- wind/wave charts north pacific-->
+      <Map Url="PJBA99.gif" Contents="North SEA STATE ANALYSIS" Area="1" />
+      <Map Url="PWBA90.gif" Contents="00/06/12/18Z WIND/WAVE ANALYSIS" Area="M" />
+      <Map Url="PWBE10.gif" Contents="24HR WIND/WAVE FORECAST" Area="4" />
+      <Map Url="PJBI10.gif" Contents="48HR WIND/WAVE FORECAST" Area="1" />
+      <Map Url="PJBI20.gif" Contents="48HR WAVE PERIOD,SWELL DIRECTION" Area="1" />
+      <Map Url="PJBM98.gif" Contents="48HR WIND/WAVE FORECAST" Area="1" />
+      <Map Url="PJBM88.gif" Contents="96HR WAVE PERIOD,SWELL DIRECTION" Area="1" />
       <!-- surface charts north pacific-->
       <Map Url="PYBA90.gif" Contents="00/06/12/18Z Sfc Analysis NE PACIFIC Part1" Area="2" />
       <Map Url="PYBA91.gif" Contents="00/06/12/18Z Sfc Analysis NW PACIFIC PART2" Area="3" />
@@ -222,7 +221,7 @@
       <!-- upper air charts north pacific-->
       <Map Url="PPBA10.gif" Contents="00/12Z 500MB Analysis" Area="1" />
       <Map Url="PPBE50.gif" Contents="24HR 500MB FORECAST N PACIFIC 00Z" Area="1" />
- 	  <Map Url="PPBE51.gif" Contents="24HR 500MB FORECAST N PACIFIC 12Z" Area="1" />
+     <Map Url="PPBE51.gif" Contents="24HR 500MB FORECAST N PACIFIC 12Z" Area="1" />
       <Map Url="PPBI10.gif" Contents="48HR 500MB FORECAST N PACIFIC 00Z" Area="1" />
       <Map Url="PPBI51.gif" Contents="48HR 500MB FORECAST N PACIFIC 12Z" Area="1" />
       <Map Url="PPBM50.gif" Contents="96HR 500MB FORECAST N PACIFIC" Area="1" />	  
@@ -255,7 +254,6 @@
 	  <Area Name="R" lat1="50N" lat2="30S" lon1="100W" lon2="120E" />
 	  <Area Name="S" lat1="0N" lat2="50N" lon1="110W" lon2="130E" /> 	  
 	  <Area Name="T" lat1="5S" lat2="50N" lon1="55W" lon2="125E" /> 
-	  
       <Area Name="Y" lat1="5N" lat2="32N" lon1="120W" lon2="80W"/>
       <Area Name="Z" lat1="20S" lat2="30N" lon1="140W" lon2="80W" />
 
@@ -282,17 +280,14 @@
       <Map Url="shtml/A_96hrbw.gif" Contents="96-hour Surface Forecast" Area="2" />
       <Map Url="shtml/A_48hrwind_wave.gif" Contents="48-hour Wind Wave Forecast" Area="2" />
       <Map Url="shtml/A_96hrwind_wave.gif" Contents="96-hour Wind Wave Forecast" Area="2" />
-      <Map Url="shtml/A_024hrwper_color.gif" Contents="24-hour Wave Forecast" Area="3" />
-      <Map Url="shtml/A_048hrwper_color.gif" Contents="48-hour Wave Forecast" Area="3" />
-      <Map Url="shtml/A_096hrwper_color.gif" Contents="96-hour Wave Forecast" Area="3" />
+      <Map Url="shtml/A_024hrwper_color.gif" Contents="24-hour Wave Period Forecast" Area="3" />
+      <Map Url="shtml/A_048hrwper_color.gif" Contents="48-hour Wave Period Forecast" Area="3" />
+      <Map Url="shtml/A_096hrwper_color.gif" Contents="96-hour Wave Period Forecast" Area="3" />
       <Map Url="shtml/ira1.gif" Contents="Wind/Wave Analysis (FEET)" Area="4" />
       <Map Url="A_w_sfc_color.png" Contents="West Atlantic Surface Analysis" Area="5" />
       <Map Url="A_e_sfc_color.png" Contents="East Atlantic Surface Analysis" Area="6" />
       <Map Url="sst/images/gulfstream/ncomhrCurrWatlGS.png" Contents="Gulf Stream Currents" Area="7" />
       <Map Url="sst/images/gulfstream/GScomp_NCOMHR.png" Contents="Gulf Stream Sea Surface Temperature (SST)" Area="8" />
-      <Map Url="images/regions/rtofs/rtofssstAtl.jpg" Contents="RTOFS SST Atlantic" Area="12" />
-      <Map Url="images/regions/oisst/OISSTAtl.jpg" Contents="Ol SST Atlantic" Area="12" />
-      <Map Url="images/regions/rtofs/rtofssstGM.jpg" Contents="RTOFS SST Gulf of Mexico" Area="10" />
 
 	  <Area Name="1" lat1="20N" lat2="60N" lon1="90W" lon2="0W" />	
       <Area Name="1a" lat1="20N" lat2="60N" lon1="90W" lon2="0W" />	  
@@ -305,10 +300,7 @@
       <Area Name="6" lat1="20N" lat2="65N" lon1="50W" lon2="10E" />
       <Area Name="7" lat1="25N" lat2="42N" lon1="82W" lon2="64W" />
       <Area Name="8" lat1="25N" lat2="42N" lon1="82W" lon2="64W" />
-	  <Area Name="9" lat1="0N" lat2="55N" lon1="100W" lon2="0W" />	  
-      <Area Name="10" lat1="15N" lat2="30N" lon1="100W" lon2="80W" />
-	  <Area Name="11" lat1="0N" lat2="55N" lon1="100W" lon2="20E" />
-	  <Area Name="12" lat1="0N" lat2="55N" lon1="100W" lon2="20E" />	  
+
     </Region>
 
     <Region Name="Pacific">
@@ -2401,17 +2393,19 @@ http://www.bom.gov.au/charts_data/IDY30100/current/windWave/IDY30100.windWave.00
       <Map Url="noaa_ukmo_analysis/previous/PPVA89_06z_last.gif" Contents="Prev MSLP Analysis 06z" Area="1" />
       <Map Url="noaa_ukmo_analysis/previous/PPVA89_12z_last.gif" Contents="Prev MSLP Analysis 12z" Area="1" />
       <Map Url="noaa_ukmo_analysis/previous/PPVA89_18z_last.gif" Contents="Prev MSLP Analysis 18z" Area="1" />  
-      <Map Url="noaa_ukmo_analysis/PPVA89.gif" Contents="Surface Analysis" Area="1" />
-      <Map Url="noaa_ukmo_prognosis/PPVE89.gif" Contents="24 Hour MSLP" Area="1" />
-      <Map Url="noaa_ukmo_prognosis/PPVG89.gif" Contents="36 Hour MSLP" Area="1" />
-      <Map Url="noaa_ukmo_prognosis/PPVI89.gif" Contents="48 Hour MSLP" Area="1" />
-      <Map Url="noaa_ukmo_prognosis/PPVJ89.gif" Contents="60 Hour MSLP" Area="1" />
-      <Map Url="noaa_ukmo_prognosis/PPVK89.gif" Contents="72 Hour MSLP" Area="1" />
-      <Map Url="noaa_ukmo_prognosis/PPVL89.gif" Contents="84 Hour MSLP" Area="1" />
-      <Map Url="noaa_ukmo_prognosis/PPVM89.gif" Contents="96 Hour MSLP" Area="1" />
-      <Map Url="noaa_ukmo_prognosis/PPVO89.gif" Contents="120 Hour MSLP" Area="1" />
+      <Map Url="noaa_ukmo_analysis/PPVA89.gif" Contents="Surface Analysis" Area="2" />
+      <Map Url="noaa_ukmo_prognosis/PPVE89.gif" Contents="24 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVG89.gif" Contents="36 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVI89.gif" Contents="48 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVJ89.gif" Contents="60 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVK89.gif" Contents="72 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVL89.gif" Contents="84 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVM89.gif" Contents="96 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVO89.gif" Contents="120 Hour MSLP" Area="3" />
 
       <Area Name="1" lat1="40N" lat2="70N" lon1="50W" lon2="50E" />
+      <Area Name="2" lat1="40N" lat2="70N" lon1="60W" lon2="40E" />
+      <Area Name="3" lat1="40N" lat2="70N" lon1="50W" lon2="50E" />
     </Region>
   </Server>
 
