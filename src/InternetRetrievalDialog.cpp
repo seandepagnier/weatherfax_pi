@@ -783,6 +783,12 @@ void InternetRetrievalDialog::RebuildList()
     m_bRetrieveScheduled->Enable(enable);
     m_bRetrieveSelected->Enable(m_lUrls->GetSelectedItemCount() != 0);
 
+    m_lUrls->SetColumnWidth(SCHEDULED, wxLIST_AUTOSIZE);
+    m_lUrls->SetColumnWidth(SERVER, wxLIST_AUTOSIZE);
+    m_lUrls->SetColumnWidth(REGION, wxLIST_AUTOSIZE);
+    m_lUrls->SetColumnWidth(CONTENTS, wxLIST_AUTOSIZE);
+    m_lUrls->SetColumnWidth(MAP_AREA, wxLIST_AUTOSIZE);
+
     m_bRebuilding = false;
 }
 
@@ -792,17 +798,8 @@ void InternetRetrievalDialog::UpdateItem(long index)
         (wxUIntToPtr(m_lUrls->GetItemData(index)));
 
     m_lUrls->SetItemImage(index, url->Scheduled ? 1 : 0);
-    m_lUrls->SetColumnWidth(SCHEDULED, wxLIST_AUTOSIZE);
-
     m_lUrls->SetItem(index, SERVER, url->Server);
-    m_lUrls->SetColumnWidth(SERVER, wxLIST_AUTOSIZE);
-
     m_lUrls->SetItem(index, REGION, url->Region);
-    m_lUrls->SetColumnWidth(REGION, wxLIST_AUTOSIZE);
-
     m_lUrls->SetItem(index, CONTENTS, url->Contents);
-    m_lUrls->SetColumnWidth(CONTENTS, wxLIST_AUTOSIZE);
-
     m_lUrls->SetItem(index, MAP_AREA, url->Area.AreaDescription());
-    m_lUrls->SetColumnWidth(MAP_AREA, wxLIST_AUTOSIZE);
 }
