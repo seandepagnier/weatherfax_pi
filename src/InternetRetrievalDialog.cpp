@@ -280,6 +280,7 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                                             url.Contents = wxString::Format
                                                 (wxString::FromUTF8(h->Attribute("Contents")), index);
                                             url.area_name = wxString::FromUTF8(h->Attribute("Area"));
+                                            url.Script = wxString::FromUTF8(h->Attribute("Script"));
                                         
                                             urls.push_back(url);
                                         }
@@ -292,10 +293,16 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                                 url.Scheduled = false;
                                 url.Server = server.Name;
                                 url.Region = region.Name;
-                         
-                                url.Url = region_url + wxString::FromUTF8(g->Attribute("Url"));
+
+                                long offset = 0;
+                                wxString s_offset = wxString::FromUTF8(g->Attribute("DateOffset"));
+                                s_offset.ToLong(&offset);
+                                wxDateSpan dateSpan = wxDateSpan::Days(offset);
+                                wxDateTime dateUrl = wxDateTime::UNow().Add(dateSpan);
+                                url.Url = region_url + dateUrl.Format(wxString::FromUTF8(g->Attribute("Url")));
                                 url.Contents = wxString::FromUTF8(g->Attribute("Contents"));
                                 url.area_name = wxString::FromUTF8(g->Attribute("Area"));
+                                url.Script = wxString::FromUTF8(g->Attribute("Script"));
 
                                 urls.push_back(url);
                             } else if(!strcmp(g->Value(), "Area")) {
@@ -554,6 +561,23 @@ void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
 
         count++;
 
+        if (! faxurl->Script.empty()) {
+	    wxString s = wxFileName::GetPathSeparator();
+	    wxString script = *GetpSharedDataLocation() + _T("plugins")
+	        + s + _T("weatherfax_pi") + s + _T("data") + s + faxurl->Script
+		+ _T(" \"") + faxurl->Server + _T("\" ")
+		+ _T(" \"") + faxurl->Region + _T("\" ")
+		+ _T(" \"") + faxurl->Contents + _T("\" ");
+	    wxArrayString output, error;
+	    if (::wxExecute(script, output, error) != 0) {
+	        wxMessageDialog mdlg(this, _("Failed to launch: ") + script,
+	                             _("weatherfax"), wxOK | wxICON_ERROR);
+	        mdlg.ShowModal();
+	        return;
+	    }
+	    faxurl->Url = output[0];
+	}
+
         wxString path = weatherfax_pi::StandardPath();
 
         wxString filename = faxurl->Url;
@@ -759,6 +783,12 @@ void InternetRetrievalDialog::RebuildList()
     m_bRetrieveScheduled->Enable(enable);
     m_bRetrieveSelected->Enable(m_lUrls->GetSelectedItemCount() != 0);
 
+    m_lUrls->SetColumnWidth(SCHEDULED, wxLIST_AUTOSIZE);
+    m_lUrls->SetColumnWidth(SERVER, wxLIST_AUTOSIZE);
+    m_lUrls->SetColumnWidth(REGION, wxLIST_AUTOSIZE);
+    m_lUrls->SetColumnWidth(CONTENTS, wxLIST_AUTOSIZE);
+    m_lUrls->SetColumnWidth(MAP_AREA, wxLIST_AUTOSIZE);
+
     m_bRebuilding = false;
 }
 
@@ -768,17 +798,8 @@ void InternetRetrievalDialog::UpdateItem(long index)
         (wxUIntToPtr(m_lUrls->GetItemData(index)));
 
     m_lUrls->SetItemImage(index, url->Scheduled ? 1 : 0);
-    m_lUrls->SetColumnWidth(SCHEDULED, wxLIST_AUTOSIZE);
-
     m_lUrls->SetItem(index, SERVER, url->Server);
-    m_lUrls->SetColumnWidth(SERVER, wxLIST_AUTOSIZE);
-
     m_lUrls->SetItem(index, REGION, url->Region);
-    m_lUrls->SetColumnWidth(REGION, wxLIST_AUTOSIZE);
-
     m_lUrls->SetItem(index, CONTENTS, url->Contents);
-    m_lUrls->SetColumnWidth(CONTENTS, wxLIST_AUTOSIZE);
-
     m_lUrls->SetItem(index, MAP_AREA, url->Area.AreaDescription());
-    m_lUrls->SetColumnWidth(MAP_AREA, wxLIST_AUTOSIZE);
 }

@@ -43,6 +43,7 @@ struct FaxUrl
     wxString Url;
     wxString Contents;
     wxString area_name;
+    wxString Script;
 
     FaxArea Area;
 };
