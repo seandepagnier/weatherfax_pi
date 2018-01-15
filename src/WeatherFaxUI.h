@@ -1,8 +1,8 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Oct  3 2017)
+// C++ code generated with wxFormBuilder (version Dec 20 2017)
 // http://www.wxformbuilder.org/
 //
-// PLEASE DO "NOT" EDIT THIS FILE!
+// PLEASE DO *NOT* EDIT THIS FILE!
 ///////////////////////////////////////////////////////////////////////////
 
 #ifndef __WEATHERFAXUI_H__
@@ -45,6 +45,8 @@
 #include <wx/dynarray.h>
 WX_DEFINE_ARRAY_PTR( wxWizardPageSimple*, WizardPages );
 #include <wx/choicebk.h>
+
+#include "wxWTranslateCatalog.h"
 
 ///////////////////////////////////////////////////////////////////////////
 
