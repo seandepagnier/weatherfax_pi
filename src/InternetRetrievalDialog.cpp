@@ -39,7 +39,12 @@
 #include "WeatherFax.h"
 
 InternetRetrievalDialog::InternetRetrievalDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
-    : InternetRetrievalDialogBase( parent ), m_weatherfax_pi(_weatherfax_pi),
+#ifndef __WXOSX__
+    : InternetRetrievalDialogBase( parent ),
+#else
+    : InternetRetrievalDialogBase( parent, wxID_ANY, _("Internet Retrieval"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE|wxRESIZE_BORDER|wxSTAY_ON_TOP ),
+#endif
+      m_weatherfax_pi(_weatherfax_pi),
       m_bLoaded(false), m_bDisableServers(false), m_bDisableRegions(false),
       m_bDisableFilter(true), m_bRebuilding(false)
 {

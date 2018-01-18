@@ -38,7 +38,12 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
                                     WeatherFax &parent,
                                     WeatherFaxImageCoordinateList *coords,
                                     wxString newcoordbasename)
-    : WeatherFaxWizardBase( &parent ), m_decoder(*this, CaptureSettings ),
+#ifndef __WXOSX__
+    : WeatherFaxWizardBase( &parent ),
+#else
+    : WeatherFaxWizardBase( &parent, wxID_ANY, _("Weather Fax Image"), wxNullBitmap, wxDefaultPosition, wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER|wxSYSTEM_MENU|wxSTAY_ON_TOP),
+#endif
+      m_decoder(*this, CaptureSettings ),
       m_DecoderOptionsDialog(CaptureSettings.type == FaxDecoderCaptureSettings::NONE ?
                              NULL : new DecoderOptionsDialog(*this)),
       m_parent(parent), m_wfimg(img), m_curCoords(img.m_Coords),
@@ -241,7 +246,14 @@ void WeatherFaxWizard::OnStopDecoding( wxCommandEvent& event )
 
 void WeatherFaxWizard::OnDecoderOptions( wxCommandEvent& event )
 {
+#ifdef __WXOSX__
+    // Modal dialogs on macOS are broken and opened bellow the parent with wxSTAY_ON_TOP set
+    // Opening it with Show() still let's it fall behind the Wizard, but at least it starts above it...
+    // There is probably nothing more we can do about it until wx3.1/3.2 migration
+    m_DecoderOptionsDialog->Show();
+#else
     m_DecoderOptionsDialog->ShowModal();
+#endif
 }
 
 void WeatherFaxWizard::OnPaintPhasing( wxPaintEvent& event )
