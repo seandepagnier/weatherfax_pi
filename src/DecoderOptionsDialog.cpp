@@ -31,7 +31,12 @@
 #include "DecoderOptionsDialog.h"
 
 DecoderOptionsDialog::DecoderOptionsDialog(WeatherFaxWizard &wizard)
-    : DecoderOptionsDialogBase(&wizard), m_wizard(wizard)
+#ifndef __WXOSX__
+    : DecoderOptionsDialogBase(&wizard),
+#else
+    : DecoderOptionsDialogBase(&wizard, wxID_ANY, _("Fax Decoding Options"), wxDefaultPosition, wxDefaultSize, wxDEFAULT_DIALOG_STYLE|wxSTAY_ON_TOP),
+#endif
+    m_wizard(wizard)
 {
     Hide();
 
