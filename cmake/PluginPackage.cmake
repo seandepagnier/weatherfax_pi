@@ -172,11 +172,21 @@ configure_file(${PROJECT_SOURCE_DIR}/buildosx/InstallOSX/pkg_background.jpg
  configure_file(${PROJECT_SOURCE_DIR}/buildosx/InstallOSX/${PACKAGE_NAME}.pkgproj.in
             ${CMAKE_CURRENT_BINARY_DIR}/${VERBOSE_NAME}.pkgproj)
 
+ #We depend on libportaudio, let's assume it is available from Homebrew
+ ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libportaudio.2.dylib
+                 COMMAND cp /usr/local/lib/libportaudio.2.dylib ${CMAKE_CURRENT_BINARY_DIR}
+                 COMMAND chmod 755 ${CMAKE_CURRENT_BINARY_DIR}/libportaudio.2.dylib
+                 COMMAND install_name_tool -change /usr/local/lib/libportaudio.2.dylib @executable_path/../MacOS/libportaudio.2.dylib libweatherfax_pi.dylib
+                 COMMAND install_name_tool -change /usr/local/opt/portaudio/lib/libportaudio.2.dylib @executable_path/../MacOS/libportaudio.2.dylib libweatherfax_pi.dylib
+                 WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                 DEPENDS ${PACKAGE_NAME}
+)
+
  ADD_CUSTOM_COMMAND(
    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${VERBOSE_NAME}-Plugin.pkg
    COMMAND /usr/local/bin/packagesbuild -F ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_BINARY_DIR}/${VERBOSE_NAME}.pkgproj
    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-   DEPENDS ${PACKAGE_NAME}
+   DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/libportaudio.2.dylib
    COMMENT "create-pkg [${PACKAGE_NAME}]: Generating pkg file."
 )
 
