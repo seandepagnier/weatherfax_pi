@@ -108,7 +108,7 @@ SET(SRC_WEATHERFAX
 	)
 
 
-IF(UNIX AND NOT APPLE)
+IF(UNIX)
   find_library(RTLSDR_LIBRARY NAMES rtlsdr
     DOC "The rtlsdr library"
     )
@@ -126,7 +126,7 @@ IF(UNIX AND NOT APPLE)
     MESSAGE (STATUS "============================================")
     MESSAGE (STATUS "")
   ENDIF()
-ENDIF(UNIX AND NOT APPLE)
+ENDIF(UNIX)
 
       
 IF(UNIX)
