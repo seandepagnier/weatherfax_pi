@@ -354,6 +354,7 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
 
 #ifndef BUILTIN_RTLAIS
     dialog->m_cbCaptureType->RemovePage(1);
+    //TODO: This is actually broken at least on macOS, but let it be for now as we may build with rtlsdr there
 #else
     dialog->m_cbCaptureType->SetSelection(m_CaptureSettings.type == FaxDecoderCaptureSettings::RTLSDR);
 #endif
@@ -383,6 +384,9 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
         m_CaptureSettings.rtlsdr_deviceindex = dialog->m_srtlsdr_deviceindex->GetValue();
         m_CaptureSettings.rtlsdr_errorppm = dialog->m_srtlsdr_errorppm->GetValue();
         m_CaptureSettings.rtlsdr_upconverter_mhz = dialog->m_srtlsdr_upconverter_mhz->GetValue();
+        
+        m_CaptureSettings.audio_deviceindex = dialog->m_sDeviceIndex->GetValue();
+        m_CaptureSettings.audio_samplerate = wxAtol( dialog->m_cSampleRate->GetString(dialog->m_cSampleRate->GetSelection()) );
 
         m_iExportColors = dialog->m_sExportColors->GetValue();
         m_bExportDepthMeters = dialog->m_rbExportDepthMeters->GetValue();

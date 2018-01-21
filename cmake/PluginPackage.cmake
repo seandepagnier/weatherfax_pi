@@ -13,10 +13,10 @@ ENDIF (COMMAND cmake_policy)
 SET(CPACK_PACKAGE_NAME "${PACKAGE_NAME}")
 SET(CPACK_PACKAGE_VENDOR "opencpn.org")
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY ${CPACK_PACKAGE_NAME} ${PACKAGE_VERSION})
-SET(CPACK_PACKAGE_VERSION ${PACKAGE_VERSION})
-SET(CPACK_PACKAGE_VERSION_MAJOR ${VERSION_MAJOR})
-SET(CPACK_PACKAGE_VERSION_MINOR ${VERSION_MINOR})
-SET(CPACK_PACKAGE_VERSION_PATCH ${VERSION_PATCH})
+SET(CPACK_PACKAGE_VERSION ${PLUGIN_PACKAGE_VERSION})
+SET(CPACK_PACKAGE_VERSION_MAJOR ${PLUGIN_VERSION_MAJOR})
+SET(CPACK_PACKAGE_VERSION_MINOR ${PLUGIN_VERSION_MINOR})
+SET(CPACK_PACKAGE_VERSION_PATCH ${PLUGIN_VERSION_PATCH})
 SET(CPACK_INSTALL_CMAKE_PROJECTS "${CMAKE_CURRENT_BINARY_DIR};${PACKAGE_NAME};ALL;/")
 SET(CPACK_PACKAGE_EXECUTABLES OpenCPN ${PACKAGE_NAME})
 
@@ -172,11 +172,29 @@ configure_file(${PROJECT_SOURCE_DIR}/buildosx/InstallOSX/pkg_background.jpg
  configure_file(${PROJECT_SOURCE_DIR}/buildosx/InstallOSX/${PACKAGE_NAME}.pkgproj.in
             ${CMAKE_CURRENT_BINARY_DIR}/${VERBOSE_NAME}.pkgproj)
 
+ #We depend on libportaudio, libusb and librtlsdr, let's assume they are available from Homebrew
+ ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libportaudio.2.dylib
+                 COMMAND cp /usr/local/lib/libportaudio.2.dylib ${CMAKE_CURRENT_BINARY_DIR}
+                 COMMAND chmod 755 ${CMAKE_CURRENT_BINARY_DIR}/libportaudio.2.dylib
+                 COMMAND install_name_tool -change /usr/local/lib/libportaudio.2.dylib @executable_path/../MacOS/libportaudio.2.dylib libweatherfax_pi.dylib
+                 COMMAND install_name_tool -change /usr/local/opt/portaudio/lib/libportaudio.2.dylib @executable_path/../MacOS/libportaudio.2.dylib libweatherfax_pi.dylib
+                 COMMAND cp /usr/local/lib/librtlsdr.0.dylib ${CMAKE_CURRENT_BINARY_DIR}
+                 COMMAND chmod 755 ${CMAKE_CURRENT_BINARY_DIR}/librtlsdr.0.dylib
+                 COMMAND install_name_tool -change /usr/local/lib/librtlsdr.0.dylib @executable_path/../MacOS/librtlsdr.0.dylib libweatherfax_pi.dylib
+                 COMMAND install_name_tool -change /usr/local/opt/librtlsdr/lib/librtlsdr.0.dylib @executable_path/../MacOS/librtlsdr.0.dylib libweatherfax_pi.dylib
+                 COMMAND cp /usr/local/lib/libusb-1.0.dylib ${CMAKE_CURRENT_BINARY_DIR}
+                 COMMAND chmod 755 ${CMAKE_CURRENT_BINARY_DIR}/libusb-1.0.dylib
+                 COMMAND install_name_tool -change /usr/local/lib/libusb-1.0.0.dylib @executable_path/../MacOS/libusb-1.0.dylib librtlsdr.0.dylib
+                 COMMAND install_name_tool -change /usr/local/opt/libusb/lib/libusb-1.0.0.dylib @executable_path/../MacOS/libusb-1.0.dylib librtlsdr.0.dylib
+                 WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                 DEPENDS ${PACKAGE_NAME}
+)
+
  ADD_CUSTOM_COMMAND(
    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${VERBOSE_NAME}-Plugin.pkg
    COMMAND /usr/local/bin/packagesbuild -F ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_BINARY_DIR}/${VERBOSE_NAME}.pkgproj
    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-   DEPENDS ${PACKAGE_NAME}
+   DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/libportaudio.2.dylib
    COMMENT "create-pkg [${PACKAGE_NAME}]: Generating pkg file."
 )
 

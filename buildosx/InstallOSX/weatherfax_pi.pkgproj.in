@@ -22,6 +22,105 @@
 										<dict>
 											<key>CHILDREN</key>
 											<array>
+                                                <dict><!-- Here begins the file -->
+                                                    <key>CHILDREN</key>
+                                                    <array>
+                                                        <dict>
+                                                            <key>CHILDREN</key>
+                                                            <array/>
+                                                            <key>GID</key>
+                                                            <integer>80</integer>
+                                                            <key>PATH</key>
+                                                            <string>libportaudio.2.dylib</string>
+                                                            <key>PATH_TYPE</key>
+                                                            <integer>3</integer>
+                                                            <key>PERMISSIONS</key>
+                                                            <integer>493</integer>
+                                                            <key>TYPE</key>
+                                                            <integer>3</integer>
+                                                            <key>UID</key>
+                                                            <integer>0</integer>
+                                                        </dict>
+                                                    </array>
+                                                    <key>GID</key>
+                                                    <integer>80</integer>
+                                                    <key>PATH</key>
+                                                    <string>MacOS</string>
+                                                    <key>PATH_TYPE</key>
+                                                    <integer>0</integer>
+                                                    <key>PERMISSIONS</key>
+                                                    <integer>509</integer>
+                                                    <key>TYPE</key>
+                                                    <integer>2</integer>
+                                                    <key>UID</key>
+                                                    <integer>0</integer>
+                                                </dict><!-- Here ends the file -->
+                                                <dict><!-- Here begins the file -->
+                                                    <key>CHILDREN</key>
+                                                    <array>
+                                                        <dict>
+                                                            <key>CHILDREN</key>
+                                                            <array/>
+                                                            <key>GID</key>
+                                                            <integer>80</integer>
+                                                            <key>PATH</key>
+                                                            <string>librtlsdr.0.dylib</string>
+                                                            <key>PATH_TYPE</key>
+                                                            <integer>3</integer>
+                                                            <key>PERMISSIONS</key>
+                                                            <integer>493</integer>
+                                                            <key>TYPE</key>
+                                                            <integer>3</integer>
+                                                            <key>UID</key>
+                                                            <integer>0</integer>
+                                                        </dict>
+                                                    </array>
+                                                    <key>GID</key>
+                                                    <integer>80</integer>
+                                                    <key>PATH</key>
+                                                    <string>MacOS</string>
+                                                    <key>PATH_TYPE</key>
+                                                    <integer>0</integer>
+                                                    <key>PERMISSIONS</key>
+                                                    <integer>509</integer>
+                                                    <key>TYPE</key>
+                                                    <integer>2</integer>
+                                                    <key>UID</key>
+                                                    <integer>0</integer>
+                                                </dict><!-- Here ends the file -->
+                                                <dict><!-- Here begins the file -->
+                                                    <key>CHILDREN</key>
+                                                    <array>
+                                                        <dict>
+                                                            <key>CHILDREN</key>
+                                                            <array/>
+                                                            <key>GID</key>
+                                                            <integer>80</integer>
+                                                            <key>PATH</key>
+                                                            <string>libusb-1.0.dylib</string>
+                                                            <key>PATH_TYPE</key>
+                                                            <integer>3</integer>
+                                                            <key>PERMISSIONS</key>
+                                                            <integer>493</integer>
+                                                            <key>TYPE</key>
+                                                            <integer>3</integer>
+                                                            <key>UID</key>
+                                                            <integer>0</integer>
+                                                        </dict>
+                                                    </array>
+                                                    <key>GID</key>
+                                                    <integer>80</integer>
+                                                    <key>PATH</key>
+                                                    <string>MacOS</string>
+                                                    <key>PATH_TYPE</key>
+                                                    <integer>0</integer>
+                                                    <key>PERMISSIONS</key>
+                                                    <integer>509</integer>
+                                                    <key>TYPE</key>
+                                                    <integer>2</integer>
+                                                    <key>UID</key>
+                                                    <integer>0</integer>
+                                                </dict><!-- Here ends the file -->
 												<dict>
 													<key>CHILDREN</key>
 													<array>
@@ -1401,7 +1500,7 @@
 				</dict>
 			</array>
 			<key>NAME</key>
-			<string>${VERBOSE_NAME}-Plugin_${VERSION_MAJOR}.${VERSION_MINOR}</string>
+			<string>${VERBOSE_NAME}-Plugin_${PLUGIN_VERSION_MAJOR}.${PLUGIN_VERSION_MINOR}</string>
 			<key>REFERENCE_FOLDER_PATH</key>
 			<string>.</string>
 		</dict>
