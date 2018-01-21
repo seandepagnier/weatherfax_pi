@@ -63,10 +63,15 @@ weatherfax_pi::weatherfax_pi(void *ppimgr)
 int weatherfax_pi::Init(void)
 {
     AddLocaleCatalog( _T("opencpn-weatherfax_pi") );
-    m_leftclick_tool_id  = InsertPlugInTool(_T(""), _img_weatherfax,
+#ifdef WEATHERFAX_USE_SVG
+    m_leftclick_tool_id = InsertPlugInToolSVG(_T( "WeatherFax" ), _svg_weatherfax, _svg_weatherfax_rollover, _svg_weatherfax_toggled,
+                                                wxITEM_CHECK, _("WeatherFax"), _T( "" ), NULL, WEATHERFAX_TOOL_POSITION, 0, this);
+#else
+    m_leftclick_tool_id  = InsertPlugInTool(_T("WeatherFax"), _img_weatherfax,
                                             _img_weatherfax, wxITEM_NORMAL,
                                             _("WeatherFax"), _T(""), NULL,
                                             WEATHERFAX_TOOL_POSITION, 0, this);
+#endif
     m_pWeatherFax = NULL;
 
     return (WANTS_OVERLAY_CALLBACK |
