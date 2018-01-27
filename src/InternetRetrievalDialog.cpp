@@ -29,6 +29,7 @@
 #include <wx/progdlg.h>
 #include <wx/url.h>
 #include <wx/wfstream.h>
+#include <wx/arrstr.h>
 
 #include <list>
 
@@ -656,13 +657,21 @@ void InternetRetrievalDialog::Filter()
         lon = NAN;
 
     /* reset filter flags */
+    wxArrayString servers;
     for(std::list<FaxServer>::iterator it = m_Servers.begin();
-        it != m_Servers.end(); it++)
+        it != m_Servers.end(); it++) {
         it->Filtered = true;
+        if(HasServer(it->Name))
+            servers.Add(it->Name);
+    }
 
+    wxArrayString regions;
     for(std::list<FaxRegion>::iterator it = m_Regions.begin();
-        it != m_Regions.end(); it++)
+        it != m_Regions.end(); it++) {
         it->Filtered = true;
+        if(HasRegion(it->Name))
+            regions.Add(it->Name);
+    }
 
     for(std::list<FaxUrl*>::iterator it = m_InternetRetrieval.begin();
         it != m_InternetRetrieval.end(); it++) {
@@ -679,7 +688,7 @@ void InternetRetrievalDialog::Filter()
                     it2->Filtered = false;
         }
             
-        (*it)->Filtered = !(boat_in_area && HasServer((*it)->Server) && HasRegion((*it)->Region));
+        (*it)->Filtered = !(boat_in_area && servers.Index((*it)->Server) != wxNOT_FOUND && regions.Index((*it)->Region) != wxNOT_FOUND);
     }
 
     RebuildServers();
