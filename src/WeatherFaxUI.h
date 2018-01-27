@@ -88,6 +88,7 @@ class WeatherFaxBase : public wxFrame
 		virtual void OnCapture( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnSchedules( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnInternet( wxCommandEvent& event ) { event.Skip(); }
+        virtual void OnUpdateData( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAbout( wxCommandEvent& event ) { event.Skip(); }
 		
 	

@@ -86,6 +86,7 @@ public:
     void OnCapture( wxCommandEvent& event );
     void OnSchedules( wxCommandEvent& event );
     void OnInternet( wxCommandEvent& event );
+    void OnUpdateData( wxCommandEvent& event );
     void OnAbout( wxCommandEvent& event );
 
     bool Show( bool show = true );
@@ -111,6 +112,9 @@ protected:
 
     std::list<WeatherFaxWizard *> m_AudioWizards;
     wxTimer m_tDeleteAudioWizard;
+
+private:
+    bool DownloadFile( wxString filename );
 };
 
 class FaxDecoder;

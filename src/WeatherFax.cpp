@@ -696,6 +696,51 @@ void WeatherFax::OnAbout( wxCommandEvent& event )
     dlg.ShowModal();
 }
 
+bool WeatherFax::DownloadFile( wxString filename )
+{
+    const wxString url = m_weatherfax_pi.m_UpdateDataBaseUrl + filename;
+    const wxString target_filename = m_weatherfax_pi.StandardPath() + filename;
+    const wxString tmp_filename = wxFileName::CreateTempFileName( _T("weatherfax_") );
+    _OCPN_DLStatus res = OCPN_downloadFile( url, tmp_filename, _("WeatherFax Data update"),
+                            _("Reading Headers: ") + url, wxNullBitmap, this,
+                            OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|OCPN_DLDS_SHOW_ALL|OCPN_DLDS_AUTO_CLOSE, 10 );
+    
+    switch( res )
+    {
+        case OCPN_DL_NO_ERROR:
+            if( wxFileExists( target_filename ) )
+                wxRenameFile(target_filename, target_filename + _T(".bak"));
+            wxRenameFile(tmp_filename, target_filename);
+            break;
+        case OCPN_DL_FAILED:
+        {
+            wxMessageDialog mdlg(this, _("Failed to Download: ") +
+                                 url + _T("\n") +
+                                 _("Verify there is a working internet connection.") + _T("\n") +
+                                 _("If the url is incorrect please edit the xml and/or post a bug report."),
+                                 _("Weather Fax"), wxOK | wxICON_ERROR);
+            mdlg.ShowModal();
+            wxRemoveFile( filename );
+            return false;
+        }
+        case OCPN_DL_ABORTED:
+            return false;
+    }
+    return true;
+}
+
+void WeatherFax::OnUpdateData( wxCommandEvent& event )
+{
+    if( DownloadFile( _T("WeatherFaxInternetRetrieval.xml") ) &&
+       DownloadFile( _T("CoordinateSets.xml") ) ) {
+        m_InternetRetrievalDialog.Load(true);
+    }
+    if( DownloadFile( _T("WeatherFaxSchedules.xml") ) ) {
+        m_SchedulesDialog.Load(true);
+    }
+
+}
+
 bool WeatherFax::Show( bool show )
 {
     for(std::list<WeatherFaxWizard *>::iterator it = m_AudioWizards.begin();

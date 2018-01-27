@@ -84,9 +84,9 @@ InternetRetrievalDialog::~InternetRetrievalDialog()
     ClearInternetRetrieval();
 }
 
-void InternetRetrievalDialog::Load()
+void InternetRetrievalDialog::Load(bool force)
 {
-    if(m_bLoaded)
+    if(m_bLoaded && !force)
         return;
 
     m_bLoaded = true;
@@ -144,7 +144,10 @@ void InternetRetrievalDialog::Load()
     }
 
     s = wxFileName::GetPathSeparator();
-    OpenXML(*GetpSharedDataLocation() + _T("plugins")
+    if( wxFileExists( m_weatherfax_pi.StandardPath() + _T("WeatherFaxInternetRetrieval.xml") ) )
+        OpenXML( m_weatherfax_pi.StandardPath() + _T("WeatherFaxInternetRetrieval.xml") );
+    else
+        OpenXML(*GetpSharedDataLocation() + _T("plugins")
             + s + _T("weatherfax_pi") + s + _T("data") + s
             + _T("WeatherFaxInternetRetrieval.xml"));
 
@@ -198,6 +201,8 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
 {
     ClearInternetRetrieval();
     m_lServers->Clear();
+    m_Servers.clear();
+    m_Regions.clear();
 
     TiXmlDocument doc;
     wxString error;
