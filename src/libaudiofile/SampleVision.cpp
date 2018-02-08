@@ -3,19 +3,19 @@
 	Copyright (C) 2012, Michael Pruett <michael@68k.org>
 
 	This library is free software; you can redistribute it and/or
-	modify it under the terms of the GNU Library General Public
+	modify it under the terms of the GNU Lesser General Public
 	License as published by the Free Software Foundation; either
-	version 2 of the License, or (at your option) any later version.
+	version 2.1 of the License, or (at your option) any later version.
 
 	This library is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-	Library General Public License for more details.
+	Lesser General Public License for more details.
 
-	You should have received a copy of the GNU Library General Public
+	You should have received a copy of the GNU Lesser General Public
 	License along with this library; if not, write to the
-	Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-	Boston, MA  02111-1307  USA.
+	Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+	Boston, MA  02110-1301  USA
 */
 
 #include "config.h"
@@ -91,7 +91,10 @@ AFfilesetup SampleVisionFile::completeSetup(AFfilesetup setup)
 		return AF_NULL_FILESETUP;
 	}
 
-	TrackSetup *track = &setup->tracks[0];
+	TrackSetup *track = setup->getTrack();
+	if (!track)
+		return AF_NULL_FILESETUP;
+
 	if (track->sampleFormatSet)
 	{
 		if (!track->f.isSigned() || track->f.sampleWidth != 16)
@@ -122,6 +125,24 @@ AFfilesetup SampleVisionFile::completeSetup(AFfilesetup setup)
 	if (track->markersSet && track->markerCount)
 	{
 		_af_error(AF_BAD_NUMMARKS, "SampleVision does not support markers");
+		return AF_NULL_FILESETUP;
+	}
+
+	if (track->aesDataSet)
+	{
+		_af_error(AF_BAD_FILESETUP, "SampleVision does not support AES data");
+		return AF_NULL_FILESETUP;
+	}
+
+	if (setup->instrumentSet && setup->instrumentCount)
+	{
+		_af_error(AF_BAD_FILESETUP, "SampleVision does not support instruments");
+		return AF_NULL_FILESETUP;
+	}
+
+	if (setup->miscellaneousSet && setup->miscellaneousCount)
+	{
+		_af_error(AF_BAD_FILESETUP, "SampleVision does not support miscellaneous data");
 		return AF_NULL_FILESETUP;
 	}
 

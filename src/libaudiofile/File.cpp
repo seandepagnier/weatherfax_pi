@@ -38,15 +38,8 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#if (HAVE_UNISTD_H)
 #include <unistd.h>
-#endif
 #include <stdio.h>
-
-#if defined(_WIN32)
-#include <io.h>
-#define _lseek lseek
-#endif
 
 class FilePOSIX : public File
 {

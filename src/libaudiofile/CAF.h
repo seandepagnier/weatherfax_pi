@@ -1,21 +1,21 @@
 /*
 	Audio File Library
-	Copyright (C) 2011-2012, Michael Pruett <michael@68k.org>
+	Copyright (C) 2011-2013 Michael Pruett <michael@68k.org>
 
 	This library is free software; you can redistribute it and/or
-	modify it under the terms of the GNU Library General Public
+	modify it under the terms of the GNU Lesser General Public
 	License as published by the Free Software Foundation; either
-	version 2 of the License, or (at your option) any later version.
+	version 2.1 of the License, or (at your option) any later version.
 
 	This library is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-	Library General Public License for more details.
+	Lesser General Public License for more details.
 
-	You should have received a copy of the GNU Library General Public
+	You should have received a copy of the GNU Lesser General Public
 	License along with this library; if not, write to the
-	Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-	Boston, MA  02111-1307  USA.
+	Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+	Boston, MA  02110-1301  USA
 */
 
 #ifndef CAF_H
@@ -27,8 +27,10 @@
 #include "Tag.h"
 #include <stdint.h>
 
-#define _AF_CAF_NUM_COMPTYPES 3
+#define _AF_CAF_NUM_COMPTYPES 4
 extern const int _af_caf_compression_types[_AF_CAF_NUM_COMPTYPES];
+
+class Buffer;
 
 class CAFFile : public _AFfilehandle
 {
@@ -45,15 +47,22 @@ public:
 
 private:
 	AFfileoffset m_dataOffset;
+	AFfileoffset m_cookieDataOffset;
+	SharedPtr<Buffer> m_codecData;
 
 	status parseDescription(const Tag &, int64_t);
 	status parseData(const Tag &, int64_t);
+	status parsePacketTable(const Tag &, int64_t);
+	status parseCookieData(const Tag &, int64_t);
 
 	status writeDescription();
 	status writeData(bool update);
+	status writePacketTable();
+	status writeCookieData();
 
 	void initCompressionParams();
 	void initIMACompressionParams();
+	void initALACCompressionParams();
 };
 
 #endif

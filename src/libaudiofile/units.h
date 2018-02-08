@@ -3,19 +3,19 @@
 	Copyright (C) 2000, Michael Pruett <michael@68k.org>
 
 	This library is free software; you can redistribute it and/or
-	modify it under the terms of the GNU Library General Public
+	modify it under the terms of the GNU Lesser General Public
 	License as published by the Free Software Foundation; either
-	version 2 of the License, or (at your option) any later version.
+	version 2.1 of the License, or (at your option) any later version.
 
 	This library is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-	Library General Public License for more details.
+	Lesser General Public License for more details.
 
-	You should have received a copy of the GNU Library General Public
+	You should have received a copy of the GNU Lesser General Public
 	License along with this library; if not, write to the
-	Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-	Boston, MA  02111-1307  USA.
+	Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+	Boston, MA  02110-1301  USA
 */
 
 /*
@@ -31,8 +31,8 @@
 #include "audiofile.h"
 #include "afinternal.h"
 
-class Module;
 struct AudioFormat;
+class FileModule;
 
 struct Unit
 {
@@ -74,14 +74,14 @@ struct CompressionUnit
 	bool	multiple_of;	/* can accept any multiple of chunksize */
 	bool	(*fmtok) (AudioFormat *format);
 
-	Module *(*initcompress) (Track *track, File *fh,
+	FileModule *(*initcompress) (Track *track, File *fh,
 		bool seekok, bool headerless, AFframecount *chunkframes);
-	Module *(*initdecompress) (Track *track, File *fh,
+	FileModule *(*initdecompress) (Track *track, File *fh,
 		bool seekok, bool headerless, AFframecount *chunkframes);
 };
 
-#define _AF_NUM_UNITS 16
-#define _AF_NUM_COMPRESSION 5
+#define _AF_NUM_UNITS 17
+#define _AF_NUM_COMPRESSION 7
 
 extern const Unit _af_units[_AF_NUM_UNITS];
 extern const CompressionUnit _af_compression[_AF_NUM_COMPRESSION];

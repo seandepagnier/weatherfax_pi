@@ -4,19 +4,19 @@
 	Copyright (C) 2000-2001, Silicon Graphics, Inc.
 
 	This library is free software; you can redistribute it and/or
-	modify it under the terms of the GNU Library General Public
+	modify it under the terms of the GNU Lesser General Public
 	License as published by the Free Software Foundation; either
-	version 2 of the License, or (at your option) any later version.
+	version 2.1 of the License, or (at your option) any later version.
 
 	This library is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-	Library General Public License for more details.
+	Lesser General Public License for more details.
 
-	You should have received a copy of the GNU Library General Public
+	You should have received a copy of the GNU Lesser General Public
 	License along with this library; if not, write to the
-	Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-	Boston, MA  02111-1307  USA.
+	Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+	Boston, MA  02110-1301  USA
 */
 
 /*
@@ -598,8 +598,6 @@ bool AIFFFile::recognizeAIFFC(File *fh)
 
 AFfilesetup AIFFFile::completeSetup(AFfilesetup setup)
 {
-	TrackSetup	*track;
-
 	bool	isAIFF = setup->fileFormat == AF_FILE_AIFF;
 
 	if (setup->trackSet && setup->trackCount != 1)
@@ -608,7 +606,9 @@ AFfilesetup AIFFFile::completeSetup(AFfilesetup setup)
 		return AF_NULL_FILESETUP;
 	}
 
-	track = &setup->tracks[0];
+	TrackSetup *track = setup->getTrack();
+	if (!track)
+		return AF_NULL_FILESETUP;
 
 	if (track->sampleFormatSet)
 	{
@@ -707,13 +707,14 @@ AFfilesetup AIFFFile::completeSetup(AFfilesetup setup)
 
 bool AIFFFile::isInstrumentParameterValid(AUpvlist list, int i)
 {
-	int param, type, lval;
+	int param, type;
 
 	AUpvgetparam(list, i, &param);
 	AUpvgetvaltype(list, i, &type);
 	if (type != AU_PVTYPE_LONG)
 		return false;
 
+	long lval;
 	AUpvgetval(list, i, &lval);
 
 	switch (param)

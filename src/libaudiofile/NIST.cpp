@@ -3,19 +3,19 @@
 	Copyright (C) 2004, Michael Pruett <michael@68k.org>
 
 	This library is free software; you can redistribute it and/or
-	modify it under the terms of the GNU Library General Public
+	modify it under the terms of the GNU Lesser General Public
 	License as published by the Free Software Foundation; either
-	version 2 of the License, or (at your option) any later version.
+	version 2.1 of the License, or (at your option) any later version.
 
 	This library is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-	Library General Public License for more details.
+	Lesser General Public License for more details.
 
-	You should have received a copy of the GNU Library General Public
+	You should have received a copy of the GNU Lesser General Public
 	License along with this library; if not, write to the
-	Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-	Boston, MA  02111-1307  USA.
+	Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+	Boston, MA  02110-1301  USA
 */
 
 /*
@@ -77,15 +77,15 @@ bool NISTFile::recognize(File *fh)
 
 AFfilesetup NISTFile::completeSetup(AFfilesetup setup)
 {
-	TrackSetup	*track;
-
 	if (setup->trackSet && setup->trackCount != 1)
 	{
 		_af_error(AF_BAD_NUMTRACKS, "NIST SPHERE file must have 1 track");
 		return AF_NULL_FILESETUP;
 	}
 
-	track = &setup->tracks[0];
+	TrackSetup *track = setup->getTrack();
+	if (!track)
+		return AF_NULL_FILESETUP;
 
 	if (track->sampleFormatSet)
 	{
@@ -371,8 +371,6 @@ status NISTFile::readInit(AFfilesetup setup)
 
 	track->fpos_first_frame = NIST_SPHERE_HEADER_LENGTH;
 	track->data_size = m_fh->length() - NIST_SPHERE_HEADER_LENGTH;
-	track->nextfframe = 0;
-	track->fpos_next_frame = track->fpos_first_frame;
 
 	return AF_SUCCEED;
 }
@@ -447,10 +445,7 @@ status NISTFile::writeInit(AFfilesetup setup)
 
 	Track *track = getTrack();
 
-	track->totalfframes = 0;
 	track->fpos_first_frame = NIST_SPHERE_HEADER_LENGTH;
-	track->nextfframe = 0;
-	track->fpos_next_frame = track->fpos_first_frame;
 
 	m_fh->seek(0, File::SeekFromBeginning);
 	writeHeader();

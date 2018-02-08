@@ -4,19 +4,19 @@
 	Copyright (C) 2010-2013, Michael Pruett <michael@68k.org>
 
 	This library is free software; you can redistribute it and/or
-	modify it under the terms of the GNU Library General Public
+	modify it under the terms of the GNU Lesser General Public
 	License as published by the Free Software Foundation; either
-	version 2 of the License, or (at your option) any later version.
+	version 2.1 of the License, or (at your option) any later version.
 
 	This library is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-	Library General Public License for more details.
+	Lesser General Public License for more details.
 
-	You should have received a copy of the GNU Library General Public
+	You should have received a copy of the GNU Lesser General Public
 	License along with this library; if not, write to the
-	Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-	Boston, MA  02111-1307  USA.
+	Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+	Boston, MA  02110-1301  USA
 */
 
 #include "config.h"
@@ -24,12 +24,14 @@
 
 #include "File.h"
 #include "FileHandle.h"
+#include "FileModule.h"
 #include "RebufferModule.h"
 #include "SimpleModule.h"
 #include "Track.h"
 #include "byteorder.h"
 #include "compression.h"
 #include "units.h"
+#include "util.h"
 #include "../pcm.h"
 
 #include <algorithm>
@@ -37,10 +39,6 @@
 #include <cmath>
 #include <functional>
 #include <stdio.h>
-
-#if defined (__MSVC__)
-static inline long long llrint(double x){return (long long)(x > 0.0 ? x + 0.5 : x - 0.5);}
-#endif
 
 ModuleState::ModuleState() :
 	m_isDirty(true)
@@ -80,13 +78,13 @@ status ModuleState::initFileModule(AFfilehandle file, Track *track)
 	if (unit->needsRebuffer)
 	{
 		assert(unit->nativeSampleFormat == AF_SAMPFMT_TWOSCOMP);
-		assert(unit->nativeSampleWidth == 16);
 
 		RebufferModule::Direction direction =
 			file->m_access == _AF_WRITE_ACCESS ?
 				RebufferModule::VariableToFixed : RebufferModule::FixedToVariable;
+
 		m_fileRebufferModule = new RebufferModule(direction,
-			sizeof (int16_t) * track->f.channelCount, chunkFrames,
+			track->f.bytesPerFrame(false), chunkFrames,
 			unit->multiple_of);
 	}
 
@@ -101,6 +99,11 @@ status ModuleState::init(AFfilehandle file, Track *track)
 		return AF_FAIL;
 
 	return AF_SUCCEED;
+}
+
+bool ModuleState::fileModuleHandlesSeeking() const
+{
+	return m_fileModule->handlesSeeking();
 }
 
 status ModuleState::setup(AFfilehandle file, Track *track)
@@ -137,8 +140,7 @@ status ModuleState::setup(AFfilehandle file, Track *track)
 
 		if (!track->filemodhappy)
 			return AF_FAIL;
-		int bufsize = m_fileModule->inChunk()->frameCount *
-			m_fileModule->outChunk()->f.bytesPerFrame(true);
+		int bufsize = m_fileModule->bufferSize();
 		if (bufsize > maxbufsize)
 			maxbufsize = bufsize;
 	}
@@ -160,8 +162,7 @@ status ModuleState::setup(AFfilehandle file, Track *track)
 		if (!track->filemodhappy)
 			return AF_FAIL;
 
-		int bufsize = m_fileModule->outChunk()->frameCount *
-			m_fileModule->inChunk()->f.bytesPerFrame(true);
+		int bufsize = m_fileModule->bufferSize();
 		if (bufsize > maxbufsize)
 			maxbufsize = bufsize;
 	}
@@ -401,7 +402,7 @@ status ModuleState::arrange(AFfilehandle file, Track *track)
 		addModule(new Transform(outfc, in.pcm, out.pcm));
 
 	if (in.channelCount != out.channelCount)
-		addModule(new ApplyChannelMatrix(infc, isReading,
+		addModule(new ApplyChannelMatrix(outfc, isReading,
 			in.channelCount, out.channelCount,
 			in.pcm.minClip, in.pcm.maxClip,
 			track->channelMatrix));

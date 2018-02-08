@@ -3,19 +3,19 @@
 	Copyright (C) 2000-2001, Silicon Graphics, Inc.
 
 	This library is free software; you can redistribute it and/or
-	modify it under the terms of the GNU Library General Public
+	modify it under the terms of the GNU Lesser General Public
 	License as published by the Free Software Foundation; either
-	version 2 of the License, or (at your option) any later version.
+	version 2.1 of the License, or (at your option) any later version.
 
 	This library is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-	Library General Public License for more details.
+	Lesser General Public License for more details.
 
-	You should have received a copy of the GNU Library General Public
+	You should have received a copy of the GNU Lesser General Public
 	License along with this library; if not, write to the
-	Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-	Boston, MA  02111-1307  USA.
+	Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+	Boston, MA  02110-1301  USA
 */
 
 /*
@@ -26,6 +26,7 @@
 
 #include "config.h"
 
+#include "Features.h"
 #include "audiofile.h"
 #include "afinternal.h"
 #include "units.h"
@@ -33,6 +34,7 @@
 #include "AIFF.h"
 #include "AVR.h"
 #include "CAF.h"
+#include "FLACFile.h"
 #include "IFF.h"
 #include "IRCAM.h"
 #include "NeXT.h"
@@ -44,10 +46,12 @@
 
 #include "compression.h"
 
-#include "modules/PCM.h"
+#include "modules/ALAC.h"
+#include "modules/FLAC.h"
 #include "modules/G711.h"
 #include "modules/IMA.h"
 #include "modules/MSADPCM.h"
+#include "modules/PCM.h"
 
 const Unit _af_units[_AF_NUM_UNITS] =
 {
@@ -246,6 +250,21 @@ const Unit _af_units[_AF_NUM_UNITS] =
 		0,		// maximum number of loops per instrument
 		0,		// number of instrument parameters
 		NULL	// instrument parameters
+	},
+	{
+		AF_FILE_FLAC,
+		"FLAC", "Free Lossless Audio Codec", "flac",
+		true,
+		FLACFile::completeSetup,
+		FLACFile::recognize,
+		AF_SAMPFMT_TWOSCOMP, 16,
+		_AF_FLAC_NUM_COMPTYPES,
+		_af_flac_compression_types,
+		0,		// maximum marker count
+		0,		// maximum instrument count
+		0,		// maximum number of loops per instrument
+		0,		// number of instrument parameters
+		NULL	// instrument parameters
 	}
 };
 
@@ -315,5 +334,35 @@ const CompressionUnit _af_compression[_AF_NUM_COMPRESSION] =
 		false,	/* multiple_of */
 		_af_ms_adpcm_format_ok,
 		_af_ms_adpcm_init_compress, _af_ms_adpcm_init_decompress
+	},
+	{
+		AF_COMPRESSION_FLAC,
+#if ENABLE(FLAC)
+		true,
+#else
+		false,
+#endif
+		"flac",	// label
+		"FLAC",	// short name
+		"Free Lossless Audio Codec",
+		1.0,
+		AF_SAMPFMT_TWOSCOMP, 16,
+		false,	// needsRebuffer
+		false,	// multiple_of
+		_af_flac_format_ok,
+		_af_flac_init_compress, _af_flac_init_decompress
+	},
+	{
+		AF_COMPRESSION_ALAC,
+		true,
+		"alac",	// label
+		"ALAC",	// short name
+		"Apple Lossless Audio Codec",
+		1.0,
+		AF_SAMPFMT_TWOSCOMP, 16,
+		true,	// needsRebuffer
+		false,	// multiple_of
+		_af_alac_format_ok,
+		_af_alac_init_compress, _af_alac_init_decompress
 	}
 };

@@ -3,19 +3,19 @@
 	Copyright (C) 2010-2012, Michael Pruett <michael@68k.org>
 
 	This library is free software; you can redistribute it and/or
-	modify it under the terms of the GNU Library General Public
+	modify it under the terms of the GNU Lesser General Public
 	License as published by the Free Software Foundation; either
-	version 2 of the License, or (at your option) any later version.
+	version 2.1 of the License, or (at your option) any later version.
 
 	This library is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-	Library General Public License for more details.
+	Lesser General Public License for more details.
 
-	You should have received a copy of the GNU Library General Public
+	You should have received a copy of the GNU Lesser General Public
 	License along with this library; if not, write to the
-	Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-	Boston, MA  02111-1307  USA.
+	Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+	Boston, MA  02110-1301  USA
 */
 
 #include "config.h"
@@ -23,7 +23,6 @@
 
 #include "File.h"
 #include "Track.h"
-#include "util.h"
 
 #include <errno.h>
 #include <string.h>
@@ -59,9 +58,19 @@ ssize_t FileModule::write(const void *data, size_t nbytes)
 	return bytesWritten;
 }
 
+off_t FileModule::seek(off_t offset)
+{
+	return m_fh->seek(offset, File::SeekFromBeginning);
+}
+
 off_t FileModule::tell()
 {
 	return m_fh->tell();
+}
+
+off_t FileModule::length()
+{
+	return m_fh->length();
 }
 
 void FileModule::reportReadError(AFframecount framesRead,
@@ -72,7 +81,7 @@ void FileModule::reportReadError(AFframecount framesRead,
 		return;
 
 	_af_error(AF_BAD_READ,
-		"file missing data -- read %"PRId64" frames, should be %"PRId64,
+		"file missing data -- read %jd frames, should be %jd",
 		static_cast<intmax_t>(m_track->nextfframe),
 		static_cast<intmax_t>(m_track->totalfframes));
 	m_track->filemodhappy = false;
@@ -89,7 +98,7 @@ void FileModule::reportWriteError(AFframecount framesWritten,
 	{
 		// Signal I/O error.
 		_af_error(AF_BAD_WRITE,
-			"unable to write data (%s) -- wrote %"PRId64" out of %"PRId64" frames",
+			"unable to write data (%s) -- wrote %jd out of %jd frames",
 			strerror(errno),
 			static_cast<intmax_t>(m_track->nextfframe),
 			static_cast<intmax_t>(m_track->nextfframe + framesToWrite));
@@ -99,10 +108,18 @@ void FileModule::reportWriteError(AFframecount framesWritten,
 		// Signal disk full error.
 		_af_error(AF_BAD_WRITE,
 			"unable to write data (disk full) -- "
-			"wrote %"PRId64" out of %"PRId64" frames",
+			"wrote %jd out of %jd frames",
 			static_cast<intmax_t>(m_track->nextfframe + framesWritten),
 			static_cast<intmax_t>(m_track->nextfframe + framesToWrite));
 	}
 
 	m_track->filemodhappy = false;
+}
+
+int FileModule::bufferSize() const
+{
+	if (mode() == Compress)
+		return outChunk()->frameCount * inChunk()->f.bytesPerFrame(true);
+	else
+		return inChunk()->frameCount * outChunk()->f.bytesPerFrame(true);
 }

@@ -4,19 +4,19 @@
 	Copyright (C) 2000, Silicon Graphics, Inc.
 
 	This library is free software; you can redistribute it and/or
-	modify it under the terms of the GNU Library General Public
+	modify it under the terms of the GNU Lesser General Public
 	License as published by the Free Software Foundation; either
-	version 2 of the License, or (at your option) any later version.
+	version 2.1 of the License, or (at your option) any later version.
 
 	This library is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-	Library General Public License for more details.
+	Lesser General Public License for more details.
 
-	You should have received a copy of the GNU Library General Public
+	You should have received a copy of the GNU Lesser General Public
 	License along with this library; if not, write to the
-	Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-	Boston, MA  02111-1307  USA.
+	Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+	Boston, MA  02110-1301  USA
 */
 
 /*
@@ -60,7 +60,8 @@ int afWriteFrames (AFfilehandle file, int trackid, const void *samples,
 	if (track->ms->isDirty() && track->ms->setup(file, track) == AF_FAIL)
 		return -1;
 
-	if (file->m_seekok &&
+	if (!track->ms->fileModuleHandlesSeeking() &&
+		file->m_seekok &&
 		file->m_fh->seek(track->fpos_next_frame, File::SeekFromBeginning) !=
 			track->fpos_next_frame)
 	{
@@ -143,7 +144,8 @@ int afReadFrames (AFfilehandle file, int trackid, void *samples,
 	if (track->ms->isDirty() && track->ms->setup(file, track) == AF_FAIL)
 		return -1;
 
-	if (file->m_seekok &&
+	if (!track->ms->fileModuleHandlesSeeking() &&
+		file->m_seekok &&
 		file->m_fh->seek(track->fpos_next_frame, File::SeekFromBeginning) !=
 			track->fpos_next_frame)
 	{

@@ -1,21 +1,21 @@
 /*
 	Audio File Library
-	Copyright (C) 1998-2000, 2010-2013, Michael Pruett <michael@68k.org>
+	Copyright (C) 1998-2000, 2010-2013 Michael Pruett <michael@68k.org>
 
 	This library is free software; you can redistribute it and/or
-	modify it under the terms of the GNU Library General Public
+	modify it under the terms of the GNU Lesser General Public
 	License as published by the Free Software Foundation; either
-	version 2 of the License, or (at your option) any later version.
+	version 2.1 of the License, or (at your option) any later version.
 
 	This library is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-	Library General Public License for more details.
+	Lesser General Public License for more details.
 
-	You should have received a copy of the GNU Library General Public
+	You should have received a copy of the GNU Lesser General Public
 	License along with this library; if not, write to the
-	Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-	Boston, MA  02111-1307  USA.
+	Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+	Boston, MA  02110-1301  USA
 */
 
 /*
@@ -33,7 +33,7 @@
 
 #define LIBAUDIOFILE_MAJOR_VERSION 0
 #define LIBAUDIOFILE_MINOR_VERSION 3
-#define LIBAUDIOFILE_MICRO_VERSION 5
+#define LIBAUDIOFILE_MICRO_VERSION 6
 
 #ifdef __cplusplus
 extern "C" {
@@ -114,7 +114,8 @@ enum
 	AF_FILE_VOC = 12,
 	AF_FILE_NIST_SPHERE = 13,
 	AF_FILE_SOUNDFONT2 = 14,	/* not implemented */
-	AF_FILE_CAF = 15
+	AF_FILE_CAF = 15,
+	AF_FILE_FLAC = 16
 };
 
 enum
@@ -202,7 +203,10 @@ enum
 	AF_COMPRESSION_GSM = 520,
 	AF_COMPRESSION_FS1016 = 521,
 	AF_COMPRESSION_DV = 522,
-	AF_COMPRESSION_MS_ADPCM = 523
+	AF_COMPRESSION_MS_ADPCM = 523,
+
+	AF_COMPRESSION_FLAC = 530,
+	AF_COMPRESSION_ALAC = 540
 };
 
 /* tokens for afQuery() -- see the man page for instructions */

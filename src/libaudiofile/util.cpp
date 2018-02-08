@@ -4,19 +4,19 @@
 	Copyright (C) 2000, Silicon Graphics, Inc.
 
 	This library is free software; you can redistribute it and/or
-	modify it under the terms of the GNU Library General Public
+	modify it under the terms of the GNU Lesser General Public
 	License as published by the Free Software Foundation; either
-	version 2 of the License, or (at your option) any later version.
+	version 2.1 of the License, or (at your option) any later version.
 
 	This library is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-	Library General Public License for more details.
+	Lesser General Public License for more details.
 
-	You should have received a copy of the GNU Library General Public
+	You should have received a copy of the GNU Lesser General Public
 	License along with this library; if not, write to the
-	Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-	Boston, MA  02111-1307  USA.
+	Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+	Boston, MA  02110-1301  USA
 */
 
 /*
@@ -89,7 +89,7 @@ void *_af_malloc (size_t size)
 
 	if (size <= 0)
 	{
-            _af_error(AF_BAD_MALLOC, "bad memory allocation size request %lu", (unsigned long)size);
+		_af_error(AF_BAD_MALLOC, "bad memory allocation size request %zd", size);
 		return NULL;
 	}
 
@@ -102,7 +102,7 @@ void *_af_malloc (size_t size)
 
 	if (p == NULL)
 	{
-            _af_error(AF_BAD_MALLOC, "allocation of %lu bytes failed", (unsigned long)size);
+		_af_error(AF_BAD_MALLOC, "allocation of %zd bytes failed", size);
 		return NULL;
 	}
 
@@ -123,7 +123,7 @@ void *_af_realloc (void *p, size_t size)
 {
 	if (size <= 0)
 	{
-            _af_error(AF_BAD_MALLOC, "bad memory allocation size request %lu", (unsigned long)size);
+		_af_error(AF_BAD_MALLOC, "bad memory allocation size request %zd", size);
 		return NULL;
 	}
 
@@ -131,7 +131,7 @@ void *_af_realloc (void *p, size_t size)
 
 	if (p == NULL)
 	{
-            _af_error(AF_BAD_MALLOC, "allocation of %lu bytes failed", (unsigned long)size);
+		_af_error(AF_BAD_MALLOC, "allocation of %zd bytes failed", size);
 		return NULL;
 	}
 
@@ -145,7 +145,7 @@ void *_af_calloc (size_t nmemb, size_t size)
 	if (nmemb <= 0 || size <= 0)
 	{
 		_af_error(AF_BAD_MALLOC, "bad memory allocation size request "
-                          "%lu elements of %lu bytes each", (unsigned long)nmemb, (unsigned long)size);
+			"%zd elements of %zd bytes each", nmemb, size);
 		return NULL;
 	}
 
@@ -153,8 +153,8 @@ void *_af_calloc (size_t nmemb, size_t size)
 
 	if (p == NULL)
 	{
-		_af_error(AF_BAD_MALLOC, "allocation of %lu bytes failed",
-                          (unsigned long)nmemb*size);
+		_af_error(AF_BAD_MALLOC, "allocation of %zd bytes failed",
+			nmemb*size);
 		return NULL;
 	}
 

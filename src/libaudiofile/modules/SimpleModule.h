@@ -3,19 +3,19 @@
 	Copyright (C) 2010, Michael Pruett <michael@68k.org>
 
 	This library is free software; you can redistribute it and/or
-	modify it under the terms of the GNU Library General Public
+	modify it under the terms of the GNU Lesser General Public
 	License as published by the Free Software Foundation; either
-	version 2 of the License, or (at your option) any later version.
+	version 2.1 of the License, or (at your option) any later version.
 
 	This library is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-	Library General Public License for more details.
+	Lesser General Public License for more details.
 
-	You should have received a copy of the GNU Library General Public
+	You should have received a copy of the GNU Lesser General Public
 	License along with this library; if not, write to the
-	Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-	Boston, MA  02111-1307  USA.
+	Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+	Boston, MA  02110-1301  USA
 */
 
 #ifndef SIMPLE_MODULE_H
@@ -123,7 +123,8 @@ struct signConverter
 	typedef typename IntTypes<Format>::UnsignedType UnsignedType;
 
 	static const int kScaleBits = (Format + 1) * CHAR_BIT - 1;
-	static const int kMinSignedValue = -1 << kScaleBits;
+	static const int kMaxSignedValue = (((1 << (kScaleBits - 1)) - 1) << 1) + 1;
+	static const int kMinSignedValue = -kMaxSignedValue - 1;
 
 	struct signedToUnsigned : public std::unary_function<SignedType, UnsignedType>
 	{
@@ -582,7 +583,7 @@ struct Clip : public SimpleModule
 
 private:
 	FormatCode m_format;
-	PCMInfo m_inputMapping, m_outputMapping;
+	PCMInfo m_outputMapping;
 
 	template <typename T>
 	void run(const void *srcData, void *dstData, int count)

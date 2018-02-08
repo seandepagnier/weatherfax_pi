@@ -3,32 +3,34 @@
 	Copyright (C) 2011-2013, Michael Pruett <michael@68k.org>
 
 	This library is free software; you can redistribute it and/or
-	modify it under the terms of the GNU Library General Public
+	modify it under the terms of the GNU Lesser General Public
 	License as published by the Free Software Foundation; either
-	version 2 of the License, or (at your option) any later version.
+	version 2.1 of the License, or (at your option) any later version.
 
 	This library is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-	Library General Public License for more details.
+	Lesser General Public License for more details.
 
-	You should have received a copy of the GNU Library General Public
+	You should have received a copy of the GNU Lesser General Public
 	License along with this library; if not, write to the
-	Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-	Boston, MA  02111-1307  USA.
+	Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+	Boston, MA  02110-1301  USA
 */
 
 #include "config.h"
 #include "CAF.h"
 
+#include "Buffer.h"
 #include "File.h"
+#include "PacketTable.h"
 #include "Setup.h"
 #include "Tag.h"
 #include "Track.h"
-#include "Track.h"
 #include "byteorder.h"
 #include "util.h"
-#include <inttypes.h>
+
+#include <stdint.h>
 #include <string.h>
 #include <string>
 #include <vector>
@@ -37,7 +39,8 @@ const int _af_caf_compression_types[_AF_CAF_NUM_COMPTYPES] =
 {
 	AF_COMPRESSION_G711_ULAW,
 	AF_COMPRESSION_G711_ALAW,
-	AF_COMPRESSION_IMA
+	AF_COMPRESSION_IMA,
+	AF_COMPRESSION_ALAC
 };
 
 enum
@@ -45,6 +48,16 @@ enum
 	kCAFLinearPCMFormatFlagIsFloat = (1L << 0),
 	kCAFLinearPCMFormatFlagIsLittleEndian = (1L << 1)
 };
+
+enum
+{
+	kALACFormatFlag_16BitSourceData = 1,
+	kALACFormatFlag_20BitSourceData = 2,
+	kALACFormatFlag_24BitSourceData = 3,
+	kALACFormatFlag_32BitSourceData = 4
+};
+
+static const unsigned kALACDefaultFramesPerPacket = 4096;
 
 static const _AFfilesetup cafDefaultFileSetup =
 {
@@ -62,7 +75,8 @@ static const _AFfilesetup cafDefaultFileSetup =
 };
 
 CAFFile::CAFFile() :
-	m_dataOffset(-1)
+	m_dataOffset(-1),
+	m_cookieDataOffset(-1)
 {
 	setFormatByteOrder(AF_BYTEORDER_BIGENDIAN);
 }
@@ -107,8 +121,8 @@ status CAFFile::readInit(AFfilesetup setup)
 			chunkLength = fileLength - currentOffset;
 		else if (chunkLength < 0)
 			_af_error(AF_BAD_HEADER,
-				"invalid chunk length %"PRId64" for chunk type %s\n",
-                                  static_cast<intmax_t>(chunkLength), chunkType.name().c_str());
+				"invalid chunk length %jd for chunk type %s\n",
+				static_cast<intmax_t>(chunkLength), chunkType.name().c_str());
 
 		if (chunkType == "desc")
 		{
@@ -118,6 +132,16 @@ status CAFFile::readInit(AFfilesetup setup)
 		else if (chunkType == "data")
 		{
 			if (parseData(chunkType, chunkLength) == AF_FAIL)
+				return AF_FAIL;
+		}
+		else if (chunkType == "pakt")
+		{
+			if (parsePacketTable(chunkType, chunkLength) == AF_FAIL)
+				return AF_FAIL;
+		}
+		else if (chunkType == "kuki")
+		{
+			if (parseCookieData(chunkType, chunkLength) == AF_FAIL)
 				return AF_FAIL;
 		}
 
@@ -142,6 +166,8 @@ status CAFFile::writeInit(AFfilesetup setup)
 
 	if (writeDescription() == AF_FAIL)
 		return AF_FAIL;
+	if (writeCookieData() == AF_FAIL)
+		return AF_FAIL;
 	if (writeData(false) == AF_FAIL)
 		return AF_FAIL;
 
@@ -156,7 +182,9 @@ AFfilesetup CAFFile::completeSetup(AFfilesetup setup)
 		return AF_NULL_FILESETUP;
 	}
 
-	TrackSetup *track = &setup->tracks[0];
+	TrackSetup *track = setup->getTrack();
+	if (!track)
+		return AF_NULL_FILESETUP;
 
 	if (track->sampleFormatSet)
 	{
@@ -184,7 +212,8 @@ AFfilesetup CAFFile::completeSetup(AFfilesetup setup)
 	if (track->f.compressionType != AF_COMPRESSION_NONE &&
 		track->f.compressionType != AF_COMPRESSION_G711_ULAW &&
 		track->f.compressionType != AF_COMPRESSION_G711_ALAW &&
-		track->f.compressionType != AF_COMPRESSION_IMA)
+		track->f.compressionType != AF_COMPRESSION_IMA &&
+		track->f.compressionType != AF_COMPRESSION_ALAC)
 	{
 		_af_error(AF_BAD_COMPTYPE,
 			"compression format %d not supported in CAF file",
@@ -198,12 +227,34 @@ AFfilesetup CAFFile::completeSetup(AFfilesetup setup)
 		return AF_NULL_FILESETUP;
 	}
 
+	if (track->aesDataSet)
+	{
+		_af_error(AF_BAD_FILESETUP, "CAF does not support AES data");
+		return AF_NULL_FILESETUP;
+	}
+
+	if (setup->instrumentSet && setup->instrumentCount)
+	{
+		_af_error(AF_BAD_NOT_IMPLEMENTED, "CAF does not yet support instruments");
+		return AF_NULL_FILESETUP;
+	}
+
+	if (setup->miscellaneousSet && setup->miscellaneousCount)
+	{
+		_af_error(AF_BAD_NOT_IMPLEMENTED, "CAF does not yet support miscellaneous data");
+		return AF_NULL_FILESETUP;
+	}
+
 	return _af_filesetup_copy(setup, &cafDefaultFileSetup, true);
 }
 
 status CAFFile::update()
 {
+	if (writeCookieData() == AF_FAIL)
+		return AF_FAIL;
 	if (writeData(true) == AF_FAIL)
+		return AF_FAIL;
+	if (writePacketTable() == AF_FAIL)
 		return AF_FAIL;
 	return AF_SUCCEED;
 }
@@ -288,6 +339,31 @@ status CAFFile::parseDescription(const Tag &, int64_t)
 		initIMACompressionParams();
 		return AF_SUCCEED;
 	}
+	else if (formatID == "alac")
+	{
+		track->f.compressionType = AF_COMPRESSION_ALAC;
+		track->f.byteOrder = _AF_BYTEORDER_NATIVE;
+		switch (formatFlags)
+		{
+			case kALACFormatFlag_16BitSourceData:
+				track->f.sampleWidth = 16; break;
+			case kALACFormatFlag_20BitSourceData:
+				track->f.sampleWidth = 20; break;
+			case kALACFormatFlag_24BitSourceData:
+				track->f.sampleWidth = 24; break;
+			case kALACFormatFlag_32BitSourceData:
+				track->f.sampleWidth = 32; break;
+			default:
+				_af_error(AF_BAD_CODEC_TYPE,
+					"unsupported format flags for ALAC: %u", formatFlags);
+				return AF_FAIL;
+		}
+		_af_set_sample_format(&track->f, AF_SAMPFMT_TWOSCOMP,
+			track->f.sampleWidth);
+		track->f.framesPerPacket = framesPerPacket;
+		track->f.bytesPerPacket = 0;
+		return AF_SUCCEED;
+	}
 	else
 	{
 		_af_error(AF_BAD_NOT_IMPLEMENTED, "Compression type %s not supported",
@@ -310,6 +386,134 @@ status CAFFile::parseData(const Tag &tag, int64_t length)
 	track->fpos_first_frame = m_fh->tell();
 
 	track->computeTotalFileFrames();
+	return AF_SUCCEED;
+}
+
+static uint32_t readBERInteger(const uint8_t *input, size_t *numBytes)
+{
+	uint32_t result = 0;
+	uint8_t data;
+	size_t size = 0;
+	do
+	{
+		data = input[size];
+		result = (result << 7) | (data & 0x7f);
+		if (++size > 5)
+			return 0;
+	} while ((data & 0x80) && size < *numBytes);
+	*numBytes = size;
+	return result;
+}
+
+static void encodeBERInteger(uint32_t value, uint8_t *buffer, size_t *numBytes)
+{
+	if ((value & 0x7f) == value)
+	{
+		*numBytes = 1;
+		buffer[0] = value;
+	}
+	else if ((value & 0x3fff) == value)
+	{
+		*numBytes = 2;
+		buffer[0] = (value >> 7) | 0x80;
+		buffer[1] = value & 0x7f;
+	}
+	else if ((value & 0x1fffff) == value)
+	{
+		*numBytes = 3;
+		buffer[0] = (value >> 14) | 0x80;
+		buffer[1] = ((value >> 7) & 0x7f) | 0x80;
+		buffer[2] = value & 0x7f;
+	}
+	else if ((value & 0x0fffffff) == value)
+	{
+		*numBytes = 4;
+		buffer[0] = (value >> 21) | 0x80;
+		buffer[1] = ((value >> 14) & 0x7f) | 0x80;
+		buffer[2] = ((value >> 7) & 0x7f) | 0x80;
+		buffer[3] = value & 0x7f;
+	}
+	else
+	{
+		*numBytes = 5;
+		buffer[0] = (value >> 28) | 0x80;
+		buffer[1] = ((value >> 21) & 0x7f) | 0x80;
+		buffer[2] = ((value >> 14) & 0x7f) | 0x80;
+		buffer[3] = ((value >> 7) & 0x7f) | 0x80;
+		buffer[4] = value & 0x7f;
+	}
+}
+
+status CAFFile::parsePacketTable(const Tag &tag, int64_t length)
+{
+	if (length < 24)
+		return AF_FAIL;
+
+	int64_t numPackets;
+	int64_t numValidFrames;
+	int32_t primingFrames;
+	int32_t remainderFrames;
+	if (!readS64(&numPackets) ||
+		!readS64(&numValidFrames) ||
+		!readS32(&primingFrames) ||
+		!readS32(&remainderFrames))
+	{
+		return AF_FAIL;
+	}
+
+	if (!numPackets)
+		return AF_SUCCEED;
+
+	int64_t tableLength = length - 24;
+
+	SharedPtr<Buffer> buffer = new Buffer(tableLength);
+	if (m_fh->read(buffer->data(), tableLength) != tableLength)
+		return AF_FAIL;
+
+	SharedPtr<PacketTable> packetTable = new PacketTable(numValidFrames,
+		primingFrames, remainderFrames);
+
+	const uint8_t *data = static_cast<const uint8_t *>(buffer->data());
+	size_t position = 0;
+	while (position < buffer->size())
+	{
+		size_t sizeRemaining = buffer->size() - position;
+		uint32_t bytesPerPacket = readBERInteger(data + position, &sizeRemaining);
+		if (bytesPerPacket == 0)
+			break;
+		packetTable->append(bytesPerPacket);
+		position += sizeRemaining;
+	}
+
+	assert(numPackets == packetTable->numPackets());
+
+	Track *track = getTrack();
+	track->m_packetTable = packetTable;
+	track->totalfframes = numValidFrames;
+
+	return AF_SUCCEED;
+}
+
+status CAFFile::parseCookieData(const Tag &tag, int64_t length)
+{
+	m_codecData = new Buffer(length);
+	if (m_fh->read(m_codecData->data(), length) != length)
+		return AF_FAIL;
+
+	AUpvlist pv = AUpvnew(2);
+
+	AUpvsetparam(pv, 0, _AF_CODEC_DATA_SIZE);
+	AUpvsetvaltype(pv, 0, AU_PVTYPE_LONG);
+	long l = length;
+	AUpvsetval(pv, 0, &l);
+
+	AUpvsetparam(pv, 1, _AF_CODEC_DATA);
+	AUpvsetvaltype(pv, 1, AU_PVTYPE_PTR);
+	void *v = m_codecData->data();
+	AUpvsetval(pv, 1, &v);
+
+	Track *track = getTrack();
+	track->f.compressionParams = pv;
 
 	return AF_SUCCEED;
 }
@@ -354,6 +558,19 @@ status CAFFile::writeDescription()
 		framesPerPacket = track->f.framesPerPacket;
 		bitsPerChannel = 16;
 	}
+	else if (track->f.compressionType == AF_COMPRESSION_ALAC)
+	{
+		formatID = "alac";
+		switch (track->f.sampleWidth)
+		{
+			case 16: formatFlags = kALACFormatFlag_16BitSourceData; break;
+			case 20: formatFlags = kALACFormatFlag_20BitSourceData; break;
+			case 24: formatFlags = kALACFormatFlag_24BitSourceData; break;
+			case 32: formatFlags = kALACFormatFlag_32BitSourceData; break;
+		}
+		bytesPerPacket = track->f.bytesPerPacket;
+		framesPerPacket = track->f.framesPerPacket;
+	}
 
 	if (!writeTag(&desc) ||
 		!writeS64(&chunkLength) ||
@@ -392,11 +609,79 @@ status CAFFile::writeData(bool update)
 	return AF_SUCCEED;
 }
 
+status CAFFile::writePacketTable()
+{
+	Track *track = getTrack();
+
+	m_fh->seek(track->fpos_after_data, File::SeekFromBeginning);
+
+	SharedPtr<PacketTable> packetTable = track->m_packetTable;
+	if (!packetTable)
+		return AF_SUCCEED;
+
+	int64_t numPackets = packetTable->numPackets();
+	int64_t numValidFrames = packetTable->numValidFrames();
+	int32_t primingFrames = packetTable->primingFrames();
+	int32_t remainderFrames = packetTable->remainderFrames();
+
+	SharedPtr<Buffer> buffer = new Buffer(packetTable->numPackets() * 5);
+
+	uint8_t *data = static_cast<uint8_t *>(buffer->data());
+	size_t position = 0;
+	for (unsigned i=0; i<packetTable->numPackets(); i++)
+	{
+		uint32_t bytesPerPacket = packetTable->bytesPerPacket(i);
+		size_t numBytes = 0;
+		encodeBERInteger(bytesPerPacket, data + position, &numBytes);
+		position += numBytes;
+	}
+
+	Tag pakt("pakt");
+	int64_t packetTableLength = 24 + position;
+
+	if (!writeTag(&pakt) ||
+		!writeS64(&packetTableLength) ||
+		!writeS64(&numPackets) ||
+		!writeS64(&numValidFrames) ||
+		!writeS32(&primingFrames) ||
+		!writeS32(&remainderFrames) ||
+		m_fh->write(buffer->data(), position) != static_cast<ssize_t>(position))
+	{
+		return AF_FAIL;
+	}
+
+	return AF_SUCCEED;
+}
+
+status CAFFile::writeCookieData()
+{
+	if (!m_codecData)
+		return AF_SUCCEED;
+
+	if (m_cookieDataOffset == -1)
+		m_cookieDataOffset = m_fh->tell();
+	else
+		m_fh->seek(m_cookieDataOffset, File::SeekFromBeginning);
+
+	Tag kuki("kuki");
+	int64_t cookieDataLength = m_codecData->size();
+	if (!writeTag(&kuki) ||
+		!writeS64(&cookieDataLength) ||
+		m_fh->write(m_codecData->data(), m_codecData->size()) != static_cast<ssize_t>(m_codecData->size()))
+	{
+		return AF_FAIL;
+	}
+
+	return AF_SUCCEED;
+}
+
 void CAFFile::initCompressionParams()
 {
 	Track *track = getTrack();
 	if (track->f.compressionType == AF_COMPRESSION_IMA)
 		initIMACompressionParams();
+	else if (track->f.compressionType == AF_COMPRESSION_ALAC)
+		initALACCompressionParams();
 }
 
 void CAFFile::initIMACompressionParams()
@@ -413,4 +698,41 @@ void CAFFile::initIMACompressionParams()
 	AUpvsetval(pv, 0, &l);
 
 	track->f.compressionParams = pv;
+}
+
+void CAFFile::initALACCompressionParams()
+{
+	if (m_access == _AF_READ_ACCESS)
+		return;
+
+	Track *track = getTrack();
+
+	track->f.bytesPerPacket = 0;
+	track->f.framesPerPacket = kALACDefaultFramesPerPacket;
+
+	const unsigned kALACSpecificConfigSize = 24;
+	const unsigned kChannelAtomSize = 12;
+	const unsigned kALACAudioChannelLayoutSize = 12;
+
+	unsigned codecDataSize = kALACSpecificConfigSize;
+	if (track->f.channelCount > 2)
+		codecDataSize += kChannelAtomSize + kALACAudioChannelLayoutSize;
+	m_codecData = new Buffer(codecDataSize);
+	memset(m_codecData->data(), 0, m_codecData->size());
+
+	AUpvlist pv = AUpvnew(2);
+
+	AUpvsetparam(pv, 0, _AF_CODEC_DATA_SIZE);
+	AUpvsetvaltype(pv, 0, AU_PVTYPE_LONG);
+	long l = codecDataSize;
+	AUpvsetval(pv, 0, &l);
+
+	AUpvsetparam(pv, 1, _AF_CODEC_DATA);
+	AUpvsetvaltype(pv, 1, AU_PVTYPE_PTR);
+	void *v = m_codecData->data();
+	AUpvsetval(pv, 1, &v);
+
+	track->f.compressionParams = pv;
+
+	track->m_packetTable = new PacketTable();
 }
