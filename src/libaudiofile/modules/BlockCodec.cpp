@@ -23,6 +23,7 @@
 
 #include "Track.h"
 
+#include <algorithm>
 #include <assert.h>
 
 BlockCodec::BlockCodec(Mode mode, Track *track, File *fh, bool canSeek) :
