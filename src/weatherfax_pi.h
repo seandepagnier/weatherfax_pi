@@ -99,6 +99,7 @@ public:
       int m_iExportColors;
       bool m_bExportDepthMeters;
       wxString m_sExportSoundingDatum;
+      wxString m_UpdateDataBaseUrl;
 
       PlugIn_Position_Fix_Ex m_lastfix;
 

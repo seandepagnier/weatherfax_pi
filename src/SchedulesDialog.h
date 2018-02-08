@@ -86,7 +86,7 @@ public:
     SchedulesDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent);
     ~SchedulesDialog();
 
-    void Load();
+    void Load(bool force = false);
     void ClearSchedules();
     bool OpenXML(wxString filename);
 

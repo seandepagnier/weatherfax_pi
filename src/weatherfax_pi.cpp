@@ -297,6 +297,9 @@ bool weatherfax_pi::LoadConfig(void)
     pConf->Read ( _T ( "Colors" ), &m_iExportColors, 64 );
     pConf->Read ( _T ( "DepthMeters" ), &m_bExportDepthMeters, true );
     pConf->Read ( _T ( "SoundingDatum" ), &m_sExportSoundingDatum, _T("LOWEST LOW WATER"));
+    
+    pConf->SetPath ( _T ( "/Settings/WeatherFax/Updates" ) );
+    pConf->Read( _T("UpdateDataBaseUrl"), &m_UpdateDataBaseUrl, _T("https://raw.githubusercontent.com/seandepagnier/weatherfax_pi/master/data/") );
 
     return true;
 }
