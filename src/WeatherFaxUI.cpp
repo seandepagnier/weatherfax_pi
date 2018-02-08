@@ -111,6 +111,12 @@ WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString&
 	wxMenuItem* m_menuItem6;
 	m_menuItem6 = new wxMenuItem( m_menu2, wxID_ANY, wxString( _("&Internet") ) + wxT('\t') + wxT("ctrl+i"), wxEmptyString, wxITEM_NORMAL );
 	m_menu2->Append( m_menuItem6 );
+    
+    m_menu2->AppendSeparator();
+    
+    wxMenuItem* m_menuItemUpdate;
+    m_menuItemUpdate = new wxMenuItem( m_menu2, wxID_ANY, wxString( _("&Update data sources") ) + wxT('\t') + wxT("ctrl+u"), wxEmptyString, wxITEM_NORMAL );
+    m_menu2->Append( m_menuItemUpdate );
 	
 	m_menubar1->Append( m_menu2, _("&Retrieve") ); 
 	
@@ -161,6 +167,7 @@ WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString&
 	this->Connect( m_menuItem5->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnSchedules ) );
 	this->Connect( m_menuItem6->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnInternet ) );
 	this->Connect( m_menuItem7->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnAbout ) );
+    this->Connect( m_menuItemUpdate->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnUpdateData ) );
 }
 
 WeatherFaxBase::~WeatherFaxBase()
@@ -200,7 +207,7 @@ WeatherFaxBase::~WeatherFaxBase()
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnSchedules ) );
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnInternet ) );
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnAbout ) );
-	
+    this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnUpdateData ) );
 }
 
 SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )

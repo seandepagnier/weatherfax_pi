@@ -72,7 +72,7 @@ public:
     InternetRetrievalDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent);
     ~InternetRetrievalDialog();
 
-    void Load();
+    void Load(bool force = false);
     void ClearInternetRetrieval();
     bool OpenXML(wxString filename);
 

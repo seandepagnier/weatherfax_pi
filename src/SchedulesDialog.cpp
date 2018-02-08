@@ -107,9 +107,9 @@ SchedulesDialog::~SchedulesDialog()
     }
 }
 
-void SchedulesDialog::Load()
+void SchedulesDialog::Load(bool force)
 {
-    if(m_bLoaded)
+    if(m_bLoaded && !force)
         return;
 
     m_bLoaded = true;
@@ -217,7 +217,10 @@ void SchedulesDialog::Load()
     }
 
     s = wxFileName::GetPathSeparator();
-    OpenXML(*GetpSharedDataLocation() + _T("plugins")
+    if( wxFileExists( m_weatherfax_pi.StandardPath() + _T("WeatherFaxSchedules.xml") ) )
+        OpenXML( m_weatherfax_pi.StandardPath() + _T("WeatherFaxSchedules.xml") );
+    else
+        OpenXML(*GetpSharedDataLocation() + _T("plugins")
             + s + _T("weatherfax_pi") + s + _T("data") + s
             + _T("WeatherFaxSchedules.xml"));
 
