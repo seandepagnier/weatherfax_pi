@@ -63,7 +63,7 @@ void copy_coefs( int16_t * srcCoefs, int16_t * dstCoefs, int32_t numPairs )
 		dstCoefs[k] = srcCoefs[k];
 }
 
-static inline int32_t ALWAYS_INLINE sign_of_int( int32_t i )
+static int32_t ALWAYS_INLINE sign_of_int( int32_t i )
 {
     int32_t negishift;
 	
