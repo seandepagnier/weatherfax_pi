@@ -5,7 +5,7 @@
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
- *   Copyright (C) 2014 by Sean D'Epagnier                                 *
+ *   Copyright (C) 2018 by Sean D'Epagnier                                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -45,6 +45,8 @@ struct FaxUrl
     wxString area_name;
 
     FaxArea Area;
+
+    int hour_offset, hour_round, hour_round_offset;
 };
 
 struct FaxRegion

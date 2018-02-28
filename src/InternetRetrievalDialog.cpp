@@ -5,7 +5,7 @@
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
- *   Copyright (C) 2014 by Sean D'Epagnier                                 *
+ *   Copyright (C) 2018 by Sean D'Epagnier                                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -291,7 +291,11 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                                             url.Contents = wxString::Format
                                                 (wxString::FromUTF8(h->Attribute("Contents")), index);
                                             url.area_name = wxString::FromUTF8(h->Attribute("Area"));
-                                        
+
+                                            url.hour_offset = url.hour_round = url.hour_round_offset = 0;
+                                            const char*hour = h->Attribute( "Hour" );
+                                            if(hour)
+                                                sscanf(hour, "%d;%d;%d", &url.hour_offset, &url.hour_round, &url.hour_round_offset);
                                             urls.push_back(url);
                                         }
                                     } else
@@ -307,7 +311,11 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                                 url.Url = region_url + wxString::FromUTF8(g->Attribute("Url"));
                                 url.Contents = wxString::FromUTF8(g->Attribute("Contents"));
                                 url.area_name = wxString::FromUTF8(g->Attribute("Area"));
-
+                                
+                                url.hour_offset = url.hour_round = url.hour_round_offset = 0;
+                                const char*hour = g->Attribute( "Hour" );
+                                if(hour)
+                                    sscanf(hour, "%d;%d;%d", &url.hour_offset, &url.hour_round, &url.hour_round_offset);
                                 urls.push_back(url);
                             } else if(!strcmp(g->Value(), "Area")) {
                                 FaxArea Area;
@@ -565,9 +573,26 @@ void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
 
         count++;
 
+
+        /* compute actual url */
+        wxString url = faxurl->Url;
+        wxDateTime now = wxDateTime::Now();
+
+        // now deal with hour
+        int hour = now.GetHour(wxDateTime::UTC);
+        if(faxurl->hour_round) {
+            int nhour = wxRound(((double)hour+faxurl->hour_offset-faxurl->hour_round_offset)/faxurl->hour_round)*faxurl->hour_round+faxurl->hour_round_offset;
+            now+=wxTimeSpan::Hours(nhour - hour);
+        }
+            
+        wxString formats[] = {"%Y", "%y", "%m", "%d", "%H"};
+        for(unsigned int i=0; i<(sizeof formats) / (sizeof *formats); i++)
+            url.Replace(formats[i], now.Format(formats[i], wxDateTime::UTC));
+
+        
         wxString path = weatherfax_pi::StandardPath();
 
-        wxString filename = faxurl->Url;
+        wxString filename = url;
         filename.Replace(_T("/"), _T("!"));
         filename.Replace(_T(":"), _T("!"));
 
@@ -589,18 +614,21 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
 
         {
 
-        _OCPN_DLStatus res = OCPN_downloadFile( faxurl->Url, filename, _("WeatherFax InternetRetrieval"),
+        _OCPN_DLStatus res = OCPN_downloadFile( url, filename, _("WeatherFax InternetRetrieval"),
                               _("Reading Headers: ") + faxurl->Contents, wxNullBitmap, this,
                                                OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|OCPN_DLDS_SHOW_ALL|OCPN_DLDS_AUTO_CLOSE, 10 );
 
         switch( res )
         {
         case OCPN_DL_NO_ERROR: break;
+        case OCPN_DL_STARTED: break;
         case OCPN_DL_FAILED:
+        case OCPN_DL_UNKNOWN:
+        case OCPN_DL_USER_TIMEOUT:
         {
             wxMessageDialog mdlg(this, _("Failed to Download: ") +
                                  faxurl->Contents + _T("\n") +
-                                 faxurl->Url + _T("\n") +
+                                 url + _T("\n") +
                                  _("Verify there is a working internet connection.") + _T("\n") +
                                  _("If the url is incorrect please edit the xml and/or post a bug report."),
                                  _("Weather Fax"), wxOK | wxICON_ERROR);

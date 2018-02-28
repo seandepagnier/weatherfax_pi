@@ -712,6 +712,9 @@ bool WeatherFax::DownloadFile( wxString filename )
                 wxRenameFile(target_filename, target_filename + _T(".bak"));
             wxRenameFile(tmp_filename, target_filename);
             break;
+        case OCPN_DL_UNKNOWN:
+        case OCPN_DL_USER_TIMEOUT:
+        case OCPN_DL_STARTED:
         case OCPN_DL_FAILED:
         {
             wxMessageDialog mdlg(this, _("Failed to Download: ") +
