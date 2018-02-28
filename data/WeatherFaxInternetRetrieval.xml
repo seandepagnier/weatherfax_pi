@@ -1958,4 +1958,26 @@
       <Area Name="2" lat1="40S" lat2="0S" lon1="40E" lon2="95E" />
     </Region>
   </Server>
+  <Server Name="Japan Meteorological Agency" Url="http://www.jma.go.jp/en/g3/images/asia/">
+    <Region Name="Japan">
+      <Map Url="%y%m%d%H.png" Contents="Analysis Now" Area="1" Hour="6;6;3" />
+      <Map Url="%y%m%d%H.png" Contents="Analysis -6" Area="1" Hour="0;6;3" />
+      <Map Url="%y%m%d%H.png" Contents="Analysis -12" Area="1" Hour="-6;6;3" />
+      <Map Url="%y%m%d%H.png" Contents="Analysis -18" Area="1" Hour="-12;6;3" />
+      <Area Name="1" lat1="0N" lat2="70N" lon1="90E" lon2="180E" />
+    </Region>
+  </Server>
+  <Server Name="Weather Online" Url="http://www.weatheronline.co.uk/daten/sailcharts/gfs/">
+    <Region Name="Great Britain">
+      <Map Url="%Y/%m/%d/pslv_grbr_06-%Y%m%d%H.gif" Area="1" Hour="-9;6;0" />
+      <Area Name="1" lat1="48N" lat2="60N" lon1="12W" lon2="6E" />
+    </Region>
+    <Region Name="Asia">
+      <Map Url="%Y/%m/%d/pslv_asie_06-%Y%m%d%H.gif" Contents="Surface Pressure (GFS)" Area="1" Hour="-9;6;0" />
+      <Map Url="gfs/%Y/%m/%d/pslv_asie_00-%Y%m%d%H.gif" Contents="Surface Pressure (GFS)" Area="1" Hour="-15;6;0" />
+      <!-- many more -->
+      <Area Name="1" lat1="10S" lat2="45N" lon1="50E" lon2="150E" />
+    </Region>
+  </Server>
+  
 </OCPNWeatherFaxInternetRetrieval>
