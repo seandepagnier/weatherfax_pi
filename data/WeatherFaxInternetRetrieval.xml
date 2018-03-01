@@ -24,11 +24,11 @@
       <Map Url="PPAI10.TIF" Contents="48HR 500MB FORECAST NW ATLANTIC VT00/12Z" Area="4" />
       <Map Url="PPAM50.TIF" Contents="96HR 500MB FORECAST NW ATLANTIC VT12Z" Area="4" />
       <!-- cyclone/high waves -->
-      <Map Url="PWEK11.TIF" Contents="Tropical Cyclone Danger Area VT03/09/15/21Z 05N-60N 00W-100W" Area="7" />
+      <Map Url="PWEK11.TIF" Contents="Tropical Cyclone Danger 03/09/15/21Z" Area="7" />
       <!-- ice chart -->
-      <Map Url="PIEA88.TIF" Contents="Latest USCG Ice Limits Chart (During Ice Season)" Area="6" />
+      <Map Url="PIEA88.TIF" Contents="Latest USCG Ice Limits Chart" Area="6" />
       <!-- satellite imagery -->
-      <Map Url="evnt99.jpg" Contents="GOES IR Satellite Image, West Atlantic or Atlantic" Area="5" />
+      <Map Url="evnt99.jpg" Contents="GOES IR Satellite, W.Atlantic" Area="5" />
       <Area Name="1" lat1="28N" lat2="52N" lon1="85W" lon2="45W" />
       <Area Name="2" lat1="18N" lat2="65N" lon1="45W" lon2="10E" />
       <Area Name="3" lat1="18N" lat2="65N" lon1="95W" lon2="40W" />
@@ -36,7 +36,7 @@
       <Area Name="4a" lat1="18N" lat2="65N" lon1="95E" lon2="10E" />
       <Area Name="5" lat1="20N" lat2="55N" lon1="95W" lon2="55W" />
       <Area Name="6" lat1="60N" lat2="45N" lon1="65W" lon2="40W" />
-      <Area Name="7" lat1="0N" lat2="30N" lon1="100W" lon2="40W" />
+      <Area Name="7" lat1="05N" lat2="60N" lon1="100W" lon2="00W" />
       <Area Name="8" lat1="22N" lat2="51N" lon1="98W" lon2="40W" />
     </Region>
     <Region Name="Pt. Reyes">
@@ -68,7 +68,7 @@
       <Map Url="PYFI10.gif" Contents="48HR Trop Sfc Forecast" Area="12" />
       <Map Url="PYFK10.gif" Contents="72HR Trop Sfc Forecast" Area="12" />
       <!-- tropical cyclone danger area charts -->
-      <Map Url="PWFK11.gif" Contents="00/06/12/18Z Tropical CYCLONE DANGER AREA" Area="10" />
+      <Map Url="PWFK11.gif" Contents="00/06/12/18Z Tropical CYCLONE DANGER" Area="10" />
       <!-- upper air charts -->
       <Map Url="PPBA10.gif" Contents="00/12Z 500MB ANALYSIS" Area="1" />
       <Map Url="PPBE11.gif" Contents="24HR 500MB FORECAST" Area="1" />
@@ -117,11 +117,11 @@
       <Map Url="PYEI10.gif" Contents="48 HR SURFACE FORECAST" Area="7" />
       <Map Url="PYEK10.gif" Contents="72 HR SURFACE FORECAST" Area="7" />
       <!-- tropical cyclone danger area charts -->
-      <Map Url="PWEK11.gif" Contents="74HR Trop CYCLONE DANGER AREA" Area="6" />
+      <Map Url="PWEK11.gif" Contents="74HR Trop CYCLONE DANGER" Area="6" />
       <!-- high seas forecasts -->
-      <Map Url="PLEA10.gif" Contents="04/10/12/18Z HIGH SEAS FORECAST (IN ENGLISH)" Area="5" />
+      <Map Url="PLEA10.gif" Contents="04/10/12/18Z HIGH SEAS FORECAST" Area="5" />
       <!-- satellite imagery -->
-      <Map Url="evst99.jpg" Contents="00/06/12/18Z GOES IR TROPICAL SATELLITE IMAGE" Area="4" />	  
+      <Map Url="evst99.jpg" Contents="00/06/12/18Z GOES IR TROPICAL SATELLITE" Area="4" />	  
       <Area Name="1" lat1="5S" lat2="50N" lon1="125W" lon2="55W" />
       <Area Name="2" lat1="5S" lat2="50N" lon1="70W" lon2="0W" />
       <Area Name="3" lat1="0N" lat2="31N" lon1="100W" lon2="35W" />
@@ -272,7 +272,7 @@
       <Map Url="A_w_sfc_color.png" Contents="West Atlantic Surface Analysis" Area="5" />
       <Map Url="A_e_sfc_color.png" Contents="East Atlantic Surface Analysis" Area="6" />
       <Map Url="sst/images/gulfstream/ncomhrCurrWatlGS.png" Contents="Gulf Stream Currents" Area="7" />
-      <Map Url="sst/images/gulfstream/GScomp_NCOMHR.png" Contents="Gulf Stream Sea Surface Temperature (SST)" Area="8" />
+      <Map Url="sst/images/gulfstream/GScomp_NCOMHR.png" Contents="Gulf Stream Sea Surface Temp (SST)" Area="8" />
 	  <Area Name="1" lat1="20N" lat2="60N" lon1="90W" lon2="0W" />
       <Area Name="1a" lat1="20N" lat2="60N" lon1="90W" lon2="0W" />
       <Area Name="2" lat1="20N" lat2="60N" lon1="90W" lon2="0W" />
@@ -1951,17 +1951,17 @@
       <Area Name="2" lat1="35S" lat2="10N" lon1="150E" lon2="180W" />
     </Region>
   </Server>
-  <Server Name="Singapore Met-strftime" Url="http://www.weather.gov.sg/files/marine/">
+  <Server Name="Singapore Met" Url="http://www.weather.gov.sg/files/marine/">
     <Region Name="Singapore">
-      <Map Url="surfacewinds/surfacewinds_24Hr_20170731_213000.gif" Contents="Surface Wind Forecast 24hr" Area="1" />
-      <Map Url="surfacewinds/surfacewinds_48Hr_20170731_213000.gif" Contents="Surface Wind Forecast 48hr" Area="1" />
-      <Map Url="surfacewinds/surfacewinds_72Hr_20170731_213000.gif" Contents="Surface Wind Forecast 72hr" Area="1" />
-      <Map Url="waveheight/sig_waves_height_24Hr_20170801_203000.gif" Contents="Significant Wave Forecast 24hr" Area="2" />
-      <Map Url="waveheight/sig_waves_height_48Hr_20170801_203000.gif" Contents="Significant Wave Forecast 48hr" Area="2" />
-      <Map Url="waveheight/sig_waves_height_72Hr_20170801_203000.gif" Contents="Significant Wave Forecast 72hr" Area="2" />
-      <Map Url="swell/swell_24Hr_20170731_203000.gif" Contents="Swell Wave Ht 24hr" Area="3" />
-      <Map Url="swell/swell_48Hr_20170731_203000.gif" Contents="Swell Wave Ht 48hr" Area="3" />
-      <Map Url="swell/swell_72Hr_20170731_203000.gif" Contents="Swell Wave Ht 72hr" Area="3" />
+      <Map Url="surfacewinds/surfacewinds_24Hr_%Y%m%d_213000.gif" Contents="Surface Wind Forecast 24hr" Area="1" />
+      <Map Url="surfacewinds/surfacewinds_48Hr_%Y%m%d_213000.gif" Contents="Surface Wind Forecast 48hr" Area="1" />
+      <Map Url="surfacewinds/surfacewinds_72Hr_%Y%m%d_213000.gif" Contents="Surface Wind Forecast 72hr" Area="1" />
+      <Map Url="waveheight/sig_waves_height_24Hr_%Y%m%d_065000.gif" Contents="Significant Wave Forecast 24hr" Area="2" />
+      <Map Url="waveheight/sig_waves_height_48Hr_%Y%m%d_065000.gif" Contents="Significant Wave Forecast 48hr" Area="2" />
+      <Map Url="waveheight/sig_waves_height_72Hr_%Y%m%d_065000.gif" Contents="Significant Wave Forecast 72hr" Area="2" />
+      <Map Url="swell/swell_24Hr_%Y%m%d_100000.gif" Contents="Swell Wave Ht 24hr" Area="3" />
+      <Map Url="swell/swell_48Hr_%Y%m%d_100000.gif" Contents="Swell Wave Ht 48hr" Area="3" />
+      <Map Url="swell/swell_72Hr_%Y%m%d_100000.gif" Contents="Swell Wave Ht 72hr" Area="3" />
       <Area Name="1" lat1="20S" lat2="40N" lon1="80E" lon2="150E" />
       <Area Name="2" lat1="15S" lat2="35N" lon1="90E" lon2="130E" />
       <Area Name="3" lat1="20S" lat2="40N" lon1="80E" lon2="150E" />
@@ -2026,7 +2026,7 @@
       <Area Name="2" lat1="40S" lat2="0S" lon1="40E" lon2="95E" />
     </Region>
   </Server>
-    <Server Name="Japan Meteorological Agency" Url="http://www.jma.go.jp/en/g3/images/asia/">
+    <Server Name="Japan Met" Url="http://www.jma.go.jp/en/g3/images/asia/">
     <Region Name="Japan">
       <Map Url="%y%m%d%H.png" Contents="Analysis Now" Area="1" Hour="6;6;3" />
       <Map Url="%y%m%d%H.png" Contents="Analysis -6" Area="1" Hour="0;6;3" />
