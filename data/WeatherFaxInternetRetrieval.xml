@@ -1951,23 +1951,7 @@
       <Area Name="2" lat1="35S" lat2="10N" lon1="150E" lon2="180W" />
     </Region>
   </Server>
-  <Server Name="Singapore Met" Url="http://www.weather.gov.sg/files/marine/">
-    <Region Name="Singapore">
-      <Map Url="surfacewinds/surfacewinds_24Hr_%Y%m%d_213000.gif" Contents="Surface Wind Forecast 24hr" Area="1" />
-      <Map Url="surfacewinds/surfacewinds_48Hr_%Y%m%d_213000.gif" Contents="Surface Wind Forecast 48hr" Area="1" />
-      <Map Url="surfacewinds/surfacewinds_72Hr_%Y%m%d_213000.gif" Contents="Surface Wind Forecast 72hr" Area="1" />
-      <Map Url="waveheight/sig_waves_height_24Hr_%Y%m%d_065000.gif" Contents="Significant Wave Forecast 24hr" Area="2" />
-      <Map Url="waveheight/sig_waves_height_48Hr_%Y%m%d_065000.gif" Contents="Significant Wave Forecast 48hr" Area="2" />
-      <Map Url="waveheight/sig_waves_height_72Hr_%Y%m%d_065000.gif" Contents="Significant Wave Forecast 72hr" Area="2" />
-      <Map Url="swell/swell_24Hr_%Y%m%d_100000.gif" Contents="Swell Wave Ht 24hr" Area="3" />
-      <Map Url="swell/swell_48Hr_%Y%m%d_100000.gif" Contents="Swell Wave Ht 48hr" Area="3" />
-      <Map Url="swell/swell_72Hr_%Y%m%d_100000.gif" Contents="Swell Wave Ht 72hr" Area="3" />
-      <Area Name="1" lat1="20S" lat2="40N" lon1="80E" lon2="150E" />
-      <Area Name="2" lat1="15S" lat2="35N" lon1="90E" lon2="130E" />
-      <Area Name="3" lat1="20S" lat2="40N" lon1="80E" lon2="150E" />
-    </Region>
-  </Server>
-  <Server Name="Bermuda" Url="http://www.weather.bm/">
+   <Server Name="Bermuda" Url="http://www.weather.bm/">
     <Region Name="Bermuda">
       <Map Url="images/surfaceAnalysis/Latest/Atlantic.gif" Contents="Surface Analysis" Area="1" />
       <Map Url="images/marineChart/Latest/Small/_chartSmall36.gif" Contents="Day 2 Marine forecast" Area="3" />
@@ -2047,4 +2031,21 @@
       <Area Name="1" lat1="10S" lat2="45N" lon1="50E" lon2="150E" />
     </Region>
   </Server>
+  <Server Name="Singapore Met" Url="http://www.weather.gov.sg/files/marine/">
+    <Region Name="Singapore">
+      <Map Url="surfacewinds/surfacewinds_24Hr_%Y%m%d_213000.gif" Contents="Surface Wind Forecast 24hr" Area="1" />
+      <Map Url="surfacewinds/surfacewinds_48Hr_%Y%m%d_213000.gif" Contents="Surface Wind Forecast 48hr" Area="1" />
+      <Map Url="surfacewinds/surfacewinds_72Hr_%Y%m%d_213000.gif" Contents="Surface Wind Forecast 72hr" Area="1" />
+      <Map Url="waveheight/sig_waves_height_24Hr_%Y%m%d_065000.gif" Contents="Significant Wave Forecast 24hr" Area="2" />
+      <Map Url="waveheight/sig_waves_height_48Hr_%Y%m%d_065000.gif" Contents="Significant Wave Forecast 48hr" Area="2" />
+      <Map Url="waveheight/sig_waves_height_72Hr_%Y%m%d_065000.gif" Contents="Significant Wave Forecast 72hr" Area="2" />
+      <Map Url="swell/swell_24Hr_%Y%m%d_100000.gif" Contents="Swell Wave Ht 24hr" Area="3" />
+      <Map Url="swell/swell_48Hr_%Y%m%d_100000.gif" Contents="Swell Wave Ht 48hr" Area="3" />
+      <Map Url="swell/swell_72Hr_%Y%m%d_100000.gif" Contents="Swell Wave Ht 72hr" Area="3" />
+      <Area Name="1" lat1="20S" lat2="40N" lon1="80E" lon2="150E" />
+      <Area Name="2" lat1="15S" lat2="35N" lon1="90E" lon2="130E" />
+      <Area Name="3" lat1="20S" lat2="40N" lon1="80E" lon2="150E" />
+    </Region>
+  </Server>
+
   </OCPNWeatherFaxInternetRetrieval>
