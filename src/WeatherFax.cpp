@@ -465,6 +465,7 @@ wizarddone:
 
 void WeatherFax::Goto(int selection)
 {
+    assert(selection >= 0);
     WeatherFaxImage &image = *m_Faxes[selection];
     double lat0 = image.m_Coords->lat(0), lat1 = image.m_Coords->lat(image.m_mappedimg.GetHeight());
     double lon0 = image.m_Coords->lon(0), lon1 = image.m_Coords->lon(image.m_mappedimg.GetWidth());
