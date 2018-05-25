@@ -31,9 +31,16 @@ ELSE (PORTAUDIO_FOUND)
 ENDIF (PORTAUDIO_FOUND)
 ELSE (UNIX)
     INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/include)
-    SET(PLUGINS_LIBS ${PLUGINS_LIBS} ../buildwin/portaudio_x86)
+    IF(STANDALONE MATCHES "BUNDLED")
+	# within OpenCPN tree
+    	SET(PLUGINS_LIBS ${EXTRA_LIBS} ../../buildwin/portaudio_x86)
+    	INSTALL(FILES "../buildwin/portaudio_x86.dll" DESTINATION ".")
+    ELSE()
+    	SET(PLUGINS_LIBS ${EXTRA_LIBS} ../buildwin/portaudio_x86)
+    	INSTALL(FILES "buildwin/portaudio_x86.dll" DESTINATION ".")
+    ENDIF()
+
     ADD_DEFINITIONS(-DOCPN_USE_PORTAUDIO)
-    INSTALL(FILES "buildwin/portaudio_x86.dll" DESTINATION ".")
 ENDIF (UNIX)
 
 IF (MSVC)
