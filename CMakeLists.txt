@@ -34,7 +34,7 @@ ELSE (UNIX)
     IF(STANDALONE MATCHES "BUNDLED")
 	# within OpenCPN tree
     	SET(PLUGINS_LIBS ${EXTRA_LIBS} ../../buildwin/portaudio_x86)
-    	INSTALL(FILES "../buildwin/portaudio_x86.dll" DESTINATION ".")
+    	INSTALL(FILES "../../buildwin/portaudio_x86.dll" DESTINATION ".")
     ELSE()
     	SET(PLUGINS_LIBS ${EXTRA_LIBS} ../buildwin/portaudio_x86)
     	INSTALL(FILES "buildwin/portaudio_x86.dll" DESTINATION ".")
@@ -183,7 +183,13 @@ ENDIF(TINYXML_FOUND)
 ADD_DEFINITIONS(-DTIXML_USE_STL)
 
 IF(WIN32)
- INSTALL(FILES "buildwin/PVW32Con.exe" DESTINATION "plugins\\\\${PACKAGE_NAME}")
+    IF(STANDALONE MATCHES "BUNDLED")
+	# within OpenCPN tree
+	INSTALL(FILES "../../buildwin/PVW32Con.exe" DESTINATION "plugins\\\\${PACKAGE_NAME}")
+    ELSE()
+	INSTALL(FILES "buildwin/PVW32Con.exe" DESTINATION "plugins\\\\${PACKAGE_NAME}")
+    ENDIF()
+
 ENDIF(WIN32)
 
 ADD_DEFINITIONS(-DTIXML_USE_STL)
