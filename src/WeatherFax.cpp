@@ -478,7 +478,7 @@ void WeatherFax::Goto(int selection)
 #else
     WFDistanceBearingMercator(lat0, lon0, lat1, lon1, NULL, &distance);
 #endif
-    if(!isnan(distance))
+    if(!wxIsNaN(distance))
         JumpToPosition((lat0 + lat1) / 2, (lon0 + lon1) / 2, .5/distance);
 }
 
