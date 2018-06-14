@@ -465,6 +465,7 @@ wizarddone:
 
 void WeatherFax::Goto(int selection)
 {
+    assert(selection >= 0);
     WeatherFaxImage &image = *m_Faxes[selection];
     double lat0 = image.m_Coords->lat(0), lat1 = image.m_Coords->lat(image.m_mappedimg.GetHeight());
     double lon0 = image.m_Coords->lon(0), lon1 = image.m_Coords->lon(image.m_mappedimg.GetWidth());
@@ -703,7 +704,10 @@ bool WeatherFax::DownloadFile( wxString filename )
     const wxString tmp_filename = wxFileName::CreateTempFileName( _T("weatherfax_") );
     _OCPN_DLStatus res = OCPN_downloadFile( url, tmp_filename, _("WeatherFax Data update"),
                             _("Reading Headers: ") + url, wxNullBitmap, this,
-                            OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|OCPN_DLDS_SHOW_ALL|OCPN_DLDS_AUTO_CLOSE, 10 );
+                                OCPN_DLDS_ELAPSED_TIME|OCPN_DLDS_ESTIMATED_TIME|OCPN_DLDS_REMAINING_TIME|
+                                OCPN_DLDS_SPEED|OCPN_DLDS_SIZE|OCPN_DLDS_URL|
+                                OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|
+                                OCPN_DLDS_AUTO_CLOSE, 10 );
     
     switch( res )
     {
