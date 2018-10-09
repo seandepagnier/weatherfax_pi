@@ -30,7 +30,14 @@
   #include "wx/wx.h"
 #endif //precompiled headers
 
+#define USE_AUDIOFILE
+#ifdef USE_AUDIOFILE
 #include <audiofile.h>
+#else
+#define    AFfilehandle int
+#define    AFfileoffset int
+#define    AFframecount int
+#endif
 
 #ifdef OCPN_USE_PORTAUDIO
     #include <portaudio.h>
@@ -104,6 +111,7 @@ public:
     Header State(bool &phasing) { phasing = phasingLinesLeft>0; return lasttype; }
 
     bool m_bEndDecoding; /* flag to end decoding thread */
+
     AFframecount m_stop_audio_offset; // position in stream when stop sequence was found
 
     wxMutex m_DecoderMutex, m_DecoderStopMutex, m_DecoderReloadMutex;

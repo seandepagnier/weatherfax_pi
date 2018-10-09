@@ -49,6 +49,10 @@ InternetRetrievalDialog::InternetRetrievalDialog( weatherfax_pi &_weatherfax_pi,
       m_bLoaded(false), m_bDisableServers(false), m_bDisableRegions(false),
       m_bDisableFilter(true), m_bRebuilding(false)
 {
+#ifdef __OCPN__ANDROID__
+    wxSize s = ::wxGetDisplaySize();
+    SetSize(0, 0, s.x, s.y-40);
+#endif
     m_panel8->Fit();
 }
 
@@ -639,9 +643,11 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
         }
     }
 
+
     loadimage:
         m_weatherfax_pi.m_pWeatherFax->OpenImage
             (filename, faxurl->Server + _T(" - ") + faxurl->Region, faxurl->area_name, faxurl->Contents);
+
 
     }
     

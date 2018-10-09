@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Dec 20 2017)
+// C++ code generated with wxFormBuilder (version May 19 2018)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO *NOT* EDIT THIS FILE!
@@ -12,6 +12,10 @@
 #include <wx/xrc/xmlres.h>
 #include <wx/intl.h>
 #include <wx/string.h>
+#include <wx/bitmap.h>
+#include <wx/image.h>
+#include <wx/icon.h>
+#include <wx/menu.h>
 #include <wx/listbox.h>
 #include <wx/gdicmn.h>
 #include <wx/font.h>
@@ -21,10 +25,6 @@
 #include <wx/statbox.h>
 #include <wx/slider.h>
 #include <wx/checkbox.h>
-#include <wx/bitmap.h>
-#include <wx/image.h>
-#include <wx/icon.h>
-#include <wx/menu.h>
 #include <wx/frame.h>
 #include <wx/listctrl.h>
 #include <wx/stattext.h>
@@ -41,9 +41,7 @@
 #include <wx/splitter.h>
 #include <wx/scrolwin.h>
 #include <wx/choice.h>
-#include <wx/wizard.h>
-#include <wx/dynarray.h>
-WX_DEFINE_ARRAY_PTR( wxWizardPageSimple*, WizardPages );
+#include <wx/simplebook.h>
 #include <wx/choicebk.h>
 
 #include "wxWTranslateCatalog.h"
@@ -59,6 +57,12 @@ class WeatherFaxBase : public wxFrame
 	private:
 	
 	protected:
+		wxMenu* m_menu4;
+		wxMenuItem* m_mDelete1;
+		wxMenuItem* m_mGoto1;
+		wxMenu* m_menu11;
+		wxMenuItem* m_mSaveAs1;
+		wxMenuItem* m_mExport1;
 		wxCheckBox* m_cInvert;
 		wxMenuBar* m_menubar1;
 		wxMenu* m_menu1;
@@ -73,22 +77,24 @@ class WeatherFaxBase : public wxFrame
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnClose( wxCloseEvent& event ) { event.Skip(); }
+		virtual void OnLeftDown( wxMouseEvent& event ) { event.Skip(); }
+		virtual void OnLeftUp( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnFaxes( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnEdit( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnInternet( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnSchedules( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnDelete( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnPreferences( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnGoto( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnOpen( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnSaveAs( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnExport( wxCommandEvent& event ) { event.Skip(); }
 		virtual void TransparencyChanged( wxScrollEvent& event ) { event.Skip(); }
 		virtual void WhiteTransparencyChanged( wxScrollEvent& event ) { event.Skip(); }
 		virtual void OnInvert( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnOpen( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnSaveAs( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnGoto( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnExport( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnDelete( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnPreferences( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnCapture( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnSchedules( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnInternet( wxCommandEvent& event ) { event.Skip(); }
-        virtual void OnUpdateData( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnUpdateData( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAbout( wxCommandEvent& event ) { event.Skip(); }
 		
 	
@@ -101,6 +107,11 @@ class WeatherFaxBase : public wxFrame
 		WeatherFaxBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxCAPTION|wxCLOSE_BOX|wxFRAME_FLOAT_ON_PARENT|wxFRAME_NO_TASKBAR|wxRESIZE_BORDER|wxSYSTEM_MENU|wxTAB_TRAVERSAL );
 		
 		~WeatherFaxBase();
+		
+		void m_lFaxesOnContextMenu( wxMouseEvent &event )
+		{
+			m_lFaxes->PopupMenu( m_menu4, event.GetPosition() );
+		}
 	
 };
 
@@ -189,6 +200,7 @@ class InternetRetrievalDialogBase : public wxDialog
 		wxPanel* m_panel8;
 		wxButton* m_bRetrieveScheduled;
 		wxButton* m_bRetrieveSelected;
+		wxButton* m_bX;
 		wxTextCtrl* m_tContainsLat;
 		wxStaticText* m_staticText24;
 		wxTextCtrl* m_tContainsLon;
@@ -208,6 +220,7 @@ class InternetRetrievalDialogBase : public wxDialog
 		virtual void OnUrlsSort( wxListEvent& event ) { event.Skip(); }
 		virtual void OnUrlSelected( wxListEvent& event ) { event.Skip(); }
 		virtual void OnRetrieve( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnFilter( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnBoatPosition( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnReset( wxCommandEvent& event ) { event.Skip(); }
@@ -226,7 +239,7 @@ class InternetRetrievalDialogBase : public wxDialog
 		
 		void m_splitter1OnIdle( wxIdleEvent& )
 		{
-			m_splitter1->SetSashPosition( 216 );
+			m_splitter1->SetSashPosition( 160 );
 			m_splitter1->Disconnect( wxEVT_IDLE, wxIdleEventHandler( InternetRetrievalDialogBase::m_splitter1OnIdle ), NULL, this );
 		}
 	
@@ -235,11 +248,13 @@ class InternetRetrievalDialogBase : public wxDialog
 ///////////////////////////////////////////////////////////////////////////////
 /// Class WeatherFaxWizardBase
 ///////////////////////////////////////////////////////////////////////////////
-class WeatherFaxWizardBase : public wxWizard 
+class WeatherFaxWizardBase : public wxDialog 
 {
 	private:
 	
 	protected:
+		wxSimplebook* m_book;
+		wxPanel* m_panel9;
 		wxScrolledWindow* m_swFaxArea1;
 		wxButton* m_bStopDecoding;
 		wxButton* m_bDecoderOptions;
@@ -256,6 +271,8 @@ class WeatherFaxWizardBase : public wxWizard
 		wxChoice* m_cRotation;
 		wxStaticText* m_staticText101;
 		wxSlider* m_sSkew;
+		wxPanel* m_panel10;
+		wxScrolledWindow* m_scrolledWindow5;
 		wxFlexGridSizer* m_fgSizerUnMappedCoords;
 		wxComboBox* m_cbCoordSet;
 		wxButton* m_bRemoveCoordSet;
@@ -300,6 +317,7 @@ class WeatherFaxWizardBase : public wxWizard
 		wxButton* m_bGetEquator;
 		wxButton* m_bGetAspectRatio;
 		wxButton* m_bInformation;
+		wxPanel* m_panel11;
 		wxRadioButton* m_rbCoord1;
 		wxStaticText* m_staticText61;
 		wxSpinCtrl* m_sCoord1Y;
@@ -313,12 +331,12 @@ class WeatherFaxWizardBase : public wxWizard
 		wxSpinCtrl* m_sCoord2X;
 		wxTextCtrl* m_tCoord2Lon;
 		wxScrolledWindow* m_swFaxArea3;
+		wxButton* m_bPrev;
+		wxButton* m_bNext;
+		wxButton* m_bCancel;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnSetSizes( wxInitDialogEvent& event ) { event.Skip(); }
-		virtual void OnWizardCancel( wxWizardEvent& event ) { event.Skip(); }
-		virtual void OnWizardFinished( wxWizardEvent& event ) { event.Skip(); }
-		virtual void OnWizardPageChanged( wxWizardEvent& event ) { event.Skip(); }
 		virtual void OnBitmapClickPage1( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnPaintImage( wxPaintEvent& event ) { event.Skip(); }
 		virtual void OnStopDecoding( wxCommandEvent& event ) { event.Skip(); }
@@ -342,13 +360,15 @@ class WeatherFaxWizardBase : public wxWizard
 		virtual void OnGetAspectRatio( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnInformation( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnBitmapClickPage3( wxMouseEvent& event ) { event.Skip(); }
+		virtual void OnPrev( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnNext( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnCancel( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:
 		wxFlexGridSizer* m_fgSizer434;
 		
-		WeatherFaxWizardBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax Image"), const wxBitmap& bitmap = wxNullBitmap, const wxPoint& pos = wxDefaultPosition, long style = wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER|wxSYSTEM_MENU );
-		WizardPages m_pages;
+		WeatherFaxWizardBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxDEFAULT_DIALOG_STYLE ); 
 		~WeatherFaxWizardBase();
 	
 };

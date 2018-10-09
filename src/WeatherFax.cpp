@@ -40,6 +40,10 @@
 
 #include "wximgkap.h"
 
+#ifdef __OCPN__ANDROID__ 
+#include <qdebug.h>
+#endif
+
 /* XPM */
 const char * box_xpm[] = {
 "20 20 3 1",
@@ -194,8 +198,8 @@ static void LoadCoordinatesFromXml(WeatherFaxImageCoordinateList &coords, wxStri
     }
     return;
 failed:
-    wxLogMessage(_("Weather Fax") + wxString(_T(" : ")) + error);
-//    wxMessageDialog mdlg(NULL, error, _("Weather Fax"), wxOK | wxICON_ERROR);
+    wxLogMessage(_("Weather Fax") + " : "+ error);
+//    wxMessageDialog mdlg(NULL, "file: " + coordinatesets_path + coordinatesets + " : " + error, _("Weather Fax"), wxOK | wxICON_ERROR);
 //    mdlg.ShowModal();
 }
 
@@ -204,7 +208,7 @@ WeatherFax::WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
       m_SchedulesDialog(_weatherfax_pi, this),
       m_InternetRetrievalDialog(_weatherfax_pi, this),
       m_weatherfax_pi(_weatherfax_pi)
-{
+{    
     wxIcon icon;
     icon.CopyFromBitmap(*_img_weatherfax);
     m_SchedulesDialog.SetIcon(icon);
@@ -213,16 +217,38 @@ WeatherFax::WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
     UpdateMenuStates();
 
     LoadCoordinatesFromXml(m_BuiltinCoords, _T("CoordinateSets.xml"));
+    if(m_BuiltinCoords.empty()) {
+        wxMessageDialog mdlg(this, _("CoordinateSets.xml failed to load1"),
+                             _("Weather Fax"), wxOK | wxICON_WARNING);
+        mdlg.ShowModal();
+    }
+    
     LoadCoordinatesFromXml(m_UserCoords, _T("UserCoordinateSets.xml"));
 
     if(m_weatherfax_pi.m_bLoadSchedulesStart)
         m_SchedulesDialog.Load();
 
     m_tDeleteAudioWizard.Connect(wxEVT_TIMER, wxTimerEventHandler( WeatherFax::OnDeleteWizardTimer ), NULL, this);
+
+#ifdef __OCPN__ANDROID__ 
+    GetHandle()->setAttribute(Qt::WA_AcceptTouchEvents);
+    GetHandle()->grabGesture(Qt::PanGesture);
+    GetHandle()->setStyleSheet( qtStyleSheet);
+
+    m_lFaxes->GetHandle()->setAttribute(Qt::WA_AcceptTouchEvents);
+    m_lFaxes->GetHandle()->grabGesture(Qt::PanGesture);
+    m_lFaxes->Connect( wxEVT_QT_PANGESTURE,
+                       (wxObjectEventFunction) (wxEventFunction) &WeatherFax::OnEvtPanGesture, NULL, this );
+    m_tDownTimer.Connect(wxEVT_TIMER, wxTimerEventHandler
+                         ( WeatherFax::OnDownTimer ), NULL, this);
+#endif
 }
 
 static void SaveCoordinatesToXml(WeatherFaxImageCoordinateList &coords, wxString filename)
 {
+    if(coords.empty()) // do not make blank file
+        return;
+    
     TiXmlDocument doc;
     TiXmlDeclaration* decl = new TiXmlDeclaration( "1.0", "utf-8", "" );
     doc.LinkEndChild( decl );
@@ -286,6 +312,43 @@ WeatherFax::~WeatherFax()
 
     for(unsigned int i=0; i<m_Faxes.size(); i++)
         delete m_Faxes[i];
+}
+
+
+#ifdef __OCPN__ANDROID__ 
+void WeatherFax::OnEvtPanGesture( wxQT_PanGestureEvent &event)
+{
+    switch(event.GetState()){
+        case GestureStarted:
+            m_startPos = GetPosition();
+            m_startMouse = event.GetCursorPos(); //g_mouse_pos_screen;
+            break;
+        default:
+        {
+            wxPoint pos = event.GetCursorPos();
+            int x = wxMax(0, pos.x + m_startPos.x - m_startMouse.x);
+            int y = wxMax(0, pos.y + m_startPos.y - m_startMouse.y);
+            int xmax = ::wxGetDisplaySize().x - GetSize().x;
+            x = wxMin(x, xmax);
+            int ymax = ::wxGetDisplaySize().y - GetSize().y;          // Some fluff at the bottom
+            y = wxMin(y, ymax);
+            
+            Move(x, y);
+            m_tDownTimer.Stop();
+        } break;
+    }
+}
+#endif
+
+void WeatherFax::OnLeftDown( wxMouseEvent& event )
+{
+    m_tDownTimer.Start(1200, true);
+    m_downPos = event.GetPosition();
+}
+
+void WeatherFax::OnLeftUp( wxMouseEvent& event )
+{
+    m_tDownTimer.Stop();
 }
 
 void WeatherFax::EnableDisplayControls(bool enable)
@@ -381,7 +444,6 @@ WeatherFaxWizard* WeatherFax::OpenWav(wxString filename, long offset, wxString s
 
     wizard->FaxName  = station.size() && contents.size() ? (station + _T(" - ") + contents) :
         filename.size() ? filename : wxString(_("Audio Capture") );
-    wizard->ShowPage(wizard->m_pages[0]);
     wizard->Show();
 
     m_AudioWizards.push_back(wizard);
@@ -399,6 +461,9 @@ void WeatherFax::OpenImage(wxString filename, wxString station, wxString area, w
     if (!wimg.CanRead(filename))
         ::wxInitAllImageHandlers();
 
+#ifdef __OCPN__ANDROID__ 
+    qDebug() << "load file...";
+#endif
     if(!wimg.LoadFile(filename)) {
 #ifdef WIN32
         // attempt to convert using PVW32Con.exe
@@ -413,16 +478,24 @@ void WeatherFax::OpenImage(wxString filename, wxString station, wxString area, w
         if(!wimg.LoadFile(filename))
 #endif
         {
-            wxMessageDialog mdlg(this, _("Failed to load input file: ") + filename,
-                                 _("Weather Fax"), wxOK | wxICON_ERROR);
+            wxMessageDialog mdlg(this, _("Failed to load input file: ") + filename
+#ifdef __OCPN__ANDROID__
+                                 + _("Android doesn't support tif images")
+#endif
+                                 , _("Weather Fax"), wxOK | wxICON_ERROR);
             mdlg.ShowModal();
             return;
         }
     }
 
+#ifdef __OCPN__ANDROID__ 
+    qDebug() << "ok";
+#endif    
     WeatherFaxImage *img = new WeatherFaxImage(wimg, transparency, whitetransparency, invert);
     wxString name = station.size() && area.size() ? (station + _T(" - ") + area) : _T("");
-
+#ifdef __OCPN__ANDROID__ 
+    qDebug() << "image ok";
+#endif
     for(unsigned int i=0; i<m_BuiltinCoords.GetCount(); i++)
         if(name == m_BuiltinCoords[i]->name) {
             img->m_Coords = m_BuiltinCoords[i];
@@ -435,8 +508,15 @@ void WeatherFax::OpenImage(wxString filename, wxString station, wxString area, w
         FaxDecoderCaptureSettings CaptureSettings = m_weatherfax_pi.m_CaptureSettings;
         CaptureSettings.type = FaxDecoderCaptureSettings::NONE;
             
+#ifdef __OCPN__ANDROID__ 
+        qDebug() << "create wizard...";
+#endif
         WeatherFaxWizard wizard(*img, CaptureSettings, *this, name.size() ? &BuiltinCoordList : &m_UserCoords, name);
-        if(wizard.RunWizard(wizard.m_pages[1])) {
+#ifdef __OCPN__ANDROID__ 
+        qDebug() << "run wizard...";
+#endif
+        wizard.RunWizard(1);
+        if(wizard.GetReturnCode() == wxID_OK) {
             if(name.size() == 0) {
                 wxFileName filenamec(filename);
                 name = filenamec.GetFullName();
@@ -483,19 +563,16 @@ void WeatherFax::Goto(int selection)
 
 void WeatherFax::OnOpen( wxCommandEvent& event )
 {
-    wxFileDialog openDialog
-        ( this, _( "Open Weather Fax Input File" ),
-          m_weatherfax_pi.m_path, wxT ( "" ),
-          _ ( "\
+    wxString filename;
+    int response = PlatformFileSelectorDialog(this, &filename, _("Choose a file"), m_weatherfax_pi.m_path, "", _( "\
 Supported Files|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;\
 *.TIF;*.tif;*.TIFF;*.tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;\
 *.PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga;*.WAV;*.wav|\
-All files (*.*)|*.*" ), wxFD_OPEN);
+All files (*.*)|*.*" ));
 
-    if( openDialog.ShowModal() == wxID_OK ) {
-        wxString filename = openDialog.GetPath();
+    if( response == wxID_OK ) {
         wxFileName filenamec(filename);
-        m_weatherfax_pi.m_path = openDialog.GetDirectory();        
+        m_weatherfax_pi.m_path = filenamec.GetPath();
         if(filenamec.GetExt() == _T("wav") || filenamec.GetExt() == _T("WAV")) {
             if(m_AudioWizards.size()) {
                 wxMessageDialog mdlg(this, _("Cannot open audio weather fax already in progress."),
@@ -521,9 +598,12 @@ void WeatherFax::OnSaveAs( wxCommandEvent& event )
             ( this, _( "Save Weather Fax To Image" ),
               m_weatherfax_pi.m_export_path, image.m_Coords->name + _T(".png"),
               _ ( "\
-Image Files|*.BMP;*.bmp|*.PNG;*.png|*.TIFF;*.tiff\
 All files (*.*)|*.*" ), wxFD_SAVE);
-
+#ifdef __OCPN__ANDROID__
+        wxSize sz = ::wxGetDisplaySize();
+        saveDialog.SetSize(0, 0, sz.x, sz.y-40);
+#endif
+ 
         if( saveDialog.ShowModal() == wxID_OK ) {
             wxString filename = saveDialog.GetPath();
             m_weatherfax_pi.m_export_path = saveDialog.GetDirectory();        
@@ -559,7 +639,7 @@ void WeatherFax::OnEdit( wxCommandEvent& event )
     FaxDecoderCaptureSettings CaptureSettings = m_weatherfax_pi.m_CaptureSettings;
     CaptureSettings.type = FaxDecoderCaptureSettings::NONE;
     WeatherFaxWizard wizard(image, CaptureSettings, *this, builtin ? &BuiltinCoordList : &m_UserCoords, _T(""));
-    if(wizard.RunWizard(wizard.m_pages[0]))
+    if(wizard.RunWizard(0) == wxID_OK)
         image.FreeData();
     else
         image = backupimage;
@@ -593,7 +673,10 @@ void WeatherFax::OnExport( wxCommandEvent& event )
               _ ( "\
 KAP Files|*.KAP;*.kap|\
 All files (*.*)|*.*" ), wxFD_SAVE);
-
+#ifdef __OCPN__ANDROID__
+        wxSize sz = ::wxGetDisplaySize();
+        saveDialog.SetSize(0, 0, sz.x, sz.y-40);
+#endif
         if( saveDialog.ShowModal() == wxID_OK ) {
             wxString filename = saveDialog.GetPath();
             m_weatherfax_pi.m_export_path = saveDialog.GetDirectory();        
@@ -694,6 +777,11 @@ void WeatherFax::OnAbout( wxCommandEvent& event )
 {
     AboutDialog dlg(this);
     dlg.ShowModal();
+}
+
+void WeatherFax::OnDownTimer( wxTimerEvent & )
+{
+    m_lFaxes->PopupMenu( m_menu4, m_downPos );
 }
 
 bool WeatherFax::DownloadFile( wxString filename )

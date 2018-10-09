@@ -3,7 +3,7 @@
 ## Copyright:   
 ## License:     GPLv3
 ##---------------------------------------------------------------------------
- 
+
 # define minimum cmake version
 CMAKE_MINIMUM_REQUIRED(VERSION 2.6.2)
 
@@ -12,11 +12,6 @@ SET(PACKAGE_NAME weatherfax_pi)
 SET(VERBOSE_NAME WeatherFax)
 SET(TITLE_NAME WEATHERFAX)
 SET(CPACK_PACKAGE_CONTACT "Sean D'Epagnier ")
-
-SET(BUNDLE_DATA TRUE)
-
-INCLUDE( VERSION.cmake )
-SET(PLUGIN_VERSION "${PLUGIN_VERSION_MAJOR}.${PLUGIN_VERSION_MINOR}.${PLUGIN_VERSION_PATCH}" )
 
 IF (UNIX)
 INCLUDE("cmake/FindPortaudio.cmake")
@@ -40,13 +35,7 @@ IF (MSVC)
     INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/include/msvc)
 ENDIF (MSVC)
 
-OPTION(WEATHERFAX_USE_SVG "Use SVG graphics" ON)
-
 INCLUDE("cmake/PluginConfigure.cmake")
-
-IF(WEATHERFAX_USE_SVG)
-  ADD_DEFINITIONS(-DWEATHERFAX_USE_SVG)
-ENDIF(WEATHERFAX_USE_SVG)
 
 SET(SRC_WEATHERFAX
             src/weatherfax_pi.cpp
@@ -62,7 +51,9 @@ SET(SRC_WEATHERFAX
             src/icons.cpp
 
             src/wximgkap.cpp
+	)
 
+SET(SRC_AUDIOFILE
             src/libaudiofile/aupv.c
             src/libaudiofile/error.c
             src/libaudiofile/extended.c
@@ -128,8 +119,7 @@ SET(SRC_WEATHERFAX
             src/libaudiofile/modules/PCM.cpp
             src/libaudiofile/modules/RebufferModule.cpp
             src/libaudiofile/modules/SimpleModule.cpp
-	)
-
+)
 
 IF(UNIX)
   find_library(RTLSDR_LIBRARY NAMES rtlsdr
@@ -152,36 +142,17 @@ IF(UNIX)
 ENDIF(UNIX)
 
       
-IF(UNIX)
- INCLUDE("cmake/FindTinyXML.cmake")
- FIND_PACKAGE(TinyXML QUIET)
-ENDIF(UNIX)
-
-IF(TINYXML_FOUND)
- message (STATUS "Building with system tinyxml")
- INCLUDE_DIRECTORIES(${TINYXML_INCLUDE_DIR})
- ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX})
- TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${TINYXML_LIBRARIES} ${EXTRA_LIBS})
-ELSE(TINYXML_FOUND)
- message (STATUS "Building with embedded tinyxml")
- INCLUDE_DIRECTORIES(src/tinyxml/)
- SET(SRC_LTINYXML
-            src/tinyxml/tinyxml.cpp
-            src/tinyxml/tinyxmlparser.cpp
-            src/tinyxml/tinyxmlerror.cpp
- )
- ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_LTINYXML})
- TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
-ENDIF(TINYXML_FOUND)
-ADD_DEFINITIONS(-DTIXML_USE_STL)
-
 IF(WIN32)
  INSTALL(FILES "buildwin/PVW32Con.exe" DESTINATION "plugins\\\\${PACKAGE_NAME}")
 ENDIF(WIN32)
 
-ADD_DEFINITIONS(-DTIXML_USE_STL)
-
 INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/libaudiofile)
+
+ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE})
+TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
+
+INCLUDE("cmake/PluginXML.cmake")
+INCLUDE("cmake/PluginGL.cmake")
 
 INCLUDE("cmake/PluginInstall.cmake")
 INCLUDE("cmake/PluginLocalization.cmake")

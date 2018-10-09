@@ -26,6 +26,10 @@
 
 #include <vector>
 
+#ifdef __OCPN__ANDROID__
+#include <wx/qt/private/wxQtGesture.h>
+#endif
+
 #include "WeatherFaxUI.h"
 
 extern const char * box_xpm[];
@@ -69,6 +73,12 @@ public:
     WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent);
     ~WeatherFax();
 
+#ifdef __OCPN__ANDROID__
+    void OnEvtPanGesture( wxQT_PanGestureEvent &event);
+#endif    
+    void OnLeftDown( wxMouseEvent& event );
+    void OnLeftUp( wxMouseEvent& event );
+    
     void OnClose( wxCloseEvent& event ) { Hide(); }
     void EnableDisplayControls(bool enable);
     void OnFaxes( wxCommandEvent& event );
@@ -88,6 +98,7 @@ public:
     void OnInternet( wxCommandEvent& event );
     void OnUpdateData( wxCommandEvent& event );
     void OnAbout( wxCommandEvent& event );
+    void OnDownTimer( wxTimerEvent & );
 
     bool Show( bool show = true );
     void WizardFinished(WeatherFaxWizard *wizard);
@@ -111,9 +122,10 @@ protected:
     void OnDeleteWizardTimer( wxTimerEvent & );
 
     std::list<WeatherFaxWizard *> m_AudioWizards;
-    wxTimer m_tDeleteAudioWizard;
+    wxTimer m_tDeleteAudioWizard, m_tDownTimer;
 
 private:
+    wxPoint m_downPos, m_startPos, m_startMouse;
     bool DownloadFile( wxString filename );
 };
 

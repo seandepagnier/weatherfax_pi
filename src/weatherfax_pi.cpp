@@ -28,6 +28,7 @@
 #include "WeatherFaxImage.h"
 #include "WeatherFax.h"
 #include "icons.h"
+#include "plugingl/pidc.h"
 
 // the class factories, used to create and destroy instances of the PlugIn
 
@@ -63,7 +64,7 @@ weatherfax_pi::weatherfax_pi(void *ppimgr)
 int weatherfax_pi::Init(void)
 {
     AddLocaleCatalog( _T("opencpn-weatherfax_pi") );
-#ifdef WEATHERFAX_USE_SVG
+#ifdef OCPN_USE_SVG
     m_leftclick_tool_id = InsertPlugInToolSVG(_T( "WeatherFax" ), _svg_weatherfax, _svg_weatherfax_rollover, _svg_weatherfax_toggled,
                                                 wxITEM_CHECK, _("WeatherFax"), _T( "" ), NULL, WEATHERFAX_TOOL_POSITION, 0, this);
 #else
@@ -216,6 +217,9 @@ bool weatherfax_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
 
 bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
 {
+    piDC pidc;
+    pidc.SetVP(vp);
+    
     if(!m_pWeatherFax || !m_pWeatherFax->IsShown())
         return true;
 
@@ -228,16 +232,8 @@ bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
 
 wxString weatherfax_pi::StandardPath()
 {
-    wxStandardPathsBase& std_path = wxStandardPathsBase::Get();
     wxString s = wxFileName::GetPathSeparator();
-
-#if defined(__WXMSW__)
-    wxString stdPath  = std_path.GetConfigDir();
-#elif defined(__WXGTK__) || defined(__WXQT__)
-    wxString stdPath  = std_path.GetUserDataDir();
-#elif defined(__WXOSX__)
-    wxString stdPath  = (std_path.GetUserConfigDir() + s + _T("opencpn"));
-#endif
+    wxString stdPath  = *GetpPrivateApplicationDataLocation();
 
     stdPath += s + _T("plugins");
     if (!wxDirExists(stdPath))

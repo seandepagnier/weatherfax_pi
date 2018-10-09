@@ -4,21 +4,22 @@
 ## License:     GPLv3+
 ##---------------------------------------------------------------------------
 
+IF(NOT QT_ANDROID)
+
 # build a CPack driven installer package
 #include (InstallRequiredSystemLibraries)
-IF (COMMAND cmake_policy)
-  CMAKE_POLICY(SET CMP0002 OLD)
-ENDIF (COMMAND cmake_policy)
 
 SET(CPACK_PACKAGE_NAME "${PACKAGE_NAME}")
 SET(CPACK_PACKAGE_VENDOR "opencpn.org")
 SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY ${CPACK_PACKAGE_NAME} ${PACKAGE_VERSION})
-SET(CPACK_PACKAGE_VERSION ${PLUGIN_PACKAGE_VERSION})
+SET(PACKAGE_VERSION "${PLUGIN_VERSION_MAJOR}.${PLUGIN_VERSION_MINOR}.${PLUGIN_VERSION_PATCH}" )
+SET(CPACK_PACKAGE_VERSION ${PACKAGE_VERSION})
 SET(CPACK_PACKAGE_VERSION_MAJOR ${PLUGIN_VERSION_MAJOR})
 SET(CPACK_PACKAGE_VERSION_MINOR ${PLUGIN_VERSION_MINOR})
 SET(CPACK_PACKAGE_VERSION_PATCH ${PLUGIN_VERSION_PATCH})
 SET(CPACK_INSTALL_CMAKE_PROJECTS "${CMAKE_CURRENT_BINARY_DIR};${PACKAGE_NAME};ALL;/")
 SET(CPACK_PACKAGE_EXECUTABLES OpenCPN ${PACKAGE_NAME})
+SET(CPACK_DEBIAN_PACKAGE_MAINTAINER ${CPACK_PACKAGE_CONTACT})
 
 IF(WIN32)
 # to protect against confusable windows users, let us _not_ generate zip packages
@@ -39,8 +40,6 @@ IF(WIN32)
 #  These lines set the name of the Windows Start Menu shortcut and the icon that goes with it
 #  SET(CPACK_NSIS_INSTALLED_ICON_NAME "${PACKAGE_NAME}")
 SET(CPACK_NSIS_DISPLAY_NAME "OpenCPN ${PACKAGE_NAME}")
-
-#  SET(CPACK_PACKAGE_FILE_NAME "${PACKAGE_NAME}_${VERSION_MAJOR}.${VERSION_MINOR}_setup" )
 
   SET(CPACK_NSIS_DIR "${PROJECT_SOURCE_DIR}/buildwin/NSIS_Unicode")  #Gunther
   SET(CPACK_BUILDWIN_DIR "${PROJECT_SOURCE_DIR}/buildwin")  #Gunther
@@ -172,29 +171,11 @@ configure_file(${PROJECT_SOURCE_DIR}/buildosx/InstallOSX/pkg_background.jpg
  configure_file(${PROJECT_SOURCE_DIR}/buildosx/InstallOSX/${PACKAGE_NAME}.pkgproj.in
             ${CMAKE_CURRENT_BINARY_DIR}/${VERBOSE_NAME}.pkgproj)
 
- #We depend on libportaudio, libusb and librtlsdr, let's assume they are available from Homebrew
- ADD_CUSTOM_COMMAND(OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/libportaudio.2.dylib
-                 COMMAND cp /usr/local/lib/libportaudio.2.dylib ${CMAKE_CURRENT_BINARY_DIR}
-                 COMMAND chmod 755 ${CMAKE_CURRENT_BINARY_DIR}/libportaudio.2.dylib
-                 COMMAND install_name_tool -change /usr/local/lib/libportaudio.2.dylib @executable_path/../MacOS/libportaudio.2.dylib libweatherfax_pi.dylib
-                 COMMAND install_name_tool -change /usr/local/opt/portaudio/lib/libportaudio.2.dylib @executable_path/../MacOS/libportaudio.2.dylib libweatherfax_pi.dylib
-                 COMMAND cp /usr/local/lib/librtlsdr.0.dylib ${CMAKE_CURRENT_BINARY_DIR}
-                 COMMAND chmod 755 ${CMAKE_CURRENT_BINARY_DIR}/librtlsdr.0.dylib
-                 COMMAND install_name_tool -change /usr/local/lib/librtlsdr.0.dylib @executable_path/../MacOS/librtlsdr.0.dylib libweatherfax_pi.dylib
-                 COMMAND install_name_tool -change /usr/local/opt/librtlsdr/lib/librtlsdr.0.dylib @executable_path/../MacOS/librtlsdr.0.dylib libweatherfax_pi.dylib
-                 COMMAND cp /usr/local/lib/libusb-1.0.dylib ${CMAKE_CURRENT_BINARY_DIR}
-                 COMMAND chmod 755 ${CMAKE_CURRENT_BINARY_DIR}/libusb-1.0.dylib
-                 COMMAND install_name_tool -change /usr/local/lib/libusb-1.0.0.dylib @executable_path/../MacOS/libusb-1.0.dylib librtlsdr.0.dylib
-                 COMMAND install_name_tool -change /usr/local/opt/libusb/lib/libusb-1.0.0.dylib @executable_path/../MacOS/libusb-1.0.dylib librtlsdr.0.dylib
-                 WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                 DEPENDS ${PACKAGE_NAME}
-)
-
  ADD_CUSTOM_COMMAND(
    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/${VERBOSE_NAME}-Plugin.pkg
    COMMAND /usr/local/bin/packagesbuild -F ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_BINARY_DIR}/${VERBOSE_NAME}.pkgproj
    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-   DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/libportaudio.2.dylib
+   DEPENDS ${PACKAGE_NAME}
    COMMENT "create-pkg [${PACKAGE_NAME}]: Generating pkg file."
 )
 
@@ -203,4 +184,19 @@ configure_file(${PROJECT_SOURCE_DIR}/buildosx/InstallOSX/pkg_background.jpg
 
 
 ENDIF(APPLE)
+
+IF(WIN32)
+  SET(CPACK_PACKAGE_FILE_NAME "${PACKAGE_NAME}-${PLUGIN_VERSION_MAJOR}.${PLUGIN_VERSION_MINOR}-win32.exe" )
+  MESSAGE(STATUS "FILE: ${CPACK_PACKAGE_FILE_NAME}")
+  add_custom_command(OUTPUT ${CPACK_PACKAGE_FILE_NAME}
+	  COMMAND signtool sign /v /f \\cert\\OpenCPNSPC.pfx /d http://www.opencpn.org /t http://timestamp.verisign.com/scripts/timstamp.dll ${CPACK_PACKAGE_FILE_NAME}
+	  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+	  DEPENDS ${PACKAGE_NAME}
+	  COMMENT "Code-Signing: ${CPACK_PACKAGE_FILE_NAME}")
+  ADD_CUSTOM_TARGET(codesign COMMENT "code signing: Done."
+  DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/${CPACK_PACKAGE_FILE_NAME} )
+
+ENDIF(WIN32)
 ENDIF(NOT STANDALONE MATCHES "BUNDLED")
+
+ENDIF(NOT QT_ANDROID)

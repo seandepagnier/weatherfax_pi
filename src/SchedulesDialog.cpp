@@ -53,6 +53,10 @@ SchedulesDialog::SchedulesDialog( weatherfax_pi &_weatherfax_pi, wxWindow* paren
     m_cbSound->Disable();
     m_fpSound->Disable();
 #endif
+#ifdef __OCPN__ANDROID__
+    wxSize s = ::wxGetDisplaySize();
+    SetSize(0, 0, s.x, s.y-40);
+#endif
 }
 
 SchedulesDialog::~SchedulesDialog()

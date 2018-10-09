@@ -30,6 +30,7 @@
 #include <wx/wx.h>
 #include <wx/stdpaths.h>
 #include <wx/fileconf.h>
+#include "plugingl/qtstylesheet.h"
 
 #include "version.h"
 

@@ -5,7 +5,7 @@
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
- *   Copyright (C) 2014 by Sean D'Epagnier                                 *
+ *   Copyright (C) 2018 by Sean D'Epagnier                                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -53,14 +53,18 @@ public:
     void MakeNewCoordinates();
     void OnDecoderTimer( wxTimerEvent & );
 
-    void OnWizardCancel( wxWizardEvent& event );
-    void OnWizardFinished( wxWizardEvent& event );
+
+    int RunWizard(int page) { m_book->SetSelection(page); return ShowModal(); }
+    void OnCancel( wxCommandEvent& event );
+    void OnPrev( wxCommandEvent& event );
+    void OnNext( wxCommandEvent& event );
+    void Finished();
+
     void OnSetSizes( wxInitDialogEvent& event );
     void UpdateMappingControls();
     void OnStopDecoding( wxCommandEvent& event );
     void OnDecoderOptions( wxCommandEvent& event );
     void OnPaintPhasing( wxPaintEvent& event );
-    void OnWizardPageChanged( wxWizardEvent& event );
     void OnMappingChoice( wxCommandEvent& event );
     void GetMappingPolar(bool onlyequator);
     void GetMappingFixedFlat();

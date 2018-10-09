@@ -29,7 +29,18 @@
 
 #include "defs.h"
 #include "WeatherFaxImage.h"
+
+#ifdef __OCPN__ANDROID__
+#include <qopengl.h>
+#include "GL/gl_private.h"
+#include "GLES2/gl2.h"
+#include <qdebug.h>
+#else
 #include <GL/gl.h>
+#endif
+
+#include "plugingl/pi_shaders.h"
+#include "plugingl/pidc.h"
 
 WX_DEFINE_LIST(WeatherFaxImageCoordinateList);
 
@@ -646,6 +657,45 @@ void WeatherFaxImage::RenderImageGL(PlugIn_ViewPort *vp)
         delete [] idata;
     }
         
+#ifdef USE_GLSL
+    glEnable(texture_format);
+    glEnable( GL_BLEND );
+    glUseProgram( pi_texture_2DA_shader_program );
+
+    // Get pointers to the attributes in the program.
+    GLint mPosAttrib = glGetAttribLocation( pi_texture_2DA_shader_program, "aPos" );
+    GLint mUvAttrib  = glGetAttribLocation( pi_texture_2DA_shader_program, "aUV" );
+    
+    // Set up the texture sampler to texture unit 0
+    GLint texUni = glGetUniformLocation( pi_texture_2DA_shader_program, "uTex" );
+    glUniform1i( texUni, 0 );
+
+        // Disable VBO's (vertex buffer objects) for attributes.
+    glBindBuffer( GL_ARRAY_BUFFER, 0 );
+    glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, 0 );
+    
+    float colorv[4] = {0, 0, 0, -m_iTransparency/255.0f};
+
+    GLint colloc = glGetUniformLocation(pi_texture_2DA_shader_program,"color");
+    glUniform4fv(colloc, 1, colorv);
+
+
+    // Rotate 
+    float angle = 0;
+    mat4x4 I, Q;
+    mat4x4_identity(I);
+    mat4x4_rotate_Z(Q, I, angle);
+    
+    // Translate
+    Q[3][0] = 0;
+    Q[3][1] = 0;
+    
+    GLint matloc = glGetUniformLocation(pi_texture_2DA_shader_program,"TransformMatrix");
+    glUniformMatrix4fv( matloc, 1, GL_FALSE, (const GLfloat*)Q); 
+    
+    // Select the active texture unit.
+    glActiveTexture( GL_TEXTURE0 );
+#else
     glPushAttrib(GL_COLOR_BUFFER_BIT | GL_ENABLE_BIT | GL_POLYGON_BIT | GL_TEXTURE_BIT);
 
     glEnable(texture_format);
@@ -653,6 +703,7 @@ void WeatherFaxImage::RenderImageGL(PlugIn_ViewPort *vp)
     glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
     glTexEnvi( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_BLEND);
     glColor4ub(255, 255, 255, 255-m_iTransparency);
+#endif
 
     for(unsigned int ty = 0;  ty<m_numgltexturesh; ty++) {
         for(unsigned int tx = 0; tx<m_numgltexturesw; tx++) {
@@ -674,14 +725,36 @@ void WeatherFaxImage::RenderImageGL(PlugIn_ViewPort *vp)
             if(texture_format == GL_TEXTURE_2D)
                 tw = th = 1;
 
+#ifdef USE_GLSL
+            float co1[8], tco1[8];
+            tco1[0] = 0,  tco1[1] = 0;     co1[0] = pu1x, co1[1] = pu1y;
+            tco1[2] = tw, tco1[3] = 0;     co1[2] = pu2x, co1[3] = pu2y;
+            tco1[4] = 0, tco1[5] = th;    co1[4] = pu4x, co1[5] = pu4y;
+            tco1[6] = tw,  tco1[7] = th;    co1[6] = pu3x, co1[7] = pu3y;
+  
+            glVertexAttribPointer( mPosAttrib, 2, GL_FLOAT, GL_FALSE, 0, co1 );
+            // Set the attribute mPosAttrib with the vertices in the screen coordinates...
+            glEnableVertexAttribArray( mPosAttrib );
+            glVertexAttribPointer( mUvAttrib, 2, GL_FLOAT, GL_FALSE, 0, tco1 );
+            // Set the attribute mUvAttrib with the vertices in the GL coordinates...
+            glEnableVertexAttribArray( mUvAttrib );
+    
+            glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+#else
             glBegin(GL_QUADS);
             glTexCoord2i(0,   0), glVertex2d(pu1x, pu1y);
             glTexCoord2i(tw,  0), glVertex2d(pu2x, pu2y);
             glTexCoord2i(tw, th), glVertex2d(pu3x, pu3y);
             glTexCoord2i(0,  th), glVertex2d(pu4x, pu4y);
             glEnd();
+#endif
         }
     }
-    
+
+    glDisable(texture_format);
+
+#ifndef USE_GLSL
     glPopAttrib();
+#endif
+
 }

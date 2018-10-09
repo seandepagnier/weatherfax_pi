@@ -26,7 +26,7 @@
 
 #include "FaxDecoder.h"
 
-#ifdef __linux__
+#if defined(__linux__) && !defined(__ANDROID__)
 #include <sys/ioctl.h>
 #include <sys/soundcard.h>
 #endif
@@ -320,7 +320,9 @@ void FaxDecoder::CloseInput()
              close(dsp);
          break;
      case FaxDecoderCaptureSettings::FILE:
+#ifdef USE_AUDIOFILE
          afCloseFile(aFile);
+#endif
          break;
      case FaxDecoderCaptureSettings::RTLSDR:
 #ifdef BUILTIN_RTLAIS
@@ -380,8 +382,10 @@ bool FaxDecoder::DecodeFax()
             len = m_blocksize;
             break;
         case FaxDecoderCaptureSettings::FILE:
+#ifdef USE_AUDIOFILE
             if((len = afReadFrames(aFile, AF_DEFAULT_TRACK, sample, m_blocksize)) == m_blocksize)
                 break;
+#endif
 #ifdef BUILTIN_RTLAIS
         case FaxDecoderCaptureSettings::RTLSDR:
 #endif            
@@ -430,9 +434,11 @@ bool FaxDecoder::DecodeFax()
                 } else if(gotstart) // detect stop only if detected start
                 {
                     // exit at stop
+#ifdef USE_AUDIOFILE
                     if(m_CaptureSettings.type == FaxDecoderCaptureSettings::FILE)
                         m_stop_audio_offset = afTellFrame (aFile, AF_DEFAULT_TRACK);
                     else
+#endif
                         m_stop_audio_offset = 1; // used as flag to indicate stop was reached
                     m_DecoderStopMutex.Unlock();
                     goto done;
@@ -496,6 +502,7 @@ done:
 
 bool FaxDecoder::DecodeFaxFromFilename()
 {
+#ifdef USE_AUDIOFILE
     size = 0;
     AFfilesetup fs=0;
     if((aFile=afOpenFile(m_CaptureSettings.filename.ToUTF8(),"r",fs))==AF_NULL_FILEHANDLE)
@@ -513,11 +520,14 @@ bool FaxDecoder::DecodeFaxFromFilename()
         size = 0; // file is still being written to..
 
     return true;
+#else
+    return Error(_("no audiofile support compiled"));
+#endif
 }
 
 bool FaxDecoder::DecodeFaxFromDSP()
 {
-#ifdef __linux__
+#if defined(__linux__) && !defined(__ANDROID__)
      if((dsp=open("/dev/dsp",O_RDONLY))==-1)
          return false;
 

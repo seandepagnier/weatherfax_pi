@@ -5,7 +5,7 @@
  * Author:   Sean D'Epagnier
  *
  ***************************************************************************
- *   Copyright (C) 2014 by Sean D'Epagnier                                 *
+ *   Copyright (C) 2018 by Sean D'Epagnier                                 *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -50,7 +50,6 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
       m_NewCoordBaseName(newcoordbasename.empty() ? wxString(_("New Coord")) : newcoordbasename),
       m_Coords(coords ? *coords : m_BuiltinCoords)
 {
-
     // for now, only rtlsdr is tunable, in the future audio could be
     // if we support radio control
     if(CaptureSettings.type != FaxDecoderCaptureSettings::RTLSDR)
@@ -96,6 +95,15 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
         else
             m_bDecoderOptions->Disable();
     }
+
+    // android doesn't set these !!!?!??!
+    m_rbCoord1UnMapped->SetValue(true);
+    m_rbCoord1->SetValue(true);
+
+#ifdef __OCPN__ANDROID__
+    wxSize sz = ::wxGetDisplaySize();
+    SetSize(0, 0, sz.x, sz.y-40);
+#endif
 }
 
 WeatherFaxWizard::~WeatherFaxWizard()
@@ -292,39 +300,48 @@ void WeatherFaxWizard::OnPaintPhasing( wxPaintEvent& event )
     dc.DrawLine(0, p, w, p);
 }
 
-void WeatherFaxWizard::OnWizardPageChanged( wxWizardEvent& event )
+void WeatherFaxWizard::OnPrev( wxCommandEvent& event )
 {
-    if(event.GetPage() == m_pages[1]) {
-        if(!event.GetDirection()) {
-            /* if we backed up, convert the mapped coordinates back to the input */
-            double x1, y1, mx1, my1;
-            double x2, y2, mx2, my2;
+    if(m_book->GetSelection() == 1)
+        m_book->ChangeSelection(0);
+    else if(m_book->GetSelection() == 2) {
+        /* if we backed up, convert the mapped coordinates back to the input */
+        double x1, y1, mx1, my1;
+        double x2, y2, mx2, my2;
 
-            x1 = m_sCoord1X->GetValue(), y1 = m_sCoord1Y->GetValue();
-            x2 = m_sCoord2X->GetValue(), y2 = m_sCoord2Y->GetValue();
+        x1 = m_sCoord1X->GetValue(), y1 = m_sCoord1Y->GetValue();
+        x2 = m_sCoord2X->GetValue(), y2 = m_sCoord2Y->GetValue();
 
-            m_wfimg.MercatorToInput(x1, y1, mx1, my1);
-            m_sCoord1XUnMapped->SetValue(round(mx1));
-            m_sCoord1YUnMapped->SetValue(round(my1));
+        m_wfimg.MercatorToInput(x1, y1, mx1, my1);
+        m_sCoord1XUnMapped->SetValue(round(mx1));
+        m_sCoord1YUnMapped->SetValue(round(my1));
 
-            m_wfimg.MercatorToInput(x2, y2, mx2, my2);
-            m_sCoord2XUnMapped->SetValue(round(mx2));
-            m_sCoord2YUnMapped->SetValue(round(my2));
-    
-            double coord1lat, coord1lon, coord2lat, coord2lon;
-            m_tCoord1Lat->GetValue().ToDouble(&coord1lat);
-            m_tCoord1Lon->GetValue().ToDouble(&coord1lon);
-            m_tCoord2Lat->GetValue().ToDouble(&coord2lat);
-            m_tCoord2Lon->GetValue().ToDouble(&coord2lon);
-            WriteMappingLatLon(coord1lat, coord1lon, coord2lat, coord2lon);
-        }
+        m_wfimg.MercatorToInput(x2, y2, mx2, my2);
+        m_sCoord2XUnMapped->SetValue(round(mx2));
+        m_sCoord2YUnMapped->SetValue(round(my2));
+        
+        double coord1lat, coord1lon, coord2lat, coord2lon;
+        m_tCoord1Lat->GetValue().ToDouble(&coord1lat);
+        m_tCoord1Lon->GetValue().ToDouble(&coord1lon);
+        m_tCoord2Lat->GetValue().ToDouble(&coord2lat);
+        m_tCoord2Lon->GetValue().ToDouble(&coord2lon);
+        WriteMappingLatLon(coord1lat, coord1lon, coord2lat, coord2lon);
+        m_book->ChangeSelection(1);
+    }
 
-        SetUnMappedCoordRanges();
-        UpdateMappingControls();
+    SetUnMappedCoordRanges();
+    UpdateMappingControls();
 
-        m_rbCoord1UnMapped->SetValue(true);
-        m_rbCoord2UnMapped->SetValue(false);
-    } else if(event.GetPage() == m_pages[2]) {
+    m_rbCoord1UnMapped->SetValue(true);
+    m_rbCoord2UnMapped->SetValue(false);
+}
+
+void WeatherFaxWizard::OnNext( wxCommandEvent& event )
+{
+    if(m_book->GetSelection() == 0)
+        m_book->ChangeSelection(1);
+    else
+    if(m_book->GetSelection() == 1) {
         StoreMappingParams();
         /* invalidate mapped image */
         m_wfimg.m_mappedimg = wxNullImage;
@@ -336,21 +353,19 @@ void WeatherFaxWizard::OnWizardPageChanged( wxWizardEvent& event )
                 ( this, _("Failed to apply mapping\nCheck Mapping Correction Parameters"),
                   _("Mapping"), wxOK | wxICON_ERROR );
             w.ShowModal();
-            ShowPage(m_pages[1], true);
         } else if(m_curCoords->mapping == WeatherFaxImageCoordinates::MERCATOR &&
                 m_curCoords->mappingmultiplier == 1 &&
                   m_curCoords->mappingratio == 1) {
-            wxWizardEvent dummy;
-            OnWizardFinished( dummy );
-            if(IsModal())
-                EndModal(wxID_OK);
-            else
-                Hide();
-        }
+            Finished();
+        } else
+            m_book->ChangeSelection(2);
     }
+    else
+    if(m_book->GetSelection() == 2)
+        Finished();
 }
 
-void WeatherFaxWizard::OnWizardCancel( wxWizardEvent& event )
+void WeatherFaxWizard::OnCancel( wxCommandEvent& event )
 {
     delete m_newCoords;
 
@@ -358,9 +373,14 @@ void WeatherFaxWizard::OnWizardCancel( wxWizardEvent& event )
         m_tDecoder.Stop();
         delete &m_wfimg;
     }
+
+    if(IsModal())
+        EndModal(wxID_CANCEL);
+    else
+        Hide();
 }
 
-void WeatherFaxWizard::OnWizardFinished( wxWizardEvent& event )
+void WeatherFaxWizard::Finished()
 {
     /* add coordinates to set if it is the new one, but make
        sure it has a unique name */
@@ -391,6 +411,11 @@ void WeatherFaxWizard::OnWizardFinished( wxWizardEvent& event )
 
     if(m_parent.WizardCleanup(this))
         m_parent.WizardFinished(this);
+
+    if(IsModal())
+        EndModal(wxID_OK);
+    else
+        Hide();
 }
 
 void WeatherFaxWizard::OnSetSizes( wxInitDialogEvent& event )
@@ -855,9 +880,9 @@ bool WeatherFaxWizard::ApplyMapping()
 
 #if !wxCHECK_VERSION(3, 0, 0)
     m_cbCoordSet->SetValue(m_curCoords->name);
-#endif
 
     Refresh();
+#endif
     return true;
 }
 
@@ -1055,14 +1080,23 @@ void WeatherFaxWizard::OnShowLatLonMinutes( wxCommandEvent& event )
 
 void WeatherFaxWizard::OnPaintImage( wxPaintEvent& event)
 {
-    wxScrolledWindow *window = dynamic_cast<wxScrolledWindow*>(event.GetEventObject());
+    //wxScrolledWindow *window = dynamic_cast<wxScrolledWindow*>(event.GetEventObject());
+    wxScrolledWindow *window = NULL;
+
+    if(m_book->GetSelection() == 0)
+        window = m_swFaxArea1;
+    if(m_book->GetSelection() == 1)
+        window = m_swFaxArea2;
+    if(m_book->GetSelection() == 2)
+        window = m_swFaxArea3;
+    
     if(!window)
         return;
 
     wxPaintDC dc( window );
     dc.SetBrush(wxBrush(*wxTRANSPARENT_BRUSH));
     
-    wxBitmap bmp(GetCurrentPage() == m_pages[2] ? m_wfimg.m_mappedimg : m_wfimg.m_phasedimg);
+    wxBitmap bmp(m_book->GetSelection() == 2 ? m_wfimg.m_mappedimg : m_wfimg.m_phasedimg);
 
     int x, y;
     window->GetViewStart(&x, &y);
@@ -1079,9 +1113,9 @@ void WeatherFaxWizard::OnPaintImage( wxPaintEvent& event)
         mdc.SelectObject( wxNullBitmap );
     }
 
-    if(GetCurrentPage() != m_pages[0]) {
+    if(m_book->GetSelection() != 0) {
         int x1, x2, y1, y2;
-        if(GetCurrentPage() == m_pages[1]) {
+        if(m_book->GetSelection() == 1) {
              x1 = m_sCoord1XUnMapped->GetValue(), y1 = m_sCoord1YUnMapped->GetValue();
              x2 = m_sCoord2XUnMapped->GetValue(), y2 = m_sCoord2YUnMapped->GetValue();
         } else {
@@ -1097,7 +1131,7 @@ void WeatherFaxWizard::OnPaintImage( wxPaintEvent& event)
         dc.DrawLine(x2-x, 0, x2-x, h);
         dc.DrawLine(0, y2-y, w, y2-y);
 
-        if(GetCurrentPage() == m_pages[1] &&
+        if(m_book->GetSelection() == 1 &&
            (m_cMapping->GetSelection() == (int)WeatherFaxImageCoordinates::POLAR ||
             m_cMapping->GetSelection() == (int)WeatherFaxImageCoordinates::CONIC)) {
             int inputpolex = m_sMappingPoleX->GetValue();

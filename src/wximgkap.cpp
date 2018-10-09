@@ -68,7 +68,7 @@ static inline double lontox(double l)
 static inline double lattoy_WS84(double l)
 {
     double e = WGSexentrik;
-    double s = sinl(l*M_PI/180.0);
+    double s = sin(l*M_PI/180.0);
 
     return log(tan(M_PI/4 + l * M_PI/360)*pow((1. - e * s)/(1. + e * s), e/2.));
 }
@@ -85,7 +85,7 @@ static double postod(double lat0, double lon0, double lat1, double lon1)
     v = sin((lon0 - lon1)/2.0);
     w = cos(lat0) * cos(lat1) * v * v;
     x = sin((lat0 - lat1)/2.0);
-    return (180. * 60. / M_PI) * 2.0 * asinl(sqrtl(x*x + w));
+    return (180. * 60. / M_PI) * 2.0 * asin(sqrt(x*x + w));
 }
 
 

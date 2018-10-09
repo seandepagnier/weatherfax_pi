@@ -14,7 +14,7 @@ extern void initialize_images(void);
 
 extern wxBitmap *_img_weatherfax;
 
-#ifdef WEATHERFAX_USE_SVG
+#ifdef OCPN_USE_SVG
 extern wxString _svg_weatherfax;
 extern wxString _svg_weatherfax_rollover;
 extern wxString _svg_weatherfax_toggled;
