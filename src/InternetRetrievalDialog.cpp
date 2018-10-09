@@ -620,7 +620,10 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
 
         _OCPN_DLStatus res = OCPN_downloadFile( url, filename, _("WeatherFax InternetRetrieval"),
                               _("Reading Headers: ") + faxurl->Contents, wxNullBitmap, this,
-                                               OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|OCPN_DLDS_SHOW_ALL|OCPN_DLDS_AUTO_CLOSE, 10 );
+                                               OCPN_DLDS_ELAPSED_TIME|OCPN_DLDS_ESTIMATED_TIME|OCPN_DLDS_REMAINING_TIME|
+                                               OCPN_DLDS_SPEED|OCPN_DLDS_SIZE|OCPN_DLDS_URL|
+                                               OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|
+                                               OCPN_DLDS_AUTO_CLOSE, 10 );
 
         switch( res )
         {

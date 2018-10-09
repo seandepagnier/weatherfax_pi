@@ -28,6 +28,7 @@
 
 #ifndef __DPLIB_H__
 #define __DPLIB_H__
+#include "config.h"
 
 #include <stdint.h>
 

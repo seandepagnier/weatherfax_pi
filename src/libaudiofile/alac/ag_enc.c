@@ -54,7 +54,7 @@
 */
 
 // note: implementing this with some kind of "count leading zeros" assembly is a big performance win
-static int32_t lead( int32_t m )
+static inline int32_t lead( int32_t m )
 {
 	long j;
 	unsigned long c = (1ul << 31);
@@ -70,7 +70,7 @@ static int32_t lead( int32_t m )
 
 #define arithmin(a, b) ((a) < (b) ? (a) : (b))
 
-static int32_t ALWAYS_INLINE lg3a( int32_t x)
+static inline int32_t ALWAYS_INLINE lg3a( int32_t x)
 {
     int32_t result;
 
@@ -80,7 +80,7 @@ static int32_t ALWAYS_INLINE lg3a( int32_t x)
     return 31 - result;
 }
 
-static int32_t ALWAYS_INLINE abs_func( int32_t a )
+static inline int32_t ALWAYS_INLINE abs_func( int32_t a )
 {
 	// note: the CW PPC intrinsic __abs() turns into these instructions so no need to try and use it
 	int32_t isneg  = a >> 31;
@@ -90,7 +90,7 @@ static int32_t ALWAYS_INLINE abs_func( int32_t a )
 	return result;	
 }
 
-static uint32_t ALWAYS_INLINE unaligned_read32_be(const uint8_t *buffer)
+static inline uint32_t ALWAYS_INLINE unaligned_read32_be(const uint8_t *buffer)
 {
 	// embedded CPUs typically can't read unaligned 32-bit words so just read the bytes
 	uint32_t		value;
@@ -100,7 +100,7 @@ static uint32_t ALWAYS_INLINE unaligned_read32_be(const uint8_t *buffer)
 	return value;
 }
 
-static void ALWAYS_INLINE unaligned_write32_be(uint8_t *buffer, uint32_t value)
+static inline void ALWAYS_INLINE unaligned_write32_be(uint8_t *buffer, uint32_t value)
 {
 	buffer[0] = value >> 24;
 	buffer[1] = (value >> 16) & 0xff;
@@ -112,7 +112,7 @@ static void ALWAYS_INLINE unaligned_write32_be(uint8_t *buffer, uint32_t value)
 #pragma mark -
 #endif
 
-static int32_t dyn_code(int32_t m, int32_t k, int32_t n, uint32_t *outNumBits)
+static inline int32_t dyn_code(int32_t m, int32_t k, int32_t n, uint32_t *outNumBits)
 {
 	uint32_t 	div, mod, de;
 	uint32_t	numBits;
@@ -148,7 +148,7 @@ static int32_t dyn_code(int32_t m, int32_t k, int32_t n, uint32_t *outNumBits)
 }
 
 
-static int32_t dyn_code_32bit(int32_t maxbits, uint32_t m, uint32_t k, uint32_t n, uint32_t *outNumBits, uint32_t *outValue, uint32_t *overflow, uint32_t *overflowbits)
+static inline int32_t dyn_code_32bit(int32_t maxbits, uint32_t m, uint32_t k, uint32_t n, uint32_t *outNumBits, uint32_t *outValue, uint32_t *overflow, uint32_t *overflowbits)
 {
 	uint32_t 	div, mod, de;
 	uint32_t	numBits;
@@ -184,7 +184,7 @@ codeasescape:
 }
 
 
-static void ALWAYS_INLINE dyn_jam_noDeref(unsigned char *out, uint32_t bitPos, uint32_t numBits, uint32_t value)
+static inline void ALWAYS_INLINE dyn_jam_noDeref(unsigned char *out, uint32_t bitPos, uint32_t numBits, uint32_t value)
 {
 	uint8_t		*i = out + (bitPos >> 3);
 	uint32_t	mask;
@@ -207,7 +207,7 @@ static void ALWAYS_INLINE dyn_jam_noDeref(unsigned char *out, uint32_t bitPos, u
 }
 
 
-static void ALWAYS_INLINE dyn_jam_noDeref_large(unsigned char *out, uint32_t bitPos, uint32_t numBits, uint32_t value)
+static inline void ALWAYS_INLINE dyn_jam_noDeref_large(unsigned char *out, uint32_t bitPos, uint32_t numBits, uint32_t value)
 {
 	uint8_t		*i = out + (bitPos>>3);
 	uint32_t	w;
