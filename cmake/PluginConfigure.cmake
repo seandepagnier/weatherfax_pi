@@ -95,7 +95,7 @@ ENDIF(NOT SKIP_VERSION_CONFIG)
 
 SET(PLUGIN_VERSION "${PLUGIN_VERSION_MAJOR}.${PLUGIN_VERSION_MINOR}.${PLUGIN_VERSION_PATCH}" )
 
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/src)
+INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/src)
 
 # SET(PROFILING 1)
 
@@ -162,7 +162,7 @@ ENDIF(QT_ANDROID)
 
 IF(MSYS)
 # this is just a hack. I think the bug is in FindwxWidgets.cmake
-STRING( REGEX REPLACE "/usr/local" "\\\\;C:/MinGW/msys/1.0/usr/local" wxWidgets_INCLUDE_DIRS ${wxWidgets_INCLUDE_DIRS} )
+STRING( REGEX REPLACE "/usr/local" "\\\\;C:/MinGW/msys/1.0/usr/local" wxWidgets_INCLUDE_DIRS "${wxWidgets_INCLUDE_DIRS}" )
 ENDIF(MSYS)
 
 #  QT_ANDROID is a cross-build, so the native FIND_PACKAGE(OpenGL) is not useful.
@@ -183,8 +183,8 @@ IF(OPENGL_GLU_FOUND)
     INCLUDE_DIRECTORIES(${OPENGL_INCLUDE_DIR})
 
     MESSAGE (STATUS "Found OpenGL..." )
-    #MESSAGE (STATUS "    Lib: " ${OPENGL_LIBRARIES})
-    #MESSAGE (STATUS "    Include: " ${OPENGL_INCLUDE_DIR})
+    MESSAGE (STATUS "    Lib: " ${OPENGL_LIBRARIES})
+    MESSAGE (STATUS "    Include: " ${OPENGL_INCLUDE_DIR})
     ADD_DEFINITIONS(-DocpnUSE_GL)
 ELSE(OPENGL_GLU_FOUND)
     MESSAGE (STATUS "OpenGL not found..." )
