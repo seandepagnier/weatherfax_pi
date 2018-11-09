@@ -41,7 +41,7 @@ WeatherFaxWizard::WeatherFaxWizard( WeatherFaxImage &img,
 #ifndef __WXOSX__
     : WeatherFaxWizardBase( &parent ),
 #else
-    : WeatherFaxWizardBase( &parent, wxID_ANY, _("Weather Fax Image"), wxNullBitmap, wxDefaultPosition, wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER|wxSYSTEM_MENU|wxSTAY_ON_TOP),
+    : WeatherFaxWizardBase( &parent, wxID_ANY, _("Weather Fax Image"), wxDefaultPosition, wxDefaultSize, wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER|wxSYSTEM_MENU|wxSTAY_ON_TOP),
 #endif
       m_decoder(*this, CaptureSettings ),
       m_DecoderOptionsDialog(CaptureSettings.type == FaxDecoderCaptureSettings::NONE ?
