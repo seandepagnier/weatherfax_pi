@@ -25,6 +25,7 @@
  */
 
 #include "ocpn_plugin.h"
+#include <cmath>
 
 struct WeatherFaxImageCoordinates
 {
@@ -72,7 +73,7 @@ WeatherFaxImageCoordinates(wxString n) : name(n),
         double yy;
         // for accuracy use reference furthest from equator,
         // and to avoid case where p1.y-eq == 0
-        if(fabsf(p1.y - eq) > fabsf(p2.y - eq))
+        if(std::abs(p1.y - eq) > std::abs(p2.y - eq))
             //        y1/(p1.y-eq) = yy/(y-eq);
             //        y1*(y-eq)/(p1.y-eq) = yy;
             yy = y1*(y-eq)/(p1.y-eq);

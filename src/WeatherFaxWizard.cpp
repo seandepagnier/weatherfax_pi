@@ -946,32 +946,32 @@ void WeatherFaxWizard::ReadMappingLatLon(double &mapping1lat, double &mapping1lo
     double mapping1latminutes, mapping1lonminutes, mapping2latminutes, mapping2lonminutes;
     mapping1lat = m_sCoord1LatUnMapped->GetValue();
     m_tCoord1LatMinutesUnMapped->GetValue().ToDouble(&mapping1latminutes);
-    mapping1lat += ((mapping1lat > 0) ? mapping1latminutes : - mapping1latminutes) / 60;
+    mapping1lat += ((mapping1lat > 0) ? mapping1latminutes : - mapping1latminutes) / 60.;
 
     mapping1lon = m_sCoord1LonUnMapped->GetValue();
     m_tCoord1LonMinutesUnMapped->GetValue().ToDouble(&mapping1lonminutes);
-    mapping1lon += ((mapping1lon > 0) ? mapping1lonminutes : - mapping1lonminutes) / 60;
+    mapping1lon += ((mapping1lon > 0) ? mapping1lonminutes : - mapping1lonminutes) / 60.;
 
     mapping2lat = m_sCoord2LatUnMapped->GetValue();
     m_tCoord2LatMinutesUnMapped->GetValue().ToDouble(&mapping2latminutes);
-    mapping2lat += ((mapping2lat > 0) ? mapping2latminutes : - mapping2latminutes) / 60;
+    mapping2lat += ((mapping2lat > 0) ? mapping2latminutes : - mapping2latminutes) / 60.;
 
     mapping2lon = m_sCoord2LonUnMapped->GetValue();
     m_tCoord2LonMinutesUnMapped->GetValue().ToDouble(&mapping2lonminutes);
-    mapping2lon += ((mapping2lon > 0) ? mapping2lonminutes : - mapping2lonminutes) / 60;
+    mapping2lon += ((mapping2lon > 0) ? mapping2lonminutes : - mapping2lonminutes) / 60.;
 }
 
 void WeatherFaxWizard::WriteMappingLatLon(double mapping1lat, double mapping1lon,
                                           double mapping2lat, double mapping2lon)
 {
     m_sCoord1LatUnMapped->SetValue(trunc(mapping1lat)), mapping1lat -= trunc(mapping1lat);
-    m_tCoord1LatMinutesUnMapped->SetValue(wxString::Format(_T("%.4f"), 60*fabsf(mapping1lat)));
+    m_tCoord1LatMinutesUnMapped->SetValue(wxString::Format(_T("%.4f"), 60*std::abs(mapping1lat)));
     m_sCoord1LonUnMapped->SetValue(trunc(mapping1lon)), mapping1lon -= trunc(mapping1lon);
-    m_tCoord1LonMinutesUnMapped->SetValue(wxString::Format(_T("%.4f"), 60*fabsf(mapping1lon)));
+    m_tCoord1LonMinutesUnMapped->SetValue(wxString::Format(_T("%.4f"), 60*std::abs(mapping1lon)));
     m_sCoord2LatUnMapped->SetValue(trunc(mapping2lat)), mapping2lat -= trunc(mapping2lat);
-    m_tCoord2LatMinutesUnMapped->SetValue(wxString::Format(_T("%.4f"), 60*fabsf(mapping2lat)));
+    m_tCoord2LatMinutesUnMapped->SetValue(wxString::Format(_T("%.4f"), 60*std::abs(mapping2lat)));
     m_sCoord2LonUnMapped->SetValue(trunc(mapping2lon)), mapping2lon -= trunc(mapping2lon);
-    m_tCoord2LonMinutesUnMapped->SetValue(wxString::Format(_T("%.4f"), 60*fabsf(mapping2lon)));
+    m_tCoord2LonMinutesUnMapped->SetValue(wxString::Format(_T("%.4f"), 60*std::abs(mapping2lon)));
 }
 
 void WeatherFaxWizard::UpdatePage1()
