@@ -405,7 +405,7 @@ void InternetRetrievalDialog::OnUrlsLeftDown( wxMouseEvent& event )
 static int sortcol, sortorder = 1;
 // sort callback. Sort by body.
 #if wxCHECK_VERSION(2, 9, 0)
-int wxCALLBACK SortUrl(long item1, long item2, wxIntPtr list)
+int wxCALLBACK SortUrl(wxIntPtr item1, wxIntPtr item2, wxIntPtr list)
 #else
 int wxCALLBACK SortUrl(long item1, long item2, long list)
 #endif            
@@ -451,7 +451,11 @@ void InternetRetrievalDialog::OnUrlsSort( wxListEvent& event )
                                  _("weatherfax"), wxOK | wxICON_ERROR);
             mdlg.ShowModal();
         } else
+#if wxCHECK_VERSION(2, 9, 0)
+            m_lUrls->SortItems(SortUrl, (wxIntPtr)m_lUrls);
+#else
             m_lUrls->SortItems(SortUrl, (long)m_lUrls);
+#endif
 }
 
 void InternetRetrievalDialog::OnUrlSelected( wxListEvent& event )

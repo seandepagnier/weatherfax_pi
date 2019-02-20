@@ -441,7 +441,7 @@ void SchedulesDialog::OnSchedulesLeftDown( wxMouseEvent& event )
 static int sortcol, sortorder = 1;
 // sort callback. Sort by body.
 #if wxCHECK_VERSION(2, 9, 0)
-int wxCALLBACK SortSchedules(long item1, long item2, wxIntPtr list)
+int wxCALLBACK SortSchedules(wxIntPtr item1, wxIntPtr item2, wxIntPtr list)
 #else
 int wxCALLBACK SortSchedules(long item1, long item2, long list)
 #endif            
@@ -497,7 +497,11 @@ void SchedulesDialog::OnSchedulesSort( wxListEvent& event )
                                  _("weatherfax"), wxOK | wxICON_ERROR);
             mdlg.ShowModal();
         } else
+#if wxCHECK_VERSION(2, 9, 0)
+            m_lSchedules->SortItems(SortSchedules, (wxIntPtr)m_lSchedules);
+#else
             m_lSchedules->SortItems(SortSchedules, (long)m_lSchedules);
+#endif
 }
 
 void SchedulesDialog::OnBoatPosition( wxCommandEvent& event )
