@@ -1,7 +1,7 @@
 ##---------------------------------------------------------------------------
 ## Author:      Sean D'Epagnier
-## Copyright:   
-## License:     GPLv3
+## Copyright:
+## License:     GPLv3+
 ##---------------------------------------------------------------------------
 
 # define minimum cmake version
