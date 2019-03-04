@@ -5,8 +5,7 @@ image:
 - Visual Studio 2017
 
 platform: 
-# - x64
-- Win32
+  - Win32
 
 configuration: Release
 test: OFF
@@ -29,13 +28,13 @@ install:
   - ps: Start-FileDownload http://opencpn.navnux.org/build_deps/wxWidgets-3.1.2.7z
   - cmd: 7z x wxWidgets-3.1.2.7z -o%WXWIN% > null
 
- #- set #Use only while debugging - it reveals the deploy token set on Appveyor
+  #- set #Use only while debugging - it reveals the deploy token set on Appveyor
 
 before_build:
   - cd c:\project\weatherfax_pi
   - mkdir build
   - cd build
- - ps: Start-FileDownload https://downloads.sourceforge.net/project/opencpnplugins/opencpn_lib/4.99.1405-vc141_xp/opencpn.lib
+  - ps: Start-FileDownload https://downloads.sourceforge.net/project/opencpnplugins/opencpn_lib/4.99.1405-vc141_xp/opencpn.lib
   - ps: Start-FileDownload http://opencpn.navnux.org/build_deps/OpenCPN_buildwin-4.99a.7z
   - cmd: 7z x -y OpenCPN_buildwin-4.99a.7z -oc:\project\iacfleet_pi\buildwin
   - ps: Start-FileDownload https://sourceforge.net/projects/opencpnplugins/files/opencpn_packaging_data/portaudio-vc12.7z
@@ -51,12 +50,12 @@ artifacts:
     name: installer
 
 deploy:
-  description: 'release created by AppVeyor CI'
-  provider: GitHub
-  auth_token: '%GitHub_auth_token%'
-  artifact: installer
-  draft: true
-  prerelease: true
-  on:
-    appveyor_repo_tag: true # deploy on tag push only
-    configuration: Release  # Debug contains non-redist MS DLLs
+   description: 'release created by AppVeyor CI'
+   provider: GitHub
+   auth_token: '%GitHub_auth_token%'
+   artifact: installer
+   draft: true
+   prerelease: true
+   on:
+     appveyor_repo_tag: true # deploy on tag push only
+     configuration: Release  # Debug contains non-redist MS DLLs
