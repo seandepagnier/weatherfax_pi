@@ -4,7 +4,7 @@ shallow_clone: true
 image:
 - Visual Studio 2017
 
-platform: 
+platform:
   - Win32
 
 configuration: Release
@@ -46,7 +46,7 @@ build_script:
   - cmake --build . --target package --config release
 
 artifacts:
-  - path: 'build\*.exe'
+  - path: build\weatherfax_pi*.exe
     name: installer
 
 deploy:
