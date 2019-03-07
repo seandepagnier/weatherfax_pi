@@ -32,7 +32,6 @@ install:
 
 before_build:
   - cd c:\project\weatherfax_pi
-  - mkdir buildwin
   - ps: Start-FileDownload http://opencpn.navnux.org/build_deps/OpenCPN_buildwin-4.99a.7z
   - cmd: 7z x -y OpenCPN_buildwin-4.99a.7z -oc:\project\weatherfax_pi\buildwin
   - ps: Start-FileDownload https://sourceforge.net/projects/opencpnplugins/files/opencpn_packaging_data/portaudio-vc12.7z
