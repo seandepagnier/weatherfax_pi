@@ -36,24 +36,18 @@ before_build:
   - cd build
   - ps: Start-FileDownload https://downloads.sourceforge.net/project/opencpnplugins/opencpn_lib/4.99.1405-vc141_xp/opencpn.lib
   - dir
-  - mkdir buildwin
-  - cd c:\project\weatherfax_pi\buildwin
   - ps: Start-FileDownload http://opencpn.navnux.org/build_deps/OpenCPN_buildwin-4.99a.7z
   - cmd: 7z x -y OpenCPN_buildwin-4.99a.7z -oc:\project\weatherfax_pi\buildwin
-  - dir c:\project\weatherfax_pi\buildwin
-  - dir c:\project\weatherfax_pi\build
-  - dir c:\project\weatherfax_pi
   - ps: Start-FileDownload https://sourceforge.net/projects/opencpnplugins/files/opencpn_packaging_data/portaudio-vc12.7z
   - cmd: 7z x -y portaudio-vc12.7z -oc:\project\weatherfax_pi\buildwin
-  - cd c:\project\weatherfax_pi\build
-  - dir
+  - dir c:\project\weatherfax_pi\buildwin
+  - dir c:\project\weatherfax_pi
   - cmake -T v141_xp ..
-  - dir
+  - dir c:\project\weatherfax_pi\build
 
 build_script:
-
   - cmake --build . --target package --config release
-  - dir
+  - dir c:\project\weatherfax_pi\build
 
 artifacts:
   - path: build\weatherfax_pi*.exe
