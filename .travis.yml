@@ -44,4 +44,4 @@ deploy:
       # or his branch
       branch: dev
       # and only when API token is set
-      condition: "${#GitHub_auth_token} != 0" 
+      condition: "${#GitHub_auth_token} != 1" 
