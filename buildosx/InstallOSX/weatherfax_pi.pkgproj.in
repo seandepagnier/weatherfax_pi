@@ -161,7 +161,7 @@
 													<key>GID</key>
 													<integer>80</integer>
 													<key>PATH</key>
-													<string>Plugins</string>
+													<string>PlugIns</string>
 													<key>PATH_TYPE</key>
 													<integer>0</integer>
 													<key>PERMISSIONS</key>
@@ -230,7 +230,7 @@
 															<key>GID</key>
 															<integer>80</integer>
 															<key>PATH</key>
-															<string>plugins</string>
+															<string>PlugIns</string>
 															<key>PATH_TYPE</key>
 															<integer>0</integer>
 															<key>PERMISSIONS</key>
@@ -841,22 +841,6 @@
 		</dict>
 		<key>PROJECT_PRESENTATION</key>
 		<dict>
-			<key>BACKGROUND</key>
-			<dict>
-				<key>ALIGNMENT</key>
-				<integer>4</integer>
-				<key>BACKGROUND_PATH</key>
-				<dict>
-					<key>PATH</key>
-					<string>pkg_background.jpg</string>
-					<key>PATH_TYPE</key>
-					<integer>1</integer>
-				</dict>
-				<key>CUSTOM</key>
-				<integer>1</integer>
-				<key>SCALING</key>
-				<integer>1</integer>
-			</dict>
 			<key>INSTALLATION TYPE</key>
 			<dict>
 				<key>HIERARCHIES</key>
