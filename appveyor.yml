@@ -42,15 +42,15 @@ before_build:
   - mkdir build
   - cd build
   - ps: Start-FileDownload https://downloads.sourceforge.net/project/opencpnplugins/opencpn_lib/4.99.1405-vc141_xp/opencpn.lib
-  - dir c:\project\weatherfax_pi\buildwin
-  - dir c:\project\weatherfax_pi\buildwin
-  - dir c:\project\weatherfax_pi
+  #- dir c:\project\weatherfax_pi\buildwin
+  #- dir c:\project\weatherfax_pi\buildwin
+  #- dir c:\project\weatherfax_pi
   - cmake -T v141_xp ..
-  - dir c:\project\weatherfax_pi\build
+  #- dir c:\project\weatherfax_pi\build
 
 build_script:
   - cmake --build . --target package --config release
-  - dir c:\project\weatherfax_pi\build
+  #- dir c:\project\weatherfax_pi\build
 
 artifacts:
   - path: build\weatherfax_pi*.exe
