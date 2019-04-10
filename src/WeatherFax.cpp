@@ -428,7 +428,8 @@ WeatherFaxWizard* WeatherFax::OpenWav(wxString filename, long offset, wxString s
         CaptureSettings.type = FaxDecoderCaptureSettings::FILE;
         CaptureSettings.filename = filename;
         CaptureSettings.offset = offset;
-    }
+    } else
+        CaptureSettings.type = FaxDecoderCaptureSettings::AUDIO;
     
     WeatherFaxImageCoordinateList *coords = name.size() ? NULL : &m_UserCoords;
     WeatherFaxWizard *wizard = new WeatherFaxWizard
