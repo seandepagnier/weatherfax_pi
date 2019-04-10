@@ -169,8 +169,10 @@ WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString&
 	
 	// Connect Events
 	this->Connect( wxEVT_CLOSE_WINDOW, wxCloseEventHandler( WeatherFaxBase::OnClose ) );
+#ifdef __OCPN__ANDROID__
 	m_lFaxes->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( WeatherFaxBase::OnLeftDown ), NULL, this );
 	m_lFaxes->Connect( wxEVT_LEFT_UP, wxMouseEventHandler( WeatherFaxBase::OnLeftUp ), NULL, this );
+#endif
 	m_lFaxes->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnFaxes ), NULL, this );
 	m_lFaxes->Connect( wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler( WeatherFaxBase::OnEdit ), NULL, this );
 	this->Connect( m_menuItem61->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnInternet ) );
@@ -219,8 +221,10 @@ WeatherFaxBase::~WeatherFaxBase()
 {
 	// Disconnect Events
 	this->Disconnect( wxEVT_CLOSE_WINDOW, wxCloseEventHandler( WeatherFaxBase::OnClose ) );
+#ifdef __OCPN__ANDROID__
 	m_lFaxes->Disconnect( wxEVT_LEFT_DOWN, wxMouseEventHandler( WeatherFaxBase::OnLeftDown ), NULL, this );
 	m_lFaxes->Disconnect( wxEVT_LEFT_UP, wxMouseEventHandler( WeatherFaxBase::OnLeftUp ), NULL, this );
+#endif
 	m_lFaxes->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnFaxes ), NULL, this );
 	m_lFaxes->Disconnect( wxEVT_COMMAND_LISTBOX_DOUBLECLICKED, wxCommandEventHandler( WeatherFaxBase::OnEdit ), NULL, this );
 	this->Disconnect( wxID_ANY, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( WeatherFaxBase::OnInternet ) );
