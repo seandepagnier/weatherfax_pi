@@ -239,6 +239,8 @@ WeatherFax::WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
     m_lFaxes->GetHandle()->grabGesture(Qt::PanGesture);
     m_lFaxes->Connect( wxEVT_QT_PANGESTURE,
                        (wxObjectEventFunction) (wxEventFunction) &WeatherFax::OnEvtPanGesture, NULL, this );
+    m_lFaxes->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( WeatherFaxBase::OnLeftDown ), NULL, this );
+    m_lFaxes->Connect( wxEVT_LEFT_UP, wxMouseEventHandler( WeatherFaxBase::OnLeftUp ), NULL, this );
     m_tDownTimer.Connect(wxEVT_TIMER, wxTimerEventHandler
                          ( WeatherFax::OnDownTimer ), NULL, this);
 #endif
@@ -338,7 +340,6 @@ void WeatherFax::OnEvtPanGesture( wxQT_PanGestureEvent &event)
         } break;
     }
 }
-#endif
 
 void WeatherFax::OnLeftDown( wxMouseEvent& event )
 {
@@ -350,6 +351,7 @@ void WeatherFax::OnLeftUp( wxMouseEvent& event )
 {
     m_tDownTimer.Stop();
 }
+#endif
 
 void WeatherFax::EnableDisplayControls(bool enable)
 {
