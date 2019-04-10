@@ -641,7 +641,7 @@ void WeatherFax::OnEdit( wxCommandEvent& event )
     FaxDecoderCaptureSettings CaptureSettings = m_weatherfax_pi.m_CaptureSettings;
     CaptureSettings.type = FaxDecoderCaptureSettings::NONE;
     WeatherFaxWizard wizard(image, CaptureSettings, *this, builtin ? &BuiltinCoordList : &m_UserCoords, _T(""));
-    if(wizard.RunWizard(0) == wxID_OK)
+    if(wizard.RunWizard(1) == wxID_OK)
         image.FreeData();
     else
         image = backupimage;
