@@ -904,7 +904,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	m_staticText46->Wrap( -1 );
 	fgSizer631->Add( m_staticText46, 0, wxALL, 5 );
 
-	m_sHFFrequency = new wxSpinCtrl( sbSizer7->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 100,-1 ), wxSP_ARROW_KEYS, 0, 100000000, 9108000 );
+	m_sHFFrequency = new wxSpinCtrl( sbSizer7->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 150,-1 ), wxSP_ARROW_KEYS, 0, 100000000, 9108000 );
 	fgSizer631->Add( m_sHFFrequency, 0, wxALL, 5 );
 
 	m_stDecoderState = new wxStaticText( sbSizer7->GetStaticBox(), wxID_ANY, _("N/A"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -932,7 +932,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	m_cbFilter = new wxCheckBox( sbSizer5->GetStaticBox(), wxID_ANY, _("Filter"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer10->Add( m_cbFilter, 0, wxALL, 5 );
 
-	m_sFilter = new wxSpinCtrl( sbSizer5->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 70,-1 ), wxSP_ARROW_KEYS, 0, 256, 128 );
+	m_sFilter = new wxSpinCtrl( sbSizer5->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 90,-1 ), wxSP_ARROW_KEYS, 0, 256, 128 );
 	fgSizer10->Add( m_sFilter, 0, wxALL, 5 );
 
 	m_staticText9 = new wxStaticText( sbSizer5->GetStaticBox(), wxID_ANY, _("Phasing"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1053,12 +1053,10 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 
 	m_fgSizerLatLonUnMapped->Add( m_stMinutes, 0, wxALL, 5 );
 
-	m_sCoord1YUnMapped = new wxSpinCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
-	m_sCoord1YUnMapped->SetMinSize( wxSize( 80,-1 ) );
-
+	m_sCoord1YUnMapped = new wxSpinCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 120,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
 	m_fgSizerLatLonUnMapped->Add( m_sCoord1YUnMapped, 0, wxALL, 5 );
 
-	m_sCoord1LatUnMapped = new wxSpinCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 60,-1 ), wxSP_ARROW_KEYS, -90, 90, 0 );
+	m_sCoord1LatUnMapped = new wxSpinCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 120,-1 ), wxSP_ARROW_KEYS, -90, 90, 0 );
 	m_fgSizerLatLonUnMapped->Add( m_sCoord1LatUnMapped, 0, wxALL, 5 );
 
 	m_tCoord1LatMinutesUnMapped = new wxTextCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( -1,-1 ), 0 );
@@ -1066,12 +1064,10 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 
 	m_fgSizerLatLonUnMapped->Add( m_tCoord1LatMinutesUnMapped, 0, wxALL, 5 );
 
-	m_sCoord1XUnMapped = new wxSpinCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
-	m_sCoord1XUnMapped->SetMinSize( wxSize( 80,-1 ) );
-
+	m_sCoord1XUnMapped = new wxSpinCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 120,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
 	m_fgSizerLatLonUnMapped->Add( m_sCoord1XUnMapped, 0, wxALL, 5 );
 
-	m_sCoord1LonUnMapped = new wxSpinCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 60,-1 ), wxSP_ARROW_KEYS, -180, 180, 0 );
+	m_sCoord1LonUnMapped = new wxSpinCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 120,-1 ), wxSP_ARROW_KEYS, -180, 180, 0 );
 	m_fgSizerLatLonUnMapped->Add( m_sCoord1LonUnMapped, 0, wxALL, 5 );
 
 	m_tCoord1LonMinutesUnMapped = new wxTextCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( -1,-1 ), 0 );
@@ -1101,10 +1097,10 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 
 	fgSizer72->Add( 0, 0, 1, wxEXPAND, 5 );
 
-	m_sCoord2YUnMapped = new wxSpinCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
+	m_sCoord2YUnMapped = new wxSpinCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 120,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
 	fgSizer72->Add( m_sCoord2YUnMapped, 0, wxALL, 5 );
 
-	m_sCoord2LatUnMapped = new wxSpinCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 60,-1 ), wxSP_ARROW_KEYS, -90, 90, 0 );
+	m_sCoord2LatUnMapped = new wxSpinCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 120,-1 ), wxSP_ARROW_KEYS, -90, 90, 0 );
 	fgSizer72->Add( m_sCoord2LatUnMapped, 0, wxALL, 5 );
 
 	m_tCoord2LatMinutesUnMapped = new wxTextCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( -1,-1 ), 0 );
@@ -1112,10 +1108,10 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 
 	fgSizer72->Add( m_tCoord2LatMinutesUnMapped, 0, wxALL, 5 );
 
-	m_sCoord2XUnMapped = new wxSpinCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
+	m_sCoord2XUnMapped = new wxSpinCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 120,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
 	fgSizer72->Add( m_sCoord2XUnMapped, 0, wxALL, 5 );
 
-	m_sCoord2LonUnMapped = new wxSpinCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 60,-1 ), wxSP_ARROW_KEYS, -180, 180, 0 );
+	m_sCoord2LonUnMapped = new wxSpinCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 120,-1 ), wxSP_ARROW_KEYS, -180, 180, 0 );
 	fgSizer72->Add( m_sCoord2LonUnMapped, 0, wxALL, 5 );
 
 	m_tCoord2LonMinutesUnMapped = new wxTextCtrl( m_scrolledWindow5, wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( -1,-1 ), 0 );
@@ -1217,21 +1213,21 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	m_stMappingLabel1->Wrap( -1 );
 	fgChangingLabelSizer->Add( m_stMappingLabel1, 0, wxALIGN_CENTER|wxALL, 5 );
 
-	m_sMappingPoleX = new wxSpinCtrl( sbSizer51->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 70,-1 ), wxSP_ARROW_KEYS, -100000, 100000, 369 );
+	m_sMappingPoleX = new wxSpinCtrl( sbSizer51->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 90,-1 ), wxSP_ARROW_KEYS, -100000, 100000, 369 );
 	fgChangingLabelSizer->Add( m_sMappingPoleX, 0, wxALL, 5 );
 
 	m_stMappingLabel2 = new wxStaticText( sbSizer51->GetStaticBox(), wxID_ANY, _("Pole Y"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_stMappingLabel2->Wrap( -1 );
 	fgChangingLabelSizer->Add( m_stMappingLabel2, 0, wxALIGN_CENTER|wxALL, 5 );
 
-	m_sMappingPoleY = new wxSpinCtrl( sbSizer51->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 70,-1 ), wxSP_ARROW_KEYS, -100000, 100000, -74 );
+	m_sMappingPoleY = new wxSpinCtrl( sbSizer51->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 90,-1 ), wxSP_ARROW_KEYS, -100000, 100000, -74 );
 	fgChangingLabelSizer->Add( m_sMappingPoleY, 0, wxALL, 5 );
 
 	m_stMapping = new wxStaticText( sbSizer51->GetStaticBox(), wxID_ANY, _("Equator Y"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_stMapping->Wrap( -1 );
 	fgChangingLabelSizer->Add( m_stMapping, 0, wxALIGN_CENTER|wxALL, 5 );
 
-	m_sMappingEquatorY = new wxSpinCtrl( sbSizer51->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 70,-1 ), wxSP_ARROW_KEYS, -100000, 100000, 560 );
+	m_sMappingEquatorY = new wxSpinCtrl( sbSizer51->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 90,-1 ), wxSP_ARROW_KEYS, -100000, 100000, 560 );
 	fgChangingLabelSizer->Add( m_sMappingEquatorY, 0, wxALL, 5 );
 
 	m_bGetMapping = new wxButton( sbSizer51->GetStaticBox(), wxID_ANY, _("Get Mapping "), wxDefaultPosition, wxDefaultSize, 0 );
@@ -1299,13 +1295,13 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 
 	fgSizer71->Add( m_staticText61, 0, wxALL, 5 );
 
-	m_sCoord1Y = new wxSpinCtrl( sbSizer41->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
+	m_sCoord1Y = new wxSpinCtrl( sbSizer41->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 120,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
 	fgSizer71->Add( m_sCoord1Y, 0, wxALL, 5 );
 
 	m_tCoord1Lat = new wxTextCtrl( sbSizer41->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer71->Add( m_tCoord1Lat, 0, wxALL, 5 );
 
-	m_sCoord1X = new wxSpinCtrl( sbSizer41->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
+	m_sCoord1X = new wxSpinCtrl( sbSizer41->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 120,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
 	fgSizer71->Add( m_sCoord1X, 0, wxALL, 5 );
 
 	m_tCoord1Lon = new wxTextCtrl( sbSizer41->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
@@ -1322,13 +1318,13 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 
 	fgSizer71->Add( m_staticText81, 0, wxALL, 5 );
 
-	m_sCoord2Y = new wxSpinCtrl( sbSizer41->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
+	m_sCoord2Y = new wxSpinCtrl( sbSizer41->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 120,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
 	fgSizer71->Add( m_sCoord2Y, 0, wxALL, 5 );
 
 	m_tCoord2Lat = new wxTextCtrl( sbSizer41->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer71->Add( m_tCoord2Lat, 0, wxALL, 5 );
 
-	m_sCoord2X = new wxSpinCtrl( sbSizer41->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 80,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
+	m_sCoord2X = new wxSpinCtrl( sbSizer41->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxSize( 120,-1 ), wxSP_ARROW_KEYS, 0, 10, 0 );
 	fgSizer71->Add( m_sCoord2X, 0, wxALL, 5 );
 
 	m_tCoord2Lon = new wxTextCtrl( sbSizer41->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );

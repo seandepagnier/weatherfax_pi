@@ -5272,7 +5272,7 @@
                         <object class="simplebookpage" expanded="1">
                             <property name="label">a page</property>
                             <property name="select">0</property>
-                            <object class="wxPanel" expanded="1">
+                            <object class="wxPanel" expanded="0">
                                 <property name="BottomDockable">1</property>
                                 <property name="LeftDockable">1</property>
                                 <property name="RightDockable">1</property>
@@ -5323,7 +5323,7 @@
                                 <property name="window_extra_style"></property>
                                 <property name="window_name"></property>
                                 <property name="window_style">wxTAB_TRAVERSAL</property>
-                                <object class="wxFlexGridSizer" expanded="1">
+                                <object class="wxFlexGridSizer" expanded="0">
                                     <property name="cols">1</property>
                                     <property name="flexible_direction">wxBOTH</property>
                                     <property name="growablecols">0</property>
@@ -5396,11 +5396,11 @@
                                             <event name="OnPaint">OnPaintImage</event>
                                         </object>
                                     </object>
-                                    <object class="sizeritem" expanded="1">
+                                    <object class="sizeritem" expanded="0">
                                         <property name="border">5</property>
                                         <property name="flag">wxEXPAND</property>
                                         <property name="proportion">1</property>
-                                        <object class="wxFlexGridSizer" expanded="1">
+                                        <object class="wxFlexGridSizer" expanded="0">
                                             <property name="cols">2</property>
                                             <property name="flexible_direction">wxBOTH</property>
                                             <property name="growablecols">1</property>
@@ -5412,11 +5412,11 @@
                                             <property name="permission">none</property>
                                             <property name="rows">1</property>
                                             <property name="vgap">0</property>
-                                            <object class="sizeritem" expanded="1">
+                                            <object class="sizeritem" expanded="0">
                                                 <property name="border">5</property>
                                                 <property name="flag">wxEXPAND</property>
                                                 <property name="proportion">1</property>
-                                                <object class="wxStaticBoxSizer" expanded="1">
+                                                <object class="wxStaticBoxSizer" expanded="0">
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Decoder</property>
                                                     <property name="minimum_size"></property>
@@ -5792,7 +5792,7 @@
                                                                             <property name="pos"></property>
                                                                             <property name="resize">Resizable</property>
                                                                             <property name="show">1</property>
-                                                                            <property name="size">100,-1</property>
+                                                                            <property name="size">150,-1</property>
                                                                             <property name="style">wxSP_ARROW_KEYS</property>
                                                                             <property name="subclass"></property>
                                                                             <property name="toolbar_pane">0</property>
@@ -5870,11 +5870,11 @@
                                                     </object>
                                                 </object>
                                             </object>
-                                            <object class="sizeritem" expanded="1">
+                                            <object class="sizeritem" expanded="0">
                                                 <property name="border">5</property>
                                                 <property name="flag">wxEXPAND</property>
                                                 <property name="proportion">1</property>
-                                                <object class="wxStaticBoxSizer" expanded="1">
+                                                <object class="wxStaticBoxSizer" expanded="0">
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="label">Image Correction</property>
                                                     <property name="minimum_size"></property>
@@ -6014,7 +6014,7 @@
                                                                     <property name="pos"></property>
                                                                     <property name="resize">Resizable</property>
                                                                     <property name="show">1</property>
-                                                                    <property name="size">70,-1</property>
+                                                                    <property name="size">90,-1</property>
                                                                     <property name="style">wxSP_ARROW_KEYS</property>
                                                                     <property name="subclass"></property>
                                                                     <property name="toolbar_pane">0</property>
@@ -6501,7 +6501,7 @@
                         <object class="simplebookpage" expanded="1">
                             <property name="label">a page</property>
                             <property name="select">0</property>
-                            <object class="wxPanel" expanded="1">
+                            <object class="wxPanel" expanded="0">
                                 <property name="BottomDockable">1</property>
                                 <property name="LeftDockable">1</property>
                                 <property name="RightDockable">1</property>
@@ -6552,7 +6552,7 @@
                                 <property name="window_extra_style"></property>
                                 <property name="window_name"></property>
                                 <property name="window_style">wxTAB_TRAVERSAL</property>
-                                <object class="wxFlexGridSizer" expanded="1">
+                                <object class="wxFlexGridSizer" expanded="0">
                                     <property name="cols">1</property>
                                     <property name="flexible_direction">wxBOTH</property>
                                     <property name="growablecols">0</property>
@@ -6564,11 +6564,11 @@
                                     <property name="permission">none</property>
                                     <property name="rows">2</property>
                                     <property name="vgap">0</property>
-                                    <object class="sizeritem" expanded="1">
+                                    <object class="sizeritem" expanded="0">
                                         <property name="border">5</property>
                                         <property name="flag">wxEXPAND</property>
                                         <property name="proportion">1</property>
-                                        <object class="wxFlexGridSizer" expanded="1">
+                                        <object class="wxFlexGridSizer" expanded="0">
                                             <property name="cols">2</property>
                                             <property name="flexible_direction">wxBOTH</property>
                                             <property name="growablecols">1</property>
@@ -6580,7 +6580,7 @@
                                             <property name="permission">none</property>
                                             <property name="rows">1</property>
                                             <property name="vgap">0</property>
-                                            <object class="sizeritem" expanded="1">
+                                            <object class="sizeritem" expanded="0">
                                                 <property name="border">5</property>
                                                 <property name="flag">wxEXPAND | wxALL</property>
                                                 <property name="proportion">1</property>
@@ -7063,7 +7063,7 @@
                                                                         <property name="min">0</property>
                                                                         <property name="min_size"></property>
                                                                         <property name="minimize_button">0</property>
-                                                                        <property name="minimum_size">80,-1</property>
+                                                                        <property name="minimum_size">-1,-1</property>
                                                                         <property name="moveable">1</property>
                                                                         <property name="name">m_sCoord1YUnMapped</property>
                                                                         <property name="pane_border">1</property>
@@ -7074,7 +7074,7 @@
                                                                         <property name="pos"></property>
                                                                         <property name="resize">Resizable</property>
                                                                         <property name="show">1</property>
-                                                                        <property name="size">80,-1</property>
+                                                                        <property name="size">120,-1</property>
                                                                         <property name="style">wxSP_ARROW_KEYS</property>
                                                                         <property name="subclass"></property>
                                                                         <property name="toolbar_pane">0</property>
@@ -7137,7 +7137,7 @@
                                                                         <property name="pos"></property>
                                                                         <property name="resize">Resizable</property>
                                                                         <property name="show">1</property>
-                                                                        <property name="size">60,-1</property>
+                                                                        <property name="size">120,-1</property>
                                                                         <property name="style">wxSP_ARROW_KEYS</property>
                                                                         <property name="subclass"></property>
                                                                         <property name="toolbar_pane">0</property>
@@ -7252,7 +7252,7 @@
                                                                         <property name="min">0</property>
                                                                         <property name="min_size"></property>
                                                                         <property name="minimize_button">0</property>
-                                                                        <property name="minimum_size">80,-1</property>
+                                                                        <property name="minimum_size">-1,-1</property>
                                                                         <property name="moveable">1</property>
                                                                         <property name="name">m_sCoord1XUnMapped</property>
                                                                         <property name="pane_border">1</property>
@@ -7263,7 +7263,7 @@
                                                                         <property name="pos"></property>
                                                                         <property name="resize">Resizable</property>
                                                                         <property name="show">1</property>
-                                                                        <property name="size">80,-1</property>
+                                                                        <property name="size">120,-1</property>
                                                                         <property name="style">wxSP_ARROW_KEYS</property>
                                                                         <property name="subclass"></property>
                                                                         <property name="toolbar_pane">0</property>
@@ -7326,7 +7326,7 @@
                                                                         <property name="pos"></property>
                                                                         <property name="resize">Resizable</property>
                                                                         <property name="show">1</property>
-                                                                        <property name="size">60,-1</property>
+                                                                        <property name="size">120,-1</property>
                                                                         <property name="style">wxSP_ARROW_KEYS</property>
                                                                         <property name="subclass"></property>
                                                                         <property name="toolbar_pane">0</property>
@@ -7605,7 +7605,7 @@
                                                                         <property name="pos"></property>
                                                                         <property name="resize">Resizable</property>
                                                                         <property name="show">1</property>
-                                                                        <property name="size">80,-1</property>
+                                                                        <property name="size">120,-1</property>
                                                                         <property name="style">wxSP_ARROW_KEYS</property>
                                                                         <property name="subclass"></property>
                                                                         <property name="toolbar_pane">0</property>
@@ -7668,7 +7668,7 @@
                                                                         <property name="pos"></property>
                                                                         <property name="resize">Resizable</property>
                                                                         <property name="show">1</property>
-                                                                        <property name="size">60,-1</property>
+                                                                        <property name="size">120,-1</property>
                                                                         <property name="style">wxSP_ARROW_KEYS</property>
                                                                         <property name="subclass"></property>
                                                                         <property name="toolbar_pane">0</property>
@@ -7794,7 +7794,7 @@
                                                                         <property name="pos"></property>
                                                                         <property name="resize">Resizable</property>
                                                                         <property name="show">1</property>
-                                                                        <property name="size">80,-1</property>
+                                                                        <property name="size">120,-1</property>
                                                                         <property name="style">wxSP_ARROW_KEYS</property>
                                                                         <property name="subclass"></property>
                                                                         <property name="toolbar_pane">0</property>
@@ -7857,7 +7857,7 @@
                                                                         <property name="pos"></property>
                                                                         <property name="resize">Resizable</property>
                                                                         <property name="show">1</property>
-                                                                        <property name="size">60,-1</property>
+                                                                        <property name="size">120,-1</property>
                                                                         <property name="style">wxSP_ARROW_KEYS</property>
                                                                         <property name="subclass"></property>
                                                                         <property name="toolbar_pane">0</property>
@@ -8144,11 +8144,11 @@
                                             </object>
                                         </object>
                                     </object>
-                                    <object class="sizeritem" expanded="1">
+                                    <object class="sizeritem" expanded="0">
                                         <property name="border">5</property>
                                         <property name="flag">wxEXPAND</property>
                                         <property name="proportion">1</property>
-                                        <object class="wxStaticBoxSizer" expanded="1">
+                                        <object class="wxStaticBoxSizer" expanded="0">
                                             <property name="id">wxID_ANY</property>
                                             <property name="label">Coordinates Mapping Correction</property>
                                             <property name="minimum_size"></property>
@@ -8156,7 +8156,7 @@
                                             <property name="orient">wxVERTICAL</property>
                                             <property name="parent">1</property>
                                             <property name="permission">none</property>
-                                            <object class="sizeritem" expanded="1">
+                                            <object class="sizeritem" expanded="0">
                                                 <property name="border">5</property>
                                                 <property name="flag">wxEXPAND</property>
                                                 <property name="proportion">1</property>
@@ -8942,7 +8942,7 @@
                                                                     <property name="pos"></property>
                                                                     <property name="resize">Resizable</property>
                                                                     <property name="show">1</property>
-                                                                    <property name="size">70,-1</property>
+                                                                    <property name="size">90,-1</property>
                                                                     <property name="style">wxSP_ARROW_KEYS</property>
                                                                     <property name="subclass"></property>
                                                                     <property name="toolbar_pane">0</property>
@@ -9066,7 +9066,7 @@
                                                                     <property name="pos"></property>
                                                                     <property name="resize">Resizable</property>
                                                                     <property name="show">1</property>
-                                                                    <property name="size">70,-1</property>
+                                                                    <property name="size">90,-1</property>
                                                                     <property name="style">wxSP_ARROW_KEYS</property>
                                                                     <property name="subclass"></property>
                                                                     <property name="toolbar_pane">0</property>
@@ -9190,7 +9190,7 @@
                                                                     <property name="pos"></property>
                                                                     <property name="resize">Resizable</property>
                                                                     <property name="show">1</property>
-                                                                    <property name="size">70,-1</property>
+                                                                    <property name="size">90,-1</property>
                                                                     <property name="style">wxSP_ARROW_KEYS</property>
                                                                     <property name="subclass"></property>
                                                                     <property name="toolbar_pane">0</property>
@@ -9505,7 +9505,7 @@
                         <object class="simplebookpage" expanded="1">
                             <property name="label">a page</property>
                             <property name="select">0</property>
-                            <object class="wxPanel" expanded="1">
+                            <object class="wxPanel" expanded="0">
                                 <property name="BottomDockable">1</property>
                                 <property name="LeftDockable">1</property>
                                 <property name="RightDockable">1</property>
@@ -9556,7 +9556,7 @@
                                 <property name="window_extra_style"></property>
                                 <property name="window_name"></property>
                                 <property name="window_style">wxTAB_TRAVERSAL</property>
-                                <object class="wxFlexGridSizer" expanded="1">
+                                <object class="wxFlexGridSizer" expanded="0">
                                     <property name="cols">1</property>
                                     <property name="flexible_direction">wxBOTH</property>
                                     <property name="growablecols">0</property>
@@ -9568,7 +9568,7 @@
                                     <property name="permission">none</property>
                                     <property name="rows">1</property>
                                     <property name="vgap">0</property>
-                                    <object class="sizeritem" expanded="1">
+                                    <object class="sizeritem" expanded="0">
                                         <property name="border">5</property>
                                         <property name="flag">wxEXPAND</property>
                                         <property name="proportion">1</property>
@@ -9804,7 +9804,7 @@
                                                                             <property name="pos"></property>
                                                                             <property name="resize">Resizable</property>
                                                                             <property name="show">1</property>
-                                                                            <property name="size">80,-1</property>
+                                                                            <property name="size">120,-1</property>
                                                                             <property name="style">wxSP_ARROW_KEYS</property>
                                                                             <property name="subclass"></property>
                                                                             <property name="toolbar_pane">0</property>
@@ -9931,7 +9931,7 @@
                                                                             <property name="pos"></property>
                                                                             <property name="resize">Resizable</property>
                                                                             <property name="show">1</property>
-                                                                            <property name="size">80,-1</property>
+                                                                            <property name="size">120,-1</property>
                                                                             <property name="style">wxSP_ARROW_KEYS</property>
                                                                             <property name="subclass"></property>
                                                                             <property name="toolbar_pane">0</property>
@@ -10183,7 +10183,7 @@
                                                                             <property name="pos"></property>
                                                                             <property name="resize">Resizable</property>
                                                                             <property name="show">1</property>
-                                                                            <property name="size">80,-1</property>
+                                                                            <property name="size">120,-1</property>
                                                                             <property name="style">wxSP_ARROW_KEYS</property>
                                                                             <property name="subclass"></property>
                                                                             <property name="toolbar_pane">0</property>
@@ -10310,7 +10310,7 @@
                                                                             <property name="pos"></property>
                                                                             <property name="resize">Resizable</property>
                                                                             <property name="show">1</property>
-                                                                            <property name="size">80,-1</property>
+                                                                            <property name="size">120,-1</property>
                                                                             <property name="style">wxSP_ARROW_KEYS</property>
                                                                             <property name="subclass"></property>
                                                                             <property name="toolbar_pane">0</property>
