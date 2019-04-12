@@ -518,7 +518,7 @@ void WeatherFax::OpenImage(wxString filename, wxString station, wxString area, w
 #ifdef __OCPN__ANDROID__ 
         qDebug() << "run wizard...";
 #endif
-        wizard.RunWizard(1);
+        wizard.RunWizard(0);
         if(wizard.GetReturnCode() == wxID_OK) {
             if(name.size() == 0) {
                 wxFileName filenamec(filename);
@@ -643,7 +643,7 @@ void WeatherFax::OnEdit( wxCommandEvent& event )
     FaxDecoderCaptureSettings CaptureSettings = m_weatherfax_pi.m_CaptureSettings;
     CaptureSettings.type = FaxDecoderCaptureSettings::NONE;
     WeatherFaxWizard wizard(image, CaptureSettings, *this, builtin ? &BuiltinCoordList : &m_UserCoords, _T(""));
-    if(wizard.RunWizard(1) == wxID_OK)
+    if(wizard.RunWizard(0) == wxID_OK)
         image.FreeData();
     else
         image = backupimage;
