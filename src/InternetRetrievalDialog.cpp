@@ -445,6 +445,7 @@ void InternetRetrievalDialog::OnUrlsSort( wxListEvent& event )
             faxurl->Scheduled = sortorder == 1;
             UpdateItem(i);
         }
+        m_bRetrieveScheduled->Enable(sortorder == 1);
     } else
         if(m_lUrls->GetItemCount() > 500)  {
             wxMessageDialog mdlg(this, _("Sorting this many urls might take too long"),
