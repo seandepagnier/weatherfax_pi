@@ -1,15 +1,37 @@
-clone_folder: c:\project\weatherfax_pi
-shallow_clone: true
+#    General Configuration      #
+#    Environment Configuration    #
+# environment:
+#  auth_token:
+#    secure: VVAVg9a8n+XgesI85/cXrXyNeStivq8FynlajE94lGUtzDGeu5PMWI5f1OSYg0tS
+# Appveyor auth token encrypted  
+# Build worker image (VM template)
 image:
 - Visual Studio 2015
 
+# scripts that are called at very beginning, before repo cloning
+# init:
+
+version: 1.9.{build}
+# clone directory
+clone_folder: c:\project\weatherfax_pi
+# fetch repository as zip archive
+shallow_clone: false  # default is "false"
+# set clone depth, clone entire repository history if not defined
+# clone_depth:5
+
+# Build Configuration       #
+# build platform, i.e. x86, x64, Any CPU. This setting is optional.
 platform: 
 # - x64
-- Win32
+  - Win32
 
+# build Configuration, i.e. Debug, Release, etc.
 configuration: Release
+
+# to run tests against only selected assemblies and/or categories
 test: OFF
 
+# scripts that run after cloning repository
 install:
   - '"C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x86'
 
@@ -35,6 +57,7 @@ install:
   - cmd: nmake -f makefile.vc BUILD=release SHARED=1 CFLAGS=/D_USING_V120_SDK71_ CXXFLAGS=/D_USING_V120_SDK71_
   - cmd: nmake -f makefile.vc BUILD=debug SHARED=1 CFLAGS=/D_USING_V120_SDK71_ CXXFLAGS=/D_USING_V120_SDK71_
 
+# scripts to run before build
 before_build:
   - cd c:\project\weatherfax_pi
   - cd buildwin
@@ -49,21 +72,26 @@ before_build:
   - cmd: 7z x -y portaudio-vc12.7z -oc:\project\weatherfax_pi\buildwin
   - cmake -T v120_xp ..
 
+# to run your custom scripts instead of automatic MSBuild
 build_script:
   # - cmake --build . --config debug
   - cmake --build . --target package --config release
 
-artifacts:
-  - path: 'build\*.exe'
-    name: installer
-
+# Artifacts Configuration    #
+artifacts: # push all files in directory
+  path: build\*.exe
+  name: installer
+# Deploy to GitHub Releases
+  
 deploy:
-  description: 'release created by AppVeyor CI'
   provider: GitHub
-  auth_token: '%GitHub_auth_token%'
-  artifact: installer
+  auth_token:
+    secure: VVAVg9a8n+XgesI85/cXrXyNeStivq8FynlajE94lGUtzDGeu5PMWI5f1OSYg0tS
+  artifact: installer, portable
   draft: true
   prerelease: true
+  tag: $(APPVEYOR_REPO_TAG_NAME) # use pushed Tag or insert version name
   on:
-    appveyor_repo_tag: true # deploy on tag push only
-    configuration: Release  # Debug contains non-redist MS DLLs
+    configuration: Release    # Debug contains non-redist MS DLLs
+    APPVEYOR_REPO_TAG: true   # deploy on tag push only
+#   branch: master   # release from master branch only
