@@ -95,6 +95,6 @@ deploy:
   prerelease: true
   tag: $(APPVEYOR_REPO_TAG_NAME) # use pushed Tag or insert version name   
   on:
-     configuration: Release  # Debug contains non-redist MS DLLs
+    configuration: Release  # Debug contains non-redist MS DLLs
     APPVEYOR_REPO_TAG: true   # deploy on tag push only
 #   branch: master   # release from master branch only
