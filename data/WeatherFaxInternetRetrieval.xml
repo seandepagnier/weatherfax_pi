@@ -460,7 +460,7 @@
       <Area Name="A" lat1="10S" lat2="70N" lon1="20W" lon2="160E" />
     </Region>
 </Server>
-<Server Name="German Weather DWD" Url="https://www.dwd.de/DWD/wetter/wv_spez/hobbymet/wetterkarten/">
+<Server Name="German Weather DWD" Url="http://www.dwd.de/DWD/wetter/wv_spez/hobbymet/wetterkarten/">
     <Region Name="European">
       <Map Url="bwk_bodendruck_na_ana.png" Contents="Surface Anlys(4mb)" Area="A" />
       <Map Url="ico_tkboden_na_024.png" Contents="24hr Forecast" Area="B" />

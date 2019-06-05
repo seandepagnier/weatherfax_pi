@@ -200,7 +200,6 @@ class InternetRetrievalDialogBase : public wxDialog
 		wxPanel* m_panel8;
 		wxButton* m_bRetrieveScheduled;
 		wxButton* m_bRetrieveSelected;
-		wxButton* m_bX;
 		wxTextCtrl* m_tContainsLat;
 		wxStaticText* m_staticText24;
 		wxTextCtrl* m_tContainsLon;
@@ -210,9 +209,10 @@ class InternetRetrievalDialogBase : public wxDialog
 		wxButton* m_bAllServers;
 		wxButton* m_bNoServers;
 		wxListBox* m_lServers;
+		wxListBox* m_lRegions;
 		wxButton* m_bAllRegions;
 		wxButton* m_bNoRegions;
-		wxListBox* m_lRegions;
+		wxButton* m_bClose;
 		
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnRetrieve( wxMouseEvent& event ) { event.Skip(); }
@@ -220,16 +220,16 @@ class InternetRetrievalDialogBase : public wxDialog
 		virtual void OnUrlsSort( wxListEvent& event ) { event.Skip(); }
 		virtual void OnUrlSelected( wxListEvent& event ) { event.Skip(); }
 		virtual void OnRetrieve( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnFilter( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnBoatPosition( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnReset( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAllServers( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNoServers( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnFilterServers( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnFilterRegions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAllRegions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNoRegions( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnFilterRegions( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
 		
 	
 	public:

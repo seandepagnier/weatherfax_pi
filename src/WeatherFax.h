@@ -125,8 +125,11 @@ protected:
     wxTimer m_tDeleteAudioWizard, m_tDownTimer;
 
 private:
-    wxPoint m_downPos, m_startPos, m_startMouse;
     bool DownloadFile( wxString filename );
+
+#ifdef __OCPN__ANDROID__
+    wxPoint m_downPos, m_startPos, m_startMouse;
+#endif    
 };
 
 class FaxDecoder;
