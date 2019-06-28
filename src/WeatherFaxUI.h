@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Apr  1 2019)
+// C++ code generated with wxFormBuilder (version Mar 28 2019)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO *NOT* EDIT THIS FILE!
@@ -207,9 +207,10 @@ class InternetRetrievalDialogBase : public wxDialog
 		wxButton* m_bAllServers;
 		wxButton* m_bNoServers;
 		wxListBox* m_lServers;
+		wxListBox* m_lRegions;
 		wxButton* m_bAllRegions;
 		wxButton* m_bNoRegions;
-		wxListBox* m_lRegions;
+		wxButton* m_bClose;
 
 		// Virtual event handlers, overide them in your derived class
 		virtual void OnRetrieve( wxMouseEvent& event ) { event.Skip(); }
@@ -224,9 +225,9 @@ class InternetRetrievalDialogBase : public wxDialog
 		virtual void OnAllServers( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNoServers( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnFilterServers( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnFilterRegions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAllRegions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNoRegions( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnFilterRegions( wxCommandEvent& event ) { event.Skip(); }
 
 
 	public:
