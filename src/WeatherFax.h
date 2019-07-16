@@ -78,6 +78,7 @@ public:
 #endif    
     void OnLeftDown( wxMouseEvent& event );
     void OnLeftUp( wxMouseEvent& event );
+    void OnDownTimer( wxTimerEvent & );
     
     void OnClose( wxCloseEvent& event ) { Hide(); }
     void EnableDisplayControls(bool enable);
@@ -98,7 +99,6 @@ public:
     void OnInternet( wxCommandEvent& event );
     void OnUpdateData( wxCommandEvent& event );
     void OnAbout( wxCommandEvent& event );
-    void OnDownTimer( wxTimerEvent & );
 
     bool Show( bool show = true );
     void WizardFinished(WeatherFaxWizard *wizard);
@@ -125,8 +125,11 @@ protected:
     wxTimer m_tDeleteAudioWizard, m_tDownTimer;
 
 private:
-    wxPoint m_downPos, m_startPos, m_startMouse;
     bool DownloadFile( wxString filename );
+
+#ifdef __OCPN__ANDROID__
+    wxPoint m_downPos, m_startPos, m_startMouse;
+#endif    
 };
 
 class FaxDecoder;
