@@ -351,6 +351,11 @@ void WeatherFax::OnLeftUp( wxMouseEvent& event )
 {
     m_tDownTimer.Stop();
 }
+
+void WeatherFax::OnDownTimer( wxTimerEvent & )
+{
+    m_lFaxes->PopupMenu( m_menu4, m_downPos );
+}
 #endif
 
 void WeatherFax::EnableDisplayControls(bool enable)
@@ -781,11 +786,6 @@ void WeatherFax::OnAbout( wxCommandEvent& event )
 {
     AboutDialog dlg(this);
     dlg.ShowModal();
-}
-
-void WeatherFax::OnDownTimer( wxTimerEvent & )
-{
-    m_lFaxes->PopupMenu( m_menu4, m_downPos );
 }
 
 bool WeatherFax::DownloadFile( wxString filename )
