@@ -1,13 +1,12 @@
-#    General Configuration      #
-#    Environment Configuration    #
+#    General Configuration      
+#    Environment Configuration
 # environment:
 #  auth_token:
 #    secure: VVAVg9a8n+XgesI85/cXrXyNeStivq8FynlajE94lGUtzDGeu5PMWI5f1OSYg0tS
 # Appveyor auth token encrypted  
 # Build worker image (VM template)
 image:
-- Visual Studio 2015
-
+- Visual Studio 2017
 # scripts that are called at very beginning, before repo cloning
 # init:
 
@@ -19,79 +18,83 @@ shallow_clone: false  # default is "false"
 # set clone depth, clone entire repository history if not defined
 # clone_depth:5
 
-# Build Configuration       #
+# Build Configuration
 # build platform, i.e. x86, x64, Any CPU. This setting is optional.
-platform: 
+platform:
 # - x64
   - Win32
-
 # build Configuration, i.e. Debug, Release, etc.
 configuration: Release
-
 # to run tests against only selected assemblies and/or categories
 test: OFF
 
 # scripts that run after cloning repository
 install:
-  - '"C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x86'
+  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat"
 
-  # sent environment variables for wxWidgets
-  - set WXWIN=C:\wxWidgets-3.0.2
+# sent environment variables for wxWidgets
+  - set WXWIN=C:\wxWidgets-3.1.2
   - set wxWidgets_ROOT_DIR=%WXWIN%
   - set wxWidgets_LIB_DIR=%WXWIN%\lib\vc_dll
   - cmd: SET PATH=%PATH%;%WXWIN%;%wxWidgets_LIB_DIR%;C:\Program Files (x86)\Poedit\Gettexttools\bin;
 
-  # install dependencies:
-  - choco install poedit nsis -x86
+# install dependencies:
+  - choco install poedit
+  - ps: Start-FileDownload http://opencpn.navnux.org/build_deps/nsis-3.04-setup.exe
+  - cmd: nsis-3.04-setup.exe /S
 
-  # Download and unzip wxwidgets
-  - ps: Start-FileDownload http://downloads.sourceforge.net/project/wxwindows/3.0.2/wxWidgets-3.0.2.zip
-  - cmd: 7z x wxwidgets-3.0.2.zip -o%WXWIN% > null
+# Download and unzip wxwidgets
+  - ps: Start-FileDownload http://opencpn.navnux.org/build_deps/wxWidgets-3.1.2.7z
+  - cmd: 7z x wxWidgets-3.1.2.7z -o%WXWIN% > null
 
-  # some debugging information
-  - set
-  # - cmake --help
+# some debugging information
+# - set #Use only while debugging - it reveals the deploy token set on Appveyor
+# - cmake --help	   
 
-  # build wxWidgets
-  - cmd: cd %WXWIN%\build\msw\
-  - cmd: nmake -f makefile.vc BUILD=release SHARED=1 CFLAGS=/D_USING_V120_SDK71_ CXXFLAGS=/D_USING_V120_SDK71_
-  - cmd: nmake -f makefile.vc BUILD=debug SHARED=1 CFLAGS=/D_USING_V120_SDK71_ CXXFLAGS=/D_USING_V120_SDK71_
-
-# scripts to run before build
+# scripts to run before build							 
 before_build:
   - cd c:\project\weatherfax_pi
+# - mkdir buildwin
   - cd buildwin
-  - ps: Start-FileDownload https://downloads.sourceforge.net/project/opencpnplugins/opencpn_packaging_data/PVW32Con.exe
+  - ps: Start-FileDownload https://downloads.sourceforge.net/project/opencpnplugins/opencpn_packaging_data/PVW32Con.exe  
+  - ps: Start-FileDownload http://opencpn.navnux.org/build_deps/OpenCPN_buildwin-4.99a.7z
+  - cmd: 7z x -y OpenCPN_buildwin-4.99a.7z -oc:\project\weatherfax_pi\buildwin
+  - ps: Start-FileDownload https://sourceforge.net/projects/opencpnplugins/files/opencpn_packaging_data/portaudio-vc12.7z
+  - cmd: 7z x -y portaudio-vc12.7z -oc:\project\weatherfax_pi\buildwin
+
   - cd ..
   - mkdir build
   - cd build
-  - ps: Start-FileDownload https://downloads.sourceforge.net/project/opencpnplugins/opencpn_lib/4.2-vc120_xp/opencpn.lib
-  - ps: Start-FileDownload https://downloads.sourceforge.net/project/opencpnplugins/opencpn_packaging_data/OpenCPN_buildwin.7z
-  - cmd: 7z x -y OpenCPN_buildwin.7z -oc:\project\weatherfax_pi
-  - ps: Start-FileDownload https://sourceforge.net/projects/opencpnplugins/files/opencpn_packaging_data/portaudio-vc12.7z
-  - cmd: 7z x -y portaudio-vc12.7z -oc:\project\weatherfax_pi\buildwin
-  - cmake -T v120_xp ..
+  - ps: Start-FileDownload https://downloads.sourceforge.net/project/opencpnplugins/opencpn_lib/4.99.1405-vc141_xp/opencpn.lib
+ #- dir c:\project\weatherfax_pi\buildwin
+ #- dir c:\project\weatherfax_pi\build
+ #- dir c:\project\weatherfax_pi
+
+  - cmake -T v141_xp ..
+  #- dir c:\project\weatherfax_pi\build
 
 # to run your custom scripts instead of automatic MSBuild
 build_script:
-  # - cmake --build . --config debug
+ #- cmake --build . --config debug
   - cmake --build . --target package --config release
-
-# Artifacts Configuration    #
+ #- dir c:\project\weatherfax_pi\build
+  
+# Artifacts Configuration
 artifacts: # push all files in directory
   path: build\*.exe
   name: installer
+
 # Deploy to GitHub Releases
-  
 deploy:
+# description: 'release created by AppVeyor CI'
   provider: GitHub
-  auth_token:
+  auth_token: # '%GitHub_auth_token%'
     secure: VVAVg9a8n+XgesI85/cXrXyNeStivq8FynlajE94lGUtzDGeu5PMWI5f1OSYg0tS
-  artifact: installer, portable
+  artifact: installer
   draft: true
   prerelease: true
-  tag: $(APPVEYOR_REPO_TAG_NAME) # use pushed Tag or insert version name
+  tag: $(APPVEYOR_REPO_TAG_NAME) # use pushed Tag or insert version name   
   on:
-    configuration: Release    # Debug contains non-redist MS DLLs
+    configuration: Release  # Debug contains non-redist MS DLLs
     APPVEYOR_REPO_TAG: true   # deploy on tag push only
 #   branch: master   # release from master branch only
