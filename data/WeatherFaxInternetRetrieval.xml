@@ -262,16 +262,17 @@
       <Area Name="6" lat1="18N" lat2="52N" lon1="157W"  long2="" />
     </Region>
   </Server>
-  <Server Name="NOAA OPC" Url="http://www.opc.ncep.noaa.gov/">
+  <Server Name="NOAA OPC" Url="https://ocean.weather.gov/">
     <Region Name="Atlantic">
       <Map Url="A_sfc_full_ocean.jpg" Contents="Atlantic Ocean Analysis" Area="1" />
       <Map Url="A_sfc_full_ocean_color.png" Contents="Atlantic Ocean Analysis (color)" Area="1a" />
       <Map Url="shtml/A_24hr500bw.gif" Contents="24-hour 500 MB Forecast" Area="2a" />
       <Map Url="shtml/A_48hr500bw.gif" Contents="48-hour 500 MB Forecast" Area="2" />
       <Map Url="shtml/A_96hr500bw.gif" Contents="96-hour 500 MB Forecast" Area="2" />
-      <Map Url="shtml/A_24hrbw.gif" Contents="24-hour Surface Forecast" Area="2b" />
-      <Map Url="shtml/A_48hrbw.gif" Contents="48-hour Surface Forecast" Area="2" />
-      <Map Url="shtml/A_96hrbw.gif" Contents="96-hour Surface Forecast" Area="2" />
+      <Map Url="shtml/A_24hrsfc.gif" Contents="24-hour Surface Forecast" Area="2b" />
+      <Map Url="shtml/A_48hrsfc.gif" Contents="48-hour Surface Forecast" Area="2" />
+      <Map Url="shtml/A_72hrsfc.gif" Contents="72-hour Surface Forecast" Area="2" />
+      <Map Url="shtml/A_96hrsfc.gif" Contents="96-hour Surface Forecast" Area="2" />
       <Map Url="shtml/A_48hrwind_wave.gif" Contents="48-hour Wind Wave Forecast" Area="2" />
       <Map Url="shtml/A_96hrwind_wave.gif" Contents="96-hour Wind Wave Forecast" Area="2" />
       <Map Url="shtml/A_024hrwper_color.gif" Contents="24-hour Wave Period Forecast" Area="3" />
@@ -469,7 +470,7 @@
       <Area Name="A" lat1="10S" lat2="70N" lon1="20W" lon2="160E" />
     </Region>
 </Server>
-<Server Name="German Weather DWD" Url="http://www.dwd.de/DWD/wetter/wv_spez/hobbymet/wetterkarten/">
+<Server Name="German Weather DWD" Url="https://www.dwd.de/DWD/wetter/wv_spez/hobbymet/wetterkarten/">
     <Region Name="European">
       <Map Url="bwk_bodendruck_na_ana.png" Contents="Surface Anlys(4mb)" Area="A" />
       <Map Url="ico_tkboden_na_024.png" Contents="24hr Forecast" Area="B" />

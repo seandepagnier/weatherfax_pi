@@ -66,7 +66,7 @@ addons:
 # for tagged commits to GitHub Releases.
 deploy:
 - provider: releases
-  api_key:  #for weatherfax
+  api_key:  #github ptoken for weatherfax into travis encryption
    secure:"oMEBfnuulqTorg40G4VAKrMjToYQRhbejr/m7uJZqld/bE4fNFcUppEuAno8uQA9CXOSbrv6m+D4DJa0Za3K2ppDtcBNfxIuFq1Nxs97TMfQdFL3ywBXo2V119e6VWvHP05kMSJx8ECuqWlE8EhKIoHH9aKTnVmuPMqCrpd8Tkfn4KQSRrJ9WzgivEILgb3GSb8fI2GTgOwf4dN8F1lSDdIcw1VciPKyZj9OeSc+Tj87lcxwVjSPJyek9lnnpQ8HQXHzqq0pPD4R91veT+LKMrmnkit8z1fhDm/JY31HHf3F5YuWLfSYRotLfHR/KTwDiD0K0tJohZ5Cl4Dm+r1XMUxaPY9YBlWNqa8cSUPEAcy1bU/r+Dz6py+wVpyrEdYs0CNMUUM7X3hYeompsmRi/WvGl0GL9sTYEm8QHLETExIdxGJ/8E8o1LtzOBrTPkmV/xVMmFqzFlS1xwAKeSvtxbQZfjmIyNr1NOBhEYvmBfq2fs4iU63Kpb8XkylQdQ4TZ64w+jnBRZ5vAWunvM0WbbVzy8W3ykT9sx5eUqEcTfvNd8ghoGWnIX+7L6KXRYDiWyRtzvkhW7S0Dr5IfLAsrkdIYyN+6Ll5/6l5tVOlYePnEG560lBPBGrLBlMSIbaTnokYpTq1LwMexSYg3g0BbEulWi5VOcuyVB7o3JmVpNA="
   file_glob: true
   file: "$TRAVIS_BUILD_DIR/build/*.{deb,rpm,dmg,txz,pkg,pkg.tar.xz}"
