@@ -306,7 +306,7 @@ SET (HDRS
 			src/WeatherFaxUI.h
 			src/WeatherFaxWizard.h
 			src/wximgkap.h
-			src/wxWTranslateCatalog.h
+#			src/wxWTranslateCatalog.h
 			
 			src/libaudiofile/af_vfs.h
 			src/libaudiofile/afinternal.h
