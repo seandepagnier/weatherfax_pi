@@ -1,9 +1,15 @@
 ##--------------------------------------------------------------------------##
+## OpenCPN Plugin: Weatherfax_pi
 ## Author:      Sean d'Epagnier  Copyright: License:     wxWidgets License
-## License: GPLV3 ##-------------------------------------------------------------------------
-
+## License: GPLV3 
+##-------------------------------------------------------------------------##
+## CMakeLists and Frontend
+## Author: Jon Gough
+## Version: 0.0.1
+## Date: 03-21-2020
+## -------------------------------------------------------------------------##
 ##
-## ----- Modify section below to include all the details for your plugin ----- ##
+## ----- Modify section below to include all the details for your plugin -- ##
 ##
 
 # define minimum cmake version
@@ -533,8 +539,6 @@ add_definitions(-DTIXML_USE_STL)
 ##
 ## ----- Change above to match project requirements ----- ##
 ## ------ Includes from weatherfax cmake------------------## 
-
-
 
 INCLUDE("cmake/PluginXML.cmake")
 INCLUDE("cmake/PluginGL.cmake")
