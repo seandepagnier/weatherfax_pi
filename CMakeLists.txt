@@ -195,7 +195,39 @@ include("cmake/PluginConfigure.cmake")
 add_definitions(-DUSE_S57)
 
 
-##-----------Weatheerfax Specific Files --------------------##
+##-----------Weatherfax Specific Files --------------------##
+
+IF (UNIX)
+INCLUDE("cmake/FindPortaudio.cmake")
+IF (PORTAUDIO_FOUND)
+    MESSAGE (STATUS "Portaudio Found")
+    INCLUDE_DIRECTORIES(BEFORE ${PORTAUDIO_INCLUDE_DIRS})
+    SET(PLUGINS_LIBS ${PLUGINS_LIBS} ${PORTAUDIO_LIBRARIES})
+    ADD_DEFINITIONS(${PORTAUDIO_DEFINITIONS})
+    ADD_DEFINITIONS(-DOCPN_USE_PORTAUDIO)
+ELSE (PORTAUDIO_FOUND)
+    MESSAGE (STATUS "Portaudio Not Found...")
+ENDIF (PORTAUDIO_FOUND)
+ELSE (UNIX)
+    INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/include)
+    IF(STANDALONE MATCHES "BUNDLED")
+	# within OpenCPN tree
+    	SET(PLUGINS_LIBS ${EXTRA_LIBS} ../../buildwin/portaudio_x86)
+    	INSTALL(FILES "../../buildwin/portaudio_x86.dll" DESTINATION ".")
+    ELSE()
+    	SET(PLUGINS_LIBS ${EXTRA_LIBS} ../buildwin/portaudio_x86)
+    	INSTALL(FILES "buildwin/portaudio_x86.dll" DESTINATION ".")
+    ENDIF()
+
+    ADD_DEFINITIONS(-DOCPN_USE_PORTAUDIO)
+ENDIF (UNIX)
+
+IF (MSVC)
+    INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/include/msvc)
+ENDIF (MSVC)
+
+INCLUDE("cmake/PluginConfigure.cmake")
+
 
 SET(SRC_WEATHERFAX
             src/weatherfax_pi.cpp
@@ -386,9 +418,9 @@ SET (HDRS
 			src/tinyxml/tinyxml.h
 )			
 
-INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/libaudiofile)
 
-ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} ${HDRS} )
+
+# TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 
 IF(UNIX)
   find_library(RTLSDR_LIBRARY NAMES rtlsdr
@@ -421,8 +453,10 @@ IF(WIN32)
 
 ENDIF(WIN32)
 
+INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/libaudiofile)
 
-TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
+ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} ${HDRS} )
+
 
 
 ##-----------Testplugin Specific Files --------------------##
