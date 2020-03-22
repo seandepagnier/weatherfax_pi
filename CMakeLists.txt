@@ -89,6 +89,7 @@ set(OpenGL_GL_PREFERENCE "LEGACY")
 ##
 ## ----- Modify section below if there are special requirements for the plugin ----- ##
 ##
+##  ---- Section below is directly from TestPlugin ---------------------------##
 
 set(PACKAGE_NAME ${PACKAGE}_pi)
 set(PACKAGE_FILE_NAME "${PARENT}-plugin-${PACKAGE}")
@@ -182,6 +183,9 @@ if(CMAKE_VERSION VERSION_GREATER 3.9)
 endif()
 
 ##
+## -------Section above is directly from Testplugin --------------##
+##
+##
 ## ----- Modify section above if there are special requirements for the plugin ----- ##
 ##
 
@@ -227,6 +231,10 @@ IF (MSVC)
 ENDIF (MSVC)
 
 INCLUDE("cmake/PluginConfigure.cmake")
+
+## --Section above is direct from Weatherfax located above SET(SRC_WEATHERFAX  ---##
+##
+## --------------------Section below is direct from Weatherfax -----------##
 
 
 SET(SRC_WEATHERFAX
@@ -312,6 +320,10 @@ SET(SRC_AUDIOFILE
             src/libaudiofile/modules/RebufferModule.cpp
             src/libaudiofile/modules/SimpleModule.cpp
 )
+
+## --------------------Section above is direct from Weatherfax -----------##
+## --------------------Section below added recently to Weatherfax set -----##
+
 
 SET (SRC_PLUGINGL
             src/plugingl/pi_shaders.cpp
@@ -419,8 +431,8 @@ SET (HDRS
 )			
 
 
-
-# TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
+## --------------------Section above is added recently to Weatherfax set -----##
+## --------------------Section below directly from Weatherfax --------##
 
 IF(UNIX)
   find_library(RTLSDR_LIBRARY NAMES rtlsdr
@@ -457,6 +469,11 @@ INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/libaudiofile)
 
 ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} ${HDRS} )
 
+TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
+
+##
+##-------  Section above is direct from Weatherfax located relative to where it was
+##
 
 
 ##-----------Testplugin Specific Files --------------------##
