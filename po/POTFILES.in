@@ -1,3 +1,4 @@
+api-16/ocpn_plugin.h
 src/AboutDialog.h
 src/DecoderOptionsDialog.h
 src/defs.h

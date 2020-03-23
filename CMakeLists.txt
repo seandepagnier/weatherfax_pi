@@ -325,23 +325,27 @@ SET(SRC_AUDIOFILE
 ## --------------------Section below added recently to Weatherfax set -----##
 
 
-SET (SRC_PLUGINGL
-            src/plugingl/pi_shaders.cpp
-			src/plugingl/pidc.cpp
-			src/plugingl/qtstylesheet.cpp
-			src/plugingl/TexFont.cpp
-)
+#  not needed see PluginGL Line 594
+#SET (SRC_PLUGINGL
+#           src/plugingl/pi_shaders.cpp
+#			src/plugingl/pidc.cpp
+#			src/plugingl/qtstylesheet.cpp
+#			src/plugingl/TexFont.cpp
+#)
 
-SET (SRC_TINYXML
-            src/tinyxml/tinyxml.cpp
-			src/tinyxml/tinyxmlerror.cpp
-			src/tinyxml/tinyxmlparser.cpp
-)
-
+#  not needed see PluginXML Line 593
+#SET (SRC_TINYXML
+#           src/tinyxml/tinyxml.cpp
+#			src/tinyxml/tinyxmlerror.cpp
+#			src/tinyxml/tinyxmlparser.cpp
+#)
+#
 
 
 SET (HDRS
-            src/AboutDialog.h
+            api-16/ocpn_plugin.h
+			
+			src/AboutDialog.h
 			src/DecoderOptionsDialog.h
 			src/defs.h
 			src/FaxDecoder.h
@@ -356,7 +360,6 @@ SET (HDRS
 			src/WeatherFaxUI.h
 			src/WeatherFaxWizard.h
 			src/wximgkap.h
-#			src/wxWTranslateCatalog.h
 			
 			src/libaudiofile/af_vfs.h
 			src/libaudiofile/afinternal.h
@@ -467,9 +470,13 @@ ENDIF(WIN32)
 
 INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/libaudiofile)
 
-ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} ${HDRS} )
+# ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} ${HDRS} )
+
+ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${HDRS} )
+
 
 TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
+
 
 ##
 ##-------  Section above is direct from Weatherfax located relative to where it was
