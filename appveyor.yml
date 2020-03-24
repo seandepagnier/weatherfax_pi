@@ -16,7 +16,7 @@ clone_folder: c:\project\weatherfax_pi
 # fetch repository as zip archive
 shallow_clone: false  # default is "false"
 # set clone depth, clone entire repository history if not defined
-clone_depth:10
+# clone_depth:10
 
 # Build Configuration
 # build platform, i.e. x86, x64, Any CPU. This setting is optional.
