@@ -2,14 +2,14 @@
 #    Environment Configuration
 # environment:
 #  auth_token:
-#    secure: VVAVg9a8n+XgesI85/cXrXyNeStivq8FynlajE94lGUtzDGeu5PMWI5f1OSYg0tS
+# Encryption
+#  secure: JgI5QtayVIori1X4L9fynDr+66vJ8+9hA5TtO9Ozz1kJ/nXCgXSt0E2cGw52o12I
 # Appveyor auth token encrypted  
 # Build worker image (VM template)
 image:
 - Visual Studio 2017
 # scripts that are called at very beginning, before repo cloning
-# init:																
-
+# init:
 version: 1.9.{build}
 # clone directory
 clone_folder: c:\project\weatherfax_pi
@@ -17,9 +17,9 @@ clone_folder: c:\project\weatherfax_pi
 shallow_clone: false  # default is "false"
 # set clone depth, clone entire repository history if not defined
 clone_depth:10
-# Build Configuration
-# build platform, i.e. x86, x64, Any CPU. This setting is optional.	   
 
+# Build Configuration
+# build platform, i.e. x86, x64, Any CPU. This setting is optional.
 platform:
 # - x64
   - Win32
@@ -63,12 +63,12 @@ before_build:
   - ps: Start-FileDownload https://sourceforge.net/projects/opencpnplugins/files/opencpn_packaging_data/portaudio-vc12.7z
   - ps: Start-FileDownload https://downloads.sourceforge.net/project/opencpnplugins/opencpn_lib/4.99.1405-vc141_xp/opencpn.lib- cmd: 7z x -y portaudio-vc12.7z -oc:\project\weatherfax_pi\buildwin
 
-  - cd ..	 
-#- dir c:\project\weatherfax_pi\buildwin
-#- dir c:\project\weatherfax_pi\build
-#- dir c:\project\weatherfax_pi
+  - cd .. 
+# - dir c:\project\weatherfax_pi\buildwin
+# - dir c:\project\weatherfax_pi\build
+# - dir c:\project\weatherfax_pi
   - cmake -T v141_xp ..
- #- dir c:\project\weatherfax_pi\build
+# - dir c:\project\weatherfax_pi\build
 
 build_script:
  #- cmake --build . --config debug
@@ -89,7 +89,6 @@ deploy:
   auth_token: #'%GitHub_auth_token%'
     secure:JgI5QtayVIori1X4L9fynDr+66vJ8+9hA5TtO9Ozz1kJ/nXCgXSt0E2cGw52o12I
 #VVAVg9a8n+XgesI85/cXrXyNeStivq8FynlajE94lGUtzDGeu5PMWI5f1OSYg0tS
-																	   
   artifact: installer,portable
   draft: true
   prerelease: true
