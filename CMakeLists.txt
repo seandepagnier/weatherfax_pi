@@ -431,6 +431,7 @@ SET (HDRS
 			src/plugingl/TexFont.h
 
 			src/tinyxml/tinyxml.h
+			
 )			
 
 
@@ -469,6 +470,7 @@ IF(WIN32)
 ENDIF(WIN32)
 
 INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/libaudiofile)
+# INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/include)   #this does not seem to work. Need to include  include/GL
 
 # ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} ${HDRS} )
 
