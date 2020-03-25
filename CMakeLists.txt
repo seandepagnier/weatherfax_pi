@@ -515,17 +515,17 @@ TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 #    extinclude/nlohmann/json.hpp
 #    extinclude/ODAPI.h)
 
-set(LIBSSRC libs/wxJSON/src/jsonreader.cpp libs/wxJSON/src/jsonval.cpp libs/wxJSON/src/jsonwriter.cpp)
+#set(LIBSSRC libs/wxJSON/src/jsonreader.cpp libs/wxJSON/src/jsonval.cpp libs/wxJSON/src/jsonwriter.cpp)
 
-set(LIBHDRS
-    libs/GL/include/gl.h
-    libs/GL/include/gl_private.h
-    libs/GL/include/glext.h
-    libs/GL/include/glu.h
-    libs/wx/include/json_defs.h
-    libs/wx/include/jsonreader.h
-    libs/wx/include/jsonval.h
-    libs/wx/include/jsonwriter.h)
+#set(LIBHDRS
+#    libs/GL/include/gl.h
+#    libs/GL/include/gl_private.h
+#    libs/GL/include/glext.h
+#    libs/GL/include/glu.h
+#    libs/wx/include/json_defs.h
+#    libs/wx/include/jsonreader.h
+#    libs/wx/include/jsonval.h
+#    libs/wx/include/jsonwriter.h)
 
 
 add_definitions(-DPLUGIN_USE_SVG)
@@ -563,8 +563,8 @@ add_definitions(-DPLUGIN_USE_SVG)
 
 #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude)
 #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/extinclude)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wx/include)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wx/include)
 #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude/wxcurl)
 #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude/wxcurl/include)
 #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpnsrc/lz4)
