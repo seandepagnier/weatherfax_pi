@@ -124,21 +124,22 @@ set(PKG_URL "https://dl.cloudsmith.io/public/--pkg_repo--/raw/names/--name--/ver
 # Check cmake/PluginConfigure.cmake, no need to configure
 #===========================================================
 
-INCLUDE("cmake/PluginConfigure.cmake")
-
+# INCLUDE("cmake/PluginConfigure.cmake")
+# Duplicated see below at Line 221
 #=============================================================
 # Modify/configure 'Include' Directories below for the Plugin
+#
 # Below from rgleason squiddio
 #=============================================================
-INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/wxJSON)
-INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src)
-INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR})
+#INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/wxJSON)
+#INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src)
+#INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR})
 
-if (OCPN_USE_API_16) 
-  INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/api-16)
-#else ()
-#  INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/api-13)
-endif ()
+#if (OCPN_USE_API_16) 
+#  INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/api-16)
+##else ()
+##  INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/api-13)
+#endif ()
 #=============================================================
 
 
@@ -216,9 +217,8 @@ endif()
 ## ----- Modify section above if there are special requirements for the plugin ----- ##
 ##
 
-
-include("cmake/PluginConfigure.cmake")
-
+#INCLUDE("cmake/PluginConfigure.cmake")
+# There is an include cmake/PluginConfigure.cmake on line 263
 ##
 ## ----- Change below to match project requirements ----- ##
 ##
@@ -257,7 +257,11 @@ IF (MSVC)
     INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/include/msvc)
 ENDIF (MSVC)
 
+
+# --------------------------------------------
 INCLUDE("cmake/PluginConfigure.cmake")
+# --------------------------------------------
+
 
 ## --Section above is direct from Weatherfax located above SET(SRC_WEATHERFAX  ---##
 ##
