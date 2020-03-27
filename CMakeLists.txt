@@ -424,13 +424,13 @@ SET (HDRS
 			src/libaudiofile/modules/RebufferModule.h
 			src/libaudiofile/modules/SimpleModule.h
 
-			src/plugingl/linmath.h
-			src/plugingl/pi_shaders.h
-			src/plugingl/pidc.h
-			src/plugingl/qtstylesheet.h
-			src/plugingl/TexFont.h
+#			src/plugingl/linmath.h
+#			src/plugingl/pi_shaders.h
+#			src/plugingl/pidc.h
+#			src/plugingl/qtstylesheet.h
+#			src/plugingl/TexFont.h
 
-			src/tinyxml/tinyxml.h
+#			src/tinyxml/tinyxml.h
 			
 )			
 
@@ -600,6 +600,8 @@ add_definitions(-DTIXML_USE_STL)
 ## ----- Change above to match project requirements ----- ##
 ## ------ Includes from weatherfax cmake------------------## 
 
+#INCLUDE("cmake/PluginJSON.cmake")
+#INCLUDE("cmake/PluginNMEA.cmake")
 INCLUDE("cmake/PluginXML.cmake")
 INCLUDE("cmake/PluginGL.cmake")
 

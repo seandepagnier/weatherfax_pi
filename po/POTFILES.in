@@ -74,9 +74,3 @@ src/libaudiofile/modules/MSADPCM.h
 src/libaudiofile/modules/PCM.h
 src/libaudiofile/modules/RebufferModule.h
 src/libaudiofile/modules/SimpleModule.h
-src/plugingl/linmath.h
-src/plugingl/pi_shaders.h
-src/plugingl/pidc.h
-src/plugingl/qtstylesheet.h
-src/plugingl/TexFont.h
-src/tinyxml/tinyxml.h
