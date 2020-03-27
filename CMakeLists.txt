@@ -89,6 +89,12 @@ set(OpenGL_GL_PREFERENCE "LEGACY")
 ##
 ## ----- Modify section below if there are special requirements for the plugin ----- ##
 ##
+##  ---- Section below from rgleason squiddio ----
+
+SET(API_DIR "${CMAKE_SOURCE_DIR}/api-16")
+SET(OCPN_USE_API_16 ON)
+#OPTION(OCPN_USE_API_16 "Use plugin api 16 (default: api 13)." OFF)
+
 ##  ---- Section below is directly from TestPlugin ---------------------------##
 
 set(PACKAGE_NAME ${PACKAGE}_pi)
@@ -114,7 +120,28 @@ message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 set(PKG_NVR ${PACKAGE_NAME}-${PROJECT_VERSION}-${OCPN_MIN_VERSION}-${OCPN_API_VERSION_MAJOR}.${OCPN_API_VERSION_MINOR})
 set(PKG_URL "https://dl.cloudsmith.io/public/--pkg_repo--/raw/names/--name--/versions/--version--/--filename--")
 
-include("cmake/PluginSetup.cmake")
+#===========================================================
+# Check cmake/PluginConfigure.cmake, no need to configure
+#===========================================================
+
+INCLUDE("cmake/PluginConfigure.cmake")
+
+#=============================================================
+# Modify/configure 'Include' Directories below for the Plugin
+# Below from rgleason squiddio
+#=============================================================
+INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/wxJSON)
+INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src)
+INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR})
+
+if (OCPN_USE_API_16) 
+  INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/api-16)
+#else ()
+#  INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/api-13)
+endif ()
+#=============================================================
+
+
 
 set(PLUGIN_NAME ${PACKAGE}-plugin-${PKG_TARGET}-${PKG_TARGET_VERSION})
 
