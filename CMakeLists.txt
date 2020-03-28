@@ -266,6 +266,7 @@ ENDIF (MSVC)
 
 
 # --------------------------------------------
+# Try putting it at the top, same errors in appveyor
 INCLUDE("cmake/PluginConfigure.cmake")
 # --------------------------------------------
 
