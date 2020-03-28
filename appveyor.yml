@@ -78,7 +78,7 @@ build_script:
   - python -m ensurepip
   - python -m pip install -q setuptools
   - python -m pip install -q cloudsmith-cli
-  - bash ../build/appveyor-upload.sh
+  - bash ../build/cloudsmith-upload.sh
 
 artifacts:
   - path: 'build\*.exe'
@@ -96,6 +96,6 @@ deploy:
   prerelease: true
   tag: $(APPVEYOR_REPO_TAG_NAME) # use pushed Tag or insert version name   																		   
   on:
-    appveyor_repo_tag: true # deploy on tag push only
+    appveyor_repo_tag: true # Deploy on 'tag push' only
     configuration: Release  # Debug contains non-redist MS DLLs
 #   branch: master   # release from master branch only

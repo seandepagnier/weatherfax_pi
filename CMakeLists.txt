@@ -638,8 +638,8 @@ add_definitions(-DTIXML_USE_STL)
 ## ----- Change above to match project requirements ----- ##
 ## ------ Includes from weatherfax cmake------------------## 
 
-#INCLUDE("cmake/PluginJSON.cmake")
-#INCLUDE("cmake/PluginNMEA.cmake")
+#INCLUDE("cmake/PluginNMEA.cmake")   #No not for wxfax
+INCLUDE("cmake/PluginJSON.cmake")#
 INCLUDE("cmake/PluginXML.cmake")
 INCLUDE("cmake/PluginGL.cmake")
 
