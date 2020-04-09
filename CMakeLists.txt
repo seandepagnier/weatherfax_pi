@@ -82,7 +82,7 @@ set(XML_DESCRIPTION "Weatherfax Plugin has simple calibration for image overly, 
 set(APPVEYOR_TEST_DEPLOY_TO_CLOUDSMITH "true")
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
-set(WXWIDGETS_FORCE_VERSION "3.0")
+# set(WXWIDGETS_FORCE_VERSION "3.0")
 
 set(CMAKE_CXX_STANDARD 11)
 
