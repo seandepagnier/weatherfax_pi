@@ -1,15 +1,15 @@
-##--------------------------------------------------------------------------##
+# -----------------------------------------##--------------------------------------------------------------------------##
 ## OpenCPN Plugin: Weatherfax_pi
 ## Author:      Sean d'Epagnier  Copyright: License:     wxWidgets License
 ## License: GPLV3 
 ##-------------------------------------------------------------------------##
 ## CMakeLists and Frontend
 ## Author: Jon Gough
-## Version: 0.0.1
-## Date: 03-21-2020
-## -------------------------------------------------------------------------##
+## Version: 0.0.3
+## Date: 04-09-2020
+## -------------------------------------------------------------------------##					
 ##
-## ----- Modify section below to include all the details for your plugin -- ##
+## ----- Modify section below to include all the details for your plugin ----- ##
 ##
 
 # define minimum cmake version
@@ -24,17 +24,17 @@ if(COMMAND cmake_policy)
   endif(POLICY CMP0077)
 endif(COMMAND cmake_policy)
 
-set(PACKAGE_NAME "Weatherfax_pi")
-set(VERBOSE_NAME "WeatherFax")
-set(COMMON_NAME "WeatherFax")
+set(VERBOSE_NAME "weatherfax")
+set(COMMON_NAME "WeatherFax") # Search "GetCommon" in weatherfax_pi.cpp for commonname
 set(TITLE_NAME "WEATHERFAX")
 set(PACKAGE_CONTACT "Sean d'Epagnier")
+set(PACKAGE "testplugin")
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "4")
 set(VERSION_TWEAK "1")
-set(VERSION_DATE "01/012020")
+set(VERSION_DATE "04/09/2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -44,10 +44,11 @@ set(PARENT "opencpn")
 set(PACKAGE "weatherfax")
 #set(GIT_USER "jongough")
 set(GIT_USER "rgleason")
+
 set(GIT_REPOSITORY_NAME "weatherfax_pi")
 message(STATUS "CIRCLECI: ${CIRCLECLI}, Env CIRCLECI: $ENV{CIRCLECI}")
 message(STATUS "TRAVIS: ${TRAVIS}, Env TRAVIS: $ENV{TRAVIS}")
-message(STATUS "APPVEYOR: ${APPVEYOR}, Env TRAVIS: $ENV{APPVEYOR}")
+#message(STATUS "APPVEYOR: ${APPVEYOR}, Env TRAVIS: $ENV{APPVEYOR}")
 # This if allows for setting up your own local webserver with git on it for testing purposes
 if($ENV{CIRCLECI})
   set(GIT_REPOSITORY_HOST "github.com")
@@ -57,10 +58,6 @@ elseif($ENV{TRAVIS})
   set(GIT_REPOSITORY_HOST "github.com")
   set(GIT_REPOSITORY_DIR "${GIT_USER}/")
   set(GIT_REPOSITORY_BRANCH "$ENV{TRAVIS_BRANCH}")
-elseif($ENV{APPVEYOR})
-    set(GIT_REPOSITORY_HOST "github.com")
-    set(GIT_REPOSITORY_DIR "${GIT_USER}/")
-    set(GIT_REPOSITORY_BRANCH "$ENV{APPVEYOR_REPO_BRANCH}")
 else()
   set(GIT_REPOSITORY_HOST "github.com")
   set(GIT_REPOSITORY_DIR "${GIT_USER}/")
@@ -82,8 +79,6 @@ set(XML_DESCRIPTION "Weatherfax Plugin has simple calibration for image overly, 
 set(APPVEYOR_TEST_DEPLOY_TO_CLOUDSMITH "true")
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
-# set(WXWIDGETS_FORCE_VERSION "3.0")
-
 set(CMAKE_CXX_STANDARD 11)
 
 # Prefer libGL.so to libOpenGL.so, see CMP0072
@@ -98,17 +93,18 @@ set(OpenGL_GL_PREFERENCE "LEGACY")
 ##
 ##  ---- Section below from rgleason squiddio ----
 
-SET(API_DIR "${CMAKE_SOURCE_DIR}/api-16")
-SET(OCPN_USE_API_16 ON)
-#OPTION(OCPN_USE_API_16 "Use plugin api 16 (default: api 13)." OFF)
+#SET(API_DIR "${CMAKE_SOURCE_DIR}/api-16")
+#SET(OCPN_USE_API_16 ON)
+##OPTION(OCPN_USE_API_16 "Use plugin api 16 (default: api 13)." OFF)
 
 ##  ---- Section below is directly from TestPlugin ---------------------------##
 
 set(PACKAGE_NAME ${PACKAGE}_pi)
-set(PACKAGE_FILE_NAME "${PARENT}-plugin-${PACKAGE}")
+set(PACKAGE_FILE_NAME "${PACKAGE}_pi")
 string(TOUPPER "${PACKAGE}" TITLE_NAME)
 
 project(${PACKAGE_NAME} VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}.${VERSION_TWEAK})
+message(STATUS "PROJECT_VERSION: ${PROJECT_VERSION}")
 
 set(PACKAGE_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 
@@ -124,17 +120,23 @@ endif("${CMAKE_BUILD_TYPE}" STREQUAL "")
 set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "" "Debug" "Release" "RelWithDebInfo" "MinSizeRel")
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
-set(PKG_NVR ${PACKAGE_NAME}-${PROJECT_VERSION}-${OCPN_MIN_VERSION}-${OCPN_API_VERSION_MAJOR}.${OCPN_API_VERSION_MINOR})
+# set(PKG_NVR ${PACKAGE_NAME}-${PROJECT_VERSION}-${OCPN_MIN_VERSION}-${OCPN_API_VERSION_MAJOR}.${OCPN_API_VERSION_MINOR})
+set(PKG_NVR ${PACKAGE_NAME}-${PROJECT_VERSION})
 set(PKG_URL "https://dl.cloudsmith.io/public/--pkg_repo--/raw/names/--name--/versions/--version--/--filename--")
 
 #===========================================================
 # Check cmake/PluginConfigure.cmake, no need to configure
 #===========================================================
-
-# INCLUDE("cmake/PluginConfigure.cmake")
+include("cmake/PluginSetup.cmake")
 # Duplicated see below at Line 221
-#=============================================================
-# Modify/configure 'Include' Directories below for the Plugin
+#===========================================================
+if(DEFINED ENV{OCPN_TARGET})
+    set(PACKAGING_NAME "${PKG_NVR}_${PKG_TARGET}-${PKG_TARGET_VERSION}-$ENV{OCPN_TARGET}")
+else(DEFINED ENV{OCPN_TARGET})
+    set(PACKAGING_NAME "${PKG_NVR}_${PKG_TARGET}-${PKG_TARGET_VERSION}")
+endif(DEFINED ENV{OCPN_TARGET})
+message(STATUS "PACKAGING_NAME: ${PACKAGING_NAME}")
+										# Modify/configure 'Include' Directories below for the Plugin
 #
 # Below from rgleason squiddio
 #=============================================================
@@ -147,38 +149,35 @@ set(PKG_URL "https://dl.cloudsmith.io/public/--pkg_repo--/raw/names/--name--/ver
 ##else ()
 ##  INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/api-13)
 #endif ()
-#=============================================================
-
-
+#=============================================================		  
 
 set(PLUGIN_NAME ${PACKAGE}-plugin-${PKG_TARGET}-${PKG_TARGET_VERSION})
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
-option(OD_CXX11 "Use c++11" OFF)
+option(Plugin_CXX11 "Use c++11" OFF)
 
-if(OD_CXX11)
+if(Plugin_CXX11)
   message(STATUS "Attempting to use c++11")
   include(CheckCXXCompilerFlag)
   check_cxx_compiler_flag("-std=c++11" COMPILER_SUPPORTS_CXX11)
   check_cxx_compiler_flag("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
   if(COMPILER_SUPPORTS_CXX11)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-    set(Testplugin_USE_CXX11 ON)
+    set(Plugin_USE_CXX11 ON)
   elseif(COMPILER_SUPPORTS_CXX0X)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
-    set(Testplugin_USE_CXX11 ON)
+    set(Plugin_USE_CXX11 ON)
   else()
     message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
-    set(Testplugin_USE_CXX11 OFF)
+    set(Plugin_USE_CXX11 OFF)
   endif()
 else()
-  set(Testplugin_USE_CXX11 OFF)
+  set(Plugin_USE_CXX11 OFF)
 endif()
 
-if(Testplugin_USE_CXX11)
+if(Plugin_USE_CXX11)
   message(STATUS "Allowing use of c++11")
-  add_definitions(-DTestplugin_USE_CXX11)
 endif()
 
 message(STATUS "CMAKE version: ${CMAKE_VERSION}")
@@ -218,13 +217,14 @@ if(CMAKE_VERSION VERSION_GREATER 3.9)
 endif()
 
 ##
-## -------Section above is directly from Testplugin --------------##
 ##
+## -------Section above is directly from Testplugin --------------##
 ##
 ## ----- Modify section above if there are special requirements for the plugin ----- ##
 ##
 
-#INCLUDE("cmake/PluginConfigure.cmake")
+
+include("cmake/PluginConfigure.cmake")
 # There is an include cmake/PluginConfigure.cmake on line 263
 ##
 ## ----- Change below to match project requirements ----- ##
@@ -232,8 +232,8 @@ endif()
 
 add_definitions(-DUSE_S57)
 
+##++++++++Weatherfax Specific Files ++++++++++++++##
 
-##-----------Weatherfax Specific Files --------------------##
 
 IF (UNIX)
 INCLUDE("cmake/FindPortaudio.cmake")
@@ -264,17 +264,9 @@ IF (MSVC)
     INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/include/msvc)
 ENDIF (MSVC)
 
-
-# --------------------------------------------
-# Try putting it at the top, same errors in appveyor
-INCLUDE("cmake/PluginConfigure.cmake")
-# --------------------------------------------
-
-
 ## --Section above is direct from Weatherfax located above SET(SRC_WEATHERFAX  ---##
 ##
-## --------------------Section below is direct from Weatherfax -----------##
-
+## ++++++++++++++Section below is direct from Weatherfax +++++++++##
 
 SET(SRC_WEATHERFAX
             src/weatherfax_pi.cpp
@@ -474,8 +466,8 @@ SET (HDRS
 )			
 
 
-## --------------------Section above is added recently to Weatherfax set -----##
-## --------------------Section below directly from Weatherfax --------##
+## +++++++++Section above is added recently to Weatherfax set ++++++++++##
+##++++++++++++Section below directly from Weatherfax +++++++++##
 
 IF(UNIX)
   find_library(RTLSDR_LIBRARY NAMES rtlsdr
@@ -483,8 +475,17 @@ IF(UNIX)
     )
   IF(RTLSDR_LIBRARY)
     MESSAGE (STATUS "Found rtlsdr:  ${RTLSDR_LIBRARY}")
+																											
+							   
 
     ADD_DEFINITIONS( "-DBUILTIN_RTLAIS" )
+															
+													   
+																 
+																	
+																									 
+															 
+																 
 
     SET(PLUGINS_LIBS ${PLUGINS_LIBS} ${RTLSDR_LIBRARY})
   ELSE()
@@ -520,7 +521,7 @@ TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 
 
 ##
-##-------  Section above is direct from Weatherfax located relative to where it was
+##++++++++++Section above from Weatherfax located relative to where it was  ++++++++
 ##
 
 
@@ -528,25 +529,16 @@ TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 
 #set(SRCS
 #    src/tpdc.cpp
-#    src/tpControlDialogDef.cpp
-#    src/tpControlDialogImpl.cpp
-#    src/tpicons.cpp
-#    src/tpJSON.cpp
-#    src/testplugin_pi.cpp
+#...
 #    src/tpUtils.cpp)
 
 #set(HDRS
 #    include/testplugin_pi.h
-#    include/tpicons.h
-#    include/tpControlDialogDef.h
-#    include/tpControlDialogImpl.h
-#    include/tpIconCombo.h
-#    include/tpJSON.h
-#    include/tpdc.h
+#...
 #    include/tpUtils.h)
 
 #set(OCPNSRC ocpnsrc/TexFont.cpp)
-#set(OCPNHDRS ocpninclude/ocpn_plugin.h ocpninclude/pluginmanager.h #ocpninclude/TexFont.h)
+#set(OCPNHDRS ocpninclude/ocpn_plugin.h ocpninclude/pluginmanager.h ocpninclude/TexFont.h)
 
 #set(EXTSRC)
 
@@ -554,27 +546,22 @@ TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 #    extinclude/nlohmann/json.hpp
 #    extinclude/ODAPI.h)
 
-#set(LIBSSRC libs/wxJSON/src/jsonreader.cpp libs/wxJSON/src/jsonval.cpp libs/wxJSON/src/jsonwriter.cpp)
+#set(LIBSSRC 
+#...
+#libs/wxJSON/src/jsonwriter.cpp)
 
 #set(LIBHDRS
 #    libs/GL/include/gl.h
-#    libs/GL/include/gl_private.h
-#    libs/GL/include/glext.h
-#    libs/GL/include/glu.h
-#    libs/wx/include/json_defs.h
-#    libs/wx/include/jsonreader.h
-#    libs/wx/include/jsonval.h
+#...
 #    libs/wx/include/jsonwriter.h)
-
 
 add_definitions(-DPLUGIN_USE_SVG)
 
 ##
 ##---- Section needed for Testplugin operations -----------------##
-##
-
+##  
 #IF(APPLE)
-#    OPTION(TP_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" OFF)
+#    OPTION(#"Use JSON Schema validator" OFF)
 #ELSE(APPLE)
 #    OPTION(TP_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" ON)
 #ENDIF(APPLE)
@@ -637,7 +624,7 @@ add_definitions(-DTIXML_USE_STL)
 
 ##
 ## ----- Change above to match project requirements ----- ##
-## ------ Includes from weatherfax cmake------------------## 
+## ++++++++++ Includes from weatherfax cmake  +++++++++++++## 
 
 #INCLUDE("cmake/PluginNMEA.cmake")   #No not for wxfax
 INCLUDE("cmake/PluginJSON.cmake")#

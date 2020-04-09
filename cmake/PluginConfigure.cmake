@@ -2,8 +2,6 @@
 # Author:      Jon Gough (Based on the work of Sean D'Epagnier and Pavel Kalian) Copyright:   2019 License:     GPLv3+
 # ---------------------------------------------------------------------------
 
-set(PLUGIN_SOURCE_DIR .)
-
 message(STATUS "*** Staging to build ${PACKAGE_NAME} ***")
 
 # Do the version.h & wxWTranslateCatalog configuration into the build output directory, thereby allowing building from a read-only source tree.
@@ -15,8 +13,21 @@ if(NOT SKIP_VERSION_CONFIG)
 endif(NOT SKIP_VERSION_CONFIG)
 
 # configure xml file for circleci
+message(STATUS "OCPN_TARGET: $ENV{OCPN_TARGET}")
+if(NOT DEFINED ENV{OCPN_TARGET})
+    set($ENV{OCPN_TARGET} ${PKG_TARGET})
+    message(STATUS "Setting OCPN_TARGET")
+endif(NOT DEFINED ENV{OCPN_TARGET})
+if($ENV{OCPN_TARGET} MATCHES "(.*)gtk3")
+    set(PKG_TARGET_FULL "${PKG_TARGET}-gtk3")
+    message(STATUS "Found gtk3")
+else($ENV{OCPN_TARGET} MATCHES "(.*)gtk3")
+    set(PKG_TARGET_FULL "${PKG_TARGET}")
+endif($ENV{OCPN_TARGET} MATCHES "(.*)gtk3")
+
+message(STATUS "PKG_TARGET_FULL: ${PKG_TARGET_FULL}")
 message(STATUS "*.in files generated in ${CMAKE_CURRENT_BINARY_DIR}")
-configure_file(${CMAKE_SOURCE_DIR}/cmake/in-files/plugin.xml.in ${CMAKE_CURRENT_BINARY_DIR}/${PLUGIN_NAME}-$ENV{OCPN_TARGET}.xml)
+configure_file(${CMAKE_SOURCE_DIR}/cmake/in-files/plugin.xml.in ${CMAKE_CURRENT_BINARY_DIR}/${PACKAGING_NAME}.xml)
 configure_file(${CMAKE_SOURCE_DIR}/cmake/in-files/pkg_version.sh.in ${CMAKE_CURRENT_BINARY_DIR}/pkg_version.sh)
 configure_file(${CMAKE_SOURCE_DIR}/cmake/in-files/cloudsmith-upload.sh.in ${CMAKE_CURRENT_BINARY_DIR}/cloudsmith-upload.sh @ONLY)
 

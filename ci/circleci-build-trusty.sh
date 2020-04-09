@@ -20,9 +20,9 @@ if [ -n "$BUILD_GTK3" ]; then
 fi
 
 if [ -n "$tag" ]; then
-  cmake -DCMAKE_BUILD_TYPE=Release ..
+  cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local ..
 else
-  cmake -DCMAKE_BUILD_TYPE=Debug ..
+  cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=/usr/local ..
 fi
 
 make -j2

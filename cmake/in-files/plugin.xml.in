@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin version="1">
-  <name> ${PACKAGE} </name>
+  <name> ${COMMON_NAME} </name>
   <version> ${PACKAGE_VERSION} </version>
   <release> ${PROJECT_VERSION_TWEAK} </release>
   <summary> ${XML_SUMMARY} </summary>
@@ -14,7 +14,7 @@
     ${XML_DESCRIPTION}
   </description>
 
-  <target>${PKG_TARGET}</target>
+  <target>${PKG_TARGET_FULL}</target>
   <target-version>${PKG_TARGET_VERSION}</target-version>
   <tarball-url>
     ${PKG_URL}

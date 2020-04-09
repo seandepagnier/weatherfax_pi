@@ -1,25 +1,10 @@
-#    General Configuration      
-#    Environment Configuration
-# environment:
-#  auth_token:
-# Encryption
-#  secure: JgI5QtayVIori1X4L9fynDr+66vJ8+9hA5TtO9Ozz1kJ/nXCgXSt0E2cGw52o12I
-# Appveyor auth token encrypted  
-# Build worker image (VM template)
+clone_folder: c:\project\weatherfax_pi
+shallow_clone: false
+clone_depth: 10
+
 image:
 - Visual Studio 2017
-# scripts that are called at very beginning, before repo cloning
-# init:
-version: 1.9.{build}
-# clone directory
-clone_folder: c:\project\weatherfax_pi
-# fetch repository as zip archive
-shallow_clone: false  # default is "false"
-# set clone depth, clone entire repository history if not defined
-clone_depth:10
 
-# Build Configuration
-# build platform, i.e. x86, x64, Any CPU. This setting is optional.
 platform:
 # - x64
   - Win32
@@ -50,12 +35,13 @@ install:
   - ps: Start-FileDownload http://opencpn.navnux.org/build_deps/wxWidgets-3.1.2.7z
   - cmd: 7z x wxWidgets-3.1.2.7z -o%WXWIN% > null
 
-# some debugging information
-# - set #Use only while debugging - it reveals the deploy token set on Appveyor
-# - cmake --help
+# Debugging information Use only while debugging reveals the deploy token.						
+  - set
+# - cmake --help				
 
 before_build:
   - cd c:\project\weatherfax_pi
+
   - rm -rf buildwin && mkdir buildwin && cd buildwin 
   - ps: Start-FileDownload  https://downloads.sourceforge.net/project/opencpnplugins/opencpn_packaging_data/PVW32Con.exe
   - ps: Start-FileDownload http://opencpn.navnux.org/build_deps/OpenCPN_buildwin-4.99a.7z
@@ -63,17 +49,19 @@ before_build:
   - ps: Start-FileDownload https://sourceforge.net/projects/opencpnplugins/files/opencpn_packaging_data/portaudio-vc12.7z
   - cmd: 7z x -y portaudio-vc12.7z -oc:\project\weatherfax_pi\buildwin
   - cd ..
+
   - rm -rf build && mkdir build && cd build
   - ps: Start-FileDownload https://downloads.sourceforge.net/project/opencpnplugins/opencpn_lib/4.99.1405-vc141_xp/opencpn.lib
+#  - ps: Start-FileDownload http://opencpn.navnux.org/build_deps/OpenCPN_buildwin-4.99a.7z
+#  - cmd: 7z x -y OpenCPN_buildwin-4.99a.7z -oc:\project\testplugin_pi\buildwin
   - dir c:\project\weatherfax_pi\buildwin
   - dir c:\project\weatherfax_pi\build
-  - dir c:\project\weatherfax_pi
-
+  - dir c:\project\weatherfax_pi  
   - cmake -T v141_xp ..
-  - dir c:\project\weatherfax_pi\build
+  - dir c:\project\weatherfax_pi\build									  
 
 build_script:
- #- cmake --build . --config debug
+ #- cmake --build . --config debug								  
   - cmake --build . --target package --config Release
   - python -m ensurepip
   - python -m pip install -q setuptools
@@ -84,18 +72,17 @@ artifacts:
   - path: 'build\*.exe'
     name: installer
 
-# Deploy to GitHub Releases						   
 deploy:
   description: 'release created by AppVeyor CI'
   provider: GitHub
-  auth_token: #'%GitHub_auth_token%'
-    secure:JgI5QtayVIori1X4L9fynDr+66vJ8+9hA5TtO9Ozz1kJ/nXCgXSt0E2cGw52o12I
-#VVAVg9a8n+XgesI85/cXrXyNeStivq8FynlajE94lGUtzDGeu5PMWI5f1OSYg0tS
+  auth_token: '%GitHub_auth_token%'
+#    secure:JgI5QtayVIori1X4L9fynDr+66vJ8+9hA5TtO9Ozz1kJ/nXCgXSt0E2cGw52o12I
+#VVAVg9a8n+XgesI85/cXrXyNeStivq8FynlajE94lGUtzDGeu5PMWI5f1OSYg0tS			
   artifact: installer,portable
   draft: true
   prerelease: true
-  tag: $(APPVEYOR_REPO_TAG_NAME) # use pushed Tag or insert version name   																		   
+#  tag: $(APPVEYOR_REPO_TAG_NAME) # use pushed Tag or insert version name   						  
   on:
-    appveyor_repo_tag: true # Deploy on 'tag push' only
+    appveyor_repo_tag: true # deploy on tag push only
     configuration: Release  # Debug contains non-redist MS DLLs
-#   branch: master   # release from master branch only
+#   branch: master   # release from master branch only													  

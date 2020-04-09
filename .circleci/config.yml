@@ -1,7 +1,6 @@
 ---
 version: 2
 jobs:
-#  branches: frontend
    build-trusty:
      docker:
        - image: circleci/buildpack-deps:trusty-scm

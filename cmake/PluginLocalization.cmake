@@ -10,7 +10,6 @@ message(STATUS "Starting POTFILE generation")
 
 set(POTFILE ${CMAKE_CURRENT_SOURCE_DIR}/po/POTFILES.in)
 file(REMOVE ${POTFILE}.test)
-message (STATUS "Removed POTFILES.in.test")
 foreach(POTLINE IN ITEMS ${SRCS})
   file(APPEND ${POTFILE}.test "${POTLINE}\n")
 endforeach(POTLINE)
@@ -79,7 +78,7 @@ macro(GETTEXT_BUILD_MO)
     add_custom_command(
       OUTPUT ${_gmoFile}
       COMMAND ${GETTEXT_MSGFMT_EXECUTABLE} --check -o ${_gmoFile} ${_absFile}
-      COMMAND ${CMAKE_COMMAND} -E copy ${_gmoFile} "Resources/${_poBasename}.lproj/opencpn-${PACKAGE_NAME}.mo"
+      COMMAND ${CMAKE_COMMAND} -E copy ${_gmoFile} "Resources/${_poBasename}.lproj/${PACKAGE_NAME}.mo"
       DEPENDS ${_absFile}
       COMMENT "${I18N_NAME}-i18n [${_poBasename}]: Created mo file.")
 
@@ -87,13 +86,13 @@ macro(GETTEXT_BUILD_MO)
       install(
         FILES ${_gmoFile}
         DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/OpenCPN.app/Contents/Resources/${_poBasename}.lproj
-        RENAME opencpn-${PACKAGE_NAME}.mo)
+        RENAME ${PACKAGE_NAME}.mo)
     else(APPLE)
       install(
         FILES ${_gmoFile}
         DESTINATION ${PREFIX_DATA}/locale/${_poBasename}/LC_MESSAGES
-        RENAME opencpn-${PACKAGE_NAME}.mo)
-      message(STATUS "Install language files to: ${PREFIX_DATA}/locale/${_poBasename}/LC_MESSAGES renamed to: opencpn-${PACKAGE_NAME}.mo")
+        RENAME ${PACKAGE_NAME}.mo)
+      message(STATUS "Install language files to: ${PREFIX_DATA}/locale/${_poBasename}/LC_MESSAGES renamed to: ${PACKAGE_NAME}.mo")
     endif(APPLE)
 
     set(_gmoFiles ${_gmoFiles} ${_gmoFile})
