@@ -1,13 +1,25 @@
-# -----------------------------------------##--------------------------------------------------------------------------##
-## OpenCPN Plugin: Weatherfax_pi
-## Author:      Sean d'Epagnier  Copyright: License:     wxWidgets License
-## License: GPLV3 
-##-------------------------------------------------------------------------##
-## CMakeLists and Frontend
-## Author: Jon Gough
-## Version: 0.0.3
-## Date: 04-09-2020
-## -------------------------------------------------------------------------##					
+# ---------------------------------------------------------------------------
+# Frontend2 Author: jongough aka. Jon Gough    License:wxWidgets License
+# ---------------------------------------------------------------------------
+##---------------------------------------------------------------------------
+## Author:      Mauro Calvi
+##***************************************************************************
+## *   Copyright (C) 2010 by Mauro Calvi                               *
+## *   This program is free software; you can redistribute it and/or modify  *
+## *   it under the terms of the GNU General Public License as published by  *
+## *   the Free Software Foundation; either version 2 of the License, or     *
+## *   (at your option) any later version.                                   *
+## *                                                                         *
+## *   This program is distributed in the hope that it will be useful,       *
+## *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+## *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+## *   GNU General Public License for more details.                          *
+## *                                                                         *
+## *   You should have received a copy of the GNU General Public License     *
+## *   along with this program; if not, write to the                         *
+## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx,                                       *
+## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx          *
+## ***
 ##
 ## ----- Modify section below to include all the details for your plugin ----- ##
 ##
@@ -15,74 +27,82 @@
 # define minimum cmake version
 cmake_minimum_required(VERSION 3.1.1)
 if(COMMAND cmake_policy)
-  if(POLICY CMP0043)
-    cmake_policy(SET CMP0043 NEW)
-  endif(POLICY CMP0043)
-  cmake_policy(SET CMP0048 NEW)
-  if(POLICY CMP0077)
-    cmake_policy(SET CMP0077 NEW)
-  endif(POLICY CMP0077)
+    if(POLICY CMP0043)
+        cmake_policy(SET CMP0043 NEW)
+    endif(POLICY CMP0043)
+    cmake_policy(SET CMP0048 NEW)
+    if(POLICY CMP0077)
+        cmake_policy(SET CMP0077 NEW)
+    endif(POLICY CMP0077)
 endif(COMMAND cmake_policy)
 
-set(VERBOSE_NAME "weatherfax")
-set(COMMON_NAME "WeatherFax") # Search "GetCommon" in weatherfax_pi.cpp for commonname
-set(TITLE_NAME "WEATHERFAX")
-set(PACKAGE_CONTACT "Sean d'Epagnier")
-set(PACKAGE "testplugin")
+SET(VERBOSE_NAME Squiddio)
+set(COMMON_NAME "squiddio")
+set(TITLE_NAME "squiddio")
+set(PACKAGE_CONTACT "Mauro Calvi")
+SET(PACKAGE "squiddio")
 
-set(VERSION_MAJOR "1")
-set(VERSION_MINOR "9")
-set(VERSION_PATCH "4")
+SET(VERSION_MAJOR "1")
+SET(VERSION_MINOR "3")
+
+SET(VERSION_PATCH "2")
 set(VERSION_TWEAK "1")
-set(VERSION_DATE "04/09/2020")
+set(VERSION_DATE "15/04/2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
-set(TP_COMMENT "  * Release for O5 using CI")
 
 set(PARENT "opencpn")
-set(PACKAGE "weatherfax")
+set(GIT_USER "mauroc")
 #set(GIT_USER "jongough")
-set(GIT_USER "rgleason")
-
-set(GIT_REPOSITORY_NAME "weatherfax_pi")
+#set(GIT_USER "rgleason")
+set(GIT_REPOSITORY_NAME "squiddio_pi")
 message(STATUS "CIRCLECI: ${CIRCLECLI}, Env CIRCLECI: $ENV{CIRCLECI}")
 message(STATUS "TRAVIS: ${TRAVIS}, Env TRAVIS: $ENV{TRAVIS}")
-#message(STATUS "APPVEYOR: ${APPVEYOR}, Env TRAVIS: $ENV{APPVEYOR}")
-# This if allows for setting up your own local webserver with git on it for testing purposes
+
+# This 'if' allows setup of a local webserver with git for testing
 if($ENV{CIRCLECI})
-  set(GIT_REPOSITORY_HOST "github.com")
-  set(GIT_REPOSITORY_DIR "${GIT_USER}/")
-  set(GIT_REPOSITORY_BRANCH "$ENV{CIRCLE_BRANCH}")
+    set(GIT_REPOSITORY_HOST "github.com")
+    set(GIT_REPOSITORY_DIR "${GIT_USER}/")
+    set(GIT_REPOSITORY_BRANCH "$ENV{CIRCLE_BRANCH}")
 elseif($ENV{TRAVIS})
-  set(GIT_REPOSITORY_HOST "github.com")
-  set(GIT_REPOSITORY_DIR "${GIT_USER}/")
-  set(GIT_REPOSITORY_BRANCH "$ENV{TRAVIS_BRANCH}")
+    set(GIT_REPOSITORY_HOST "github.com")
+    set(GIT_REPOSITORY_DIR "${GIT_USER}/")
+    set(GIT_REPOSITORY_BRANCH "$ENV{TRAVIS_BRANCH}")
 else()
-  set(GIT_REPOSITORY_HOST "github.com")
-  set(GIT_REPOSITORY_DIR "${GIT_USER}/")
-  set(GIT_REPOSITORY_BRANCH "master")
-#  set(GIT_REPOSITORY_HOST "git.eclipse.com.au")
-#  set(GIT_REPOSITORY_DIR "")
-#  set(GIT_REPOSITORY_BRANCH "cmake_flatpak_test")
+    set(GIT_REPOSITORY_HOST "github.com")
+    set(GIT_REPOSITORY_DIR "${GIT_USER}/")
+    set(GIT_REPOSITORY_BRANCH "master")
+    #  set(GIT_REPOSITORY_HOST "git.eclipse.com.au")
+    #  set(GIT_REPOSITORY_DIR "")
+    #  set(GIT_REPOSITORY_BRANCH "cmake_flatpak_test")
 endif()
 message(STATUS "Git Branch: ${GIT_REPOSITORY_BRANCH}")
 
-#set(CLOUDSMITH_USER "jon-gough")
-set(CLOUDSMITH_USER "rick-gleason")
+# Prod builds repository url
+set(PROD "pi")   #Mauro Repos
+#set(PROD "prod")  #Standard Repos
+
+# Beta builds repository url
+set(BETA "stable")  #Mauro Repos
+#set(BETA "beta")       #Standard Repos
+
+# Alpha builds repository url
+set(ALPHA "manual") # for Mauro's  Cloudsmith 'mauro-calvi/squiddio-manual' 
+#set(ALPHA "alpha") #Standard Repos
+
 #set(CLOUDSMITH_BASE_REPOSITORY "${GIT_REPOSITORY_NAME}")
-set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")
+set(CLOUDSMITH_BASE_REPOSITORY "squiddio")  # Mauro's customization without the '_pi'
+#set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization
 
-set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/weatherfax.html")
-set(XML_SUMMARY "Open fax image files or decode audio faxes and overlay on chart")
-set(XML_DESCRIPTION "Weatherfax Plugin has simple calibration for image overly, Converts images, and can convert any image into a raster chart.  Db for HF radio fax stations via SSB and Metro URL internet retrieval.")
-set(APPVEYOR_TEST_DEPLOY_TO_CLOUDSMITH "true")
-option(PLUGIN_USE_SVG "Use SVG graphics" ON)
+set(CLOUDSMITH_USER "mauro-calvi")
+#set(CLOUDSMITH_USER "jon-gough")
+#set(CLOUDSMITH_USER "rick-gleason")
 
-set(CMAKE_CXX_STANDARD 11)
-
-# Prefer libGL.so to libOpenGL.so, see CMP0072
-set(OpenGL_GL_PREFERENCE "LEGACY")
+set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/squiddio.html")
+set(XML_SUMMARY "Plugin to display interesting objects")
+set(XML_DESCRIPTION "Plugin to display harbours, bouys, interesting locations etc. on the chart")
+#set(APPVEYOR_TEST_DEPLOY_TO_CLOUDSMITH "true")
 
 ##
 ## ----- Modify section above to include all the details for your plugin ----- ##
@@ -91,16 +111,18 @@ set(OpenGL_GL_PREFERENCE "LEGACY")
 ##
 ## ----- Modify section below if there are special requirements for the plugin ----- ##
 ##
-##  ---- Section below from rgleason squiddio ----
 
-#SET(API_DIR "${CMAKE_SOURCE_DIR}/api-16")
-#SET(OCPN_USE_API_16 ON)
-##OPTION(OCPN_USE_API_16 "Use plugin api 16 (default: api 13)." OFF)
+option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
-##  ---- Section below is directly from TestPlugin ---------------------------##
+set(CMAKE_CXX_STANDARD 11)
 
-set(PACKAGE_NAME ${PACKAGE}_pi)
-set(PACKAGE_FILE_NAME "${PACKAGE}_pi")
+if(NOT ${PACKAGE} MATCHES "(.*)_pi")
+    set(PACKAGE_NAME ${PACKAGE}_pi)
+    set(PACKAGE_FILE_NAME "${PACKAGE}_pi")
+else(NOT ${PACKAGE} MATCHES "(.*)_pi")
+    set(PACKAGE_NAME ${PACKAGE})
+    set(PACKAGE_FILE_NAME "${PACKAGE}")
+endif(NOT ${PACKAGE} MATCHES "(.*)_pi")
 string(TOUPPER "${PACKAGE}" TITLE_NAME)
 
 project(${PACKAGE_NAME} VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}.${VERSION_TWEAK})
@@ -111,8 +133,12 @@ set(PACKAGE_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 message(STATUS "${VERBOSE_NAME} Version: ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}.${VERSION_TWEAK}")
 message(STATUS "OPCN_FLATPAK: ${OCPN_FLATPAK}")
 
+# Prefer libGL.so to libOpenGL.so, see CMP0072
+set(OpenGL_GL_PREFERENCE "LEGACY")
 # Don't use local version of GLU library
 set(USE_LOCAL_GLU FALSE)
+option(USE_GL "Enable OpenGL support" OFF)
+message(STATUS "USE_GL: ${USE_GL}")
 
 if("${CMAKE_BUILD_TYPE}" STREQUAL "")
   set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build" FORCE)
@@ -124,32 +150,14 @@ message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 set(PKG_NVR ${PACKAGE_NAME}-${PROJECT_VERSION})
 set(PKG_URL "https://dl.cloudsmith.io/public/--pkg_repo--/raw/names/--name--/versions/--version--/--filename--")
 
-#===========================================================
-# Check cmake/PluginConfigure.cmake, no need to configure
-#===========================================================
 include("cmake/PluginSetup.cmake")
-# Duplicated see below at Line 221
-#===========================================================
+
 if(DEFINED ENV{OCPN_TARGET})
     set(PACKAGING_NAME "${PKG_NVR}_${PKG_TARGET}-${PKG_TARGET_VERSION}-$ENV{OCPN_TARGET}")
 else(DEFINED ENV{OCPN_TARGET})
     set(PACKAGING_NAME "${PKG_NVR}_${PKG_TARGET}-${PKG_TARGET_VERSION}")
 endif(DEFINED ENV{OCPN_TARGET})
 message(STATUS "PACKAGING_NAME: ${PACKAGING_NAME}")
-										# Modify/configure 'Include' Directories below for the Plugin
-#
-# Below from rgleason squiddio
-#=============================================================
-#INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/wxJSON)
-#INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src)
-#INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR})
-
-#if (OCPN_USE_API_16) 
-#  INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/api-16)
-##else ()
-##  INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/api-13)
-#endif ()
-#=============================================================		  
 
 set(PLUGIN_NAME ${PACKAGE}-plugin-${PKG_TARGET}-${PKG_TARGET_VERSION})
 
@@ -217,422 +225,215 @@ if(CMAKE_VERSION VERSION_GREATER 3.9)
 endif()
 
 ##
-##
-## -------Section above is directly from Testplugin --------------##
-##
 ## ----- Modify section above if there are special requirements for the plugin ----- ##
 ##
 
 
-include("cmake/PluginConfigure.cmake")
-# There is an include cmake/PluginConfigure.cmake on line 263
-##
-## ----- Change below to match project requirements ----- ##
-##
-
-add_definitions(-DUSE_S57)
-
-##++++++++Weatherfax Specific Files ++++++++++++++##
-
-
-IF (UNIX)
-INCLUDE("cmake/FindPortaudio.cmake")
-IF (PORTAUDIO_FOUND)
-    MESSAGE (STATUS "Portaudio Found")
-    INCLUDE_DIRECTORIES(BEFORE ${PORTAUDIO_INCLUDE_DIRS})
-    SET(PLUGINS_LIBS ${PLUGINS_LIBS} ${PORTAUDIO_LIBRARIES})
-    ADD_DEFINITIONS(${PORTAUDIO_DEFINITIONS})
-    ADD_DEFINITIONS(-DOCPN_USE_PORTAUDIO)
-ELSE (PORTAUDIO_FOUND)
-    MESSAGE (STATUS "Portaudio Not Found...")
-ENDIF (PORTAUDIO_FOUND)
-ELSE (UNIX)
-    INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/include)
-    IF(STANDALONE MATCHES "BUNDLED")
-	# within OpenCPN tree
-    	SET(PLUGINS_LIBS ${EXTRA_LIBS} ../../buildwin/portaudio_x86)
-    	INSTALL(FILES "../../buildwin/portaudio_x86.dll" DESTINATION ".")
-    ELSE()
-    	SET(PLUGINS_LIBS ${EXTRA_LIBS} ../buildwin/portaudio_x86)
-    	INSTALL(FILES "buildwin/portaudio_x86.dll" DESTINATION ".")
-    ENDIF()
-
-    ADD_DEFINITIONS(-DOCPN_USE_PORTAUDIO)
-ENDIF (UNIX)
-
-IF (MSVC)
-    INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/include/msvc)
-ENDIF (MSVC)
-
-## --Section above is direct from Weatherfax located above SET(SRC_WEATHERFAX  ---##
-##
-## ++++++++++++++Section below is direct from Weatherfax +++++++++##
-
-SET(SRC_WEATHERFAX
-            src/weatherfax_pi.cpp
-            src/FaxDecoder.cpp
-            src/DecoderOptionsDialog.cpp
-            src/WeatherFax.cpp
-            src/WeatherFaxWizard.cpp
-            src/WeatherFaxUI.cpp
-            src/WeatherFaxImage.cpp
-            src/SchedulesDialog.cpp
-            src/InternetRetrievalDialog.cpp
-            src/AboutDialog.cpp
-            src/icons.cpp
-
-            src/wximgkap.cpp
-	)
-
-SET(SRC_AUDIOFILE
-            src/libaudiofile/aupv.c
-            src/libaudiofile/error.c
-            src/libaudiofile/extended.c
-            src/libaudiofile/g711.c
- 
-            src/libaudiofile/AIFF.cpp
-            src/libaudiofile/AVR.cpp
-            src/libaudiofile/CAF.cpp
-            src/libaudiofile/IFF.cpp
-            src/libaudiofile/IRCAM.cpp
-            src/libaudiofile/NIST.cpp
-            src/libaudiofile/NeXT.cpp
-            src/libaudiofile/Raw.cpp
-            src/libaudiofile/SampleVision.cpp
-            src/libaudiofile/VOC.cpp
-
-            src/libaudiofile/AudioFormat.cpp
-            src/libaudiofile/Buffer.cpp
-            src/libaudiofile/FLACFile.cpp
-            src/libaudiofile/File.cpp
-            src/libaudiofile/FileHandle.cpp
-            src/libaudiofile/Instrument.cpp
-            src/libaudiofile/Loop.cpp
-            src/libaudiofile/Marker.cpp
-            src/libaudiofile/Miscellaneous.cpp
-            src/libaudiofile/Setup.cpp
-            src/libaudiofile/Track.cpp
-            src/libaudiofile/UUID.cpp
-            src/libaudiofile/WAVE.cpp
-            src/libaudiofile/aes.cpp
-            src/libaudiofile/af_vfs.cpp
-            src/libaudiofile/compression.cpp
-            src/libaudiofile/data.cpp
-            src/libaudiofile/debug.cpp
-            src/libaudiofile/format.cpp
-            src/libaudiofile/openclose.cpp
-            src/libaudiofile/PacketTable.cpp
-            src/libaudiofile/pcm.cpp
-            src/libaudiofile/query.cpp
-            src/libaudiofile/units.cpp
-            src/libaudiofile/util.cpp
-
-            src/libaudiofile/alac/ALACEncoder.cpp
-            src/libaudiofile/alac/ALACDecoder.cpp
-            src/libaudiofile/alac/ag_dec.c
-            src/libaudiofile/alac/ag_enc.c
-            src/libaudiofile/alac/ALACBitUtilities.c
-            src/libaudiofile/alac/dp_dec.c
-            src/libaudiofile/alac/dp_enc.c
-            src/libaudiofile/alac/EndianPortable.c
-            src/libaudiofile/alac/matrix_dec.c
-            src/libaudiofile/alac/matrix_enc.c
-            
-            src/libaudiofile/modules/ALAC.cpp
-            src/libaudiofile/modules/BlockCodec.cpp            
-            src/libaudiofile/modules/FLAC.cpp
-            src/libaudiofile/modules/FileModule.cpp
-            src/libaudiofile/modules/G711.cpp
-            src/libaudiofile/modules/IMA.cpp
-            src/libaudiofile/modules/MSADPCM.cpp
-            src/libaudiofile/modules/Module.cpp
-            src/libaudiofile/modules/ModuleState.cpp
-            src/libaudiofile/modules/PCM.cpp
-            src/libaudiofile/modules/RebufferModule.cpp
-            src/libaudiofile/modules/SimpleModule.cpp
-)
-
-## --------------------Section above is direct from Weatherfax -----------##
-## --------------------Section below added recently to Weatherfax set -----##
-
-
-#  not needed see PluginGL Line 594
-#SET (SRC_PLUGINGL
-#           src/plugingl/pi_shaders.cpp
-#			src/plugingl/pidc.cpp
-#			src/plugingl/qtstylesheet.cpp
-#			src/plugingl/TexFont.cpp
-#)
-
-#  not needed see PluginXML Line 593
-#SET (SRC_TINYXML
-#           src/tinyxml/tinyxml.cpp
-#			src/tinyxml/tinyxmlerror.cpp
-#			src/tinyxml/tinyxmlparser.cpp
-#)
-#
-
-# Added by Rick recently
-SET (HDRS
-            api-16/ocpn_plugin.h
-			
-			src/AboutDialog.h
-			src/DecoderOptionsDialog.h
-			src/defs.h
-			src/FaxDecoder.h
-			src/georef.h
-			src/icons.h
-			src/InternetRetrievalDialog.h
-			src/ocpn_plugin.h
-			src/SchedulesDialog.h
-			src/WeatherFax.h
-			src/weatherfax_pi.h
-			src/WeatherFaxImage.h
-			src/WeatherFaxUI.h
-			src/WeatherFaxWizard.h
-			src/wximgkap.h
-			
-			src/libaudiofile/af_vfs.h
-			src/libaudiofile/afinternal.h
-			src/libaudiofile/AIFF.h
-			src/libaudiofile/audiofile.h
-			src/libaudiofile/AudioFormat.h
-			src/libaudiofile/aupvinternal.h
-			src/libaudiofile/aupvlist.h
-			src/libaudiofile/AVR.h
-			src/libaudiofile/Buffer.h
-			src/libaudiofile/byteorder.h
-			src/libaudiofile/CAF.h
-			src/libaudiofile/Compiler.h
-			src/libaudiofile/compression.h
-			src/libaudiofile/config.h
-			src/libaudiofile/debug.h
-			src/libaudiofile/error.h
-			src/libaudiofile/extended.h
-			src/libaudiofile/Features.h
-			src/libaudiofile/File.h
-			src/libaudiofile/FileHandle.h
-			src/libaudiofile/FLACFile.h
-			src/libaudiofile/g711.h
-			src/libaudiofile/IFF.h
-			src/libaudiofile/Instrument.h
-			src/libaudiofile/IRCAM.h
-			src/libaudiofile/Marker.h
-			src/libaudiofile/NeXT.h
-			src/libaudiofile/NIST.h
-			src/libaudiofile/PacketTable.h
-			src/libaudiofile/pcm.h
-			src/libaudiofile/Raw.h
-			src/libaudiofile/SampleVision.h
-			src/libaudiofile/Setup.h
-			src/libaudiofile/Shared.h
-			src/libaudiofile/Tag.h
-			src/libaudiofile/Track.h
-			src/libaudiofile/units.h
-			src/libaudiofile/util.h
-			src/libaudiofile/UUID.h
-			src/libaudiofile/VOC.h
-			src/libaudiofile/WAVE.h
-
-			src/libaudiofile/alac/ALACAudioTypes.h
-			src/libaudiofile/alac/ALACBitUtilities.h
-			src/libaudiofile/alac/ALACDecoder.h
-			src/libaudiofile/alac/ALACEncoder.h
-			src/libaudiofile/alac/dplib.h
-			src/libaudiofile/alac/EndianPortable.h
-			src/libaudiofile/alac/matrixlib.h
-
-			src/libaudiofile/modules/ALAC.h
-			src/libaudiofile/modules/BlockCodec.h
-			src/libaudiofile/modules/FileModule.h
-			src/libaudiofile/modules/FLAC.h
-			src/libaudiofile/modules/G711.h
-			src/libaudiofile/modules/IMA.h
-			src/libaudiofile/modules/Module.h
-			src/libaudiofile/modules/ModuleState.h
-			src/libaudiofile/modules/MSADPCM.h
-			src/libaudiofile/modules/PCM.h
-			src/libaudiofile/modules/RebufferModule.h
-			src/libaudiofile/modules/SimpleModule.h
-
-#			src/plugingl/linmath.h
-#			src/plugingl/pi_shaders.h
-#			src/plugingl/pidc.h
-#			src/plugingl/qtstylesheet.h
-#			src/plugingl/TexFont.h
-
-#			src/tinyxml/tinyxml.h
-			
-)			
-
-
-## +++++++++Section above is added recently to Weatherfax set ++++++++++##
-##++++++++++++Section below directly from Weatherfax +++++++++##
-
-IF(UNIX)
-  find_library(RTLSDR_LIBRARY NAMES rtlsdr
-    DOC "The rtlsdr library"
-    )
-  IF(RTLSDR_LIBRARY)
-    MESSAGE (STATUS "Found rtlsdr:  ${RTLSDR_LIBRARY}")
-																											
-							   
-
-    ADD_DEFINITIONS( "-DBUILTIN_RTLAIS" )
-															
-													   
-																 
-																	
-																									 
-															 
-																 
-
-    SET(PLUGINS_LIBS ${PLUGINS_LIBS} ${RTLSDR_LIBRARY})
-  ELSE()
-    MESSAGE (STATUS "")
-    MESSAGE (STATUS "================ WARNING ===================")
-    MESSAGE (STATUS "rtlsdr library not found, cannot decode from rtlsdr")
-    MESSAGE (STATUS "You may want to install librtlsdr-dev and run cmake again")
-    MESSAGE (STATUS "============================================")
-    MESSAGE (STATUS "")
-  ENDIF()
-ENDIF(UNIX)
-
-      
-IF(WIN32)
-    IF(STANDALONE MATCHES "BUNDLED")
-	# within OpenCPN tree
-	INSTALL(FILES "../../buildwin/PVW32Con.exe" DESTINATION "plugins\\\\${PACKAGE_NAME}")
-    ELSE()
-	INSTALL(FILES "buildwin/PVW32Con.exe" DESTINATION "plugins\\\\${PACKAGE_NAME}")
-    ENDIF()
-
-ENDIF(WIN32)
-
-INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/libaudiofile)
-# INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/include)   #this does not seem to work. Need to include  include/GL
-
-# ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} ${HDRS} )
-
-ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${HDRS} )
-
-
-TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
-
+INCLUDE("cmake/PluginConfigure.cmake")
 
 ##
-##++++++++++Section above from Weatherfax located relative to where it was  ++++++++
+## ----- Change below to match your project requirements ----- ##
+## ------These lines are only for Testplugin - do not use ------------##
 ##
+##   REMOVED
+##
+## ------The lines above are only for Testplugin -do not use------------##
+##
+# ----Remember to Add your project Set(SRCS and set(HDRS
+##----------Below From Squiddio for SET( Headers and SRCS) ------------------
+SET(SRCS
+    src/squiddio_pi.h
+    src/squiddio_pi.cpp
+    src/squiddioPrefsDialogBase.cpp
+    src/squiddioPrefsDialogBase.h
+    src/squiddio_pi_thread.h
+    src/squiddio_pi_thread.cpp
+    src/squiddioKaps.cpp
+    src/sJSON.cpp
+    src/sJSON.h
+    src/icons.h
+    src/icons.cpp
+    src/logs.cpp
+    src/logs.h
+    src/NavObjectCollection.h
+    src/NavObjectCollection.cpp
+    src/Poi.h
+    src/Poi.cpp
+    src/PoiMan.h
+    src/PoiMan.cpp
+    src/Layer.h
+    src/pugixml.hpp
+    src/pugixml.cpp
+    src/ocpn_types.h
+    src/pugiconfig.hpp
+    src/Hyperlink.h
+    src/gpxdocument.h
+    src/wxJSON/jsonval.cpp
+    src/wxJSON/jsonreader.cpp
+    src/wxJSON/json_defs.h
+    src/wxJSON/jsonreader.h
+    src/wxJSON/jsonval.h
+    src/wxJSON/jsonwriter.cpp
+    src/wxJSON/jsonwriter.h
+  )
+
+SET(SRC_NMEA0183
+    src/nmea0183/LatLong.hpp
+    src/nmea0183/latlong.cpp
+    src/nmea0183/long.cpp
+    src/nmea0183/nmea0183.cpp
+    src/nmea0183/nmea0183.hpp
+    src/nmea0183/Response.hpp
+    src/nmea0183/response.cpp
+    src/nmea0183/RMB.hpp
+    src/nmea0183/rmb.cpp
+    src/nmea0183/Sentence.hpp
+    src/nmea0183/sentence.cpp
+    src/nmea0183/talkerid.cpp
+    src/nmea0183/RMC.HPP
+    src/nmea0183/rmc.cpp
+    src/nmea0183/hexvalue.cpp
+    src/nmea0183/lat.cpp
+    src/nmea0183/expid.cpp
+    src/nmea0183/wpl.hpp
+    src/nmea0183/wpl.cpp
+    src/nmea0183/rte.hpp
+    src/nmea0183/rte.cpp
+    src/nmea0183/hdt.hpp
+    src/nmea0183/hdt.cpp
+    src/nmea0183/hdg.hpp
+    src/nmea0183/hdg.cpp
+    src/nmea0183/hdm.hpp
+    src/nmea0183/hdm.cpp
+    src/nmea0183/gll.hpp
+    src/nmea0183/gll.cpp
+    src/nmea0183/vtg.hpp
+    src/nmea0183/vtg.cpp
+    src/nmea0183/gga.hpp
+    src/nmea0183/gga.cpp
+    src/nmea0183/gsv.hpp
+    src/nmea0183/gsv.cpp
+    src/nmea0183/dbt.cpp
+    src/nmea0183/dbt.hpp
+    src/nmea0183/dpt.cpp
+    src/nmea0183/dpt.hpp
+    src/nmea0183/mtw.cpp
+    src/nmea0183/mtw.hpp
+    src/nmea0183/mwv.cpp
+    src/nmea0183/mwv.hpp
+    src/nmea0183/vhw.hpp
+    src/nmea0183/vhw.cpp
+    src/nmea0183/vwr.cpp
+    src/nmea0183/vwr.hpp
+    src/nmea0183/zda.cpp
+    src/nmea0183/zda.hpp
+    src/nmea0183/rsa.hpp
+    src/nmea0183/rsa.cpp
+    src/nmea0183/SatInfo.h
+    src/nmea0183/mwd.cpp
+    src/nmea0183/mwd.hpp
+    src/nmea0183/vwt.cpp
+    src/nmea0183/vwt.hpp
+    src/nmea0183/mta.cpp
+    src/nmea0183/mta.hpp
+    src/nmea0183/vlw.cpp
+    src/nmea0183/vlw.hpp
+    src/nmea0183/mda.cpp
+    src/nmea0183/mda.hpp
+  )
+INCLUDE_DIRECTORIES(nmea0183)
+INCLUDE_DIRECTORIES(src/wxJSON)
+INCLUDE_DIRECTORIES(api-16)
 
 
-##-----------Testplugin Specific Files --------------------##
+##----------Above From Squiddio ------------------
 
+##=============REMOVE THESE LINES LEFT FROM TESTPLUGIN ================
+#add_definitions(-DUSE_S57)
 #set(SRCS
 #    src/tpdc.cpp
-#...
+#    ...
 #    src/tpUtils.cpp)
-
+#
 #set(HDRS
 #    include/testplugin_pi.h
-#...
+#    ...
 #    include/tpUtils.h)
-
+#
+#
 #set(OCPNSRC ocpnsrc/TexFont.cpp)
 #set(OCPNHDRS ocpninclude/ocpn_plugin.h ocpninclude/pluginmanager.h ocpninclude/TexFont.h)
-
 #set(EXTSRC)
-
 #set(EXTINCLUDE
 #    extinclude/nlohmann/json.hpp
 #    extinclude/ODAPI.h)
-
-#set(LIBSSRC 
-#...
-#libs/wxJSON/src/jsonwriter.cpp)
-
+#set(LIBSSRC libs/wxJSON/src/jsonreader.cpp libs/wxJSON/src/jsonval.cpp libs/wxJSON/src/jsonwriter.cpp)
 #set(LIBHDRS
 #    libs/GL/include/gl.h
-#...
+#    ...
 #    libs/wx/include/jsonwriter.h)
-
-add_definitions(-DPLUGIN_USE_SVG)
-
-##
-##---- Section needed for Testplugin operations -----------------##
-##  
+#
+# add_definitions(-DPLUGIN_USE_SVG)
+#
 #IF(APPLE)
-#    OPTION(#"Use JSON Schema validator" OFF)
+#    OPTION(TP_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" OFF)
 #ELSE(APPLE)
 #    OPTION(TP_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" ON)
 #ENDIF(APPLE)
 
 #IF(TP_JSON_SCHEMA_VALIDATOR)
-#    MESSAGE(STATUS "Using JSON Schema validation - warning this changes the 'flavour' of the executable and it may not be compatible with OpenCPN")
-#    ADD_DEFINITIONS(-DTP_JSON_SCHEMA_VALIDATOR)
-#    MESSAGE(STATUS "Adding JSON Schema validation")
-
-#    SET(EXTSRC
-#        ${EXTSRC}
-#        extsrc/json-schema-validator/json-schema-draft7.json.cpp
-#        extsrc/json-schema-validator/json-uri.cpp
-#        extsrc/json-schema-validator/json-validator.cpp
-#    )
-#    SET(EXTINCLUDE
-#        ${EXTINCLUDE}
-#        extinclude/nlohmann/json.hpp
-#        extinclude/json-schema-validator/json-schema.hpp
-#    )
-#    INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/extinclude/json-schema-validator)
-#ELSE(TP_JSON_SCHEMA_VALIDATOR)
-#    MESSAGE(STATUS "Not using JSON Schema validation - warning invalid JSON 'may' cause unexpected crashes")
+#...
 #ENDIF(TP_JSON_SCHEMA_VALIDATOR)
 
 #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/extinclude)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wx/include)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude/wxcurl)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude/wxcurl/include)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpnsrc/lz4)
+#...
 #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpnsrc/bitmaps)
-
-#add_library(${PACKAGE_NAME} SHARED ${SRCS} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSSRC})
-
-add_definitions(-DTIXML_USE_STL)
 
 #IF(UNIX AND NOT APPLE)
 #  IF(TP_JSON_SCHEMA_VALIDATOR)
-#    # Change OS/ABI to be UNIX - System V to make it run with OCPN
-#    SET(lib_name lib${PACKAGE_NAME}.so)
-#    MESSAGE(STATUS "lib-name: ${lib_name}")
-#    FIND_FILE(elfedit elfedit)
-#    IF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-#      MESSAGE(STATUS "Will ensure OS/ABI is set to 0 to match OCPN")
-#      ADD_CUSTOM_COMMAND(
-#        TARGET ${PACKAGE_NAME}
-#        POST_BUILD
-#        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-#        DEPENDS ${PACKAGE_NAME}
-#        COMMENT " Running post build action on ${lib_name}."
-#        COMMAND sh -c 'elfedit --input-osabi=Linux --output-osabi=none ${lib_name} || (echo 0) '
-#      )
-#    ELSE(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-#      MESSAGE(STATUS "Cannot correct OS/ABI to match OCPN if it is generated incorrectly. Package binutils needed")
-#    ENDIF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+#  ... 
 #  ENDIF(TP_JSON_SCHEMA_VALIDATOR)
 #ENDIF(UNIX AND NOT APPLE)
+## ========== REMOVE Lines above left over from TestPlugin ==================
+
+
+##
+## ----- Change below to match project requirements ----- ##
+##
+##================================================================================
+## Required to collect all the set( headers and SRCS  - Adjust as required
+## This add_library  is used in the conditionals below.
+##================================================================================
+##    add_library(${PACKAGE_NAME} SHARED ${SRCS}  ${SRC_NMEA0183})
+##================================================================================
+
+ADD_DEFINITIONS(-DTIXML_USE_STL)
+IF(UNIX AND NOT APPLE)
+    INCLUDE("cmake/FindTinyXML.cmake")
+    FIND_PACKAGE(TinyXML QUIET)
+ENDIF(UNIX AND NOT APPLE)
+
+IF(TINYXML_FOUND)
+    message (STATUS "Building with system tinyxml")
+    INCLUDE_DIRECTORIES(${TINYXML_INCLUDE_DIR})
+    ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRCS} ${SRC_NMEA0183})
+    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${TINYXML_LIBRARIES} )
+ELSE(TINYXML_FOUND)
+    message (STATUS "Building with embedded tinyxml")
+    SET(SRC_LTINYXML
+    src/tinyxml.h
+    src/tinystr.h
+      )
+    ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRCS} ${SRC_NMEA0183} ${SRC_LTINYXML})
+ENDIF(TINYXML_FOUND)
+
 
 ##
 ## ----- Change above to match project requirements ----- ##
-## ++++++++++ Includes from weatherfax cmake  +++++++++++++## 
-
-#INCLUDE("cmake/PluginNMEA.cmake")   #No not for wxfax
-INCLUDE("cmake/PluginJSON.cmake")#
-INCLUDE("cmake/PluginXML.cmake")
-INCLUDE("cmake/PluginGL.cmake")
+##
 
 ##
-## ----- do not change - needed to build app ----- ##
+## ----- Do not change - needed to build app ----- ##
 ##
 
 include("cmake/PluginInstall.cmake")

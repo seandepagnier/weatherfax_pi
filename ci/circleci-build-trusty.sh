@@ -5,7 +5,7 @@
 #
 set -xe
 sudo apt-get -qq update
-sudo apt-get install devscripts equivs gdebi
+sudo apt-get install devscripts equivs gdebi libglu1-mesa-dev
 
 rm -rf build && mkdir build && cd build
 mk-build-deps ../ci/control
