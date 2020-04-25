@@ -281,113 +281,22 @@ ENDIF (MSVC)
   
 SET(SRC_WEATHERFAX
             src/weatherfax_pi.cpp
-				
             src/FaxDecoder.cpp
             src/DecoderOptionsDialog.cpp
             src/WeatherFax.cpp
             src/WeatherFaxWizard.cpp
             src/WeatherFaxUI.cpp
-						
             src/WeatherFaxImage.cpp
             src/SchedulesDialog.cpp
             src/InternetRetrievalDialog.cpp
-						
             src/AboutDialog.cpp
             src/icons.cpp
-
             src/wximgkap.cpp
 )
-
-SET(SRC_AUDIOFILE
-            src/libaudiofile/aupv.c
-            src/libaudiofile/error.c
-            src/libaudiofile/extended.c
-            src/libaudiofile/g711.c
- 
-            src/libaudiofile/AIFF.cpp
-            src/libaudiofile/AVR.cpp
-            src/libaudiofile/CAF.cpp
-            src/libaudiofile/IFF.cpp
-            src/libaudiofile/IRCAM.cpp
-            src/libaudiofile/NIST.cpp
-            src/libaudiofile/NeXT.cpp
-            src/libaudiofile/Raw.cpp
-            src/libaudiofile/SampleVision.cpp
-            src/libaudiofile/VOC.cpp
-
-            src/libaudiofile/AudioFormat.cpp
-            src/libaudiofile/Buffer.cpp
-            src/libaudiofile/FLACFile.cpp
-            src/libaudiofile/File.cpp
-            src/libaudiofile/FileHandle.cpp
-            src/libaudiofile/Instrument.cpp
-            src/libaudiofile/Loop.cpp
-            src/libaudiofile/Marker.cpp
-            src/libaudiofile/Miscellaneous.cpp
-            src/libaudiofile/Setup.cpp
-            src/libaudiofile/Track.cpp
-            src/libaudiofile/UUID.cpp
-            src/libaudiofile/WAVE.cpp
-            src/libaudiofile/aes.cpp
-            src/libaudiofile/af_vfs.cpp
-            src/libaudiofile/compression.cpp
-            src/libaudiofile/data.cpp
-            src/libaudiofile/debug.cpp
-            src/libaudiofile/format.cpp
-            src/libaudiofile/openclose.cpp
-            src/libaudiofile/PacketTable.cpp
-            src/libaudiofile/pcm.cpp
-            src/libaudiofile/query.cpp
-            src/libaudiofile/units.cpp
-            src/libaudiofile/util.cpp
-
-            src/libaudiofile/alac/ALACEncoder.cpp
-            src/libaudiofile/alac/ALACDecoder.cpp
-            src/libaudiofile/alac/ag_dec.c
-            src/libaudiofile/alac/ag_enc.c
-            src/libaudiofile/alac/ALACBitUtilities.c
-            src/libaudiofile/alac/dp_dec.c
-            src/libaudiofile/alac/dp_enc.c
-            src/libaudiofile/alac/EndianPortable.c
-            src/libaudiofile/alac/matrix_dec.c
-            src/libaudiofile/alac/matrix_enc.c
-            
-            src/libaudiofile/modules/ALAC.cpp
-            src/libaudiofile/modules/BlockCodec.cpp            
-            src/libaudiofile/modules/FLAC.cpp
-            src/libaudiofile/modules/FileModule.cpp
-            src/libaudiofile/modules/G711.cpp
-            src/libaudiofile/modules/IMA.cpp
-            src/libaudiofile/modules/MSADPCM.cpp
-            src/libaudiofile/modules/Module.cpp
-            src/libaudiofile/modules/ModuleState.cpp
-            src/libaudiofile/modules/PCM.cpp
-            src/libaudiofile/modules/RebufferModule.cpp
-            src/libaudiofile/modules/SimpleModule.cpp
-)
-
-## --------------------Section above is direct from Weatherfax -----------##
-## --------------------Section below added recently to Weatherfax set -----##
-#  not needed see PluginGL Line 594
-#SET (SRC_PLUGINGL
-#           src/plugingl/pi_shaders.cpp
-#			src/plugingl/pidc.cpp
-#			src/plugingl/qtstylesheet.cpp
-#			src/plugingl/TexFont.cpp
-#)
-
-#  not needed see PluginXML Line 593
-#SET (SRC_TINYXML
-#           src/tinyxml/tinyxml.cpp
-#			src/tinyxml/tinyxmlerror.cpp
-#			src/tinyxml/tinyxmlparser.cpp
-#)
-#
 
 # Added by Rick recently
 SET (HDRS
             api-16/ocpn_plugin.h
-			
 			src/AboutDialog.h
 			src/DecoderOptionsDialog.h
 			src/defs.h
@@ -403,7 +312,6 @@ SET (HDRS
 			src/WeatherFaxUI.h
 			src/WeatherFaxWizard.h
 			src/wximgkap.h
-			
 			src/libaudiofile/af_vfs.h
 			src/libaudiofile/afinternal.h
 			src/libaudiofile/AIFF.h
@@ -445,7 +353,6 @@ SET (HDRS
 			src/libaudiofile/UUID.h
 			src/libaudiofile/VOC.h
 			src/libaudiofile/WAVE.h
-
 			src/libaudiofile/alac/ALACAudioTypes.h
 			src/libaudiofile/alac/ALACBitUtilities.h
 			src/libaudiofile/alac/ALACDecoder.h
@@ -453,7 +360,6 @@ SET (HDRS
 			src/libaudiofile/alac/dplib.h
 			src/libaudiofile/alac/EndianPortable.h
 			src/libaudiofile/alac/matrixlib.h
-
 			src/libaudiofile/modules/ALAC.h
 			src/libaudiofile/modules/BlockCodec.h
 			src/libaudiofile/modules/FileModule.h
@@ -466,15 +372,95 @@ SET (HDRS
 			src/libaudiofile/modules/PCM.h
 			src/libaudiofile/modules/RebufferModule.h
 			src/libaudiofile/modules/SimpleModule.h
-
 			src/plugingl/linmath.h
 			src/plugingl/pi_shaders.h
 			src/plugingl/pidc.h
 			src/plugingl/qtstylesheet.h
 			src/plugingl/TexFont.h
-
 			src/tinyxml/tinyxml.h
 )			
+
+
+SET(SRC_AUDIOFILE
+            src/libaudiofile/aupv.c
+            src/libaudiofile/error.c
+            src/libaudiofile/extended.c
+            src/libaudiofile/g711.c
+            src/libaudiofile/AIFF.cpp
+            src/libaudiofile/AVR.cpp
+            src/libaudiofile/CAF.cpp
+            src/libaudiofile/IFF.cpp
+            src/libaudiofile/IRCAM.cpp
+            src/libaudiofile/NIST.cpp
+            src/libaudiofile/NeXT.cpp
+            src/libaudiofile/Raw.cpp
+            src/libaudiofile/SampleVision.cpp
+            src/libaudiofile/VOC.cpp
+            src/libaudiofile/AudioFormat.cpp
+            src/libaudiofile/Buffer.cpp
+            src/libaudiofile/FLACFile.cpp
+            src/libaudiofile/File.cpp
+            src/libaudiofile/FileHandle.cpp
+            src/libaudiofile/Instrument.cpp
+            src/libaudiofile/Loop.cpp
+            src/libaudiofile/Marker.cpp
+            src/libaudiofile/Miscellaneous.cpp
+            src/libaudiofile/Setup.cpp
+            src/libaudiofile/Track.cpp
+            src/libaudiofile/UUID.cpp
+            src/libaudiofile/WAVE.cpp
+            src/libaudiofile/aes.cpp
+            src/libaudiofile/af_vfs.cpp
+            src/libaudiofile/compression.cpp
+            src/libaudiofile/data.cpp
+            src/libaudiofile/debug.cpp
+            src/libaudiofile/format.cpp
+            src/libaudiofile/openclose.cpp
+            src/libaudiofile/PacketTable.cpp
+            src/libaudiofile/pcm.cpp
+            src/libaudiofile/query.cpp
+            src/libaudiofile/units.cpp
+            src/libaudiofile/util.cpp
+            src/libaudiofile/alac/ALACEncoder.cpp
+            src/libaudiofile/alac/ALACDecoder.cpp
+            src/libaudiofile/alac/ag_dec.c
+            src/libaudiofile/alac/ag_enc.c
+            src/libaudiofile/alac/ALACBitUtilities.c
+            src/libaudiofile/alac/dp_dec.c
+            src/libaudiofile/alac/dp_enc.c
+            src/libaudiofile/alac/EndianPortable.c
+            src/libaudiofile/alac/matrix_dec.c
+            src/libaudiofile/alac/matrix_enc.c
+            src/libaudiofile/modules/ALAC.cpp
+            src/libaudiofile/modules/BlockCodec.cpp            
+            src/libaudiofile/modules/FLAC.cpp
+            src/libaudiofile/modules/FileModule.cpp
+            src/libaudiofile/modules/G711.cpp
+            src/libaudiofile/modules/IMA.cpp
+            src/libaudiofile/modules/MSADPCM.cpp
+            src/libaudiofile/modules/Module.cpp
+            src/libaudiofile/modules/ModuleState.cpp
+            src/libaudiofile/modules/PCM.cpp
+            src/libaudiofile/modules/RebufferModule.cpp
+            src/libaudiofile/modules/SimpleModule.cpp
+)
+
+## --------------------Section above is direct from Weatherfax -----------##
+## --------------------Section below added recently to Weatherfax set -----##
+#  not needed see PluginGL Line 594
+SET (SRC_PLUGINGL
+           src/plugingl/pi_shaders.cpp
+			src/plugingl/pidc.cpp
+			src/plugingl/qtstylesheet.cpp
+			src/plugingl/TexFont.cpp
+)
+
+#  not needed see PluginXML Line 593
+SET (SRC_TINYXML
+           src/tinyxml/tinyxml.cpp
+			src/tinyxml/tinyxmlerror.cpp
+			src/tinyxml/tinyxmlparser.cpp
+)
 
 
 ## +++++++++Section above is added recently to Weatherfax set ++++++++++##
@@ -486,11 +472,7 @@ IF(UNIX)
     )
   IF(RTLSDR_LIBRARY)
     MESSAGE (STATUS "Found rtlsdr:  ${RTLSDR_LIBRARY}")
-																											
-							   
-
     ADD_DEFINITIONS( "-DBUILTIN_RTLAIS" )
-
 
     SET(PLUGINS_LIBS ${PLUGINS_LIBS} ${RTLSDR_LIBRARY})
   ELSE()
@@ -515,11 +497,10 @@ IF(WIN32)
 ENDIF(WIN32)
 
 INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/libaudiofile)
-# INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/include)   #this does not seem to work. Need to include  include/GL
 
+# INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/include)   #this does not seem to work. Need to include  include/GL
 # ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} ${HDRS} )
 # ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${HDRS} )
-
 # TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 
 
@@ -561,6 +542,9 @@ INCLUDE_DIRECTORIES(api-16)
 
 INCLUDE_DIRECTORIES (src/plugingl)
 
+add_library(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_NMEA0183})
+
+
 ADD_DEFINITIONS(-DTIXML_USE_STL)
 IF(UNIX AND NOT APPLE)
     INCLUDE("cmake/FindTinyXML.cmake")
@@ -580,7 +564,7 @@ ELSE(TINYXML_FOUND)
     src/tinystr.h
       )
 #   ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRCS} ${SRC_NMEA0183} ${SRC_LTINYXML})
-    ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${HDRS} )
+    ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_PLUGINGL} ${SRC_TINYXML} ${SRC_AUDIOFILE} ${HDRS} )
 
 ENDIF(TINYXML_FOUND)
 
