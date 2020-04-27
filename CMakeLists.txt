@@ -45,15 +45,15 @@ SET(PACKAGE "weatherfax_pi")
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "4")
-set(VERSION_TWEAK "3")
-set(VERSION_DATE "04/26/2020")
+set(VERSION_TWEAK "4")
+set(VERSION_DATE "04/27/2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
 
 set(PARENT "opencpn")
 
-#set(GIT_USER "mauroc")
+#set(GIT_USER "seandepagnier")
 #set(GIT_USER "jongough")
 set(GIT_USER "rgleason")
 
@@ -235,9 +235,6 @@ endif()
 #
 # ----- Modify section above for special plugin requirements----- ##
 #
-
-# Is this needed?
-#add_definitions(-DUSE_S57)
 
 #======== Portaudio Section below direct from weatherfax_pi =======
 IF (UNIX)
@@ -460,10 +457,6 @@ SET (SRC_TINYXML
 			src/tinyxml/tinyxmlparser.cpp
 )
 
-#INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/libaudiofile)
-#INCLUDE_DIRECTORIES (BEFORE ${PLUGIN_SOURCE_DIR}/src/plugingl)
-#INCLUDE_DIRECTORIES (BEFORE ${PLUGIN_SOURCE_DIR}/api-16)
-
 ## +++++++++Section above is added recently to Weatherfax set ++++++++++##
 ##++++++++++++RTLSDR Section directly from Weatherfax +++++++++##
 
@@ -496,24 +489,9 @@ IF(WIN32)
     ENDIF()
 ENDIF(WIN32)
 
-#<<<<<<< HEAD
-# INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/libaudiofile)
-# INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/plugingl)
-#=======
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
-#>>>>>>> cd6536706b0d0abebf37fd297f1826b3a3b13c3c
-
-#INCLUDE_DIRECTORIES( /src/libaudiofile )
-#INCLUDE_DIRECTORIES( /src/libaudiofile/audiofile.h )
-#INCLUDE_DIRECTORIES( ${PLUGIN_SOURCE_DIR}/src/libaudiofile)
-#INCLUDE_DIRECTORIES (src/plugingl)
-#<<<<<<< HEAD
-#INCLUDE_DIRECTORIES(api-16)
-#=======
 INCLUDE_DIRECTORIES(api-16)
-#>>>>>>> cd6536706b0d0abebf37fd297f1826b3a3b13c3c
-# INCLUDE_DIRECTORIES (BEFORE ${PROJECT_    PLUGIN_SOURCE_DIR}/api-16)
 
 ##================================================================================
 ## Required to collect all the set( headers and SRCS  - Adjust as required
@@ -522,18 +500,12 @@ INCLUDE_DIRECTORIES(api-16)
 ##    add_library(${PACKAGE_NAME} SHARED ${SRCS}  ${SRC_NMEA0183})
 ##================================================================================
 
-# ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} )
-# ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} )
-
 ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
-# TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 
 ##++++++++++Section above from Weatherfax located relative to where it was  ++++++++
-
 ##
 ## ----- Change below to match project requirements ----- ##
 ##
-
 
 if(WIN32)
     if(MSVC)
@@ -541,128 +513,12 @@ if(WIN32)
     endif(MSVC)
 endif(WIN32)
 
-# ADD_DEFINITIONS(-DTIXML_USE_STL)
-
-#IF(UNIX AND NOT APPLE)
-#    INCLUDE("cmake/FindTinyXML.cmake")
-#    FIND_PACKAGE(TinyXML QUIET)
-#ENDIF(UNIX AND NOT APPLE)
-
-#IF(TINYXML_FOUND)
-#    message (STATUS "Building with system tinyxml")
-#    INCLUDE_DIRECTORIES(${TINYXML_INCLUDE_DIR})
-##   ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
-#    ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${HDRS} )
-#    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${TINYXML_LIBRARIES} )
-#ELSE(TINYXML_FOUND)
-#    message (STATUS "Building with embedded tinyxml")
-#    SET(SRC_LTINYXML
-#    src/tinyxml.h
-#    src/tinystr.h
-#      )
-#   ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
-#ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_PLUGINGL} ${SRC_TINYXML} ${SRC_AUDIOFILE} ${HDRS} )
-#ENDIF(TINYXML_FOUND)
-
-# ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC})
-#Add_Library (${PACKAGE_NAME} is used below. Cannot use same name.
-
-#IF(NOT UNIX)
-#    SET(SRC_BZIP	
-#            src/bzip2/bzlib.c
-#            src/bzip2/blocksort.c
-#            src/bzip2/compress.c
-#            src/bzip2/crctable.c
-#            src/bzip2/decompress.c
-#            src/bzip2/huffman.c
-#            src/bzip2/randtable.c
-#			src/bzip2/bzlib_private.h
-#    )
-#    ADD_LIBRARY(LIB_BZIP_WR STATIC ${SRC_BZIP})
-#    TARGET_LINK_LIBRARIES( ${PACKAGE_NAME} LIB_BZIP_WR )
-#    INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/bzip2)
-#ENDIF(NOT UNIX)
-
-#IF(NOT UNIX)
-#    INCLUDE_DIRECTORIES(src/zlib-1.2.3)
-#    INCLUDE_DIRECTORIES(src/bzip2)
-#ENDIF(NOT UNIX)
-
-#IF(WIN32)
-#  IF(MSVC)
-#    INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/buildwin/include)
-#    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} "${CMAKE_SOURCE_DIR}/buildwin/zlib1.lib")
-#  ELSE()
-#    # MINGW
-##    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} "-lwxzlib-2.8")
-#    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} "-lz")
-#  ENDIF()
-#ENDIF()
-
-# ADD_DEFINITIONS(-DTIXML_USE_STL)
-
-#IF(UNIX AND NOT APPLE)
-#    INCLUDE("cmake/FindTinyXML.cmake")
-#    FIND_PACKAGE(TinyXML QUIET)
-#ENDIF(UNIX AND NOT APPLE)
-
-#IF(TINYXML_FOUND)
-#    message (STATUS "Building with system tinyxml")
-#    INCLUDE_DIRECTORIES(${TINYXML_INCLUDE_DIR})
-##   ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
-#    ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${HDRS} )
-#    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${TINYXML_LIBRARIES} )
-#ELSE(TINYXML_FOUND)
-#    message (STATUS "Building with embedded tinyxml")
-#    SET(SRC_LTINYXML
-#    src/tinyxml.h
-#    src/tinystr.h
-#      )
-#   ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
-#ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_PLUGINGL} ${SRC_TINYXML} ${SRC_AUDIOFILE} ${HDRS} )
-#ENDIF(TINYXML_FOUND)
-
-# ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC})
-#Add_Library (${PACKAGE_NAME} is used below. Cannot use same name.
-
-#IF(NOT UNIX)
-#    SET(SRC_BZIP	
-#            src/bzip2/bzlib.c
-#            src/bzip2/blocksort.c
-#            src/bzip2/compress.c
-#            src/bzip2/crctable.c
-#            src/bzip2/decompress.c
-#            src/bzip2/huffman.c
-#            src/bzip2/randtable.c
-#			src/bzip2/bzlib_private.h
-#    )
-#    ADD_LIBRARY(LIB_BZIP_WR STATIC ${SRC_BZIP})
-#    TARGET_LINK_LIBRARIES( ${PACKAGE_NAME} LIB_BZIP_WR )
-#    INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/bzip2)
-#ENDIF(NOT UNIX)
-
-#IF(NOT UNIX)
-#    INCLUDE_DIRECTORIES(src/zlib-1.2.3)
-#    INCLUDE_DIRECTORIES(src/bzip2)
-#ENDIF(NOT UNIX)
-
-#IF(WIN32)
-#  IF(MSVC)
-#    INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/buildwin/include)
-#    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} "${CMAKE_SOURCE_DIR}/buildwin/zlib1.lib")
-#  ELSE()
-#    # MINGW
-##    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} "-lwxzlib-2.8")
-#    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} "-lz")
-#  ENDIF()
-#ENDIF()
-
 # ----- Change above to match project requirements ----- ##
 #--------REMOVE LN 194 to LN 296 from Testplugin_pi---------------
 #------- Change below to match project requirements --------------#
 
 #----INCLUDE CMAKE #3 & #4 -----
-#  INCLUDE("cmake/PluginNMEA.cmake") #not for wxfax
+# INCLUDE("cmake/PluginNMEA.cmake") #not for wxfax
 # INCLUDE("cmake/PluginJSON.cmake")  #not for wxfax
 INCLUDE("cmake/PluginXML.cmake")
 INCLUDE("cmake/PluginGL.cmake")
