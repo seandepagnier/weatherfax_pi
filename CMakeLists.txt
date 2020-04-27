@@ -251,7 +251,7 @@ INCLUDE("cmake/FindPortaudio.cmake")
 IF (PORTAUDIO_FOUND)
     MESSAGE (STATUS "Portaudio Found")
     INCLUDE_DIRECTORIES(BEFORE ${PORTAUDIO_INCLUDE_DIRS})
-    SET(PLUGINS_LIBS ${PLUGINS_LIBS} ${PORTAUDIO_LIBRARIES})
+    SET(EXTRA_LIBS ${EXTRA_LIBS} ${PORTAUDIO_LIBRARIES})
     ADD_DEFINITIONS(${PORTAUDIO_DEFINITIONS})
     ADD_DEFINITIONS(-DOCPN_USE_PORTAUDIO)
 ELSE (PORTAUDIO_FOUND)
@@ -260,12 +260,13 @@ ENDIF (PORTAUDIO_FOUND)
 ELSE (UNIX)
     INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/include)
     IF(STANDALONE MATCHES "BUNDLED")
-	# within OpenCPN tree
-    	SET(PLUGINS_LIBS ${EXTRA_LIBS} ../../buildwin/portaudio_x86)
+        # within OpenCPN tree
+        SET(EXTRA_LIBS ${EXTRA_LIBS} ../../buildwin/portaudio_x86)
     	INSTALL(FILES "../../buildwin/portaudio_x86.dll" DESTINATION ".")
     ELSE()
-    	SET(PLUGINS_LIBS ${EXTRA_LIBS} ../buildwin/portaudio_x86)
+        SET(EXTRA_LIBS ${EXTRA_LIBS} ../buildwin/portaudio_x86)
     	INSTALL(FILES "buildwin/portaudio_x86.dll" DESTINATION ".")
+    	message(STATUS "Not Bundled: Portaudio")
     ENDIF()
 
     ADD_DEFINITIONS(-DOCPN_USE_PORTAUDIO)
@@ -493,16 +494,15 @@ IF(WIN32)
     ELSE()
 	INSTALL(FILES "buildwin/PVW32Con.exe" DESTINATION "plugins\\\\${PACKAGE_NAME}")
     ENDIF()
-
 ENDIF(WIN32)
 
-INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/libaudiofile)
+INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
+MESSAGE(STATUS "PLUGINS_LIBS: ${PLUGINS_LIBS}")
 
 # INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/include)   #this does not seem to work. Need to include  include/GL
 # ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} ${HDRS} )
 # ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${HDRS} )
-# TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
-
+#TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 
 ##
 ##++++++++++Section above from Weatherfax located relative to where it was  ++++++++
@@ -567,6 +567,11 @@ ELSE(TINYXML_FOUND)
 
 ENDIF(TINYXML_FOUND)
 
+if(WIN32)
+    if(MSVC)
+        target_link_libraries(${PACKAGE_NAME} ${PORTAUDIO_LIBS})
+    endif(MSVC)
+endif(WIN32)
 
 # ----- Change above to match project requirements ----- ##
 #
