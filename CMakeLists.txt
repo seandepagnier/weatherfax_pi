@@ -496,14 +496,14 @@ IF(WIN32)
     ENDIF()
 ENDIF(WIN32)
 
-INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/libaudiofile)
-INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/plugingl)
+INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
+INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
 
 #INCLUDE_DIRECTORIES( /src/libaudiofile )
 #INCLUDE_DIRECTORIES( /src/libaudiofile/audiofile.h )
 #INCLUDE_DIRECTORIES( ${PLUGIN_SOURCE_DIR}/src/libaudiofile)
 #INCLUDE_DIRECTORIES (src/plugingl)
-#INCLUDE_DIRECTORIES(api-16)
+INCLUDE_DIRECTORIES(api-16)
 # INCLUDE_DIRECTORIES (BEFORE ${PLUGIN_SOURCE_DIR}/api-16)
 
 ##================================================================================
