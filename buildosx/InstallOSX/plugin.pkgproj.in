@@ -8,7 +8,7 @@
 			<key>PACKAGE_FILES</key>
 			<dict>
 				<key>DEFAULT_INSTALL_LOCATION</key>
-				<string>/</string>
+				<string>/Applications/OpenCPN.app/Contents</string>
 				<key>HIERARCHY</key>
 				<dict>
 					<key>CHILDREN</key>
@@ -22,105 +22,6 @@
 										<dict>
 											<key>CHILDREN</key>
 											<array>
-                                                <dict><!-- Here begins the file -->
-                                                    <key>CHILDREN</key>
-                                                    <array>
-                                                        <dict>
-                                                            <key>CHILDREN</key>
-                                                            <array/>
-                                                            <key>GID</key>
-                                                            <integer>80</integer>
-                                                            <key>PATH</key>
-                                                            <string>libportaudio.2.dylib</string>
-                                                            <key>PATH_TYPE</key>
-                                                            <integer>3</integer>
-                                                            <key>PERMISSIONS</key>
-                                                            <integer>493</integer>
-                                                            <key>TYPE</key>
-                                                            <integer>3</integer>
-                                                            <key>UID</key>
-                                                            <integer>0</integer>
-                                                        </dict>
-                                                    </array>
-                                                    <key>GID</key>
-                                                    <integer>80</integer>
-                                                    <key>PATH</key>
-                                                    <string>MacOS</string>
-                                                    <key>PATH_TYPE</key>
-                                                    <integer>0</integer>
-                                                    <key>PERMISSIONS</key>
-                                                    <integer>509</integer>
-                                                    <key>TYPE</key>
-                                                    <integer>2</integer>
-                                                    <key>UID</key>
-                                                    <integer>0</integer>
-                                                </dict><!-- Here ends the file -->
-                                                <dict><!-- Here begins the file -->
-                                                    <key>CHILDREN</key>
-                                                    <array>
-                                                        <dict>
-                                                            <key>CHILDREN</key>
-                                                            <array/>
-                                                            <key>GID</key>
-                                                            <integer>80</integer>
-                                                            <key>PATH</key>
-                                                            <string>librtlsdr.0.dylib</string>
-                                                            <key>PATH_TYPE</key>
-                                                            <integer>3</integer>
-                                                            <key>PERMISSIONS</key>
-                                                            <integer>493</integer>
-                                                            <key>TYPE</key>
-                                                            <integer>3</integer>
-                                                            <key>UID</key>
-                                                            <integer>0</integer>
-                                                        </dict>
-                                                    </array>
-                                                    <key>GID</key>
-                                                    <integer>80</integer>
-                                                    <key>PATH</key>
-                                                    <string>MacOS</string>
-                                                    <key>PATH_TYPE</key>
-                                                    <integer>0</integer>
-                                                    <key>PERMISSIONS</key>
-                                                    <integer>509</integer>
-                                                    <key>TYPE</key>
-                                                    <integer>2</integer>
-                                                    <key>UID</key>
-                                                    <integer>0</integer>
-                                                </dict><!-- Here ends the file -->
-                                                <dict><!-- Here begins the file -->
-                                                    <key>CHILDREN</key>
-                                                    <array>
-                                                        <dict>
-                                                            <key>CHILDREN</key>
-                                                            <array/>
-                                                            <key>GID</key>
-                                                            <integer>80</integer>
-                                                            <key>PATH</key>
-                                                            <string>libusb-1.0.dylib</string>
-                                                            <key>PATH_TYPE</key>
-                                                            <integer>3</integer>
-                                                            <key>PERMISSIONS</key>
-                                                            <integer>493</integer>
-                                                            <key>TYPE</key>
-                                                            <integer>3</integer>
-                                                            <key>UID</key>
-                                                            <integer>0</integer>
-                                                        </dict>
-                                                    </array>
-                                                    <key>GID</key>
-                                                    <integer>80</integer>
-                                                    <key>PATH</key>
-                                                    <string>MacOS</string>
-                                                    <key>PATH_TYPE</key>
-                                                    <integer>0</integer>
-                                                    <key>PERMISSIONS</key>
-                                                    <integer>509</integer>
-                                                    <key>TYPE</key>
-                                                    <integer>2</integer>
-                                                    <key>UID</key>
-                                                    <integer>0</integer>
-                                                </dict><!-- Here ends the file -->
 												<dict>
 													<key>CHILDREN</key>
 													<array>
@@ -161,7 +62,24 @@
 													<key>GID</key>
 													<integer>80</integer>
 													<key>PATH</key>
-													<string>PlugIns</string>
+													<string>Plugins</string>
+													<key>PATH_TYPE</key>
+													<integer>0</integer>
+													<key>PERMISSIONS</key>
+													<integer>509</integer>
+													<key>TYPE</key>
+													<integer>2</integer>
+													<key>UID</key>
+													<integer>0</integer>
+												</dict>
+												<dict>
+													<key>CHILDREN</key>
+													<array>
+													</array>
+													<key>GID</key>
+													<integer>80</integer>
+													<key>PATH</key>
+													<string>Resources</string>
 													<key>PATH_TYPE</key>
 													<integer>0</integer>
 													<key>PERMISSIONS</key>
@@ -174,73 +92,6 @@
 												<dict>
 													<key>CHILDREN</key>
 													<array/>
-													<key>GID</key>
-													<integer>80</integer>
-													<key>PATH</key>
-													<string>Resources</string>
-													<key>PATH_TYPE</key>
-													<integer>3</integer>
-													<key>PERMISSIONS</key>
-													<integer>493</integer>
-													<key>TYPE</key>
-													<integer>3</integer>
-													<key>UID</key>
-													<integer>0</integer>
-												</dict>
-												<dict>
-													<key>CHILDREN</key>
-													<array>
-														<dict>
-															<key>CHILDREN</key>
-															<array>
-																<dict>
-																	<key>CHILDREN</key>
-																	<array>
-																		<dict>
-																			<key>CHILDREN</key>
-																			<array/>
-																			<key>GID</key>
-																			<integer>80</integer>
-																			<key>PATH</key>
-																			<string>../data</string>
-																			<key>PATH_TYPE</key>
-																			<integer>3</integer>
-																			<key>PERMISSIONS</key>
-																			<integer>493</integer>
-																			<key>TYPE</key>
-																			<integer>3</integer>
-																			<key>UID</key>
-																			<integer>0</integer>
-																		</dict>
-																	</array>
-																	<key>GID</key>
-																	<integer>80</integer>
-																	<key>PATH</key>
-																	<string>${PACKAGE_NAME}</string>
-																	<key>PATH_TYPE</key>
-																	<integer>0</integer>
-																	<key>PERMISSIONS</key>
-																	<integer>509</integer>
-																	<key>TYPE</key>
-																	<integer>2</integer>
-																	<key>UID</key>
-																	<integer>0</integer>
-																</dict>
-															</array>
-															<key>GID</key>
-															<integer>80</integer>
-															<key>PATH</key>
-															<string>PlugIns</string>
-															<key>PATH_TYPE</key>
-															<integer>0</integer>
-															<key>PERMISSIONS</key>
-															<integer>509</integer>
-															<key>TYPE</key>
-															<integer>2</integer>
-															<key>UID</key>
-															<integer>0</integer>
-														</dict>
-													</array>
 													<key>GID</key>
 													<integer>80</integer>
 													<key>PATH</key>
@@ -700,73 +551,6 @@
 							<key>UID</key>
 							<integer>0</integer>
 						</dict>
-						<dict>
-							<key>CHILDREN</key>
-							<array>
-								<dict>
-									<key>CHILDREN</key>
-									<array>
-										<dict>
-											<key>CHILDREN</key>
-											<array>
-												<dict>
-													<key>CHILDREN</key>
-													<array/>
-													<key>GID</key>
-													<integer>80</integer>
-													<key>PATH</key>
-													<string>/usr/local/lib/libportaudio.2.dylib</string>
-													<key>PATH_TYPE</key>
-													<integer>0</integer>
-													<key>PERMISSIONS</key>
-													<integer>493</integer>
-													<key>TYPE</key>
-													<integer>3</integer>
-													<key>UID</key>
-													<integer>0</integer>
-												</dict>
-											</array>
-											<key>GID</key>
-											<integer>80</integer>
-											<key>PATH</key>
-											<string>lib</string>
-											<key>PATH_TYPE</key>
-											<integer>0</integer>
-											<key>PERMISSIONS</key>
-											<integer>493</integer>
-											<key>TYPE</key>
-											<integer>2</integer>
-											<key>UID</key>
-											<integer>0</integer>
-										</dict>
-									</array>
-									<key>GID</key>
-									<integer>80</integer>
-									<key>PATH</key>
-									<string>local</string>
-									<key>PATH_TYPE</key>
-									<integer>0</integer>
-									<key>PERMISSIONS</key>
-									<integer>493</integer>
-									<key>TYPE</key>
-									<integer>2</integer>
-									<key>UID</key>
-									<integer>0</integer>
-								</dict>
-							</array>
-							<key>GID</key>
-							<integer>80</integer>
-							<key>PATH</key>
-							<string>usr</string>
-							<key>PATH_TYPE</key>
-							<integer>0</integer>
-							<key>PERMISSIONS</key>
-							<integer>493</integer>
-							<key>TYPE</key>
-							<integer>2</integer>
-							<key>UID</key>
-							<integer>0</integer>
-						</dict>
 					</array>
 					<key>GID</key>
 					<integer>0</integer>
@@ -808,7 +592,7 @@
 				<key>LOCATION</key>
 				<integer>0</integer>
 				<key>NAME</key>
-				<string>${VERBOSE_NAME}-Plugin</string>
+				<string>${VERBOSE_NAME}-Plugin_${PACKAGE_VERSION}-${OCPN_MIN_VERSION}-${OCPN_API_VERSION_MAJOR}.${OCPN_API_VERSION_MINOR}</string>
 				<key>OVERWRITE_PERMISSIONS</key>
 				<false/>
 				<key>USE_HFS+_COMPRESSION</key>
@@ -841,6 +625,22 @@
 		</dict>
 		<key>PROJECT_PRESENTATION</key>
 		<dict>
+			<key>BACKGROUND</key>
+			<dict>
+				<key>ALIGNMENT</key>
+				<integer>4</integer>
+				<key>BACKGROUND_PATH</key>
+				<dict>
+					<key>PATH</key>
+					<string>pkg_background.jpg</string>
+					<key>PATH_TYPE</key>
+					<integer>1</integer>
+				</dict>
+				<key>CUSTOM</key>
+				<integer>1</integer>
+				<key>SCALING</key>
+				<integer>1</integer>
+			</dict>
 			<key>INSTALLATION TYPE</key>
 			<dict>
 				<key>HIERARCHIES</key>
@@ -1484,7 +1284,7 @@
 				</dict>
 			</array>
 			<key>NAME</key>
-			<string>${VERBOSE_NAME}-Plugin_${PLUGIN_VERSION_MAJOR}.${PLUGIN_VERSION_MINOR}</string>
+			<string>${VERBOSE_NAME}-Plugin-${PACKAGE_VERSION}-${OCPN_MIN_VERSION}-${OCPN_API_VERSION_MAJOR}.${OCPN_API_VERSION_MINOR}</string>
 			<key>REFERENCE_FOLDER_PATH</key>
 			<string>.</string>
 		</dict>
@@ -1523,7 +1323,7 @@ chk_flag = (ocpn_vers &gt;= '3.3.1606'); }
 // return the check results
   return chk_flag;
   }
-</string>
+  </string>
 	</dict>
 	<key>TYPE</key>
 	<integer>0</integer>
