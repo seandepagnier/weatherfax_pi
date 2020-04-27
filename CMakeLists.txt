@@ -1,15 +1,13 @@
 # ---------------------------------------------------------------------------
-# Frontend2 Author: jongough aka. Jon Gough    License:wxWidgets License
-## CMakeLists and Frontend
-## Author: Jon Gough
-## Version: 0.0.3
-## Date: 04-09-2020
-##------------------------------------------------------------------------##
-## OpenCPN Plugin: Weatherfax_pi
-## Author:Sean d'Epagnier 
-## License:wxWidgets License
-## License: GPLV3 
-##-------------------------------------------------------------------------##
+##---------------------------------------------------------------------------
+## Author:      Sean d'Epagnier
+##***************************************************************************
+## *   Copyright (C) 2010 by Sean d'Epagnier                              *
+## *   This program is free software; you can redistribute it and/or modify  *
+## *   it under the terms of the GNU General Public License as published by  *
+## *   the Free Software Foundation; either version 2 of the License, or     *
+## *   (at your option) any later version.                                   *
+## *                                                                         *
 ## *   This program is distributed in the hope that it will be useful,       *
 ## *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
 ## *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
@@ -18,15 +16,14 @@
 ## *   You should have received a copy of the GNU General Public License     *
 ## *   along with this program; if not, write to the                         *
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx,                                       *
-## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx          *
-## ***
-##
-## ----- Modify section below to include all the details for your plugin ----- ##
-##
-# ====FRONTEND 2==============
-## 
-## 
-# define minimum cmake version
+## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                       *
+#-----------------------------------------------------------------------------
+# Frontend2 Author: Jon Gough  
+# ---------------------------------------------------------------------------
+# CMake-CI Number: 0.0.004  
+# ---------------------------------------------------------------------------
+# ----- Modify section below to include all the details for your plugin ----- ##
+
 cmake_minimum_required(VERSION 3.1.1)
 if(COMMAND cmake_policy)
   if(POLICY CMP0043)
@@ -39,51 +36,68 @@ if(COMMAND cmake_policy)
 endif(COMMAND cmake_policy)
 
 SET(VERBOSE_NAME weatherfax)
+# Search "getcommonname"in weather_routing_pi.cpp
 set(COMMON_NAME "Weatherfax")
 set(TITLE_NAME "WeatherFax")
 set(PACKAGE_CONTACT "Sean d'Epagnier")
-SET(PACKAGE "weatherfax")
+SET(PACKAGE "weatherfax_pi")
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "4")
-set(VERSION_TWEAK "2")
-set(VERSION_DATE "04/24/2020")
+set(VERSION_TWEAK "3")
+set(VERSION_DATE "04/26/2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
 
 set(PARENT "opencpn")
+
 #set(GIT_USER "mauroc")
 #set(GIT_USER "jongough")
 set(GIT_USER "rgleason")
+
 set(GIT_REPOSITORY_NAME "weatherfax_pi")
 message(STATUS "CIRCLECI: ${CIRCLECLI}, Env CIRCLECI: $ENV{CIRCLECI}")
 message(STATUS "TRAVIS: ${TRAVIS}, Env TRAVIS: $ENV{TRAVIS}")
 
-# Permits setup of a local webserver with git for testing
+## Allows setup of a local webserver with git for testing
 if($ENV{CIRCLECI})
-    set(GIT_REPOSITORY_HOST "github.com")
-    set(GIT_REPOSITORY_DIR "${GIT_USER}/")
-    set(GIT_REPOSITORY_BRANCH "$ENV{CIRCLE_BRANCH}")
+  set(GIT_REPOSITORY_HOST "github.com")
+  set(GIT_REPOSITORY_DIR "${GIT_USER}/")
+  set(GIT_REPOSITORY_BRANCH "$ENV{CIRCLE_BRANCH}")
 elseif($ENV{TRAVIS})
-    set(GIT_REPOSITORY_HOST "github.com")
-    set(GIT_REPOSITORY_DIR "${GIT_USER}/")
-    set(GIT_REPOSITORY_BRANCH "$ENV{TRAVIS_BRANCH}")
+  set(GIT_REPOSITORY_HOST "github.com")
+  set(GIT_REPOSITORY_DIR "${GIT_USER}/")
+  set(GIT_REPOSITORY_BRANCH "$ENV{TRAVIS_BRANCH}")
+elseif($ENV{APPVEYOR})
+  set(GIT_REPOSITORY_HOST "github.com")
+  set(GIT_REPOSITORY_DIR "${GIT_USER}/")
+  set(GIT_REPOSITORY_BRANCH "$ENV{APPVEYOR_REPO_BRANCH}")
 else()
-    set(GIT_REPOSITORY_HOST "github.com")
-    set(GIT_REPOSITORY_DIR "${GIT_USER}/")
+  set(GIT_REPOSITORY_HOST "github.com")
+  set(GIT_REPOSITORY_DIR "${GIT_USER}/")
+  # Get the current working branch
+  execute_process(
+    COMMAND git rev-parse --abbrev-ref HEAD
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    OUTPUT_VARIABLE GIT_REPOSITORY_BRANCH
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+  if(${GIT_REPOSITORY_BRANCH} EQUAL "")
+    message(STATUS "Setting default GIT repository branch - master")
     set(GIT_REPOSITORY_BRANCH "master")
-    #  set(GIT_REPOSITORY_HOST "git.eclipse.com.au")
-    #  set(GIT_REPOSITORY_DIR "")
-    #  set(GIT_REPOSITORY_BRANCH "cmake_flatpak_test")
+  endif()
 endif()
 message(STATUS "Git Branch: ${GIT_REPOSITORY_BRANCH}")
 
+#set(CLOUDSMITH_USER "sean-depagnier")
 #set(CLOUDSMITH_USER "jon-gough")
 set(CLOUDSMITH_USER "rick-gleason")
 
 #set(CLOUDSMITH_BASE_REPOSITORY "${GIT_REPOSITORY_NAME}")
+#set(CLOUDSMITH_BASE_REPOSITORY "weatherfax_pi")  #Jon Gough's customization
+#set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Sean's customization
 set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization
 
 # Set Cloudsmith upload repository suffix for each catalog
@@ -91,29 +105,31 @@ set(PROD "prod") #Standard Repos
 set(BETA "beta") #Standard Repos
 set(ALPHA "alpha") #Standard Repos
 
+# Set Plugin info-url, summary and description
 set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/weatherfax.html")
 set(XML_SUMMARY "Open fax image files or decode audio faxes and overlay on chart")
-set(XML_DESCRIPTION "Simple calibration for image overly, Converts images, and can convert any image into a raster chart.  Db for HF radio fax stations via SSB and Metro URL internet retrieval.")
+set(XML_DESCRIPTION "Simple image overlay calibration, Converts any image image into a raster chart.  Db for HF radio fax stations via SSB and Metro URL internet retrieval.")
+
+set(APPVEYOR_TEST_DEPLOY_TO_CLOUDSMITH "true")
+option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
 ##
-## ----- Modify section above to include all the details for your plugin ----- ##
+## ----- Modify above to include all the plugin details --------- ##
+## ----- Modify below for plugin special requirements------------ ##
 ##
-
-##
-## ----- Modify section below if there are special requirements for the plugin ----- ##
-##
-
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
 set(CMAKE_CXX_STANDARD 11)
 
+# Prefer libGL.so to libOpenGL.so, see CMP0072
+set(OpenGL_GL_PREFERENCE "LEGACY")
 
 if(NOT ${PACKAGE} MATCHES "(.*)_pi")
-    set(PACKAGE_NAME ${PACKAGE}_pi)
-    set(PACKAGE_FILE_NAME "${PACKAGE}_pi")
+  set(PACKAGE_NAME ${PACKAGE}_pi)
+  set(PACKAGE_FILE_NAME "${PACKAGE}_pi")
 else(NOT ${PACKAGE} MATCHES "(.*)_pi")
-    set(PACKAGE_NAME ${PACKAGE})
-    set(PACKAGE_FILE_NAME "${PACKAGE}")
+  set(PACKAGE_NAME ${PACKAGE})
+  set(PACKAGE_FILE_NAME "${PACKAGE}")
 endif(NOT ${PACKAGE} MATCHES "(.*)_pi")
 string(TOUPPER "${PACKAGE}" TITLE_NAME)
 
@@ -125,14 +141,11 @@ set(PACKAGE_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 message(STATUS "${VERBOSE_NAME} Version: ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}.${VERSION_TWEAK}")
 message(STATUS "OPCN_FLATPAK: ${OCPN_FLATPAK}")
 
-# Prefer libGL.so to libOpenGL.so, see CMP0072
-set(OpenGL_GL_PREFERENCE "LEGACY")
-
 # Don't use local version of GLU library
 set(USE_LOCAL_GLU FALSE)
 
-option(USE_GL "Enable OpenGL support" OFF)
-
+# Not in Master branch. Question still needed? on or off?
+# option(USE_GL "Enable OpenGL support" ON)
 message(STATUS "USE_GL: ${USE_GL}")
 
 if("${CMAKE_BUILD_TYPE}" STREQUAL "")
@@ -141,10 +154,8 @@ endif("${CMAKE_BUILD_TYPE}" STREQUAL "")
 set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "" "Debug" "Release" "RelWithDebInfo" "MinSizeRel")
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
-# set(PKG_NVR ${PACKAGE_NAME}-${PROJECT_VERSION}-${OCPN_MIN_VERSION}-${OCPN_API_VERSION_MAJOR}.${OCPN_API_VERSION_MINOR})
 set(PKG_NVR ${PACKAGE_NAME}-${PROJECT_VERSION})
 set(PKG_URL "https://dl.cloudsmith.io/public/--pkg_repo--/raw/names/--name--/versions/--version--/--filename--")
-
 
 #===========================================================
 INCLUDE("cmake/PluginSetup.cmake")
@@ -155,11 +166,6 @@ else(DEFINED ENV{OCPN_TARGET})
     set(PACKAGING_NAME "${PKG_NVR}_${PKG_TARGET}-${PKG_TARGET_VERSION}")
 endif(DEFINED ENV{OCPN_TARGET})
 message(STATUS "PACKAGING_NAME: ${PACKAGING_NAME}")
-
-
-##=============================================================
-# Modify/configure 'Include' Directories below for the Plugin
-##=============================================================
 
 set(PLUGIN_NAME ${PACKAGE}-plugin-${PKG_TARGET}-${PKG_TARGET_VERSION})
 
@@ -227,25 +233,13 @@ if(CMAKE_VERSION VERSION_GREATER 3.9)
 endif()
 
 #
-# -------Section above is directly from Testplugin --------------##  
-# ----- Modify section above if there are special requirements for the plugin ----- #
+# ----- Modify section above for special plugin requirements----- ##
 #
 
+# Is this needed?
+#add_definitions(-DUSE_S57)
 
-#===========================================================
-INCLUDE("cmake/PluginConfigure.cmake")
-#===========================================================
-
-#
-# ----- Change below to match your project requirements ----- ##
-# ------These lines are only for Testplugin - do not use ------------##
-#
-#   REMOVED
-#
-# ------The lines above are only for Testplugin -do not use------------##
-#++++++++Weatherfax Specific Files ++++++++++++++##
-
-
+#======== Portaudio Section below direct from weatherfax_pi =======
 IF (UNIX)
 INCLUDE("cmake/FindPortaudio.cmake")
 IF (PORTAUDIO_FOUND)
@@ -276,8 +270,11 @@ IF (MSVC)
 ENDIF (MSVC)
 
 ## --Section above is direct from Weatherfax located above SET(SRC_WEATHERFAX  ---##
-##
-## ++++++++++++++Section below is direct from Weatherfax +++++++++##
+#===========================================================
+INCLUDE("cmake/PluginConfigure.cmake")
+#===========================================================
+# ----- Change below to match your project requirements ----- ##
+# ++++++++++++++Section below is direct from Weatherfax +++++++++##
   
 SET(SRC_WEATHERFAX
             src/weatherfax_pi.cpp
@@ -462,9 +459,12 @@ SET (SRC_TINYXML
 			src/tinyxml/tinyxmlparser.cpp
 )
 
+#INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/libaudiofile)
+#INCLUDE_DIRECTORIES (BEFORE ${PLUGIN_SOURCE_DIR}/src/plugingl)
+#INCLUDE_DIRECTORIES (BEFORE ${PLUGIN_SOURCE_DIR}/api-16)
 
 ## +++++++++Section above is added recently to Weatherfax set ++++++++++##
-##++++++++++++Section below directly from Weatherfax +++++++++##
+##++++++++++++RTLSDR Section directly from Weatherfax +++++++++##
 
 IF(UNIX)
   find_library(RTLSDR_LIBRARY NAMES rtlsdr
@@ -493,46 +493,18 @@ IF(WIN32)
     ELSE()
 	INSTALL(FILES "buildwin/PVW32Con.exe" DESTINATION "plugins\\\\${PACKAGE_NAME}")
     ENDIF()
-
 ENDIF(WIN32)
 
 INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/libaudiofile)
+INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/plugingl)
 
-# INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/include)   #this does not seem to work. Need to include  include/GL
-# ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} ${HDRS} )
-# ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${HDRS} )
-# TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
+#INCLUDE_DIRECTORIES( /src/libaudiofile )
+#INCLUDE_DIRECTORIES( /src/libaudiofile/audiofile.h )
+#INCLUDE_DIRECTORIES( ${PLUGIN_SOURCE_DIR}/src/libaudiofile)
+#INCLUDE_DIRECTORIES (src/plugingl)
+#INCLUDE_DIRECTORIES(api-16)
+# INCLUDE_DIRECTORIES (BEFORE ${PLUGIN_SOURCE_DIR}/api-16)
 
-
-##
-##++++++++++Section above from Weatherfax located relative to where it was  ++++++++
-##
-##
-# ----Remember to Add your project Set(SRCS and set(HDRS
-##----------Below From Squiddio for SET( Headers and SRCS) ------------------
-
-
-# INCLUDE_DIRECTORIES(nmea0183)
-# INCLUDE_DIRECTORIES(src/wxJSON)
-INCLUDE_DIRECTORIES(api-16)
-
-
-##----------Above From Squiddio ------------------
-
-##=============REMOVE THESE LINES LEFT FROM TESTPLUGIN ================
-
-# add_definitions(-DPLUGIN_USE_SVG)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpnsrc/bitmaps)
-#add_library(${PACKAGE_NAME} SHARED ${SRCS} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSSRC})
-#add_definitions(-DTIXML_USE_STL)
-
-## ========== REMOVE Lines above left over from TestPlugin ==================
-
-
-##
-## ----- Change below to match project requirements ----- ##
-##
 ##================================================================================
 ## Required to collect all the set( headers and SRCS  - Adjust as required
 ## This add_library  is used in the conditionals below.
@@ -540,47 +512,91 @@ INCLUDE_DIRECTORIES(api-16)
 ##    add_library(${PACKAGE_NAME} SHARED ${SRCS}  ${SRC_NMEA0183})
 ##================================================================================
 
-INCLUDE_DIRECTORIES (src/plugingl)
+# ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} )
+# ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} )
 
-# add_library(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYSML})
+ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
+# TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 
-ADD_DEFINITIONS(-DTIXML_USE_STL)
-IF(UNIX AND NOT APPLE)
-    INCLUDE("cmake/FindTinyXML.cmake")
-    FIND_PACKAGE(TinyXML QUIET)
-ENDIF(UNIX AND NOT APPLE)
+##++++++++++Section above from Weatherfax located relative to where it was  ++++++++
 
-IF(TINYXML_FOUND)
-    message (STATUS "Building with system tinyxml")
-    INCLUDE_DIRECTORIES(${TINYXML_INCLUDE_DIR})
+##
+## ----- Change below to match project requirements ----- ##
+##
+
+
+
+# ADD_DEFINITIONS(-DTIXML_USE_STL)
+
+#IF(UNIX AND NOT APPLE)
+#    INCLUDE("cmake/FindTinyXML.cmake")
+#    FIND_PACKAGE(TinyXML QUIET)
+#ENDIF(UNIX AND NOT APPLE)
+
+#IF(TINYXML_FOUND)
+#    message (STATUS "Building with system tinyxml")
+#    INCLUDE_DIRECTORIES(${TINYXML_INCLUDE_DIR})
+##   ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
+#    ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${HDRS} )
+#    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${TINYXML_LIBRARIES} )
+#ELSE(TINYXML_FOUND)
+#    message (STATUS "Building with embedded tinyxml")
+#    SET(SRC_LTINYXML
+#    src/tinyxml.h
+#    src/tinystr.h
+#      )
 #   ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
-    ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${HDRS} )
-    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${TINYXML_LIBRARIES} )
-ELSE(TINYXML_FOUND)
-    message (STATUS "Building with embedded tinyxml")
-    SET(SRC_LTINYXML
-    src/tinyxml.h
-    src/tinystr.h
-      )
-#   ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
-    ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_PLUGINGL} ${SRC_TINYXML} ${SRC_AUDIOFILE} ${HDRS} )
+#ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_PLUGINGL} ${SRC_TINYXML} ${SRC_AUDIOFILE} ${HDRS} )
+#ENDIF(TINYXML_FOUND)
 
-ENDIF(TINYXML_FOUND)
+# ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC})
+#Add_Library (${PACKAGE_NAME} is used below. Cannot use same name.
 
+#IF(NOT UNIX)
+#    SET(SRC_BZIP	
+#            src/bzip2/bzlib.c
+#            src/bzip2/blocksort.c
+#            src/bzip2/compress.c
+#            src/bzip2/crctable.c
+#            src/bzip2/decompress.c
+#            src/bzip2/huffman.c
+#            src/bzip2/randtable.c
+#			src/bzip2/bzlib_private.h
+#    )
+#    ADD_LIBRARY(LIB_BZIP_WR STATIC ${SRC_BZIP})
+#    TARGET_LINK_LIBRARIES( ${PACKAGE_NAME} LIB_BZIP_WR )
+#    INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/bzip2)
+#ENDIF(NOT UNIX)
+
+#IF(NOT UNIX)
+#    INCLUDE_DIRECTORIES(src/zlib-1.2.3)
+#    INCLUDE_DIRECTORIES(src/bzip2)
+#ENDIF(NOT UNIX)
+
+#IF(WIN32)
+#  IF(MSVC)
+#    INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/buildwin/include)
+#    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} "${CMAKE_SOURCE_DIR}/buildwin/zlib1.lib")
+#  ELSE()
+#    # MINGW
+##    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} "-lwxzlib-2.8")
+#    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} "-lz")
+#  ENDIF()
+#ENDIF()
 
 # ----- Change above to match project requirements ----- ##
-#
-# ++++++++++ Includes from weatherfax cmake  +++++++++++++## 
-#INCLUDE("cmake/PluginNMEA.cmake")   #No not for wxfax
-INCLUDE("cmake/PluginJSON.cmake")#
+#--------REMOVE LN 194 to LN 296 from Testplugin_pi---------------
+#------- Change below to match project requirements --------------#
+
+#----INCLUDE CMAKE #3 & #4 -----
+#  INCLUDE("cmake/PluginNMEA.cmake") #not for wxfax
+# INCLUDE("cmake/PluginJSON.cmake")  #not for wxfax
 INCLUDE("cmake/PluginXML.cmake")
 INCLUDE("cmake/PluginGL.cmake")
-
-
 #
 # ----- Do not change - needed to build app ----- ##
 #
-
+#INCLUDE CMAKE #5,6 & 7 -----
 include("cmake/PluginInstall.cmake")
 include("cmake/PluginLocalization.cmake")
 include("cmake/PluginPackage.cmake")
