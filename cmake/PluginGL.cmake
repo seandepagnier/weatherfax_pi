@@ -9,7 +9,6 @@ SET(SRC_PLUGINGL
           src/plugingl/pi_shaders.cpp
           src/plugingl/TexFont.cpp
           src/plugingl/qtstylesheet.cpp
-		  src/plugingl/TexFont.cpp
           )
 
 if(UNIX)
