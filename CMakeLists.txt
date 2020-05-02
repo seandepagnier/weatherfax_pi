@@ -116,7 +116,7 @@ set(XML_DESCRIPTION "Simple image overlay calibration, Converts any image image 
 ## ----- Modify below for plugin special requirements------------ ##
 ##
 #------Settings
-set(APPVEYOR_TEST_DEPLOY_TO_CLOUDSMITH "true")
+#set(APPVEYOR_TEST_DEPLOY_TO_CLOUDSMITH "true")
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -171,12 +171,12 @@ message(STATUS "PACKAGING_NAME: ${PACKAGING_NAME}")
 
 set(PLUGIN_NAME ${PACKAGE}-plugin-${PKG_TARGET}-${PKG_TARGET_VERSION})
 
-# Settings and Options					  
+# Settings and Options
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
 option(Plugin_CXX11 "Use c++11" OFF)
 
-# Check on compiler support					   
+# Check on compiler support
 if(Plugin_CXX11)
   message(STATUS "Attempting to use c++11")
   include(CheckCXXCompilerFlag)
@@ -463,6 +463,32 @@ SET (SRC_TINYXML
 )
 
 add_definitions(-DPLUGIN_USE_SVG)
+
+
+#JSON Validator: Every plugin that uses JSON for passing messages should use a validator.  A JSON validator is much like an XML validator, the validator allows the system to ignore non-conformant messages.  The JSON validator changes the OSABI flavor of the Linux executable so there is code to change it back.
+
+#IF(UNIX AND NOT APPLE)
+#  IF(TP_JSON_SCHEMA_VALIDATOR)
+#    # Change OS/ABI to be UNIX - System V to make it run with OCPN
+#    SET(lib_name lib${PACKAGE_NAME}.so)
+#    MESSAGE(STATUS "lib-name: ${lib_name}")
+#    FIND_FILE(elfedit elfedit)
+#    IF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+#      MESSAGE(STATUS "Will ensure OS/ABI is set to 0 to match OCPN")
+#      ADD_CUSTOM_COMMAND(
+#        TARGET ${PACKAGE_NAME}
+#        POST_BUILD
+#        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+#        DEPENDS ${PACKAGE_NAME}
+#        COMMENT " Running post build action on ${lib_name}."
+#        COMMAND sh -c 'elfedit --input-osabi=Linux --output-osabi=none ${lib_name} || (echo 0) '
+#      )
+#    ELSE(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+#      MESSAGE(STATUS "Cannot correct OS/ABI to match OCPN if it is generated incorrectly. Package binutils needed")
+#    ENDIF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+#  ENDIF(TP_JSON_SCHEMA_VALIDATOR)
+#ENDIF(UNIX AND NOT APPLE)
+
 
 ## +++++++++Section above is added recently to Weatherfax set ++++++++++##
 ##++++++++++++RTLSDR Section directly from Weatherfax +++++++++##
