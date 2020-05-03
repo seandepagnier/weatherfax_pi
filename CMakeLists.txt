@@ -20,10 +20,11 @@
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough  
 # ---------------------------------------------------------------------------
-# CMake-CI Number: 0.0.004  
+# CMake-CI Number: 0.0.005  
+#    - 2/19/2020 10 environments needed for beta testing.
+#    - 3/30/2020 MacOS build fixed 12 env
 # ---------------------------------------------------------------------------
 # ----- Modify section below to include all the details for your plugin ----- ##
-
 cmake_minimum_required(VERSION 3.1.1)
 if(COMMAND cmake_policy)
   if(POLICY CMP0043)
@@ -41,19 +42,19 @@ set(COMMON_NAME "Weatherfax")
 set(TITLE_NAME "WeatherFax")
 set(PACKAGE_CONTACT "Sean d'Epagnier")
 SET(PACKAGE "weatherfax_pi")
-
+# Search "getcommonname"in weather_routing_pi.cpp
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "4")
-set(VERSION_TWEAK "3")
-set(VERSION_DATE "04/26/2020")
+set(VERSION_TWEAK "4")
+set(VERSION_DATE "04/27/2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
 
 set(PARENT "opencpn")
 
-#set(GIT_USER "mauroc")
+#set(GIT_USER "seandepagnier")
 #set(GIT_USER "jongough")
 set(GIT_USER "rgleason")
 
@@ -61,7 +62,7 @@ set(GIT_REPOSITORY_NAME "weatherfax_pi")
 message(STATUS "CIRCLECI: ${CIRCLECLI}, Env CIRCLECI: $ENV{CIRCLECI}")
 message(STATUS "TRAVIS: ${TRAVIS}, Env TRAVIS: $ENV{TRAVIS}")
 
-## Allows setup of a local webserver with git for testing
+# Permits setup of a local webserver with git for testing
 if($ENV{CIRCLECI})
   set(GIT_REPOSITORY_HOST "github.com")
   set(GIT_REPOSITORY_DIR "${GIT_USER}/")
@@ -97,7 +98,6 @@ set(CLOUDSMITH_USER "rick-gleason")
 
 #set(CLOUDSMITH_BASE_REPOSITORY "${GIT_REPOSITORY_NAME}")
 #set(CLOUDSMITH_BASE_REPOSITORY "weatherfax_pi")  #Jon Gough's customization
-#set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Sean's customization
 set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization
 
 # Set Cloudsmith upload repository suffix for each catalog
@@ -110,19 +110,17 @@ set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/weatherfax.html")
 set(XML_SUMMARY "Open fax image files or decode audio faxes and overlay on chart")
 set(XML_DESCRIPTION "Simple image overlay calibration, Converts any image image into a raster chart.  Db for HF radio fax stations via SSB and Metro URL internet retrieval.")
 
-set(APPVEYOR_TEST_DEPLOY_TO_CLOUDSMITH "true")
-option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
 ##
 ## ----- Modify above to include all the plugin details --------- ##
 ## ----- Modify below for plugin special requirements------------ ##
 ##
+#------Settings
+#set(APPVEYOR_TEST_DEPLOY_TO_CLOUDSMITH "true")
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
 set(CMAKE_CXX_STANDARD 11)
-
-# Prefer libGL.so to libOpenGL.so, see CMP0072
-set(OpenGL_GL_PREFERENCE "LEGACY")
+#------ End Settings
 
 if(NOT ${PACKAGE} MATCHES "(.*)_pi")
   set(PACKAGE_NAME ${PACKAGE}_pi)
@@ -141,12 +139,16 @@ set(PACKAGE_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 message(STATUS "${VERBOSE_NAME} Version: ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}.${VERSION_TWEAK}")
 message(STATUS "OPCN_FLATPAK: ${OCPN_FLATPAK}")
 
+#------Settings
+# Prefer libGL.so to libOpenGL.so, see CMP0072
+set(OpenGL_GL_PREFERENCE "LEGACY")
 # Don't use local version of GLU library
 set(USE_LOCAL_GLU FALSE)
 
 # Not in Master branch. Question still needed? on or off?
 # option(USE_GL "Enable OpenGL support" ON)
 message(STATUS "USE_GL: ${USE_GL}")
+#------End Settings
 
 if("${CMAKE_BUILD_TYPE}" STREQUAL "")
   set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build" FORCE)
@@ -169,10 +171,12 @@ message(STATUS "PACKAGING_NAME: ${PACKAGING_NAME}")
 
 set(PLUGIN_NAME ${PACKAGE}-plugin-${PKG_TARGET}-${PKG_TARGET_VERSION})
 
+# Settings and Options
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
 option(Plugin_CXX11 "Use c++11" OFF)
 
+# Check on compiler support
 if(Plugin_CXX11)
   message(STATUS "Attempting to use c++11")
   include(CheckCXXCompilerFlag)
@@ -232,13 +236,8 @@ if(CMAKE_VERSION VERSION_GREATER 3.9)
   endif()
 endif()
 
-#
+## -------Section above is directly from Testplugin --------------#  
 # ----- Modify section above for special plugin requirements----- ##
-#
-
-# Is this needed?
-#add_definitions(-DUSE_S57)
-
 #======== Portaudio Section below direct from weatherfax_pi =======
 IF (UNIX)
 INCLUDE("cmake/FindPortaudio.cmake")
@@ -275,8 +274,11 @@ ENDIF (MSVC)
 INCLUDE("cmake/PluginConfigure.cmake")
 #===========================================================
 # ----- Change below to match your project requirements ----- ##
+
+add_definitions(-DUSE_S57)
+
 # ++++++++++++++Section below is direct from Weatherfax +++++++++##
-  
+
 SET(SRC_WEATHERFAX
             src/weatherfax_pi.cpp
             src/FaxDecoder.cpp
@@ -460,9 +462,33 @@ SET (SRC_TINYXML
 			src/tinyxml/tinyxmlparser.cpp
 )
 
-#INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/src/libaudiofile)
-#INCLUDE_DIRECTORIES (BEFORE ${PLUGIN_SOURCE_DIR}/src/plugingl)
-#INCLUDE_DIRECTORIES (BEFORE ${PLUGIN_SOURCE_DIR}/api-16)
+add_definitions(-DPLUGIN_USE_SVG)
+
+
+#JSON Validator: Every plugin that uses JSON for passing messages should use a validator.  A JSON validator is much like an XML validator, the validator allows the system to ignore non-conformant messages.  The JSON validator changes the OSABI flavor of the Linux executable so there is code to change it back.
+
+#IF(UNIX AND NOT APPLE)
+#  IF(TP_JSON_SCHEMA_VALIDATOR)
+#    # Change OS/ABI to be UNIX - System V to make it run with OCPN
+#    SET(lib_name lib${PACKAGE_NAME}.so)
+#    MESSAGE(STATUS "lib-name: ${lib_name}")
+#    FIND_FILE(elfedit elfedit)
+#    IF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+#      MESSAGE(STATUS "Will ensure OS/ABI is set to 0 to match OCPN")
+#      ADD_CUSTOM_COMMAND(
+#        TARGET ${PACKAGE_NAME}
+#        POST_BUILD
+#        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+#        DEPENDS ${PACKAGE_NAME}
+#        COMMENT " Running post build action on ${lib_name}."
+#        COMMAND sh -c 'elfedit --input-osabi=Linux --output-osabi=none ${lib_name} || (echo 0) '
+#      )
+#    ELSE(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+#      MESSAGE(STATUS "Cannot correct OS/ABI to match OCPN if it is generated incorrectly. Package binutils needed")
+#    ENDIF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+#  ENDIF(TP_JSON_SCHEMA_VALIDATOR)
+#ENDIF(UNIX AND NOT APPLE)
+
 
 ## +++++++++Section above is added recently to Weatherfax set ++++++++++##
 ##++++++++++++RTLSDR Section directly from Weatherfax +++++++++##
@@ -496,15 +522,18 @@ IF(WIN32)
     ENDIF()
 ENDIF(WIN32)
 
+##=============================================================
+# Modify/configure 'Include' Directories below for the Plugin
+##=============================================================
+# EG  also inside cmake/Plugiin____.cmake files
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/extinclude)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wx/include)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude/wxcurl)
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
-
-#INCLUDE_DIRECTORIES( /src/libaudiofile )
-#INCLUDE_DIRECTORIES( /src/libaudiofile/audiofile.h )
-#INCLUDE_DIRECTORIES( ${PLUGIN_SOURCE_DIR}/src/libaudiofile)
-#INCLUDE_DIRECTORIES (src/plugingl)
 INCLUDE_DIRECTORIES(api-16)
-# INCLUDE_DIRECTORIES (BEFORE ${PLUGIN_SOURCE_DIR}/api-16)
 
 ##================================================================================
 ## Required to collect all the set( headers and SRCS  - Adjust as required
@@ -513,18 +542,12 @@ INCLUDE_DIRECTORIES(api-16)
 ##    add_library(${PACKAGE_NAME} SHARED ${SRCS}  ${SRC_NMEA0183})
 ##================================================================================
 
-# ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} )
-# ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} )
-
 ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
-# TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 
 ##++++++++++Section above from Weatherfax located relative to where it was  ++++++++
-
 ##
 ## ----- Change below to match project requirements ----- ##
 ##
-
 
 if(WIN32)
     if(MSVC)
@@ -532,70 +555,12 @@ if(WIN32)
     endif(MSVC)
 endif(WIN32)
 
-# ADD_DEFINITIONS(-DTIXML_USE_STL)
-
-#IF(UNIX AND NOT APPLE)
-#    INCLUDE("cmake/FindTinyXML.cmake")
-#    FIND_PACKAGE(TinyXML QUIET)
-#ENDIF(UNIX AND NOT APPLE)
-
-#IF(TINYXML_FOUND)
-#    message (STATUS "Building with system tinyxml")
-#    INCLUDE_DIRECTORIES(${TINYXML_INCLUDE_DIR})
-##   ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
-#    ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${HDRS} )
-#    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${TINYXML_LIBRARIES} )
-#ELSE(TINYXML_FOUND)
-#    message (STATUS "Building with embedded tinyxml")
-#    SET(SRC_LTINYXML
-#    src/tinyxml.h
-#    src/tinystr.h
-#      )
-#   ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
-#ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_PLUGINGL} ${SRC_TINYXML} ${SRC_AUDIOFILE} ${HDRS} )
-#ENDIF(TINYXML_FOUND)
-
-# ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC})
-#Add_Library (${PACKAGE_NAME} is used below. Cannot use same name.
-
-#IF(NOT UNIX)
-#    SET(SRC_BZIP	
-#            src/bzip2/bzlib.c
-#            src/bzip2/blocksort.c
-#            src/bzip2/compress.c
-#            src/bzip2/crctable.c
-#            src/bzip2/decompress.c
-#            src/bzip2/huffman.c
-#            src/bzip2/randtable.c
-#			src/bzip2/bzlib_private.h
-#    )
-#    ADD_LIBRARY(LIB_BZIP_WR STATIC ${SRC_BZIP})
-#    TARGET_LINK_LIBRARIES( ${PACKAGE_NAME} LIB_BZIP_WR )
-#    INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/bzip2)
-#ENDIF(NOT UNIX)
-
-#IF(NOT UNIX)
-#    INCLUDE_DIRECTORIES(src/zlib-1.2.3)
-#    INCLUDE_DIRECTORIES(src/bzip2)
-#ENDIF(NOT UNIX)
-
-#IF(WIN32)
-#  IF(MSVC)
-#    INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/buildwin/include)
-#    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} "${CMAKE_SOURCE_DIR}/buildwin/zlib1.lib")
-#  ELSE()
-#    # MINGW
-##    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} "-lwxzlib-2.8")
-#    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} "-lz")
-#  ENDIF()
-#ENDIF()
-
 # ----- Change above to match project requirements ----- ##
 #--------REMOVE LN 194 to LN 296 from Testplugin_pi---------------
 #------- Change below to match project requirements --------------#
 
 #----INCLUDE CMAKE #3 & #4 -----
-#  INCLUDE("cmake/PluginNMEA.cmake") #not for wxfax
+# INCLUDE("cmake/PluginNMEA.cmake") #not for wxfax
 # INCLUDE("cmake/PluginJSON.cmake")  #not for wxfax
 INCLUDE("cmake/PluginXML.cmake")
 INCLUDE("cmake/PluginGL.cmake")
