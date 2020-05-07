@@ -2,7 +2,7 @@
 ##---------------------------------------------------------------------------
 ## Author:      Sean d'Epagnier
 ##***************************************************************************
-## *   Copyright (C) 2010 by Sean d'Epagnier                              *
+## *   Copyright (C) 2010 by Sean d'Epagnier                  *
 ## *   This program is free software; you can redistribute it and/or modify  *
 ## *   it under the terms of the GNU General Public License as published by  *
 ## *   the Free Software Foundation; either version 2 of the License, or     *
@@ -20,10 +20,11 @@
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough  
 # ---------------------------------------------------------------------------
-# CMake-CI Number: 0.0.005  
+# CMake-CI Number: 0.0.006  
 #    - 2/19/2020 10 environments needed for beta testing.
 #    - 3/30/2020 MacOS build fixed 12 env
-# ---------------------------------------------------------------------------
+#    - Reverse dates here
+#    - 2/05/2020 MacOS final fix- JG# ---------------------------------------------------------------------------
 # ----- Modify section below to include all the details for your plugin ----- ##
 cmake_minimum_required(VERSION 3.1.1)
 if(COMMAND cmake_policy)
@@ -42,7 +43,7 @@ set(COMMON_NAME "Weatherfax")
 set(TITLE_NAME "WeatherFax")
 set(PACKAGE_CONTACT "Sean d'Epagnier")
 SET(PACKAGE "weatherfax_pi")
-# Search "getcommonname"in weather_routing_pi.cpp
+
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "4")
@@ -67,14 +68,17 @@ if($ENV{CIRCLECI})
   set(GIT_REPOSITORY_HOST "github.com")
   set(GIT_REPOSITORY_DIR "${GIT_USER}/")
   set(GIT_REPOSITORY_BRANCH "$ENV{CIRCLE_BRANCH}")
+  set(GIT_REPOSITORY_TAG "$ENV{CIRCLE_TAG}")
 elseif($ENV{TRAVIS})
   set(GIT_REPOSITORY_HOST "github.com")
   set(GIT_REPOSITORY_DIR "${GIT_USER}/")
   set(GIT_REPOSITORY_BRANCH "$ENV{TRAVIS_BRANCH}")
+  set(GIT_REPOSITORY_TAG "$ENV{TRAVIS_TAG}")
 elseif($ENV{APPVEYOR})
   set(GIT_REPOSITORY_HOST "github.com")
   set(GIT_REPOSITORY_DIR "${GIT_USER}/")
   set(GIT_REPOSITORY_BRANCH "$ENV{APPVEYOR_REPO_BRANCH}")
+  set(GIT_REPOSITORY_TAG "$ENV{APPVEYOR_REPO_TAG_NAME}")
 else()
   set(GIT_REPOSITORY_HOST "github.com")
   set(GIT_REPOSITORY_DIR "${GIT_USER}/")
@@ -89,11 +93,24 @@ else()
     message(STATUS "Setting default GIT repository branch - master")
     set(GIT_REPOSITORY_BRANCH "master")
   endif()
+  execute_process(
+    COMMAND git tag --contains
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    OUTPUT_VARIABLE GIT_REPOSITORY_TAG
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
 endif()
 message(STATUS "Git Branch: ${GIT_REPOSITORY_BRANCH}")
+message(STATUS "Git Tag: ${GIT_REPOSITORY_TAG}")
+if("${GIT_REPOSITORY_BRANCH}" EQUAL "")
+  set(GIT_BRANCH_OR_TAG "TAG")
+else()
+  set(GIT_BRANCH_OR_TAG "BRANCH")
+endif()
 
-#set(CLOUDSMITH_USER "sean-depagnier")
+
 #set(CLOUDSMITH_USER "jon-gough")
+#set(CLOUDSMITH_USER "sean-depagnier")											  
 set(CLOUDSMITH_USER "rick-gleason")
 
 #set(CLOUDSMITH_BASE_REPOSITORY "${GIT_REPOSITORY_NAME}")
@@ -146,7 +163,7 @@ set(OpenGL_GL_PREFERENCE "LEGACY")
 set(USE_LOCAL_GLU FALSE)
 
 # Not in Master branch. Question still needed? on or off?
-# option(USE_GL "Enable OpenGL support" ON)
+# option(USE_GL "Enable OpenGL support" OFF)
 message(STATUS "USE_GL: ${USE_GL}")
 #------End Settings
 
