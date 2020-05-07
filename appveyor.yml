@@ -66,7 +66,7 @@ artifacts:
 deploy:
   description: 'release created by AppVeyor CI'
   provider: GitHub
-  auth_token: '%GitHub_auth_token%'
+#  auth_token: '%GitHub_auth_token%'
 auth_token: '%git-ptoken-weatherfax-into-appveyor%'
   artifact: installer,portable
   draft: true
