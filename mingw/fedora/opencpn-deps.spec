@@ -38,6 +38,7 @@ BuildRequires: mingw32-openssl
 BuildRequires: mingw32-pcre
 BuildRequires: mingw32-pixman
 BuildRequires: mingw32-sqlite
+BuildRequires: mingw32-portaudio
 BuildRequires: mingw32-win-iconv
 BuildRequires: mingw32-wxWidgets3 >= 3.0.2
 BuildRequires: mingw32-xz-libs
