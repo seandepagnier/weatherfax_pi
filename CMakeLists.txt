@@ -238,35 +238,40 @@ endif()
 
 ## -------Section above is directly from Testplugin --------------#  
 # ----- Modify section above for special plugin requirements----- ##
+
 #======== Portaudio Section below direct from weatherfax_pi =======
 IF (UNIX)
 INCLUDE("cmake/FindPortaudio.cmake")
 IF (PORTAUDIO_FOUND)
     MESSAGE (STATUS "Portaudio Found")
     INCLUDE_DIRECTORIES(BEFORE ${PORTAUDIO_INCLUDE_DIRS})
-    SET(EXTRA_LIBS ${EXTRA_LIBS} ${PORTAUDIO_LIBRARIES})
+    SET(PLUGINS_LIBS ${PLUGINS_LIBS} ${PORTAUDIO_LIBRARIES})
     ADD_DEFINITIONS(${PORTAUDIO_DEFINITIONS})
     ADD_DEFINITIONS(-DOCPN_USE_PORTAUDIO)
+    message(STATUS "In Unix:Found Portaudio")
 ELSE (PORTAUDIO_FOUND)
     MESSAGE (STATUS "Portaudio Not Found...")
 ENDIF (PORTAUDIO_FOUND)
 ELSE (UNIX)
-    INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/include)
+    INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/include)
     IF(STANDALONE MATCHES "BUNDLED")
-        # within OpenCPN tree
-        SET(EXTRA_LIBS ${EXTRA_LIBS} ../../buildwin/portaudio_x86)
+	# within OpenCPN tree
+    	SET(PLUGINS_LIBS ${EXTRA_LIBS} ../../buildwin/portaudio_x86)
+    	SET(PLUGINS_LIBS ${EXTRA_LIBS} ../../buildwin/portaudio_x86.lib)
     	INSTALL(FILES "../../buildwin/portaudio_x86.dll" DESTINATION ".")
+    	message(STATUS "bundled: portaudio in ../../buildwin/portaudio_x86.dll")
     ELSE()
-        SET(EXTRA_LIBS ${EXTRA_LIBS} ../buildwin/portaudio_x86)
-    	INSTALL(FILES "buildwin/portaudio_x86.dll" DESTINATION ".")
-    	message(STATUS "Not Bundled: Portaudio")
+    	SET(PLUGINS_LIBS ${EXTRA_LIBS} ${PROJECT_SOURCE_DIR}/buildwin/portaudio_x86)
+    	SET(PLUGINS_LIBS ${EXTRA_LIBS} ${PROJECT_SOURCE_DIR}/buildwin/portaudio_x86.lib)
+    	INSTALL(FILES "${PROJECT_SOURCE_DIR}/buildwin/portaudio_x86.dll" DESTINATION ".")
+    	message(STATUS "Not bundled: portaudio in ${PROJECT_SOURCE_DIR}/buildwin/portaudio_x86.dll")
     ENDIF()
-
     ADD_DEFINITIONS(-DOCPN_USE_PORTAUDIO)
+    message(STATUS "Not in Unix:Setting USE_PORTAUDIO")
 ENDIF (UNIX)
 
 IF (MSVC)
-    INCLUDE_DIRECTORIES(BEFORE ${PLUGIN_SOURCE_DIR}/include/msvc)
+    INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/include/msvc)
 ENDIF (MSVC)
 
 ## --Section above is direct from Weatherfax located above SET(SRC_WEATHERFAX  ---##
@@ -464,6 +469,9 @@ SET (SRC_TINYXML
 
 add_definitions(-DPLUGIN_USE_SVG)
 
+#INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
+#INCLUDE_DIRECTORIES (BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
+#INCLUDE_DIRECTORIES (BEFORE ${PROJECT_SOURCE_DIR}/api-16)
 
 #JSON Validator: Every plugin that uses JSON for passing messages should use a validator.  A JSON validator is much like an XML validator, the validator allows the system to ignore non-conformant messages.  The JSON validator changes the OSABI flavor of the Linux executable so there is code to change it back.
 
@@ -533,7 +541,7 @@ ENDIF(WIN32)
 #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude/wxcurl)
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
-INCLUDE_DIRECTORIES(api-16)
+INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/api-16)
 
 ##================================================================================
 ## Required to collect all the set( headers and SRCS  - Adjust as required
@@ -543,6 +551,10 @@ INCLUDE_DIRECTORIES(api-16)
 ##================================================================================
 
 ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
+# Jon added these two lines
+TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${PLUGINS_LIBS})
+message(STATUS "Adding PUGINS_LIBS: ${PLUGINS_LIBS}")
+
 
 ##++++++++++Section above from Weatherfax located relative to where it was  ++++++++
 ##
