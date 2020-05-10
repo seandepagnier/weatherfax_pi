@@ -1619,12 +1619,11 @@ void pi_odc_endCallbackD_GLSL(void *data)
 
 #endif          //#ifdef ocpnUSE_GL
 
-
 void piDC::DrawPolygonTessellated( int n, wxPoint points[], wxCoord xoffset, wxCoord yoffset )
 {
     if( dc )
         dc->DrawPolygon( n, points, xoffset, yoffset );
-#ifdef ocpnUSE_GL_not_working
+#ifdef ocpnUSE_GL1
     else {
 #if !defined(ocpnUSE_GLES) || defined(USE_ANDROID_GLES2) // tessalator in glues is broken
         if( n < 5 )
