@@ -20,9 +20,10 @@
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough  
 # ---------------------------------------------------------------------------
-# CMake-CI Number: 0.0.005  
+# CMake-CI Number: 0.0.006
 #    - 2/19/2020 10 environments needed for beta testing.
 #    - 3/30/2020 MacOS build fixed 12 env
+#    - 11/05/2010 JG Fix portaudio for mingw
 # ---------------------------------------------------------------------------
 # ----- Modify section below to include all the details for your plugin ----- ##
 cmake_minimum_required(VERSION 3.1.1)
@@ -45,9 +46,9 @@ SET(PACKAGE "weatherfax_pi")
 # Search "getcommonname"in weather_routing_pi.cpp
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
-set(VERSION_PATCH "4")
-set(VERSION_TWEAK "4")
-set(VERSION_DATE "04/27/2020")
+set(VERSION_PATCH "5")
+set(VERSION_TWEAK "0")
+set(VERSION_DATE "05/11/2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -115,11 +116,17 @@ set(XML_DESCRIPTION "Simple image overlay calibration, Converts any image image 
 ## ----- Modify above to include all the plugin details --------- ##
 ## ----- Modify below for plugin special requirements------------ ##
 ##
+
 #------Settings
 #set(APPVEYOR_TEST_DEPLOY_TO_CLOUDSMITH "true")
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
 set(CMAKE_CXX_STANDARD 11)
+
+# Prefer libGL.so to libOpenGL.so, see CMP0072
+set(OpenGL_GL_PREFERENCE "LEGACY")
+# Don't use local version of GLU library
+set(USE_LOCAL_GLU FALSE)
 #------ End Settings
 
 if(NOT ${PACKAGE} MATCHES "(.*)_pi")
@@ -139,11 +146,6 @@ set(PACKAGE_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 message(STATUS "${VERBOSE_NAME} Version: ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}.${VERSION_TWEAK}")
 message(STATUS "OPCN_FLATPAK: ${OCPN_FLATPAK}")
 
-#------Settings
-# Prefer libGL.so to libOpenGL.so, see CMP0072
-set(OpenGL_GL_PREFERENCE "LEGACY")
-# Don't use local version of GLU library
-set(USE_LOCAL_GLU FALSE)
 
 # Not in Master branch. Question still needed? on or off?
 # option(USE_GL "Enable OpenGL support" ON)
@@ -256,12 +258,10 @@ ELSE (UNIX)
     INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/include)
     IF(STANDALONE MATCHES "BUNDLED")
 	# within OpenCPN tree
-    	SET(PLUGINS_LIBS ${EXTRA_LIBS} ../../buildwin/portaudio_x86)
     	SET(PLUGINS_LIBS ${EXTRA_LIBS} ../../buildwin/portaudio_x86.lib)
     	INSTALL(FILES "../../buildwin/portaudio_x86.dll" DESTINATION ".")
     	message(STATUS "bundled: portaudio in ../../buildwin/portaudio_x86.dll")
     ELSE()
-    	SET(PLUGINS_LIBS ${EXTRA_LIBS} ${PROJECT_SOURCE_DIR}/buildwin/portaudio_x86)
     	SET(PLUGINS_LIBS ${EXTRA_LIBS} ${PROJECT_SOURCE_DIR}/buildwin/portaudio_x86.lib)
     	INSTALL(FILES "${PROJECT_SOURCE_DIR}/buildwin/portaudio_x86.dll" DESTINATION ".")
     	message(STATUS "Not bundled: portaudio in ${PROJECT_SOURCE_DIR}/buildwin/portaudio_x86.dll")
@@ -509,7 +509,9 @@ IF(UNIX)
     MESSAGE (STATUS "Found rtlsdr:  ${RTLSDR_LIBRARY}")
     ADD_DEFINITIONS( "-DBUILTIN_RTLAIS" )
 
-    SET(PLUGINS_LIBS ${PLUGINS_LIBS} ${RTLSDR_LIBRARY})
+
+#    SET(PLUGINS_LIBS ${PLUGINS_LIBS} ${RTLSDR_LIBRARY})
+    SET(EXTRA_LIBS ${EXTRA_LIBS} ${RTLSDR_LIBRARY})
   ELSE()
     MESSAGE (STATUS "")
     MESSAGE (STATUS "================ WARNING ===================")
@@ -541,7 +543,7 @@ ENDIF(WIN32)
 #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude/wxcurl)
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
-INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/api-16)
+#INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/api-16)
 
 ##================================================================================
 ## Required to collect all the set( headers and SRCS  - Adjust as required
@@ -552,8 +554,8 @@ INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/api-16)
 
 ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
 # Jon added these two lines
-TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${PLUGINS_LIBS})
-message(STATUS "Adding PUGINS_LIBS: ${PLUGINS_LIBS}")
+TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
+message(STATUS "Adding PUGINS_LIBS: ${EXTRA_LIBS}")
 
 
 ##++++++++++Section above from Weatherfax located relative to where it was  ++++++++
@@ -561,11 +563,11 @@ message(STATUS "Adding PUGINS_LIBS: ${PLUGINS_LIBS}")
 ## ----- Change below to match project requirements ----- ##
 ##
 
-if(WIN32)
-    if(MSVC)
-        target_link_libraries(${PACKAGE_NAME} ${PORTAUDIO_LIBS})
-    endif(MSVC)
-endif(WIN32)
+#if(WIN32)
+#    if(MSVC)
+#        target_link_libraries(${PACKAGE_NAME} ${PORTAUDIO_LIBS})
+#    endif(MSVC)
+#endif(WIN32)
 
 # ----- Change above to match project requirements ----- ##
 #--------REMOVE LN 194 to LN 296 from Testplugin_pi---------------
