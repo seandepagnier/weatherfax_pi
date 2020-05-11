@@ -20,7 +20,10 @@
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough  
 # ---------------------------------------------------------------------------
-# CMake-CI Number: 0.0.004  
+# CMake-CI Number: 0.0.006
+#    - 2/19/2020 10 environments needed for beta testing.
+#    - 3/30/2020 MacOS build fixed 12 env
+#    - 11/05/2010 JG Fix portaudio for mingw
 # ---------------------------------------------------------------------------
 # ----- Modify section below to include all the details for your plugin ----- ##
 
@@ -117,12 +120,13 @@ option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 ## ----- Modify above to include all the plugin details --------- ##
 ## ----- Modify below for plugin special requirements------------ ##
 ##
+
+#------Settings
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
-
 set(CMAKE_CXX_STANDARD 11)
-
 # Prefer libGL.so to libOpenGL.so, see CMP0072
 set(OpenGL_GL_PREFERENCE "LEGACY")
+#------End Settings
 
 if(NOT ${PACKAGE} MATCHES "(.*)_pi")
   set(PACKAGE_NAME ${PACKAGE}_pi)
@@ -235,7 +239,6 @@ endif()
 #
 # ----- Modify section above for special plugin requirements----- ##
 #
-
 # Is this needed?
 #add_definitions(-DUSE_S57)
 
@@ -245,7 +248,7 @@ INCLUDE("cmake/FindPortaudio.cmake")
 IF (PORTAUDIO_FOUND)
     MESSAGE (STATUS "Portaudio Found")
     INCLUDE_DIRECTORIES(BEFORE ${PORTAUDIO_INCLUDE_DIRS})
-    SET(EXTRA_LIBS ${EXTRA_LIBS} ${PORTAUDIO_LIBRARIES})
+    SET(PLUGINS_LIBS ${PLUGINS_LIBS} ${PORTAUDIO_LIBRARIES})
     ADD_DEFINITIONS(${PORTAUDIO_DEFINITIONS})
     ADD_DEFINITIONS(-DOCPN_USE_PORTAUDIO)
     message(STATUS "In Unix:Found Portaudio")
@@ -264,7 +267,6 @@ ELSE (UNIX)
     	INSTALL(FILES "${PROJECT_SOURCE_DIR}/buildwin/portaudio_x86.dll" DESTINATION ".")
     	message(STATUS "Not bundled: portaudio in ${PROJECT_SOURCE_DIR}/buildwin/portaudio_x86.dll")
     ENDIF()
-
     ADD_DEFINITIONS(-DOCPN_USE_PORTAUDIO)
     message(STATUS "Not in Unix:Setting USE_PORTAUDIO")
 ENDIF (UNIX)
@@ -502,6 +504,11 @@ ENDIF(WIN32)
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
 
+##=============================================================
+# Modify/configure 'Include' Directories below for the Plugin
+##=============================================================
+# EG  also inside cmake/Plugin____.cmake files
+
 #INCLUDE_DIRECTORIES( /src/libaudiofile )
 #INCLUDE_DIRECTORIES( /src/libaudiofile/audiofile.h )
 #INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/src/libaudiofile)
@@ -515,7 +522,6 @@ INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
 ##================================================================================
 ##    add_library(${PACKAGE_NAME} SHARED ${SRCS}  ${SRC_NMEA0183})
 ##================================================================================
-
 # ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} )
 # ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} )
 
@@ -529,7 +535,11 @@ message(STATUS "Adding PUGINS_LIBS: ${EXTRA_LIBS}")
 ## ----- Change below to match project requirements ----- ##
 ##
 
-
+#if(WIN32)
+#    if(MSVC)
+#        target_link_libraries(${PACKAGE_NAME} ${PORTAUDIO_LIBS})
+#    endif(MSVC)
+#endif(WIN32)
 
 # ADD_DEFINITIONS(-DTIXML_USE_STL)
 
