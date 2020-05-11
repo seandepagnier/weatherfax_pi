@@ -118,16 +118,13 @@ set(XML_DESCRIPTION "Simple image overlay calibration, Converts any image image 
 ##
 
 #------Settings
-#set(APPVEYOR_TEST_DEPLOY_TO_CLOUDSMITH "true")
+# option(USE_GL "Enable OpenGL support" ON)
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
-
 set(CMAKE_CXX_STANDARD 11)
-
-# Prefer libGL.so to libOpenGL.so, see CMP0072
-set(OpenGL_GL_PREFERENCE "LEGACY")
 # Don't use local version of GLU library
 set(USE_LOCAL_GLU FALSE)
-#------ End Settings
+message(STATUS "USE_GL: ${USE_GL}")
+#------End Settings
 
 if(NOT ${PACKAGE} MATCHES "(.*)_pi")
   set(PACKAGE_NAME ${PACKAGE}_pi)
@@ -147,10 +144,6 @@ message(STATUS "${VERBOSE_NAME} Version: ${VERSION_MAJOR}.${VERSION_MINOR}.${VER
 message(STATUS "OPCN_FLATPAK: ${OCPN_FLATPAK}")
 
 
-# Not in Master branch. Question still needed? on or off?
-# option(USE_GL "Enable OpenGL support" ON)
-message(STATUS "USE_GL: ${USE_GL}")
-#------End Settings
 
 if("${CMAKE_BUILD_TYPE}" STREQUAL "")
   set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build" FORCE)
@@ -467,35 +460,10 @@ SET (SRC_TINYXML
 			src/tinyxml/tinyxmlparser.cpp
 )
 
-add_definitions(-DPLUGIN_USE_SVG)
 
 #INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
 #INCLUDE_DIRECTORIES (BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
 #INCLUDE_DIRECTORIES (BEFORE ${PROJECT_SOURCE_DIR}/api-16)
-
-#JSON Validator: Every plugin that uses JSON for passing messages should use a validator.  A JSON validator is much like an XML validator, the validator allows the system to ignore non-conformant messages.  The JSON validator changes the OSABI flavor of the Linux executable so there is code to change it back.
-
-#IF(UNIX AND NOT APPLE)
-#  IF(TP_JSON_SCHEMA_VALIDATOR)
-#    # Change OS/ABI to be UNIX - System V to make it run with OCPN
-#    SET(lib_name lib${PACKAGE_NAME}.so)
-#    MESSAGE(STATUS "lib-name: ${lib_name}")
-#    FIND_FILE(elfedit elfedit)
-#    IF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-#      MESSAGE(STATUS "Will ensure OS/ABI is set to 0 to match OCPN")
-#      ADD_CUSTOM_COMMAND(
-#        TARGET ${PACKAGE_NAME}
-#        POST_BUILD
-#        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-#        DEPENDS ${PACKAGE_NAME}
-#        COMMENT " Running post build action on ${lib_name}."
-#        COMMAND sh -c 'elfedit --input-osabi=Linux --output-osabi=none ${lib_name} || (echo 0) '
-#      )
-#    ELSE(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-#      MESSAGE(STATUS "Cannot correct OS/ABI to match OCPN if it is generated incorrectly. Package binutils needed")
-#    ENDIF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-#  ENDIF(TP_JSON_SCHEMA_VALIDATOR)
-#ENDIF(UNIX AND NOT APPLE)
 
 
 ## +++++++++Section above is added recently to Weatherfax set ++++++++++##
@@ -535,15 +503,15 @@ ENDIF(WIN32)
 ##=============================================================
 # Modify/configure 'Include' Directories below for the Plugin
 ##=============================================================
-# EG  also inside cmake/Plugiin____.cmake files
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/extinclude)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wx/include)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude/wxcurl)
+# EG  also inside cmake/Plugin____.cmake files
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
-#INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/api-16)
+# INCLUDE_DIRECTORIES (BEFORE ${PROJECT_SOURCE_DIR}/api-16)
+#INCLUDE_DIRECTORIES( /src/libaudiofile )
+#INCLUDE_DIRECTORIES( /src/libaudiofile/audiofile.h )
+#INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/src/libaudiofile)
+#INCLUDE_DIRECTORIES (src/plugingl)
+#INCLUDE_DIRECTORIES(api-16)
 
 ##================================================================================
 ## Required to collect all the set( headers and SRCS  - Adjust as required
@@ -551,12 +519,11 @@ INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
 ##================================================================================
 ##    add_library(${PACKAGE_NAME} SHARED ${SRCS}  ${SRC_NMEA0183})
 ##================================================================================
-
+# ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} )
 ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
 # Jon added these two lines
 TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 message(STATUS "Adding PUGINS_LIBS: ${EXTRA_LIBS}")
-
 
 ##++++++++++Section above from Weatherfax located relative to where it was  ++++++++
 ##
@@ -568,6 +535,67 @@ message(STATUS "Adding PUGINS_LIBS: ${EXTRA_LIBS}")
 #        target_link_libraries(${PACKAGE_NAME} ${PORTAUDIO_LIBS})
 #    endif(MSVC)
 #endif(WIN32)
+
+
+# ADD_DEFINITIONS(-DTIXML_USE_STL)
+
+#IF(UNIX AND NOT APPLE)
+#    INCLUDE("cmake/FindTinyXML.cmake")
+#    FIND_PACKAGE(TinyXML QUIET)
+#ENDIF(UNIX AND NOT APPLE)
+
+#IF(TINYXML_FOUND)
+#    message (STATUS "Building with system tinyxml")
+#    INCLUDE_DIRECTORIES(${TINYXML_INCLUDE_DIR})
+##   ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
+#    ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${HDRS} )
+#    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${TINYXML_LIBRARIES} )
+#ELSE(TINYXML_FOUND)
+#    message (STATUS "Building with embedded tinyxml")
+#    SET(SRC_LTINYXML
+#    src/tinyxml.h
+#    src/tinystr.h
+#      )
+#   ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
+#ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_PLUGINGL} ${SRC_TINYXML} ${SRC_AUDIOFILE} ${HDRS} )
+#ENDIF(TINYXML_FOUND)
+
+# ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC})
+#Add_Library (${PACKAGE_NAME} is used below. Cannot use same name.
+
+#IF(NOT UNIX)
+#    SET(SRC_BZIP	
+#            src/bzip2/bzlib.c
+#            src/bzip2/blocksort.c
+#            src/bzip2/compress.c
+#            src/bzip2/crctable.c
+#            src/bzip2/decompress.c
+#            src/bzip2/huffman.c
+#            src/bzip2/randtable.c
+#			src/bzip2/bzlib_private.h
+#    )
+#    ADD_LIBRARY(LIB_BZIP_WR STATIC ${SRC_BZIP})
+#    TARGET_LINK_LIBRARIES( ${PACKAGE_NAME} LIB_BZIP_WR )
+#    INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/bzip2)
+#ENDIF(NOT UNIX)
+
+#IF(NOT UNIX)
+#    INCLUDE_DIRECTORIES(src/zlib-1.2.3)
+#    INCLUDE_DIRECTORIES(src/bzip2)
+#ENDIF(NOT UNIX)
+
+#IF(WIN32)
+#  IF(MSVC)
+#    INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/buildwin/include)
+#    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} "${CMAKE_SOURCE_DIR}/buildwin/zlib1.lib")
+#  ELSE()
+#    # MINGW
+##    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} "-lwxzlib-2.8")
+#    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} "-lz")
+#  ENDIF()
+#ENDIF()
+
+
 
 # ----- Change above to match project requirements ----- ##
 #--------REMOVE LN 194 to LN 296 from Testplugin_pi---------------
