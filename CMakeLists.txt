@@ -26,6 +26,7 @@
 #    - 11/05/2010 JG Fix portaudio for mingw
 # ---------------------------------------------------------------------------
 # ----- Modify section below to include all the details for your plugin ----- ##
+
 cmake_minimum_required(VERSION 3.1.1)
 if(COMMAND cmake_policy)
   if(POLICY CMP0043)
@@ -43,7 +44,7 @@ set(COMMON_NAME "Weatherfax")
 set(TITLE_NAME "WeatherFax")
 set(PACKAGE_CONTACT "Sean d'Epagnier")
 SET(PACKAGE "weatherfax_pi")
-# Search "getcommonname"in weather_routing_pi.cpp
+
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "5")
@@ -55,7 +56,7 @@ set(OCPN_API_VERSION_MINOR "16")
 
 set(PARENT "opencpn")
 
-#set(GIT_USER "seandepagnier")
+#set(GIT_USER "mauroc")
 #set(GIT_USER "jongough")
 set(GIT_USER "rgleason")
 
@@ -63,7 +64,7 @@ set(GIT_REPOSITORY_NAME "weatherfax_pi")
 message(STATUS "CIRCLECI: ${CIRCLECLI}, Env CIRCLECI: $ENV{CIRCLECI}")
 message(STATUS "TRAVIS: ${TRAVIS}, Env TRAVIS: $ENV{TRAVIS}")
 
-# Permits setup of a local webserver with git for testing
+## Allows setup of a local webserver with git for testing
 if($ENV{CIRCLECI})
   set(GIT_REPOSITORY_HOST "github.com")
   set(GIT_REPOSITORY_DIR "${GIT_USER}/")
@@ -99,6 +100,7 @@ set(CLOUDSMITH_USER "rick-gleason")
 
 #set(CLOUDSMITH_BASE_REPOSITORY "${GIT_REPOSITORY_NAME}")
 #set(CLOUDSMITH_BASE_REPOSITORY "weatherfax_pi")  #Jon Gough's customization
+#set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Sean's customization
 set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization
 
 # Set Cloudsmith upload repository suffix for each catalog
@@ -111,6 +113,8 @@ set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/weatherfax.html")
 set(XML_SUMMARY "Open fax image files or decode audio faxes and overlay on chart")
 set(XML_DESCRIPTION "Simple image overlay calibration, Converts any image image into a raster chart.  Db for HF radio fax stations via SSB and Metro URL internet retrieval.")
 
+set(APPVEYOR_TEST_DEPLOY_TO_CLOUDSMITH "true")
+option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
 ##
 ## ----- Modify above to include all the plugin details --------- ##
@@ -118,12 +122,10 @@ set(XML_DESCRIPTION "Simple image overlay calibration, Converts any image image 
 ##
 
 #------Settings
-# option(USE_GL "Enable OpenGL support" ON)
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 set(CMAKE_CXX_STANDARD 11)
-# Don't use local version of GLU library
-set(USE_LOCAL_GLU FALSE)
-message(STATUS "USE_GL: ${USE_GL}")
+# Prefer libGL.so to libOpenGL.so, see CMP0072
+set(OpenGL_GL_PREFERENCE "LEGACY")
 #------End Settings
 
 if(NOT ${PACKAGE} MATCHES "(.*)_pi")
@@ -143,7 +145,12 @@ set(PACKAGE_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 message(STATUS "${VERBOSE_NAME} Version: ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}.${VERSION_TWEAK}")
 message(STATUS "OPCN_FLATPAK: ${OCPN_FLATPAK}")
 
+# Don't use local version of GLU library
+set(USE_LOCAL_GLU FALSE)
 
+# Not in Master branch. Question still needed? on or off?
+# option(USE_GL "Enable OpenGL support" ON)
+message(STATUS "USE_GL: ${USE_GL}")
 
 if("${CMAKE_BUILD_TYPE}" STREQUAL "")
   set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build" FORCE)
@@ -166,12 +173,10 @@ message(STATUS "PACKAGING_NAME: ${PACKAGING_NAME}")
 
 set(PLUGIN_NAME ${PACKAGE}-plugin-${PKG_TARGET}-${PKG_TARGET_VERSION})
 
-# Settings and Options
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
 option(Plugin_CXX11 "Use c++11" OFF)
 
-# Check on compiler support
 if(Plugin_CXX11)
   message(STATUS "Attempting to use c++11")
   include(CheckCXXCompilerFlag)
@@ -231,8 +236,11 @@ if(CMAKE_VERSION VERSION_GREATER 3.9)
   endif()
 endif()
 
-## -------Section above is directly from Testplugin --------------#  
+#
 # ----- Modify section above for special plugin requirements----- ##
+#
+# Is this needed?
+#add_definitions(-DUSE_S57)
 
 #======== Portaudio Section below direct from weatherfax_pi =======
 IF (UNIX)
@@ -251,11 +259,11 @@ ELSE (UNIX)
     INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/include)
     IF(STANDALONE MATCHES "BUNDLED")
 	# within OpenCPN tree
-    	SET(PLUGINS_LIBS ${EXTRA_LIBS} ../../buildwin/portaudio_x86.lib)
+    	SET(EXTRA_LIBS ${EXTRA_LIBS} ../../buildwin/portaudio_x86.lib)
     	INSTALL(FILES "../../buildwin/portaudio_x86.dll" DESTINATION ".")
     	message(STATUS "bundled: portaudio in ../../buildwin/portaudio_x86.dll")
     ELSE()
-    	SET(PLUGINS_LIBS ${EXTRA_LIBS} ${PROJECT_SOURCE_DIR}/buildwin/portaudio_x86.lib)
+    	SET(EXTRA_LIBS ${EXTRA_LIBS} ${PROJECT_SOURCE_DIR}/buildwin/portaudio_x86.lib)
     	INSTALL(FILES "${PROJECT_SOURCE_DIR}/buildwin/portaudio_x86.dll" DESTINATION ".")
     	message(STATUS "Not bundled: portaudio in ${PROJECT_SOURCE_DIR}/buildwin/portaudio_x86.dll")
     ENDIF()
@@ -272,11 +280,8 @@ ENDIF (MSVC)
 INCLUDE("cmake/PluginConfigure.cmake")
 #===========================================================
 # ----- Change below to match your project requirements ----- ##
-
-add_definitions(-DUSE_S57)
-
 # ++++++++++++++Section below is direct from Weatherfax +++++++++##
-
+  
 SET(SRC_WEATHERFAX
             src/weatherfax_pi.cpp
             src/FaxDecoder.cpp
@@ -460,11 +465,9 @@ SET (SRC_TINYXML
 			src/tinyxml/tinyxmlparser.cpp
 )
 
-
 #INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
 #INCLUDE_DIRECTORIES (BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
 #INCLUDE_DIRECTORIES (BEFORE ${PROJECT_SOURCE_DIR}/api-16)
-
 
 ## +++++++++Section above is added recently to Weatherfax set ++++++++++##
 ##++++++++++++RTLSDR Section directly from Weatherfax +++++++++##
@@ -477,8 +480,6 @@ IF(UNIX)
     MESSAGE (STATUS "Found rtlsdr:  ${RTLSDR_LIBRARY}")
     ADD_DEFINITIONS( "-DBUILTIN_RTLAIS" )
 
-
-#    SET(PLUGINS_LIBS ${PLUGINS_LIBS} ${RTLSDR_LIBRARY})
     SET(EXTRA_LIBS ${EXTRA_LIBS} ${RTLSDR_LIBRARY})
   ELSE()
     MESSAGE (STATUS "")
@@ -500,18 +501,20 @@ IF(WIN32)
     ENDIF()
 ENDIF(WIN32)
 
+INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
+INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
+
 ##=============================================================
 # Modify/configure 'Include' Directories below for the Plugin
 ##=============================================================
 # EG  also inside cmake/Plugin____.cmake files
-INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
-INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
-# INCLUDE_DIRECTORIES (BEFORE ${PROJECT_SOURCE_DIR}/api-16)
+
 #INCLUDE_DIRECTORIES( /src/libaudiofile )
 #INCLUDE_DIRECTORIES( /src/libaudiofile/audiofile.h )
 #INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/src/libaudiofile)
 #INCLUDE_DIRECTORIES (src/plugingl)
 #INCLUDE_DIRECTORIES(api-16)
+# INCLUDE_DIRECTORIES (BEFORE ${PROJECT_SOURCE_DIR}/api-16)
 
 ##================================================================================
 ## Required to collect all the set( headers and SRCS  - Adjust as required
@@ -519,13 +522,15 @@ INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
 ##================================================================================
 ##    add_library(${PACKAGE_NAME} SHARED ${SRCS}  ${SRC_NMEA0183})
 ##================================================================================
+# ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} )
 # ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} )
+
 ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
-# Jon added these two lines
 TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 message(STATUS "Adding PUGINS_LIBS: ${EXTRA_LIBS}")
 
 ##++++++++++Section above from Weatherfax located relative to where it was  ++++++++
+
 ##
 ## ----- Change below to match project requirements ----- ##
 ##
@@ -535,7 +540,6 @@ message(STATUS "Adding PUGINS_LIBS: ${EXTRA_LIBS}")
 #        target_link_libraries(${PACKAGE_NAME} ${PORTAUDIO_LIBS})
 #    endif(MSVC)
 #endif(WIN32)
-
 
 # ADD_DEFINITIONS(-DTIXML_USE_STL)
 
@@ -595,14 +599,12 @@ message(STATUS "Adding PUGINS_LIBS: ${EXTRA_LIBS}")
 #  ENDIF()
 #ENDIF()
 
-
-
 # ----- Change above to match project requirements ----- ##
 #--------REMOVE LN 194 to LN 296 from Testplugin_pi---------------
 #------- Change below to match project requirements --------------#
 
 #----INCLUDE CMAKE #3 & #4 -----
-# INCLUDE("cmake/PluginNMEA.cmake") #not for wxfax
+#  INCLUDE("cmake/PluginNMEA.cmake") #not for wxfax
 # INCLUDE("cmake/PluginJSON.cmake")  #not for wxfax
 INCLUDE("cmake/PluginXML.cmake")
 INCLUDE("cmake/PluginGL.cmake")

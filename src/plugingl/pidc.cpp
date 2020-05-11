@@ -1619,7 +1619,6 @@ void pi_odc_endCallbackD_GLSL(void *data)
 
 #endif          //#ifdef ocpnUSE_GL
 
-
 void piDC::DrawPolygonTessellated( int n, wxPoint points[], wxCoord xoffset, wxCoord yoffset )
 {
     if( dc )

@@ -49,11 +49,11 @@ before_build:
   - cmake -T v141_xp ..
 
 build_script:
-  - cmake -G "Visual Studio 15 2017"   ..
+#  - cmake -G "Visual Studio 15 2017"   ..
   - cmake --build . --target package --config Release
-  - cmake --build . --target install --config RelWithDebInfo
-  - cmake --build . --target package --config RelWithDebInfo
-  - choco install git
+#  - cmake --build . --target install --config RelWithDebInfo
+#  - cmake --build . --target package --config RelWithDebInfo
+#  - choco install git
   - python -m ensurepip
   - python -m pip install -q setuptools
   - python -m pip install -q cloudsmith-cli
@@ -66,8 +66,9 @@ artifacts:
 deploy:
   description: 'release created by AppVeyor CI'
   provider: GitHub
-  auth_token: '%GitHub_auth_token%'
-  artifact: installer,portable
+#  auth_token: '%GitHub_auth_token%'
+  auth_token: '%git-ptoken-weatherfax-into-appveyor%'
+  artifact: installer
   draft: true
   prerelease: true
   on:
