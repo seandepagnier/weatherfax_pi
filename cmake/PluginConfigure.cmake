@@ -6,10 +6,11 @@ message(STATUS "*** Staging to build ${PACKAGE_NAME} ***")
 
 # Do the version.h & wxWTranslateCatalog configuration into the build output directory, thereby allowing building from a read-only source tree.
 if(NOT SKIP_VERSION_CONFIG)
-  set(BUILD_INCLUDE_PATH ${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY})
-  configure_file(cmake/in-files/version.h.in ${BUILD_INCLUDE_PATH}/include/version.h)
-  configure_file(cmake/in-files/wxWTranslateCatalog.h.in ${BUILD_INCLUDE_PATH}/include/wxWTranslateCatalog.h)
-  include_directories(${BUILD_INCLUDE_PATH}/include)
+    set(BUILD_INCLUDE_PATH ${CMAKE_CURRENT_BINARY_DIR}/include)
+    configure_file(cmake/in-files/version.h.in ${BUILD_INCLUDE_PATH}/version.h)
+    configure_file(cmake/in-files/wxWTranslateCatalog.h.in ${BUILD_INCLUDE_PATH}/wxWTranslateCatalog.h)
+    include_directories(BEFORE ${BUILD_INCLUDE_PATH})
+    message(STATUS "Add BUILD_INCLUDE_PATH: ${BUILD_INCLUDE_PATH}")
 endif(NOT SKIP_VERSION_CONFIG)
 
 # configure xml file for circleci

@@ -24,7 +24,7 @@ void initialize_images(void)
 
 #ifdef OCPN_USE_SVG
     wxFileName fn;
-    fn.SetPath(*GetpSharedDataLocation());
+    fn.SetPath(GetPluginDataDir("weatherfax_pi"));
     fn.AppendDir(_T("plugins"));
     fn.AppendDir(_T("weatherfax_pi"));
     fn.AppendDir(_T("data"));
