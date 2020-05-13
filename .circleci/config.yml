@@ -113,6 +113,24 @@ jobs:
         - run: chmod a+x ci/*.sh
         - run: ci/circleci-build-debian.sh
         - run: ci/cloudsmith-upload.sh
+ build-focal-gtk3:
+        docker:
+        - image: circleci/buildpack-deps:focal-scm
+        environment:
+        - BUILD_GTK3: 1
+        - OCPN_TARGET: focal-gtk3
+        steps:
+        - checkout
+        - run: >
+            echo "deb-src http://us.archive.ubuntu.com/ubuntu/ focal main"
+            | sudo tee -a /etc/apt/sources.list
+        - run: >
+            echo "deb-src http://us.archive.ubuntu.com/ubuntu/ focal-updates main"
+            | sudo tee -a /etc/apt/sources.list
+        - run: cat /etc/apt/sources.list
+        - run: chmod a+x ci/*.sh
+        - run: ci/circleci-build-debian.sh
+        - run: ci/cloudsmith-upload.sh		
     build-buster:
         docker:
         - image: circleci/buildpack-deps:buster-scm
@@ -228,6 +246,14 @@ workflows:
                 tags:
                     only: /.*/
         - build-focal:
+            filters:
+                branches:
+                    ignore:
+                    - devel
+                    - tmp
+                tags:
+                    only: /.*/
+        - build-focal-gtk3:
             filters:
                 branches:
                     ignore:
