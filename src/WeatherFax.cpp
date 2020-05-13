@@ -142,8 +142,10 @@ static void LoadCoordinatesFromXml(WeatherFaxImageCoordinateList &coords, wxStri
     wxString error;
     wxString coordinatesets_path = weatherfax_pi::StandardPath();
     wxString s = wxFileName::GetPathSeparator();
-    wxString default_coordinatesets_path = GetPluginDataDir("weatherfax_pi") + _T("plugins")
-        + s + _T("weatherfax_pi") + s + _T("data") + s;
+    wxString default_coordinatesets_path = 
+//	GetPluginDataDir("weatherfax_pi") + _T("plugins")
+//        + s + _T("weatherfax_pi") + s + _T("data") + s;
+	GetPluginDataDir("weatherfax_pi") + s + _T("data") + s;
 
     coords.DeleteContents(true);
     if(!doc.LoadFile((coordinatesets_path + coordinatesets).mb_str()) &&
@@ -476,8 +478,9 @@ void WeatherFax::OpenImage(wxString filename, wxString station, wxString area, w
 #ifdef WIN32
         // attempt to convert using PVW32Con.exe
         wxString s = wxFileName::GetPathSeparator();
-        wxString pvw32con = GetPluginDataDir("weatherfax_pi") + _T("plugins")
-            + s + _T("weatherfax_pi") + s + _T("PVW32Con.exe");
+//      wxString pvw32con = GetPluginDataDir("weatherfax_pi") + _T("plugins")
+//          + s + _T("weatherfax_pi") + s + _T("PVW32Con.exe");
+		wxString pvw32con = GetPluginDataDir("weatherfax_pi") + s + _T("data") + s + _T("PVW32Con.exe");
         wxString cmd = pvw32con + _T(" \"") + filename + _T("\" -t --o \"" + filename + _T("\""));
 
         int ret = ::wxExecute(cmd, wxEXEC_SYNC);
