@@ -113,7 +113,7 @@ jobs:
         - run: chmod a+x ci/*.sh
         - run: ci/circleci-build-debian.sh
         - run: ci/cloudsmith-upload.sh
- build-focal-gtk3:
+    build-focal-gtk3:
         docker:
         - image: circleci/buildpack-deps:focal-scm
         environment:
