@@ -4,6 +4,48 @@
 
 message(STATUS "*** Staging to build ${PACKAGE_NAME} ***")
 
+# Deployment test- not-master=alpha,  master branch=beta, tagged push=prod
+message(STATUS "CIRCLECI: ${CIRCLECLI}, Env CIRCLECI: $ENV{CIRCLECI}")
+message(STATUS "TRAVIS: ${TRAVIS}, Env TRAVIS: $ENV{TRAVIS}")
+
+set(GIT_REPOSITORY_HOST "${GIT_REPOSITORY_SERVER}")
+set(GIT_REPOSITORY_DIR "${GIT_USER}/")
+if($ENV{CIRCLECI})
+    set(GIT_REPOSITORY_BRANCH "$ENV{CIRCLE_BRANCH}")
+    set(GIT_REPOSITORY_TAG "$ENV{CIRCLE_TAG}")
+elseif($ENV{TRAVIS})
+    set(GIT_REPOSITORY_BRANCH "$ENV{TRAVIS_BRANCH}")
+    set(GIT_REPOSITORY_TAG "$ENV{TRAVIS_TAG}")
+elseif($ENV{APPVEYOR})
+    set(GIT_REPOSITORY_BRANCH "$ENV{APPVEYOR_REPO_BRANCH}")
+    set(GIT_REPOSITORY_TAG "$ENV{APPVEYOR_REPO_TAG_NAME}")
+else()
+    # Get the current working branch
+    execute_process(
+        COMMAND git rev-parse --abbrev-ref HEAD
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        OUTPUT_VARIABLE GIT_REPOSITORY_BRANCH
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+      )
+    if(${GIT_REPOSITORY_BRANCH} EQUAL "")
+        message(STATUS "Setting default GIT repository branch - master")
+        set(GIT_REPOSITORY_BRANCH "master")
+    endif()
+    execute_process(
+        COMMAND git tag --contains
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        OUTPUT_VARIABLE GIT_REPOSITORY_TAG
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+      )
+endif()
+message(STATUS "Git Branch: ${GIT_REPOSITORY_BRANCH}")
+message(STATUS "Git Tag: ${GIT_REPOSITORY_TAG}")
+if("${GIT_REPOSITORY_BRANCH}" EQUAL "")
+    set(GIT_BRANCH_OR_TAG "tag")
+else()
+    set(GIT_BRANCH_OR_TAG "branch")
+endif()
+
 # Do the version.h & wxWTranslateCatalog configuration into the build output directory, thereby allowing building from a read-only source tree.
 if(NOT SKIP_VERSION_CONFIG)
     set(BUILD_INCLUDE_PATH ${CMAKE_CURRENT_BINARY_DIR}/include)

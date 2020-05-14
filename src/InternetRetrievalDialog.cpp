@@ -151,9 +151,7 @@ void InternetRetrievalDialog::Load(bool force)
     if( wxFileExists( m_weatherfax_pi.StandardPath() + _T("WeatherFaxInternetRetrieval.xml") ) )
         OpenXML( m_weatherfax_pi.StandardPath() + _T("WeatherFaxInternetRetrieval.xml") );
     else
-        OpenXML(GetPluginDataDir("weatherfax_pi") + _T("plugins")
-    	+ s + _T("weatherfax_pi") + s + _T("data") + s
-        + _T("WeatherFaxInternetRetrieval.xml"));
+        OpenXML(GetPluginDataDir("weatherfax_pi") + s + _T("data") + s + _T("WeatherFaxInternetRetrieval.xml"));
 
     for(unsigned int i=0; i < m_lServers->GetCount(); i++)
         for(std::list<wxString>::iterator it = serverlist.begin();

@@ -47,67 +47,23 @@ SET(PACKAGE "weatherfax_pi")
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "5")
-set(VERSION_TWEAK "6")
-set(VERSION_DATE "05/12/2020")
+set(VERSION_TWEAK "7")
+set(VERSION_DATE "05/13/2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
 
 set(PARENT "opencpn")
 
+# The following lines are used to describe your git repository
 #set(GIT_USER "seandepagnier")
 #set(GIT_USER "jongough")
 set(GIT_USER "rgleason")
-
 set(GIT_REPOSITORY_NAME "weatherfax_pi")
-message(STATUS "CIRCLECI: ${CIRCLECLI}, Env CIRCLECI: $ENV{CIRCLECI}")
-message(STATUS "TRAVIS: ${TRAVIS}, Env TRAVIS: $ENV{TRAVIS}")
 
-# Permits setup of a local webserver with git for testing
-if($ENV{CIRCLECI})
-  set(GIT_REPOSITORY_HOST "github.com")
-  set(GIT_REPOSITORY_DIR "${GIT_USER}/")
-  set(GIT_REPOSITORY_BRANCH "$ENV{CIRCLE_BRANCH}")
-  set(GIT_REPOSITORY_TAG "$ENV{CIRCLE_TAG}")
-elseif($ENV{TRAVIS})
-  set(GIT_REPOSITORY_HOST "github.com")
-  set(GIT_REPOSITORY_DIR "${GIT_USER}/")
-  set(GIT_REPOSITORY_BRANCH "$ENV{TRAVIS_BRANCH}")
-  set(GIT_REPOSITORY_TAG "$ENV{TRAVIS_TAG}")
-elseif($ENV{APPVEYOR})
-  set(GIT_REPOSITORY_HOST "github.com")
-  set(GIT_REPOSITORY_DIR "${GIT_USER}/")
-  set(GIT_REPOSITORY_BRANCH "$ENV{APPVEYOR_REPO_BRANCH}")
-  set(GIT_REPOSITORY_TAG "$ENV{APPVEYOR_REPO_TAG_NAME}")
-else()
-  set(GIT_REPOSITORY_HOST "github.com")
-  set(GIT_REPOSITORY_DIR "${GIT_USER}/")
-  # Get the current working branch
-  execute_process(
-    COMMAND git rev-parse --abbrev-ref HEAD
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    OUTPUT_VARIABLE GIT_REPOSITORY_BRANCH
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-    )
-  if(${GIT_REPOSITORY_BRANCH} EQUAL "")
-    message(STATUS "Setting default GIT repository branch - master")
-    set(GIT_REPOSITORY_BRANCH "master")
-  endif()
-  execute_process(
-    COMMAND git tag --contains
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    OUTPUT_VARIABLE GIT_REPOSITORY_TAG
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-    )
-endif()
-message(STATUS "Git Branch: ${GIT_REPOSITORY_BRANCH}")
-message(STATUS "Git Tag: ${GIT_REPOSITORY_TAG}")
-if("${GIT_REPOSITORY_BRANCH}" EQUAL "")
-  set(GIT_BRANCH_OR_TAG "TAG")
-else()
-  set(GIT_BRANCH_OR_TAG "BRANCH")
-endif()
 
+# The next line allows for setting up your own local webserver with git on it for testing purposes, the default is github.com
+set(GIT_REPOSITORY_SERVER "github.com")
 
 #set(CLOUDSMITH_USER "jon-gough")
 #set(CLOUDSMITH_USER "sean-depagnier")											  
@@ -118,7 +74,7 @@ set(CLOUDSMITH_USER "rick-gleason")
 #set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Sean's customization
 set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization
 
-# Set Cloudsmith upload repository suffix for each catalog
+# Specifies Cloudsmith deployment repository suffix for each catalog
 set(PROD "prod") #Standard Repos
 set(BETA "beta") #Standard Repos
 set(ALPHA "alpha") #Standard Repos
@@ -295,10 +251,12 @@ IF (MSVC)
 ENDIF (MSVC)
 
 ## --Section above is direct from Weatherfax located above SET(SRC_WEATHERFAX  ---##
+## --Below needed for build process.
 #===========================================================
 INCLUDE("cmake/PluginConfigure.cmake")
 #===========================================================
-# ----- Change below to match your project requirements ----- ##
+## --Above is needed for build process.
+## ----- Change below to match your project requirements ----- ##
 
 
 # ++++++++++++++Section below is direct from Weatherfax +++++++++##
@@ -655,9 +613,13 @@ message(STATUS "Adding PUGINS_LIBS: ${EXTRA_LIBS}")
 INCLUDE("cmake/PluginXML.cmake")
 INCLUDE("cmake/PluginGL.cmake")
 #
-# ----- Do not change - needed to build app ----- ##
+## ----- do not change next section - needed to configure build process ----- ##
 #
 #INCLUDE CMAKE #5,6 & 7 -----
 include("cmake/PluginInstall.cmake")
 include("cmake/PluginLocalization.cmake")
 include("cmake/PluginPackage.cmake")
+
+#
+## ----- do not change section above - needed to configure build process ----- ##
+#

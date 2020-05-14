@@ -6,7 +6,6 @@ src/FaxDecoder.h
 src/georef.h
 src/icons.h
 src/InternetRetrievalDialog.h
-src/ocpn_plugin.h
 src/SchedulesDialog.h
 src/WeatherFax.h
 src/weatherfax_pi.h
