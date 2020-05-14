@@ -59,6 +59,8 @@ set(PARENT "opencpn")
 #set(GIT_USER "seandepagnier")
 #set(GIT_USER "jongough")
 set(GIT_USER "rgleason")
+set(GIT_REPOSITORY_NAME "weatherfax_pi")
+
 
 # The next line allows for setting up your own local webserver with git on it for testing purposes, the default is github.com
 set(GIT_REPOSITORY_SERVER "github.com")
