@@ -57,8 +57,8 @@ set(PARENT "opencpn")
 
 # The following lines are used to describe your git repository
 #set(GIT_USER "seandepagnier")
-#set(GIT_USER "jongough")
-set(GIT_USER "rgleason")
+set(GIT_USER "jongough")
+#set(GIT_USER "rgleason")
 set(GIT_REPOSITORY_NAME "weatherfax_pi")
 
 
