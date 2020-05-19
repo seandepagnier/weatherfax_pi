@@ -65,12 +65,12 @@ set(PARENT "opencpn")
 
 #set(CLOUDSMITH_USER "jon-gough")
 #set(CLOUDSMITH_USER "sean-depagnier")											  
-set(CLOUDSMITH_USER "rick-gleason")
+#set(CLOUDSMITH_USER "rick-gleason")
 
 #set(CLOUDSMITH_BASE_REPOSITORY "${GIT_REPOSITORY_NAME}")
 #set(CLOUDSMITH_BASE_REPOSITORY "weatherfax_pi")  #Jon Gough's customization
 #set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Sean's customization
-set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization
+#set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization
 
 # Specifies Cloudsmith deployment repository suffix for each catalog
 set(PROD "prod") #Standard Repos
