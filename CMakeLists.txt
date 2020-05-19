@@ -63,7 +63,7 @@ set(PARENT "opencpn")
 # The next line allows for setting up your own local webserver with git on it for testing purposes, the default is github.com
 #set(GIT_REPOSITORY_SERVER "github.com")
 
-#set(CLOUDSMITH_USER "jon-gough")
+set(CLOUDSMITH_USER "jon-gough")
 #set(CLOUDSMITH_USER "sean-depagnier")											  
 #set(CLOUDSMITH_USER "rick-gleason")
 
