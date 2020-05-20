@@ -16,3 +16,4 @@ cp PVW32Con.exe ../buildwin/.
 cmake -DCMAKE_TOOLCHAIN_FILE=../mingw/fedora/toolchain.cmake ..
 make -j2
 make package
+rm ../build/PVW32Con.exe
