@@ -47,8 +47,8 @@ SET(PACKAGE "weatherfax_pi")
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "5")
-set(VERSION_TWEAK "7")
-set(VERSION_DATE "05/13/2020")
+set(VERSION_TWEAK "8")
+set(VERSION_DATE "05/19/2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -58,9 +58,9 @@ set(PARENT "opencpn")
 # The following lines are used to describe your git repository
 #set(GIT_USER "seandepagnier")
 #set(GIT_USER "jongough")
-set(GIT_USER "rgleason")
-set(GIT_REPOSITORY_NAME "weatherfax_pi")
-
+#set(GIT_USER "rgleason")
+# Jon turned off
+#set(GIT_REPOSITORY_NAME "weatherfax_pi")
 
 # The next line allows for setting up your own local webserver with git on it for testing purposes, the default is github.com
 set(GIT_REPOSITORY_SERVER "github.com")
@@ -69,7 +69,7 @@ set(GIT_REPOSITORY_SERVER "github.com")
 #set(CLOUDSMITH_USER "sean-depagnier")											  
 set(CLOUDSMITH_USER "rick-gleason")
 
-#set(CLOUDSMITH_BASE_REPOSITORY "${GIT_REPOSITORY_NAME}")
+# set this if your cloudsmith repository name does not match your git repository name
 #set(CLOUDSMITH_BASE_REPOSITORY "weatherfax_pi")  #Jon Gough's customization
 #set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Sean's customization
 set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization

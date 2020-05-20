@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
+
 #
 #
+
 # bailout on errors and echo commands.
 set -xe
 
@@ -21,9 +23,21 @@ docker exec -ti $DOCKER_CONTAINER_ID apt-get -y install git cmake build-essentia
 
 echo $OCPN_TARGET
 docker exec -ti $DOCKER_CONTAINER_ID /bin/bash -xec \
-    "export CICLECI=$CIRCLECI; export CIRCLECI_BRANCH=$CIRCLECI_BRANCH; export OCPN_TARGET=$OCPN_TARGET; rm -rf ci-source/build; mkdir ci-source/build; cd ci-source/build; cmake ..; make $BUILD_FLAGS; make package; chmod -R a+rw ../build;"
+    "export CIRCLECI=$CIRCLECI;
+    export CIRCLE_BRANCH=\"$CIRCLE_BRANCH\";
+    export CIRCLE_TAG=\"$CIRCLE_TAG\";
+    export CIRCLE_PROJECT_USERNAME=\"$CIRCLE_PROJECT_USERNAME\";
+    export CIRCLE_PROJECT_REPONAME=\"$CIRCLE_PROJECT_REPONAME\";
+    export GIT_REPOSITORY_SERVER=\"$GIT_REPOSITORY_SERVER\";
+    export OCPN_TARGET=$OCPN_TARGET;
+    export TRAVIS=$TRAVIS;
+    export TRAVIS_REPO_SLUG=\"$TRAVIS_REPO_SLUG\";
+    export TRAVIS_BRANCH=\"$TRAVIS_BRANCH\";
+    export TRAVIS_TAG=\"$TRAVIS_TAG\";
+    rm -rf ci-source/build; mkdir ci-source/build; cd ci-source/build; cmake ..; make $BUILD_FLAGS; make package; chmod -R a+rw ../build;"
 
 echo "Stopping"
 docker ps -a
 docker stop $DOCKER_CONTAINER_ID
 docker rm -v $DOCKER_CONTAINER_ID
+
