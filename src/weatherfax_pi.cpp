@@ -128,7 +128,9 @@ wxBitmap *weatherfax_pi::GetPlugInBitmap()
 
 wxString weatherfax_pi::GetCommonName()
 {
-    return _("WeatherFax");
+    // return _("WeatherFax");
+	return _T(PLUGIN_COMMON_NAME);
+		
 }
 
 wxString weatherfax_pi::GetShortDescription()
