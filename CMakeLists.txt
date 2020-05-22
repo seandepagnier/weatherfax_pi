@@ -39,7 +39,7 @@ endif(COMMAND cmake_policy)
 
 SET(VERBOSE_NAME weatherfax)
 # Search "getcommonname"in weather_routing_pi.cpp
-set(COMMON_NAME "Weatherfax")
+set(COMMON_NAME "WeatherFax")
 set(TITLE_NAME "WeatherFax")
 set(PACKAGE_CONTACT "Sean d'Epagnier")
 SET(PACKAGE "weatherfax_pi")
