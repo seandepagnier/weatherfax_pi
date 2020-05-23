@@ -97,7 +97,7 @@ echo $tarball
 echo $tarball_basename
 
 source $BUILD_DIR/pkg_version.sh
-tarball_name=@PACKAGE_NAME@-@PACKAGE_VERSION@-${PKG_TARGET}-${PKG_TARGET_VERSION}-${OCPN_TARGET}-tarball
+tarball_name=@PACKAGE_NAME@-@PACKAGE_VERSION@-${PKG_TARGET}-@ARCH@_${PKG_TARGET_VERSION}-${OCPN_TARGET}-tarball
 if [ "$(ls $BUILD_DIR/*.${PKG_EXT})" ]; then
     pkg=$(ls $BUILD_DIR/*.${PKG_EXT})
 else
@@ -194,7 +194,7 @@ pwd
 ls -la
 
 cloudsmith push raw --republish --no-wait-for-sync \
-    --name @PACKAGE_NAME@-@PKG_TARGET@-@PKG_TARGET_VERSION@-${OCPN_TARGET}-metadata \
+    --name @PACKAGE_NAME@-@PKG_TARGET@-@ARCH@_@PKG_TARGET_VERSION@-${OCPN_TARGET}-metadata \
     --version ${VERSION} \
     --summary "@PACKAGE@ opencpn plugin metadata for automatic installation" \
     $REPO $xml
@@ -207,7 +207,7 @@ cloudsmith push raw --republish --no-wait-for-sync \
 
 if [ "${PKG_EXT}" != "gz" ] && [ "$pkg" != "" ]; then
     cloudsmith push raw --republish --no-wait-for-sync \
-        --name opencpn-package-@PACKAGE@-@PKG_TARGET@-@PKG_TARGET_VERSION@-${OCPN_TARGET}.${PKG_EXT} \
+        --name opencpn-package-@PACKAGE@-@PKG_TARGET@-@ARCH@_@PKG_TARGET_VERSION@-${OCPN_TARGET}.${PKG_EXT} \
         --version ${VERSION} \
         --summary "@PACKAGE@ .${PKG_EXT} installation package" \
         $REPO $pkg

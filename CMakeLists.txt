@@ -1,4 +1,5 @@
 # ---------------------------------------------------------------------------
+# Frontend2 Author: jongough aka. Jon Gough    License:wxWidgets License
 ##---------------------------------------------------------------------------
 ## Author:      Sean d'Epagnier
 ##***************************************************************************
@@ -24,7 +25,9 @@
 #    - 2/19/2020 10 environments needed for beta testing.
 #    - 3/30/2020 MacOS build fixed 12 env
 #    - Reverse dates here
-#    - 2/05/2020 MacOS final fix- JG# ---------------------------------------------------------------------------
+#    - 2/05/2020 MacOS final fix- JG#
+#    - 23/05/2020 ARCH and CS Deploy and other 
+ ---------------------------------------------------------------------------
 # ----- Modify section below to include all the details for your plugin ----- ##
 cmake_minimum_required(VERSION 3.1.1)
 if(COMMAND cmake_policy)
@@ -47,8 +50,8 @@ SET(PACKAGE "weatherfax_pi")
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "5")
-set(VERSION_TWEAK "8")
-set(VERSION_DATE "05/19/2020")
+set(VERSION_TWEAK "9")
+set(VERSION_DATE "05/23/2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -62,19 +65,18 @@ set(PARENT "opencpn")
 # Jon turned off
 #set(GIT_REPOSITORY_NAME "weatherfax_pi")
 
-# The next line allows for setting up your own local webserver with git on it for testing purposes, the default is github.com
+# For setting up your own local webserver with git loaded, for testing purposes.
 set(GIT_REPOSITORY_SERVER "github.com")
 
 #set(CLOUDSMITH_USER "jon-gough")
-#set(CLOUDSMITH_USER "sean-depagnier")											  
+#set(CLOUDSMITH_USER "sean-depagnier")
 set(CLOUDSMITH_USER "rick-gleason")
 
-# set this if your cloudsmith repository name does not match your git repository name
+# set if the cloudsmith repository name does not match your git repository name
 #set(CLOUDSMITH_BASE_REPOSITORY "weatherfax_pi")  #Jon Gough's customization
 #set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Sean's customization
 set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization
-
-# Specifies Cloudsmith deployment repository suffix for each catalog
+# Specifies Cloudsmith upload repository suffix for each catalog
 set(PROD "prod") #Standard Repos
 set(BETA "beta") #Standard Repos
 set(ALPHA "alpha") #Standard Repos
@@ -84,8 +86,7 @@ set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/weatherfax.html")
 set(XML_SUMMARY "Open fax image files or decode audio faxes and overlay on chart")
 set(XML_DESCRIPTION "Simple image overlay calibration, Converts any image image into a raster chart.  Db for HF radio fax stations via SSB and Metro URL internet retrieval.")
 
-set(APPVEYOR_TEST_DEPLOY_TO_CLOUDSMITH "true")
-option(PLUGIN_USE_SVG "Use SVG graphics" ON)
+#set(APPVEYOR_TEST_DEPLOY_TO_CLOUDSMITH "true")
 
 ##
 ## ----- Modify above to include all the plugin details --------- ##
@@ -96,10 +97,6 @@ option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
 set(CMAKE_CXX_STANDARD 11)
-
-# Prefer libGL.so to libOpenGL.so, see CMP0072
-set(OpenGL_GL_PREFERENCE "LEGACY")
-
 #------ End Settings
 
 if(NOT ${PACKAGE} MATCHES "(.*)_pi")
@@ -120,11 +117,12 @@ message(STATUS "${VERBOSE_NAME} Version: ${VERSION_MAJOR}.${VERSION_MINOR}.${VER
 message(STATUS "OPCN_FLATPAK: ${OCPN_FLATPAK}")
 
 #------Settings
+# Prefer libGL.so to libOpenGL.so, see CMP0072
+set(OpenGL_GL_PREFERENCE "LEGACY")
 # Don't use local version of GLU library
 set(USE_LOCAL_GLU FALSE)
 
-# Not in Master branch. Question still needed? on or off?
-# option(USE_GL "Enable OpenGL support" ON)
+option(USE_GL "Enable OpenGL support" OFF)
 message(STATUS "USE_GL: ${USE_GL}")
 #------End Settings
 
@@ -141,13 +139,13 @@ set(PKG_URL "https://dl.cloudsmith.io/public/--pkg_repo--/raw/names/--name--/ver
 INCLUDE("cmake/PluginSetup.cmake")
 #===========================================================
 if(DEFINED ENV{OCPN_TARGET})
-    set(PACKAGING_NAME "${PKG_NVR}_${PKG_TARGET}-${PKG_TARGET_VERSION}-$ENV{OCPN_TARGET}")
+    set(PACKAGING_NAME "${PKG_NVR}_${PKG_TARGET}-${ARCH}_${PKG_TARGET_VERSION}-$ENV{OCPN_TARGET}")
 else(DEFINED ENV{OCPN_TARGET})
-    set(PACKAGING_NAME "${PKG_NVR}_${PKG_TARGET}-${PKG_TARGET_VERSION}")
+    set(PACKAGING_NAME "${PKG_NVR}_${PKG_TARGET}-${ARCH}_${PKG_TARGET_VERSION}")
 endif(DEFINED ENV{OCPN_TARGET})
 message(STATUS "PACKAGING_NAME: ${PACKAGING_NAME}")
 
-set(PLUGIN_NAME ${PACKAGE}-plugin-${PKG_TARGET}-${PKG_TARGET_VERSION})
+set(PLUGIN_NAME ${PACKAGE}-plugin-${PKG_TARGET}-${ARCH}_${PKG_TARGET_VERSION})
 
 # Settings and Options
 set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -445,30 +443,40 @@ SET (SRC_TINYXML
 
 # add_definitions(-DPLUGIN_USE_SVG)
 
+# ------------------------------------
+#  TP_JSON SCHEMA VALIDATOR  From Testplugin 
+# ------------------------------------
+IF(APPLE)
+    OPTION(TP_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" OFF)
+ELSE(APPLE)
+    OPTION(TP_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" ON)
+ENDIF(APPLE)
 
-#JSON Validator: Every plugin that uses JSON for passing messages should use a validator.  A JSON validator is much like an XML validator, the validator allows the system to ignore non-conformant messages.  The JSON validator changes the OSABI flavor of the Linux executable so there is code to change it back.
+IF(TP_JSON_SCHEMA_VALIDATOR)
+    MESSAGE(STATUS "Using JSON Schema validation - warning this changes the 'flavour' of the executable and it may not be compatible with OpenCPN")
+    ADD_DEFINITIONS(-DTP_JSON_SCHEMA_VALIDATOR)
+    MESSAGE(STATUS "Adding JSON Schema validation")
 
-#IF(UNIX AND NOT APPLE)
-#  IF(TP_JSON_SCHEMA_VALIDATOR)
-#    # Change OS/ABI to be UNIX - System V to make it run with OCPN
-#    SET(lib_name lib${PACKAGE_NAME}.so)
-#    MESSAGE(STATUS "lib-name: ${lib_name}")
-#    FIND_FILE(elfedit elfedit)
-#    IF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-#      MESSAGE(STATUS "Will ensure OS/ABI is set to 0 to match OCPN")
-#      ADD_CUSTOM_COMMAND(
-#        TARGET ${PACKAGE_NAME}
-#        POST_BUILD
-#        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-#        DEPENDS ${PACKAGE_NAME}
-#        COMMENT " Running post build action on ${lib_name}."
-#        COMMAND sh -c 'elfedit --input-osabi=Linux --output-osabi=none ${lib_name} || (echo 0) '
-#      )
-#    ELSE(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-#      MESSAGE(STATUS "Cannot correct OS/ABI to match OCPN if it is generated incorrectly. Package binutils needed")
-#    ENDIF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-#  ENDIF(TP_JSON_SCHEMA_VALIDATOR)
-#ENDIF(UNIX AND NOT APPLE)
+    SET(EXTSRC
+        ${EXTSRC}
+        extsrc/json-schema-validator/json-schema-draft7.json.cpp
+        extsrc/json-schema-validator/json-uri.cpp
+        extsrc/json-schema-validator/json-validator.cpp
+    )
+    SET(EXTINCLUDE
+        ${EXTINCLUDE}
+        extinclude/nlohmann/json.hpp
+        extinclude/json-schema-validator/json-schema.hpp
+    )
+    INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/extinclude/json-schema-validator)
+ELSE(TP_JSON_SCHEMA_VALIDATOR)
+    MESSAGE(STATUS "Not using JSON Schema validation - warning invalid JSON 'may' cause unexpected crashes")
+ENDIF(TP_JSON_SCHEMA_VALIDATOR)
+# ------------------------------------
+#    End of JSON VALIDATOR From Testplugin 
+# ------------------------------------
+
+
 
 #INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
 #INCLUDE_DIRECTORIES (BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
@@ -510,7 +518,7 @@ ENDIF(WIN32)
 ##=============================================================
 # Modify/configure 'Include' Directories below for the Plugin
 ##=============================================================
-# EG  also inside cmake/Plugiin____.cmake files
+# EG  also inside cmake/Plugiin____.cmake files					
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
 
@@ -545,6 +553,41 @@ message(STATUS "Adding PUGINS_LIBS: ${EXTRA_LIBS}")
 #    endif(MSVC)
 #endif(WIN32)
 # ADD_DEFINITIONS(-DTIXML_USE_STL)
+
+# ------------------------------------
+#  TP_JSON SCHEMA VALIDATOR  From Testplugin 
+# ------------------------------------
+
+#JSON Validator: Every plugin that uses JSON for passing messages should use a validator.  A JSON validator is much like an XML validator, the validator allows the system to ignore non-conformant messages.  The JSON validator changes the OSABI flavor of the Linux executable so there is code to change it back.
+
+IF(UNIX AND NOT APPLE)
+  IF(TP_JSON_SCHEMA_VALIDATOR)
+    # Change OS/ABI to be UNIX - System V to make it run with OCPN
+    SET(lib_name lib${PACKAGE_NAME}.so)
+    MESSAGE(STATUS "lib-name: ${lib_name}")
+    FIND_FILE(elfedit elfedit)
+    IF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+      MESSAGE(STATUS "Will ensure OS/ABI is set to 0 to match OCPN")
+      ADD_CUSTOM_COMMAND(
+        TARGET ${PACKAGE_NAME}
+        POST_BUILD
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        DEPENDS ${PACKAGE_NAME}
+        COMMENT " Running post build action on ${lib_name}."
+        COMMAND sh -c 'elfedit --input-osabi=Linux --output-osabi=none ${lib_name} || (echo 0) '
+      )
+    ELSE(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+      MESSAGE(STATUS "Cannot correct OS/ABI to match OCPN if it is generated incorrectly. Package binutils needed")
+    ENDIF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+  ENDIF(TP_JSON_SCHEMA_VALIDATOR)
+ENDIF(UNIX AND NOT APPLE)
+# ------------------------------------
+#    End of JSON VALIDATOR From Testplugin 
+# ------------------------------------
+
+## ----- Change above to match project requirements ----- ##
+
+
 
 #IF(UNIX AND NOT APPLE)
 #    INCLUDE("cmake/FindTinyXML.cmake")

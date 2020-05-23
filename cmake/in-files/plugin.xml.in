@@ -16,6 +16,7 @@
 
   <target>${PKG_TARGET_FULL}</target>
   <target-version>${PKG_TARGET_VERSION}</target-version>
+  <target-arch>${ARCH}</target-arch>
   <tarball-url>
     ${PKG_URL}
   </tarball-url>

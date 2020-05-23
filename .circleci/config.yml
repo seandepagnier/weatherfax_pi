@@ -130,7 +130,7 @@ jobs:
         - run: cat /etc/apt/sources.list
         - run: chmod a+x ci/*.sh
         - run: ci/circleci-build-debian.sh
-        - run: ci/cloudsmith-upload.sh		
+        - run: ci/cloudsmith-upload.sh
     build-buster:
         docker:
         - image: circleci/buildpack-deps:buster-scm
@@ -301,5 +301,4 @@ workflows:
                     - tmp
                 tags:
                     only: /.*/
-
 
