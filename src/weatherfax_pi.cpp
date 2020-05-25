@@ -103,12 +103,14 @@ bool weatherfax_pi::DeInit(void)
 
 int weatherfax_pi::GetAPIVersionMajor()
 {
-    return MY_API_VERSION_MAJOR;
+  //  return MY_API_VERSION_MAJOR;
+  return OCPN_API_VERSION_MAJOR;
 }
 
 int weatherfax_pi::GetAPIVersionMinor()
 {
-    return MY_API_VERSION_MINOR;
+   // return MY_API_VERSION_MINOR;
+	return OCPN_API_VERSION_MINOR;
 }
 
 int weatherfax_pi::GetPlugInVersionMajor()
