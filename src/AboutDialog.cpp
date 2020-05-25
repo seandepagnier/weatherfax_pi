@@ -36,7 +36,9 @@
 
 AboutDialog::AboutDialog( wxWindow *parent ) : AboutDialogBase(parent)
 {
-    m_stVersion->SetLabel(wxString::Format(_T("%d.%d"), PLUGIN_VERSION_MAJOR, PLUGIN_VERSION_MINOR));
+//    m_stVersion->SetLabel(wxString::Format(_T("%d.%d"), PLUGIN_VERSION_MAJOR, PLUGIN_VERSION_MINOR));
+	  m_stVersion->SetLabel(wxString::Format(_T("%d.%d.%d.%d"), PLUGIN_VERSION_MAJOR, PLUGIN_VERSION_MINOR,PLUGIN_VERSION_PATCH,PLUGIN_VERSION_TWEAK));
+		  
 }
 
 void AboutDialog::OnAboutAuthor( wxCommandEvent& event )
