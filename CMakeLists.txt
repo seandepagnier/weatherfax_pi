@@ -27,7 +27,7 @@
 #    - Reverse dates here
 #    - 2/05/2020 MacOS final fix- JG#
 #    - 23/05/2020 ARCH and CS Deploy and other 
- ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------#
 # ----- Modify section below to include all the details for your plugin ----- ##
 cmake_minimum_required(VERSION 3.1.1)
 if(COMMAND cmake_policy)
