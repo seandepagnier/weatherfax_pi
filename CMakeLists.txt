@@ -75,7 +75,8 @@ set(CLOUDSMITH_USER "rick-gleason")
 # set if the cloudsmith repository name does not match your git repository name
 #set(CLOUDSMITH_BASE_REPOSITORY "weatherfax_pi")  #Jon Gough's customization
 #set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Sean's customization
-set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization
+#set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization
+set(CLOUDSMITH_BASE_REPOSITORY "weatherfax")  #Rick's customization
 # Specifies Cloudsmith upload repository suffix for each catalog
 set(PROD "prod") #Standard Repos
 set(BETA "beta") #Standard Repos
