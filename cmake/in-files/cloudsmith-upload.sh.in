@@ -19,10 +19,6 @@ PROD_REPO=${CLOUDSMITH_PROD_REPO:-'@CLOUDSMITH_USER@/@CLOUDSMITH_BASE_REPOSITORY
 BETA_REPO=${CLOUDSMITH_BETA_REPO:-'@CLOUDSMITH_USER@/@CLOUDSMITH_BASE_REPOSITORY@-@BETA@'}
 ALPHA_REPO=${CLOUDSMITH_ALPHA_REPO:-'@CLOUDSMITH_USER@/@CLOUDSMITH_BASE_REPOSITORY@-@ALPHA@'}
 
-#if [ -z "$CIRCLECI" ] && [ -z "$TRAVIS" ] && [ -z "$APPVEYOR" ]; then
-#    exit 0;
-#fi
-
 LOCAL_BUILD=false
 
 if [ "$CIRCLECI" ]; then
@@ -203,34 +199,16 @@ cd $cur_dir
 pwd
 ls -la
 
-# cloudsmith push raw --republish --no-wait-for-sync \
-#    --name @PACKAGE_NAME@-@PKG_TARGET@-@ARCH@_@PKG_TARGET_VERSION@-${OCPN_TARGET}-metadata \
-#    --version ${VERSION} \
-#    --summary "@PACKAGE@ opencpn plugin metadata for automatic installation" \
-#    $REPO $xml
-
-#cloudsmith push raw --republish --no-wait-for-sync \
-#    --name $tarball_name \
-#    --version ${VERSION} \
-#    --summary "@PACKAGE@ opencpn plugin tarball for automatic installation" \
-#    $REPO $tarball
-
 if [ $LOCAL_BUILD = false ]; then
     cloudsmith push raw --republish --no-wait-for-sync \
         --name @PACKAGE_NAME@-@PACKAGE_VERSION@-@PKG_TARGET@-@ARCH@_@PKG_TARGET_VERSION@-${OCPN_TARGET}-metadata \
         --version ${VERSION} \
         --summary "@PACKAGE@ opencpn plugin metadata for automatic installation" \
         $REPO $xml
-		
 
-
-# if [ "${PKG_EXT}" != "gz" ] && [ "$pkg" != "" ]; then
     cloudsmith push raw --republish --no-wait-for-sync \
-#        --name opencpn-package-@PACKAGE@-@PKG_TARGET@-@ARCH@_@PKG_TARGET_VERSION@-${OCPN_TARGET}.${PKG_EXT} \
         --name $tarbll_name \ 
         --version ${VERSION} \
-#        --summary "@PACKAGE@ .${PKG_EXT} installation package" \
-#        $REPO $pkg
         --summary "@PACKAGE@ opencpn plugin tarball for automatic installation" \
         $REPO $tarball
 
