@@ -175,11 +175,12 @@ fi
 cat $xml
 ls -l $BUILD_DIR
 cur_dir=$(pwd)
-gunzip $tarball
+gunzip -f $tarball
 cd $BUILD_DIR
+rm -f metadata.xml
 tarball_tar=$(ls *.tar)
 xml_here=$(ls *.xml)
-cp $xml_here metadata.xml
+cp -f $xml_here metadata.xml
 if [ "$TRAVIS" ] || [ "$CIRCLECI" ]; then
     mkdir build_tar
     cp $tarball_tar build_tar/.
@@ -197,7 +198,7 @@ else
     tar -rf $tarball_tar metadata.xml
 fi
 tar -tf $tarball_tar
-gzip $tarball_tar
+gzip -f $tarball_tar
 cd $cur_dir
 pwd
 ls -la
@@ -214,7 +215,7 @@ ls -la
 #    --summary "@PACKAGE@ opencpn plugin tarball for automatic installation" \
 #    $REPO $tarball
 
-if [ !$LOCAL_BUILD ]; then
+if [ $LOCAL_BUILD = false ]; then
     cloudsmith push raw --republish --no-wait-for-sync \
         --name @PACKAGE_NAME@-@PACKAGE_VERSION@-@PKG_TARGET@-@ARCH@_@PKG_TARGET_VERSION@-${OCPN_TARGET}-metadata \
         --version ${VERSION} \
