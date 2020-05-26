@@ -325,7 +325,7 @@
       <Area Name="9" lat1="16N" lat2="65N" lon1="115W" lon2="135E" />
     </Region>
   </Server>
-  <Server Name="OPC" Url="http://www.opc.ncep.noaa.gov/shtml/">   
+  <Server Name="OPC" Url="https://ocean.weather.gov/shtml/">   
 	<Region Name="Atlantic">
 		 <!-- wind/wave charts NW ATLANTIC -->
 		<Map Url="ra1_00z.gif" Contents="00Z Wind/Wave Analysis 40W-98W" Area="10" /> 
