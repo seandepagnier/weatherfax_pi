@@ -207,7 +207,7 @@ if [ $LOCAL_BUILD = false ]; then
         $REPO $xml
 
     cloudsmith push raw --republish --no-wait-for-sync \
-        --name $tarbll_name \ 
+        --name $tarball_name \
         --version ${VERSION} \
         --summary "@PACKAGE@ opencpn plugin tarball for automatic installation" \
         $REPO $tarball
