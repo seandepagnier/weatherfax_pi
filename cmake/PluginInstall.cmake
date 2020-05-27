@@ -29,7 +29,6 @@ if(WIN32)
   endif(MINGW)
 
   target_link_libraries(${PACKAGE_NAME} ${OPENCPN_IMPORT_LIB})
-  message(STATUS "OPENCPN_IMPORT_LIB: ${OPENCPN_IMPORT_LIB}")
 endif(WIN32)
 
 if(UNIX)

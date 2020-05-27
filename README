@@ -11,19 +11,31 @@ Compiling
 
 
 Build Normally (linux)
-mkdir build
-cd build
-cmake ..
-make
-sudo make install
+* mkdir build
+* cd build
+* cmake ..
+* make
+* sudo make install
+
+Build Normally (linux) and manually deploy to cloudsmith for testing
+* cmake -DCMAKE_BUILD_TYPE=Release ..
+* make -j4
+* make package
+* ./cloudsmith-upload.sh
+You will find xml and tarball files.
 
 Compiling on windows (visual studio):
-
 * cd ..
 * cd build
 * cmake .. # To produce a binary compatible with Windows XP, you must set the respective toolset - use 'cmake -T v120_xp ..'
 * make
 * make install
+
+Compile in Windows from the build directory:
+* cmake  -G "Visual Studio 15 2017" -T v141_xp ..
+* cmake --build . --config release --target package 
+It builds and creates ..tar.gz  files and xml.
+The tarball does not have the xml file
 
 Windows Specific Libraries
 ==========================

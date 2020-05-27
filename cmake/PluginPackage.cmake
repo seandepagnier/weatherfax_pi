@@ -84,6 +84,7 @@ if(UNIX AND NOT APPLE)
   # need apt-get install rpm, for rpmbuild
   set(PACKAGE_DEPS "opencpn, bzip2, gzip")
   set(CPACK_GENERATOR "DEB;TGZ")
+
   set(CPACK_DEBIAN_PACKAGE_DEPENDS ${PACKAGE_DEPS})
   set(CPACK_DEBIAN_PACKAGE_RECOMMENDS ${PACKAGE_RECS})
   set(CPACK_DEBIAN_PACKAGE_ARCHITECTURE ${ARCH})

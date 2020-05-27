@@ -21,12 +21,13 @@
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough  
 # ---------------------------------------------------------------------------
-# CMake-CI Number: 0.0.006  
+# CMake-CI Number: 0.0.007  
 #    - 2/19/2020 10 environments needed for beta testing.
 #    - 3/30/2020 MacOS build fixed 12 env
 #    - Reverse dates here
 #    - 2/05/2020 MacOS final fix- JG#
 #    - 23/05/2020 ARCH and CS Deploy and other 
+#    - 26/05/2020 Add ARCH testing to pluginSetup.cmake 
 # ---------------------------------------------------------------------------#
 # ----- Modify section below to include all the details for your plugin ----- ##
 cmake_minimum_required(VERSION 3.1.1)
@@ -50,8 +51,8 @@ SET(PACKAGE "weatherfax_pi")
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "5")
-set(VERSION_TWEAK "13")
-set(VERSION_DATE "05/26/2020")
+set(VERSION_TWEAK "14")
+set(VERSION_DATE "05/27/2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")

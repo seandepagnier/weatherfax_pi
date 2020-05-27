@@ -3,7 +3,7 @@
 #
 # Build the mingw artifacts inside the Fedora container
 #
-
+# Must be different for weatherfax due to portaudio and PVW32con.exe
 set -xe
 
 su -c "dnf install -q -y sudo dnf-plugins-core"

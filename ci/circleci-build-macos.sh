@@ -6,19 +6,11 @@
 
 # Fix broken ruby on the CircleCI image:
 if [ -n "$CI" ]; then
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
 
 set -xe
 
-#for pkg in cairo libexif xz libarchive wget cmake; do
-#    brew list $pkg 2>/dev/null | head -10 || brew install $pkg
-#done
-#brew unlink python@2
-#brew upgrade python
-#brew ls python3
-#brew install wget
-#brew install cmake
 set -o pipefail
 for pkg in cairo cmake libarchive libexif wget; do
     brew list $pkg 2>&1 >/dev/null || brew install $pkg 2>&1 >/dev/null || brew upgrade $pkg
