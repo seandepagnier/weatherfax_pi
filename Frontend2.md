@@ -121,10 +121,11 @@ Example:
 3. git commit -am "v1.9.5.10"
 4. git tag v1.9.5.10
 5. git push origin refs/tags/v1.9.5.10
-Enumerating objects: 5, done.
-remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
-To https://github.com/xxxx/weatherfax_pi.git  
-  * [new tag]           v1.9.5.10 -> v1.9.5.10
+  Enumerating objects: 5, done.
+  remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+  To https://github.com/xxxx/weatherfax_pi.git  
+    * [new tag]           v1.9.5.10 -> v1.9.5.10
+1. git push origin master 
    
 ### Comparing Plugin Manager "Frontend2" in testplugin_pi to weatherfax_pi,
 to highlight the differences
