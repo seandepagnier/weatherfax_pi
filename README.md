@@ -1,14 +1,10 @@
-Weather Fax Plugin for OpenCPN
+### Weather Fax Plugin for OpenCPN
 =======================================
 Implement weather fax ability for opencpn.  This includes retrieval via sound card (radio fax) as well as the internet, or local image files.
-
-Compiling
-=========
-
-
+ 
+### Compiling
+============
 * git clone git://github.com/seandepagnier/weatherfax_pi.git
-
-
 
 Build Normally (linux)
 * mkdir build
@@ -31,14 +27,22 @@ Compiling on windows (visual studio):
 * make
 * make install
 
-Compile in Windows from the build directory:
+Compile in Windows using the VS Command Prompt from the build directory:
+* cmake -T v141_xp ..
+* cmake --build . --process package --configure Release
+From git "gui" (install "git on windows") started from start menu Git/Git GUI:
+* Change directory to build directory used in the cmake above
+* bash cloudsmith-upload.sh
+Note that the cloudsmith-upload.sh script process updates the 'xml' file with relevant information so that the tarball contains an metadata.xml file correctly filled in.
+
+Another Windows using VS Command Prompt:
 * cmake  -G "Visual Studio 15 2017" -T v141_xp ..
 * cmake --build . --config release --target package 
 It builds and creates ..tar.gz  files and xml.
 The tarball does not have the xml file
 
-Windows Specific Libraries
-==========================
+### Windows Specific Libraries
+=============================
 The Windows compilation is dependent on these files 
 
 Under windows, you must find the file "opencpn.lib" (Visual Studio) or "libopencpn.dll.a" (mingw) which is built in the build directory after compiling opencpn.  This file must be copied to the plugin directory.
@@ -48,7 +52,7 @@ http://sourceforge.net/projects/opencpnplugins/files/opencpn_packaging_data/port
 http://sourceforge.net/projects/opencpnplugins/files/opencpn_packaging_data/PVW32Con.exe/download (not an archive, this one just copy to buildwin)
 and unpack all these files into the buildwin directory as the compile is dependent on these.
 
-OSX Specific Libraries
+### OSX Specific Libraries
 ==========================
 The OS X compilation is dependent on these files 
 
@@ -58,6 +62,6 @@ http://sourceforge.net/projects/opencpnplugins/files/weatherfax_pi/OSXportaudiof
 Download this file and unzip it in the /usr/local directory as the compile is dependent on these.
 The make create-pkg command will include the library in the package.
 
-License
-=======
+### License
+============
 The plugin code is licensed under the terms of the GPL v3+

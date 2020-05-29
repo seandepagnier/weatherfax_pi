@@ -123,7 +123,7 @@ message(STATUS "OPCN_FLATPAK: ${OCPN_FLATPAK}")
 set(OpenGL_GL_PREFERENCE "LEGACY")
 # Don't use local version of GLU library
 set(USE_LOCAL_GLU FALSE)
-
+# For Weatherfax this must be set ON or it fails to compile
 option(USE_GL "Enable OpenGL support" ON)
 message(STATUS "USE_GL: ${USE_GL}")
 #------End Settings
