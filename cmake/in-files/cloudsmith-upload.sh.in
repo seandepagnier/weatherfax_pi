@@ -102,7 +102,12 @@ echo $tarball
 echo $tarball_basename
 
 source $BUILD_DIR/pkg_version.sh
-tarball_name=@PACKAGE_NAME@-@PACKAGE_VERSION@-${PKG_TARGET}-@ARCH@_${PKG_TARGET_VERSION}-${OCPN_TARGET}-tarball
+if [ -n "${OCPN_TARGET}" ]; then
+    tarball_name=@PACKAGE_NAME@-@PACKAGE_VERSION@-${PKG_TARGET}-@ARCH@_${PKG_TARGET_VERSION}-${OCPN_TARGET}-tarball
+else
+    tarball_name=@PACKAGE_NAME@-@PACKAGE_VERSION@-${PKG_TARGET}-@ARCH@_${PKG_TARGET_VERSION}-tarball
+fi
+
 if [ "$(ls $BUILD_DIR/*.${PKG_EXT})" ]; then
     pkg=$(ls $BUILD_DIR/*.${PKG_EXT})
 else
@@ -151,7 +156,7 @@ fi
 echo $VERSION
 echo $REPO
 
-if [ "$APPVEYOR" ]; then
+if [ "$APPVEYOR" ] || [ LOCAL_BUILD=true ]; then
     echo 'substituting xml file variables for windows build'
     while read line; do
         line=${line//--pkg_repo--/$REPO}
@@ -159,7 +164,7 @@ if [ "$APPVEYOR" ]; then
         line=${line//--version--/$VERSION}
         line=${line//--filename--/$tarball_basename}
         echo $line
-    done < $xml > xml.tmp && cat xml.tmp && cp xml.tmp $xml && rm xml.tmp
+    done < "$xml" > xml.tmp && cat xml.tmp && cp xml.tmp $xml && rm xml.tmp
 else
     echo 'substituting xml file variables for non-windows build'
     sudo sed -i -e "s|--pkg_repo--|$REPO|"  $xml

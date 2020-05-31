@@ -23,23 +23,31 @@ You will find xml and tarball files.
 Compiling on windows (visual studio):
 * cd ..
 * cd build
-* cmake .. # To produce a binary compatible with Windows XP, you must set the respective toolset - use 'cmake -T v120_xp ..'
+* cmake .. # To produce a binary compatible with Windows XP, you must set the respective toolset - use 'cmake -T v120_xp ..'   (use cmake -T v141_xp .." for version 5)
 * make
 * make install
-
-Compile in Windows using the VS Command Prompt from the build directory:
-* cmake -T v141_xp ..
-* cmake --build . --process package --configure Release
-From git "gui" (install "git on windows") started from start menu Git/Git GUI:
-* Change directory to build directory used in the cmake above
-* bash cloudsmith-upload.sh
-Note that the cloudsmith-upload.sh script process updates the 'xml' file with relevant information so that the tarball contains an metadata.xml file correctly filled in.
 
 Another Windows using VS Command Prompt:
 * cmake  -G "Visual Studio 15 2017" -T v141_xp ..
 * cmake --build . --config release --target package 
 It builds and creates ..tar.gz  files and xml.
 The tarball does not have the xml file
+
+Compile in Windows using the VS Command Prompt from the build directory:
+* cmake -T v141_xp ..
+* cmake --build . --process package --configure Release
+
+Build tarball locally to test.
+From Git-gui (install "git on windows") started from start menu Git/Git GUI:
+* First Download and Unzip http://opencpn.navnux.org/build_deps/OpenCPN_buildwin-4.99a.7z into buildwin directory.
+* Start Git-Gui (install "git on windows") and navigate to the plugin build directory
+* Change directory to the plugins build directory used in the cmake above
+* Then execute the following:
+* cmake -T v141_xp ..
+* cmake --build . --target package --config release
+* bash cloudsmith-upload.sh
+Note that the cloudsmith-upload.sh script process updates the 'xml' file with relevant information so that the tarball contains an metadata.xml file correctly filled in.
+
 
 ### Windows Specific Libraries
 =============================

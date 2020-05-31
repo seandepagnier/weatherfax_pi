@@ -27,9 +27,12 @@
 #    - Reverse dates here
 #    - 2/05/2020 MacOS final fix- JG#
 #    - 23/05/2020 ARCH and CS Deploy and other 
-#    - 26/05/2020 Add ARCH testing to pluginSetup.cmake 
+#    - 26/05/2020 Add ARCH testing to pluginSetup.cmake
+#    - 28/05/2020 Move CmakeLists code into PluginSetup.cmake
+#    - 30/05/2020 Minor Update for Arch  
 # ---------------------------------------------------------------------------#
 # ----- Modify section below to include all the details for your plugin ----- ##
+# define minimum cmake version							  
 cmake_minimum_required(VERSION 3.1.1)
 if(COMMAND cmake_policy)
   if(POLICY CMP0043)
@@ -42,7 +45,7 @@ if(COMMAND cmake_policy)
 endif(COMMAND cmake_policy)
 
 SET(VERBOSE_NAME weatherfax)
-# Search "getcommonname"in weather_routing_pi.cpp
+# Search "getcommonname"in weatherfax_pi.cpp
 set(COMMON_NAME "WeatherFax")
 set(TITLE_NAME "WeatherFax")
 set(PACKAGE_CONTACT "Sean d'Epagnier")
@@ -58,6 +61,7 @@ set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
 
 set(PARENT "opencpn")
+project(weatherfax)
 
 # The following lines are used to describe your git repository
 #set(GIT_USER "seandepagnier")
@@ -69,26 +73,26 @@ set(PARENT "opencpn")
 # For setting up your own local webserver with git loaded, for testing purposes.
 set(GIT_REPOSITORY_SERVER "github.com")
 
-#set(CLOUDSMITH_USER "jon-gough")
-#set(CLOUDSMITH_USER "sean-depagnier")
-set(CLOUDSMITH_USER "rick-gleason")
-
-# set if the cloudsmith repository name does not match your git repository name
-#set(CLOUDSMITH_BASE_REPOSITORY "weatherfax_pi")  #Jon Gough's customization
-#set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Sean's customization
-#set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization
-set(CLOUDSMITH_BASE_REPOSITORY "weatherfax")  #Rick's customization
 # Specifies Cloudsmith upload repository suffix for each catalog
 set(PROD "prod") #Standard Repos
 set(BETA "beta") #Standard Repos
 set(ALPHA "alpha") #Standard Repos
 
+#set(CLOUDSMITH_USER "jon-gough")
+#set(CLOUDSMITH_USER "sean-depagnier")
+set(CLOUDSMITH_USER "rick-gleason")
+
+# set(CLOUDSMITH_BASE_REPOSITORY "${GIT_REPOSITORY_NAME}") - This is the default)
+# set if the cloudsmith repository name does not match your git repository name
+#set(CLOUDSMITH_BASE_REPOSITORY "weatherfax_pi")  #Jon Gough's customization
+#set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Sean's customization
+#set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization
+set(CLOUDSMITH_BASE_REPOSITORY "weatherfax")  #Rick's customization
+
 # Set Plugin info-url, summary and description
 set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/weatherfax.html")
 set(XML_SUMMARY "Open fax image files or decode audio faxes and overlay on chart")
 set(XML_DESCRIPTION "Simple image overlay calibration, Converts any image image into a raster chart.  Db for HF radio fax stations via SSB and Metro URL internet retrieval.")
-
-#set(APPVEYOR_TEST_DEPLOY_TO_CLOUDSMITH "true")
 
 ##
 ## ----- Modify above to include all the plugin details --------- ##
@@ -99,30 +103,12 @@ set(XML_DESCRIPTION "Simple image overlay calibration, Converts any image image 
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
 set(CMAKE_CXX_STANDARD 11)
-#------ End Settings
 
-if(NOT ${PACKAGE} MATCHES "(.*)_pi")
-  set(PACKAGE_NAME ${PACKAGE}_pi)
-  set(PACKAGE_FILE_NAME "${PACKAGE}_pi")
-else(NOT ${PACKAGE} MATCHES "(.*)_pi")
-  set(PACKAGE_NAME ${PACKAGE})
-  set(PACKAGE_FILE_NAME "${PACKAGE}")
-endif(NOT ${PACKAGE} MATCHES "(.*)_pi")
-string(TOUPPER "${PACKAGE}" TITLE_NAME)
-
-project(${PACKAGE_NAME} VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}.${VERSION_TWEAK})
-message(STATUS "PROJECT_VERSION: ${PROJECT_VERSION}")
-
-set(PACKAGE_VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}.${VERSION_TWEAK}")
-
-message(STATUS "${VERBOSE_NAME} Version: ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}.${VERSION_TWEAK}")
-message(STATUS "OPCN_FLATPAK: ${OCPN_FLATPAK}")
-
-#------Settings
 # Prefer libGL.so to libOpenGL.so, see CMP0072
 set(OpenGL_GL_PREFERENCE "LEGACY")
 # Don't use local version of GLU library
 set(USE_LOCAL_GLU FALSE)
+
 # For Weatherfax this must be set ON or it fails to compile
 option(USE_GL "Enable OpenGL support" ON)
 message(STATUS "USE_GL: ${USE_GL}")
@@ -134,85 +120,19 @@ endif("${CMAKE_BUILD_TYPE}" STREQUAL "")
 set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "" "Debug" "Release" "RelWithDebInfo" "MinSizeRel")
 message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
-set(PKG_NVR ${PACKAGE_NAME}-${PROJECT_VERSION})
-set(PKG_URL "https://dl.cloudsmith.io/public/--pkg_repo--/raw/names/--name--/versions/--version--/--filename--")
-
+##
+## ----- The statement below is used to setup standard variables that are required by the CMAKE process - do not remove ----- ##
 #===========================================================
 INCLUDE("cmake/PluginSetup.cmake")
 #===========================================================
-if(DEFINED ENV{OCPN_TARGET})
-    set(PACKAGING_NAME "${PKG_NVR}_${PKG_TARGET}-${ARCH}_${PKG_TARGET_VERSION}-$ENV{OCPN_TARGET}")
-else(DEFINED ENV{OCPN_TARGET})
-    set(PACKAGING_NAME "${PKG_NVR}_${PKG_TARGET}-${ARCH}_${PKG_TARGET_VERSION}")
-endif(DEFINED ENV{OCPN_TARGET})
-message(STATUS "PACKAGING_NAME: ${PACKAGING_NAME}")
-
-set(PLUGIN_NAME ${PACKAGE}-plugin-${PKG_TARGET}-${ARCH}_${PKG_TARGET_VERSION})
+## ----- The above is used to setup standard variables that are required by the CMAKE process - do not remove ----- ##
+##
 
 # Settings and Options
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
 option(Plugin_CXX11 "Use c++11" OFF)
 
-# Check on compiler support
-if(Plugin_CXX11)
-  message(STATUS "Attempting to use c++11")
-  include(CheckCXXCompilerFlag)
-  check_cxx_compiler_flag("-std=c++11" COMPILER_SUPPORTS_CXX11)
-  check_cxx_compiler_flag("-std=c++0x" COMPILER_SUPPORTS_CXX0X)
-  if(COMPILER_SUPPORTS_CXX11)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-    set(Plugin_USE_CXX11 ON)
-  elseif(COMPILER_SUPPORTS_CXX0X)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
-    set(Plugin_USE_CXX11 ON)
-  else()
-    message(STATUS "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
-    set(Plugin_USE_CXX11 OFF)
-  endif()
-else()
-  set(Plugin_USE_CXX11 OFF)
-endif()
-
-if(Plugin_USE_CXX11)
-  message(STATUS "Allowing use of c++11")
-endif()
-
-message(STATUS "CMAKE version: ${CMAKE_VERSION}")
-if(CMAKE_VERSION VERSION_GREATER 3.4)
-  set(ENABLE_CLANG_TIDY
-      OFF
-      CACHE BOOL "Add clang-tidy automatically to builds")
-  if(ENABLE_CLANG_TIDY)
-    find_program(
-      CLANG_TIDY_EXE
-      NAMES "clang-tidy"
-      PATHS /usr/local/opt/llvm/bin)
-    if(CLANG_TIDY_EXE)
-      message(STATUS "clang-tidy found: ${CLANG_TIDY_EXE}")
-      # For more, see http://clang.llvm.org/extra/clang-tidy/ set(CLANG_TIDY_CHECKS "-*,modernize-*")
-      set(CLANG_TIDY_CHECKS "-*,performance-*")
-      set(CMAKE_CXX_CLANG_TIDY
-          "${CLANG_TIDY_EXE};-checks=${CLANG_TIDY_CHECKS};-header-filter='${CMAKE_SOURCE_DIR}/*'"
-          CACHE STRING "" FORCE)
-    else()
-      message(AUTHOR_WARNING "clang-tidy not found!")
-      set(CMAKE_CXX_CLANG_TIDY
-          ""
-          CACHE STRING "" FORCE) # delete it
-    endif()
-  endif()
-endif()
-
-if(CMAKE_VERSION VERSION_GREATER 3.9)
-  set(ENABLE_CPPCHECK
-      OFF
-      CACHE BOOL "Add cppcheck automatically to builds")
-  if(ENABLE_CPPCHECK)
-    find_program(CPPCHECK_EXECUTABLE NAMES "cppcheck")
-    set(CMAKE_CXX_CPPCHECK ${CPPCHECK_EXECUTABLE})
-  endif()
-endif()
 
 ## -------Section above is directly from Testplugin --------------#  
 # ----- Modify section above for special plugin requirements----- ##
@@ -361,7 +281,6 @@ SET (HDRS
 			src/tinyxml/tinyxml.h
 )			
 
-
 SET(SRC_AUDIOFILE
             src/libaudiofile/aupv.c
             src/libaudiofile/error.c
@@ -477,7 +396,6 @@ ENDIF(TP_JSON_SCHEMA_VALIDATOR)
 # ------------------------------------
 #    End of JSON VALIDATOR From Testplugin 
 # ------------------------------------
-
 
 
 #INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
@@ -646,6 +564,32 @@ ENDIF(UNIX AND NOT APPLE)
 #    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} "-lz")
 #  ENDIF()
 #ENDIF()
+
+##================================================================================
+#JSON Validator: Every plugin that uses JSON for passing messages should use a validator.  A JSON validator is much like an XML validator, the validator allows the system to ignore non-conformant messages.  The JSON validator changes the OSABI flavor of the Linux executable so there is code to change it back.
+
+# IF(UNIX AND NOT APPLE)
+#  IF(TP_JSON_SCHEMA_VALIDATOR)
+#    # Change OS/ABI to be UNIX - System V to make it run with OCPN
+#    SET(lib_name lib${PACKAGE_NAME}.so)
+#    MESSAGE(STATUS "lib-name: ${lib_name}")
+#    FIND_FILE(elfedit elfedit)
+#    IF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+#      MESSAGE(STATUS "Will ensure OS/ABI is set to 0 to match OCPN")
+#      ADD_CUSTOM_COMMAND(
+#        TARGET ${PACKAGE_NAME}
+#        POST_BUILD
+#        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+#        DEPENDS ${PACKAGE_NAME}
+#        COMMENT " Running post build action on ${lib_name}."
+#        COMMAND sh -c 'elfedit --input-osabi=Linux --output-osabi=none ${lib_name} || (echo 0) '
+#      )
+#    ELSE(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+#      MESSAGE(STATUS "Cannot correct OS/ABI to match OCPN if it is generated incorrectly. Package binutils needed")
+#    ENDIF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+#  ENDIF(TP_JSON_SCHEMA_VALIDATOR)
+# ENDIF(UNIX AND NOT APPLE)
+##================================================================================
 
 
 # ----- Change above to match project requirements ----- ##
