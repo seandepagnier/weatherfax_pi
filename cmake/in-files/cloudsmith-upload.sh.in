@@ -3,14 +3,15 @@
 #
 # Upload the .tar.gz and .xml artifacts to cloudsmith
 #
-# Builds are uploaded the either the stable or the unstable
-# repo. If there is a tag pointing to current commit it goes
-# to stable, otherwise to unstable.
+# Builds are uploaded to one of PROD, BETA or ALPHA repositories
+# The repository depends on the branch and use of tag to determine which repo.
+# ALPHA: Non-master branch no tag
+# BETA: Non-master branch with annotated tag
+# BETA: Master branch no tag
+# PROD: Master branch with annotated tag
 #
-# If the environment variable CLOUDSMITH_PROD_REPO exists it is
-# used as the production repo, defaulting to the hardcoded PROD_REPO
-# value. Likewise for CLOUDSMITH_BETA_REPO and BETA_REPO and
-# CLOUDSMIT_ALPHA_RERP and ALPHA_REPO
+# If this script is used on CIRCLECI, TRAVIS or APPVEYOR it will upload the correct files to the chosen repository
+# If this script is used locally it will build the correct artifacts but will not do the upload
 #
 
 set -xe
@@ -102,7 +103,12 @@ echo $tarball
 echo $tarball_basename
 
 source $BUILD_DIR/pkg_version.sh
-tarball_name=@PACKAGE_NAME@-@PACKAGE_VERSION@-${PKG_TARGET}-@ARCH@_${PKG_TARGET_VERSION}-${OCPN_TARGET}-tarball
+if [ -n "${OCPN_TARGET}" ]; then
+    tarball_name=@PACKAGE_NAME@-@PACKAGE_VERSION@-${PKG_TARGET}-@ARCH@_${PKG_TARGET_VERSION}-${OCPN_TARGET}-tarball
+else
+    tarball_name=@PACKAGE_NAME@-@PACKAGE_VERSION@-${PKG_TARGET}-@ARCH@_${PKG_TARGET_VERSION}-tarball
+fi
+
 if [ "$(ls $BUILD_DIR/*.${PKG_EXT})" ]; then
     pkg=$(ls $BUILD_DIR/*.${PKG_EXT})
 else
@@ -151,7 +157,7 @@ fi
 echo $VERSION
 echo $REPO
 
-if [ "$APPVEYOR" ]; then
+if [ "$APPVEYOR" ] || [ LOCAL_BUILD=true ]; then
     echo 'substituting xml file variables for windows build'
     while read line; do
         line=${line//--pkg_repo--/$REPO}
@@ -159,7 +165,7 @@ if [ "$APPVEYOR" ]; then
         line=${line//--version--/$VERSION}
         line=${line//--filename--/$tarball_basename}
         echo $line
-    done < $xml > xml.tmp && cat xml.tmp && cp xml.tmp $xml && rm xml.tmp
+    done < "$xml" > xml.tmp && cat xml.tmp && cp xml.tmp $xml && rm xml.tmp
 else
     echo 'substituting xml file variables for non-windows build'
     sudo sed -i -e "s|--pkg_repo--|$REPO|"  $xml
