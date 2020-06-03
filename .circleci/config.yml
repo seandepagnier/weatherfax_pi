@@ -7,6 +7,7 @@ jobs:
         - OCPN_TARGET=stretch-armhf
         - DOCKER_IMAGE=jongough/raspbian-stretch:latest
         - BUILD_FLAGS=-j3
+        - BUILD_ENV=raspbian
         steps:
         - checkout
         - run: chmod a+x ./ci/*.sh
@@ -20,6 +21,22 @@ jobs:
         - OCPN_TARGET=buster-armhf
         - DOCKER_IMAGE=jongough/raspbian-buster:plugin_build_tooling_current
         - BUILD_FLAGS=-j3
+        - BUILD_ENV=raspbian
+        steps:
+        - checkout
+        - run: chmod a+x ./ci/*.sh
+        - run:
+            command: ci/circleci-build-raspbian-armhf.sh
+            no_output_timeout: 30m
+        - run: ci/cloudsmith-upload.sh
+    build-armhf-bionic-64:
+        machine: true
+        environment:
+        - OCPN_TARGET=bionic-arm64
+        - OCPN_BRANCH=master
+        - DOCKER_IMAGE=arm64v8/ubuntu:18.04
+        - BUILD_FLAGS=-j3
+        - BUILD_ENV=ubuntu
         steps:
         - checkout
         - run: chmod a+x ./ci/*.sh
@@ -213,6 +230,15 @@ workflows:
                     - tmp
                 tags:
                     only: /.*/
+# Currently circleci does not build armf64 correctly due to no suitable docker image
+#        - build-armhf-bionic-64:
+#            filters:
+#                branches:
+#                    ignore:
+#                    - devel
+#                    - tmp
+#                tags:
+#                    only: /.*/
         - build-trusty:
             filters:
                 branches:

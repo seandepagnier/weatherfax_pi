@@ -44,6 +44,7 @@ if(COMMAND cmake_policy)
   endif(POLICY CMP0077)
 endif(COMMAND cmake_policy)
 
+# define plugin name, owner and versions
 SET(VERBOSE_NAME weatherfax)
 # Search "getcommonname"in weatherfax_pi.cpp
 set(COMMON_NAME "WeatherFax")
@@ -54,8 +55,8 @@ SET(PACKAGE "weatherfax_pi")
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "5")
-set(VERSION_TWEAK "15")
-set(VERSION_DATE "05/27/2020")
+set(VERSION_TWEAK "16")
+set(VERSION_DATE "06/02/2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -71,7 +72,7 @@ project(weatherfax)
 #set(GIT_REPOSITORY_NAME "weatherfax_pi")
 
 # For setting up your own local webserver with git loaded, for testing purposes.
-set(GIT_REPOSITORY_SERVER "github.com")
+# set(GIT_REPOSITORY_SERVER "github.com")
 
 # Specifies Cloudsmith upload repository suffix for each catalog
 set(PROD "prod") #Standard Repos
@@ -81,7 +82,6 @@ set(ALPHA "alpha") #Standard Repos
 #set(CLOUDSMITH_USER "jon-gough")
 #set(CLOUDSMITH_USER "sean-depagnier")
 set(CLOUDSMITH_USER "rick-gleason")
-
 # set(CLOUDSMITH_BASE_REPOSITORY "${GIT_REPOSITORY_NAME}") - This is the default)
 # set if the cloudsmith repository name does not match your git repository name
 #set(CLOUDSMITH_BASE_REPOSITORY "weatherfax_pi")  #Jon Gough's customization
@@ -99,7 +99,6 @@ set(XML_DESCRIPTION "Simple image overlay calibration, Converts any image image 
 ## ----- Modify below for plugin special requirements------------ ##
 ##
 
-#------Settings
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -112,7 +111,6 @@ set(USE_LOCAL_GLU FALSE)
 # For Weatherfax this must be set ON or it fails to compile
 option(USE_GL "Enable OpenGL support" ON)
 message(STATUS "USE_GL: ${USE_GL}")
-#------End Settings
 
 if("${CMAKE_BUILD_TYPE}" STREQUAL "")
   set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build" FORCE)
@@ -122,20 +120,30 @@ message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
 
 ##
 ## ----- The statement below is used to setup standard variables that are required by the CMAKE process - do not remove ----- ##
-#===========================================================
-INCLUDE("cmake/PluginSetup.cmake")
-#===========================================================
+##
+
+include("cmake/PluginSetup.cmake")
+
+##
 ## ----- The above is used to setup standard variables that are required by the CMAKE process - do not remove ----- ##
 ##
 
-# Settings and Options
+##
+## ----- Modify section below if there are special requirements for the plugin ----- ##
+##
+
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
 option(Plugin_CXX11 "Use c++11" OFF)
 
+##
+## ----- Modify section above if there are special requirements for the plugin ----- ##
+##
 
-## -------Section above is directly from Testplugin --------------#  
-# ----- Modify section above for special plugin requirements----- ##
+##
+## ----- do not change next section - needed to configure build process ----- ##
+##
+
 #======== Portaudio Section below direct from weatherfax_pi =======
 IF (UNIX)
 INCLUDE("cmake/FindPortaudio.cmake")
@@ -172,12 +180,13 @@ ENDIF (MSVC)
 
 ## --Section above is direct from Weatherfax located above SET(SRC_WEATHERFAX  ---##
 ## --Below needed for build process.
-#===========================================================
-INCLUDE("cmake/PluginConfigure.cmake")
-#===========================================================
-## --Above is needed for build process.
-## ----- Change below to match your project requirements ----- ##
+##
 
+include("cmake/PluginConfigure.cmake")
+
+##
+## ----- Change below to match project requirements for source, headers, etc. ----- ##
+##
 
 # ++++++++++++++Section below is direct from Weatherfax +++++++++##
 
@@ -478,7 +487,7 @@ message(STATUS "Adding PUGINS_LIBS: ${EXTRA_LIBS}")
 #  TP_JSON SCHEMA VALIDATOR  From Testplugin 
 # ------------------------------------
 
-#JSON Validator: Every plugin that uses JSON for passing messages should use a validator.  A JSON validator is much like an XML validator, the validator allows the system to ignore non-conformant messages.  The JSON validator changes the OSABI flavor of the Linux executable so there is code to change it back.
+# Every plugin that uses JSON for passing messages should use a validator. The validator  allows the system to ignore non-conformant messages. 
 
 IF(UNIX AND NOT APPLE)
   IF(TP_JSON_SCHEMA_VALIDATOR)

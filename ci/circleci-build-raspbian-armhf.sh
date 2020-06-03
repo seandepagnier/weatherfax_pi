@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 #
+# Build for Raspbian in a docker container
 #
 
 # bailout on errors and echo commands.
@@ -12,10 +13,14 @@ echo "DOCKER_OPTS=\"-H tcp://127.0.0.1:2375 -H $DOCKER_SOCK -s devicemapper\"" |
 sudo service docker restart
 sleep 5;
 
-docker run --rm --privileged multiarch/qemu-user-static:register --reset
+if [ "$BUILD_ENV" = "raspbian" ]; then
+    docker run --rm --privileged multiarch/qemu-user-static:register --reset
+else
+    docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+fi
 
 docker run --privileged -d -ti -e "container=docker"  -v $(pwd):/ci-source:rw $DOCKER_IMAGE /bin/bash
-DOCKER_CONTAINER_ID=$(docker ps | grep raspbian | awk '{print $1}')
+DOCKER_CONTAINER_ID=$(docker ps | grep $BUILD_ENV | awk '{print $1}')
 
 docker exec -ti $DOCKER_CONTAINER_ID apt-get update
 docker exec -ti $DOCKER_CONTAINER_ID apt-get -y install git cmake build-essential cmake gettext wx-common libgtk2.0-dev libwxgtk3.0-dev libbz2-dev libcurl4-openssl-dev libexpat1-dev libcairo2-dev libarchive-dev liblzma-dev libexif-dev lsb-release

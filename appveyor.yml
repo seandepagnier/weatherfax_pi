@@ -68,7 +68,7 @@ deploy:
   provider: GitHub
 #  auth_token: '%GitHub_auth_token%'
   auth_token: '%git-ptoken-weatherfax-into-appveyor%'
-  artifact: installer
+  artifact: installer,portable
   draft: true
   prerelease: true
   on:

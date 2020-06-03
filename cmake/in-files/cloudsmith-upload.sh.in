@@ -3,15 +3,16 @@
 #
 # Upload the .tar.gz and .xml artifacts to cloudsmith
 #
-# Builds are uploaded the either the stable or the unstable
-# repo. If there is a tag pointing to current commit it goes
-# to stable, otherwise to unstable.
+# Builds are uploaded to one of PROD, BETA or ALPHA repositories
+# The repository depends on the branch and use of tag to determine which repo.
+# ALPHA: Non-master branch no tag
+# BETA: Non-master branch with annotated tag
+# BETA: Master branch no tag
+# PROD: Master branch with annotated tag
 #
-# If the environment variable CLOUDSMITH_PROD_REPO exists it is
-# used as the production repo, defaulting to the hardcoded PROD_REPO
-# value. Likewise for CLOUDSMITH_BETA_REPO and BETA_REPO and
-# CLOUDSMIT_ALPHA_RERP and ALPHA_REPO
-#
+# If this script is used on CIRCLECI, TRAVIS or APPVEYOR it will upload the correct files to the chosen repository
+# If this script is used locally it will build the correct artifacts but will not do the upload
+# 
 
 set -xe
 
@@ -49,7 +50,7 @@ else
 fi
 
 set +x
-if [ -z "$CLOUDSMITH_API_KEY" && !$LOCAL_BUILD ]; then
+if [ -z "$CLOUDSMITH_API_KEY" ] && [ "$LOCAL_BUILD" = "false" ]; then
     echo 'Cannot deploy to cloudsmith, missing $CLOUDSMITH_API_KEY'
     exit 0
 fi
