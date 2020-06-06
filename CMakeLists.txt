@@ -72,7 +72,7 @@ project(weatherfax)
 #set(GIT_REPOSITORY_NAME "weatherfax_pi")
 
 # For setting up your own local webserver with git loaded, for testing purposes.
-# set(GIT_REPOSITORY_SERVER "github.com")
+set(GIT_REPOSITORY_SERVER "github.com")
 
 # Specifies Cloudsmith upload repository suffix for each catalog
 set(PROD "prod") #Standard Repos
@@ -81,7 +81,10 @@ set(ALPHA "alpha") #Standard Repos
 
 #set(CLOUDSMITH_USER "jon-gough")
 #set(CLOUDSMITH_USER "sean-depagnier")
-set(CLOUDSMITH_USER "rick-gleason")
+# set(CLOUDSMITH_USER "rick-gleason")
+set(CLOUDSMITH_USER "opencpn")
+
+
 # set(CLOUDSMITH_BASE_REPOSITORY "${GIT_REPOSITORY_NAME}") - This is the default)
 # set if the cloudsmith repository name does not match your git repository name
 #set(CLOUDSMITH_BASE_REPOSITORY "weatherfax_pi")  #Jon Gough's customization
