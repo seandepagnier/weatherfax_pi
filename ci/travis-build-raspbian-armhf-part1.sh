@@ -20,6 +20,7 @@ if [ "$BUILD_ENV" = "raspbian" ]; then
 else
     docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 fi
+
 docker run --privileged -d -ti -e "container=docker" \
       -v ~/source_top:/source_top \
       -v $(pwd):/ci-source:rw \

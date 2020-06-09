@@ -12,7 +12,7 @@
 #
 # If this script is used on CIRCLECI, TRAVIS or APPVEYOR it will upload the correct files to the chosen repository
 # If this script is used locally it will build the correct artifacts but will not do the upload
-# 
+#
 
 set -xe
 

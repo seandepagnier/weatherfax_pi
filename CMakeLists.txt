@@ -21,17 +21,23 @@
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough  
 # ---------------------------------------------------------------------------
-# CMake-CI Number: 0.0.007  
-#    - 2/19/2020 10 environments needed for beta testing.
-#    - 3/30/2020 MacOS build fixed 12 env
-#    - Reverse dates here
-#    - 2/05/2020 MacOS final fix- JG#
-#    - 23/05/2020 ARCH and CS Deploy and other 
-#    - 26/05/2020 Add ARCH testing to pluginSetup.cmake
+# CMake-CI Number: 0.0.008  
+#    - 28/05/2020 Work on Local Build
 #    - 28/05/2020 Move CmakeLists code into PluginSetup.cmake
-#    - 30/05/2020 Minor Update for Arch  
-# ---------------------------------------------------------------------------#
-# ----- Modify section below to include all the details for your plugin ----- ##
+#    - 30/05/2020 Minor Update for Arch
+#    - 09/06/2020 Fix gtk3 and new build naming  
+# ---------------------------------------------------------------------------
+## ----- When changing this file do NOT change the order in which sections occur        ----- ##
+## ----- Changes should only be made between the section blocks that identify where     ----- ##
+## ----- these changes should be. The whole configuration process relies on this        ----- ##
+## ----- sequence to be successful                                                      ----- ##
+
+##  
+## ----- Modify section below to include all the details for your plugin ----- ##
+##  
+
+set(CMLOC "CMakeLists: ")
+
 # define minimum cmake version							  
 cmake_minimum_required(VERSION 3.1.1)
 if(COMMAND cmake_policy)
@@ -46,8 +52,7 @@ endif(COMMAND cmake_policy)
 
 # define plugin name, owner and versions
 SET(VERBOSE_NAME weatherfax)
-# Search "getcommonname"in weatherfax_pi.cpp
-set(COMMON_NAME "WeatherFax")
+set(COMMON_NAME "WeatherFax") # Search "getcommonname"in weatherfax_pi.cpp
 set(TITLE_NAME "WeatherFax")
 set(PACKAGE_CONTACT "Sean d'Epagnier")
 SET(PACKAGE "weatherfax_pi")
@@ -55,41 +60,37 @@ SET(PACKAGE "weatherfax_pi")
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "5")
-set(VERSION_TWEAK "16")
-set(VERSION_DATE "06/02/2020")
+set(VERSION_TWEAK "17")
+set(VERSION_DATE "06/09/2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
 
 set(PARENT "opencpn")
-project(weatherfax)
 
-# The following lines are used to describe your git repository
+#Used to set up a local webserver with git loaded, for testing purposes.
+set(GIT_REPOSITORY_SERVER "github.com")
+
+#No longer needed, queried.
 #set(GIT_USER "seandepagnier")
 #set(GIT_USER "jongough")
 #set(GIT_USER "rgleason")
-# Jon turned off
 #set(GIT_REPOSITORY_NAME "weatherfax_pi")
 
-# For setting up your own local webserver with git loaded, for testing purposes.
-set(GIT_REPOSITORY_SERVER "github.com")
-
 # Specifies Cloudsmith upload repository suffix for each catalog
-set(PROD "prod") #Standard Repos
-set(BETA "beta") #Standard Repos
+set(PROD "prod")   #Standard Repos
+set(BETA "beta")   #Standard Repos
 set(ALPHA "alpha") #Standard Repos
 
 #set(CLOUDSMITH_USER "jon-gough")
 #set(CLOUDSMITH_USER "sean-depagnier")
-# set(CLOUDSMITH_USER "rick-gleason")
+#set(CLOUDSMITH_USER "rick-gleason")
 set(CLOUDSMITH_USER "opencpn")
-
-
+# set if the Cloudsmith Base Repository name does not match your git repository name
 # set(CLOUDSMITH_BASE_REPOSITORY "${GIT_REPOSITORY_NAME}") - This is the default)
-# set if the cloudsmith repository name does not match your git repository name
-#set(CLOUDSMITH_BASE_REPOSITORY "weatherfax_pi")  #Jon Gough's customization
-#set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Sean's customization
-#set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization
+# set(CLOUDSMITH_BASE_REPOSITORY "weatherfax_pi")  #Jon Gough's customization
+# set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Sean's customization
+# set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization
 set(CLOUDSMITH_BASE_REPOSITORY "weatherfax")  #Rick's customization
 
 # Set Plugin info-url, summary and description
@@ -113,17 +114,21 @@ set(USE_LOCAL_GLU FALSE)
 
 # For Weatherfax this must be set ON or it fails to compile
 option(USE_GL "Enable OpenGL support" ON)
-message(STATUS "USE_GL: ${USE_GL}")
+message(STATUS "${CMLOC}USE_GL: ${USE_GL}")
 
 if("${CMAKE_BUILD_TYPE}" STREQUAL "")
-  set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build" FORCE)
+    set(CMAKE_BUILD_TYPE 
+	     "Release" 
+		 CACHE STRING "Choose the type of build" FORCE)
 endif("${CMAKE_BUILD_TYPE}" STREQUAL "")
 set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "" "Debug" "Release" "RelWithDebInfo" "MinSizeRel")
-message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+message(STATUS "${CMLOC}Build type: ${CMAKE_BUILD_TYPE}")
 
 ##
 ## ----- The statement below is used to setup standard variables that are required by the CMAKE process - do not remove ----- ##
 ##
+
+project(${PACKAGE})	   
 
 include("cmake/PluginSetup.cmake")
 
@@ -151,14 +156,14 @@ option(Plugin_CXX11 "Use c++11" OFF)
 IF (UNIX)
 INCLUDE("cmake/FindPortaudio.cmake")
 IF (PORTAUDIO_FOUND)
-    MESSAGE (STATUS "Portaudio Found")
+    MESSAGE (STATUS "${CMLOC}Portaudio Found")
     INCLUDE_DIRECTORIES(BEFORE ${PORTAUDIO_INCLUDE_DIRS})
     SET(EXTRA_LIBS ${EXTRA_LIBS} ${PORTAUDIO_LIBRARIES})
     ADD_DEFINITIONS(${PORTAUDIO_DEFINITIONS})
     ADD_DEFINITIONS(-DOCPN_USE_PORTAUDIO)
-    message(STATUS "In Unix:Found Portaudio")
+    message(STATUS "${CMLOC}In Unix:Found Portaudio")
 ELSE (PORTAUDIO_FOUND)
-    MESSAGE (STATUS "Portaudio Not Found...")
+    MESSAGE (STATUS "${CMLOC}Portaudio Not Found...")
 ENDIF (PORTAUDIO_FOUND)
 ELSE (UNIX)
     INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/include)
@@ -166,15 +171,15 @@ ELSE (UNIX)
 	# within OpenCPN tree
     	SET(EXTRA_LIBS ${EXTRA_LIBS} ../../buildwin/portaudio_x86.lib)
     	INSTALL(FILES "../../buildwin/portaudio_x86.dll" DESTINATION ".")
-    	message(STATUS "bundled: portaudio in ../../buildwin/portaudio_x86.dll")
+    	message(STATUS "${CMLOC}bundled: portaudio in ../../buildwin/portaudio_x86.dll")
     ELSE()
     	SET(EXTRA_LIBS ${EXTRA_LIBS} ${PROJECT_SOURCE_DIR}/buildwin/portaudio_x86.lib)
     	INSTALL(FILES "${PROJECT_SOURCE_DIR}/buildwin/portaudio_x86.dll" DESTINATION ".")
-    	message(STATUS "Not bundled: portaudio in ${PROJECT_SOURCE_DIR}/buildwin/portaudio_x86.dll")
+    	message(STATUS "${CMLOC}Not bundled: portaudio in ${PROJECT_SOURCE_DIR}/buildwin/portaudio_x86.dll")
     ENDIF()
 
     ADD_DEFINITIONS(-DOCPN_USE_PORTAUDIO)
-    message(STATUS "Not in Unix:Setting USE_PORTAUDIO")
+    message(STATUS "${CMLOC}Not in Unix:Setting USE_PORTAUDIO")
 ENDIF (UNIX)
 
 IF (MSVC)
@@ -377,36 +382,28 @@ SET (SRC_TINYXML
 # add_definitions(-DPLUGIN_USE_SVG)
 
 # ------------------------------------
-#  TP_JSON SCHEMA VALIDATOR  From Testplugin 
+#  PI_JSON SCHEMA VALIDATOR  
 # ------------------------------------
-IF(APPLE)
-    OPTION(TP_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" OFF)
-ELSE(APPLE)
-    OPTION(TP_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" ON)
-ENDIF(APPLE)
+if(APPLE)
+    option(PI_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" OFF)
+else(APPLE)
+    option(PI_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" ON)
+endif(APPLE)
 
-IF(TP_JSON_SCHEMA_VALIDATOR)
-    MESSAGE(STATUS "Using JSON Schema validation - warning this changes the 'flavour' of the executable and it may not be compatible with OpenCPN")
-    ADD_DEFINITIONS(-DTP_JSON_SCHEMA_VALIDATOR)
-    MESSAGE(STATUS "Adding JSON Schema validation")
+if(PI_JSON_SCHEMA_VALIDATOR)
+    message(STATUS "${CMLOC}Using JSON Schema validation - warning this changes the 'flavour' of the executable and it may not be compatible with OpenCPN")
+    add_definitions(-DPI_JSON_SCHEMA_VALIDATOR)
+    message(STATUS "${CMLOC}Adding JSON Schema validation")
 
-    SET(EXTSRC
-        ${EXTSRC}
-        extsrc/json-schema-validator/json-schema-draft7.json.cpp
-        extsrc/json-schema-validator/json-uri.cpp
-        extsrc/json-schema-validator/json-validator.cpp
-    )
-    SET(EXTINCLUDE
-        ${EXTINCLUDE}
-        extinclude/nlohmann/json.hpp
-        extinclude/json-schema-validator/json-schema.hpp
-    )
-    INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/extinclude/json-schema-validator)
-ELSE(TP_JSON_SCHEMA_VALIDATOR)
-    MESSAGE(STATUS "Not using JSON Schema validation - warning invalid JSON 'may' cause unexpected crashes")
-ENDIF(TP_JSON_SCHEMA_VALIDATOR)
+    set(EXTSRC ${EXTSRC} extsrc/json-schema-validator/json-schema-draft7.json.cpp extsrc/json-schema-validator/json-uri.cpp extsrc/json-schema-validator/json-validator.cpp)
+    set(EXTINCLUDE ${EXTINCLUDE} extinclude/nlohmann/json.hpp extinclude/json-schema-validator/json-schema.hpp)
+    include_directories(BEFORE ${PROJECT_SOURCE_DIR}/extinclude/json-schema-validator)
+else(PI_JSON_SCHEMA_VALIDATOR)
+    message(STATUS "${CMLOC}Not using JSON Schema validation - warning invalid JSON 'may' cause unexpected crashes")
+endif(PI_JSON_SCHEMA_VALIDATOR)
+
 # ------------------------------------
-#    End of JSON VALIDATOR From Testplugin 
+#    End of JSON VALIDATOR
 # ------------------------------------
 
 
@@ -423,14 +420,14 @@ IF(UNIX)
     DOC "The rtlsdr library"
     )
   IF(RTLSDR_LIBRARY)
-    MESSAGE (STATUS "Found rtlsdr:  ${RTLSDR_LIBRARY}")
+    MESSAGE (STATUS "${CMLOC}Found rtlsdr:  ${RTLSDR_LIBRARY}")
     ADD_DEFINITIONS( "-DBUILTIN_RTLAIS" )
 
     SET(EXTRA_LIBS ${EXTRA_LIBS} ${RTLSDR_LIBRARY})
   ELSE()
     MESSAGE (STATUS "")
     MESSAGE (STATUS "================ WARNING ===================")
-    MESSAGE (STATUS "rtlsdr library not found, cannot decode from rtlsdr")
+    MESSAGE (STATUS "${CMLOC}rtlsdr library not found, cannot decode from rtlsdr")
     MESSAGE (STATUS "You may want to install librtlsdr-dev and run cmake again")
     MESSAGE (STATUS "============================================")
     MESSAGE (STATUS "")
@@ -472,7 +469,7 @@ INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
 
 ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
 TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
-message(STATUS "Adding PUGINS_LIBS: ${EXTRA_LIBS}")
+message(STATUS "${CMLOC}Adding PUGINS_LIBS: ${EXTRA_LIBS}")
 
 ##++++++++++Section above from Weatherfax located relative to where it was  ++++++++
 ##
@@ -487,32 +484,33 @@ message(STATUS "Adding PUGINS_LIBS: ${EXTRA_LIBS}")
 # ADD_DEFINITIONS(-DTIXML_USE_STL)
 
 # ------------------------------------
-#  TP_JSON SCHEMA VALIDATOR  From Testplugin 
+#  PI_JSON SCHEMA VALIDATOR  From Testplugin 
 # ------------------------------------
 
 # Every plugin that uses JSON for passing messages should use a validator. The validator  allows the system to ignore non-conformant messages. 
 
-IF(UNIX AND NOT APPLE)
-  IF(TP_JSON_SCHEMA_VALIDATOR)
-    # Change OS/ABI to be UNIX - System V to make it run with OCPN
-    SET(lib_name lib${PACKAGE_NAME}.so)
-    MESSAGE(STATUS "lib-name: ${lib_name}")
-    FIND_FILE(elfedit elfedit)
-    IF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-      MESSAGE(STATUS "Will ensure OS/ABI is set to 0 to match OCPN")
-      ADD_CUSTOM_COMMAND(
-        TARGET ${PACKAGE_NAME}
-        POST_BUILD
-        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-        DEPENDS ${PACKAGE_NAME}
-        COMMENT " Running post build action on ${lib_name}."
-        COMMAND sh -c 'elfedit --input-osabi=Linux --output-osabi=none ${lib_name} || (echo 0) '
-      )
-    ELSE(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-      MESSAGE(STATUS "Cannot correct OS/ABI to match OCPN if it is generated incorrectly. Package binutils needed")
-    ENDIF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-  ENDIF(TP_JSON_SCHEMA_VALIDATOR)
-ENDIF(UNIX AND NOT APPLE)
+if(UNIX AND NOT APPLE)
+    if(PI_JSON_SCHEMA_VALIDATOR)
+        # Change OS/ABI to be UNIX - System V to make it run with OCPN
+        set(lib_name lib${PACKAGE_NAME}.so)
+        message(STATUS "${CMLOC}lib-name: ${lib_name}")
+        find_file(elfedit elfedit)
+        if(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+            message(STATUS "${CMLOC}Will ensure OS/ABI is set to 0 to match OCPN")
+            add_custom_command(
+                TARGET ${PACKAGE_NAME}
+                POST_BUILD
+                WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                DEPENDS ${PACKAGE_NAME}
+                COMMENT " Running post build action on ${lib_name}."
+                COMMAND sh -c 'elfedit --input-osabi=Linux --output-osabi=none ${lib_name} || (echo 0) ')
+	   
+        else(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+            message(STATUS "${CMLOC}Cannot correct OS/ABI to match OCPN if it is generated incorrectly. Package binutils needed")
+        endif(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+    endif(PI_JSON_SCHEMA_VALIDATOR)
+endif(UNIX AND NOT APPLE)
+
 # ------------------------------------
 #    End of JSON VALIDATOR From Testplugin 
 # ------------------------------------
@@ -527,13 +525,13 @@ ENDIF(UNIX AND NOT APPLE)
 #ENDIF(UNIX AND NOT APPLE)
 
 #IF(TINYXML_FOUND)
-#    message (STATUS "Building with system tinyxml")
+#    message (STATUS "${CMLOC}Building with system tinyxml")
 #    INCLUDE_DIRECTORIES(${TINYXML_INCLUDE_DIR})
 ##   ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
 #    ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${HDRS} )
 #    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${TINYXML_LIBRARIES} )
 #ELSE(TINYXML_FOUND)
-#    message (STATUS "Building with embedded tinyxml")
+#    message (STATUS "${CMLOC}Building with embedded tinyxml")
 #    SET(SRC_LTINYXML
 #    src/tinyxml.h
 #    src/tinystr.h
@@ -584,10 +582,10 @@ ENDIF(UNIX AND NOT APPLE)
 #  IF(TP_JSON_SCHEMA_VALIDATOR)
 #    # Change OS/ABI to be UNIX - System V to make it run with OCPN
 #    SET(lib_name lib${PACKAGE_NAME}.so)
-#    MESSAGE(STATUS "lib-name: ${lib_name}")
+#    MESSAGE(STATUS "${CMLOC}lib-name: ${lib_name}")
 #    FIND_FILE(elfedit elfedit)
 #    IF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-#      MESSAGE(STATUS "Will ensure OS/ABI is set to 0 to match OCPN")
+#      MESSAGE(STATUS "${CMLOC}Will ensure OS/ABI is set to 0 to match OCPN")
 #      ADD_CUSTOM_COMMAND(
 #        TARGET ${PACKAGE_NAME}
 #        POST_BUILD
@@ -597,7 +595,7 @@ ENDIF(UNIX AND NOT APPLE)
 #        COMMAND sh -c 'elfedit --input-osabi=Linux --output-osabi=none ${lib_name} || (echo 0) '
 #      )
 #    ELSE(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-#      MESSAGE(STATUS "Cannot correct OS/ABI to match OCPN if it is generated incorrectly. Package binutils needed")
+#      MESSAGE(STATUS "${CMLOC}Cannot correct OS/ABI to match OCPN if it is generated incorrectly. Package binutils needed")
 #    ENDIF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
 #  ENDIF(TP_JSON_SCHEMA_VALIDATOR)
 # ENDIF(UNIX AND NOT APPLE)
