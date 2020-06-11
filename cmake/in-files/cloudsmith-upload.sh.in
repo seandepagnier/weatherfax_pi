@@ -50,7 +50,7 @@ else
 fi
 
 set +x
-if [ -z "$CLOUDSMITH_API_KEY" && !$LOCAL_BUILD ]; then
+if [ -z "$CLOUDSMITH_API_KEY" ] && [ "$LOCAL_BUILD" = "false" ]; then
     echo 'Cannot deploy to cloudsmith, missing $CLOUDSMITH_API_KEY'
     exit 0
 fi
