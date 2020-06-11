@@ -98,7 +98,7 @@ The following directories and files are not needed from testplugin_pi
      - OCPN_STABLE_REPO=mauro-calvi/squiddio-stable
      - OCPN_UNSTABLE_REPO=mauro-calvi/squiddio-pi
      - OCPN_PKG_REPO=mauro-calvi/squiddio-manual
- 
+
 # Deployment 
 
 The current setup for Frontend2 plugins does this:
