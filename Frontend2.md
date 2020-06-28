@@ -9,7 +9,7 @@ during installation. We call this configuration "Frontend 2".  This version is e
 # KEEP EXISTING DIRECTORIES AND FILES
 ----------------------------------------------------
 #### Important:
-1. Make these changes on a new branch "frontend1" or "ci" (if possible).
+1. Make these changes on a new branch "frontend2" or "ci" (if possible).
 1. Keep your currently working "master" branch intact.
 1. Create a new branch EG: git checkout -b frontend2 master
 1. Work in the new branch.

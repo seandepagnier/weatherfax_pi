@@ -19,13 +19,8 @@
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx,                                       *
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                       *
 #-----------------------------------------------------------------------------
-# Frontend2 Author: Jon Gough  
-# ---------------------------------------------------------------------------
-# CMake-CI Number: 0.0.008  
-#    - 28/05/2020 Work on Local Build
-#    - 28/05/2020 Move CmakeLists code into PluginSetup.cmake
-#    - 30/05/2020 Minor Update for Arch
-#    - 09/06/2020 Fix gtk3 and new build naming  
+# Frontend2 Author: Jon Gough
+# Frontend2 Version: 1.0.120  
 # ---------------------------------------------------------------------------
 ## ----- When changing this file do NOT change the order in which sections occur        ----- ##
 ## ----- Changes should only be made between the section blocks that identify where     ----- ##
@@ -59,9 +54,9 @@ SET(PACKAGE "weatherfax_pi")
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
-set(VERSION_PATCH "6")
+set(VERSION_PATCH "7")
 set(VERSION_TWEAK "0")
-set(VERSION_DATE "06/18/2020")
+set(VERSION_DATE "06/27/2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -87,9 +82,7 @@ set(ALPHA "alpha") #Standard Repos
 #set(CLOUDSMITH_USER "rick-gleason")
 set(CLOUDSMITH_USER "opencpn")
 # set if the Cloudsmith Base Repository name does not match your git repository name
-# set(CLOUDSMITH_BASE_REPOSITORY "${GIT_REPOSITORY_NAME}") - This is the default)
-# set(CLOUDSMITH_BASE_REPOSITORY "weatherfax_pi")  #Jon Gough's customization
-# set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Sean's customization
+# set(CLOUDSMITH_BASE_REPOSITORY "weatherfax_pi") #Jon Gough's customization
 # set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization
 set(CLOUDSMITH_BASE_REPOSITORY "weatherfax")  #Rick's customization
 
