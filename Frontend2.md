@@ -6,8 +6,9 @@ GOAL: Assist plugin developers to convert their plugins to the Plugin Manager sy
 1. Files are accessed by OpenCPN Plugin Manager
 1. Installed via options > Plugins > Plugin Manager Catalogs "master" and "beta" url in the metadata files
 1. During installation. 
-We call this configuration "Frontend 2".  This version is easier to configure.
-"Frontend 1" can be found in the current versions of Oesenc_pi and Vdr_pi. 
+
+This "Frontend2" configuration is found in jongough/testplugin_pi and is easier to configure all from CMakeLists.txt. 
+"Frontend1" can be found in the current versions of bdbcat/Oesenc_pi and rgleason/Vdr_pi. 
 
 
 ## KEEP EXISTING DIRECTORIES AND FILES
@@ -127,18 +128,20 @@ _________________________________
 _________________________________
 
 The current setup for Frontend2 plugins does this:
-- Non-Master branch no tag -> Alpha repository
-- Non-Master branch with tag -> Beta repository
-- Master branch no tag -> Beta repository
-- Master branch with tag -> Prod repository
+- Non-Master branch - Push with no tag -> Alpha repository
+- Non-Master branch - Push with tag -> Beta repository
+- Master branch - Push with no tag -> Beta repository
+- Master branch - Push with tag -> Prod repository
 
- There are several ways to issue a "tagged push"
+ There are several ways to issue a "push with tag" or "tagged push"
     - See https://opencpn.org/wiki/dokuwiki/doku.php?id=opencpn:developer_manual:pi_installer_procedure#deploy_to_prod_repository
   $ git commit -am "my last changes")
   $ git tag v[new version number]
-  $ git push <repo-name> <tag-name>  OR  $ git push origin refs/tags/tag_a
+  $ git push <repo-name> <tag-name>  OR
+  $ git push origin refs/tags/tag_a
+
 Not preferred:
-  $ git push --tags origin master:master  <--- Is not preferred due to pushing all old tags..
+  $ git push --tags origin master:master  <--- Is not preferred due possibility of pushing all old tags..
 
 Example:
 1. Change version number and date in  CMakeLists.txt . Save  
