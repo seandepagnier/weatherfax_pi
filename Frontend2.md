@@ -1,17 +1,20 @@
-## FRONTEND 2
+# FRONTEND 2  v1.0.124
 
-This document is intended to assist plugin developers intending to convert 
-their plugins to the new Plugin Manager system of tarballs and metadata.xml files
-deployed directly to Cloudsmith repositories that are accessed by OpenCPN Plugin Manager via Catalogs "master" and "beta"
-during installation. We call this configuration "Frontend 2".  This version is easier to configure.
+GOAL: Assist plugin developers to convert their plugins to the Plugin Manager system which
+1. Uses tarballs and metadata.xml files to store the necessary files and provide information.
+1. Deployed directly to Cloudsmith repositories
+1. That are accessed by OpenCPN Plugin Manager
+1. Via Options > Plugins > Plugin Manager Catalogs "master" and "beta" url in the metadata files
+1. during installation. 
+We call this configuration "Frontend 2".  This version is easier to configure.
 "Frontend 1" can be found in the current versions of Oesenc_pi and Vdr_pi. 
 
-# KEEP EXISTING DIRECTORIES AND FILES
+## KEEP EXISTING DIRECTORIES AND FILES
 ----------------------------------------------------
 #### Important:
 1. Make these changes on a new branch "frontend2" or "ci" (if possible).
 1. Keep your currently working "master" branch intact.
-1. Create a new branch EG: git checkout -b frontend2 master
+1. Create a new branch EG: 'git checkout -b frontend2 master'
 1. Work in the new branch.
 
 #### Preparation: 
@@ -26,7 +29,7 @@ during installation. We call this configuration "Frontend 2".  This version is e
 - Data
 - src
 - po
-- Any other specific plugin directories
+- Any other specific plugin directories essential to your plugin.
 
 ## LIST of FOLDERS & FILES copied from TESTPLUGIN_PI
 ----------------------------------------------------
@@ -39,13 +42,14 @@ Copy the following directories and files from testplugin_pi to the same location
 - testplugin_pi/cmake
 - testplugin_pi/buildosx
 - testplugin_pi/mingw
-- testplugin_pi/extinclude  Needed for json validation  (certain plugins) Ocpn_draw, watchdog, weather_routing
-- testplugin_pi/extsrc  Needed for json validation (certain plugins)
+- testplugin_pi/extinclude  (JSON Validation - only Ocpn_draw, watchdog, weather_routing)
+- testplugin_pi/extsrc  (JSON Validation - only Ocpn_draw, watchdog, weather_routing)
 
 #### Files
-- testplugin_pi/appveyor.yml
-- testplugin_pi/.travis.yml
-- testplugin_pi/CMakeLists.txt
+- testplugin_pi/appveyor.yml  (compare with your file)
+- testplugin_pi/.travis.yml   (compare with your file)
+- testplugin_pi/CMakeLists.txt  (see in line notes, major editing comparing to old file)
+- See notes below for more detail
 
 #### Directories NOT needed
 The following directories and files are not needed from testplugin_pi
@@ -57,7 +61,7 @@ The following directories and files are not needed from testplugin_pi
 - testplugin_pi/ocpnsrc
 - testplugin_pi/src
 
-# CHANGES REQUIRED 
+## CHANGES REQUIRED 
 ----------------------------------------------------------------
 1. Rename CMakeLists.txt, appveyor.yml, .travis.yml adding  .save for reference.
 1. Modify CMakeLists.txt file, following the in-line notes
@@ -74,26 +78,27 @@ The following directories and files are not needed from testplugin_pi
      - Modify/configure the set(SRCS and HDRS and 'Include' Directories using CMakeLists.save.txt
      - Modify/configure 'Set(SRCS & HDRS' Directories using CMakeLists.save.txt
      - Modify/configure 'Add Library' listings for the plugin.
-     - Make sure all your necesary libraries are found.
+     - Make sure all your necessary libraries are found.
      - Add/Modify a statement like this to join all of your project's set(
        - EG: add_library(${PACKAGE_NAME} SHARED ${SRCS} ${HDRS} ${NMEA0183} ${LIBSSRC})
 1. API Number must be at least 1.16 for the new Plugin Manager, due to a change in how directories are found and location.
 1. API Names have been changed from MY_API_VERSION_MAJOR and MY_API_VERSION_MINOR, to OCPN_API_VERSION_MAJOR/MINOR
      - OCPN_API_VERSION_MAJOR/MINOR are now used in cmake/in-files/version.h.in
-     - In the file [plugin_pi].cpp the are several lines which need to be changed from MY_API_VERSION_MAJOR/MINOR to 
+     - In the file (pluginname_pi).cpp the are several lines which need to be changed from MY_API_VERSION_MAJOR/MINOR to 
 	   - EG: "return OCPN_API_VERSION_MAJOR;"
        - EG: "return OCPN_API_VERSION_MINOR;"
-	 - Also in file [plugin_pi].cpp find   wxString [pluginname_pi]::GetCommonName() and change 
-	   - return _("[plugin-pi]");  to
+	 - Also in file (pluginname_pi).cpp find   wxString (pluginname_pi)::GetCommonName() and change 
+	   - return _("(pluginname-pi)");  to
        - return _T(PLUGIN_COMMON_NAME);		
-     - In the file [plugin_pi].h there are several lines which need to be commented out.
+     - In the file (plugin_pi).h there are several lines which need to be commented out.
        - // #define     MY_API_VERSION_MAJOR    1
        - // #define     MY_API_VERSION_MINOR    16
+	   - or removed.
        - Because the new values definitions are defined in cmake/in-files/version.h.in	   
 1. Cmake Files are somewhat generic, but often can be plugin specific, depending on the plugin.
    - Review the cmake.save files one by one with the new ones and make necessary adjustments.
    - Configuring this is not simple and requires knowledge about the plugin operation.
-1. Next get the ci/environment scripts working on Circleci, Appveyor and .travis-ci
+1. Get the ci/environment scripts working on Circleci, Appveyor and .travis-ci
 1. Then get the uploads to Cloudsmith working.
    - First create your Cloudsmith Account, then join the OpenCPN Organization as a member of the Plugins Team.
    - Once you are accepted as a member, you will be able to create three repositories for your plugin.
@@ -105,12 +110,12 @@ The following directories and files are not needed from testplugin_pi
        - @CLOUDSMITH_BASE_REPOSITORY@-beta
        - @CLOUDSMITH_BASE_REPOSITORY@-alpha
      - The Frontend2 defaults to 'CLOUDSMITH_BASE_REPOSTORY' = 'yoour Github Repository', however you should set this value in CMakeLists.txt as "opencpn"
-     - In the organization "OpenCPN" create [pluginname]-alpha, [pluginname]-beta and [pluginname]-alpha repositories.
+     - In the organization "OpenCPN" create (pluginname)-alpha, (pluginname)-beta and (pluginname)-alpha repositories.
 	 - Make sure that you select "Open Source", not just "public". It must be "Open Source"
      - See the more detailed instructions in the Developer's Manual wiki.
    - For custom Cloudsmith repository destinations, modify if needed.
 
-# DEPLOYMENT 
+## DEPLOYMENT 
 ----------------------------------------------------------------
 The current setup for Frontend2 plugins does this:
     - Non-Master branch no tag -> Alpha repository
@@ -139,26 +144,29 @@ Example:
 1. git push origin master 
 
 ----------------------------------------------------------------   
-### Weatherfax_pi Differences  using testplugin_pi "Frontend2"
+### Weatherfax_pi specific differences from testplugin_pi "Frontend2"
 
 Weatherfax_pi needs to have sound support for Windows and Mingw, additionally use with rtlsdr requires additional files. 
 
 1. circleci/config.yml  -same
 1. ci/ all scripts same except
-1. ci/control  weatherfax has librtlsdr-dev
-1. ci/circleci-build-mingw.sh     downloads and installs portauduio & PVWcon32.exe
-    - wget https://downloads.sourceforge.net/project/opencpnplugins/opencpn_packaging_data/PVW32Con.exe
-    - wget https://downloads.sourceforge.net/project/opencpnplugins/opencpn_packaging_data/portaudio-vc12.7z
-    - 7za e portaudio-vc12.7z -o../buildwin -y
-    - mv PVW32Con.exe ../buildwin/.
+    - ci/control  weatherfax has 'build librtlsdr-dev'
+    - ci/circleci-build-mingw.sh downloads and installs portauduio & PVWcon32.exe
+        - wget https://downloads.sourceforge.net/project/opencpnplugins/opencpn_packaging_data/PVW32Con.exe
+        - wget https://downloads.sourceforge.net/project/opencpnplugins/opencpn_packaging_data/portaudio-vc12.7z
+        - 7za e portaudio-vc12.7z -o../buildwin -y
+        - mv PVW32Con.exe ../buildwin/.
 1. cmake/  all the files in testplugin are used in weatherfax and are identical
 1. cmake/  weatherfax has 3-4 of its own files too
 1. cmake/in-files/ has all the same files
 1. extinclude   all the same
 1. extsrc   all the same
-1. mingw  all the same
+1. mingw  
+    - opencpn-deps.spec file has
+    	- BuildRequires: p7zip
+        - BuildRequires: wget
 1. .travis.yml  same
-1. appveyor.yml  (same except the path & name of plugin and  the api key)
+1. appveyor.yml  (same except the path & name of plugin and the api key)
 1. CMakeLists.txt  -similar, very different in places, 
     - personnal settings,
     - "USE_GL ON" for weatherfax,
