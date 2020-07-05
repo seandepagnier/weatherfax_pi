@@ -1,11 +1,11 @@
 ## Weather Fax Plugin for OpenCPN
-___________________________________
+_________________________________
 
 Implement weather fax ability for opencpn.  
 This includes retrieval via sound card (radio fax) as well as the internet, or local image files.
  
 ### Compiling
-_______________
+_________________________________
 
 * git clone git://github.com/seandepagnier/weatherfax_pi.git
 
@@ -43,7 +43,7 @@ Compiling Windows (visual studio) Opencpn v4:
 * cmake -T v120_xp ..
 
 ###  Build tarball and metadate.xml locally to test.
-______________________________________________________
+_________________________________
 
 Git clone the latest plugin, create a new build directory, go into that and issue the requisite commands. 
 
@@ -84,7 +84,7 @@ If this script is used on CIRCLECI, TRAVIS or APPVEYOR it will upload the correc
 If this script is used locally it will build the correct artifacts but will not do the upload
 
 ### To add your new Metadata xml to Plugin Manager Catalog
-===========================================================================================
+_________________________________
 
 Make Pull Request to github.com/OpenCPN/Plugiins 
 
@@ -156,7 +156,7 @@ Create an identical local copy of upstream/master as a new branch "rg-master"
 1. git checkout -b rg-master upstream/master
 
 ### Windows Specific Libraries
-===============================
+_________________________________
 
 The Windows compilation of weatherfax_pi is dependent on these files 
 
@@ -167,7 +167,7 @@ The Windows compilation of weatherfax_pi is dependent on these files
    1. Unpack all these files into the buildwin directory as the compile is dependent on these.
 
 ### OSX Specific Libraries
-==========================
+_________________________________
 
 The OS X compilation of weatherfax_pi is dependent on these files 
 
@@ -178,6 +178,6 @@ The OS X compilation of weatherfax_pi is dependent on these files
    1. Then make create-pkg command will include the library in the package.
 
 ### License
-============
+_________________________________
 
 The plugin code is licensed under the terms of the GPL v3+

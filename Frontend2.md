@@ -11,7 +11,7 @@ We call this configuration "Frontend 2".  This version is easier to configure.
 
 
 ## KEEP EXISTING DIRECTORIES AND FILES
---------------------------------------------------------------------
+_________________________________
 
 #### Important:
 1. Make these changes on a new branch "frontend2" or "ci" (if possible).
@@ -35,7 +35,7 @@ We call this configuration "Frontend 2".  This version is easier to configure.
 
 
 ## LIST of FOLDERS & FILES copied from TESTPLUGIN_PI
-----------------------------------------------------
+_________________________________
 
 #### Add these Directories + Sub-directories + Files
 
@@ -68,7 +68,8 @@ The following directories and files are not needed from testplugin_pi
 
 
 ## CHANGES REQUIRED 
-----------------------------------------------------------------
+_________________________________
+
 1. Rename CMakeLists.txt, appveyor.yml, .travis.yml adding  .save for reference.
 1. Modify CMakeLists.txt file, following the in-line notes
    - Modify Personal Specifics about Line 20 to 75.
@@ -123,7 +124,8 @@ The following directories and files are not needed from testplugin_pi
 
 
 ## DEPLOYMENT 
-----------------------------------------------------------------
+_________________________________
+
 The current setup for Frontend2 plugins does this:
 - Non-Master branch no tag -> Alpha repository
 - Non-Master branch with tag -> Beta repository
@@ -152,7 +154,7 @@ Example:
 
 
 ### Weatherfax_pi specific differences from testplugin_pi "Frontend2"
-------------------------------------------------------------------------
+_________________________________
    
 Weatherfax_pi needs to have sound support for Windows and Mingw, additionally use with rtlsdr requires additional files. 
 
