@@ -1,10 +1,11 @@
 ## Weather Fax Plugin for OpenCPN
-=======================================
+___________________________________
 
-Implement weather fax ability for opencpn.  This includes retrieval via sound card (radio fax) as well as the internet, or local image files.
+Implement weather fax ability for opencpn.  
+This includes retrieval via sound card (radio fax) as well as the internet, or local image files.
  
 ### Compiling
-===============
+_______________
 
 * git clone git://github.com/seandepagnier/weatherfax_pi.git
 
@@ -42,7 +43,7 @@ Compiling Windows (visual studio) Opencpn v4:
 * cmake -T v120_xp ..
 
 ###  Build tarball and metadate.xml locally to test.
-=======================================================
+______________________________________________________
 
 Git clone the latest plugin, create a new build directory, go into that and issue the requisite commands. 
 
@@ -69,7 +70,7 @@ I use -j12 (6 real processors, 2 threads per processor AMD  Ryzen 5 1600).
 Under windows VS will pick the number of processor automatically.
 
 ### Deployment Repository
-=============================
+_________________________________
 
 The script cloudsmith-uploads.sh which is created at runtime from cmake/in-files/cloudsmith-upload.sh.in
 uploads the .tar.gz and .xml artifacts to cloudsmith

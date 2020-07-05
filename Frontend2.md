@@ -9,8 +9,10 @@ GOAL: Assist plugin developers to convert their plugins to the Plugin Manager sy
 We call this configuration "Frontend 2".  This version is easier to configure.
 "Frontend 1" can be found in the current versions of Oesenc_pi and Vdr_pi. 
 
+
 ## KEEP EXISTING DIRECTORIES AND FILES
-----------------------------------------------------
+--------------------------------------------------------------------
+
 #### Important:
 1. Make these changes on a new branch "frontend2" or "ci" (if possible).
 1. Keep your currently working "master" branch intact.
@@ -31,8 +33,10 @@ We call this configuration "Frontend 2".  This version is easier to configure.
 - po
 - Any other specific plugin directories essential to your plugin.
 
+
 ## LIST of FOLDERS & FILES copied from TESTPLUGIN_PI
 ----------------------------------------------------
+
 #### Add these Directories + Sub-directories + Files
 
 Copy the following directories and files from testplugin_pi to the same location in the plugin directory you are working on:
@@ -62,6 +66,7 @@ The following directories and files are not needed from testplugin_pi
 - testplugin_pi/ocpnsrc
 - testplugin_pi/src
 
+
 ## CHANGES REQUIRED 
 ----------------------------------------------------------------
 1. Rename CMakeLists.txt, appveyor.yml, .travis.yml adding  .save for reference.
@@ -84,18 +89,18 @@ The following directories and files are not needed from testplugin_pi
        - EG: add_library(${PACKAGE_NAME} SHARED ${SRCS} ${HDRS} ${NMEA0183} ${LIBSSRC})
 1. API Number must be at least 1.16 for the new Plugin Manager, due to a change in how directories are found and location.
 1. API Names have been changed from MY_API_VERSION_MAJOR and MY_API_VERSION_MINOR, to OCPN_API_VERSION_MAJOR/MINOR
-     - OCPN_API_VERSION_MAJOR/MINOR are now used in cmake/in-files/version.h.in
-     - In the file (pluginname_pi).cpp the are several lines which need to be changed from MY_API_VERSION_MAJOR/MINOR to 
-	   - EG: "return OCPN_API_VERSION_MAJOR;"
-       - EG: "return OCPN_API_VERSION_MINOR;"
-	 - Also in file (pluginname_pi).cpp find   wxString (pluginname_pi)::GetCommonName() and change 
-	   - return _("(pluginname-pi)");  to
-       - return _T(PLUGIN_COMMON_NAME);		
-     - In the file (plugin_pi).h there are several lines which need to be commented out.
-       - // #define     MY_API_VERSION_MAJOR    1
-       - // #define     MY_API_VERSION_MINOR    16
-	   - or removed.
-       - Because the new values definitions are defined in cmake/in-files/version.h.in	   
+   - OCPN_API_VERSION_MAJOR/MINOR are now used in cmake/in-files/version.h.in
+   - In the file (pluginname_pi).cpp the are several lines which need to be changed from MY_API_VERSION_MAJOR/MINOR to 
+     - EG: "return OCPN_API_VERSION_MAJOR;"
+     - EG: "return OCPN_API_VERSION_MINOR;"
+   - Also in file (pluginname_pi).cpp find   wxString (pluginname_pi)::GetCommonName() and change 
+	 - return _("(pluginname-pi)");  to
+     - return _T(PLUGIN_COMMON_NAME);		
+   - In the file (plugin_pi).h there are several lines which need to be commented out.
+     - // #define     MY_API_VERSION_MAJOR    1
+     - // #define     MY_API_VERSION_MINOR    16
+	 - or removed.
+     - Because the new values definitions are defined in cmake/in-files/version.h.in	   
 1. Cmake Files are somewhat generic, but often can be plugin specific, depending on the plugin.
    - Review the cmake.save files one by one with the new ones and make necessary adjustments.
    - Configuring this is not simple and requires knowledge about the plugin operation.
@@ -115,6 +120,7 @@ The following directories and files are not needed from testplugin_pi
 	 - Make sure that you select "Open Source", not just "public". It must be "Open Source"
      - See the more detailed instructions in the Developer's Manual wiki.
    - For custom Cloudsmith repository destinations, modify if needed.
+
 
 ## DEPLOYMENT 
 ----------------------------------------------------------------
@@ -144,9 +150,10 @@ Example:
     * [new tag]           v1.9.5.10 -> v1.9.5.10
 1. git push origin master 
 
-----------------------------------------------------------------   
-### Weatherfax_pi specific differences from testplugin_pi "Frontend2"
 
+### Weatherfax_pi specific differences from testplugin_pi "Frontend2"
+------------------------------------------------------------------------
+   
 Weatherfax_pi needs to have sound support for Windows and Mingw, additionally use with rtlsdr requires additional files. 
 
 1. circleci/config.yml  -same
