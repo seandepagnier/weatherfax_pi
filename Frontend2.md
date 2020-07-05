@@ -67,7 +67,7 @@ The following directories and files are not needed from testplugin_pi
 - testplugin_pi/src
 
 
-## CHANGES REQUIRED 
+## CHANGES REQUIRED
 _________________________________
 
 1. Rename CMakeLists.txt, appveyor.yml, .travis.yml adding  .save for reference.
@@ -123,7 +123,7 @@ _________________________________
    - For custom Cloudsmith repository destinations, modify if needed.
 
 
-## DEPLOYMENT 
+## DEPLOYMENT
 _________________________________
 
 The current setup for Frontend2 plugins does this:
@@ -146,10 +146,10 @@ Example:
 1. git commit -am "v1.9.5.10"
 1. git tag v1.9.5.10
 1. git push origin refs/tags/v1.9.5.10
-  Enumerating objects: 5, done.
-  remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
-  To https://github.com/xxxx/weatherfax_pi.git  
-    * [new tag]           v1.9.5.10 -> v1.9.5.10
+  - Enumerating objects: 5, done.
+  - remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+  - To https://github.com/xxxx/weatherfax_pi.git  
+  - * [new tag]           v1.9.5.10 -> v1.9.5.10
 1. git push origin master 
 
 
