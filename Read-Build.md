@@ -1,5 +1,5 @@
 ## Weather Fax Plugin for OpenCPN
-_________________________________
+_______________________________
 
 Implement weather fax ability for opencpn.  
 This includes retrieval via sound card (radio fax) as well as the internet, or local image files.
