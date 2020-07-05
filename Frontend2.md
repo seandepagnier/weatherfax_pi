@@ -1,11 +1,11 @@
 # FRONTEND 2  v1.0.124
 
-GOAL: Assist plugin developers to convert their plugins to the Plugin Manager system which
+GOAL: Assist plugin developers to convert their plugins to the Plugin Manager system which:
 1. Uses tarballs and metadata.xml files to store the necessary files and provide information.
-1. Deployed directly to Cloudsmith repositories
-1. That are accessed by OpenCPN Plugin Manager
-1. Via Options > Plugins > Plugin Manager Catalogs "master" and "beta" url in the metadata files
-1. during installation. 
+1. Deploys directly to Cloudsmith repositories (or another location)
+1. Files are accessed by OpenCPN Plugin Manager
+1. Installed via options > Plugins > Plugin Manager Catalogs "master" and "beta" url in the metadata files
+1. During installation. 
 We call this configuration "Frontend 2".  This version is easier to configure.
 "Frontend 1" can be found in the current versions of Oesenc_pi and Vdr_pi. 
 
@@ -46,6 +46,7 @@ Copy the following directories and files from testplugin_pi to the same location
 - testplugin_pi/extsrc  (JSON Validation - only Ocpn_draw, watchdog, weather_routing)
 
 #### Files
+Review and Compare these files, deployment to Cloudsmith is required.
 - testplugin_pi/appveyor.yml  (compare with your file)
 - testplugin_pi/.travis.yml   (compare with your file)
 - testplugin_pi/CMakeLists.txt  (see in line notes, major editing comparing to old file)
@@ -118,10 +119,10 @@ The following directories and files are not needed from testplugin_pi
 ## DEPLOYMENT 
 ----------------------------------------------------------------
 The current setup for Frontend2 plugins does this:
-    - Non-Master branch no tag -> Alpha repository
-    - Non-Master branch with tag -> Beta repository
-    - Master branch no tag -> Beta repository
-    - Master branch with tag -> Prod repository
+- Non-Master branch no tag -> Alpha repository
+- Non-Master branch with tag -> Beta repository
+- Master branch no tag -> Beta repository
+- Master branch with tag -> Prod repository
 
  There are several ways to issue a "tagged push"
     - See https://opencpn.org/wiki/dokuwiki/doku.php?id=opencpn:developer_manual:pi_installer_procedure#deploy_to_prod_repository
@@ -150,25 +151,25 @@ Weatherfax_pi needs to have sound support for Windows and Mingw, additionally us
 
 1. circleci/config.yml  -same
 1. ci/ all scripts same except
-    - ci/control  weatherfax has 'build librtlsdr-dev'
-    - ci/circleci-build-mingw.sh downloads and installs portauduio & PVWcon32.exe
-        - wget https://downloads.sourceforge.net/project/opencpnplugins/opencpn_packaging_data/PVW32Con.exe
-        - wget https://downloads.sourceforge.net/project/opencpnplugins/opencpn_packaging_data/portaudio-vc12.7z
-        - 7za e portaudio-vc12.7z -o../buildwin -y
-        - mv PVW32Con.exe ../buildwin/.
+   - ci/control  weatherfax has 'build librtlsdr-dev'
+   - ci/circleci-build-mingw.sh downloads and installs portauduio & PVWcon32.exe
+     - wget https://downloads.sourceforge.net/project/opencpnplugins/opencpn_packaging_data/PVW32Con.exe
+     - wget https://downloads.sourceforge.net/project/opencpnplugins/opencpn_packaging_data/portaudio-vc12.7z
+     - 7za e portaudio-vc12.7z -o../buildwin -y
+     - mv PVW32Con.exe ../buildwin/.
 1. cmake/  all the files in testplugin are used in weatherfax and are identical
 1. cmake/  weatherfax has 3-4 of its own files too
 1. cmake/in-files/ has all the same files
 1. extinclude   all the same
 1. extsrc   all the same
 1. mingw  
-    - opencpn-deps.spec file has
-    	- BuildRequires: p7zip
-        - BuildRequires: wget
+   - opencpn-deps.spec file has
+     - BuildRequires: p7zip
+     - BuildRequires: wget
 1. .travis.yml  same
 1. appveyor.yml  (same except the path & name of plugin and the api key)
 1. CMakeLists.txt  -similar, very different in places, 
-    - personnal settings,
-    - "USE_GL ON" for weatherfax,
-    - plugin name is different,
-    - libraries and includes all different.
+   - personnal settings,
+   - "USE_GL ON" for weatherfax,
+   - plugin name is different,
+   - libraries and includes all different.
