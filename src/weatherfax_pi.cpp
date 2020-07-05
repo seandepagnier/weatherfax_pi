@@ -103,13 +103,11 @@ bool weatherfax_pi::DeInit(void)
 
 int weatherfax_pi::GetAPIVersionMajor()
 {
-  //  return MY_API_VERSION_MAJOR;
   return OCPN_API_VERSION_MAJOR;
 }
 
 int weatherfax_pi::GetAPIVersionMinor()
 {
-   // return MY_API_VERSION_MINOR;
 	return OCPN_API_VERSION_MINOR;
 }
 
@@ -130,9 +128,7 @@ wxBitmap *weatherfax_pi::GetPlugInBitmap()
 
 wxString weatherfax_pi::GetCommonName()
 {
-    // return _("WeatherFax");
-	return _T(PLUGIN_COMMON_NAME);
-		
+	return _T(PLUGIN_COMMON_NAME);		
 }
 
 wxString weatherfax_pi::GetShortDescription()
