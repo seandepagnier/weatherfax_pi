@@ -54,9 +54,9 @@ SET(PACKAGE "weatherfax_pi")
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
-set(VERSION_PATCH "9")
+set(VERSION_PATCH "10")
 set(VERSION_TWEAK "0")
-set(VERSION_DATE "07/05/2020")
+set(VERSION_DATE "07/095/2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -209,7 +209,6 @@ SET(SRC_WEATHERFAX
 
 # Added by Rick recently
 SET (HDRS
-            api-16/ocpn_plugin.h
 			src/AboutDialog.h
 			src/DecoderOptionsDialog.h
 			src/defs.h
@@ -224,6 +223,10 @@ SET (HDRS
 			src/WeatherFaxUI.h
 			src/WeatherFaxWizard.h
 			src/wximgkap.h
+            api-16/ocpn_plugin.h
+)
+
+SET(SRC_AUDIOFILE
 			src/libaudiofile/af_vfs.h
 			src/libaudiofile/afinternal.h
 			src/libaudiofile/AIFF.h
@@ -284,19 +287,12 @@ SET (HDRS
 			src/libaudiofile/modules/PCM.h
 			src/libaudiofile/modules/RebufferModule.h
 			src/libaudiofile/modules/SimpleModule.h
-			src/plugingl/linmath.h
-			src/plugingl/pi_shaders.h
-			src/plugingl/pidc.h
-			src/plugingl/qtstylesheet.h
-			src/plugingl/TexFont.h
-			src/tinyxml/tinyxml.h
-)			
 
-SET(SRC_AUDIOFILE
             src/libaudiofile/aupv.c
             src/libaudiofile/error.c
             src/libaudiofile/extended.c
             src/libaudiofile/g711.c
+
             src/libaudiofile/AIFF.cpp
             src/libaudiofile/AVR.cpp
             src/libaudiofile/CAF.cpp
@@ -356,11 +352,15 @@ SET(SRC_AUDIOFILE
             src/libaudiofile/modules/SimpleModule.cpp
 )
 
-## --------------------Section above is direct from Weatherfax -----------##
-## --------------------Section below added recently to Weatherfax set -----##
 #  not needed see PluginGL Line 594
 SET (SRC_PLUGINGL
-           src/plugingl/pi_shaders.cpp
+			src/plugingl/linmath.h
+			src/plugingl/pi_shaders.h
+			src/plugingl/pidc.h
+			src/plugingl/qtstylesheet.h
+			src/plugingl/TexFont.h
+#			src/tinyxml/tinyxml.h
+            src/plugingl/pi_shaders.cpp
 			src/plugingl/pidc.cpp
 			src/plugingl/qtstylesheet.cpp
 			src/plugingl/TexFont.cpp
@@ -371,6 +371,7 @@ SET (SRC_TINYXML
            src/tinyxml/tinyxml.cpp
 			src/tinyxml/tinyxmlerror.cpp
 			src/tinyxml/tinyxmlparser.cpp
+			src/tinyxml/tinyxml.h
 )
 
 # add_definitions(-DPLUGIN_USE_SVG)
@@ -461,7 +462,7 @@ INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
 # ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} )
 # ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} )
 
-ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
+ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX}  ${HDRS}  ${SRC_AUDIOFILE}  ${SRC_PLUGINGL}   ${SRC_TINYXML} )
 TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 message(STATUS "${CMLOC}Adding PUGINS_LIBS: ${EXTRA_LIBS}")
 
@@ -510,7 +511,6 @@ endif(UNIX AND NOT APPLE)
 # ------------------------------------
 
 ## ----- Change above to match project requirements ----- ##
-
 
 
 #IF(UNIX AND NOT APPLE)
