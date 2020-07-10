@@ -54,9 +54,9 @@ SET(PACKAGE "weatherfax_pi")
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
-set(VERSION_PATCH "12")
+set(VERSION_PATCH "13")
 set(VERSION_TWEAK "0")
-set(VERSION_DATE "07/09/2020")
+set(VERSION_DATE "07/10/2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -353,26 +353,25 @@ SET(SRC_AUDIOFILE
 )
 
 #  not needed see cmake/PluginGL.cmake  Line 594
-#SET (SRC_PLUGINGL
-#			src/plugingl/linmath.h
-#			src/plugingl/pi_shaders.h
-#			src/plugingl/pidc.h
-#			src/plugingl/qtstylesheet.h
-#			src/plugingl/TexFont.h
-##			src/tinyxml/tinyxml.h
-#            src/plugingl/pi_shaders.cpp
-#			src/plugingl/pidc.cpp
-#			src/plugingl/qtstylesheet.cpp
-#			src/plugingl/TexFont.cpp
-#)
+SET (SRC_PLUGINGL
+			src/plugingl/linmath.h
+			src/plugingl/pi_shaders.h
+			src/plugingl/pidc.h
+			src/plugingl/qtstylesheet.h
+			src/plugingl/TexFont.h
+            src/plugingl/pi_shaders.cpp
+			src/plugingl/pidc.cpp
+			src/plugingl/qtstylesheet.cpp
+			src/plugingl/TexFont.cpp
+)
 
 #  not needed see cmake/PluginXML.cmake  Line 593
-#SET (SRC_TINYXML
-#           src/tinyxml/tinyxml.cpp
-#			src/tinyxml/tinyxmlerror.cpp
-#			src/tinyxml/tinyxmlparser.cpp
-#			src/tinyxml/tinyxml.h
-#)
+SET (SRC_TINYXML
+            src/tinyxml/tinyxml.cpp
+			src/tinyxml/tinyxmlerror.cpp
+			src/tinyxml/tinyxmlparser.cpp
+			src/tinyxml/tinyxml.h
+)
 
 # add_definitions(-DPLUGIN_USE_SVG)
 
@@ -459,8 +458,7 @@ INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
 ##================================================================================
 ##    add_library(${PACKAGE_NAME} SHARED ${SRCS}  ${SRC_NMEA0183})
 ##================================================================================
-# ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} )
-ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX}  ${HDRS}  ${SRC_AUDIOFILE} )
+ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} )
 TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 message(STATUS "${CMLOC}Adding PUGINS_LIBS: ${EXTRA_LIBS}")
 
