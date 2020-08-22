@@ -1,0 +1,15 @@
+src/AboutDialog.h
+src/DecoderOptionsDialog.h
+src/defs.h
+src/FaxDecoder.h
+src/georef.h
+src/icons.h
+src/InternetRetrievalDialog.h
+src/SchedulesDialog.h
+src/WeatherFax.h
+src/weatherfax_pi.h
+src/WeatherFaxImage.h
+src/WeatherFaxUI.h
+src/WeatherFaxWizard.h
+src/wximgkap.h
+api-16/ocpn_plugin.h

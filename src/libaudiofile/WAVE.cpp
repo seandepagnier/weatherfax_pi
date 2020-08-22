@@ -31,7 +31,7 @@
 #include "WAVE.h"
 
 #include <assert.h>
-#include <math.h>
+#include <cmath>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>

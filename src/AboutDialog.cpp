@@ -28,7 +28,7 @@
 #include <wx/wx.h>
 
 #include <stdlib.h>
-#include <math.h>
+#include <cmath>
 #include <time.h>
 
 #include "AboutDialog.h"

@@ -133,19 +133,14 @@ wxString weatherfax_pi::GetCommonName()
 
 wxString weatherfax_pi::GetShortDescription()
 {
-    return _("Weather Fax PlugIn for OpenCPN");
+    return _(PLUGIN_SHORT_DESCRIPTION);
+
 }
 
 wxString weatherfax_pi::GetLongDescription()
 {
-    return _("Weather Fax PlugIn for OpenCPN\n\
-Can open image files directly, or decode audio faxes to an image.\n\
-With simple calibration, resulting image is overlaid on top of charts.\n\
-Converts images in mercator, polar, conic and uniform coordinates.\n\
-Can convert any image into a raster chart.\n\
-Builtin database for HF radio fax stations via SSB.\n\
-Builtin database for internet retrieval from meterological sites.\n\
-");
+   return _(PLUGIN_LONG_DESCRIPTION);
+   
 }
 
 int weatherfax_pi::GetToolbarToolCount(void)

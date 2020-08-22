@@ -27,12 +27,12 @@
 #define VERS   "1.0b"
 
 #include <stdint.h>
-#include <math.h>
+#include <cmath>
 #include <stdio.h>
 #include <ctype.h>
 #include <stdlib.h>		/* for malloc() */
 #include <string.h>		/* for strncmp() */
-#include <math.h>
+#include <cmath>
 
 #include <time.h>       /* for date in kap */
 

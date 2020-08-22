@@ -20,29 +20,28 @@
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                       *
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Frontend2 Version: 1.0.124  
+# Frontend2 Version: 1.0.132.1  
 # ---------------------------------------------------------------------------
 ## ----- When changing this file do NOT change the order in which sections occur        ----- ##
 ## ----- Changes should only be made between the section blocks that identify where     ----- ##
 ## ----- these changes should be. The whole configuration process relies on this        ----- ##
 ## ----- sequence to be successful                                                      ----- ##
-
 ##  
 ## ----- Modify section below to include all the details for your plugin ----- ##
 ##  
 
 set(CMLOC "CMakeLists: ")
 
-# define minimum cmake version							  
+# define minimum cmake version
 cmake_minimum_required(VERSION 3.1.1)
 if(COMMAND cmake_policy)
-  if(POLICY CMP0043)
-    cmake_policy(SET CMP0043 NEW)
-  endif(POLICY CMP0043)
-  cmake_policy(SET CMP0048 NEW)
-  if(POLICY CMP0077)
-    cmake_policy(SET CMP0077 NEW)
-  endif(POLICY CMP0077)
+    if(POLICY CMP0043)
+        cmake_policy(SET CMP0043 NEW)
+    endif(POLICY CMP0043)
+    cmake_policy(SET CMP0048 NEW)
+    if(POLICY CMP0077)
+        cmake_policy(SET CMP0077 NEW)
+    endif(POLICY CMP0077)
 endif(COMMAND cmake_policy)
 
 # define plugin name, owner and versions
@@ -51,24 +50,26 @@ set(COMMON_NAME "WeatherFax") # Search "getcommonname"in weatherfax_pi.cpp
 set(TITLE_NAME "WeatherFax")
 set(PACKAGE_CONTACT "Sean d'Epagnier")
 SET(PACKAGE "weatherfax_pi")
+set(SHORT_DESCRIPTION "Open fax image files or decode audio faxes and overlay on chart")
+set(LONG_DESCRIPTION "Open image files directly or decode audio faxes to an image.  With simple calibration, resulting image is overlaid on top of charts. Converts images in mercator, polar, conic and uniform coordinates. Can convert any image into a raster chart. Builtin database for HF radio fax stations via SSB. Builtin database for internet retrieval from meterological site.")
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "13")
-set(VERSION_TWEAK "0")
-set(VERSION_DATE "07/10/2020")
+set(VERSION_TWEAK "2")
+set(VERSION_DATE "08-22-2020")
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
 
 set(PARENT "opencpn")
 
-#Used to set up a local webserver with git loaded, for testing purposes.
-set(GIT_REPOSITORY_SERVER "github.com")
+# The next line allows setup of a local webserver with git for testing purposes.
+# The default is shown below, but it is done in cmake/pluginconfigure.cmake now.
+# This default is needed to build locally and to build flatpak.
+#set(GIT_REPOSITORY_SERVER "github.com")
 
 #No longer needed, queried.
-#set(GIT_USER "seandepagnier")
-#set(GIT_USER "jongough")
 #set(GIT_USER "rgleason")
 #set(GIT_REPOSITORY_NAME "weatherfax_pi")
 
@@ -77,20 +78,19 @@ set(PROD "prod")   #Standard Repos
 set(BETA "beta")   #Standard Repos
 set(ALPHA "alpha") #Standard Repos
 
-# Set if your cloudsmith repository name does not match your git repository name set(CLOUDSMITH_BASE_REPOSITORY "testplugin_pi")
 #set(CLOUDSMITH_USER "jon-gough")
-#set(CLOUDSMITH_USER "sean-depagnier")
 #set(CLOUDSMITH_USER "rick-gleason")
 set(CLOUDSMITH_USER "opencpn")
-# set if the Cloudsmith Base Repository name does not match your git repository name
+
+# Set if yourCloudsmith Base Repository name does not match your Git Repository name.
 # set(CLOUDSMITH_BASE_REPOSITORY "weatherfax_pi") #Jon Gough's customization
 # set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization
 set(CLOUDSMITH_BASE_REPOSITORY "weatherfax")  #Rick's customization
 
 # Set Plugin info-url, summary and description
 set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/weatherfax.html")
-set(XML_SUMMARY "Open fax image files or decode audio faxes and overlay on chart")
-set(XML_DESCRIPTION "Simple image overlay calibration, Converts any image image into a raster chart.  Db for HF radio fax stations via SSB and Metro URL internet retrieval.")
+set(XML_SUMMARY  ${SHORT_DESCRIPTION}) 
+set(XML_DESCRIPTION  ${LONG_DESCRIPTION})
 
 ##
 ## ----- Modify above to include all the plugin details --------- ##
@@ -111,9 +111,9 @@ option(USE_GL "Enable OpenGL support" ON)
 message(STATUS "${CMLOC}USE_GL: ${USE_GL}")
 
 if("${CMAKE_BUILD_TYPE}" STREQUAL "")
-    set(CMAKE_BUILD_TYPE 
-	     "Release" 
-		 CACHE STRING "Choose the type of build" FORCE)
+    set(CMAKE_BUILD_TYPE
+        "Release"
+        CACHE STRING "Choose the type of build" FORCE)
 endif("${CMAKE_BUILD_TYPE}" STREQUAL "")
 set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "" "Debug" "Release" "RelWithDebInfo" "MinSizeRel")
 message(STATUS "${CMLOC}Build type: ${CMAKE_BUILD_TYPE}")
@@ -124,13 +124,13 @@ message(STATUS "${CMLOC}Build type: ${CMAKE_BUILD_TYPE}")
 
 project(${PACKAGE})	   
 
-include("cmake/PluginSetup.cmake")
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake;")
 
+##=======================================
+include("PluginSetup")
+##=======================================
 ##
 ## ----- The above is used to setup standard variables that are required by the CMAKE process - do not remove ----- ##
-##
-
-##
 ## ----- Modify section below if there are special requirements for the plugin ----- ##
 ##
 
@@ -140,9 +140,6 @@ option(Plugin_CXX11 "Use c++11" OFF)
 
 ##
 ## ----- Modify section above if there are special requirements for the plugin ----- ##
-##
-
-##
 ## ----- do not change next section - needed to configure build process ----- ##
 ##
 
@@ -183,14 +180,13 @@ ENDIF (MSVC)
 ## --Section above is direct from Weatherfax located above SET(SRC_WEATHERFAX  ---##
 ## --Below needed for build process.
 ##
-
-include("cmake/PluginConfigure.cmake")
-
+##=======================================
+include("PluginConfigure")
+##=======================================
 ##
+## ----- do not change section above - needed to configure build process ----- 
 ## ----- Change below to match project requirements for source, headers, etc. ----- ##
-##
-
-# ++++++++++++++Section below is direct from Weatherfax +++++++++##
+#
 
 SET(SRC_WEATHERFAX
             src/weatherfax_pi.cpp
@@ -373,7 +369,8 @@ SET (SRC_TINYXML
 			src/tinyxml/tinyxml.h
 )
 
-# add_definitions(-DPLUGIN_USE_SVG)
+#was commented out
+ add_definitions(-DPLUGIN_USE_SVG)
 
 # ------------------------------------
 #  PI_JSON SCHEMA VALIDATOR  
@@ -399,7 +396,6 @@ endif(PI_JSON_SCHEMA_VALIDATOR)
 # ------------------------------------
 #    End of JSON VALIDATOR
 # ------------------------------------
-
 
 #INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
 #INCLUDE_DIRECTORIES (BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
@@ -445,20 +441,23 @@ ENDIF(WIN32)
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
 
+#INCLUDE_DIRECTORIES (BEFORE ${PROJECT_SOURCE_DIR}/api-16)
 #INCLUDE_DIRECTORIES( /src/libaudiofile )
 #INCLUDE_DIRECTORIES( /src/libaudiofile/audiofile.h )
 #INCLUDE_DIRECTORIES( ${PROJECT_SOURCE_DIR}/src/libaudiofile)
 #INCLUDE_DIRECTORIES (src/plugingl)
-#INCLUDE_DIRECTORIES(api-16)
-# INCLUDE_DIRECTORIES (BEFORE ${PROJECT_SOURCE_DIR}/api-16)
 
-##================================================================================
+##
 ## Required to collect all the set( headers and SRCS  - Adjust as required
 ## This add_library  is used in the conditionals below.
-##================================================================================
+##
 ##    add_library(${PACKAGE_NAME} SHARED ${SRCS}  ${SRC_NMEA0183})
-##================================================================================
+##
+
+##==========================================================================
 ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} )
+##==========================================================================
+
 TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 message(STATUS "${CMLOC}Adding PUGINS_LIBS: ${EXTRA_LIBS}")
 
@@ -474,9 +473,9 @@ message(STATUS "${CMLOC}Adding PUGINS_LIBS: ${EXTRA_LIBS}")
 #endif(WIN32)
 # ADD_DEFINITIONS(-DTIXML_USE_STL)
 
-# ------------------------------------
+# ---------------------------------------------
 #  PI_JSON SCHEMA VALIDATOR  From Testplugin 
-# ------------------------------------
+# ---------------------------------------------
 
 # Every plugin that uses JSON for passing messages should use a validator. The validator  allows the system to ignore non-conformant messages. 
 
@@ -502,9 +501,9 @@ if(UNIX AND NOT APPLE)
     endif(PI_JSON_SCHEMA_VALIDATOR)
 endif(UNIX AND NOT APPLE)
 
-# ------------------------------------
+# ---------------------------------------------
 #    End of JSON VALIDATOR From Testplugin 
-# ------------------------------------
+# ---------------------------------------------
 
 ## ----- Change above to match project requirements ----- ##
 
@@ -596,19 +595,21 @@ endif(UNIX AND NOT APPLE)
 #--------REMOVE LN 194 to LN 296 from Testplugin_pi---------------
 #------- Change below to match project requirements --------------#
 
-#----INCLUDE CMAKE #3 & #4 -----
-# INCLUDE("cmake/PluginNMEA.cmake") #not for wxfax
-# INCLUDE("cmake/PluginJSON.cmake")  #not for wxfax
-INCLUDE("cmake/PluginXML.cmake")
-INCLUDE("cmake/PluginGL.cmake")
+##----Optional cmake files-----
+##=======================================
+# include("PluginNMEA") #not for wxfax
+# include("PluginJSON")  #not for wxfax
+include("PluginXML")
+include("PluginGL")
+##=======================================
 #
 ## ----- do not change next section - needed to configure build process ----- ##
 #
-#INCLUDE CMAKE #5,6 & 7 -----
-include("cmake/PluginInstall.cmake")
-include("cmake/PluginLocalization.cmake")
-include("cmake/PluginPackage.cmake")
-
+##=======================================
+include("PluginInstall")
+include("PluginLocalization")
+include("PluginPackage")
+##=======================================
 #
 ## ----- do not change section above - needed to configure build process ----- ##
-#
+

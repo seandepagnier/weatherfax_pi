@@ -31,7 +31,7 @@
 #include <sys/soundcard.h>
 #endif
 
-#include <math.h>
+#include <cmath>
 #include <complex>
 
 bool FaxDecoder::Configure(int imagewidth, int BitsPerPixel, int carrier,
