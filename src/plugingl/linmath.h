@@ -1,7 +1,7 @@
 #ifndef LINMATH_H
 #define LINMATH_H
 
-#include <cmath>
+#include <math.h>
 
 #ifdef _MSC_VER
 #define inline __inline

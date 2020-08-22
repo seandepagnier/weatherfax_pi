@@ -27,7 +27,7 @@
 #include "PCM.h"
 
 #include <assert.h>
-#include <cmath>
+#include <math.h>
 
 #include "Compiler.h"
 #include "FileModule.h"

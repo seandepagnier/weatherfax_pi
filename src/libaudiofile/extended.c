@@ -52,7 +52,7 @@
 
 #include "extended.h"
 
-#include <cmath>
+#include <math.h>
 
 #ifndef HUGE_VAL
 #define HUGE_VAL HUGE
