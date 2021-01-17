@@ -262,7 +262,7 @@
       <Area Name="6" lat1="18N" lat2="52N" lon1="157W"  long2="" />
     </Region>
   </Server>
-  <Server Name="NOAA OPC" Url="http://www.opc.ncep.noaa.gov/">
+  <Server Name="NOAA OPC" Url="https://ocean.weather.gov/">
     <Region Name="Atlantic">
       <Map Url="A_sfc_full_ocean.jpg" Contents="Atlantic Ocean Analysis" Area="1" />
       <Map Url="A_sfc_full_ocean_color.png" Contents="Atlantic Ocean Analysis (color)" Area="1a" />
