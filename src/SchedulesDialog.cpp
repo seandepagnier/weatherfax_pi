@@ -220,13 +220,24 @@ void SchedulesDialog::Load(bool force)
         captures = captures.AfterFirst(';');
     }
 
-    s = wxFileName::GetPathSeparator();
+/*    s = wxFileName::GetPathSeparator();
     if( wxFileExists( m_weatherfax_pi.StandardPath() + _T("WeatherFaxSchedules.xml") ) )
         OpenXML( m_weatherfax_pi.StandardPath() + _T("WeatherFaxSchedules.xml") );
     else
-        OpenXML(*GetpSharedDataLocation() + _T("plugins")
-            + s + _T("weatherfax_pi") + s + _T("data") + s
-            + _T("WeatherFaxSchedules.xml"));
+        OpenXML(GetPluginDataDir("weatherfax_pi") + s + _T("data") + s
+            + _T("WeatherFaxInternetRetrieval.xml"));
+*/
+
+     s = wxFileName::GetPathSeparator();
+    if( wxFileExists(GetPluginDataDir("weatherfax_pi") + s + _T("data") + s
+            + _T("WeatherFaxSchedules.xml") ) )
+        OpenXML(GetPluginDataDir("weatherfax_pi") + s + _T("data") + s
+            + _T("WeatherFaxSchedules.xml") );
+    else
+      if( wxFileExists(GetPluginDataDir("weatherfax_pi") + s + _T("data") + s
+            + _T("WeatherFaxSchedules.xml") ) )
+        OpenXML(GetPluginDataDir("weatherfax_pi") + s + _T("data") + s
+            + _T("WeatherFaxInternetRetrieval.xml"));
 
     m_lStations->DeselectAll();
     for(unsigned int i=0; i < m_lStations->GetCount(); i++)

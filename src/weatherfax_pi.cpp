@@ -49,7 +49,7 @@ extern "C" DECL_EXP void destroy_pi(opencpn_plugin* p)
 //---------------------------------------------------------------------------------------------------------
 
 weatherfax_pi::weatherfax_pi(void *ppimgr)
-    : opencpn_plugin_113(ppimgr)
+    : opencpn_plugin_116(ppimgr)
 {
     // Create the PlugIn icons
     initialize_images();
@@ -103,12 +103,12 @@ bool weatherfax_pi::DeInit(void)
 
 int weatherfax_pi::GetAPIVersionMajor()
 {
-    return MY_API_VERSION_MAJOR;
+  return OCPN_API_VERSION_MAJOR;
 }
 
 int weatherfax_pi::GetAPIVersionMinor()
 {
-    return MY_API_VERSION_MINOR;
+	return OCPN_API_VERSION_MINOR;
 }
 
 int weatherfax_pi::GetPlugInVersionMajor()
@@ -128,24 +128,19 @@ wxBitmap *weatherfax_pi::GetPlugInBitmap()
 
 wxString weatherfax_pi::GetCommonName()
 {
-    return _("WeatherFax");
+	return _T(PLUGIN_COMMON_NAME);		
 }
 
 wxString weatherfax_pi::GetShortDescription()
 {
-    return _("Weather Fax PlugIn for OpenCPN");
+    return _(PLUGIN_SHORT_DESCRIPTION);
+
 }
 
 wxString weatherfax_pi::GetLongDescription()
 {
-    return _("Weather Fax PlugIn for OpenCPN\n\
-Can open image files directly, or decode audio faxes to an image.\n\
-With simple calibration, resulting image is overlaid on top of charts.\n\
-Converts images in mercator, polar, conic and uniform coordinates.\n\
-Can convert any image into a raster chart.\n\
-Builtin database for HF radio fax stations via SSB.\n\
-Builtin database for internet retrieval from meterological sites.\n\
-");
+   return _(PLUGIN_LONG_DESCRIPTION);
+   
 }
 
 int weatherfax_pi::GetToolbarToolCount(void)
