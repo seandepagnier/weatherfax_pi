@@ -128,7 +128,7 @@ wxBitmap *weatherfax_pi::GetPlugInBitmap()
 
 wxString weatherfax_pi::GetCommonName()
 {
-	return _T(PLUGIN_COMMON_NAME);		
+	return _T(PLUGIN_COMMON_NAME);
 }
 
 wxString weatherfax_pi::GetShortDescription()
@@ -140,7 +140,7 @@ wxString weatherfax_pi::GetShortDescription()
 wxString weatherfax_pi::GetLongDescription()
 {
    return _(PLUGIN_LONG_DESCRIPTION);
-   
+
 }
 
 int weatherfax_pi::GetToolbarToolCount(void)
@@ -214,7 +214,7 @@ bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
 {
     piDC pidc;
     pidc.SetVP(vp);
-    
+
     if(!m_pWeatherFax || !m_pWeatherFax->IsShown())
         return true;
 
@@ -292,7 +292,7 @@ bool weatherfax_pi::LoadConfig(void)
     pConf->Read ( _T ( "Colors" ), &m_iExportColors, 64 );
     pConf->Read ( _T ( "DepthMeters" ), &m_bExportDepthMeters, true );
     pConf->Read ( _T ( "SoundingDatum" ), &m_sExportSoundingDatum, _T("LOWEST LOW WATER"));
-    
+
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Updates" ) );
     pConf->Read( _T("UpdateDataBaseUrl"), &m_UpdateDataBaseUrl, _T("https://raw.githubusercontent.com/seandepagnier/weatherfax_pi/master/data/") );
 
@@ -315,7 +315,7 @@ bool weatherfax_pi::SaveConfig(void)
         pConf->Write ( _T ( "DialogPosX" ),   p.x );
         pConf->Write ( _T ( "DialogPosY" ),   p.y );
     }
-        
+
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Schedules" ) );
     pConf->Write ( _T ( "LoadAtStart" ), m_bLoadSchedulesStart );
 
@@ -330,7 +330,7 @@ bool weatherfax_pi::SaveConfig(void)
     pConf->Write ( _T ( "deviceindex" ), m_CaptureSettings.rtlsdr_deviceindex);
     pConf->Write ( _T ( "errorppm" ), m_CaptureSettings.rtlsdr_errorppm);
     pConf->Write ( _T ( "upconverter_mhz" ), m_CaptureSettings.rtlsdr_upconverter_mhz);
-    
+
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Export" ) );
     pConf->Write ( _T ( "Colors" ), m_iExportColors );
     pConf->Write ( _T ( "DepthMeters" ), m_bExportDepthMeters );
@@ -350,7 +350,7 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
         new WeatherFaxPrefsDialog( parent, wxID_ANY, _("WeatherFax Preferences"),
                                    wxPoint( m_weatherfax_dialog_x, m_weatherfax_dialog_y),
                                    wxDefaultSize, wxDEFAULT_DIALOG_STYLE );
-    
+
     dialog->m_cbLoadSchedulesStart->SetValue(m_bLoadSchedulesStart);
 
     dialog->m_sDeviceIndex->SetRange(0, FaxDecoder::AudioDeviceCount() - 1);
@@ -368,12 +368,12 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
     dialog->m_sExportColors->SetValue(m_iExportColors);
     dialog->m_rbExportDepthMeters->SetValue(m_bExportDepthMeters);
     dialog->m_tExportSoundingDatum->SetValue(m_sExportSoundingDatum);
-    
+
     dialog->Fit();
-    wxColour cl;
-    GetGlobalColor(_T("DILG1"), &cl);
-    dialog->SetBackgroundColour(cl);
-    
+    //wxColour cl;
+    //GetGlobalColor(_T("DILG1"), &cl);
+    //dialog->SetBackgroundColour(cl);
+
     if(dialog->ShowModal() == wxID_OK)
     {
         m_bLoadSchedulesStart = dialog->m_cbLoadSchedulesStart->GetValue();
@@ -387,7 +387,7 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
         m_CaptureSettings.rtlsdr_deviceindex = dialog->m_srtlsdr_deviceindex->GetValue();
         m_CaptureSettings.rtlsdr_errorppm = dialog->m_srtlsdr_errorppm->GetValue();
         m_CaptureSettings.rtlsdr_upconverter_mhz = dialog->m_srtlsdr_upconverter_mhz->GetValue();
-        
+
         m_CaptureSettings.audio_deviceindex = dialog->m_sDeviceIndex->GetValue();
         m_CaptureSettings.audio_samplerate = wxAtol( dialog->m_cSampleRate->GetString(dialog->m_cSampleRate->GetSelection()) );
 

@@ -1526,16 +1526,6 @@ WeatherFaxPrefsDialog::WeatherFaxPrefsDialog( wxWindow* parent, wxWindowID id, c
 	fgSizer51->SetFlexibleDirection( wxBOTH );
 	fgSizer51->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 
-	wxFlexGridSizer* fgSizer55;
-	fgSizer55 = new wxFlexGridSizer( 0, 2, 0, 0 );
-	fgSizer55->SetFlexibleDirection( wxBOTH );
-	fgSizer55->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-
-	wxFlexGridSizer* fgSizer56;
-	fgSizer56 = new wxFlexGridSizer( 0, 1, 0, 0 );
-	fgSizer56->SetFlexibleDirection( wxBOTH );
-	fgSizer56->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-
 	wxStaticBoxSizer* sbSizer18;
 	sbSizer18 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("HF Schedules") ), wxVERTICAL );
 
@@ -1551,7 +1541,7 @@ WeatherFaxPrefsDialog::WeatherFaxPrefsDialog( wxWindow* parent, wxWindowID id, c
 	sbSizer18->Add( fgSizer47, 1, wxEXPAND, 5 );
 
 
-	fgSizer56->Add( sbSizer18, 1, wxEXPAND|wxALL, 5 );
+	fgSizer51->Add( sbSizer18, 1, wxEXPAND|wxALL, 5 );
 
 	wxStaticBoxSizer* sbSizer21;
 	sbSizer21 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("capture") ), wxVERTICAL );
@@ -1565,26 +1555,26 @@ WeatherFaxPrefsDialog::WeatherFaxPrefsDialog( wxWindow* parent, wxWindowID id, c
 
 	m_staticText39 = new wxStaticText( m_panel7, wxID_ANY, _("Sample Rate"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText39->Wrap( -1 );
-	fgSizer58->Add( m_staticText39, 0, wxALL, 5 );
+	fgSizer58->Add( m_staticText39, 1, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 
 	wxString m_cSampleRateChoices[] = { _("8000"), _("16000"), _("48000") };
 	int m_cSampleRateNChoices = sizeof( m_cSampleRateChoices ) / sizeof( wxString );
 	m_cSampleRate = new wxChoice( m_panel7, wxID_ANY, wxDefaultPosition, wxDefaultSize, m_cSampleRateNChoices, m_cSampleRateChoices, 0 );
 	m_cSampleRate->SetSelection( 0 );
-	fgSizer58->Add( m_cSampleRate, 0, wxALL, 5 );
+	fgSizer58->Add( m_cSampleRate, 1, wxALL|wxEXPAND, 5 );
 
 	m_staticText42 = new wxStaticText( m_panel7, wxID_ANY, _("Device Index"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText42->Wrap( -1 );
-	fgSizer58->Add( m_staticText42, 0, wxALL, 5 );
+	fgSizer58->Add( m_staticText42, 1, wxALL|wxALIGN_CENTER_VERTICAL|wxEXPAND, 5 );
 
 	m_sDeviceIndex = new wxSpinCtrl( m_panel7, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -1, 10, 0 );
-	fgSizer58->Add( m_sDeviceIndex, 0, wxALL, 5 );
+	fgSizer58->Add( m_sDeviceIndex, 1, wxALL|wxEXPAND, 5 );
 
 
 	m_panel7->SetSizer( fgSizer58 );
 	m_panel7->Layout();
 	fgSizer58->Fit( m_panel7 );
-	m_cbCaptureType->AddPage( m_panel7, _("audio"), false );
+	m_cbCaptureType->AddPage( m_panel7, _("audio"), true );
 	m_panel8 = new wxPanel( m_cbCaptureType, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer63;
 	fgSizer63 = new wxFlexGridSizer( 0, 2, 0, 0 );
@@ -1593,34 +1583,34 @@ WeatherFaxPrefsDialog::WeatherFaxPrefsDialog( wxWindow* parent, wxWindowID id, c
 
 	m_staticText451 = new wxStaticText( m_panel8, wxID_ANY, _("device index"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText451->Wrap( -1 );
-	fgSizer63->Add( m_staticText451, 0, wxALL, 5 );
+	fgSizer63->Add( m_staticText451, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 
 	m_srtlsdr_deviceindex = new wxSpinCtrl( m_panel8, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -1, 10, 0 );
-	fgSizer63->Add( m_srtlsdr_deviceindex, 0, wxALL, 5 );
+	fgSizer63->Add( m_srtlsdr_deviceindex, 0, wxALL|wxEXPAND, 5 );
 
 	m_staticText46 = new wxStaticText( m_panel8, wxID_ANY, _("error ppm"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText46->Wrap( -1 );
-	fgSizer63->Add( m_staticText46, 0, wxALL, 5 );
+	fgSizer63->Add( m_staticText46, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 
 	m_srtlsdr_errorppm = new wxSpinCtrl( m_panel8, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -256, 256, 0 );
 	fgSizer63->Add( m_srtlsdr_errorppm, 0, wxALL, 5 );
 
 	m_staticText47 = new wxStaticText( m_panel8, wxID_ANY, _("upconverter mhz"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText47->Wrap( -1 );
-	fgSizer63->Add( m_staticText47, 0, wxALL, 5 );
+	fgSizer63->Add( m_staticText47, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
 
 	m_srtlsdr_upconverter_mhz = new wxSpinCtrl( m_panel8, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 0, 1000, 125 );
-	fgSizer63->Add( m_srtlsdr_upconverter_mhz, 0, wxALL, 5 );
+	fgSizer63->Add( m_srtlsdr_upconverter_mhz, 0, wxALL|wxEXPAND, 5 );
 
 
 	m_panel8->SetSizer( fgSizer63 );
 	m_panel8->Layout();
 	fgSizer63->Fit( m_panel8 );
-	m_cbCaptureType->AddPage( m_panel8, _("rtlsdr"), true );
+	m_cbCaptureType->AddPage( m_panel8, _("rtlsdr"), false );
 	sbSizer21->Add( m_cbCaptureType, 1, wxEXPAND | wxALL, 5 );
 
 
-	fgSizer56->Add( sbSizer21, 1, wxEXPAND|wxALL, 5 );
+	fgSizer51->Add( sbSizer21, 1, wxEXPAND|wxALL, 5 );
 
 	wxStaticBoxSizer* sbSizer17;
 	sbSizer17 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Export") ), wxVERTICAL );
@@ -1692,13 +1682,7 @@ WeatherFaxPrefsDialog::WeatherFaxPrefsDialog( wxWindow* parent, wxWindowID id, c
 	sbSizer17->Add( fgSizer53, 1, wxEXPAND, 5 );
 
 
-	fgSizer56->Add( sbSizer17, 1, wxEXPAND|wxALL, 5 );
-
-
-	fgSizer55->Add( fgSizer56, 1, wxEXPAND, 5 );
-
-
-	fgSizer51->Add( fgSizer55, 1, wxEXPAND, 5 );
+	fgSizer51->Add( sbSizer17, 1, wxEXPAND|wxALL, 5 );
 
 	m_sdbSizer1 = new wxStdDialogButtonSizer();
 	m_sdbSizer1OK = new wxButton( this, wxID_OK );
