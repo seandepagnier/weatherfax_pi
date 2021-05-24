@@ -277,7 +277,7 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
 
                                 long start, to, by;
                                 long offset = 0;
-                                long step = 0;
+                                long step = 1;
 
                                 s_start.ToLong(&start);
                                 s_to.ToLong(&to);
