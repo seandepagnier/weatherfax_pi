@@ -21,7 +21,10 @@ sudo apt-get -y install git cmake gettext unzip
 
 # Get the OCPN Android build support package.
 #NOT REQUIRED FOR LOCAL BUILD
-wget https://github.com/bdbcat/OCPNAndroidCommon/archive/master.zip
+echo "CIRCLECI_LOCAL: $CIRCLECI_LOCAL"
+if [ -z "$CIRCLECI_LOCAL" ]; then
+   wget https://github.com/bdbcat/OCPNAndroidCommon/archive/master.zip
+fi
 unzip -qq -o master.zip
 
 pwd
@@ -33,9 +36,9 @@ ls -la
 mkdir -p build
 cd build
 
-sudo rm -f CMakeCache.txt
+rm -f CMakeCache.txt
 
-sudo cmake  \
+cmake  \
   -D_wx_selected_config=androideabi-qt-arm64 \
   -DwxQt_Build=build_android_release_64_static_O3 \
   -DQt_Build=build_arm64/qtbase \
@@ -44,14 +47,20 @@ sudo cmake  \
   -DCMAKE_C_COMPILER=/opt/android/android-ndk-r20/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android21-clang \
   -DOCPN_Android_Common=OCPNAndroidCommon-master \
   -DPREFIX=/ \
-  .. 
-  
-#sudo make clean  
-sudo make
-sudo make package
+  ..
+
+# Get number of processors and use this on make to speed up build
+if type nproc &> /dev/null
+then
+    make_cmd="make -j"$(nproc)
+else
+    make_cmd="make"
+fi
+eval $make_cmd
+make package
 
 #  All below for local docker build
-#ls -l 
+#ls -l
 
 #xml=$(ls *.xml)
 #tarball=$(ls *.tar.gz)
@@ -70,6 +79,3 @@ sudo make package
 #sudo cp metadata.xml $tmpdir
 #sudo tar -C $tmpdir -czf $tarball_basename .
 #sudo rm -rf $tmpdir
-    
-
-

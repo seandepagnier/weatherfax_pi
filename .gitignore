@@ -1,3 +1,4 @@
-buildwin
-build
-
+build/
+buildwin/
+.directory
+po/POTFILES.in.test

@@ -12,4 +12,4 @@ src/WeatherFaxImage.h
 src/WeatherFaxUI.h
 src/WeatherFaxWizard.h
 src/wximgkap.h
-api-16/ocpn_plugin.h
+libs/ocpn-api/ocpn_plugin.h

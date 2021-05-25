@@ -14,6 +14,10 @@
 #include <sstream>
 #endif
 
+#ifdef __OCPN__ANDROID__
+#include <sstream>
+#endif
+
 using nlohmann::json;
 using nlohmann::json_uri;
 using nlohmann::json_schema::root_schema;
