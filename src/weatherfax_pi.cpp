@@ -370,9 +370,6 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
     dialog->m_tExportSoundingDatum->SetValue(m_sExportSoundingDatum);
 
     dialog->Fit();
-    //wxColour cl;
-    //GetGlobalColor(_T("DILG1"), &cl);
-    //dialog->SetBackgroundColour(cl);
 
     if(dialog->ShowModal() == wxID_OK)
     {
