@@ -51,7 +51,7 @@ set(TITLE_NAME "WeatherFax")
 set(PACKAGE_CONTACT "Sean d'Epagnier")
 SET(PACKAGE "weatherfax_pi")
 set(SHORT_DESCRIPTION "Open fax image files or decode audio faxes and overlay on chart")
-set(LONG_DESCRIPTION "Open image files directly or decode audio faxes to an image.  With simple calibration, resulting image is overlaid on top of charts. Converts images in mercator, polar, conic and uniform coordinates. Can convert any image into a raster chart. Builtin database for HF radio fax stations via SSB. Builtin database for internet retrieval from meterological site.")
+set(LONG_DESCRIPTION "Open image files directly or decode audio faxes to an image, simple calibration to overlay image on top of charts. Converts images in mercator, polar, conic and uniform coordinates. Convert any image into a raster chart. Built in HF Radio Fax database for SSB and for internet retrieval from meterological sites.")
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
