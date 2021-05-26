@@ -21,6 +21,7 @@
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
 # Frontend2 Version: 1.0.167.0  17/05/2021  DD/MM/YYYY 
+#  buildCI:yes useODAPI:no validateJSON:no  
 # ---------------------------------------------------------------------------
 ## ----- When changing this file do NOT change the order in which sections occur        ----- ##
 ## ----- Changes should only be made between the section blocks that identify where     ----- ##
@@ -28,7 +29,6 @@
 ## ----- sequence to be successful                                                      ----- ##
 ##  
 ## ----- Modify section below to include all the details for your plugin ----- ##
-  
 
 set(CMLOC "CMakeLists: ")
 
@@ -56,8 +56,8 @@ set(LONG_DESCRIPTION "Open image files directly or decode audio faxes to an imag
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "14")
-set(VERSION_TWEAK "3")
-set(VERSION_DATE "25-05-2021")  # DD/MM/YYYY format
+set(VERSION_TWEAK "11")
+set(VERSION_DATE "26-05-2021")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -69,7 +69,7 @@ set(PARENT "opencpn")
 #set(GIT_USER "rgleason")
 #set(GIT_REPOSITORY_NAME "weatherfax_pi")
 
-# The next line allows setup of a local webserver with git for testing purposes.
+# The next line allows setup of a local web server with git for testing purposes.
 # The default shown below is done in cmake/pluginconfigure.cmake now, is needed to build locally and to build flatpak.
 #set(GIT_REPOSITORY_SERVER "github.com")
 
@@ -81,7 +81,7 @@ set(ALPHA "alpha") #Standard Repos
 # Set if yourCloudsmith Base Repository name does not match your Git Repository name.
 #set(CLOUDSMITH_BASE_REPOSITORY "weatherfax_pi")
 # set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization
-set(CLOUDSMITH_BASE_REPOSITORY "weatherfax")  #Rick's customization
+set(CLOUDSMITH_BASE_REPOSITORY "weatherfax")
 
 # Set the following to use OpenCPN cloudsmith repositories instead of own repositories
 #set(CLOUDSMITH_USER "rick-gleason")
@@ -121,7 +121,7 @@ message(STATUS "${CMLOC}Build type: ${CMAKE_BUILD_TYPE}")
 
 project(${PACKAGE})	   
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake;")
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 ##=======================================
 include("PluginSetup")
@@ -195,7 +195,6 @@ SET(SRC_WEATHERFAX
             src/wximgkap.cpp
 )
 
-# Added by Rick recently
 SET (HDRS
 			src/AboutDialog.h
 			src/DecoderOptionsDialog.h
@@ -211,7 +210,6 @@ SET (HDRS
 			src/WeatherFaxUI.h
 			src/WeatherFaxWizard.h
 			src/wximgkap.h
-#           api-16/ocpn_plugin.h
             libs/ocpn-api/ocpn_plugin.h
 )
 
@@ -342,51 +340,67 @@ SET(SRC_AUDIOFILE
 )
 
 #  not needed see cmake/PluginGL.cmake  Line 594
-SET (SRC_PLUGINGL
-			src/plugingl/linmath.h
-			src/plugingl/pi_shaders.h
-			src/plugingl/pidc.h
-			src/plugingl/qtstylesheet.h
-			src/plugingl/TexFont.h
-            src/plugingl/pi_shaders.cpp
-			src/plugingl/pidc.cpp
-			src/plugingl/qtstylesheet.cpp
-			src/plugingl/TexFont.cpp
-)
+#SET (SRC_PLUGINGL
+#			src/plugingl/linmath.h
+#			src/plugingl/pi_shaders.h
+#			src/plugingl/pidc.h
+#			src/plugingl/qtstylesheet.h
+#			src/plugingl/TexFont.h
+#           src/plugingl/pi_shaders.cpp
+#			src/plugingl/pidc.cpp
+#			src/plugingl/qtstylesheet.cpp
+#			src/plugingl/TexFont.cpp
+#)
 
 #  not needed see cmake/PluginXML.cmake  Line 593
-SET (SRC_TINYXML
-            src/tinyxml/tinyxml.cpp
-			src/tinyxml/tinyxmlerror.cpp
-			src/tinyxml/tinyxmlparser.cpp
-			src/tinyxml/tinyxml.h
-)
+#SET (SRC_TINYXML
+#            src/tinyxml/tinyxml.cpp
+#			src/tinyxml/tinyxmlerror.cpp
+#			src/tinyxml/tinyxmlparser.cpp
+#			src/tinyxml/tinyxml.h
+#)
+
+#is this needed?
+set(LIBSSRC libs/wxJSON/src/jsonreader.cpp libs/wxJSON/src/jsonval.cpp libs/wxJSON/src/jsonwriter.cpp)
+
+#is this needed?
+set(LIBHDRS
+    libs/GL/gl.h
+    libs/GL/gl_private.h
+    libs/GL/glext.h
+    libs/GL/glu.h
+    libs/wx/include/json_defs.h
+    libs/wx/include/jsonreader.h
+    libs/wx/include/jsonval.h
+    libs/wx/include/jsonwriter.h)
 
 #was commented out
  add_definitions(-DPLUGIN_USE_SVG)
 
-set(EXTINCLUDE_DIR ${EXTINCLUDE_DIR} extinclude libs/ocpn-api/)
+# set(EXTINCLUDE_DIR ${EXTINCLUDE_DIR} extinclude libs/ocpn-api/)
 
 # ------------------------------------
 #  PI_JSON SCHEMA VALIDATOR  
 # ------------------------------------
-if(APPLE)
-    option(PI_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" OFF)
-else(APPLE)
-    option(PI_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" ON)
-endif(APPLE)
+# Uses folders:  extsrc  and extinclude
+  
+#if(APPLE)
+#    option(PI_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" OFF)
+#else(APPLE)
+#    option(PI_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" ON)
+#endif(APPLE)
 
-if(PI_JSON_SCHEMA_VALIDATOR)
-    message(STATUS "${CMLOC}Using JSON Schema validation - warning this changes the 'flavour' of the executable and it may not be compatible with OpenCPN")
-    add_definitions(-DPI_JSON_SCHEMA_VALIDATOR)
-    message(STATUS "${CMLOC}Adding JSON Schema validation")
-
-    set(EXTSRC ${EXTSRC} extsrc/json-schema-validator/json-schema-draft7.json.cpp extsrc/json-schema-validator/json-uri.cpp extsrc/json-schema-validator/json-validator.cpp)
-    set(EXTINCLUDE_DIR ${EXTINCLUDE_DIR} extinclude/nlohmann extinclude)
+#if(PI_JSON_SCHEMA_VALIDATOR)
+#    message(STATUS "${CMLOC}Using JSON Schema validation - warning this changes the 'flavour' of the executable and it may not be compatible with OpenCPN")
+#    add_definitions(-DPI_JSON_SCHEMA_VALIDATOR)
+#    message(STATUS "${CMLOC}Adding JSON Schema validation")
+#
+#    set(EXTSRC ${EXTSRC} extsrc/json-schema-validator/json-schema-draft7.json.cpp extsrc/json-schema-validator/json-uri.cpp extsrc/json-schema-validator/json-validator.cpp)
+#    set(EXTINCLUDE_DIR ${EXTINCLUDE_DIR} extinclude/nlohmann extinclude)
     #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/extinclude/json-schema-validator)
-else(PI_JSON_SCHEMA_VALIDATOR)
-    message(STATUS "${CMLOC}Not using JSON Schema validation - warning invalid JSON 'may' cause unexpected crashes")
-endif(PI_JSON_SCHEMA_VALIDATOR)
+#else(PI_JSON_SCHEMA_VALIDATOR)
+#    message(STATUS "${CMLOC}Not using JSON Schema validation - warning invalid JSON 'may' cause unexpected crashes")
+#endif(PI_JSON_SCHEMA_VALIDATOR)
 
 # ------------------------------------
 #    End of JSON VALIDATOR
@@ -429,10 +443,12 @@ ENDIF(WIN32)
 ##=============================================================
 # Modify/configure 'Include' Directories below for the Plugin
 ##=============================================================
-# EG  also inside cmake/Plugiin____.cmake files					
+# EG  also inside cmake/Plugin____.cmake files					
 
+# needed?
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include)
 
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/${EXTINCLUDE_DIR})
+# include_directories(BEFORE ${PROJECT_SOURCE_DIR}/${EXTINCLUDE_DIR})
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wx/include)
@@ -445,13 +461,13 @@ INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
 ##==========================================================================
 #ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} )
 ##==========================================================================
+#target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML})
 
-target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML})
-
+target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
 
 
 TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
-message(STATUS "${CMLOC}Adding PUGINS_LIBS: ${EXTRA_LIBS}")
+message(STATUS "${CMLOC}Adding PLUGINS_LIBS: ${EXTRA_LIBS}")
 
 
 if(NOT OCPN_FLATPAK_CONFIG)
@@ -483,6 +499,7 @@ endif(NOT OCPN_FLATPAK_CONFIG)
 # ---------------------------------------------
 
 # Every plugin that uses JSON for passing messages should use a validator. The validator  allows the system to ignore non-conformant messages. 
+
 add_definitions(-DTIXML_USE_STL)
 
 if(UNIX AND NOT APPLE AND NOT QT_ANDROID)
@@ -512,7 +529,10 @@ endif(UNIX AND NOT APPLE AND NOT QT_ANDROID)
 # ---------------------------------------------
 
 ## ----- Change above to match project requirements ----- ##
-
+# Needed for android builds
+if(QT_ANDROID)
+    include_directories(BEFORE ${qt_android_include})
+endif(QT_ANDROID)
 
 #IF(UNIX AND NOT APPLE)
 #    INCLUDE("cmake/FindTinyXML.cmake")
@@ -598,14 +618,13 @@ endif(UNIX AND NOT APPLE AND NOT QT_ANDROID)
 
 
 # ----- Change above to match project requirements ----- ##
-#--------REMOVE LN 194 to LN 296 from Testplugin_pi---------------
 #------- Change below to match project requirements --------------#
 
 ##----Optional cmake files-----
 ##=======================================
 # include("PluginNMEA") #not for wxfax
 # include("PluginJSON")  #not for wxfax
-include("PluginXML")
+# include("PluginXML")  #try using lib tinyxml - works
 include("PluginGL")
 ##=======================================
 
