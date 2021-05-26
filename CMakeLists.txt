@@ -56,7 +56,7 @@ set(LONG_DESCRIPTION "Open image files directly or decode audio faxes to an imag
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "14")
-set(VERSION_TWEAK "12")
+set(VERSION_TWEAK "14")
 set(VERSION_DATE "26-05-2021")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
@@ -213,6 +213,7 @@ SET (HDRS
             libs/ocpn-api/ocpn_plugin.h
 )
 
+# Needed otherwise - error LNK2019: unresolved external symbol
 SET(SRC_AUDIOFILE
 			src/libaudiofile/af_vfs.h
 			src/libaudiofile/afinternal.h
@@ -354,25 +355,25 @@ SET(SRC_AUDIOFILE
 
 #  not needed see cmake/PluginXML.cmake  Line 593
 #SET (SRC_TINYXML
-#            src/tinyxml/tinyxml.cpp
+#           src/tinyxml/tinyxml.cpp
 #			src/tinyxml/tinyxmlerror.cpp
 #			src/tinyxml/tinyxmlparser.cpp
 #			src/tinyxml/tinyxml.h
 #)
 
 #is this needed?
-set(LIBSSRC libs/wxJSON/src/jsonreader.cpp libs/wxJSON/src/jsonval.cpp libs/wxJSON/src/jsonwriter.cpp)
+# set(LIBSSRC libs/wxJSON/src/jsonreader.cpp libs/wxJSON/src/jsonval.cpp libs/wxJSON/src/jsonwriter.cpp)
 
-#is this needed?
-set(LIBHDRS
-    libs/GL/gl.h
-    libs/GL/gl_private.h
-    libs/GL/glext.h
-    libs/GL/glu.h
-    libs/wx/include/json_defs.h
-    libs/wx/include/jsonreader.h
-    libs/wx/include/jsonval.h
-    libs/wx/include/jsonwriter.h)
+#is this needed? windows seems to still work when commented out
+#set(LIBHDRS
+#    libs/GL/gl.h
+#    libs/GL/gl_private.h
+#    libs/GL/glext.h
+#    libs/GL/glu.h
+#    libs/wx/include/json_defs.h
+#    libs/wx/include/jsonreader.h
+#    libs/wx/include/jsonval.h
+#    libs/wx/include/jsonwriter.h)
 
 #was commented out
  add_definitions(-DPLUGIN_USE_SVG)
@@ -397,7 +398,7 @@ set(LIBHDRS
 #
 #    set(EXTSRC ${EXTSRC} extsrc/json-schema-validator/json-schema-draft7.json.cpp extsrc/json-schema-validator/json-uri.cpp extsrc/json-schema-validator/json-validator.cpp)
 #    set(EXTINCLUDE_DIR ${EXTINCLUDE_DIR} extinclude/nlohmann extinclude)
-    #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/extinclude/json-schema-validator)
+#    #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/extinclude/json-schema-validator)
 #else(PI_JSON_SCHEMA_VALIDATOR)
 #    message(STATUS "${CMLOC}Not using JSON Schema validation - warning invalid JSON 'may' cause unexpected crashes")
 #endif(PI_JSON_SCHEMA_VALIDATOR)
@@ -451,24 +452,20 @@ include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include)
 # include_directories(BEFORE ${PROJECT_SOURCE_DIR}/${EXTINCLUDE_DIR})
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wx/include)
+# include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wx/include)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxJSON/include)
-
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
 
 ## Required to collect all the set( headers and SRCS  - Adjust as required
 ##==========================================================================
-#ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} )
-##==========================================================================
-#target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML})
-
 target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
-
+##==========================================================================
+#ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} )
+#target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML})
 
 TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 message(STATUS "${CMLOC}Adding PLUGINS_LIBS: ${EXTRA_LIBS}")
-
 
 if(NOT OCPN_FLATPAK_CONFIG)
     # Build environment not available when flatpak is being configured so following statements will not work
