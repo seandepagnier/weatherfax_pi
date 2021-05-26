@@ -5,7 +5,7 @@ QString qtStyleSheet = "\
 QScrollBar:horizontal {\
 border: 0px solid grey;\
 background-color: rgb(240, 240, 240);\
-height: 25px;\
+height: 35px;\
 margin: 0px 1px 0 1px;\
 }\
 QScrollBar::handle:horizontal {\
@@ -53,11 +53,11 @@ subcontrol-position: bottom;\
 subcontrol-origin: margin;\
 }\
 QCheckBox {\
-spacing: 25px;\
+spacing: 18px;\
 }\
 QCheckBox::indicator {\
-width: 30px;\
-height: 30px;\
+width: 20px;\
+height: 20px;\
 }\
 QTreeWidget QScrollBar:vertical {\
     border: 0px solid grey;\
@@ -173,23 +173,5 @@ QTreeWidget::item {\
     height: 25px;\
     font-size: 25px;\
 }\
-QListWidget {\
-    font-size: 18px;\
-}\
-QSlider::handle:horizontal {\
-    height: 25px;\
-}\
-QMenu {\
-    font-size: 14px; \
-} \
-QMenu::item { \
-    font-size: 18px; \
-} \
-QSplitter::handle:horizontal { \
-    height: 10px; \
-} \
-QSplitter::handle:vertical { \
-    height: 10px; \
-} \
 ";
 #endif

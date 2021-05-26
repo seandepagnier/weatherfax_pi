@@ -42,8 +42,17 @@
 #include <wx/glcanvas.h>
 #endif
 
-//class ViewPort;
-class GLUtesselator;
+#ifndef DECL_EXP
+#ifdef __WXMSW__
+#  define DECL_EXP     __declspec(dllexport)
+#else
+# ifdef __GNUC__
+# define DECL_EXP       __attribute__((visibility("default")))
+#else
+#  define DECL_EXP
+# endif
+#endif
+#endif
 
 void DrawGLThickLine( float x1, float y1, float x2, float y2, wxPen pen, bool b_hiqual );
 
@@ -95,7 +104,6 @@ public:
 
      void DrawEllipse(wxCoord x, wxCoord y, wxCoord width, wxCoord height);
      void DrawPolygon(int n, wxPoint points[], wxCoord xoffset = 0, wxCoord yoffset = 0, float scale =1.0, float angle = 0.0);
-     void DrawPolygonTessellated(int n, wxPoint points[], wxCoord xoffset = 0, wxCoord yoffset = 0);
      void StrokePolygon(int n, wxPoint points[], wxCoord xoffset = 0, wxCoord yoffset = 0, float scale = 1.0);
 
      void DrawBitmap(const wxBitmap &bitmap, wxCoord x, wxCoord y, bool usemask);

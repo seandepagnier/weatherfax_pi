@@ -28,7 +28,7 @@
 #include "WeatherFaxImage.h"
 #include "WeatherFax.h"
 #include "icons.h"
-#include "plugingl/pidc.h"
+#include "pidc.h"
 
 // the class factories, used to create and destroy instances of the PlugIn
 

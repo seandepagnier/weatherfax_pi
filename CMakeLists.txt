@@ -56,7 +56,7 @@ set(LONG_DESCRIPTION "Open image files directly or decode audio faxes to an imag
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "14")
-set(VERSION_TWEAK "14")
+set(VERSION_TWEAK "15")
 set(VERSION_DATE "26-05-2021")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
@@ -340,7 +340,7 @@ SET(SRC_AUDIOFILE
             src/libaudiofile/modules/SimpleModule.cpp
 )
 
-#  not needed see cmake/PluginGL.cmake  Line 594
+# Not needed, currently using cmake/PluginGL.cmake  Line 594
 #SET (SRC_PLUGINGL
 #			src/plugingl/linmath.h
 #			src/plugingl/pi_shaders.h
@@ -353,7 +353,7 @@ SET(SRC_AUDIOFILE
 #			src/plugingl/TexFont.cpp
 #)
 
-#  not needed see cmake/PluginXML.cmake  Line 593
+# Not needed, see cmake/PluginXML.cmake  Line 593, Also now using cmakelists.txt  libs/tinyxml
 #SET (SRC_TINYXML
 #           src/tinyxml/tinyxml.cpp
 #			src/tinyxml/tinyxmlerror.cpp
@@ -361,10 +361,10 @@ SET(SRC_AUDIOFILE
 #			src/tinyxml/tinyxml.h
 #)
 
-#is this needed?
+#is this needed? -Do not seem to need this for windows
 # set(LIBSSRC libs/wxJSON/src/jsonreader.cpp libs/wxJSON/src/jsonval.cpp libs/wxJSON/src/jsonwriter.cpp)
 
-#is this needed? windows seems to still work when commented out
+#is this needed? windows seems to still work when commented out, still using pluginGL.cmake
 #set(LIBHDRS
 #    libs/GL/gl.h
 #    libs/GL/gl_private.h
@@ -378,12 +378,13 @@ SET(SRC_AUDIOFILE
 #was commented out
  add_definitions(-DPLUGIN_USE_SVG)
 
+# Is this needed?  Don't need for now.
 # set(EXTINCLUDE_DIR ${EXTINCLUDE_DIR} extinclude libs/ocpn-api/)
 
 # ------------------------------------
 #  PI_JSON SCHEMA VALIDATOR  
 # ------------------------------------
-# Uses folders:  extsrc  and extinclude
+# Uses folders:  extsrc  and extinclude dirs
   
 #if(APPLE)
 #    option(PI_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" OFF)
@@ -477,7 +478,9 @@ if(NOT OCPN_FLATPAK_CONFIG)
     target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
 endif(NOT OCPN_FLATPAK_CONFIG)
 
-
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/plugingl/include)
+add_subdirectory(libs/plugingl)
+target_link_libraries(${PACKAGE_NAME} ocpn::plugingl)
 
 ##++++++++++Section above from Weatherfax located relative to where it was  ++++++++
 ##
@@ -531,62 +534,6 @@ if(QT_ANDROID)
     include_directories(BEFORE ${qt_android_include})
 endif(QT_ANDROID)
 
-#IF(UNIX AND NOT APPLE)
-#    INCLUDE("cmake/FindTinyXML.cmake")
-#    FIND_PACKAGE(TinyXML QUIET)
-#ENDIF(UNIX AND NOT APPLE)
-
-#IF(TINYXML_FOUND)
-#    message (STATUS "${CMLOC}Building with system tinyxml")
-#    INCLUDE_DIRECTORIES(${TINYXML_INCLUDE_DIR})
-##   ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
-#    ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_AUDIOFILE} ${HDRS} )
-#    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${TINYXML_LIBRARIES} )
-#ELSE(TINYXML_FOUND)
-#    message (STATUS "${CMLOC}Building with embedded tinyxml")
-#    SET(SRC_LTINYXML
-#    src/tinyxml.h
-#    src/tinystr.h
-#      )
-#   ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
-#ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${SRC_PLUGINGL} ${SRC_TINYXML} ${SRC_AUDIOFILE} ${HDRS} )
-#ENDIF(TINYXML_FOUND)
-
-# ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC})
-#Add_Library (${PACKAGE_NAME} is used below. Cannot use same name.
-
-#IF(NOT UNIX)
-#    SET(SRC_BZIP	
-#            src/bzip2/bzlib.c
-#            src/bzip2/blocksort.c
-#            src/bzip2/compress.c
-#            src/bzip2/crctable.c
-#            src/bzip2/decompress.c
-#            src/bzip2/huffman.c
-#            src/bzip2/randtable.c
-#			src/bzip2/bzlib_private.h
-#    )
-#    ADD_LIBRARY(LIB_BZIP_WR STATIC ${SRC_BZIP})
-#    TARGET_LINK_LIBRARIES( ${PACKAGE_NAME} LIB_BZIP_WR )
-#    INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/bzip2)
-#ENDIF(NOT UNIX)
-
-#IF(NOT UNIX)
-#    INCLUDE_DIRECTORIES(src/zlib-1.2.3)
-#    INCLUDE_DIRECTORIES(src/bzip2)
-#ENDIF(NOT UNIX)
-
-#IF(WIN32)
-#  IF(MSVC)
-#    INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR}/buildwin/include)
-#    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} "${CMAKE_SOURCE_DIR}/buildwin/zlib1.lib")
-#  ELSE()
-#    # MINGW
-##    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} "-lwxzlib-2.8")
-#    TARGET_LINK_LIBRARIES(${PACKAGE_NAME} "-lz")
-#  ENDIF()
-#ENDIF()
-
 ##================================================================================
 #JSON Validator: Every plugin that uses JSON for passing messages should use a validator.  A JSON validator is much like an XML validator, the validator allows the system to ignore non-conformant messages.  The JSON validator changes the OSABI flavor of the Linux executable so there is code to change it back.
 
@@ -621,8 +568,8 @@ endif(QT_ANDROID)
 ##=======================================
 # include("PluginNMEA") #not for wxfax
 # include("PluginJSON")  #not for wxfax
-# include("PluginXML")  #try using lib tinyxml - works
-include("PluginGL")
+# include("PluginXML")  #try using cmakelists.txt lib tinyxml - works
+# include("PluginGL")  #try using cmakelists.xt lib plugingl
 ##=======================================
 
 
