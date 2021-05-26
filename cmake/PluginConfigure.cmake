@@ -360,7 +360,7 @@ if(QT_ANDROID AND USE_GL MATCHES "ON")
     set(OPENGL_FOUND "YES")
 
     set(wxWidgets_USE_LIBS ${wxWidgets_USE_LIBS} gl)
-    add_subdirectory(src/glshim)
+    add_subdirectory(libs/glshim)
 endif(QT_ANDROID AND USE_GL MATCHES "ON")
 
 if((NOT OPENGLES_FOUND) AND (NOT QT_ANDROID))
