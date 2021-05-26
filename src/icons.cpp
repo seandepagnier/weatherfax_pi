@@ -8,7 +8,7 @@
 
 wxBitmap *_img_weatherfax;
 
-#ifdef OCPN_USE_SVG
+#ifdef PLUGIN_USE_SVG
 #include "ocpn_plugin.h"
 wxString _svg_weatherfax;
 wxString _svg_weatherfax_rollover;
@@ -22,7 +22,7 @@ void initialize_images(void)
 		_img_weatherfax = new wxBitmap(wxImage(sm));
 	}
 
-#ifdef OCPN_USE_SVG
+#ifdef PLUGIN_USE_SVG
     wxFileName fn;
     fn.SetPath(GetPluginDataDir("weatherfax_pi"));
     fn.AppendDir(_T("data"));

@@ -64,7 +64,7 @@ weatherfax_pi::weatherfax_pi(void *ppimgr)
 int weatherfax_pi::Init(void)
 {
     AddLocaleCatalog( _T("opencpn-weatherfax_pi") );
-#ifdef OCPN_USE_SVG
+#ifdef PLUGIN_USE_SVG
     m_leftclick_tool_id = InsertPlugInToolSVG(_T( "WeatherFax" ), _svg_weatherfax, _svg_weatherfax_rollover, _svg_weatherfax_toggled,
                                                 wxITEM_CHECK, _("WeatherFax"), _T( "" ), NULL, WEATHERFAX_TOOL_POSITION, 0, this);
 #else

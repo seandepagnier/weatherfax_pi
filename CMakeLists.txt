@@ -56,7 +56,7 @@ set(LONG_DESCRIPTION "Open image files directly or decode audio faxes to an imag
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "14")
-set(VERSION_TWEAK "15")
+set(VERSION_TWEAK "16")
 set(VERSION_DATE "26-05-2021")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
@@ -179,6 +179,13 @@ include("PluginConfigure")
 ## ----- Change below to match project requirements for source, headers, etc. ----- ##
 
 add_definitions(-DUSE_S57)
+
+IF(PLUGIN_USE_SVG)
+    MESSAGE(STATUS "${CMLOC}SVG support enabled...")
+    IF(NOT QT_ANDROID)
+        ADD_DEFINITIONS(-DPLUGIN_USE_SVG)
+    ENDIF(NOT QT_ANDROID)
+ENDIF(PLUGIN_USE_SVG)
 
 SET(SRC_WEATHERFAX
             src/weatherfax_pi.cpp
@@ -376,6 +383,7 @@ SET(SRC_AUDIOFILE
 #    libs/wx/include/jsonwriter.h)
 
 #was commented out
+
  add_definitions(-DPLUGIN_USE_SVG)
 
 # Is this needed?  Don't need for now.
