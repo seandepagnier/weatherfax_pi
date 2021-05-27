@@ -723,6 +723,17 @@
 		  <Area Name="12a" lat1="20N" lat2="60N" lon1="90W" lon2="0W" />
        </Region>
   </Server>
+  <Server Name="NAVY" Url="https://www.ncei.noaa.gov/jag/navy/data/satellite_analysis/">
+      <Region Name="Gulf Stream">
+        <!-- Gulf Stream charts -->
+        <Map Url="gsncofa.gif" Contents="North Altantic" Area="GS1" />
+        <Map Url="gsscofa.gif" Contents="Mid Atlantic and GOM" Area="GS2" />
+        <Map Url="gsneofa.gif" Contents="NE Atlantic" Area="GS3" />
+        <Area Name="GS1" lat1="28N" lat2="52N" lon1="85W" lon2="45W" />
+        <Area Name="GS2" lat1="18N" lat2="65N" lon1="45W" lon2="10E" />
+        <Area Name="GS3" lat1="25.2N" lat2="60.0N" lon1="82.0W" lon2="63.7W" />
+      </Region>
+  </Server>
   <Server Name="Aviation Weather" Url="https://aviationweather.gov/data/obs/sat/intl/">
     <Region Name="Sat Images Infrared">
       <Map Url="sat_irbw_a.jpg" Contents="Americas" Area="A" />
@@ -2404,5 +2415,4 @@
       <Area Name="3" lat1="20S" lat2="40N" lon1="80E" lon2="150E" />
     </Region>
   </Server>
-
   </OCPNWeatherFaxInternetRetrieval>
