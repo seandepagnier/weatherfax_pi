@@ -22,16 +22,20 @@ void initialize_images(void)
 		_img_weatherfax = new wxBitmap(wxImage(sm));
 	}
 
+ 
 #ifdef PLUGIN_USE_SVG
     wxFileName fn;
     fn.SetPath(GetPluginDataDir("weatherfax_pi"));
     fn.AppendDir(_T("data"));
     fn.SetFullName(_T("weatherfax_pi.svg"));
     _svg_weatherfax = fn.GetFullPath();
+    wxLogMessage(_T("Loading toolbar icon: ") + _svg_weatherfax); 	
     fn.SetFullName(_T("weatherfax_pi_rollover.svg"));
     _svg_weatherfax_rollover = fn.GetFullPath();
+    wxLogMessage(_T("Loading toolbar icon: ") + _svg_weatherfax_rollover); 
     fn.SetFullName(_T("weatherfax_pi_toggled.svg"));
     _svg_weatherfax_toggled = fn.GetFullPath();
+    wxLogMessage(_T("Loading toolbar icon: ") + _svg_weatherfax_toggled); 
 #endif
 
 	return;
