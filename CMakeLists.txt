@@ -56,7 +56,7 @@ set(LONG_DESCRIPTION "Open image files directly or decode audio faxes to an imag
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "14")
-set(VERSION_TWEAK "17")
+set(VERSION_TWEAK "18")
 set(VERSION_DATE "27-05-2021")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
@@ -382,41 +382,7 @@ SET(SRC_AUDIOFILE
 #    libs/wx/include/jsonval.h
 #    libs/wx/include/jsonwriter.h)
 
-#was commented out
-
- add_definitions(-DPLUGIN_USE_SVG)
-
-# Is this needed?  Don't need for now.
-# set(EXTINCLUDE_DIR ${EXTINCLUDE_DIR} extinclude libs/ocpn-api/)
-
-# ------------------------------------
-#  PI_JSON SCHEMA VALIDATOR  
-# ------------------------------------
-# Uses folders:  extsrc  and extinclude dirs
-  
-#if(APPLE)
-#    option(PI_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" OFF)
-#else(APPLE)
-#    option(PI_JSON_SCHEMA_VALIDATOR "Use JSON Schema validator" ON)
-#endif(APPLE)
-
-#if(PI_JSON_SCHEMA_VALIDATOR)
-#    message(STATUS "${CMLOC}Using JSON Schema validation - warning this changes the 'flavour' of the executable and it may not be compatible with OpenCPN")
-#    add_definitions(-DPI_JSON_SCHEMA_VALIDATOR)
-#    message(STATUS "${CMLOC}Adding JSON Schema validation")
-#
-#    set(EXTSRC ${EXTSRC} extsrc/json-schema-validator/json-schema-draft7.json.cpp extsrc/json-schema-validator/json-uri.cpp extsrc/json-schema-validator/json-validator.cpp)
-#    set(EXTINCLUDE_DIR ${EXTINCLUDE_DIR} extinclude/nlohmann extinclude)
-#    #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/extinclude/json-schema-validator)
-#else(PI_JSON_SCHEMA_VALIDATOR)
-#    message(STATUS "${CMLOC}Not using JSON Schema validation - warning invalid JSON 'may' cause unexpected crashes")
-#endif(PI_JSON_SCHEMA_VALIDATOR)
-
-# ------------------------------------
-#    End of JSON VALIDATOR
-# ------------------------------------
-
-
+add_definitions(-DPLUGIN_USE_SVG)
 
 ## +++++++++Section above is added recently to Weatherfax set ++++++++++##
 ##++++++++++++RTLSDR Section directly from Weatherfax +++++++++##
@@ -439,7 +405,6 @@ IF(UNIX)
     MESSAGE (STATUS "")
   ENDIF()
 ENDIF(UNIX)
-
       
 IF(WIN32)
     IF(STANDALONE MATCHES "BUNDLED")
@@ -479,10 +444,7 @@ message(STATUS "${CMLOC}Adding PLUGINS_LIBS: ${EXTRA_LIBS}")
 if(NOT OCPN_FLATPAK_CONFIG)
     # Build environment not available when flatpak is being configured so following statements will not work
     message(STATUS "${CMLOC}Adding target link libraries to ${PACKAGE_NAME}")
-
     add_subdirectory(libs/tinyxml)
-																 
-
     target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
 endif(NOT OCPN_FLATPAK_CONFIG)
 
@@ -495,12 +457,6 @@ target_link_libraries(${PACKAGE_NAME} ocpn::plugingl)
 ## ----- Change below to match project requirements ----- ##
 ##
 
-#if(WIN32)
-#    if(MSVC)
-#        target_link_libraries(${PACKAGE_NAME} ${PORTAUDIO_LIBS})
-#    endif(MSVC)
-#endif(WIN32)
-# ADD_DEFINITIONS(-DTIXML_USE_STL)
 
 # ---------------------------------------------
 #  PI_JSON SCHEMA VALIDATOR  From Testplugin 
@@ -541,33 +497,6 @@ endif(UNIX AND NOT APPLE AND NOT QT_ANDROID)
 if(QT_ANDROID)
     include_directories(BEFORE ${qt_android_include})
 endif(QT_ANDROID)
-
-##================================================================================
-#JSON Validator: Every plugin that uses JSON for passing messages should use a validator.  A JSON validator is much like an XML validator, the validator allows the system to ignore non-conformant messages.  The JSON validator changes the OSABI flavor of the Linux executable so there is code to change it back.
-
-# IF(UNIX AND NOT APPLE)
-#  IF(TP_JSON_SCHEMA_VALIDATOR)
-#    # Change OS/ABI to be UNIX - System V to make it run with OCPN
-#    SET(lib_name lib${PACKAGE_NAME}.so)
-#    MESSAGE(STATUS "${CMLOC}lib-name: ${lib_name}")
-#    FIND_FILE(elfedit elfedit)
-#    IF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-#      MESSAGE(STATUS "${CMLOC}Will ensure OS/ABI is set to 0 to match OCPN")
-#      ADD_CUSTOM_COMMAND(
-#        TARGET ${PACKAGE_NAME}
-#        POST_BUILD
-#        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-#        DEPENDS ${PACKAGE_NAME}
-#        COMMENT " Running post build action on ${lib_name}."
-#        COMMAND sh -c 'elfedit --input-osabi=Linux --output-osabi=none ${lib_name} || (echo 0) '
-#      )
-#    ELSE(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-#      MESSAGE(STATUS "${CMLOC}Cannot correct OS/ABI to match OCPN if it is generated incorrectly. Package binutils needed")
-#    ENDIF(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-#  ENDIF(TP_JSON_SCHEMA_VALIDATOR)
-# ENDIF(UNIX AND NOT APPLE)
-##================================================================================
-
 
 # ----- Change above to match project requirements ----- ##
 #------- Change below to match project requirements --------------#
