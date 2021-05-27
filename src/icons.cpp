@@ -4,6 +4,7 @@
 #	include <wx/wx.h>
 #endif
 #include <wx/mstream.h>
+#include <wx/filename.h>		
 #include "icons.h"
 
 wxBitmap *_img_weatherfax;
@@ -24,15 +25,25 @@ void initialize_images(void)
 
  
 #ifdef PLUGIN_USE_SVG
+//    wxFileName fn;
+//	   wxString tmp_path;
+//	   tmp_path = GetPluginDataDir("watchdog_pi");
+//	   fn.SetPath(tmp_path);
+//	   fn.AppendDir(_T("data"));
+//	   fn.SetFullName(_T("watchdog_pi.svg"));
+//       _svg_watchdog = fn.GetFullPath();
+//      fn.SetFullName(_T("watchdog_pi_toggled.svg"));
+//    _svg_watchdog_toggled = fn.GetFullPath();
+
     wxFileName fn;
     fn.SetPath(GetPluginDataDir("weatherfax_pi"));
     fn.AppendDir(_T("data"));
     fn.SetFullName(_T("weatherfax_pi.svg"));
     _svg_weatherfax = fn.GetFullPath();
-    wxLogMessage(_T("Loading toolbar icon: ") + _svg_weatherfax); 	
-    fn.SetFullName(_T("weatherfax_pi_rollover.svg"));
-    _svg_weatherfax_rollover = fn.GetFullPath();
-    wxLogMessage(_T("Loading toolbar icon: ") + _svg_weatherfax_rollover); 
+    wxLogMessage(_T("Loading toolbar icon: ") + _svg_weatherfax);
+//    fn.SetFullName(_T("weatherfax_pi_rollover.svg"));
+//    _svg_weatherfax_rollover = fn.GetFullPath();
+//    wxLogMessage(_T("Loading toolbar icon: ") + _svg_weatherfax_rollover); 
     fn.SetFullName(_T("weatherfax_pi_toggled.svg"));
     _svg_weatherfax_toggled = fn.GetFullPath();
     wxLogMessage(_T("Loading toolbar icon: ") + _svg_weatherfax_toggled); 
