@@ -39,8 +39,8 @@
 #include <GL/gl.h>
 #endif
 
-#include "plugingl/pi_shaders.h"
-#include "plugingl/pidc.h"
+#include "pi_shaders.h"
+#include "pidc.h"
 
 WX_DEFINE_LIST(WeatherFaxImageCoordinateList);
 
