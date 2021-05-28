@@ -340,7 +340,7 @@
       <Area Name="1" lat1="42N" lat2="43.4N" lon1="7.6E" lon2="9.8E" />
    </Region>
  </Server>
-  <Server Name="NOAA" Url="http://tgftp.nws.noaa.gov/fax/">
+  <Server Name="NOAA" Url="https://tgftp.nws.noaa.gov/fax/">
     <Region Name="Boston">
       <!-- wind/wave charts -->
 	  <Map Url="PJAA99.TIF" Contents="SEA STATE ANALYSIS 12Z" Area="4" />
@@ -602,7 +602,7 @@
       <Area Name="6" lat1="18N" lat2="52N" lon1="157W"  long2="" />
     </Region>
   </Server>
-  <Server Name="NOAA OPC" Url="http://www.ocean.weather.gov/">
+  <Server Name="NOAA OPC" Url="https://ocean.weather.gov/">
     <Region Name="Atlantic">
       <Map Url="A_sfc_full_ocean.jpg" Contents="Atlantic Ocean Analysis" Area="1" />
       <Map Url="A_sfc_full_ocean_color.png" Contents="Atlantic Ocean Analysis (color)" Area="1a" />
