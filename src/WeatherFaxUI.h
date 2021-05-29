@@ -270,7 +270,6 @@ class WeatherFaxWizardBase : public wxDialog
 		wxStaticText* m_staticText101;
 		wxSlider* m_sSkew;
 		wxPanel* m_panel10;
-		wxScrolledWindow* m_scrolledWindow5;
 		wxFlexGridSizer* m_fgSizerUnMappedCoords;
 		wxComboBox* m_cbCoordSet;
 		wxButton* m_bRemoveCoordSet;
