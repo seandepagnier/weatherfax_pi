@@ -28,7 +28,7 @@
 #include "WeatherFaxImage.h"
 #include "WeatherFax.h"
 #include "icons.h"
-#include "plugingl/pidc.h"
+#include "pidc.h"
 
 // the class factories, used to create and destroy instances of the PlugIn
 
@@ -49,7 +49,7 @@ extern "C" DECL_EXP void destroy_pi(opencpn_plugin* p)
 //---------------------------------------------------------------------------------------------------------
 
 weatherfax_pi::weatherfax_pi(void *ppimgr)
-    : opencpn_plugin_113(ppimgr)
+    : opencpn_plugin_116(ppimgr)
 {
     // Create the PlugIn icons
     initialize_images();
@@ -63,16 +63,25 @@ weatherfax_pi::weatherfax_pi(void *ppimgr)
 
 int weatherfax_pi::Init(void)
 {
-    AddLocaleCatalog( _T("opencpn-weatherfax_pi") );
-#ifdef OCPN_USE_SVG
-    m_leftclick_tool_id = InsertPlugInToolSVG(_T( "WeatherFax" ), _svg_weatherfax, _svg_weatherfax_rollover, _svg_weatherfax_toggled,
-                                                wxITEM_CHECK, _("WeatherFax"), _T( "" ), NULL, WEATHERFAX_TOOL_POSITION, 0, this);
+//    AddLocaleCatalog( _T("opencpn-weatherfax_pi") );
+    AddLocaleCatalog( PLUGIN_CATALOG_NAME );
+
+#ifdef PLUGIN_USE_SVG
+
+    m_leftclick_tool_id = InsertPlugInToolSVG(_T( "WeatherFax" ), _svg_weatherfax, _svg_weatherfax_toggled, _svg_weatherfax_toggled,
+                                                wxITEM_CHECK, _( "WeatherFax" ), _T( "" ), NULL, WEATHERFAX_TOOL_POSITION, 0, this);
 #else
-    m_leftclick_tool_id  = InsertPlugInTool(_T("WeatherFax"), _img_weatherfax,
-                                            _img_weatherfax, wxITEM_NORMAL,
-                                            _("WeatherFax"), _T(""), NULL,
-                                            WEATHERFAX_TOOL_POSITION, 0, this);
+
+    m_leftclick_tool_id  = InsertPlugInTool ("", _img_weatherfax, _img_weatherfax, wxITEM_NORMAL,
+         _("Weatherfax"), _T(""), NULL, WATCHDOG_TOOL_POSITION, 0, this);
+
+//    m_leftclick_tool_id  = InsertPlugInTool(_T("WeatherFax"), _img_weatherfax,
+//                                            _img_weatherfax, wxITEM_NORMAL,
+//                                            _("WeatherFax"), _T(""), NULL,
+//                                            WEATHERFAX_TOOL_POSITION, 0, this);
+
 #endif
+
     m_pWeatherFax = NULL;
 
     return (WANTS_OVERLAY_CALLBACK |
@@ -103,12 +112,12 @@ bool weatherfax_pi::DeInit(void)
 
 int weatherfax_pi::GetAPIVersionMajor()
 {
-    return MY_API_VERSION_MAJOR;
+  return OCPN_API_VERSION_MAJOR;
 }
 
 int weatherfax_pi::GetAPIVersionMinor()
 {
-    return MY_API_VERSION_MINOR;
+	return OCPN_API_VERSION_MINOR;
 }
 
 int weatherfax_pi::GetPlugInVersionMajor()
@@ -128,24 +137,19 @@ wxBitmap *weatherfax_pi::GetPlugInBitmap()
 
 wxString weatherfax_pi::GetCommonName()
 {
-    return _("WeatherFax");
+	return _T(PLUGIN_COMMON_NAME);
 }
 
 wxString weatherfax_pi::GetShortDescription()
 {
-    return _("Weather Fax PlugIn for OpenCPN");
+    return _(PLUGIN_SHORT_DESCRIPTION);
+
 }
 
 wxString weatherfax_pi::GetLongDescription()
 {
-    return _("Weather Fax PlugIn for OpenCPN\n\
-Can open image files directly, or decode audio faxes to an image.\n\
-With simple calibration, resulting image is overlaid on top of charts.\n\
-Converts images in mercator, polar, conic and uniform coordinates.\n\
-Can convert any image into a raster chart.\n\
-Builtin database for HF radio fax stations via SSB.\n\
-Builtin database for internet retrieval from meterological sites.\n\
-");
+   return _(PLUGIN_LONG_DESCRIPTION);
+
 }
 
 int weatherfax_pi::GetToolbarToolCount(void)
@@ -219,7 +223,7 @@ bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
 {
     piDC pidc;
     pidc.SetVP(vp);
-    
+
     if(!m_pWeatherFax || !m_pWeatherFax->IsShown())
         return true;
 
@@ -297,7 +301,7 @@ bool weatherfax_pi::LoadConfig(void)
     pConf->Read ( _T ( "Colors" ), &m_iExportColors, 64 );
     pConf->Read ( _T ( "DepthMeters" ), &m_bExportDepthMeters, true );
     pConf->Read ( _T ( "SoundingDatum" ), &m_sExportSoundingDatum, _T("LOWEST LOW WATER"));
-    
+
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Updates" ) );
     pConf->Read( _T("UpdateDataBaseUrl"), &m_UpdateDataBaseUrl, _T("https://raw.githubusercontent.com/seandepagnier/weatherfax_pi/master/data/") );
 
@@ -320,7 +324,7 @@ bool weatherfax_pi::SaveConfig(void)
         pConf->Write ( _T ( "DialogPosX" ),   p.x );
         pConf->Write ( _T ( "DialogPosY" ),   p.y );
     }
-        
+
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Schedules" ) );
     pConf->Write ( _T ( "LoadAtStart" ), m_bLoadSchedulesStart );
 
@@ -335,7 +339,7 @@ bool weatherfax_pi::SaveConfig(void)
     pConf->Write ( _T ( "deviceindex" ), m_CaptureSettings.rtlsdr_deviceindex);
     pConf->Write ( _T ( "errorppm" ), m_CaptureSettings.rtlsdr_errorppm);
     pConf->Write ( _T ( "upconverter_mhz" ), m_CaptureSettings.rtlsdr_upconverter_mhz);
-    
+
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Export" ) );
     pConf->Write ( _T ( "Colors" ), m_iExportColors );
     pConf->Write ( _T ( "DepthMeters" ), m_bExportDepthMeters );
@@ -355,7 +359,7 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
         new WeatherFaxPrefsDialog( parent, wxID_ANY, _("WeatherFax Preferences"),
                                    wxPoint( m_weatherfax_dialog_x, m_weatherfax_dialog_y),
                                    wxDefaultSize, wxDEFAULT_DIALOG_STYLE );
-    
+
     dialog->m_cbLoadSchedulesStart->SetValue(m_bLoadSchedulesStart);
 
     dialog->m_sDeviceIndex->SetRange(0, FaxDecoder::AudioDeviceCount() - 1);
@@ -373,12 +377,9 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
     dialog->m_sExportColors->SetValue(m_iExportColors);
     dialog->m_rbExportDepthMeters->SetValue(m_bExportDepthMeters);
     dialog->m_tExportSoundingDatum->SetValue(m_sExportSoundingDatum);
-    
+
     dialog->Fit();
-    wxColour cl;
-    GetGlobalColor(_T("DILG1"), &cl);
-    dialog->SetBackgroundColour(cl);
-    
+
     if(dialog->ShowModal() == wxID_OK)
     {
         m_bLoadSchedulesStart = dialog->m_cbLoadSchedulesStart->GetValue();
@@ -392,7 +393,7 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
         m_CaptureSettings.rtlsdr_deviceindex = dialog->m_srtlsdr_deviceindex->GetValue();
         m_CaptureSettings.rtlsdr_errorppm = dialog->m_srtlsdr_errorppm->GetValue();
         m_CaptureSettings.rtlsdr_upconverter_mhz = dialog->m_srtlsdr_upconverter_mhz->GetValue();
-        
+
         m_CaptureSettings.audio_deviceindex = dialog->m_sDeviceIndex->GetValue();
         m_CaptureSettings.audio_samplerate = wxAtol( dialog->m_cSampleRate->GetString(dialog->m_cSampleRate->GetSelection()) );
 

@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Mar 28 2019)
+// C++ code generated with wxFormBuilder (version Oct 26 2018)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO *NOT* EDIT THIS FILE!
@@ -232,12 +232,12 @@ class InternetRetrievalDialogBase : public wxDialog
 
 	public:
 
-		InternetRetrievalDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Internet Retrieval"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
+		InternetRetrievalDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Internet Retrieval"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 890,669 ), long style = wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
 		~InternetRetrievalDialogBase();
 
 		void m_splitter1OnIdle( wxIdleEvent& )
 		{
-			m_splitter1->SetSashPosition( 160 );
+			m_splitter1->SetSashPosition( 311 );
 			m_splitter1->Disconnect( wxEVT_IDLE, wxIdleEventHandler( InternetRetrievalDialogBase::m_splitter1OnIdle ), NULL, this );
 		}
 
@@ -261,12 +261,12 @@ class WeatherFaxWizardBase : public wxDialog
 		wxSpinCtrl* m_sHFFrequency;
 		wxStaticText* m_stDecoderState;
 		wxCheckBox* m_cbFilter;
-		wxSpinCtrl* m_sFilter;
-		wxStaticText* m_staticText9;
-		wxSlider* m_sPhasing;
 		wxCheckBox* m_cbPhaseCorrectLinebyLine;
+		wxSpinCtrl* m_sFilter;
 		wxStaticText* m_staticText17;
 		wxChoice* m_cRotation;
+		wxStaticText* m_staticText9;
+		wxSlider* m_sPhasing;
 		wxStaticText* m_staticText101;
 		wxSlider* m_sSkew;
 		wxPanel* m_panel10;
@@ -307,14 +307,14 @@ class WeatherFaxWizardBase : public wxDialog
 		wxTextCtrl* m_tTrueRatio;
 		wxStaticText* m_stMappingLabel1;
 		wxSpinCtrl* m_sMappingPoleX;
-		wxStaticText* m_stMappingLabel2;
-		wxSpinCtrl* m_sMappingPoleY;
-		wxStaticText* m_stMapping;
-		wxSpinCtrl* m_sMappingEquatorY;
 		wxButton* m_bGetMapping;
 		wxButton* m_bGetEquator;
+		wxStaticText* m_stMappingLabel2;
+		wxSpinCtrl* m_sMappingPoleY;
 		wxButton* m_bGetAspectRatio;
 		wxButton* m_bInformation;
+		wxStaticText* m_stMapping;
+		wxSpinCtrl* m_sMappingEquatorY;
 		wxPanel* m_panel11;
 		wxRadioButton* m_rbCoord1;
 		wxStaticText* m_staticText61;
@@ -342,8 +342,8 @@ class WeatherFaxWizardBase : public wxDialog
 		virtual void OnPaintPhasing( wxPaintEvent& event ) { event.Skip(); }
 		virtual void UpdatePage1( wxCommandEvent& event ) { event.Skip(); }
 		virtual void UpdatePage1Spin( wxSpinEvent& event ) { event.Skip(); }
-		virtual void UpdatePage1Scroll( wxScrollEvent& event ) { event.Skip(); }
 		virtual void UpdatePage1Rotation( wxCommandEvent& event ) { event.Skip(); }
+		virtual void UpdatePage1Scroll( wxScrollEvent& event ) { event.Skip(); }
 		virtual void OnCoordSet( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnCoordText( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnRemoveCoords( wxCommandEvent& event ) { event.Skip(); }

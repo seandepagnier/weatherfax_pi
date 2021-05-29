@@ -30,12 +30,9 @@
 #include <wx/wx.h>
 #include <wx/stdpaths.h>
 #include <wx/fileconf.h>
-#include "plugingl/qtstylesheet.h"
+#include "qtstylesheet.h"
 
 #include "version.h"
-
-#define     MY_API_VERSION_MAJOR    1
-#define     MY_API_VERSION_MINOR    13
 
 #define ABOUT_AUTHOR_URL "http://seandepagnier.users.sourceforge.net"
 
@@ -53,7 +50,7 @@
 class WeatherFaxImage;
 class WeatherFax;
 
-class weatherfax_pi : public opencpn_plugin_113
+class weatherfax_pi : public opencpn_plugin_116
 {
 public:
       weatherfax_pi(void *ppimgr);

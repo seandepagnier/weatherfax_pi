@@ -33,7 +33,7 @@
 
 #include <list>
 
-#include "tinyxml/tinyxml.h"
+#include "tinyxml.h"
 
 #include "weatherfax_pi.h"
 #include "WeatherFaxImage.h"
@@ -151,9 +151,7 @@ void InternetRetrievalDialog::Load(bool force)
     if( wxFileExists( m_weatherfax_pi.StandardPath() + _T("WeatherFaxInternetRetrieval.xml") ) )
         OpenXML( m_weatherfax_pi.StandardPath() + _T("WeatherFaxInternetRetrieval.xml") );
     else
-        OpenXML(*GetpSharedDataLocation() + _T("plugins")
-            + s + _T("weatherfax_pi") + s + _T("data") + s
-            + _T("WeatherFaxInternetRetrieval.xml"));
+        OpenXML(GetPluginDataDir("weatherfax_pi") + s + _T("data") + s + _T("WeatherFaxInternetRetrieval.xml"));
 
     for(unsigned int i=0; i < m_lServers->GetCount(); i++)
         for(std::list<wxString>::iterator it = serverlist.begin();
@@ -271,29 +269,36 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                                 wxString s_start = wxString::FromUTF8(g->Attribute("From"));
                                 wxString s_to = wxString::FromUTF8(g->Attribute("To"));
                                 wxString s_by = wxString::FromUTF8(g->Attribute("By"));
+                                wxString s_offset = wxString::FromUTF8(g->Attribute("Offset"));
+                                wxString s_step = wxString::FromUTF8(g->Attribute("Step"));
 
                                 if(s_start.size() == 0 || s_to.size() == 0 || s_by.size() == 0)
                                     FAIL(_("Invalid iterator: ") + wxString::FromUTF8(g->Value()));
-                                
+
                                 long start, to, by;
+                                long offset = 0;
+                                long step = 1;
+
                                 s_start.ToLong(&start);
                                 s_to.ToLong(&to);
                                 s_by.ToLong(&by);
+                                s_offset.ToLong(&offset);
+                                s_step.ToLong(&step);
 
                                 for(TiXmlElement* h = g->FirstChildElement(); h; h = h->NextSiblingElement()) {
                                     if(!strcmp(h->Value(), "Map")) {
                                         FaxUrl url;
-                                    
+
                                         url.Scheduled = false;
                                         url.Server = server.Name;
                                         url.Region = region.Name;
-                         
+
                                         for(int index = start; index <= to; index += by) {
                                             wxString iurl = wxString::FromUTF8(h->Attribute("Url"));
                                             url.Url = region_url + wxString::Format
                                                 (iurl, index);
                                             url.Contents = wxString::Format
-                                                (wxString::FromUTF8(h->Attribute("Contents")), index);
+                                                (wxString::FromUTF8(h->Attribute("Contents")), index*step+offset);
                                             url.area_name = wxString::FromUTF8(h->Attribute("Area"));
 
                                             url.hour_offset = url.hour_round = url.hour_round_offset = 0;
@@ -307,15 +312,15 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                                 }
                             } else if(!strcmp(g->Value(), "Map")) {
                                 FaxUrl url;
-                                    
+
                                 url.Scheduled = false;
                                 url.Server = server.Name;
                                 url.Region = region.Name;
-                         
+
                                 url.Url = region_url + wxString::FromUTF8(g->Attribute("Url"));
                                 url.Contents = wxString::FromUTF8(g->Attribute("Contents"));
                                 url.area_name = wxString::FromUTF8(g->Attribute("Area"));
-                                
+
                                 url.hour_offset = url.hour_round = url.hour_round_offset = 0;
                                 const char*hour = g->Attribute( "Hour" );
                                 if(hour)
@@ -325,7 +330,7 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                                 FaxArea Area;
                                 Area.name = wxString::FromUTF8(g->Attribute("Name"));
                                 Area.description = wxString::FromUTF8(g->Attribute("Description"));
-                        
+
                                 Area.lat1 = ParseLatLon(wxString::FromUTF8(g->Attribute("lat1")));
                                 Area.lat2 = ParseLatLon(wxString::FromUTF8(g->Attribute("lat2")));
                                 Area.lon1 = ParseLatLon(wxString::FromUTF8(g->Attribute("lon1")));
@@ -376,7 +381,7 @@ void InternetRetrievalDialog::OnUrlsLeftDown( wxMouseEvent& event )
     wxPoint pos = event.GetPosition();
     int flags = 0;
     long index = m_lUrls->HitTest(pos, flags);
-    
+
     if (index > -1 && event.GetX() < m_lUrls->GetColumnWidth(0))
     {
         // Process the clicked item
@@ -408,7 +413,7 @@ static int sortcol, sortorder = 1;
 int wxCALLBACK SortUrl(wxIntPtr item1, wxIntPtr item2, wxIntPtr list)
 #else
 int wxCALLBACK SortUrl(long item1, long item2, long list)
-#endif            
+#endif
 {
     wxListCtrl *lc = (wxListCtrl*)list;
 
@@ -416,13 +421,13 @@ int wxCALLBACK SortUrl(long item1, long item2, long list)
 
     it1.SetId(lc->FindItem(-1, item1));
     it1.SetColumn(sortcol);
-    
+
     it2.SetId(lc->FindItem(-1, item2));
     it2.SetColumn(sortcol);
-    
+
     lc->GetItem(it1);
     lc->GetItem(it2);
-    
+
     if(0) { /* numeric */
         double a, b;
         it1.GetText().ToDouble(&a);
@@ -561,7 +566,7 @@ public:
     bool please_quit;
     wxString url, filename;
     int position, size;
-    
+
     int exitcode;
 };
 #endif
@@ -593,12 +598,12 @@ void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
             int nhour = wxRound(((double)hour+faxurl->hour_offset-faxurl->hour_round_offset)/faxurl->hour_round)*faxurl->hour_round+faxurl->hour_round_offset;
             now+=wxTimeSpan::Hours(nhour - hour);
         }
-            
+
         wxString formats[] = {"%Y", "%y", "%m", "%d", "%H"};
         for(unsigned int i=0; i<(sizeof formats) / (sizeof *formats); i++)
             url.Replace(formats[i], now.Format(formats[i], wxDateTime::UTC));
 
-        
+
         wxString path = weatherfax_pi::StandardPath();
 
         wxString filename = url;
@@ -658,7 +663,7 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
 
 
     }
-    
+
     /* inform user if no faxes were selected */
     if(count == 0) {
         wxMessageDialog mdlg(this, _("No Faxes selected.") + wxString(_T("\n")) +
@@ -734,7 +739,7 @@ void InternetRetrievalDialog::Filter()
                 if(it2->Name == (*it)->Region && it2->Server == (*it)->Server)
                     it2->Filtered = false;
         }
-            
+
         (*it)->Filtered = !(boat_in_area && servers.Index((*it)->Server) != wxNOT_FOUND && regions.Index((*it)->Region) != wxNOT_FOUND);
     }
 
@@ -797,7 +802,7 @@ void InternetRetrievalDialog::RebuildList()
 
     m_lUrls->DeleteAllItems();
 
-    //   wxProgressDialog progressdialog(_("WeatherFax InternetRetrieval"), 
+    //   wxProgressDialog progressdialog(_("WeatherFax InternetRetrieval"),
 //                                    _("Populating List"), m_InternetRetrieval.size(),
 //                                    this, wxPD_ELAPSED_TIME | wxPD_REMAINING_TIME);
     int i=0;

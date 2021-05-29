@@ -36,7 +36,7 @@
 
 #include <algorithm>
 #include <cassert>
-#include <cmath>
+#include <math.h>
 #include <functional>
 #include <stdio.h>
 
