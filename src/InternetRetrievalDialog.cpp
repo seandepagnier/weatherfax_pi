@@ -148,10 +148,21 @@ void InternetRetrievalDialog::Load(bool force)
     }
 
     s = wxFileName::GetPathSeparator();
+
+    ClearInternetRetrieval();
+    m_lServers->Clear();
+    m_Servers.clear();
+    m_Regions.clear();
+
     if( wxFileExists( m_weatherfax_pi.StandardPath() + _T("WeatherFaxInternetRetrieval.xml") ) )
         OpenXML( m_weatherfax_pi.StandardPath() + _T("WeatherFaxInternetRetrieval.xml") );
     else
         OpenXML(GetPluginDataDir("weatherfax_pi") + s + _T("data") + s + _T("WeatherFaxInternetRetrieval.xml"));
+
+    if( wxFileExists( m_weatherfax_pi.StandardPath() + _T("WeatherFaxInternetRetrieval_1.xml") ) )
+        OpenXML( m_weatherfax_pi.StandardPath() + _T("WeatherFaxInternetRetrieval_1.xml") );
+    else
+        OpenXML(GetPluginDataDir("weatherfax_pi") + s + _T("data") + s + _T("WeatherFaxInternetRetrieval_1.xml"));
 
     for(unsigned int i=0; i < m_lServers->GetCount(); i++)
         for(std::list<wxString>::iterator it = serverlist.begin();
@@ -201,10 +212,6 @@ static double ParseLatLon(wxString s)
 
 bool InternetRetrievalDialog::OpenXML(wxString filename)
 {
-    ClearInternetRetrieval();
-    m_lServers->Clear();
-    m_Servers.clear();
-    m_Regions.clear();
 
     TiXmlDocument doc;
     wxString error;
