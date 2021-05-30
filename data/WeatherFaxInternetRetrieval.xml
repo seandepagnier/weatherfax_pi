@@ -612,7 +612,7 @@
       <Map Url="shtml/A_96hr500bw.gif" Contents="96-hour 500 MB Forecast" Area="2" />
       <Map Url="shtml/A_24hrbw.gif" Contents="24-hour Surface Forecast" Area="2b" />
       <Map Url="shtml/A_48hrbw.gif" Contents="48-hour Surface Forecast" Area="2" />
-      <Map Url="shtml/A_72hrbw.gif" Contents="72-hour Surface Forecast" Area="2" />	  
+      <Map Url="shtml/A_72hrbw.gif" Contents="72-hour Surface Forecast" Area="2" />
       <Map Url="shtml/A_96hrbw.gif" Contents="96-hour Surface Forecast" Area="2" />
 	  <Map Url="shtml/A_24hrwind_wave.gif" Contents="24-hour Wind Wave Forecast" Area="2" />
 	  <Map Url="shtml/A_48hrwind_wave.gif" Contents="48-hour Wind Wave Forecast" Area="2" />
@@ -852,7 +852,7 @@
   </Server>
   <Server Name="UK MET" Url="http://old.wetterzentrale.de/pics/">
     <Region Name="Central">
-      <Map Url="bracka.gif" Contents="Surface Anlys" Area="A" />
+      <Map Url="bracka.gif" Contents="Surface Anlys" Area="B" />
       <Map Url="brack0.gif" Contents="24hr Forecast" Area="A" />
       <Map Url="brack0a.gif" Contents="36hr Forecast" Area="A" />
       <Map Url="brack1.gif" Contents="48hr Forecast" Area="A" />
@@ -862,6 +862,7 @@
       <Map Url="brack3.gif" Contents="96hr Forecast" Area="A" />
       <Map Url="brack4.gif" Contents="120hr Forecast" Area="A" />
       <Area Name="A" lat1="40N" lat2="80N" lon1="40E" lon2="60W" />
+      <Area Name="B" lat1="40N" lat2="80N" lon1="40E" lon2="60W" />
 	 </Region>
   </Server>
   <Server Name="WeatherchartsUK" Url="http://www.weathercharts.net/">
