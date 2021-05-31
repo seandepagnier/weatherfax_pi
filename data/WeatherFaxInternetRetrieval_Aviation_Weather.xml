@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<OCPNWeatherFaxInternetRetrieval>
+  <Server Name="Aviation Weather" Url="https://aviationweather.gov/data/obs/sat/intl/">
+    <Region Name="Sat Images Infrared">
+      <Map Url="sat_irbw_a.jpg" Contents="Americas" Area="A" />
+      <Map Url="sat_irbw_b1.jpg" Contents="Atlantic" Area="B1" />
+      <Map Url="sat_irbw_c.jpg" Contents="Europe Africa" Area="C" />
+      <Map Url="sat_irbw_d.jpg" Contents="Europe Africa Asia" Area="D" />
+      <Map Url="sat_irbw_e.jpg" Contents="Indian Ocean and Oceania" Area="E" />
+      <Map Url="sat_irbw_f.jpg" Contents="Pacific" Area="F" />
+      <Map Url="sat_irbw_m.jpg" Contents="North Pacific" Area="M" />
+      <Area Name="A" lat1="50S" lat2="70N" lon1="130W" lon2="30W" />
+      <Area Name="B1" lat1="45S" lat2="63N" lon1="120W" lon2="40E" />
+      <Area Name="C" lat1="40S" lat2="75N" lon1="35W" lon2="70E" />
+      <Area Name="D" lat1="20S" lat2="62N" lon1="10W" lon2="130E" />
+      <Area Name="E" lat1="50S" lat2="40N" lon1="26E" lon2="180" />
+      <Area Name="F" lat1="50S" lat2="50N" lon1="100E" lon2="110W" />
+      <Area Name="M" lat1="10S" lat2="70N" lon1="100E" lon2="110W" />
+    </Region>
+    <Region Name="Sat Images Infrared-color">
+      <Map Url="sat_ircol_a.jpg" Contents="Americas" Area="A" />
+      <Map Url="sat_ircol_b1.jpg" Contents="Atlantic" Area="B1" />
+      <Map Url="sat_ircol_c.jpg" Contents="Europe Africa" Area="C" />
+      <Map Url="sat_ircol_d.jpg" Contents="Europe Africa Asia" Area="D" />
+      <Map Url="sat_ircol_e.jpg" Contents="Indian Ocean and Oceania" Area="E" />
+      <Map Url="sat_ircol_f.jpg" Contents="Pacific" Area="F" />
+      <Map Url="sat_ircol_m.jpg" Contents="North Pacific" Area="M" />
+      <Area Name="A" lat1="50S" lat2="70N" lon1="130W" lon2="30W" />
+      <Area Name="B1" lat1="45S" lat2="63N" lon1="120W" lon2="40E" />
+      <Area Name="C" lat1="40S" lat2="75N" lon1="35W" lon2="70E" />
+      <Area Name="D" lat1="20S" lat2="62N" lon1="10W" lon2="130E" />
+      <Area Name="E" lat1="50S" lat2="40N" lon1="26E" lon2="180" />
+      <Area Name="F" lat1="50S" lat2="50N" lon1="100E" lon2="110W" />
+      <Area Name="M" lat1="10S" lat2="70N" lon1="100E" lon2="110W" />
+    </Region>
+    <Region Name="Sat Images Infrared-NWS-color">
+      <Map Url="sat_irnws_a.jpg" Contents="Americas" Area="A" />
+      <Map Url="sat_irnws_b1.jpg" Contents="Atlantic" Area="B1" />
+      <Map Url="sat_irnws_c.jpg" Contents="Europe Africa" Area="C" />
+      <Map Url="sat_irnws_d.jpg" Contents="Europe Africa Asia" Area="D" />
+      <Map Url="sat_irnws_e.jpg" Contents="Indian Ocean and Oceania" Area="E" />
+      <Map Url="sat_irnws_f.jpg" Contents="Pacific" Area="F" />
+      <Map Url="sat_irnws_m.jpg" Contents="North Pacific" Area="M" />
+      <Area Name="A" lat1="50S" lat2="70N" lon1="130W" lon2="30W" />
+      <Area Name="B1" lat1="45S" lat2="63N" lon1="120W" lon2="40E" />
+      <Area Name="C" lat1="40S" lat2="75N" lon1="35W" lon2="70E" />
+      <Area Name="D" lat1="20S" lat2="62N" lon1="10W" lon2="130E" />
+      <Area Name="E" lat1="50S" lat2="40N" lon1="26E" lon2="180" />
+      <Area Name="F" lat1="50S" lat2="50N" lon1="100E" lon2="110W" />
+      <Area Name="M" lat1="10S" lat2="70N" lon1="100E" lon2="110W" />
+    </Region>
+    <Region Name="Sat Images Visible">
+      <Map Url="sat_vis_a.jpg" Contents="Americas" Area="A" />
+      <Map Url="sat_vis_b1.jpg" Contents="Atlantic" Area="B1" />
+      <Map Url="sat_vis_c.jpg" Contents="Europe Africa" Area="C" />
+      <Map Url="sat_vis_d.jpg" Contents="Europe Africa Asia" Area="D" />
+      <Map Url="sat_vis_e.jpg" Contents="Indian Ocean and Oceania" Area="E" />
+      <Map Url="sat_vis_f.jpg" Contents="Pacific" Area="F" />
+      <Map Url="sat_vis_m.jpg" Contents="North Pacific" Area="M" />
+      <Area Name="A" lat1="50S" lat2="70N" lon1="130W" lon2="30W" />
+      <Area Name="B1" lat1="45S" lat2="63N" lon1="120W" lon2="40E" />
+      <Area Name="C" lat1="40S" lat2="75N" lon1="35W" lon2="70E" />
+      <Area Name="D" lat1="20S" lat2="62N" lon1="10W" lon2="130E" />
+      <Area Name="E" lat1="50S" lat2="40N" lon1="26E" lon2="180" />
+      <Area Name="F" lat1="50S" lat2="50N" lon1="100E" lon2="110W" />
+      <Area Name="M" lat1="10S" lat2="70N" lon1="100E" lon2="110W" />
+    </Region>
+   <Region Name="Sat Images Water-Vapor">
+      <Map Url="sat_wv_a.jpg" Contents="Americas" Area="A" />
+      <Map Url="sat_wv_b1.jpg" Contents="Atlantic" Area="B1" />
+      <Map Url="sat_wv_c.jpg" Contents="Europe Africa" Area="C" />
+      <Map Url="sat_wv_d.jpg" Contents="Europe Africa Asia" Area="D" />
+      <Map Url="sat_wv_e.jpg" Contents="Indian Ocean and Oceania" Area="E" />
+      <Map Url="sat_wv_f.jpg" Contents="Pacific" Area="F" />
+      <Map Url="sat_wv_m.jpg" Contents="North Pacific" Area="M" />
+      <Area Name="A" lat1="50S" lat2="70N" lon1="130W" lon2="30W" />
+      <Area Name="B1" lat1="45S" lat2="63N" lon1="120W" lon2="40E" />
+      <Area Name="C" lat1="40S" lat2="75N" lon1="35W" lon2="70E" />
+      <Area Name="D" lat1="20S" lat2="62N" lon1="10W" lon2="130E" />
+      <Area Name="E" lat1="50S" lat2="40N" lon1="26E" lon2="180" />
+      <Area Name="F" lat1="50S" lat2="50N" lon1="100E" lon2="110W" />
+      <Area Name="M" lat1="10S" lat2="70N" lon1="100E" lon2="110W" />
+    </Region>
+    <Region Name="Sat Images Polar">
+      <Map Url="sat_irbw_g.jpg" Contents="Polar" Area="A" />
+      <Area Name="A" lat1="10S" lat2="70N" lon1="20W" lon2="160E" />
+    </Region>
+  </Server>
+</OCPNWeatherFaxInternetRetrieval>

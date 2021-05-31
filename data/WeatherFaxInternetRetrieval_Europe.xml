@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<OCPNWeatherFaxInternetRetrieval>
+<Server Name="German Weather DWD" Url="http://www.dwd.de/DWD/wetter/wv_spez/hobbymet/wetterkarten/">
+    <Region Name="European">
+      <Map Url="bwk_bodendruck_na_ana.png" Contents="Surface Anlys(4mb)" Area="A" />
+      <Map Url="ico_tkboden_na_024.png" Contents="24hr Forecast" Area="B" />
+      <Map Url="ico_tkboden_na_036.png" Contents="36hr Forecast" Area="B" />
+      <Map Url="ico_tkboden_na_048.png" Contents="48hr Forecast" Area="B" />
+      <Map Url="ico_tkboden_na_060.png" Contents="60hr Forecast" Area="B" />
+      <Map Url="ico_tkboden_na_084.png" Contents="84hr Forecast" Area="B" />
+      <Map Url="ico_tkboden_na_108.png" Contents="108hr Forecast" Area="B" />
+      <Map Url="ico_500ht_na_ana.png" Contents="500mb Analysis" Area="C" />
+      <Map Url="ico_500ht_na_024.png" Contents="500mb 24hr" Area="C" />
+      <Map Url="ico_500ht_na_048.png" Contents="500mb 48hr" Area="C" />
+      <Map Url="ico_500ht_na_072.png" Contents="500mb 72hr" Area="C" />
+      <Area Name="A" lat1="40N" lat2="60N" lon1="40E" lon2="40W" />
+      <Area Name="B" lat1="40N" lat2="60N" lon1="40E" lon2="40W" />
+      <Area Name="C" lat1="30N" lat2="70N" lon1="40E" lon2="40W" />
+	 </Region>
+  </Server>
+  <Server Name="UK MET" Url="http://old.wetterzentrale.de/pics/">
+    <Region Name="Central">
+      <Map Url="bracka.gif" Contents="Surface Anlys" Area="A" />
+      <Map Url="brack0.gif" Contents="24hr Forecast" Area="A" />
+      <Map Url="brack0a.gif" Contents="36hr Forecast" Area="A" />
+      <Map Url="brack1.gif" Contents="48hr Forecast" Area="A" />
+      <Map Url="brack1a.gif" Contents="60hr Forecast" Area="A" />
+      <Map Url="brack2.gif" Contents="72hr Forecast" Area="A" />
+      <Map Url="brack2a.gif" Contents="84hr Forecast" Area="A" />
+      <Map Url="brack3.gif" Contents="96hr Forecast" Area="A" />
+      <Map Url="brack4.gif" Contents="120hr Forecast" Area="A" />
+      <Area Name="A" lat1="40N" lat2="80N" lon1="40E" lon2="60W" />
+	 </Region>
+  </Server>
+  <Server Name="WeatherchartsUK" Url="http://www.weathercharts.net/">
+    <Region Name="UK">
+      <Map Url="noaa_ukmo_analysis/previous/PPVA89_00z_last.gif" Contents="Prev MSLP Analysis 00z" Area="1" />
+      <Map Url="noaa_ukmo_analysis/previous/PPVA89_06z_last.gif" Contents="Prev MSLP Analysis 06z" Area="1" />
+      <Map Url="noaa_ukmo_analysis/previous/PPVA89_12z_last.gif" Contents="Prev MSLP Analysis 12z" Area="1" />
+      <Map Url="noaa_ukmo_analysis/previous/PPVA89_18z_last.gif" Contents="Prev MSLP Analysis 18z" Area="1" />
+      <Map Url="noaa_ukmo_analysis/PPVA89.gif" Contents="Surface Analysis" Area="2" />
+      <Map Url="noaa_ukmo_prognosis/PPVE89.gif" Contents="24 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVG89.gif" Contents="36 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVI89.gif" Contents="48 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVJ89.gif" Contents="60 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVK89.gif" Contents="72 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVL89.gif" Contents="84 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVM89.gif" Contents="96 Hour MSLP" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVO89.gif" Contents="120 Hour MSLP" Area="3" />
+      <Area Name="1" lat1="40N" lat2="70N" lon1="50W" lon2="50E" />
+      <Area Name="2" lat1="40N" lat2="70N" lon1="60W" lon2="40E" />
+      <Area Name="3" lat1="40N" lat2="70N" lon1="50W" lon2="50E" />
+    </Region>
+  </Server>
+</OCPNWeatherFaxInternetRetrieval>

@@ -154,15 +154,25 @@ void InternetRetrievalDialog::Load(bool force)
     m_Servers.clear();
     m_Regions.clear();
 
-    if( wxFileExists( m_weatherfax_pi.StandardPath() + _T("WeatherFaxInternetRetrieval.xml") ) )
-        OpenXML( m_weatherfax_pi.StandardPath() + _T("WeatherFaxInternetRetrieval.xml") );
-    else
-        OpenXML(GetPluginDataDir("weatherfax_pi") + s + _T("data") + s + _T("WeatherFaxInternetRetrieval.xml"));
+    m_Filenames = { _T("NOAA"),
+                    _T("NOAA_OPC"),
+                    _T("NAVY"),
+                    _T("PWx_Amer_Atl"),
+                    _T("Aviation_Weather"),
+                    _T("PWx_Euro_Atl"),
+                    _T("Europe"),
+                    _T("LaMMA"),
+                    _T("PWx_India"),
+                    _T("Australia"),
+                    _T("PWx_Pacific")
+                    _T("Misc"),
+                    };
 
-    if( wxFileExists( m_weatherfax_pi.StandardPath() + _T("WeatherFaxInternetRetrieval_1.xml") ) )
-        OpenXML( m_weatherfax_pi.StandardPath() + _T("WeatherFaxInternetRetrieval_1.xml") );
-    else
-        OpenXML(GetPluginDataDir("weatherfax_pi") + s + _T("data") + s + _T("WeatherFaxInternetRetrieval_1.xml"));
+    for(it_Filenames = m_Filenames.begin(); it_Filenames != m_Filenames.end(); it_Filenames++)
+        if( wxFileExists( m_weatherfax_pi.StandardPath() + _T("WeatherFaxInternetRetrieval_") + *it_Filenames + _T(".xml")))
+            OpenXML( m_weatherfax_pi.StandardPath() + _T("WeatherFaxInternetRetrieval_") + *it_Filenames + _T(".xml"));
+        else
+            OpenXML(GetPluginDataDir("weatherfax_pi") + s + _T("data") + s + _T("WeatherFaxInternetRetrieval_") + *it_Filenames + _T(".xml"));
 
     for(unsigned int i=0; i < m_lServers->GetCount(); i++)
         for(std::list<wxString>::iterator it = serverlist.begin();
