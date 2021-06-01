@@ -164,8 +164,8 @@ void InternetRetrievalDialog::Load(bool force)
                     _T("LaMMA"),
                     _T("PWx_India"),
                     _T("Australia"),
-                    _T("PWx_Pacific")
-                    _T("Misc"),
+                    _T("PWx_Pacific"),
+                    _T("Misc")
                     };
 
     for(it_Filenames = m_Filenames.begin(); it_Filenames != m_Filenames.end(); it_Filenames++)
