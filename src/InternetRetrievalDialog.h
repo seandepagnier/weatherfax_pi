@@ -113,6 +113,8 @@ private:
     std::list<FaxServer> m_Servers;
     std::list<FaxRegion> m_Regions;
     std::list<FaxUrl*> m_InternetRetrieval;
+    std::list<wxString> m_Filenames;
+    std::list<wxString>::iterator it_Filenames;
 
     bool m_bLoaded;
     bool m_bDisableServers, m_bDisableRegions, m_bDisableFilter;

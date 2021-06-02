@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<OCPNWeatherFaxInternetRetrieval>
+  <Server Name="PWx Pacific" Url="http://passageweather.com/maps/">
+   <Region Name="Alaska" Url="alaska/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="45N" lat2="63N" lon1="151W" lon2="124W" />
+   </Region>
+   <Region Name="Puget Sound" Url="puget/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="48N" lat2="50N" lon1="126.5W" lon2="122W" />
+   </Region>
+   <Region Name="USA west" Url="usawest/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="32N" lat2="50N" lon1="147W" lon2="113W" />
+   </Region>
+   <Region Name="Trans Pac" Url="transpac/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="2" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="2" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="2" />
+      </Iterator>
+      <Area Name="1" lat1="17N" lat2="44N" lon1="168W" lon2="110W" />
+      <Area Name="2" lat1="17N" lat2="44N" lon1="168W" lon2="110W" />
+   </Region>
+   <Region Name="Hawaii" Url="hawaii/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="18N" lat2="23N" lon1="162W" lon2="153W" />
+   </Region>
+   <Region Name="Tahiti" Url="tahiti/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="25S" lat2="40N" lon1="175W" lon2="75W" />
+   </Region>
+   <Region Name="Southern California" Url="socal/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="32.5N" lat2="34.5N" lon1="121W" lon2="117W" />
+   </Region>
+   <Region Name="Baja" Url="baja/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="21N" lat2="35N" lon1="129W" lon2="104W" />
+   </Region>
+   <Region Name="Mexico" Url="mexico/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="13N" lat2="35N" lon1="130W" lon2="90W" />
+   </Region>
+   <Region Name="Panama" Url="panama/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="5N" lat2="16N" lon1="100W" lon2="77W" />
+   </Region>
+  </Server>
+  <Server Name="PWx Asian Pacific" Url="http://passageweather.com/maps/">
+   <Region Name="Sea of Japan" Url="japan/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+       <Area Name="1" lat1="30N" lat2="45N" lon1="120E" lon2="150E" />
+   </Region>
+   <Region Name="South China Sea" Url="chinasea/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="South China Sea Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="South China Sea Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="South China Sea Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="South China Sea Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="South China Sea Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="South China Sea Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="South China Sea Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="South China Sea Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="South China Sea Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="8N" lat2="24N" lon1="100E" lon2="130E" />
+    </Region>
+   <Region Name="Strait of Malacca" Url="malacca/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="5S" lat2="15N" lon1="85E" lon2="120E" />
+   </Region>
+   <Region Name="SW Australia" Url="leeuwin/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="40S" lat2="27S" lon1="105E" lon2="130E" />
+   </Region>
+   <Region Name="Coral Sea" Url="coralsea/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="30S" lat2="10S" lon1="140E" lon2="175E" />
+   </Region>
+   <Region Name="SE Australia and Tasmania" Url="hobart/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="45S" lat2="30S" lon1="130E" lon2="160E" />
+   </Region>
+   <Region Name="Tasman Sea" Url="tasman/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="50S" lat2="30S" lon1="145E" lon2="180" />
+   </Region>
+   <Region Name="New Zealand" Url="newzealand/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="49S" lat2="32S" lon1="156E" lon2="172W" />
+   </Region>
+   <Region Name="Oceania" Url="oceania/">
+     <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+       <Area Name="1" lat1="50S" lat2="12N" lon1="110E" lon2="130W" />
+   </Region>
+  </Server>
+</OCPNWeatherFaxInternetRetrieval>
