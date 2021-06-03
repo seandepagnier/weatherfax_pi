@@ -845,7 +845,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	m_book = new wxSimplebook( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, 0 );
 	m_panel9 = new wxPanel( m_book, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer11;
-	fgSizer11 = new wxFlexGridSizer( 2, 1, 0, 0 );
+	fgSizer11 = new wxFlexGridSizer( 0, 1, 0, 0 );
 	fgSizer11->AddGrowableCol( 0 );
 	fgSizer11->AddGrowableRow( 0 );
 	fgSizer11->SetFlexibleDirection( wxBOTH );
@@ -1113,7 +1113,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	m_fgSizerLatLonUnMapped->Add( m_sCoord2LonUnMapped, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
 
 
-	fgSizer59->Add( m_fgSizerLatLonUnMapped, 1, wxEXPAND|wxRIGHT|wxLEFT, 5 );
+	fgSizer59->Add( m_fgSizerLatLonUnMapped, 1, wxRIGHT|wxLEFT|wxEXPAND, 5 );
 
 	m_pMinutes = new wxPanel( m_panel10, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	m_pMinutes->Hide();
@@ -1259,7 +1259,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	bSizer81->Add( m_tTrueRatio, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_CENTER_HORIZONTAL, 5 );
 
 
-	sbSizer51->Add( bSizer81, 0, wxEXPAND|wxTOP|wxRIGHT|wxLEFT, 5 );
+	sbSizer51->Add( bSizer81, 0, wxTOP|wxRIGHT|wxLEFT, 5 );
 
 	wxBoxSizer* bSizer9;
 	bSizer9 = new wxBoxSizer( wxHORIZONTAL );
@@ -1286,7 +1286,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	bSizer9->Add( m_sMappingEquatorY, 0, wxALL, 5 );
 
 
-	sbSizer51->Add( bSizer9, 0, wxEXPAND|wxALIGN_CENTER_HORIZONTAL, 5 );
+	sbSizer51->Add( bSizer9, 0, 0, 5 );
 
 	wxFlexGridSizer* fgChangingLabelSizer;
 	fgChangingLabelSizer = new wxFlexGridSizer( 0, 4, 0, 0 );
@@ -1306,7 +1306,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	fgChangingLabelSizer->Add( m_bInformation, 0, wxALL, 5 );
 
 
-	sbSizer51->Add( fgChangingLabelSizer, 1, wxALIGN_CENTER_HORIZONTAL|wxBOTTOM|wxRIGHT|wxLEFT, 5 );
+	sbSizer51->Add( fgChangingLabelSizer, 1, wxBOTTOM|wxRIGHT|wxLEFT, 5 );
 
 
 	fgSizer111->Add( sbSizer51, 1, wxALL|wxEXPAND, 5 );
@@ -1318,7 +1318,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	m_book->AddPage( m_panel10, _("a page"), false );
 	m_panel11 = new wxPanel( m_book, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL );
 	wxFlexGridSizer* fgSizer1111;
-	fgSizer1111 = new wxFlexGridSizer( 1, 1, 0, 0 );
+	fgSizer1111 = new wxFlexGridSizer( 1, 2, 0, 0 );
 	fgSizer1111->AddGrowableCol( 0 );
 	fgSizer1111->AddGrowableRow( 0 );
 	fgSizer1111->SetFlexibleDirection( wxBOTH );
@@ -1389,11 +1389,11 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	sbSizer41->Add( fgSizer71, 1, wxEXPAND|wxALL, 5 );
 
 
-	fgSizer1711->Add( sbSizer41, 1, wxEXPAND, 5 );
+	fgSizer1711->Add( sbSizer41, 1, wxALL|wxEXPAND, 5 );
 
 	m_swFaxArea3 = new wxScrolledWindow( m_panel11, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxHSCROLL|wxVSCROLL );
 	m_swFaxArea3->SetScrollRate( 5, 5 );
-	fgSizer1711->Add( m_swFaxArea3, 1, wxEXPAND | wxALL, 5 );
+	fgSizer1711->Add( m_swFaxArea3, 1, wxALL|wxEXPAND, 5 );
 
 
 	fgSizer1111->Add( fgSizer1711, 1, wxEXPAND, 5 );
