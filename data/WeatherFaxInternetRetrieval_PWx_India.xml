@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<OCPNWeatherFaxInternetRetrieval>
+  <Server Name="PWx India" Url="http://passageweather.com/maps/">
+   <Region Name="Indian Ocean" Url="indian/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="35S" lat2="25N" lon1="10E" lon2="130E" />
+   </Region>
+   <Region Name="Red Sea and Arabian Sea" Url="arabian/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="10N" lat2="30N" lon1="30E" lon2="75E" />
+   </Region>
+   <Region Name="Southern Indian Ocean" Url="sindian/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="75S" lat2="10S" lon1="10E" lon2="130E" />
+   </Region>
+   <Region Name="South Africa" Url="safrica/">
+      <Iterator From="0" To="48" By="3">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="54" To="72" By="6">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Iterator From="84" To="180" By="12">
+        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="40S" lat2="2S" lon1="0" lon2="70E" />
+   </Region>
+  </Server>
+</OCPNWeatherFaxInternetRetrieval>
