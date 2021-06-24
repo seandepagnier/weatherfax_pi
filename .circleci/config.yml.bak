@@ -53,24 +53,22 @@ parameters:
         default: true
     run_build_android_arm64:
         type: boolean
-        default: true
+        default: false
     run_build_android_armhf:
         type: boolean
-        default: true
+        default: false
 
 orbs:
     cloudsmith: cloudsmith/cloudsmith@1.0.4
 
 jobs:
     build-armhf-stretch:
-        machine:
-            image: ubuntu-2004:202104-01
+        machine: true
         environment:
         - OCPN_TARGET=stretch-armhf
         - DOCKER_IMAGE=balenalib/raspberry-pi-debian:stretch
         - BUILD_FLAGS=-j3
         - BUILD_ENV=raspbian
-        - DEPLOY_USE_ORB: true
         steps:
         - checkout
         - run: chmod a+x ./ci/*.sh
@@ -80,18 +78,14 @@ jobs:
         - when:
             condition: <<pipeline.parameters.run_workflow_deploy>>
             steps:
-            - cloudsmith/ensure-api-key
-            - cloudsmith/install-cli
             - run: ci/cloudsmith-upload.sh
     build-armhf-buster:
-        machine:
-            image: ubuntu-2004:202104-01
+        machine: true
         environment:
         - OCPN_TARGET=buster-armhf
         - DOCKER_IMAGE=balenalib/raspberry-pi-debian:buster
         - BUILD_FLAGS=-j3
         - BUILD_ENV=raspbian
-        - DEPLOY_USE_ORB: true
         steps:
         - checkout
         - run: chmod a+x ./ci/*.sh
@@ -101,8 +95,6 @@ jobs:
         - when:
             condition: <<pipeline.parameters.run_workflow_deploy>>
             steps:
-            - cloudsmith/ensure-api-key
-            - cloudsmith/install-cli
             - run: ci/cloudsmith-upload.sh
     build-armhf-bionic-64:
         machine:
@@ -444,18 +436,17 @@ workflows:
 #                    - tmp
 #                tags:
 #                    only: /.*/
-# Trusty is depricated so will not be built
-#    build_4:
-#        when: <<pipeline.parameters.run_build_trusty>>
-#        jobs:
-#        - build-trusty:
-#            filters:
-#                branches:
-#                    ignore:
-#                    - devel
-#                    - tmp
-#                tags:
-#                    only: /.*/
+    build_4:
+        when: <<pipeline.parameters.run_build_trusty>>
+        jobs:
+        - build-trusty:
+            filters:
+                branches:
+                    ignore:
+                    - devel
+                    - tmp
+                tags:
+                    only: /.*/
     build_5:
         when: <<pipeline.parameters.run_build_xenial>>
         jobs:

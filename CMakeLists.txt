@@ -20,14 +20,14 @@
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                       *
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Frontend2 Version: 1.0.167.0  17/05/2021  DD/MM/YYYY 
-#  buildCI:yes useODAPI:no validateJSON:no  
+# Frontend2 Version: 1.0.169.0  207/06/2021  DD/MM/YYYY
+#  buildCI:yes useODAPI:no validateJSON:no
 # ---------------------------------------------------------------------------
 ## ----- When changing this file do NOT change the order in which sections occur        ----- ##
 ## ----- Changes should only be made between the section blocks that identify where     ----- ##
 ## ----- these changes should be. The whole configuration process relies on this        ----- ##
 ## ----- sequence to be successful                                                      ----- ##
-##  
+##
 ## ----- Modify section below to include all the details for your plugin ----- ##
 
 set(CMLOC "CMakeLists: ")
@@ -50,14 +50,14 @@ set(COMMON_NAME "WeatherFax") # Search "getcommonname"in weatherfax_pi.cpp
 set(TITLE_NAME "WeatherFax")
 set(PACKAGE_CONTACT "Sean d'Epagnier")
 SET(PACKAGE "weatherfax_pi")
-set(SHORT_DESCRIPTION "Open fax image files or decode audio faxes and overlay on chart")
-set(LONG_DESCRIPTION "Open image files directly or decode audio faxes to an image, simple calibration to overlay image on top of charts. Converts images in mercator, polar, conic and uniform coordinates. Convert any image into a raster chart. Built in HF Radio Fax database for SSB and for internet retrieval from meterological sites.")
+set(SHORT_DESCRIPTION "Open fax image, decode audio fax, chart overlay")
+set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate chart overlay image. Convert images in mercator, polar, conic and uniform coordinates. Convert any image into a raster chart. Built in HF Radio Fax database for SSB and Internet retrieval from meterological sites. ")
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
-set(VERSION_PATCH "17")
-set(VERSION_TWEAK "1")
-set(VERSION_DATE "05-06-2021")  # DD/MM/YYYY format
+set(VERSION_PATCH "18")
+set(VERSION_TWEAK "0")
+set(VERSION_DATE "23-06-2021")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -89,7 +89,7 @@ set(CLOUDSMITH_USER "opencpn")
 
 # Set Plugin info-url, summary and description
 set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/weatherfax.html")
-set(XML_SUMMARY  ${SHORT_DESCRIPTION}) 
+set(XML_SUMMARY  ${SHORT_DESCRIPTION})
 set(XML_DESCRIPTION  ${LONG_DESCRIPTION})
 
 ## ----- Modify above to include all the plugin details --------- ##
@@ -119,7 +119,7 @@ message(STATUS "${CMLOC}Build type: ${CMAKE_BUILD_TYPE}")
 
 ## ----- The statement below is used to setup standard variables that are required by the CMAKE process - do not remove ----- ##
 
-project(${PACKAGE})	   
+project(${PACKAGE})
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
@@ -175,7 +175,7 @@ ENDIF (MSVC)
 ##=======================================
 include("PluginConfigure")
 ##=======================================
-## ----- do not change section above - needed to configure build process ----- 
+## ----- do not change section above - needed to configure build process -----
 ## ----- Change below to match project requirements for source, headers, etc. ----- ##
 
 add_definitions(-DUSE_S57)
@@ -334,7 +334,7 @@ SET(SRC_AUDIOFILE
             src/libaudiofile/alac/matrix_dec.c
             src/libaudiofile/alac/matrix_enc.c
             src/libaudiofile/modules/ALAC.cpp
-            src/libaudiofile/modules/BlockCodec.cpp            
+            src/libaudiofile/modules/BlockCodec.cpp
             src/libaudiofile/modules/FLAC.cpp
             src/libaudiofile/modules/FileModule.cpp
             src/libaudiofile/modules/G711.cpp
@@ -372,17 +372,19 @@ SET(SRC_AUDIOFILE
 # set(LIBSSRC libs/wxJSON/src/jsonreader.cpp libs/wxJSON/src/jsonval.cpp libs/wxJSON/src/jsonwriter.cpp)
 
 #is this needed? windows seems to still work when commented out, still using pluginGL.cmake
-#set(LIBHDRS
-#    libs/GL/gl.h
-#    libs/GL/gl_private.h
-#    libs/GL/glext.h
-#    libs/GL/glu.h
-#    libs/wx/include/json_defs.h
-#    libs/wx/include/jsonreader.h
-#    libs/wx/include/jsonval.h
-#    libs/wx/include/jsonwriter.h)
+set(LIBHDRS
+    libs/GL/gl.h
+    libs/GL/gl_private.h
+    libs/GL/glext.h
+    libs/GL/glu.h
+    libs/wx/include/json_defs.h
+    libs/wx/include/jsonreader.h
+    libs/wx/include/jsonval.h
+    libs/wx/include/jsonwriter.h)
 
 add_definitions(-DPLUGIN_USE_SVG)
+
+set(EXTINCLUDE_DIR ${EXTINCLUDE_DIR} extinclude libs/ocpn-api/)
 
 ## +++++++++Section above is added recently to Weatherfax set ++++++++++##
 ##++++++++++++RTLSDR Section directly from Weatherfax +++++++++##
@@ -405,7 +407,7 @@ IF(UNIX)
     MESSAGE (STATUS "")
   ENDIF()
 ENDIF(UNIX)
-      
+
 IF(WIN32)
     IF(STANDALONE MATCHES "BUNDLED")
 	# within OpenCPN tree
@@ -418,12 +420,11 @@ ENDIF(WIN32)
 ##=============================================================
 # Modify/configure 'Include' Directories below for the Plugin
 ##=============================================================
-# EG  also inside cmake/Plugin____.cmake files					
-
+# EG  also inside cmake/Plugin____.cmake files
 # needed?
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include)
 
-# include_directories(BEFORE ${PROJECT_SOURCE_DIR}/${EXTINCLUDE_DIR})
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/${EXTINCLUDE_DIR})
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
 # include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wx/include)
@@ -433,7 +434,7 @@ INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
 
 ## Required to collect all the set( headers and SRCS  - Adjust as required
 ##==========================================================================
-target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE})
+target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${EXTSRC} ${SRC_AUDIOFILE})
 ##==========================================================================
 #ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} )
 #target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML})
@@ -459,10 +460,10 @@ target_link_libraries(${PACKAGE_NAME} ocpn::plugingl)
 
 
 # ---------------------------------------------
-#  PI_JSON SCHEMA VALIDATOR  From Testplugin 
+#  PI_JSON SCHEMA VALIDATOR  From Testplugin
 # ---------------------------------------------
 
-# Every plugin that uses JSON for passing messages should use a validator. The validator  allows the system to ignore non-conformant messages. 
+# Every plugin that uses JSON for passing messages should use a validator. The validator  allows the system to ignore non-conformant messages.
 
 add_definitions(-DTIXML_USE_STL)
 
@@ -489,7 +490,7 @@ if(UNIX AND NOT APPLE AND NOT QT_ANDROID)
 endif(UNIX AND NOT APPLE AND NOT QT_ANDROID)
 
 # ---------------------------------------------
-#    End of JSON VALIDATOR From Testplugin 
+#    End of JSON VALIDATOR From Testplugin
 # ---------------------------------------------
 
 ## ----- Change above to match project requirements ----- ##
