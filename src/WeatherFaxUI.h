@@ -270,27 +270,26 @@ class WeatherFaxWizardBase : public wxDialog
 		wxStaticText* m_staticText101;
 		wxSlider* m_sSkew;
 		wxPanel* m_panel10;
-		wxScrolledWindow* m_scrolledWindow5;
 		wxFlexGridSizer* m_fgSizerUnMappedCoords;
 		wxComboBox* m_cbCoordSet;
 		wxButton* m_bRemoveCoordSet;
-		wxFlexGridSizer* m_fgSizerLatLonUnMapped;
 		wxRadioButton* m_rbCoord1UnMapped;
 		wxStaticText* m_staticText6;
-		wxStaticText* m_stMinutes;
 		wxSpinCtrl* m_sCoord1YUnMapped;
 		wxSpinCtrl* m_sCoord1LatUnMapped;
-		wxTextCtrl* m_tCoord1LatMinutesUnMapped;
 		wxSpinCtrl* m_sCoord1XUnMapped;
 		wxSpinCtrl* m_sCoord1LonUnMapped;
-		wxTextCtrl* m_tCoord1LonMinutesUnMapped;
 		wxRadioButton* m_rbCoord2UnMapped;
 		wxStaticText* m_staticText8;
 		wxSpinCtrl* m_sCoord2YUnMapped;
 		wxSpinCtrl* m_sCoord2LatUnMapped;
-		wxTextCtrl* m_tCoord2LatMinutesUnMapped;
 		wxSpinCtrl* m_sCoord2XUnMapped;
 		wxSpinCtrl* m_sCoord2LonUnMapped;
+		wxPanel* m_pMinutes;
+		wxStaticText* m_stMinutes;
+		wxTextCtrl* m_tCoord1LatMinutesUnMapped;
+		wxTextCtrl* m_tCoord1LonMinutesUnMapped;
+		wxTextCtrl* m_tCoord2LatMinutesUnMapped;
 		wxTextCtrl* m_tCoord2LonMinutesUnMapped;
 		wxCheckBox* m_cbShowLatLonMinutes;
 		wxStaticText* m_staticText43;
@@ -307,14 +306,14 @@ class WeatherFaxWizardBase : public wxDialog
 		wxTextCtrl* m_tTrueRatio;
 		wxStaticText* m_stMappingLabel1;
 		wxSpinCtrl* m_sMappingPoleX;
-		wxButton* m_bGetMapping;
-		wxButton* m_bGetEquator;
 		wxStaticText* m_stMappingLabel2;
 		wxSpinCtrl* m_sMappingPoleY;
-		wxButton* m_bGetAspectRatio;
-		wxButton* m_bInformation;
 		wxStaticText* m_stMapping;
 		wxSpinCtrl* m_sMappingEquatorY;
+		wxButton* m_bGetEquator;
+		wxButton* m_bGetMapping;
+		wxButton* m_bGetAspectRatio;
+		wxButton* m_bInformation;
 		wxPanel* m_panel11;
 		wxRadioButton* m_rbCoord1;
 		wxStaticText* m_staticText61;
@@ -353,8 +352,8 @@ class WeatherFaxWizardBase : public wxDialog
 		virtual void OnMappingChoice( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnUpdateMapping( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnUpdateMappingSpin( wxSpinEvent& event ) { event.Skip(); }
-		virtual void OnGetMapping( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnGetEquator( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnGetMapping( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnGetAspectRatio( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnInformation( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnBitmapClickPage3( wxMouseEvent& event ) { event.Skip(); }

@@ -350,46 +350,18 @@ IF(DEFINED _wx_selected_config)
 ENDIF(DEFINED _wx_selected_config)
 
 # Building for QT_ANDROID involves a cross-building environment, So the include directories, flags, etc must be stated explicitly without trying to locate them on the host build system.
-IF(QT_ANDROID)
-    MESSAGE(STATUS "${CMLOC}Processing QT_ANDROID")
-    ADD_DEFINITIONS(-D__WXQT__)
-    ADD_DEFINITIONS(-D__OCPN__ANDROID__)
-    ADD_DEFINITIONS(-DOCPN_USE_WRAPPER)
-    ADD_DEFINITIONS(-DANDROID)
+if(QT_ANDROID AND USE_GL MATCHES "ON")
+    message(STATUS "${CMLOC}Using GLESv1 for Android")
+    add_definitions(-DocpnUSE_GLES)
+    add_definitions(-DocpnUSE_GL)
+    add_definitions(-DARMHF)
 
-    set(CMAKE_SHARED_LINKER_FLAGS "-Wl,-soname,libgorp.so ")
+    set(OPENGLES_FOUND "YES")
+    set(OPENGL_FOUND "YES")
 
+    set(wxWidgets_USE_LIBS ${wxWidgets_USE_LIBS} gl)
     add_subdirectory(libs/glshim)
-    target_link_libraries(${PACKAGE_NAME} gl_static::gl_static)
-
-    #set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-    SET(CMAKE_CXX_FLAGS "-pthread -fPIC")
-
-    ## Compiler flags
-    add_compile_options("-Wno-inconsistent-missing-override"
-    "-Wno-potentially-evaluated-expression"
-    "-Wno-overloaded-virtual"
-    "-Wno-unused-command-line-argument"
-    "-Wno-unknown-pragmas"
-      )
-
-    message(STATUS "${CMLOC}Adding libgorp.o shared library")
-    set(CMAKE_SHARED_LINKER_FLAGS "-Wl,-soname,libgorp.so ")
-    SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -s")  ## Strip binary
-
-    SET(QT_LINUX "OFF")
-    SET(QT "ON")
-    SET(CMAKE_SKIP_BUILD_RPATH  TRUE)
-    ADD_DEFINITIONS(-DQT_WIDGETS_LIB)
-    if("$ENV{OCPN_TARGET}" STREQUAL "android-arm64")
-        MESSAGE(STATUS "${CMLOC}Adding definition -DARM64")
-        ADD_DEFINITIONS(-DARM64)
-    else()
-        MESSAGE(STATUS "${CMLOC}Adding definition -DARMHF")
-        ADD_DEFINITIONS(-DARMHF)
-    endif()
-
-ENDIF(QT_ANDROID)
+endif(QT_ANDROID AND USE_GL MATCHES "ON")
 
 if((NOT OPENGLES_FOUND) AND (NOT QT_ANDROID))
 
