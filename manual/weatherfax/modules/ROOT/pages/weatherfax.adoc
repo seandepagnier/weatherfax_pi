@@ -10,6 +10,7 @@ image::wx-0-retrieve-internet-overlaid-on-chart.png[]
 === Links
 
 * Source: https://github.com/seandepagnier/weatherfax_pi
+* Maintenance Source: https://github.com/rgleason/weatherfax_pi
 * Release: https://github.com/rgleason/weatherfax_pi/releases[Windows Releases]
 * Download: https://opencpn.org/OpenCPN/plugins/weatherfax.html
 * Forum: http://www.cruisersforum.com/forums/f134/weatherfax-97533.html
