@@ -1,7 +1,7 @@
 site:
   title: Weatherfax Plugin Manual
   url:  https://nowhere.net
-  start_page: weatherfax:ROOT:weatherfax.adoc
+  start_page: weatherfax:ROOT:index.adoc
 
 content:
   sources:
