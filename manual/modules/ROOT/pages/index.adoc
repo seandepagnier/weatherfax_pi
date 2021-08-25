@@ -107,17 +107,17 @@ image::wx-b1-ret-hfradiosch-filtertab-menu.png[]
 *Retrieve > RF Radio Schedule Menu* on the 1 minute Alarm Tab. 
 
 
-image::wx-b2-ret-hfradiosch-alarmtab-menu.png[]
+//image::wx-b2-ret-hfradiosch-alarmtab-menu.png[]
 
 
 *Retrieve > RF Radio Schedule Menu* on the Capture Options Tab. 
 
-image::wx-b3-ret-hfradiosch-captureoptionstab-menu.png[]
+// image::wx-b3-ret-hfradiosch-captureoptionstab-menu.png[]
 
 
 *Retrieve > RF Radio Schedule Menu* on the Information Tab. 
 
-image::wx-b4-ret-hfradiosch-infotab-menu.png[]
+// image::wx-b4-ret-hfradiosch-infotab-menu.png[]
 
 === Decoding Sound via SSB
 
@@ -168,24 +168,27 @@ Metarea for Saildocs.
 
 ===== Noaa All Weather Products
 
-http://www.nws.noaa.gov/om/marine/home.htm[Noaa Weather Products]
+https://www.nws.noaa.gov/om/marine/home.htm[Noaa Weather Products]
 
 ===== Briefings
 
-* https://ocean.weather.gov/shtml/A_brief.shtml[OPC Atlantic Weather
-Briefing] https://ocean.weather.gov/shtml/A_brief_text.shtml[Text
+* https://ocean.weather.gov/shtml/A_brief.php[OPC Atlantic Weather
+Briefing] https://ocean.weather.gov/shtml/A_brief_text.php[Text
 Briefing]
-* https://ocean.weather.gov/shtml/P_brief.shtml[OPC Pacific Weather
-Briefing] https://ocean.weather.gov/shtml/P_brief_text.shtml[Text
+* https://ocean.weather.gov/shtml/P_brief.php[OPC Pacific Weather
+Briefing] https://ocean.weather.gov/shtml/P_brief_text.php[Text
 Briefing]
 
 ===== FTP Websites
 
 https://tgftp.nws.noaa.gov/fax/[FTP WeatherFax] Most recent synoptic
 time, or near.
-https://testbed.aviationweather.gov/data/obs/sat/intl/[FTP Aviation
-Weather Satellite] https://www.goes.noaa.gov/[Noaa GOES Server] Updated
-every hour.
+// Requires authorization:
+// https://testbed.aviationweather.gov/data/obs/sat/intl/[FTP Aviation
+// Weather Satellite]
+
+// DNS lookup error:
+// https://www.goes.noaa.gov/[Noaa GOES Server] Updated every hour.
 
 ===== Lists of Filenames
 
@@ -220,9 +223,10 @@ Atlantic]
 Atlantic]
 * http://tgftp.nws.noaa.gov/fax/PWAE98.gif[Atlantic]
 * http://tgftp.nws.noaa.gov/fax/PPAE11.gif[24 hr 500mb Atlantic]
-* http://www.opc.ncep.noaa.gov/Atl_tab.shtml[NOAA Ocean Prediction
+// DNS lookup error: 
+// * http://www.opc.ncep.noaa.gov/Atl_tab.shtml[NOAA Ocean Prediction
 Center -Atlantic]
-* http://www.weathercharts.org/[UK Atlantic Forecasts]
+* https://www.weathercharts.org/[UK Atlantic Forecasts]
 
 ==== How to use Weatherfax files and the Image Wizard:
 
