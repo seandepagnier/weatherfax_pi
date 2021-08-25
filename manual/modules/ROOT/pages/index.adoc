@@ -54,7 +54,7 @@ Selected”.
 * Select forecast you need.(X)
 * Highlight and use the 'Selected' button.
 
-image::weatherfax.-inetpng.png.detail.html[]
+image::weatherfax-inetpng.png[]
 
 The plugin data directory contains an WeatherFaxInternetRetrieval.xml file that has database for meterological sites. The “Internet Retrieval” Option uses this schedule.
 
