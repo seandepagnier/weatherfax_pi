@@ -1,4 +1,4 @@
-== Weatherfax
+= Weatherfax
 
 
 image::weatherfax.png[]
@@ -7,7 +7,7 @@ Retrieves internet image files, reads image files or decodes audio and then Over
 
 image::wx-0-retrieve-internet-overlaid-on-chart.png[]
 
-=== Links
+== Links
 
 * Source: https://github.com/seandepagnier/weatherfax_pi
 * Maintenance Source: https://github.com/rgleason/weatherfax_pi
@@ -15,7 +15,7 @@ image::wx-0-retrieve-internet-overlaid-on-chart.png[]
 * Download: https://opencpn.org/OpenCPN/plugins/weatherfax.html
 * Forum: http://www.cruisersforum.com/forums/f134/weatherfax-97533.html
 
-=== Preparation
+== Preparation
 
 Install Weatherfax Plugin. Enable it in the Settings > Plugin Tab. Then open it and explore the top menus.
 
@@ -23,7 +23,7 @@ With an internet connection it is quite easy to select the “HF Radio Schedules
 
 image::wx-2-retrieve-menu.png[]
 
-=== Retrieve Weatherfax Image files with an internet connection
+== Retrieve Weatherfax Image files with an internet connection
 
 If you have an internet connection, first Retrieve > All > HF Radio Schedules. +
 Then Retrieve > Internet > Select NOAA > Select Boston (for example) >
@@ -47,7 +47,7 @@ automatically listed in the menu area.
 * Select several faxes and pick “Retrieve Scheduled” or “Retrieve
 Selected”.
 
-==== Internet Retrieval Summary
+=== Internet Retrieval Summary
 
 * Retrieve…Internet
 * Select provider and region.
@@ -96,7 +96,7 @@ charts.
 The weatherfax will be overlayed generally in the proper location
 provided the weather service has not changed their fax formats. (The user can modify the associated WeatherFaxInternetRetrieval.xml file appropriately to add or modify the actions.) Users should please post changes to this file to the Weatherfax Thread for the next release.
 
-=== HF Radio Weather Faxes
+== HF Radio Weather Faxes
 
 The plugin has a builtin database (WeatherFaxSchedules.xml) for HF Radio Weather Service Fax transmissions, which when used properly can automatically alert the user and begin decoding these faxes.
 
@@ -119,7 +119,7 @@ image::wx-b1-ret-hfradiosch-filtertab-menu.png[]
 
 // image::wx-b4-ret-hfradiosch-infotab-menu.png[]
 
-=== Decoding Sound via SSB
+== Decoding Sound via SSB
 
 Select Retrieve → Audio Capture (Ctrl+A)
 
@@ -127,7 +127,7 @@ A line from the SSB radio to the audio input of the sound card should be
 attached, and the radio tuned to the appropriate frequency (1.9khz below
 listed frequency and SSB mode) The SSB BFO must be adjusted correctly.
 
-=== Retrieve > Audio Capture shown while recieving
+== Retrieve > Audio Capture shown while recieving
 
 image::wx-a1-ret-audiocapture-recieving.png[image]
 
@@ -135,9 +135,9 @@ The images decoded can then be calibrated and overlayed on charts. The
 resulting image can be exported to a chart, so the plugin also works as
 a general purpose conversion tool to make charts from images.
 
-=== Weatherfax Image Wizard
+== Weatherfax Image Wizard
 
-==== Working with Files
+=== Working with Files
 
 The plugin can read and open numerous common image files, and audio
 files, and can save Kap files. The next step in development is to have
@@ -146,7 +146,7 @@ and reused.
 
 image::wx-1-file-menu.png[image]
 
-==== Weather Sources - David Burch Navigation Blog
+=== Weather Sources - David Burch Navigation Blog
 
 * https://www.youtube.com/watch?v=Sx_ImKxdZXI&feature=youtu.be[Georeferencing
 Sat Images in OpenCPN - Video 2018 -NEW]
@@ -164,13 +164,13 @@ and Pacific Weather Briefings - Blog 2015]
 Seas Forecasts and Tropical Cyclone Alerts by Email Request - Blog 2015]
 Metarea for Saildocs.
 
-==== Weatherfax Image File Sources
+=== Weatherfax Image File Sources
 
-===== Noaa All Weather Products
+==== Noaa All Weather Products
 
 https://www.nws.noaa.gov/om/marine/home.htm[Noaa Weather Products]
 
-===== Briefings
+==== Briefings
 
 * https://ocean.weather.gov/shtml/A_brief.php[OPC Atlantic Weather
 Briefing] https://ocean.weather.gov/shtml/A_brief_text.php[Text
@@ -179,7 +179,7 @@ Briefing]
 Briefing] https://ocean.weather.gov/shtml/P_brief_text.php[Text
 Briefing]
 
-===== FTP Websites
+==== FTP Websites
 
 https://tgftp.nws.noaa.gov/fax/[FTP WeatherFax] Most recent synoptic
 time, or near.
@@ -190,7 +190,7 @@ time, or near.
 // DNS lookup error:
 // https://www.goes.noaa.gov/[Noaa GOES Server] Updated every hour.
 
-===== Lists of Filenames
+==== Lists of Filenames
 
 * http://tgftp.nws.noaa.gov/fax/rfaxpac.txt[List of all Pacific Weather
 Map File Names]
@@ -204,7 +204,7 @@ file names]
 file names]
 * http://tgftp.nws.noaa.gov/fax/uk.txt[Selected UK map file names]
 
-===== Example Weatherfax Files
+==== Example Weatherfax Files
 
 Some example files that can be used (Gif, png, tif, etc.):
 
@@ -228,7 +228,7 @@ Atlantic]
 Center -Atlantic]
 * https://www.weathercharts.org/[UK Atlantic Forecasts]
 
-==== How to use Weatherfax files and the Image Wizard:
+=== How to use Weatherfax files and the Image Wizard:
 
 * Save the files in a new directory on your hard drive in the same
 directory as your Charts. (I called the directory FaxWx).
@@ -237,7 +237,7 @@ directory as your Charts. (I called the directory FaxWx).
 * Select Open and browse to the FaxWx directory and select a fax file.
 * Open the file.
 
-==== Objective:
+=== Objective:
 
 The objective is to set the x/y coordinates and lat/long properly so
 that the image will map directly over the proper area on the
@@ -247,7 +247,7 @@ overlay or not, depending on the skill of the user. If it does not work
 properly the first time, simply try it again. There are two basic types
 of projections the wizard can handle.
 
-===== Mercator Projections
+==== Mercator Projections
 
 If the fax is a Mercator projection (orthogonal, not polar), click
 through the next screen that comes up and at the second screen set the
@@ -259,7 +259,7 @@ I first use a separate image viewer with the selected fax image, to zoom in and 
 
 image::weatherfax-inetpng.png[]
 
-===== Polar Projections
+==== Polar Projections
 
 There are other techniques used to modify a Polar fax onto a Mercator
 projection chart which are reviewed on the forum and will be more fully
@@ -289,9 +289,9 @@ Here is an example of a WxFax overlay in Opencpn
 
 image::wx-overlay.jpeg[]
 
-=== File Export as KAP, File Open KAP
+== File Export as KAP, File Open KAP
 
-==== File Export as KAP
+=== File Export as KAP
 
 Image files that are downloaded and overlaid onto charts with specific
 coordinates, can now be saved as Kap files that save long/lat and
@@ -299,7 +299,7 @@ coordinates with the file.
 
 image::wx-export-open-kap-files.jpeg[]
 
-==== File Open KAP (Next Improvement)
+=== File Open KAP (Next Improvement)
 
 Hopefully the plugin will also be made to read Kap files so that they can be automatically overlaid on charts without having to use the WeatherFax Image Wizard.
 
