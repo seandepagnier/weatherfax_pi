@@ -64,17 +64,19 @@ if [ "$CIRCLECI" ] || [ "$TRAVIS" ]; then
     if [ ! "$DEPLOY_USE_ORB" ]; then
         if pyenv versions 2>&1 >/dev/null; then
             pyenv versions
-            if ! pyenv global 3.8.6 2>&1 >/dev/null; then
-                if ! pyenv global 3.7.1 2>&1 >/dev/null; then
-                    if ! pyenv global 3.7.0 2>&1>/dev/null; then
-                        if ! pyenv global 3.5.2 2>&1>/dev/null; then
-                            sudo apt install software-properties-common
-                            sudo apt update
-                            sudo apt install -y python3.7 python3-pip
-                            sudo rm /usr/bin/python3
-                            sudo ln -s /usr/bin/python3.7 /usr/bin/python3
-                            sudo python3.7 -m pip install --upgrade pip
-                            pyenv global 3.7
+            if ! pyenv global 3.9.1 2>&1 >/dev/null; then
+                if ! pyenv global 3.8.6 2>&1 >/dev/null; then
+                    if ! pyenv global 3.7.1 2>&1 >/dev/null; then
+                        if ! pyenv global 3.7.0 2>&1>/dev/null; then
+                            if ! pyenv global 3.5.2 2>&1>/dev/null; then
+                                sudo apt install software-properties-common
+                                sudo apt update
+                                sudo apt install -y python3.7 python3-pip
+                                sudo rm /usr/bin/python3
+                                sudo ln -s /usr/bin/python3.7 /usr/bin/python3
+                                sudo python3.7 -m pip install --upgrade pip
+                                pyenv global 3.7
+                            fi
                         fi
                     fi
                 fi

@@ -48,7 +48,7 @@ cmake  \
   -DCMAKE_CXX_COMPILER=$COMPDIR/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi21-clang++ \
   -DCMAKE_C_COMPILER=$COMPDIR/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi21-clang \
   -DOCPN_Android_Common=OCPNAndroidCommon-master \
-  -DPREFIX=/ \
+  -DCMAKE_INSTALL_PREFIX=/ \
   ..
 
 # Get number of processors and use this on make to speed up build

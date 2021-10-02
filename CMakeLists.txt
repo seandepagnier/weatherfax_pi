@@ -20,7 +20,7 @@
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                       *
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Frontend2 Version: 1.0.169.0  207/06/2021  DD/MM/YYYY
+# Frontend2 Version: 1.0.175.3  29/09/2021  DD/MM/YYYY
 #  buildCI:yes useODAPI:no validateJSON:no
 # ---------------------------------------------------------------------------
 ## ----- When changing this file do NOT change the order in which sections occur        ----- ##
@@ -55,9 +55,9 @@ set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate 
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
-set(VERSION_PATCH "18")
+set(VERSION_PATCH "19")
 set(VERSION_TWEAK "0")
-set(VERSION_DATE "23-06-2021")  # DD/MM/YYYY format
+set(VERSION_DATE "02-10-2021")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -389,6 +389,8 @@ set(EXTINCLUDE_DIR ${EXTINCLUDE_DIR} extinclude libs/ocpn-api/)
 ## +++++++++Section above is added recently to Weatherfax set ++++++++++##
 ##++++++++++++RTLSDR Section directly from Weatherfax +++++++++##
 
+# Not doing Json_schema_validation.
+
 IF(UNIX)
   find_library(RTLSDR_LIBRARY NAMES rtlsdr
     DOC "The rtlsdr library"
@@ -431,6 +433,13 @@ include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxJSON/include)
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
 INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
+
+if(QT_ANDROID)
+    include_directories(BEFORE ${qt_android_include})
+    include_directories( ${CMAKE_SOURCE_DIR}/extinclude/GLES2)
+    #    #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/glshim/include/GLES)
+endif(QT_ANDROID)
+    
 
 ## Required to collect all the set( headers and SRCS  - Adjust as required
 ##==========================================================================
