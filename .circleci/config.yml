@@ -38,17 +38,26 @@ parameters:
         default: true
     run_build_flatpack:
         type: boolean
+        default: false
+    run_build_flatpak_x86_1808:
+        type: boolean
+        default: true
+    run_build_flatpak_x86_2008:
+        type: boolean
         default: true
     run_build_flatpack-arm64:
         type: boolean
         default: true
     run_build_fedora:
         type: boolean
-        default: true
+        default: false
     run_build_mingw:
         type: boolean
         default: true
     run_build_macos:
+        type: boolean
+        default: true
+    run_build_macos_wx315:
         type: boolean
         default: true
     run_build_android_arm64:
@@ -106,7 +115,7 @@ jobs:
             - run: ci/cloudsmith-upload.sh
     build-armhf-bionic-64:
         machine:
-            image: ubuntu-1604:202010-01
+            image: ubuntu-2004:202104-01
         environment:
         - OCPN_TARGET=bionic-arm64
         - OCPN_BRANCH=master
@@ -301,25 +310,10 @@ jobs:
             - run: ci/cloudsmith-upload.sh
     build-flatpak:
         machine:
-            image: circleci/classic:201808-01
+            image: ubuntu-2004:202010-01
         environment:
         - OCPN_TARGET:  flatpak
-        - CLOUDSMITH_PKG_EXT: gz
-        - SDK_VER: 18.08
-        steps:
-        - checkout
-        - run: chmod a+x ci/*.sh
-        - run: bash ci/circleci-build-flatpak.sh
-        - when:
-            condition: <<pipeline.parameters.run_workflow_deploy>>
-            steps:
-            - run: ci/cloudsmith-upload.sh
-    build-flatpak-arm64:
-        machine:
-            image: circleci/classic:201808-01
-        environment:
-        - OCPN_TARGET:  flatpak-arm64
-        - FLATPAK_BRANCH: beta
+        - FLATPAK_BRANCH: stable
         - CLOUDSMITH_PKG_EXT: gz
         - SDK_VER: 20.08
         steps:
@@ -329,6 +323,66 @@ jobs:
         - when:
             condition: <<pipeline.parameters.run_workflow_deploy>>
             steps:
+            - run: ci/cloudsmith-upload.sh
+    build-flatpak-x86-1808:
+        machine:
+            image: ubuntu-2004:202010-01
+        environment:
+        - OCPN_TARGET:  flatpak
+        - FLATPAK_BRANCH: stable
+        - CLOUDSMITH_PKG_EXT: gz
+        - SDK_VER: 18.08
+        - DEPLOY_USE_ORB: true
+        steps:
+        - checkout
+        - run: chmod a+x ci/*.sh
+        - run: bash ci/circleci-build-flatpak.sh
+        - when:
+            condition: <<pipeline.parameters.run_workflow_deploy>>
+            steps:
+            - cloudsmith/ensure-api-key
+            - cloudsmith/install-cli
+            - run: ci/cloudsmith-upload.sh
+    build-flatpak-x86-2008:
+        machine:
+            image: ubuntu-2004:202010-01
+        environment:
+        - OCPN_TARGET:  flatpak
+        - FLATPAK_BRANCH: beta
+        - CLOUDSMITH_PKG_EXT: gz
+        - SDK_VER: 20.08
+        - DEPLOY_USE_ORB: true
+        steps:
+        - checkout
+        - run: chmod a+x ci/*.sh
+        - run:
+            command: bash ci/circleci-build-flatpak.sh
+            no_output_timeout: 30m
+        - when:
+            condition: <<pipeline.parameters.run_workflow_deploy>>
+            steps:
+            - cloudsmith/ensure-api-key
+            - cloudsmith/install-cli
+            - run: ci/cloudsmith-upload.sh
+    build-flatpak-arm64:
+        machine:
+            image: ubuntu-2004:202101-01
+        resource_class: arm.medium
+        environment:
+        - OCPN_TARGET:  flatpak-arm64
+        - FLATPAK_BRANCH: beta
+        - CLOUDSMITH_PKG_EXT: gz
+        - SDK_VER: 20.08
+        - DEPLOY_USE_ORB: true
+        steps:
+        - checkout
+        - run: chmod a+x ci/*.sh
+        - run: bash ci/circleci-build-flatpak.sh
+        - when:
+            condition: <<pipeline.parameters.run_workflow_deploy>>
+            steps:
+            - cloudsmith/ensure-api-key
+            - cloudsmith/install-cli
             - run: ci/cloudsmith-upload.sh
     build-fedora:
         docker:
@@ -364,11 +418,30 @@ jobs:
             - run: ci/cloudsmith-upload.sh
     build-macos:
         macos:
-            xcode: "11.0.0"
+            xcode: "12.5.1"
         environment:
         - OCPN_TARGET:  macos
         - CLOUDSMITH_PKG_EXT: pkg
         - DEPLOY_USE_ORB: true
+        - WXVERSION: 312
+        steps:
+        - checkout
+        - run: chmod a+x ci/*.sh
+        - run: bash ci/circleci-build-macos.sh
+        - when:
+            condition: <<pipeline.parameters.run_workflow_deploy>>
+            steps:
+            - cloudsmith/ensure-api-key
+            - cloudsmith/install-cli
+            - run: ci/cloudsmith-upload.sh
+    build-macos-wx315:
+        macos:
+            xcode: "12.5.1"
+        environment:
+        - OCPN_TARGET:  macos
+        - CLOUDSMITH_PKG_EXT: pkg
+        - DEPLOY_USE_ORB: true
+        - WXVERSION: 315
         steps:
         - checkout
         - run: chmod a+x ci/*.sh
@@ -405,10 +478,6 @@ jobs:
             condition: <<pipeline.parameters.run_workflow_deploy>>
             steps:
             - run: ci/cloudsmith-upload.sh
-            # the next process relies on circleci local being run with "--volume --volume <full path to directory for build> /circleci-output:/home/circleci/circleci-output"
-            # it will copy the generated gz file to the local drive so that it can be tested without neededing cloudsmith for the deployment. It is adised to use the "-e DONT_DEPLOY=true"
-            # setting on the circleci command line as this will supress the deploy to cloudsmith whilst generating all the required deployment files
-            #- run: sudo cp build/*.gz ~/circleci-output
 workflows:
     build_1:
         when: <<pipeline.parameters.run_build_armhf_stretch>>
@@ -523,17 +592,18 @@ workflows:
                     - tmp
                 tags:
                     only: /.*/
-    build_11:
-        when: <<pipeline.parameters.run_build_flatpack>>
-        jobs:
-        - build-flatpak:
-            filters:
-                branches:
-                    ignore:
-                    - devel
-                    - tmp
-                tags:
-                    only: /.*/
+# Removed as replaced by following flatpack builds
+#    build_11:
+#        when: <<pipeline.parameters.run_build_flatpack>>
+#        jobs:
+#        - build-flatpak:
+#            filters:
+#                branches:
+#                    ignore:
+#                    - devel
+#                    - tmp
+#                tags:
+#                    only: /.*/
     build_12:
         when: <<pipeline.parameters.run_build_flatpack-arm64>>
         jobs:
@@ -545,8 +615,30 @@ workflows:
                     - tmp
                 tags:
                     only: /.*/
+    build_13:
+        when: <<pipeline.parameters.run_build_flatpak_x86_2008>>
+        jobs:
+        - build-flatpak-x86-2008:
+            filters:
+                branches:
+                    ignore:
+                    - devel
+                    - tmp
+                tags:
+                    only: /.*/
+    build_14:
+        when: <<pipeline.parameters.run_build_flatpak_x86_1808>>
+        jobs:
+        - build-flatpak-x86-1808:
+            filters:
+                branches:
+                    ignore:
+                    - devel
+                    - tmp
+                tags:
+                    only: /.*/
 # Fedora is being removed from the supplied list of environments so don't build
-#    build_12:
+#    build_15:
 #        when: <<pipeline.parameters.run_build_fedora>>
 #        jobs:
 #        - build-fedora:
@@ -557,7 +649,7 @@ workflows:
 #                    - tmp
 #                tags:
 #                    only: /.*/
-    build_13:
+    build_16:
         when: <<pipeline.parameters.run_build_mingw>>
         jobs:
         - build-mingw:
@@ -568,7 +660,7 @@ workflows:
                     - tmp
                 tags:
                     only: /.*/
-    build_14:
+    build_17:
         when: <<pipeline.parameters.run_build_macos>>
         jobs:
         - build-macos:
@@ -579,7 +671,18 @@ workflows:
                     - tmp
                 tags:
                     only: /.*/
-    build_15:
+    build_18:
+        when: <<pipeline.parameters.run_build_macos_wx315>>
+        jobs:
+        - build-macos-wx315:
+            filters:
+                branches:
+                    ignore:
+                    - devel
+                    - tmp
+                tags:
+                    only: /.*/
+    build_19:
         when: <<pipeline.parameters.run_build_android_arm64>>
         jobs:
         - build-android-arm64:
@@ -590,7 +693,7 @@ workflows:
                     - tmp
                 tags:
                     only: /.*/
-    build_16:
+    build_20:
         when: <<pipeline.parameters.run_build_android_armhf>>
         jobs:
         - build-android-armhf:

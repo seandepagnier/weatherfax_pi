@@ -20,7 +20,7 @@
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                       *
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Frontend2 Version: 1.0.175.3  29/09/2021  DD/MM/YYYY
+# Frontend2 Version: 1.0.175.4  29/09/2021  DD/MM/YYYY
 #  buildCI:yes useODAPI:no validateJSON:no
 # ---------------------------------------------------------------------------
 ## ----- When changing this file do NOT change the order in which sections occur        ----- ##
@@ -347,26 +347,9 @@ SET(SRC_AUDIOFILE
             src/libaudiofile/modules/SimpleModule.cpp
 )
 
-# Not needed, currently using cmake/PluginGL.cmake  Line 594
-#SET (SRC_PLUGINGL
-#			src/plugingl/linmath.h
-#			src/plugingl/pi_shaders.h
-#			src/plugingl/pidc.h
-#			src/plugingl/qtstylesheet.h
-#			src/plugingl/TexFont.h
-#           src/plugingl/pi_shaders.cpp
-#			src/plugingl/pidc.cpp
-#			src/plugingl/qtstylesheet.cpp
-#			src/plugingl/TexFont.cpp
-#)
+# Currently using cmake/PluginGL.cmake  Line 594
 
-# Not needed, see cmake/PluginXML.cmake  Line 593, Also now using cmakelists.txt  libs/tinyxml
-#SET (SRC_TINYXML
-#           src/tinyxml/tinyxml.cpp
-#			src/tinyxml/tinyxmlerror.cpp
-#			src/tinyxml/tinyxmlparser.cpp
-#			src/tinyxml/tinyxml.h
-#)
+# See cmake/PluginXML.cmake  Line 593, Also now using cmakelists.txt  libs/tinyxml
 
 #is this needed? -Do not seem to need this for windows
 # set(LIBSSRC libs/wxJSON/src/jsonreader.cpp libs/wxJSON/src/jsonval.cpp libs/wxJSON/src/jsonwriter.cpp)
