@@ -53,6 +53,31 @@ weatherfax_pi::weatherfax_pi(void *ppimgr)
 {
     // Create the PlugIn icons
     initialize_images();
+	
+	// Create the PlugIn icons  -from shipdriver
+    // loads png file for the listing panel icon
+    wxFileName fn;
+    auto path = GetPluginDataDir("weatherfax_pi");
+    fn.SetPath(path);
+    fn.AppendDir("data");
+    fn.SetFullName("weatherfax_panel.png");
+
+    path = fn.GetFullPath();
+
+    wxInitAllImageHandlers();
+
+    wxLogDebug(wxString("Using icon path: ") + path);
+    if (!wxImage::CanRead(path)) {
+        wxLogDebug("Initiating image handlers.");
+        wxInitAllImageHandlers();
+    }
+    wxImage panelIcon(path);
+    if (panelIcon.IsOk())
+        m_panelBitmap = wxBitmap(panelIcon);
+    else
+        wxLogWarning("Weather_Routing Navigation Panel icon has NOT been loaded");
+// End of from Shipdriver	
+
 }
 
 //---------------------------------------------------------------------------------------------------------
@@ -130,10 +155,14 @@ int weatherfax_pi::GetPlugInVersionMinor()
     return PLUGIN_VERSION_MINOR;
 }
 
-wxBitmap *weatherfax_pi::GetPlugInBitmap()
-{
-    return new wxBitmap(_img_weatherfax->ConvertToImage().Copy());
-}
+//wxBitmap *weatherfax_pi::GetPlugInBitmap()
+//{
+//    return new wxBitmap(_img_weatherfax->ConvertToImage().Copy());
+//}
+
+// Shipdriver uses the climatology_panel.png file to make the bitmap.
+wxBitmap *weatherfax_pi::GetPlugInBitmap()  { return &m_panelBitmap; }
+// End of shipdriver process
 
 wxString weatherfax_pi::GetCommonName()
 {
