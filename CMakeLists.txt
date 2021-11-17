@@ -20,7 +20,7 @@
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                       *
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Frontend2 Version: 1.0.176.1  07/10/2021  DD/MM/YYYY
+# Frontend2 Version: 1.0.180  17/11/2021  DD/MM/YYYY
 #  buildCI:yes useODAPI:no validateJSON:no
 # ---------------------------------------------------------------------------
 ## ----- When changing this file do NOT change the order in which sections occur        ----- ##
@@ -33,12 +33,14 @@
 set(CMLOC "CMakeLists: ")
 
 # define minimum cmake version
-cmake_minimum_required(VERSION 3.1.1)
+cmake_minimum_required(VERSION 3.5.1)
 if(COMMAND cmake_policy)
     if(POLICY CMP0043)
         cmake_policy(SET CMP0043 NEW)
     endif(POLICY CMP0043)
     cmake_policy(SET CMP0048 NEW)
+# Need cmake 3.13 to implement this, but raspbian builds are at 3.7.2 and bionic at 3.10 and xenial builds at 3.5.1
+#    cmake_policy(SET CMP0076 NEW)
     if(POLICY CMP0077)
         cmake_policy(SET CMP0077 NEW)
     endif(POLICY CMP0077)
@@ -55,9 +57,9 @@ set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate 
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
-set(VERSION_PATCH "22")
+set(VERSION_PATCH "23")
 set(VERSION_TWEAK "0")
-set(VERSION_DATE "08-10-2021")  # DD/MM/YYYY format
+set(VERSION_DATE "17-11-2021")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -84,10 +86,9 @@ set(ALPHA "alpha") #Standard Repos
 set(CLOUDSMITH_BASE_REPOSITORY "weatherfax")
 
 # Set the following to use OpenCPN cloudsmith repositories instead of own repositories
-#set(CLOUDSMITH_USER "rick-gleason")
 set(CLOUDSMITH_USER "opencpn")
+#set(CLOUDSMITH_USER "rick-gleason")
 
-# Set Plugin info-url, summary and description
 set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/weatherfax.html")
 set(XML_SUMMARY  ${SHORT_DESCRIPTION})
 set(XML_DESCRIPTION  ${LONG_DESCRIPTION})
@@ -99,11 +100,11 @@ option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
 set(CMAKE_CXX_STANDARD 11)
 
-# Don't use local version of GLU library
-set(USE_LOCAL_GLU FALSE)
 
 # Prefer libGL.so to libOpenGL.so, see CMP0072
 set(OpenGL_GL_PREFERENCE "LEGACY")
+# Don't use local version of GLU library
+set(USE_LOCAL_GLU FALSE)
 
 # For Weatherfax this must be set ON or it fails to compile
 option(USE_GL "Enable OpenGL support" ON)
@@ -347,12 +348,37 @@ SET(SRC_AUDIOFILE
             src/libaudiofile/modules/SimpleModule.cpp
 )
 
-# Currently using cmake/PluginGL.cmake  Line 594
 
-# See cmake/PluginXML.cmake  Line 593, Also now using cmakelists.txt  libs/tinyxml
+set(OCPNSRC
+    ocpnsrc/cutil.cpp
+    ocpnsrc/TexFont.cpp
+)
+
+set(OCPNHDRS
+    ocpninclude/cutil.h
+#    ocpninclude/ocpn_plugin.h
+    ocpninclude/pluginmanager.h
+    ocpninclude/shaders.h
+    ocpninclude/TexFont.h
+    ocpninclude/vector2D.h
+    libs/ocpn-api/ocpn_plugin.h
+)
+
+set(EXTSRC
+)
+
+set(EXTINCLUDE
+    extinclude/ODAPI.h
+    extinclude/ODJSONSchemas.h
+)
 
 #is this needed? -Do not seem to need this for windows
-# set(LIBSSRC libs/wxJSON/src/jsonreader.cpp libs/wxJSON/src/jsonval.cpp libs/wxJSON/src/jsonwriter.cpp)
+set(LIBSSRC libs/wxJSON/src/jsonreader.cpp libs/wxJSON/src/jsonval.cpp libs/wxJSON/src/jsonwriter.cpp)
+
+# Currently using cmake/PluginGL.cmake  Line 594
+# See cmake/PluginXML.cmake  Line 593, Also now using cmakelists.txt  libs/tinyxml
+
+
 
 #is this needed? windows seems to still work when commented out, still using pluginGL.cmake
 set(LIBHDRS
@@ -360,10 +386,11 @@ set(LIBHDRS
     libs/GL/gl_private.h
     libs/GL/glext.h
     libs/GL/glu.h
-    libs/wx/include/json_defs.h
-    libs/wx/include/jsonreader.h
-    libs/wx/include/jsonval.h
-    libs/wx/include/jsonwriter.h)
+    libs/wxJSON/include/json_defs.h
+    libs/wxJSON/include/jsonreader.h
+    libs/wxJSON/include/jsonval.h
+    libs/wxJSON/include/jsonwriter.h
+    )
 
 add_definitions(-DPLUGIN_USE_SVG)
 
@@ -372,7 +399,15 @@ set(EXTINCLUDE_DIR ${EXTINCLUDE_DIR} extinclude libs/ocpn-api/)
 ## +++++++++Section above is added recently to Weatherfax set ++++++++++##
 ##++++++++++++RTLSDR Section directly from Weatherfax +++++++++##
 
+#
+# ----- If using JSON validation in plugin section below is needed ----- ##
+#
+
 # Not doing Json_schema_validation.
+
+#
+# ----- If using JSON validation in plugin section above is needed ----- ##
+#
 
 IF(UNIX)
   find_library(RTLSDR_LIBRARY NAMES rtlsdr
@@ -405,24 +440,29 @@ ENDIF(WIN32)
 ##=============================================================
 # Modify/configure 'Include' Directories below for the Plugin
 ##=============================================================
-# EG  also inside cmake/Plugin____.cmake files
-# needed?
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include)
 
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpnsrc/glu/include)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/${EXTINCLUDE_DIR})
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/GL)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
-# include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wx/include)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxJSON/include)
-INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
-INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
+
+#
+# ----- Change below to match project requirements for android build ----- ##
+#
 
 if(QT_ANDROID)
-    include_directories(BEFORE ${qt_android_include})
-    include_directories( ${CMAKE_SOURCE_DIR}/extinclude/GLES2)
-    #    #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/glshim/include/GLES)
+    include_directories( ${PROJECT_SOURCE_DIR}/extinclude/GLES2)
 endif(QT_ANDROID)
-    
+
+##
+## ----- Change above to match project requirements for android build ----- ##
+##
 
 ## Required to collect all the set( headers and SRCS  - Adjust as required
 ##==========================================================================
@@ -437,7 +477,9 @@ message(STATUS "${CMLOC}Adding PLUGINS_LIBS: ${EXTRA_LIBS}")
 if(NOT OCPN_FLATPAK_CONFIG)
     # Build environment not available when flatpak is being configured so following statements will not work
     message(STATUS "${CMLOC}Adding target link libraries to ${PACKAGE_NAME}")
+
     add_subdirectory(libs/tinyxml)
+
     target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
 endif(NOT OCPN_FLATPAK_CONFIG)
 
@@ -445,65 +487,37 @@ include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/plugingl/include)
 add_subdirectory(libs/plugingl)
 target_link_libraries(${PACKAGE_NAME} ocpn::plugingl)
 
+add_definitions(-DTIXML_USE_STL)
+
 ##++++++++++Section above from Weatherfax located relative to where it was  ++++++++
 ##
 ## ----- Change below to match project requirements ----- ##
 ##
 
 
-# ---------------------------------------------
-#  PI_JSON SCHEMA VALIDATOR  From Testplugin
-# ---------------------------------------------
+#
+# ----- If using JSON validation in plugin section below is needed ----- ##
+#
 
-# Every plugin that uses JSON for passing messages should use a validator. The validator  allows the system to ignore non-conformant messages.
+# Not doing Json_schema_validation.
 
-add_definitions(-DTIXML_USE_STL)
-
-if(UNIX AND NOT APPLE AND NOT QT_ANDROID)
-    if(PI_JSON_SCHEMA_VALIDATOR)
-        # Change OS/ABI to be UNIX - System V to make it run with OCPN
-        set(lib_name lib${PACKAGE_NAME}.so)
-        message(STATUS "${CMLOC}lib-name: ${lib_name}")
-        find_file(elfedit elfedit)
-        if(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-            message(STATUS "${CMLOC}Will ensure OS/ABI is set to 0 to match OCPN")
-            add_custom_command(
-                TARGET ${PACKAGE_NAME}
-                POST_BUILD
-                WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                DEPENDS ${PACKAGE_NAME}
-                COMMENT " Running post build action on ${lib_name}."
-                COMMAND sh -c 'elfedit --input-osabi=Linux --output-osabi=none ${lib_name} || (echo 0) ')
-
-        else(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-            message(STATUS "${CMLOC}Cannot correct OS/ABI to match OCPN if it is generated incorrectly. Package binutils needed")
-        endif(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
-    endif(PI_JSON_SCHEMA_VALIDATOR)
-endif(UNIX AND NOT APPLE AND NOT QT_ANDROID)
-
-# ---------------------------------------------
-#    End of JSON VALIDATOR From Testplugin
-# ---------------------------------------------
+#
+# ----- If using JSON validation in plugin section above is needed ----- ##
+#
 
 ## ----- Change above to match project requirements ----- ##
+##
+## ----- do not change next section - needed to configure build process ----- ##
+##
+
 # Needed for android builds
 if(QT_ANDROID)
     include_directories(BEFORE ${qt_android_include})
 endif(QT_ANDROID)
 
-# ----- Change above to match project requirements ----- ##
-#------- Change below to match project requirements --------------#
-
-##----Optional cmake files-----
-##=======================================
-# include("PluginNMEA") #not for wxfax
-# include("PluginJSON")  #not for wxfax
-# include("PluginXML")  #try using cmakelists.txt lib tinyxml - works
-# include("PluginGL")  #try using cmakelists.xt lib plugingl
-##=======================================
 
 
-## ----- do not change next section - needed to configure build process ----- ##
+# Needed for all builds
 ##=======================================
 include("PluginInstall")
 include("PluginLocalization")
