@@ -1,5 +1,3 @@
-# ---------------------------------------------------------------------------
-# Frontend2 Author: jongough aka. Jon Gough    License:wxWidgets License
 ##---------------------------------------------------------------------------
 ## Author:      Sean d'Epagnier
 ##***************************************************************************
@@ -20,7 +18,7 @@
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                       *
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Frontend2 Version: 1.0.185.0  08/12/2021  DD/MM/YYYY
+# Testplugin Version: 1.0.193.0  02/17/2022  DD/MM/YYYY
 #  buildCI:yes useODAPI:no validateJSON:no
 # ---------------------------------------------------------------------------
 ## ----- When changing this file do NOT change the order in which sections occur        ----- ##
@@ -58,8 +56,8 @@ set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "28")
-set(VERSION_TWEAK "0")
-set(VERSION_DATE "09-12-2021")  # DD/MM/YYYY format
+set(VERSION_TWEAK "1")
+set(VERSION_DATE "02-26-2022")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -67,12 +65,7 @@ set(TP_COMMENT "  * Release for O5 using CI")
 
 set(PARENT "opencpn")
 
-#No longer needed, queried.
-#set(GIT_USER "rgleason")
-#set(GIT_REPOSITORY_NAME "weatherfax_pi")
-
 # The next line allows setup of a local web server with git for testing purposes.
-# The default shown below is done in cmake/pluginconfigure.cmake now, is needed to build locally and to build flatpak.
 #set(GIT_REPOSITORY_SERVER "github.com")
 
 # Specifies Cloudsmith upload repository suffix for each catalog
@@ -81,7 +74,6 @@ set(BETA "beta")   #Standard Repos
 set(ALPHA "alpha") #Standard Repos
 
 # Set if yourCloudsmith Base Repository name does not match your Git Repository name.
-#set(CLOUDSMITH_BASE_REPOSITORY "weatherfax_pi")
 # set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization
 set(CLOUDSMITH_BASE_REPOSITORY "weatherfax")
 
@@ -101,10 +93,10 @@ option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 set(CMAKE_CXX_STANDARD 11)
 
 
-# Prefer libGL.so to libOpenGL.so, see CMP0072
-set(OpenGL_GL_PREFERENCE "LEGACY")
 # Don't use local version of GLU library
 set(USE_LOCAL_GLU FALSE)
+# Prefer libGL.so to libOpenGL.so, see CMP0072
+set(OpenGL_GL_PREFERENCE "LEGACY")
 
 # For Weatherfax this must be set ON or it fails to compile
 option(USE_GL "Enable OpenGL support" ON)
@@ -468,8 +460,7 @@ endif(QT_ANDROID)
 ##==========================================================================
 target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${EXTSRC} ${SRC_AUDIOFILE})
 ##==========================================================================
-#ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML} )
-#target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${SRC_AUDIOFILE} ${SRC_PLUGINGL} ${SRC_TINYXML})
+
 
 TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 message(STATUS "${CMLOC}Adding PLUGINS_LIBS: ${EXTRA_LIBS}")
