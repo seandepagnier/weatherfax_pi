@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <OCPNWeatherFaxInternetRetrieval>
-  <Server Name="Australia bom" Url="http://www.bom.gov.au/charts_data/">
+  <Server Name="Australia bom" Url="http://www.bom.gov.au/fwo/">
     <Region Name="Australia">
       <Iterator From="3" To="72" By="3">
         <Map Url="IDY20301/current/mslp-precip/IDY20301.mslp-precip.%03d.png"
