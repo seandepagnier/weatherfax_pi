@@ -315,9 +315,16 @@ It is the User's job to update this information, by sending newly updated files 
 
 Note that the file weatherfaxinternetretrieval.xml has been separated into world region xml files, to make this task easier. We need voluteers to take a region and send in updates every six months to a year.  Github pull requests to the maintainer for these changes are easiest, but emailed files are accepted too.
 
-David Burch's Blog has made some videos which help to explain how to update the world regional xmls and the coordinateset.xml file.
-https://www.youtube.com/watch?v=Ks4JwUYu84w[How to update file souces for OpenCPN weatherfax plugin]  Keep in mind that the World Regional weatherfaxInternetRetrieval (xml) files are now separated.
+The critical files are:
+    Regional WeatherFaxInternetRetrieval.xml's (multiple files)
+    CoordinateSets.xml
 
+Keep in mind that the World Regional weatherfaxInternetRetrieval (xml) files are now separated.
+
+David Burch's Blog has made some videos which help to explain how to update the world regional xmls and the coordinateset.xml file.
+https://www.youtube.com/watch?v=Ks4JwUYu84w[How to update file souces for OpenCPN weatherfax plugin]  
+
+http://davidburchnavigation.blogspot.com/search?q=weatherfax[How to update file souces for OpenCPN weatherfax plugin]
 
 
 
