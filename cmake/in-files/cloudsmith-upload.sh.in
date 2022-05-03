@@ -71,19 +71,17 @@ if [ "$CIRCLECI" ] || [ "$TRAVIS" ]; then
                             if ! pyenv global 3.5.2 2>&1>/dev/null; then
                                 sudo apt install software-properties-common
                                 sudo apt update
-                                sudo apt install -y python3.7 python3-pip
+                                sudo apt install -y python3.8 python3-pip
                                 sudo rm /usr/bin/python3
-                                sudo ln -s /usr/bin/python3.7 /usr/bin/python3
-                                sudo python3.7 -m pip install --upgrade pip
-                                pyenv global 3.7
+                                sudo ln -s /usr/bin/python3.8 /usr/bin/python3
+                                pyenv global 3.8
                             fi
                         fi
                     fi
                 fi
             fi
             python3 --version
-            pip install -U pip
-            python3 -m pip install cloudsmith-cli
+            sudo python3 -m pip install cloudsmith-cli
             pyenv rehash
         elif dnf --version 2>&1 >/dev/null; then
             sudo dnf -y install python3-pip python3-setuptools
@@ -92,9 +90,9 @@ if [ "$CIRCLECI" ] || [ "$TRAVIS" ]; then
             COUNTER=0
             sudo apt install software-properties-common
             sudo apt update
-            sudo apt install -y python3.7
+            sudo apt install -y python3.8
             sudo rm /usr/bin/python3
-            sudo ln -s /usr/bin/python3.7 /usr/bin/python3
+            sudo ln -s /usr/bin/python3.8 /usr/bin/python3
             until
                 sudo apt-get install python3-pip python3-setuptools
             do
@@ -261,7 +259,7 @@ elif [ $LOCAL_BUILD = false ]; then
 
         if [ "${PKG_EXT}" != "gz" ] && [ "$pkg" != "" ]; then
             cloudsmith push raw --republish --no-wait-for-sync \
-                --name opencpn-package-@PACKAGE@-@PACKAGE_VERSION@-@PKG_TARGET@-@ARCH@PKG_TARGET_WX_VER@-@PKG_TARGET_VERSION@-${OCPN_TARGET}.${PKG_EXT} \
+                --name opencpn-package-@PACKAGE@-@PACKAGE_VERSION@-@PKG_TARGET@-@ARCH@@PKG_TARGET_WX_VER@-@PKG_TARGET_VERSION@-${OCPN_TARGET}.${PKG_EXT} \
                 --version ${VERSION} \
                 --summary "@PACKAGE@ .${PKG_EXT} installation package" \
                 $REPO $pkg
