@@ -19,18 +19,31 @@
 	 </Region>
   </Server>
   <Server Name="UK MET" Url="http://old.wetterzentrale.de/pics/">
-    <Region Name="Central">
-      <Map Url="bracka.gif" Contents="Surface Anlys" Area="A" />
-      <Map Url="brack0.gif" Contents="24hr Forecast" Area="A" />
-      <Map Url="brack0a.gif" Contents="36hr Forecast" Area="A" />
-      <Map Url="brack1.gif" Contents="48hr Forecast" Area="A" />
-      <Map Url="brack1a.gif" Contents="60hr Forecast" Area="A" />
-      <Map Url="brack2.gif" Contents="72hr Forecast" Area="A" />
-      <Map Url="brack2a.gif" Contents="84hr Forecast" Area="A" />
-      <Map Url="brack3.gif" Contents="96hr Forecast" Area="A" />
-      <Map Url="brack4.gif" Contents="120hr Forecast" Area="A" />
+ <Server Name="UK MET" Url="https://www.wetterzentrale.de/maps/">
+    <Region Name="Europe">
+      <Map Url="UKMHDOPEU00_0_1.png" Contents="Surface Anlys 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_6_1.png" Contents="6hr Forecast 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_12_1.png" Contents="12hr Forecast 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_18_1.png" Contents="18hr Forecast 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_24_1.png" Contents="24hr Forecast 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_30_1.png" Contents="30hr Forecast 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_36_1.png" Contents="36hr Forecast 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_42_1.png" Contents="42hr Forecast 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_48_1.png" Contents="48hr Forecast 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_54_1.png" Contents="54hr Forecast 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_60_1.png" Contents="60hr Forecast 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_66_1.png" Contents="66hr Forecast 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_72_1.png" Contents="72hr Forecast 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_78_1.png" Contents="78hr Forecast 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_84_1.png" Contents="84hr Forecast 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_90_1.png" Contents="90hr Forecast 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_96_1.png" Contents="96hr Forecast 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_102_1.png" Contents="102hr Forecast 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_108_1.png" Contents="108hr Forecast 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_114_1.png" Contents="114hr Forecast 00Z" Area="A" />
+      <Map Url="UKMHDOPEU00_120_1.png" Contents="120hr Forecast 00Z" Area="A" />
       <Area Name="A" lat1="40N" lat2="80N" lon1="40E" lon2="60W" />
-	 </Region>
+    </Region>
   </Server>
   <Server Name="WeatherchartsUK" Url="http://www.weathercharts.net/">
     <Region Name="UK">
