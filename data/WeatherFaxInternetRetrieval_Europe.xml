@@ -18,7 +18,6 @@
       <Area Name="C" lat1="30N" lat2="70N" lon1="40E" lon2="40W" />
 	 </Region>
   </Server>
-  <Server Name="UK MET" Url="http://old.wetterzentrale.de/pics/">
  <Server Name="UK MET" Url="https://www.wetterzentrale.de/maps/">
     <Region Name="Europe">
       <Map Url="UKMHDOPEU00_0_1.png" Contents="Surface Anlys 00Z" Area="A" />

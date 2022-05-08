@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <OCPNWeatherFaxInternetRetrieval>
   <Server Name="Australia bom" Url="http://www.bom.gov.au/fwo/">
-    <Region Name="Australia">
+      <Region Name="Australia Test"> 
+         <Map Url="IDY00030.202205071800.png"
+             Contents="Surface Pressure Analysis" Area="Australia" />
+		 <Area Name="Australia" lat1="55S" lat2="0S" lon1="90E" lon2="180E" />	 
+     </Region>
+     <Region Name="Australia">
       <Iterator From="3" To="72" By="3">
         <Map Url="IDY20301/current/mslp-precip/IDY20301.mslp-precip.%03d.png"
              Contents="Surface Pressure &amp; Rainfall t+%03d" Area="Australia" />
