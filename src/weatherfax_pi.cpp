@@ -53,31 +53,6 @@ weatherfax_pi::weatherfax_pi(void *ppimgr)
 {
     // Create the PlugIn icons
     initialize_images();
-	
-	// Create the PlugIn icons  -from shipdriver
-    // loads png file for the listing panel icon
-    wxFileName fn;
-    auto path = GetPluginDataDir("weatherfax_pi");
-    fn.SetPath(path);
-    fn.AppendDir("data");
-    fn.SetFullName("weatherfax_panel.png");
-
-    path = fn.GetFullPath();
-
-    wxInitAllImageHandlers();
-
-    wxLogDebug(wxString("Using icon path: ") + path);
-    if (!wxImage::CanRead(path)) {
-        wxLogDebug("Initiating image handlers.");
-        wxInitAllImageHandlers();
-    }
-    wxImage panelIcon(path);
-    if (panelIcon.IsOk())
-        m_panelBitmap = wxBitmap(panelIcon);
-    else
-        wxLogWarning("Weather_Routing Navigation Panel icon has NOT been loaded");
-// End of from Shipdriver	
-
 }
 
 //---------------------------------------------------------------------------------------------------------
@@ -155,14 +130,10 @@ int weatherfax_pi::GetPlugInVersionMinor()
     return PLUGIN_VERSION_MINOR;
 }
 
-//wxBitmap *weatherfax_pi::GetPlugInBitmap()
-//{
-//    return new wxBitmap(_img_weatherfax->ConvertToImage().Copy());
-//}
-
-// Shipdriver uses the climatology_panel.png file to make the bitmap.
-wxBitmap *weatherfax_pi::GetPlugInBitmap()  { return &m_panelBitmap; }
-// End of shipdriver process
+wxBitmap *weatherfax_pi::GetPlugInBitmap()
+{
+    return new wxBitmap(_img_weatherfax->ConvertToImage().Copy());
+}
 
 wxString weatherfax_pi::GetCommonName()
 {
@@ -332,8 +303,7 @@ bool weatherfax_pi::LoadConfig(void)
     pConf->Read ( _T ( "SoundingDatum" ), &m_sExportSoundingDatum, _T("LOWEST LOW WATER"));
 
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Updates" ) );
-    pConf->Read( _T("UpdateDataBaseUrl"), &m_UpdateDataBaseUrl, _T(
-	"https://github.com/rgleason/weatherfax_pi/blob/master/data/") );//"https://raw.githubusercontent.com/rgleason/weatherfax_pi/master/data/") );
+    pConf->Read( _T("UpdateDataBaseUrl"), &m_UpdateDataBaseUrl, _T("https://github.com/seandepagnier/weatherfax_pi/raw/master/data/") );
 
     return true;
 }
@@ -435,4 +405,3 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
     }
     delete dialog;
 }
-

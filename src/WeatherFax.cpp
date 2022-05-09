@@ -40,7 +40,7 @@
 
 #include "wximgkap.h"
 
-#ifdef __OCPN__ANDROID__ 
+#ifdef __OCPN__ANDROID__
 #include <qdebug.h>
 #endif
 
@@ -182,7 +182,7 @@ static void LoadCoordinatesFromXml(WeatherFaxImageCoordinateList &coords, wxStri
 
                 coord->mapping = WeatherFaxImageCoordinates::GetMapType
                     (wxString::FromUTF8(e->Attribute("Mapping")));
-  
+
                 coord->inputpole.x = AttributeInt(e, "InputPoleX", 0);
                 coord->inputpole.y = AttributeInt(e, "InputPoleY", 0);
                 coord->inputequator = AttributeDouble(e, "InputEquator", 0);
@@ -207,7 +207,7 @@ WeatherFax::WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
       m_SchedulesDialog(_weatherfax_pi, this),
       m_InternetRetrievalDialog(_weatherfax_pi, this),
       m_weatherfax_pi(_weatherfax_pi)
-{    
+{
     wxIcon icon;
     icon.CopyFromBitmap(*_img_weatherfax);
     m_SchedulesDialog.SetIcon(icon);
@@ -221,7 +221,7 @@ WeatherFax::WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
                              _("Weather Fax"), wxOK | wxICON_WARNING);
         mdlg.ShowModal();
     }
-    
+
     LoadCoordinatesFromXml(m_UserCoords, _T("UserCoordinateSets.xml"));
 
     if(m_weatherfax_pi.m_bLoadSchedulesStart)
@@ -229,7 +229,7 @@ WeatherFax::WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
 
     m_tDeleteAudioWizard.Connect(wxEVT_TIMER, wxTimerEventHandler( WeatherFax::OnDeleteWizardTimer ), NULL, this);
 
-#ifdef __OCPN__ANDROID__ 
+#ifdef __OCPN__ANDROID__
     GetHandle()->setAttribute(Qt::WA_AcceptTouchEvents);
     GetHandle()->grabGesture(Qt::PanGesture);
     GetHandle()->setStyleSheet( qtStyleSheet);
@@ -249,7 +249,7 @@ static void SaveCoordinatesToXml(WeatherFaxImageCoordinateList &coords, wxString
 {
     if(coords.empty()) // do not make blank file
         return;
-    
+
     TiXmlDocument doc;
     TiXmlDeclaration* decl = new TiXmlDeclaration( "1.0", "utf-8", "" );
     doc.LinkEndChild( decl );
@@ -266,7 +266,7 @@ static void SaveCoordinatesToXml(WeatherFaxImageCoordinateList &coords, wxString
         c->SetAttribute("Y1", wxString::Format(_T("%d"), coords[i]->p1.y).mb_str());
         c->SetAttribute("Lat1", wxString::Format(_T("%.5f"), coords[i]->lat1).mb_str());
         c->SetAttribute("Lon1", wxString::Format(_T("%.5f"), coords[i]->lon1).mb_str());
-        
+
         c->SetAttribute("X2", wxString::Format(_T("%d"), coords[i]->p2.x).mb_str());
         c->SetAttribute("Y2", wxString::Format(_T("%d"), coords[i]->p2.y).mb_str());
         c->SetAttribute("Lat2", wxString::Format(_T("%.5f"), coords[i]->lat2).mb_str());
@@ -278,7 +278,7 @@ static void SaveCoordinatesToXml(WeatherFaxImageCoordinateList &coords, wxString
         case WeatherFaxImageCoordinates::R180: c->SetAttribute("Rotation", "180"); break;
         default: break;
         }
-    
+
         c->SetAttribute("Mapping", WeatherFaxImageCoordinates::MapName(coords[i]->mapping).mb_str());
 
         if(coords[i]->mapping != WeatherFaxImageCoordinates::MERCATOR) {
@@ -316,7 +316,7 @@ WeatherFax::~WeatherFax()
 }
 
 
-#ifdef __OCPN__ANDROID__ 
+#ifdef __OCPN__ANDROID__
 void WeatherFax::OnEvtPanGesture( wxQT_PanGestureEvent &event)
 {
     switch(event.GetState()){
@@ -333,7 +333,7 @@ void WeatherFax::OnEvtPanGesture( wxQT_PanGestureEvent &event)
             x = wxMin(x, xmax);
             int ymax = ::wxGetDisplaySize().y - GetSize().y;          // Some fluff at the bottom
             y = wxMin(y, ymax);
-            
+
             Move(x, y);
             m_tDownTimer.Stop();
         } break;
@@ -393,7 +393,7 @@ void WeatherFax::WizardFinished(WeatherFaxWizard *wizard)
 
     RequestRefresh( m_parent );
     UpdateMenuStates();
-    
+
     WeatherFaxImageCoordinateList &CurrentWizardBuiltinCoordList = wizard->GetBuiltinCoords();
     if(CurrentWizardBuiltinCoordList.GetCount())
         m_BuiltinCoords.Append(CurrentWizardBuiltinCoordList[0]);
@@ -436,7 +436,7 @@ WeatherFaxWizard* WeatherFax::OpenWav(wxString filename, long offset, wxString s
         CaptureSettings.offset = offset;
     } else
         CaptureSettings.type = FaxDecoderCaptureSettings::AUDIO;
-    
+
     WeatherFaxImageCoordinateList *coords = name.size() ? NULL : &m_UserCoords;
     WeatherFaxWizard *wizard = new WeatherFaxWizard
         (*img, CaptureSettings, *this, coords, name);
@@ -468,7 +468,7 @@ void WeatherFax::OpenImage(wxString filename, wxString station, wxString area, w
     if (!wimg.CanRead(filename))
         ::wxInitAllImageHandlers();
 
-#ifdef __OCPN__ANDROID__ 
+#ifdef __OCPN__ANDROID__
     qDebug() << "load file...";
 #endif
     if(!wimg.LoadFile(filename)) {
@@ -494,12 +494,12 @@ void WeatherFax::OpenImage(wxString filename, wxString station, wxString area, w
         }
     }
 
-#ifdef __OCPN__ANDROID__ 
+#ifdef __OCPN__ANDROID__
     qDebug() << "ok";
-#endif    
+#endif
     WeatherFaxImage *img = new WeatherFaxImage(wimg, transparency, whitetransparency, invert);
     wxString name = station.size() && area.size() ? (station + _T(" - ") + area) : _T("");
-#ifdef __OCPN__ANDROID__ 
+#ifdef __OCPN__ANDROID__
     qDebug() << "image ok";
 #endif
     for(unsigned int i=0; i<m_BuiltinCoords.GetCount(); i++)
@@ -513,12 +513,12 @@ void WeatherFax::OpenImage(wxString filename, wxString station, wxString area, w
     {
         FaxDecoderCaptureSettings CaptureSettings = m_weatherfax_pi.m_CaptureSettings;
         CaptureSettings.type = FaxDecoderCaptureSettings::NONE;
-            
-#ifdef __OCPN__ANDROID__ 
+
+#ifdef __OCPN__ANDROID__
         qDebug() << "create wizard...";
 #endif
         WeatherFaxWizard wizard(*img, CaptureSettings, *this, name.size() ? &BuiltinCoordList : &m_UserCoords, name);
-#ifdef __OCPN__ANDROID__ 
+#ifdef __OCPN__ANDROID__
         qDebug() << "run wizard...";
 #endif
         wizard.RunWizard(0);
@@ -610,10 +610,10 @@ All files (*.*)|*.*" ), wxFD_SAVE);
         wxSize sz = ::wxGetDisplaySize();
         saveDialog.SetSize(0, 0, sz.x, sz.y-40);
 #endif
- 
+
         if( saveDialog.ShowModal() == wxID_OK ) {
             wxString filename = saveDialog.GetPath();
-            m_weatherfax_pi.m_export_path = saveDialog.GetDirectory();        
+            m_weatherfax_pi.m_export_path = saveDialog.GetDirectory();
 
             if(!image.m_mappedimg.SaveFile(filename)) {
                 wxMessageDialog mdlg(this, _("Failed to save file: ") + filename,
@@ -673,7 +673,7 @@ void WeatherFax::OnExport( wxCommandEvent& event )
             continue;
 
         WeatherFaxImage &image = *m_Faxes[selection];
-    
+
         wxFileDialog saveDialog
             ( this, _( "Save Weather Fax To KAP" ),
               m_weatherfax_pi.m_export_path, image.m_Coords->name + _T(".kap"),
@@ -686,7 +686,7 @@ All files (*.*)|*.*" ), wxFD_SAVE);
 #endif
         if( saveDialog.ShowModal() == wxID_OK ) {
             wxString filename = saveDialog.GetPath();
-            m_weatherfax_pi.m_export_path = saveDialog.GetDirectory();        
+            m_weatherfax_pi.m_export_path = saveDialog.GetDirectory();
 
             wximgtokap(image, m_weatherfax_pi.m_iExportColors,
                        m_weatherfax_pi.m_bExportDepthMeters ? METERS : FATHOMS,
@@ -707,7 +707,7 @@ void WeatherFax::OnDelete( wxCommandEvent& event )
 
         m_lFaxes->Delete(selection);
         UpdateMenuStates();
-        
+
         RequestRefresh( m_parent );
         selection--;
     }
@@ -797,7 +797,7 @@ bool WeatherFax::DownloadFile( wxString filename )
                                 OCPN_DLDS_SPEED|OCPN_DLDS_SIZE|OCPN_DLDS_URL|
                                 OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|
                                 OCPN_DLDS_AUTO_CLOSE, 10 );
-    
+
     switch( res )
     {
         case OCPN_DL_NO_ERROR:
@@ -827,8 +827,19 @@ bool WeatherFax::DownloadFile( wxString filename )
 
 void WeatherFax::OnUpdateData( wxCommandEvent& event )
 {
-    if( DownloadFile( _T("WeatherFaxInternetRetrieval.xml") ) &&
-       DownloadFile( _T("CoordinateSets.xml") ) ) {
+    if( DownloadFile( _T("WeatherFaxInternetRetrieval_NOAA.xml") ) &&
+      DownloadFile( _T("WeatherFaxInternetRetrieval_NOAA_OPC.xml") ) &&
+      DownloadFile( _T("WeatherFaxInternetRetrieval_NAVY.xml") ) &&
+      DownloadFile( _T("WeatherFaxInternetRetrieval_PWx_Amer_Atl.xml") ) &&
+      DownloadFile( _T("WeatherFaxInternetRetrieval_Aviation_Weather.xml") ) &&
+      DownloadFile( _T("WeatherFaxInternetRetrieval_PWx_Euro_Atl.xml") ) &&
+      DownloadFile( _T("WeatherFaxInternetRetrieval_LaMMA.xml") ) &&
+      DownloadFile( _T("WeatherFaxInternetRetrieval_Europe.xml") ) &&
+      DownloadFile( _T("WeatherFaxInternetRetrieval_PWx_India.xml") ) &&
+      DownloadFile( _T("WeatherFaxInternetRetrieval_Australia.xml") ) &&
+      DownloadFile( _T("WeatherFaxInternetRetrieval_PWx_Pacific.xml") ) &&
+      DownloadFile( _T("WeatherFaxInternetRetrieval_Misc.xml") ) &&
+      DownloadFile( _T("CoordinateSets.xml") ) ) {
         m_InternetRetrievalDialog.Load(true);
     }
     if( DownloadFile( _T("WeatherFaxSchedules.xml") ) ) {
