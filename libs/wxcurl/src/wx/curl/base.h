@@ -186,7 +186,7 @@ protected:
     double m_rDownloadTotal, m_rDownloadNow;
 
 private:
-    //DECLARE_DYNAMIC_CLASS(wxCurlDownloadEvent);
+    DECLARE_DYNAMIC_CLASS(wxCurlDownloadEvent);
 };
 
 typedef void (wxEvtHandler::*wxCurlDownloadEventFunction)(wxCurlDownloadEvent&);

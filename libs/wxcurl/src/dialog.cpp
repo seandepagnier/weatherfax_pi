@@ -523,8 +523,10 @@ void wxCurlTransferDialog::OnEndPerform(wxCurlEndPerformEvent &ev)
 // ----------------------------------------------------------------------------
 // wxCurlDownloadDialog
 // ----------------------------------------------------------------------------
+#ifdef _WIN32
+IMPLEMENT_DYNAMIC_CLASS( wxCurlDownloadDialog, wxCurlTransferDialog )
+#endif
 
-//IMPLEMENT_DYNAMIC_CLASS( wxCurlDownloadDialog, wxCurlTransferDialog )
 BEGIN_EVENT_TABLE( wxCurlDownloadDialog, wxCurlTransferDialog )
     EVT_CURL_DOWNLOAD( ThreadId, wxCurlDownloadDialog::OnDownload )
 END_EVENT_TABLE()
@@ -620,7 +622,9 @@ void wxCurlUploadDialog::OnUpload(wxCurlUploadEvent &ev)
 // wxCurlConnectionSettingsDialog
 // ----------------------------------------------------------------------------
 
-//IMPLEMENT_DYNAMIC_CLASS( wxCurlConnectionSettingsDialog, wxDialog )
+#if _WIN32
+IMPLEMENT_DYNAMIC_CLASS( wxCurlConnectionSettingsDialog, wxDialog )
+#endif
 
 bool wxCurlConnectionSettingsDialog::Create(const wxString& title,
                                             const wxString& message,
