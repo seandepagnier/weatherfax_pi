@@ -1,102 +1,31 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <OCPNWeatherFaxInternetRetrieval>
-  <Server Name="Australia bom" Url="http://www.bom.gov.au/fwo/">
-      <Region Name="Australia Test"> 
-         <Map Url="IDY00030.202205071800.png"
-             Contents="Surface Pressure Analysis" Area="Australia" />
-		 <Area Name="Australia" lat1="55S" lat2="0S" lon1="90E" lon2="180E" />	 
-     </Region>
-     <Region Name="Australia">
-      <Iterator From="3" To="72" By="3">
-        <Map Url="IDY20301/current/mslp-precip/IDY20301.mslp-precip.%03d.png"
-             Contents="Surface Pressure &amp; Rainfall t+%03d" Area="Australia" />
-        <Map Url="IDY20301/current/windbarb/10m/IDY20301.windbarb-10m.%03d.png"
-             Contents="Wind Speed &amp; Direction t+%03d" Area="Australia-W" />
-        <Map Url="IDY20202/current/mslp-precip/IDY20202.mslp-precip.%03d.png"
-             Contents="Surface Pressure &amp; Rainfall t+%03d" Area="New South Wales" />
-        <Map Url="IDY20202/current/windbarb/10m/IDY20202.windbarb-10m.%03d.png"
-             Contents="Wind Speed &amp; Direction t+%03d" Area="New South Wales-W" />
-        <Map Url="IDY20114/current/mslp-precip/IDY20114.mslp-precip.%03d.png"
-             Contents="Surface Pressure &amp; Rainfall t+%03d" Area="Queensland" />
-        <Map Url="IDY20114/current/windbarb/10m/IDY20114.windbarb-10m.%03d.png"
-             Contents="Wind Speed &amp; Direction t+%03d" Area="Queensland-W" />
-        <Map Url="IDY20115/current/mslp-precip/IDY20115.mslp-precip.%03d.png"
-             Contents="Surface Pressure &amp; Rainfall t+%03d" Area="Western Australia" />
-        <Map Url="IDY20115/current/windbarb/10m/IDY20115.windbarb-10m.%03d.png"
-             Contents="Wind Speed &amp; Direction t+%03d" Area="Western Australia-W" />
-        <Map Url="IDY20201/current/mslp-precip/IDY20201.mslp-precip.%03d.png"
-             Contents="Surface Pressure &amp; Rainfall t+%03d" Area="Victoria, Tasmania" />
-        <Map Url="IDY20201/current/windbarb/10m/IDY20201.windbarb-10m.%03d.png"
-             Contents="Wind Speed &amp; Direction t+%03d" Area="Victoria, Tasmania-W" />
-        <Map Url="IDY20206/current/mslp-precip/IDY20206.mslp-precip.%03d.png"
-             Contents="Surface Pressure &amp; Rainfall t+%03d" Area="South Australia" />
-        <Map Url="IDY20206/current/windbarb/10m/IDY20206.windbarb-10m.%03d.png"
-             Contents="Wind Speed &amp; Direction t+%03d" Area="South Australia-W" />
-        <Map Url="IDY20207/current/mslp-precip/IDY20207.mslp-precip.%03d.png"
-             Contents="Surface Pressure &amp; Rainfall t+%03d" Area="Tasmania" />
-        <Map Url="IDY20207/current/windbarb/10m/IDY20207.windbarb-10m.%03d.png"
-             Contents="Wind Speed &amp; Direction t+%03d" Area="Tasmania-W" />
-      </Iterator>
-      <Iterator From="78" To="156" By="6">
-        <Map Url="IDY20002/current/mslp-precip/IDY20002.mslp-precip.%03d.png"
-             Contents="Surface Pressure &amp; Rainfall t+%03d" Area="Australia" />
-        <Map Url="IDY20002/current/windbarb/10m/IDY20002.windbarb-10m.%03d.png"
-             Contents="Wind + and Direction t+%03d" Area="Australia" />
-      </Iterator>
-      <Area Name="Australia" lat1="55S" lat2="0S" lon1="90E" lon2="180E" />
-      <Area Name="Australia-W" lat1="55S" lat2="0S" lon1="90E" lon2="180E" />
-      <Area Name="New South Wales" lat1="40S" lat2="25S" lon1="137E" lon2="160E" />
-      <Area Name="New South Wales-W" lat1="40S" lat2="25S" lon1="137E" lon2="160E" />
-      <Area Name="Queensland" lat1="32S" lat2="5S" lon1="132E" lon2="162E" />
-      <Area Name="Queensland-W" lat1="32S" lat2="5S" lon1="132E" lon2="162E" />
-      <Area Name="Western Australia" lat1="38S" lat2="12S" lon1="110E" lon2="132E" />
-      <Area Name="Western Australia-W" lat1="38S" lat2="12S" lon1="110E" lon2="132E" />
-      <Area Name="Victoria, Tasmania" lat1="46S" lat2="30S" lon1="135E" lon2="151E" />
-      <Area Name="Victoria, Tasmania-W" lat1="46S" lat2="30S" lon1="135E" lon2="151E" />
-      <Area Name="South Australia" lat1="42S" lat2="18S" lon1="120E" lon2="142E" />
-      <Area Name="South Australia-W" lat1="42S" lat2="18S" lon1="120E" lon2="142E" />
-      <Area Name="Tasmania" lat1="46S" lat2="30S" lon1="135E" lon2="151E" />
-      <Area Name="Tasmania-W" lat1="46S" lat2="30S" lon1="135E" lon2="151E" />
-    </Region>
-    <Region Name="Indonesia">
-      <Iterator From="6" To="150" By="06">
-        <Map Url="IDY20108/current/mslp-precip/IDY20108.mslp-precip.%03d.png" Contents="Surface Pressure &amp; Rainfall t+%03d" Area="1" />
-        <Map Url="IDY20108/current/windbarb/10m/IDY20108.windbarb-10m.%03d.png" Contents="Wind Speed &amp; Direction t+%03d" Area="2" />
-      </Iterator>
-      <Area Name="1" lat1="15S" lat2="10N" lon1="90E" lon2="130E" />
-      <Area Name="2" lat1="15S" lat2="10N" lon1="90E" lon2="130E" />
-    </Region>
-    <Region Name="SE Asia">
-      <Iterator From="6" To="150" By="06">
-        <Map Url="IDY20104/current/mslp-precip/IDY20104.mslp-precip.%03d.png" Contents="Surface Pressure &amp; Rainfall t+%03d" Area="1" />
-        <Map Url="IDY20104/current/windbarb/10m/IDY20104.windbarb-10m.%03d.png" Contents="Wind Speed &amp; Direction t+%03d" Area="2" />
-      </Iterator>
-      <Area Name="1" lat1="5N" lat2="30N" lon1="90E" lon2="130E" />
-      <Area Name="2" lat1="5N" lat2="30N" lon1="90E" lon2="130E" />
-    </Region>
-    <Region Name="Philippines">
-      <Iterator From="6" To="150" By="06">
-        <Map Url="IDY20109/current/mslp-precip/IDY20109.mslp-precip.%03d.png" Contents="Surface Pressure &amp; Rainfall t+%03d" Area="1" />
-        <Map Url="IDY20109/current/windbarb/10m/IDY20109.windbarb-10m.%03d.png" Contents="Wind Speed &amp; Direction t+%03d" Area="2" />
-      </Iterator>
-      <Area Name="1" lat1="5N" lat2="30N" lon1="115E" lon2="165E" />
-      <Area Name="2" lat1="5N" lat2="30N" lon1="115E" lon2="165E" />
-    </Region>
-    <Region Name="New Guinea">
-      <Iterator From="6" To="150" By="06">
-        <Map Url="IDY20110/current/mslp-precip/IDY20110.mslp-precip.%03d.png" Contents="Surface Pressure &amp; Rainfall t+%03d" Area="1" />
-        <Map Url="IDY20110/current/windbarb/10m/IDY20110.windbarb-10m.%03d.png" Contents="Wind Speed &amp; Direction t+%03d" Area="2" />
-      </Iterator>
-      <Area Name="1" lat1="15S" lat2="10N" lon1="125E" lon2="165E" />
-      <Area Name="2" lat1="15S" lat2="10N" lon1="125E" lon2="165E" />
-    </Region>
-    <Region Name="South Pacific">
-      <Iterator From="6" To="150" By="06">
-        <Map Url="IDY20112/current/mslp-precip/IDY20112.mslp-precip.%03d.png" Contents="Surface Pressure &amp; Rainfall t+%03d" Area="1" />
-        <Map Url="IDY20112/current/windbarb/10m/IDY20112.windbarb-10m.%03d.png" Contents="Wind Speed &amp; Direction t+%03d" Area="2" />
-      </Iterator>
-      <Area Name="1" lat1="35S" lat2="10N" lon1="150E" lon2="180W" />
-      <Area Name="2" lat1="35S" lat2="10N" lon1="150E" lon2="180W" />
+  <Server Name="Australia BOM" Url="ftp://ftp.bom.gov.au/anon/gen/">
+    <Region Name="Australia">
+      <Map Url="fwo/IDY00030.%Y%m%d%H00.png" Contents="MSLP Analysis (color)" Area="MSLPC" Hour="-6;6;6" />
+      <Map Url="difacs/IDX0078.gif" Contents="MSLP Analysis" Area="MSLP" />
+      <Map Url="difacs/IDX0131.gif" Contents="MSLP 12hr Forecast" Area="MSLP" />
+      <Map Url="difacs/IDX0086.gif" Contents="MSLP 24hr Forecast" Area="MSLP" />
+      <Map Url="difacs/IDX0087.gif" Contents="MSLP 36hr Forecast" Area="MSLP" />
+      <Map Url="difacs/IDX0608.gif" Contents="MSLP 48hr Forecast" Area="MSLP" />
+      <Map Url="difacs/IDX0147.gif" Contents="MSLP 60hr Forecast" Area="MSLP" />
+      <Map Url="difacs/IDX0049.%Y%m%d%H00.gif" Contents="Total waves Height &amp; Direction Analysis" Area="Wave" Hour="-6;6;6" />
+      <Map Url="difacs/IDX0049.%Y%m%d%H00.gif" Contents="Total waves Height &amp; Direction 06hr Forecast" Area="Wave" Hour="0;6;6" />
+      <Map Url="difacs/IDX0049.%Y%m%d%H00.gif" Contents="Total waves Height &amp; Direction 12hr Forecast" Area="Wave" Hour="6;6;6" />
+      <Map Url="difacs/IDX0049.%Y%m%d%H00.gif" Contents="Total waves Height &amp; Direction 18hr Forecast" Area="Wave" Hour="12;6;6" />
+      <Map Url="difacs/IDX0050.%Y%m%d%H00.gif" Contents="Primary Swell Height &amp; Direction Analysis" Area="Wave" Hour="-6;6;6" />
+      <Map Url="difacs/IDX0050.%Y%m%d%H00.gif" Contents="Primary Swell Height &amp; Direction 06hr Forecast" Area="Wave" Hour="0;6;6" />
+      <Map Url="difacs/IDX0050.%Y%m%d%H00.gif" Contents="Primary Swell Height &amp; Direction 12hr Forecast" Area="Wave" Hour="6;6;6" />
+      <Map Url="difacs/IDX0050.%Y%m%d%H00.gif" Contents="Primary Swell Height &amp; Direction 18hr Forecast" Area="Wave" Hour="12;6;6" />
+      <Map Url="difacs/IDX0051.gif" Contents="Sea Surface Wind Analysis" Area="Wind" />
+      <Map Url="difacs/IDX0052.gif" Contents="Sea Surface Wind 12hr Forecast" Area="Wind" />
+      <Map Url="difacs/IDX0053.gif" Contents="Sea Surface Wind 24hr Forecast" Area="Wind" />
+      <Map Url="difacs/IDX0054.gif" Contents="Sea Surface Wind 36hr Forecast" Area="Wind" />
+      <Area Name="MSLPC" lat1="50S" lat2="10S" lon1="90E" lon2="180E" />
+      <Area Name="MSLP" lat1="55S" lat2="10S" lon1="80E" lon2="175W" />
+      <Area Name="Wave" lat1="55S" lat2="0S" lon1="90E" lon2="180E" />
+      <Area Name="Swell" lat1="55S" lat2="0S" lon1="90E" lon2="180E" />
+      <Area Name="Wind" lat1="52S" lat2="8S" lon1="88E" lon2="172E" />
     </Region>
   </Server>
-  </OCPNWeatherFaxInternetRetrieval>
+</OCPNWeatherFaxInternetRetrieval>

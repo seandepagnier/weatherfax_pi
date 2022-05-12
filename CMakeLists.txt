@@ -443,6 +443,7 @@ include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxJSON/include)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
 #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxcurl/src)
 
 #
 # ----- Change below to match project requirements for android build ----- ##
@@ -460,6 +461,9 @@ endif(QT_ANDROID)
 ##==========================================================================
 target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${EXTSRC} ${SRC_AUDIOFILE})
 ##==========================================================================
+
+add_subdirectory("libs/wxcurl")
+  target_link_libraries(${PACKAGE_NAME} ocpn::wxcurl_src)
 
 
 TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
