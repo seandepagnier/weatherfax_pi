@@ -26,7 +26,7 @@
       <Map Url="PPAI10.TIF" Contents="48HR 500MB FORECAST NW ATLANTIC VT00/12Z" Area="4" />
       <Map Url="PPAM50.TIF" Contents="96HR 500MB FORECAST NW ATLANTIC VT12Z" Area="4" />
       <!-- cyclone/high waves -->
-      <Map Url="PWEK11.TIF" Contents="Tropical Cyclone Danger 03/09/15/21Z" Area="7" />
+      <Map Url="PWEK11.TIF" Contents="48HR Tropical Cyclone Danger" Area="7" />
       <!-- ice chart -->
       <Map Url="PIEA88.TIF" Contents="Latest USCG Ice Limits Chart" Area="6" />
       <!-- satellite imagery -->
@@ -76,7 +76,7 @@
       <Map Url="PYFI10.gif" Contents="48HR Trop Sfc Forecast" Area="12" />
       <Map Url="PYFK10.gif" Contents="72HR Trop Sfc Forecast" Area="12" />
       <!-- tropical cyclone danger area charts -->
-      <Map Url="PWFK11.gif" Contents="00/06/12/18Z Tropical CYCLONE DANGER" Area="10" />
+      <Map Url="PWFK11.gif" Contents="48HR Tropical CYCLONE DANGER" Area="10" />
       <!-- upper air charts -->
       <Map Url="PPBA10.gif" Contents="00/12Z 500MB ANALYSIS" Area="1" />
       <Map Url="PPBE11.gif" Contents="24HR 500MB FORECAST" Area="1" />
@@ -126,7 +126,7 @@
       <Map Url="PYEI10.gif" Contents="48 HR SURFACE FORECAST" Area="7" />
       <Map Url="PYEK10.gif" Contents="72 HR SURFACE FORECAST" Area="7" />
       <!-- tropical cyclone danger area charts -->
-      <Map Url="PWEK11.gif" Contents="74HR Trop CYCLONE DANGER" Area="6" />
+      <Map Url="PWEK11.gif" Contents="48HR Trop CYCLONE DANGER" Area="6" />
       <!-- high seas forecasts -->
       <Map Url="PLEA10.gif" Contents="04/10/12/18Z HIGH SEAS FORECAST" Area="5" />
       <!-- satellite imagery -->
@@ -184,7 +184,6 @@
       <!-- surface charts central pacific-->
       <Map Url="PPBA11.gif" Contents="00/06/12/18Z PACIFIC SURFACE ANALYSIS" Area="C" />
       <Map Url="PWFA11.gif" Contents="00/06/12/18Z PACIFIC STREAMLINE ANALYSIS" Area="I" />
-      <Map Url="QYFA99.gif" Contents="00/06/12/18Z SURFACE ANALYSIS" Area="2" />
       <Map Url="PYFE11.gif" Contents="24HR SURFACE FORECAST" Area="A" />
       <Map Url="PYFI11.gif" Contents="48HR SURFACE FORECAST" Area="A" />
       <Map Url="PYFK11.gif" Contents="72HR SURFACE FORECAST" Area="A" />

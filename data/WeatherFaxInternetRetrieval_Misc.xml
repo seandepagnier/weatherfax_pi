@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <OCPNWeatherFaxInternetRetrieval>
-   <Server Name="Bermuda" Url="http://www.weather.bm/">
+   <Server Name="Bermuda" Url="http://www.weather.bm/images/ForecastCharts/">
     <Region Name="Bermuda">
-      <Map Url="images/surfaceAnalysis/Latest/Atlantic.gif" Contents="Surface Analysis" Area="1" />
-      <Map Url="images/marineChart/Latest/Small/_chartSmall36.gif" Contents="Day 2 Marine forecast" Area="3" />
-      <Map Url="images/marineChart/Latest/Small/_chartSmall60.gif" Contents="Day 3 Marine forecast" Area="3" />
-      <Map Url="images/marineChart/Latest/Small/_chartSmall84.gif" Contents="Day 4 Marine forecast" Area="3" />
-      <Map Url="images/marineChart/Latest/Small/_chartSmall108.gif" Contents="Day 5 Marine forecast" Area="3" />
-      <Map Url="images/surfaceAnalysis/Latest/Local.gif" Contents="Local Analysis" Area="2" />
-      <Area Name="1" lat1="15N" lat2="45N" lon1="90W" lon2="20W" />
-      <Area Name="2" lat1="10N" lat2="55N" lon1="90W" lon2="10W" />
-      <Area Name="3" lat1="10N" lat2="55N" lon1="90W" lon2="10W" />
+      <Map Url="%Y-%m-%d-%H00_BermudaCentricChart.png" Contents="Day 1 MSLP &amp; Wind (color)" Area="1" Hour="-24;12;0" />
+      <Map Url="%Y-%m-%d-%H00_BermudaCentricChart.png" Contents="Day 1 MSLP &amp; Wind (color)" Area="1" Hour="0;12;0" />
+      <Map Url="%Y-%m-%d-%H00_BermudaCentricChart.png" Contents="Day 1 MSLP &amp; Wind" Area="2" Hour="24;12;0" />
+      <Map Url="%Y-%m-%d-%H00_BermudaCentricChart.png" Contents="Day 1 MSLP &amp; Wind" Area="2" Hour="48;12;0" />
+      <Map Url="%Y-%m-%d-%H00_BermudaCentricChart.png" Contents="Day 1 MSLP &amp; Wind" Area="2" Hour="72;12;0" />
+      <Area Name="1" lat1="18N" lat2="43N" lon1="85W" lon2="45W" />
+      <Area Name="2" lat1="18N" lat2="41N" lon1="90W" lon2="40W" />
     </Region>
   </Server>
   <Server Name="French Polynesia" Url="https://meteo.pf/sites/default/files/meteo_data/bulletins/marines/">
@@ -34,69 +32,21 @@
     <Region Name="Chile">
       <Map Url="cartas/carta.jpg" Contents="Streamline Analysis" Area="1" />
       <Map Url="pub/Csuperficie12.jpg" Contents="Streamline 1000-500hPa" Area="2" />
-      <Area Name="1" lat1="80S" lat2="5S" lon1="120W" lon2="40W" />
+      <Area Name="1" lat1="77S" lat2="5S" lon1="140W" lon2="40W" />
       <Area Name="2" lat1="75S" lat2="15S" lon1="130W" lon2="55W" />
     </Region>
   </Server>
-  <Server Name="Weather SA" Url="http://www.weathersa.co.za/media/data/marine/">
-    <Region Name="South Africa">
-      <Map Url="ma_sy.gif" Contents="Streamline Analysis" Area="1" />
-      <Area Name="1" lat1="65S" lat2="30S" lon1="40W" lon2="80E" />
+  <Server Name="Weather SA">
+    <Region Name="South Africa offshore" Url="http://www.weathersa.co.za/images/data/specialised/">
+      <Map Url="ma_sy.gif" Contents="MSLP Analysis" Area="1" />
+      <Area Name="1" lat1="70S" lat2="0S" lon1="50W" lon2="80E" />
+    </Region>
+    <Region Name="South Africa coastal" Url="http://marine.weathersa.co.za/Forecasts/">
+      <Iterator From="0" To="72" By="1">
+        <Map Url="Wind/SA_Wind_6km_%01d.png" Contents="Wind speed +%02dHr" Area="2" />
+        <Map Url="Waves/SA_Tm02_6km_%01d.png" Contents="Waves Period +%02dHr" Area="2" />
+      </Iterator>
+      <Area Name="2" lat1="38S" lat2="24S" lon1="13E" lon2="37E" />
     </Region>
   </Server>
-  <Server Name="Fiji Met" Url="http://www.met.gov.fj/aifs_prods/">
-    <Region Name="South Pacific">
-      <Map Url="0990.jpg" Contents="Mean Sea Level Analysis 6am" Area="1" />
-      <Map Url="0991.jpg" Contents="Mean Sea Level Analysis 12am" Area="1" />
-      <Map Url="0992.jpg" Contents="Mean Sea Level Analysis 3pm Color" Area="1" />
-      <Map Url="gms_vis.gif" Contents="Visible" Area="2" />
-      <Area Name="1" lat1="35S" lat2="5S" lon1="150E" lon2="155W" />
-      <Area Name="2" lat1="40S" lat2="0S" lon1="140E" lon2="160W" />
-    </Region>
-  </Server>
-  <Server Name="Mauritius Met" Url="http://metservice.intnet.mu/">
-    <Region Name="Mauritius">
-      <Map Url="synopticimages/satellite.jpg" Contents="Satellite Image" Area="1" />
-      <Map Url="mmsimages/chart.jpg" Contents="Synoptic chart" Area="2" />
-      <Area Name="1" lat1="37S" lat2="4S" lon1="37E" lon2="90W" />
-      <Area Name="2" lat1="40S" lat2="0S" lon1="40E" lon2="95E" />
-    </Region>
-  </Server>
-    <Server Name="Japan Met" Url="http://www.jma.go.jp/en/g3/images/asia/">
-    <Region Name="Japan">
-      <Map Url="%y%m%d%H.png" Contents="Analysis Now" Area="1" Hour="6;6;3" />
-      <Map Url="%y%m%d%H.png" Contents="Analysis -6" Area="1" Hour="0;6;3" />
-      <Map Url="%y%m%d%H.png" Contents="Analysis -12" Area="1" Hour="-6;6;3" />
-      <Map Url="%y%m%d%H.png" Contents="Analysis -18" Area="1" Hour="-12;6;3" />
-      <Area Name="1" lat1="0N" lat2="70N" lon1="90E" lon2="180E" />
-    </Region>
-  </Server>
-  <Server Name="Weather Online" Url="http://www.weatheronline.co.uk/daten/sailcharts/gfs/">
-    <Region Name="Great Britain">
-      <Map Url="%Y/%m/%d/pslv_grbr_06-%Y%m%d%H.gif" Area="1" Hour="-9;6;0" />
-      <Area Name="1" lat1="48N" lat2="60N" lon1="12W" lon2="6E" />
-    </Region>
-    <Region Name="Asia">
-      <Map Url="%Y/%m/%d/pslv_asie_06-%Y%m%d%H.gif" Contents="Surface Pressure (GFS)" Area="1" Hour="-9;6;0" />
-      <Map Url="gfs/%Y/%m/%d/pslv_asie_00-%Y%m%d%H.gif" Contents="Surface Pressure (GFS)" Area="1" Hour="-15;6;0" />
-      <!-- many more -->
-      <Area Name="1" lat1="10S" lat2="45N" lon1="50E" lon2="150E" />
-    </Region>
-  </Server>
-  <Server Name="Singapore Met" Url="http://www.weather.gov.sg/files/marine/">
-    <Region Name="Singapore">
-      <Map Url="surfacewinds/surfacewinds_24Hr_%Y%m%d_213000.gif" Contents="Surface Wind Forecast 24hr" Area="1" />
-      <Map Url="surfacewinds/surfacewinds_48Hr_%Y%m%d_213000.gif" Contents="Surface Wind Forecast 48hr" Area="1" />
-      <Map Url="surfacewinds/surfacewinds_72Hr_%Y%m%d_213000.gif" Contents="Surface Wind Forecast 72hr" Area="1" />
-      <Map Url="waveheight/sig_waves_height_24Hr_%Y%m%d_065000.gif" Contents="Significant Wave Forecast 24hr" Area="2" />
-      <Map Url="waveheight/sig_waves_height_48Hr_%Y%m%d_065000.gif" Contents="Significant Wave Forecast 48hr" Area="2" />
-      <Map Url="waveheight/sig_waves_height_72Hr_%Y%m%d_065000.gif" Contents="Significant Wave Forecast 72hr" Area="2" />
-      <Map Url="swell/swell_24Hr_%Y%m%d_100000.gif" Contents="Swell Wave Ht 24hr" Area="3" />
-      <Map Url="swell/swell_48Hr_%Y%m%d_100000.gif" Contents="Swell Wave Ht 48hr" Area="3" />
-      <Map Url="swell/swell_72Hr_%Y%m%d_100000.gif" Contents="Swell Wave Ht 72hr" Area="3" />
-      <Area Name="1" lat1="20S" lat2="40N" lon1="80E" lon2="150E" />
-      <Area Name="2" lat1="15S" lat2="35N" lon1="90E" lon2="130E" />
-      <Area Name="3" lat1="20S" lat2="40N" lon1="80E" lon2="150E" />
-    </Region>
-  </Server>
-  </OCPNWeatherFaxInternetRetrieval>
+</OCPNWeatherFaxInternetRetrieval>
