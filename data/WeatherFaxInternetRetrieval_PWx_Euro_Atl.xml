@@ -64,7 +64,7 @@
         <Map Url="coamps/%03d.png" Contents="COAMPS Wind %03d" Area="1" />
       </Iterator>
       <Iterator From="0" To="48" By="3">
-        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="wind/%03d.png" Contents="GFS Wind %03d" Area="1" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
         <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
       </Iterator>
@@ -147,19 +147,20 @@
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
-        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="2" />
       </Iterator>
       <Iterator From="54" To="72" By="6">
         <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
-        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="2" />
       </Iterator>
       <Iterator From="84" To="180" By="12">
         <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
-        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="2" />
       </Iterator>
      <Area Name="1" lat1="10N" lat2="45N" lon1="70W" lon2="4W" />
+     <Area Name="2" lat1="10N" lat2="45N" lon1="70W" lon2="4W" />
    </Region>
    <Region Name="Azores" Url="azores/">
       <Iterator From="0" To="48" By="3">
@@ -183,19 +184,20 @@
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
-        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="2" />
       </Iterator>
       <Iterator From="54" To="72" By="6">
         <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
-        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="2" />
       </Iterator>
       <Iterator From="84" To="180" By="12">
         <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
-        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="2" />
       </Iterator>
      <Area Name="1" lat1="26.4N" lat2="30N" lon1="19W" lon2="12.5W" />
+     <Area Name="2" lat1="26.4N" lat2="30N" lon1="19W" lon2="12.5W" />
    </Region>
    <Region Name="Gibraltar" Url="gibraltar/">
       <Iterator From="0" To="96" By="3">
