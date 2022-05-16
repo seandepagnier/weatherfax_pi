@@ -7,22 +7,39 @@ separate-locales: false
 appstream-compose: false
 modules:
   - name: libcurl
-    no-autogen: true
     buildsystem: autotools
+    config-opts:
+      - --with-openssl
+      - --disable-shared
+      - --disable-ldap
+      - --disable-ldaps
+      - --disable-rtsp
+      - --disable-dict
+      - --disable-telnet
+      - --disable-pop3
+      - --disable-imap
+      - --disable-smb
+      - --disable-gopher
+      - --disable-mqtt
+      - --disable-manual
+      - --disable-mime
     make-args:
       - PREFIX=/app
     make-install-args:
       - DESTDIR=/app/extensions/weatherfax
       - SBINDIR=/bin
-    post-install:
-      - >
-        cd /app/extensions/o-weatherfax/bin;
-        rm -f bridge genl if* *stat route* rt* ss tc libusb-config
-      - cd /app/extensions/o-charts; rm -rf include etc lib/pkgconfig lib/*.la
+    cleanup:
+         - /include/
+         - /bin/
+         - /share/
     sources:
       - type: git
         url: https://github.com/curl/curl.git
         tag: curl-7_83_1
+      - type: script
+        dest-filename: autogen.sh
+        commands:
+          - "autoreconf -fi"
 
   - name: ${PACKAGE}
     no-autogen: true
