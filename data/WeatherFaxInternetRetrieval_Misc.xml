@@ -2,11 +2,11 @@
 <OCPNWeatherFaxInternetRetrieval>
    <Server Name="Bermuda" Url="http://www.weather.bm/images/ForecastCharts/">
     <Region Name="Bermuda">
-      <Map Url="%Y-%m-%d-%H00_BermudaCentricChart.png" Contents="Day 1 MSLP &amp; Wind (color)" Area="1" Hour="-24;12;0" />
-      <Map Url="%Y-%m-%d-%H00_BermudaCentricChart.png" Contents="Day 1 MSLP &amp; Wind (color)" Area="1" Hour="0;12;0" />
-      <Map Url="%Y-%m-%d-%H00_BermudaCentricChart.png" Contents="Day 1 MSLP &amp; Wind" Area="2" Hour="24;12;0" />
-      <Map Url="%Y-%m-%d-%H00_BermudaCentricChart.png" Contents="Day 1 MSLP &amp; Wind" Area="2" Hour="48;12;0" />
-      <Map Url="%Y-%m-%d-%H00_BermudaCentricChart.png" Contents="Day 1 MSLP &amp; Wind" Area="2" Hour="72;12;0" />
+      <Map Url="%Y-%m-%d-%H00_BermudaCentricChart.png" Contents="Day 1 MSLP &amp; Wind (color)" Area="1" Hour="-6;6;0" />
+      <Map Url="%Y-%m-%d-%H00_BermudaCentricChart.png" Contents="Day 2 MSLP &amp; Wind" Area="2" Hour="24;12;0" />
+      <Map Url="%Y-%m-%d-%H00_BermudaCentricChart.png" Contents="Day 3 MSLP &amp; Wind" Area="2" Hour="48;12;0" />
+      <Map Url="%Y-%m-%d-%H00_BermudaCentricChart.png" Contents="Day 4 MSLP &amp; Wind" Area="2" Hour="72;12;0" />
+      <Map Url="%Y-%m-%d-%H00_BermudaCentricChart.png" Contents="Day 5 MSLP &amp; Wind" Area="2" Hour="96;12;0" />
       <Area Name="1" lat1="18N" lat2="43N" lon1="85W" lon2="45W" />
       <Area Name="2" lat1="18N" lat2="41N" lon1="90W" lon2="40W" />
     </Region>
@@ -30,7 +30,7 @@
   </Server>
   <Server Name="Chile Met" Url="http://web.directemar.cl/met/jturno/">
     <Region Name="Chile">
-      <Map Url="cartas/carta.jpg" Contents="Streamline Analysis" Area="1" />
+      <Map Url="cartas/carta.jpg" Contents="Streamline Analysis (Warning: 3MBytes)" Area="1" />
       <Map Url="pub/Csuperficie12.jpg" Contents="Streamline 1000-500hPa" Area="2" />
       <Area Name="1" lat1="77S" lat2="5S" lon1="140W" lon2="40W" />
       <Area Name="2" lat1="75S" lat2="15S" lon1="130W" lon2="55W" />

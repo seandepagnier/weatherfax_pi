@@ -79,27 +79,27 @@
 		<Map Url="ra1_18z.gif" Contents="18Z Wind/Wave Analysis 40W-98W" Area="10" />
 		<Map Url="pwae98.gif" Contents="24HR Wind/Wave Forecast VT00Z 40W-98W" Area="10" />
 		<Map Url="pwae99.gif" Contents="24HR Wind/Wave Forecast VT12Z 40W-98W" Area="10" />
-		<Map Url="pjai98.gif" Contents="48HR Wind/Wave Forecast VT00Z 10E-95W" Area="12" />
-		<Map Url="pjai99.gif" Contents="48HR Wind/Wave Forecast VT12Z 10E-95W" Area="12" />
-		<Map Url="pjai88.gif" Contents="48HR Wave Period Forecast VT00Z 10E-95W" Area="12a" />
-		<Map Url="pjai89.gif" Contents="48HR Wave Period Forecast VT12Z 10E-95W" Area="12a" />
-		<Map Url="pjam98.gif" Contents="96HR Wind/Wave Forecast VT12Z 10E-95W" Area="12" />
-		<Map Url="pjam88.gif" Contents="96HR Wave Period Forecast VT12Z 10E-95W" Area="12a" />
+		<Map Url="pjai98.gif" Contents="48HR Wind/Wave Forecast VT00Z 10E-97W" Area="12" />
+		<Map Url="pjai99.gif" Contents="48HR Wind/Wave Forecast VT12Z 10E-97W" Area="12" />
+		<Map Url="pjai88.gif" Contents="48HR Wave Period Forecast VT00Z 10E-97W" Area="12a" />
+		<Map Url="pjai89.gif" Contents="48HR Wave Period Forecast VT12Z 10E-97W" Area="12a" />
+		<Map Url="pjam98.gif" Contents="96HR Wind/Wave Forecast VT12Z 10E-975W" Area="12" />
+		<Map Url="pjam88.gif" Contents="96HR Wave Period Forecast VT12Z 10E-97W" Area="12a" />
 		<!-- surface analysis NW ATLANTIC -->
-		<Map Url="pjaa99.gif" Contents="SEA STATE ANALYSIS 10E-95W 12Z" Area="4" />
-		<Map Url="pyaa01.gif" Contents="00Z Surface Analysis Part 1 10E-45W" Area="2b" />
-		<Map Url="pyaa02.gif" Contents="00Z Surface Analysis Part 2 40W-95W" Area="3" />
-		<Map Url="pyaa03.gif" Contents="06Z Surface Analysis Part 1 10E-45W" Area="2b" />
-		<Map Url="pyaa04.gif" Contents="06Z Surface Analysis Part 2 40W-95W" Area="3" />
-		<Map Url="pyaa05.gif" Contents="12Z Surface Analysis Part 1 10E-45W" Area="2b" />
-		<Map Url="pyaa06.gif" Contents="12Z Surface Analysis Part 2 40W-95W" Area="3" />
-		<Map Url="pyaa07.gif" Contents="18Z Surface Analysis Part 1 10E-45W" Area="2b" />
-		<Map Url="pyaa08.gif" Contents="18Z Surface Analysis Part 2 40W-95W" Area="3" />
+		<Map Url="pjaa99.gif" Contents="SEA STATE ANALYSIS 10E-97W 12Z" Area="4" />
+		<Map Url="pyaa01.gif" Contents="00Z Surface Analysis Part 1 10E-50W" Area="2b" />
+		<Map Url="pyaa02.gif" Contents="00Z Surface Analysis Part 2 40W-100W" Area="3" />
+		<Map Url="pyaa03.gif" Contents="06Z Surface Analysis Part 1 10E-50W" Area="2b" />
+		<Map Url="pyaa04.gif" Contents="06Z Surface Analysis Part 2 40W-100W" Area="3" />
+		<Map Url="pyaa05.gif" Contents="12Z Surface Analysis Part 1 10E-50W" Area="2b" />
+		<Map Url="pyaa06.gif" Contents="12Z Surface Analysis Part 2 40W-100W" Area="3" />
+		<Map Url="pyaa07.gif" Contents="18Z Surface Analysis Part 1 10E-50W" Area="2b" />
+		<Map Url="pyaa08.gif" Contents="18Z Surface Analysis Part 2 40W-100W" Area="3" />
 		<Map Url="ppae00.gif" Contents="24HR Surface Forecast VT00Z 40W-98W" Area="8" />
 		<Map Url="ppae01.gif" Contents="24HR Surface Forecast VT12Z 40W-98W" Area="8" />
-		<Map Url="qdtm85.gif" Contents="48HR Surface Forecast VT00Z 10E-95W" Area="4a" />
-		<Map Url="qdtm86.gif" Contents="48HR Surface Forecast VT12Z 10E-95W" Area="4a" />
-		<Map Url="pwam99.gif" Contents="96HR Surface Forecast VT12Z 10E-95W" Area="4a" />
+		<Map Url="qdtm85.gif" Contents="48HR Surface Forecast VT00Z 10E-97W" Area="4a" />
+		<Map Url="qdtm86.gif" Contents="48HR Surface Forecast VT12Z 10E-97W" Area="4a" />
+		<Map Url="pwam99.gif" Contents="96HR Surface Forecast VT12Z 10E-97W" Area="4a" />
 	   <!--OPC Atlantic Marine -->
 		<Map Url="A_24hr500.gif" Contents="24-hour 500 mb" Area="9" />
 		<Map Url="A_48hr500.gif" Contents="48-hour 500 mb" Area="9" />
