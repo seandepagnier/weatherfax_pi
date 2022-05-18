@@ -465,6 +465,11 @@ target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${EXTSRC} ${SRC_
 add_subdirectory("libs/wxcurl")
   target_link_libraries(${PACKAGE_NAME} ocpn::wxcurl_src)
 
+if (NOT QT_ANDROID)
+  add_subdirectory("${CMAKE_SOURCE_DIR}/libs/curl")
+  target_link_libraries(${PACKAGE_NAME} libcurl::libcurl)
+endif ()
+
 
 TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 message(STATUS "${CMLOC}Adding PLUGINS_LIBS: ${EXTRA_LIBS}")
