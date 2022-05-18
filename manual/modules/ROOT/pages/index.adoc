@@ -119,6 +119,15 @@ charts.
 The weatherfax will be overlayed generally in the proper location
 provided the weather service has not changed their fax formats. (The user can modify the associated WeatherFaxInternetRetrieval.xml file appropriately to add or modify the actions.) Users should please post changes to this file to the Weatherfax Thread for the next release.
 
+=== Memory Use ===
+Please note tht all the loaded maps stay in RAM until OpenCPN is closed.  RAM occupation depends on the maps size. The number of weatherfax charts that can be stored in memory is dependent on the amount of memory available. When weatherfax_pi runs out of available memory, it will stop downloading weatherfaxes. As soon as you close WxFax and restart this memory is cleared, however the previous images then no longer have active georeferencing, so you will need to download them again for automatic georeferencing. Weatherfax_pi keeps all downloaded images connected to its coordinates and georeferenced until that session of weatherfax is closed.
+
+For exemple on OpenCPN linux flatpak:
+Load 96 maps in Arome/France: 887MB
+Load 57 maps in Arpege/Europe: 2250MB
+
+The limit seems to be the system RAM. I loaded 213 maps, more than 6GB and still okay and responsive.
+
 == HF Radio Weather Faxes
 
 The plugin has a builtin database (WeatherFaxSchedules.xml) for HF Radio Weather Service Fax transmissions, which when used properly can automatically alert the user and begin decoding these faxes.
