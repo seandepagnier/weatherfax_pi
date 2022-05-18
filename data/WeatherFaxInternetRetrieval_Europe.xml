@@ -23,7 +23,7 @@
         <Map Url="ICOOPGE00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPGE00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="54" To="120" By="6">
+	  <Iterator From="54" To="180" By="6">
         <Map Url="ICOOPGE00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="ICOOPGE00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPGE00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -36,7 +36,7 @@
         <Map Url="ICOOPFR00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPFR00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="54" To="120" By="6">
+	  <Iterator From="54" To="180" By="6">
         <Map Url="ICOOPFR00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="ICOOPFR00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPFR00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -49,7 +49,7 @@
         <Map Url="ICOOPUK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPUK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="54" To="120" By="6">
+	  <Iterator From="54" To="180" By="6">
         <Map Url="ICOOPUK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="ICOOPUK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPUK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -62,7 +62,7 @@
         <Map Url="ICOOPSP00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPSP00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="54" To="120" By="6">
+	  <Iterator From="54" To="180" By="6">
         <Map Url="ICOOPSP00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="ICOOPSP00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPSP00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -75,7 +75,7 @@
         <Map Url="ICOOPIT00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPIT00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="54" To="120" By="6">
+	  <Iterator From="54" To="180" By="6">
         <Map Url="ICOOPIT00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="ICOOPIT00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPIT00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -88,7 +88,7 @@
         <Map Url="ICOOPTK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPTK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="54" To="120" By="6">
+	  <Iterator From="54" To="180" By="6">
         <Map Url="ICOOPTK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="ICOOPTK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPTK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -101,7 +101,7 @@
         <Map Url="ICOOPNL00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPNL00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="54" To="120" By="6">
+	  <Iterator From="54" To="180" By="6">
         <Map Url="ICOOPNL00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="ICOOPNL00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPNL00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -114,7 +114,7 @@
         <Map Url="ICOOPDK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPDK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="54" To="120" By="6">
+	  <Iterator From="54" To="180" By="6">
         <Map Url="ICOOPDK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="ICOOPDK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPDK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -127,7 +127,7 @@
         <Map Url="ICOOPSC00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPSC00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="54" To="120" By="6">
+	  <Iterator From="54" To="180" By="6">
         <Map Url="ICOOPSC00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="ICOOPSC00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPSC00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -140,7 +140,7 @@
         <Map Url="ICOOPME00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPME00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="54" To="120" By="6">
+	  <Iterator From="54" To="180" By="6">
         <Map Url="ICOOPME00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="ICOOPME00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPME00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -153,7 +153,7 @@
         <Map Url="ICOOPEE00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPEE00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="54" To="120" By="6">
+	  <Iterator From="54" To="180" By="6">
         <Map Url="ICOOPEE00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="ICOOPEE00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPEE00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -369,7 +369,7 @@
         <Map Url="GFSOPNA00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPNA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="192" To="240" By="24">
+	  <Iterator From="192" To="384" By="24">
         <Map Url="GFSOPNA00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="GFSOPNA00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPNA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -387,7 +387,7 @@
         <Map Url="GFSOPMA00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPMA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="192" To="240" By="24">
+	  <Iterator From="192" To="384" By="24">
         <Map Url="GFSOPMA00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="GFSOPMA00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPMA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -405,7 +405,7 @@
         <Map Url="GFSOPSA00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPSA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="192" To="240" By="24">
+	  <Iterator From="192" To="384" By="24">
         <Map Url="GFSOPSA00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="GFSOPSA00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPSA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -423,7 +423,7 @@
         <Map Url="GFSOPAF00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPAF00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="192" To="240" By="24">
+	  <Iterator From="192" To="384" By="24">
         <Map Url="GFSOPAF00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="GFSOPAF00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPAF00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -441,7 +441,7 @@
         <Map Url="GFSOPEA00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPEA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="192" To="240" By="24">
+	  <Iterator From="192" To="384" By="24">
         <Map Url="GFSOPEA00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="GFSOPEA00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPEA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -459,7 +459,7 @@
         <Map Url="GFSOPSS00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPSS00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="192" To="240" By="24">
+	  <Iterator From="192" To="384" By="24">
         <Map Url="GFSOPSS00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="GFSOPSS00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPSS00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -477,7 +477,7 @@
         <Map Url="GFSOPAU00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPAU00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="192" To="240" By="24">
+	  <Iterator From="192" To="384" By="24">
         <Map Url="GFSOPAU00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="GFSOPAU00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPAU00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -495,7 +495,7 @@
         <Map Url="GFSOPFR00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPFR00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="192" To="240" By="24">
+	  <Iterator From="192" To="384" By="24">
         <Map Url="GFSOPFR00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="GFSOPFR00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPFR00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -513,7 +513,7 @@
         <Map Url="GFSOPUK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPUK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="192" To="240" By="24">
+	  <Iterator From="192" To="384" By="24">
         <Map Url="GFSOPUK00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="GFSOPUK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPUK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -531,7 +531,7 @@
         <Map Url="GFSOPSP00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPSP00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="192" To="240" By="24">
+	  <Iterator From="192" To="384" By="24">
         <Map Url="GFSOPSP00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="GFSOPSP00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPSP00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -549,7 +549,7 @@
         <Map Url="GFSOPIT00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPIT00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="192" To="240" By="24">
+	  <Iterator From="192" To="384" By="24">
         <Map Url="GFSOPIT00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="GFSOPIT00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPIT00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -567,7 +567,7 @@
         <Map Url="GFSOPTK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPTK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="192" To="240" By="24">
+	  <Iterator From="192" To="384" By="24">
         <Map Url="GFSOPTK00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="GFSOPTK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPTK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -585,7 +585,7 @@
         <Map Url="GFSOPNL00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPNL00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="192" To="240" By="24">
+	  <Iterator From="192" To="384" By="24">
         <Map Url="GFSOPNL00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="GFSOPNL00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPNL00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -603,7 +603,7 @@
         <Map Url="GFSOPDK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPDK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="192" To="240" By="24">
+	  <Iterator From="192" To="384" By="24">
         <Map Url="GFSOPDK00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="GFSOPDK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPDK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -621,7 +621,7 @@
         <Map Url="GFSOPSC00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPSC00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="192" To="240" By="24">
+	  <Iterator From="192" To="384" By="24">
         <Map Url="GFSOPSC00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="GFSOPSC00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPSC00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -639,7 +639,7 @@
         <Map Url="GFSOPME00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPME00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="192" To="240" By="24">
+	  <Iterator From="192" To="384" By="24">
         <Map Url="GFSOPME00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="GFSOPME00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="GFSOPME00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -684,7 +684,7 @@
         <Map Url="UKMHDOPEU00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPEU00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="108" To="240" By="12">
+	  <Iterator From="108" To="168" By="12">
         <Map Url="UKMHDOPEU00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="UKMHDOPEU00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPEU00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -697,7 +697,7 @@
         <Map Url="UKMHDOPFR00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPFR00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="108" To="240" By="12">
+	  <Iterator From="108" To="168" By="12">
         <Map Url="UKMHDOPFR00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="UKMHDOPFR00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPFR00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -710,7 +710,7 @@
         <Map Url="UKMHDOPUK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPUK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="108" To="240" By="12">
+	  <Iterator From="108" To="168" By="12">
         <Map Url="UKMHDOPUK00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="UKMHDOPUK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPUK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -723,7 +723,7 @@
         <Map Url="UKMHDOPSP00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPSP00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="108" To="240" By="12">
+	  <Iterator From="108" To="168" By="12">
         <Map Url="UKMHDOPSP00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="UKMHDOPSP00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPSP00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -736,7 +736,7 @@
         <Map Url="UKMHDOPIT00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPIT00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="108" To="240" By="12">
+	  <Iterator From="108" To="168" By="12">
         <Map Url="UKMHDOPIT00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="UKMHDOPIT00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPIT00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -749,7 +749,7 @@
         <Map Url="UKMHDOPTK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPTK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="108" To="240" By="12">
+	  <Iterator From="108" To="168" By="12">
         <Map Url="UKMHDOPTK00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="UKMHDOPTK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPTK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -762,7 +762,7 @@
         <Map Url="UKMHDOPNL00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPNL00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="108" To="240" By="12">
+	  <Iterator From="108" To="168" By="12">
         <Map Url="UKMHDOPNL00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="UKMHDOPNL00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPNL00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -775,7 +775,7 @@
         <Map Url="UKMHDOPDK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPDK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="108" To="240" By="12">
+	  <Iterator From="108" To="168" By="12">
         <Map Url="UKMHDOPDK00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="UKMHDOPDK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPDK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -788,7 +788,7 @@
         <Map Url="UKMHDOPSC00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPSC00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="108" To="240" By="12">
+	  <Iterator From="108" To="168" By="12">
         <Map Url="UKMHDOPSC00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="UKMHDOPSC00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPSC00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
@@ -801,7 +801,7 @@
         <Map Url="UKMHDOPME00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPME00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-	  <Iterator From="108" To="240" By="12">
+	  <Iterator From="108" To="168" By="12">
         <Map Url="UKMHDOPME00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
         <Map Url="UKMHDOPME00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
         <Map Url="UKMHDOPME00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
