@@ -42,9 +42,9 @@ In OpenCPN, go to the _Options → Plugins_ and download, install and enable the
 
 image::wx-2-retrieve-menu.png[]
 
-=== Use Plugin Package Installer (PI)
+=== Use Legacyt Plugin Package Installer (PI)
 
-The second way is to download a PI Package Installer (Windows .exe, Linux .deb or MacOS .pkg) from the  https://www.opencpn.org[OpenCPN website, to download Weatherfax]
+The second way is to download a Legacy PI Package Installer (Windows .exe, Linux .deb or MacOS .pkg) from the  https://www.opencpn.org[OpenCPN website, to download Weatherfax]
 
 == Retrieve Weatherfax Image files with an internet connection
 
