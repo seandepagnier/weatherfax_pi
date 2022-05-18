@@ -127,6 +127,164 @@
 		  <Area Name="10" lat1="22N" lat2="51N" lon1="98W" lon2="40W" />
 		  <Area Name="12" lat1="16N" lat2="64N" lon1="97W" lon2="10E" />
 		  <Area Name="12a" lat1="17N" lat2="64N" lon1="97W" lon2="10E" />
-       </Region>
+    </Region>
   </Server>
-  </OCPNWeatherFaxInternetRetrieval>
+  <Server Name="NOAA GOES" Url="https://cdn.star.nesdis.noaa.gov/">
+    <Region Name="Northern Atlantic Ocean" Url="GOES16/ABI/SECTOR/na/">
+      <Map Url="GEOCOLOR/1800x1080.jpg" Contents="GeoColor" Area="1" />
+      <Map Url="AirMass/1800x1080.jpg" Contents="AirMass RGB" Area="1" />
+      <Map Url="Sandwich/1800x1080.jpg" Contents="Sandwich RGB" Area="1" />
+      <Map Url="DayCloudPhase/1800x1080.jpg" Contents="Day Cloud Phase RGB" Area="1" />
+      <Map Url="NightMicrophysics/1800x1080.jpg" Contents="Nighttime Microphysics" Area="1" />
+      <Map Url="FireTemperature/1800x1080.jpg" Contents="Fire Temperature" Area="1" />
+      <Map Url="Dust/1800x1080.jpg" Contents="Dust RGB" Area="1" />
+      <Map Url="01/1800x1080.jpg" Contents="Band 1 - 0.47µm Blue - Visible" Area="1" />
+      <Map Url="02/1800x1080.jpg" Contents="Band 2 - 0.64µm Red - Visible" Area="1" />
+      <Map Url="03/1800x1080.jpg" Contents="Band 3 - 0.86µm Veggie - Near IR" Area="1" />
+      <Map Url="04/1800x1080.jpg" Contents="Band 4 - 1.37µm Cirrus - Near IR" Area="1" />
+      <Map Url="05/1800x1080.jpg" Contents="Band 5 - 1.6µm Snow/Ice - Near IR" Area="1" />
+      <Map Url="06/1800x1080.jpg" Contents="Band 6 - 2.2µm Cloud particle - Near IR" Area="1" />
+      <Map Url="07/1800x1080.jpg" Contents="Band 7 - 3.9µm Shortwave Window - IR" Area="1" />
+      <Map Url="08/1800x1080.jpg" Contents="Band 8 - 6.2µm Upper-Level Water Vapor - IR" Area="1" />
+      <Map Url="09/1800x1080.jpg" Contents="Band 9 - 6.9µm Mid-Level Water Vapor - IR" Area="1" />
+      <Map Url="10/1800x1080.jpg" Contents="Band 10 - 7.3µm Lower-Level Water Vapor - IR" Area="1" />
+      <Map Url="11/1800x1080.jpg" Contents="Band 11 - 8.4µm Cloud Top - IR" Area="1" />
+      <Map Url="12/1800x1080.jpg" Contents="Band 12 - 9.6µm Ozone - IR" Area="1" />
+      <Map Url="13/1800x1080.jpg" Contents="Band 13 - 10.3µm Clean Longwave Window - IR" Area="1" />
+      <Map Url="14/1800x1080.jpg" Contents="Band 14 - 11.2µm Longwave Window - IR" Area="1" />
+      <Map Url="15/1800x1080.jpg" Contents="Band 15 - 12.3µm Dirty Longwave Window - IR" Area="1" />
+      <Map Url="16/1800x1080.jpg" Contents="Band 16 - 13.3µm CO2 Longwave - IR" Area="1" />
+      <Area Name="1" lat1="35N" lat2="65N" lon1="80W" lon2="0E" />
+    </Region>
+    <Region Name="Eastern Pacific Ocean" Url="GOES16/ABI/SECTOR/eep/">
+      <Map Url="GEOCOLOR/1800x1080.jpg" Contents="GeoColor" Area="1" />
+      <Map Url="AirMass/1800x1080.jpg" Contents="AirMass RGB" Area="1" />
+      <Map Url="Sandwich/1800x1080.jpg" Contents="Sandwich RGB" Area="1" />
+      <Map Url="DayCloudPhase/1800x1080.jpg" Contents="Day Cloud Phase RGB" Area="1" />
+      <Map Url="NightMicrophysics/1800x1080.jpg" Contents="Nighttime Microphysics" Area="1" />
+      <Map Url="FireTemperature/1800x1080.jpg" Contents="Fire Temperature" Area="1" />
+      <Map Url="Dust/1800x1080.jpg" Contents="Dust RGB" Area="1" />
+      <Map Url="01/1800x1080.jpg" Contents="Band 1 - 0.47µm Blue - Visible" Area="1" />
+      <Map Url="02/1800x1080.jpg" Contents="Band 2 - 0.64µm Red - Visible" Area="1" />
+      <Map Url="03/1800x1080.jpg" Contents="Band 3 - 0.86µm Veggie - Near IR" Area="1" />
+      <Map Url="04/1800x1080.jpg" Contents="Band 4 - 1.37µm Cirrus - Near IR" Area="1" />
+      <Map Url="05/1800x1080.jpg" Contents="Band 5 - 1.6µm Snow/Ice - Near IR" Area="1" />
+      <Map Url="06/1800x1080.jpg" Contents="Band 6 - 2.2µm Cloud particle - Near IR" Area="1" />
+      <Map Url="07/1800x1080.jpg" Contents="Band 7 - 3.9µm Shortwave Window - IR" Area="1" />
+      <Map Url="08/1800x1080.jpg" Contents="Band 8 - 6.2µm Upper-Level Water Vapor - IR" Area="1" />
+      <Map Url="09/1800x1080.jpg" Contents="Band 9 - 6.9µm Mid-Level Water Vapor - IR" Area="1" />
+      <Map Url="10/1800x1080.jpg" Contents="Band 10 - 7.3µm Lower-Level Water Vapor - IR" Area="1" />
+      <Map Url="11/1800x1080.jpg" Contents="Band 11 - 8.4µm Cloud Top - IR" Area="1" />
+      <Map Url="12/1800x1080.jpg" Contents="Band 12 - 9.6µm Ozone - IR" Area="1" />
+      <Map Url="13/1800x1080.jpg" Contents="Band 13 - 10.3µm Clean Longwave Window - IR" Area="1" />
+      <Map Url="14/1800x1080.jpg" Contents="Band 14 - 11.2µm Longwave Window - IR" Area="1" />
+      <Map Url="15/1800x1080.jpg" Contents="Band 15 - 12.3µm Dirty Longwave Window - IR" Area="1" />
+      <Map Url="16/1800x1080.jpg" Contents="Band 16 - 13.3µm CO2 Longwave - IR" Area="1" />
+      <Area Name="1" lat1="35N" lat2="65N" lon1="80W" lon2="0E" />
+    </Region>
+    <Region Name="Northern Pacific Ocean" Url="GOES17/ABI/SECTOR/np/">
+      <Map Url="GEOCOLOR/1800x1080.jpg" Contents="GeoColor" Area="1" />
+      <Map Url="AirMass/1800x1080.jpg" Contents="AirMass RGB" Area="1" />
+      <Map Url="Sandwich/1800x1080.jpg" Contents="Sandwich RGB" Area="1" />
+      <Map Url="DayCloudPhase/1800x1080.jpg" Contents="Day Cloud Phase RGB" Area="1" />
+      <Map Url="NightMicrophysics/1800x1080.jpg" Contents="Nighttime Microphysics" Area="1" />
+      <Map Url="FireTemperature/1800x1080.jpg" Contents="Fire Temperature" Area="1" />
+      <Map Url="Dust/1800x1080.jpg" Contents="Dust RGB" Area="1" />
+      <Map Url="01/1800x1080.jpg" Contents="Band 1 - 0.47µm Blue - Visible" Area="1" />
+      <Map Url="02/1800x1080.jpg" Contents="Band 2 - 0.64µm Red - Visible" Area="1" />
+      <Map Url="03/1800x1080.jpg" Contents="Band 3 - 0.86µm Veggie - Near IR" Area="1" />
+      <Map Url="04/1800x1080.jpg" Contents="Band 4 - 1.37µm Cirrus - Near IR" Area="1" />
+      <Map Url="05/1800x1080.jpg" Contents="Band 5 - 1.6µm Snow/Ice - Near IR" Area="1" />
+      <Map Url="06/1800x1080.jpg" Contents="Band 6 - 2.2µm Cloud particle - Near IR" Area="1" />
+      <Map Url="07/1800x1080.jpg" Contents="Band 7 - 3.9µm Shortwave Window - IR" Area="1" />
+      <Map Url="08/1800x1080.jpg" Contents="Band 8 - 6.2µm Upper-Level Water Vapor - IR" Area="1" />
+      <Map Url="09/1800x1080.jpg" Contents="Band 9 - 6.9µm Mid-Level Water Vapor - IR" Area="1" />
+      <Map Url="10/1800x1080.jpg" Contents="Band 10 - 7.3µm Lower-Level Water Vapor - IR" Area="1" />
+      <Map Url="11/1800x1080.jpg" Contents="Band 11 - 8.4µm Cloud Top - IR" Area="1" />
+      <Map Url="12/1800x1080.jpg" Contents="Band 12 - 9.6µm Ozone - IR" Area="1" />
+      <Map Url="13/1800x1080.jpg" Contents="Band 13 - 10.3µm Clean Longwave Window - IR" Area="1" />
+      <Map Url="14/1800x1080.jpg" Contents="Band 14 - 11.2µm Longwave Window - IR" Area="1" />
+      <Map Url="15/1800x1080.jpg" Contents="Band 15 - 12.3µm Dirty Longwave Window - IR" Area="1" />
+      <Map Url="16/1800x1080.jpg" Contents="Band 16 - 13.3µm CO2 Longwave - IR" Area="1" />
+      <Area Name="1" lat1="35N" lat2="65N" lon1="80W" lon2="0E" />
+    </Region>
+    <Region Name="Tropical Pacific Ocean" Url="GOES17/ABI/SECTOR/tpw/">
+      <Map Url="GEOCOLOR/1800x1080.jpg" Contents="GeoColor" Area="1" />
+      <Map Url="AirMass/1800x1080.jpg" Contents="AirMass RGB" Area="1" />
+      <Map Url="Sandwich/1800x1080.jpg" Contents="Sandwich RGB" Area="1" />
+      <Map Url="DayCloudPhase/1800x1080.jpg" Contents="Day Cloud Phase RGB" Area="1" />
+      <Map Url="NightMicrophysics/1800x1080.jpg" Contents="Nighttime Microphysics" Area="1" />
+      <Map Url="FireTemperature/1800x1080.jpg" Contents="Fire Temperature" Area="1" />
+      <Map Url="Dust/1800x1080.jpg" Contents="Dust RGB" Area="1" />
+      <Map Url="01/1800x1080.jpg" Contents="Band 1 - 0.47µm Blue - Visible" Area="1" />
+      <Map Url="02/1800x1080.jpg" Contents="Band 2 - 0.64µm Red - Visible" Area="1" />
+      <Map Url="03/1800x1080.jpg" Contents="Band 3 - 0.86µm Veggie - Near IR" Area="1" />
+      <Map Url="04/1800x1080.jpg" Contents="Band 4 - 1.37µm Cirrus - Near IR" Area="1" />
+      <Map Url="05/1800x1080.jpg" Contents="Band 5 - 1.6µm Snow/Ice - Near IR" Area="1" />
+      <Map Url="06/1800x1080.jpg" Contents="Band 6 - 2.2µm Cloud particle - Near IR" Area="1" />
+      <Map Url="07/1800x1080.jpg" Contents="Band 7 - 3.9µm Shortwave Window - IR" Area="1" />
+      <Map Url="08/1800x1080.jpg" Contents="Band 8 - 6.2µm Upper-Level Water Vapor - IR" Area="1" />
+      <Map Url="09/1800x1080.jpg" Contents="Band 9 - 6.9µm Mid-Level Water Vapor - IR" Area="1" />
+      <Map Url="10/1800x1080.jpg" Contents="Band 10 - 7.3µm Lower-Level Water Vapor - IR" Area="1" />
+      <Map Url="11/1800x1080.jpg" Contents="Band 11 - 8.4µm Cloud Top - IR" Area="1" />
+      <Map Url="12/1800x1080.jpg" Contents="Band 12 - 9.6µm Ozone - IR" Area="1" />
+      <Map Url="13/1800x1080.jpg" Contents="Band 13 - 10.3µm Clean Longwave Window - IR" Area="1" />
+      <Map Url="14/1800x1080.jpg" Contents="Band 14 - 11.2µm Longwave Window - IR" Area="1" />
+      <Map Url="15/1800x1080.jpg" Contents="Band 15 - 12.3µm Dirty Longwave Window - IR" Area="1" />
+      <Map Url="16/1800x1080.jpg" Contents="Band 16 - 13.3µm CO2 Longwave - IR" Area="1" />
+      <Area Name="1" lat1="35N" lat2="65N" lon1="80W" lon2="0E" />
+    </Region>
+    <Region Name="Southern Pacific Ocean" Url="GOES17/ABI/SECTOR/tsp/">
+      <Map Url="GEOCOLOR/1800x1080.jpg" Contents="GeoColor" Area="1" />
+      <Map Url="AirMass/1800x1080.jpg" Contents="AirMass RGB" Area="1" />
+      <Map Url="Sandwich/1800x1080.jpg" Contents="Sandwich RGB" Area="1" />
+      <Map Url="DayCloudPhase/1800x1080.jpg" Contents="Day Cloud Phase RGB" Area="1" />
+      <Map Url="NightMicrophysics/1800x1080.jpg" Contents="Nighttime Microphysics" Area="1" />
+      <Map Url="FireTemperature/1800x1080.jpg" Contents="Fire Temperature" Area="1" />
+      <Map Url="Dust/1800x1080.jpg" Contents="Dust RGB" Area="1" />
+      <Map Url="01/1800x1080.jpg" Contents="Band 1 - 0.47µm Blue - Visible" Area="1" />
+      <Map Url="02/1800x1080.jpg" Contents="Band 2 - 0.64µm Red - Visible" Area="1" />
+      <Map Url="03/1800x1080.jpg" Contents="Band 3 - 0.86µm Veggie - Near IR" Area="1" />
+      <Map Url="04/1800x1080.jpg" Contents="Band 4 - 1.37µm Cirrus - Near IR" Area="1" />
+      <Map Url="05/1800x1080.jpg" Contents="Band 5 - 1.6µm Snow/Ice - Near IR" Area="1" />
+      <Map Url="06/1800x1080.jpg" Contents="Band 6 - 2.2µm Cloud particle - Near IR" Area="1" />
+      <Map Url="07/1800x1080.jpg" Contents="Band 7 - 3.9µm Shortwave Window - IR" Area="1" />
+      <Map Url="08/1800x1080.jpg" Contents="Band 8 - 6.2µm Upper-Level Water Vapor - IR" Area="1" />
+      <Map Url="09/1800x1080.jpg" Contents="Band 9 - 6.9µm Mid-Level Water Vapor - IR" Area="1" />
+      <Map Url="10/1800x1080.jpg" Contents="Band 10 - 7.3µm Lower-Level Water Vapor - IR" Area="1" />
+      <Map Url="11/1800x1080.jpg" Contents="Band 11 - 8.4µm Cloud Top - IR" Area="1" />
+      <Map Url="12/1800x1080.jpg" Contents="Band 12 - 9.6µm Ozone - IR" Area="1" />
+      <Map Url="13/1800x1080.jpg" Contents="Band 13 - 10.3µm Clean Longwave Window - IR" Area="1" />
+      <Map Url="14/1800x1080.jpg" Contents="Band 14 - 11.2µm Longwave Window - IR" Area="1" />
+      <Map Url="15/1800x1080.jpg" Contents="Band 15 - 12.3µm Dirty Longwave Window - IR" Area="1" />
+      <Map Url="16/1800x1080.jpg" Contents="Band 16 - 13.3µm CO2 Longwave - IR" Area="1" />
+      <Area Name="1" lat1="35N" lat2="65N" lon1="80W" lon2="0E" />
+    </Region>
+    <Region Name="Caribbean" Url="GOES16/ABI/SECTOR/car/">
+      <Map Url="GEOCOLOR/1000x1000.jpg" Contents="GeoColor" Area="1" />
+      <Map Url="AirMass/1000x1000.jpg" Contents="AirMass RGB" Area="1" />
+      <Map Url="Sandwich/1000x1000.jpg" Contents="Sandwich RGB" Area="1" />
+      <Map Url="DayCloudPhase/1000x1000.jpg" Contents="Day Cloud Phase RGB" Area="1" />
+      <Map Url="NightMicrophysics/1000x1000.jpg" Contents="Nighttime Microphysics" Area="1" />
+      <Map Url="FireTemperature/1000x1000.jpg" Contents="Fire Temperature" Area="1" />
+      <Map Url="Dust/1000x1000.jpg" Contents="Dust RGB" Area="1" />
+      <Map Url="01/1000x1000.jpg" Contents="Band 1 - 0.47µm Blue - Visible" Area="1" />
+      <Map Url="02/1000x1000.jpg" Contents="Band 2 - 0.64µm Red - Visible" Area="1" />
+      <Map Url="03/1000x1000.jpg" Contents="Band 3 - 0.86µm Veggie - Near IR" Area="1" />
+      <Map Url="04/1000x1000.jpg" Contents="Band 4 - 1.37µm Cirrus - Near IR" Area="1" />
+      <Map Url="05/1000x1000.jpg" Contents="Band 5 - 1.6µm Snow/Ice - Near IR" Area="1" />
+      <Map Url="06/1000x1000.jpg" Contents="Band 6 - 2.2µm Cloud particle - Near IR" Area="1" />
+      <Map Url="07/1000x1000.jpg" Contents="Band 7 - 3.9µm Shortwave Window - IR" Area="1" />
+      <Map Url="08/1000x1000.jpg" Contents="Band 8 - 6.2µm Upper-Level Water Vapor - IR" Area="1" />
+      <Map Url="09/1000x1000.jpg" Contents="Band 9 - 6.9µm Mid-Level Water Vapor - IR" Area="1" />
+      <Map Url="10/1000x1000.jpg" Contents="Band 10 - 7.3µm Lower-Level Water Vapor - IR" Area="1" />
+      <Map Url="11/1000x1000.jpg" Contents="Band 11 - 8.4µm Cloud Top - IR" Area="1" />
+      <Map Url="12/1000x1000.jpg" Contents="Band 12 - 9.6µm Ozone - IR" Area="1" />
+      <Map Url="13/1000x1000.jpg" Contents="Band 13 - 10.3µm Clean Longwave Window - IR" Area="1" />
+      <Map Url="14/1000x1000.jpg" Contents="Band 14 - 11.2µm Longwave Window - IR" Area="1" />
+      <Map Url="15/1000x1000.jpg" Contents="Band 15 - 12.3µm Dirty Longwave Window - IR" Area="1" />
+      <Map Url="16/1000x1000.jpg" Contents="Band 16 - 13.3µm CO2 Longwave - IR" Area="1" />
+      <Area Name="1" lat1="35N" lat2="65N" lon1="80W" lon2="0E" />
+    </Region>
+  </Server>
+</OCPNWeatherFaxInternetRetrieval>
