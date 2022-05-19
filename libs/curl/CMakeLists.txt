@@ -32,11 +32,13 @@ if (OCPN_FLATPAK_CONFIG)
 
   #  On Linux and Flatpak: use the system library and be done with it.
   find_library(LIBCURL NAMES libcurl curl REQUIRED)
+  message(STATUS "libs/curl/CMakeLists.txt LIBCURL:  ${LIBCURL}")
   if (${CMAKE_VERSION} VERSION_LESS 3.18)
     find_path(CURL_HEADERS NAMES curl.h PATH_SUFFIXES curl)
   else ()
     find_path(CURL_HEADERS NAMES curl.h PATH_SUFFIXES curl REQUIRED)
   endif ()
+  message(STATUS "libs/curl/CMakeLists.txt CURL_HEADERS:  ${CURL_HEADERS}")
   target_link_libraries(curl_if INTERFACE ${LIBCURL})
   target_include_directories(curl_if INTERFACE ${CURL_HEADERS})
   return ()
