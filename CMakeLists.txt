@@ -463,6 +463,7 @@ target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${EXTSRC} ${SRC_
 ##==========================================================================
 
 if (OCPN_FLATPAK_CONFIG)
+  message(STATUS "Adding libs/curl")
   add_subdirectory("${CMAKE_SOURCE_DIR}/libs/curl")
   target_link_libraries(${PACKAGE_NAME} libcurl::libcurl)
 endif ()

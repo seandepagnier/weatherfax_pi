@@ -28,6 +28,8 @@ add_library(curl_if INTERFACE)
 add_library(libcurl::libcurl ALIAS curl_if)
 
 if (OCPN_FLATPAK_CONFIG)
+  message(STATUS "libs/curl/CMakeLists.txt processing flatpak")
+
   #  On Linux and Flatpak: use the system library and be done with it.
   find_library(LIBCURL NAMES libcurl curl REQUIRED)
   if (${CMAKE_VERSION} VERSION_LESS 3.18)
