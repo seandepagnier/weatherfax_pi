@@ -462,7 +462,7 @@ endif(QT_ANDROID)
 target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${EXTSRC} ${SRC_AUDIOFILE})
 ##==========================================================================
 
-if (NOT QT_ANDROID)
+if (OCPN_FLATPAK_CONFIG)
   add_subdirectory("${CMAKE_SOURCE_DIR}/libs/curl")
   target_link_libraries(${PACKAGE_NAME} libcurl::libcurl)
 endif ()

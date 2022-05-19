@@ -1,34 +1,61 @@
-
-# OpenCPN wrapper for libcurl:
+# OpenCPN wrapper for libcurl -- https://curl.se/libcurl/
 #
-# Exports: libcurl::libcurl link object
+# Exports: libcurl::libcurl transitive link object
+#
+# Copyright (C) 2022 Alec Leamas
+#
+# This program is free software; you can redistribute it and/or modify  *
+# it under the terms of the GNU General Public License as published by  *
+# the Free Software Foundation; either version 3 of the License, or     *
+# (at your option) any later version.                                   *
 
 cmake_minimum_required (VERSION 3.1.0)
+
+set(curl_version 7.83.1)   # Actual version for built library
 
 if (TARGET libcurl::libcurl)
   return ()
 endif ()
 
+if (QT_ANDROID)
+  message(STATUS "NOTE: libcurl is not available on Android")
+  return ()
+endif ()
+
 project(ocpn_curl)
 
-set(curl_version 7.83.1)   # Actual version for downloaded tarball
+add_library(curl_if INTERFACE)
+add_library(libcurl::libcurl ALIAS curl_if)
+
+if (OCPN_FLATPAK_CONFIG)
+  #  On Linux and Flatpak: use the system library and be done with it.
+  find_library(LIBCURL NAMES libcurl curl REQUIRED)
+  if (${CMAKE_VERSION} VERSION_LESS 3.18)
+    find_path(CURL_HEADERS NAMES curl.h PATH_SUFFIXES curl)
+  else ()
+    find_path(CURL_HEADERS NAMES curl.h PATH_SUFFIXES curl REQUIRED)
+  endif ()
+  target_link_libraries(curl_if INTERFACE ${LIBCURL})
+  target_include_directories(curl_if INTERFACE ${CURL_HEADERS})
+  return ()
+endif ()
 
 set(curl_tarball "curl-${curl_version}.tar.gz")
 set(curl_url https://curl.se/download/${curl_tarball})
-set(curl_srcdir ${CMAKE_CURRENT_LIST_DIR}/curl-${curl_version})
+set(curl_cache_dir "${CMAKE_CURRENT_LIST_DIR}/cache")
+set(curl_srcdir "${curl_cache_dir}/curl-${curl_version}")
 
-# Make sure we have downloaded and unpacked the tarball
+# Make sure the tarball is downloaded and unpacked
 if (NOT EXISTS ${curl_srcdir})
-  set(_cachedir "${CMAKE_SOURCE_DIR}/cache" CACHE STRING "Build download area")
-  execute_process(COMMAND cmake -E make_directory ${_cachedir})
-
-  # Some Debian/ubuntu versions have buggy curl and hence file(DOWNLOAD ...):
-  if (NOT EXISTS ${_cachedir}/${curl_tarball})
-    execute_process(COMMAND wget -O ${_cachedir}/${curl_tarball} ${curl_url})
+  # Some Debian/Ubuntu versions have buggy curl and hence file(DOWNLOAD ...):
+  if (NOT EXISTS "${curl_cache_dir}/${curl_tarball}")
+    execute_process(
+      COMMAND wget -nv -O "${curl_cache_dir}/${curl_tarball}" ${curl_url}
+    )
   endif ()
   execute_process(
-    COMMAND ${CMAKE_COMMAND} -E tar -xzf "${_cachedir}/${curl_tarball}"
-    WORKING_DIRECTORY "${CMAKE_CURRENT_LIST_DIR}"
+    COMMAND ${CMAKE_COMMAND} -E tar -xzf "${curl_cache_dir}/${curl_tarball}"
+    WORKING_DIRECTORY "${curl_cache_dir}"
   )
 endif ()
 
@@ -57,7 +84,5 @@ endif ()
 
 add_subdirectory(${curl_srcdir})
 
-add_library(curl_if INTERFACE)
-add_library(libcurl::libcurl ALIAS curl_if)
 target_link_libraries(curl_if INTERFACE libcurl)
-target_include_directories(curl_if INTERFACE ${curl_srcdir}/include)
+target_include_directories(curl_if INTERFACE "${curl_srcdir}/include")
