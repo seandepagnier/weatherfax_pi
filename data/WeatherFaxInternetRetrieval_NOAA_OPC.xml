@@ -180,7 +180,7 @@
       <Map Url="14/1800x1080.jpg" Contents="Band 14 - 11.2µm Longwave Window - IR" Area="1" />
       <Map Url="15/1800x1080.jpg" Contents="Band 15 - 12.3µm Dirty Longwave Window - IR" Area="1" />
       <Map Url="16/1800x1080.jpg" Contents="Band 16 - 13.3µm CO2 Longwave - IR" Area="1" />
-      <Area Name="1" lat1="35N" lat2="65N" lon1="80W" lon2="0E" />
+      <Area Name="1" lat1="9S" lat2="30N" lon1="139W" lon2="74W" />
     </Region>
     <Region Name="Northern Pacific Ocean" Url="GOES17/ABI/SECTOR/np/">
       <Map Url="GEOCOLOR/1800x1080.jpg" Contents="GeoColor" Area="1" />
@@ -206,7 +206,7 @@
       <Map Url="14/1800x1080.jpg" Contents="Band 14 - 11.2µm Longwave Window - IR" Area="1" />
       <Map Url="15/1800x1080.jpg" Contents="Band 15 - 12.3µm Dirty Longwave Window - IR" Area="1" />
       <Map Url="16/1800x1080.jpg" Contents="Band 16 - 13.3µm CO2 Longwave - IR" Area="1" />
-      <Area Name="1" lat1="35N" lat2="65N" lon1="80W" lon2="0E" />
+      <Area Name="1" lat1="35N" lat2="65N" lon1="160E" lon2="110W" />
     </Region>
     <Region Name="Tropical Pacific Ocean" Url="GOES17/ABI/SECTOR/tpw/">
       <Map Url="GEOCOLOR/1800x1080.jpg" Contents="GeoColor" Area="1" />
@@ -232,7 +232,7 @@
       <Map Url="14/1800x1080.jpg" Contents="Band 14 - 11.2µm Longwave Window - IR" Area="1" />
       <Map Url="15/1800x1080.jpg" Contents="Band 15 - 12.3µm Dirty Longwave Window - IR" Area="1" />
       <Map Url="16/1800x1080.jpg" Contents="Band 16 - 13.3µm CO2 Longwave - IR" Area="1" />
-      <Area Name="1" lat1="35N" lat2="65N" lon1="80W" lon2="0E" />
+      <Area Name="1" lat1="5S" lat2="36N" lon1="174W" lon2="103W" />
     </Region>
     <Region Name="Southern Pacific Ocean" Url="GOES17/ABI/SECTOR/tsp/">
       <Map Url="GEOCOLOR/1800x1080.jpg" Contents="GeoColor" Area="1" />
@@ -258,7 +258,7 @@
       <Map Url="14/1800x1080.jpg" Contents="Band 14 - 11.2µm Longwave Window - IR" Area="1" />
       <Map Url="15/1800x1080.jpg" Contents="Band 15 - 12.3µm Dirty Longwave Window - IR" Area="1" />
       <Map Url="16/1800x1080.jpg" Contents="Band 16 - 13.3µm CO2 Longwave - IR" Area="1" />
-      <Area Name="1" lat1="35N" lat2="65N" lon1="80W" lon2="0E" />
+      <Area Name="1" lat1="4S" lat2="5N" lon1="167E" lon2="127W" />
     </Region>
     <Region Name="Caribbean" Url="GOES16/ABI/SECTOR/car/">
       <Map Url="GEOCOLOR/1000x1000.jpg" Contents="GeoColor" Area="1" />
@@ -284,7 +284,7 @@
       <Map Url="14/1000x1000.jpg" Contents="Band 14 - 11.2µm Longwave Window - IR" Area="1" />
       <Map Url="15/1000x1000.jpg" Contents="Band 15 - 12.3µm Dirty Longwave Window - IR" Area="1" />
       <Map Url="16/1000x1000.jpg" Contents="Band 16 - 13.3µm CO2 Longwave - IR" Area="1" />
-      <Area Name="1" lat1="35N" lat2="65N" lon1="80W" lon2="0E" />
+      <Area Name="1" lat1="0N" lat2="36N" lon1="85W" lon2="49W" />
     </Region>
   </Server>
 </OCPNWeatherFaxInternetRetrieval>
