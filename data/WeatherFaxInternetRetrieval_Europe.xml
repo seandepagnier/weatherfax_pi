@@ -13,9 +13,9 @@
       <Map Url="ico_500ht_na_024.png" Contents="500mb 24hr" Area="C" />
       <Map Url="ico_500ht_na_048.png" Contents="500mb 48hr" Area="C" />
       <Map Url="ico_500ht_na_072.png" Contents="500mb 72hr" Area="C" />
-      <Area Name="A" lat1="40N" lat2="60N" lon1="40E" lon2="40W" />
-      <Area Name="B" lat1="40N" lat2="60N" lon1="40E" lon2="40W" />
-      <Area Name="C" lat1="30N" lat2="70N" lon1="40E" lon2="40W" />
+      <Area Name="A" lat1="31N" lat2="80N" lon1="50E" lon2="44W" />
+      <Area Name="B" lat1="31N" lat2="80N" lon1="50E" lon2="44W" />
+      <Area Name="C" lat1="35N" lat2="80N" lon1="44E" lon2="44W" />
 	 </Region>
     <Region Name="Germany" Url="https://www.wetterzentrale.de/maps/">
 	  <Iterator From="0" To="48" By="3">
@@ -28,7 +28,7 @@
         <Map Url="ICOOPGE00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPGE00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-      <Area Name="1" lat1="42N" lat2="51N" lon1="6W" lon2="11E" />
+      <Area Name="1" lat1="47N" lat2="55N" lon1="4E" lon2="15E" />
     </Region>
     <Region Name="France" Url="https://www.wetterzentrale.de/maps/">
 	  <Iterator From="0" To="48" By="3">
@@ -158,7 +158,7 @@
         <Map Url="ICOOPEE00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="ICOOPEE00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-      <Area Name="1" lat1="45N" lat2="55N" lon1="3W" lon2="19E" />
+      <Area Name="1" lat1="45N" lat2="58N" lon1="19e" lon2="55E" />
     </Region>
   </Server>
   <Server Name="ECMWF" Url="https://www.wetterzentrale.de/maps/">
@@ -664,8 +664,8 @@
       <Map Url="noaa_ukmo_prognosis/PPVL89.gif" Contents="84hr MSLP Forecast" Area="3" />
       <Map Url="noaa_ukmo_prognosis/PPVM89.gif" Contents="96hr MSLP Forecast" Area="3" />
       <Map Url="noaa_ukmo_prognosis/PPVO89.gif" Contents="120hr MSLP Forecast" Area="3" />
-      <Area Name="2" lat1="30N" lat2="75N" lon1="60W" lon2="45E" />
-      <Area Name="3" lat1="30N" lat2="75N" lon1="60W" lon2="45E" />
+      <Area Name="2" lat1="30N" lat2="80N" lon1="60W" lon2="45E" />
+      <Area Name="3" lat1="30N" lat2="80N" lon1="60W" lon2="45E" />
     </Region>
     <Region Name="NE Atlantic (color)" Url="http://data.consumer-digital.api.metoffice.gov.uk/v1/surface-pressure/colour/">
 		<Map Url="%Y-%m-%dT%H00/FSXX%HT_00.gif" Contents="MSLP Analysis" Area="1" Hour="-12;12;0" />
@@ -953,7 +953,7 @@
         <Map Url="AROOPGE00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
         <Map Url="AROOPGE00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
       </Iterator>
-      <Area Name="1" lat1="42N" lat2="51N" lon1="6W" lon2="11E" />
+      <Area Name="1" lat1="47N" lat2="55N" lon1="4E" lon2="15E" />
     </Region>
     <Region Name="France">
 	  <Iterator From="1" To="24" By="1">
