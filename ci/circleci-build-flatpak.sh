@@ -31,15 +31,13 @@ sudo apt --allow-unauthenticated --allow-downgrades --allow-remove-essential --a
 # Install extra build libs
 pwd
 ME=$(echo ${0##*/} | sed 's/\.sh//g')
-ls -lar *
-EXTRA_LIBS=../ci/extras/extra_libs.txt
+EXTRA_LIBS=ci/extras/extra_libs.txt
 if test -f "$EXTRA_LIBS"; then
     while read line; do
         sudo apt-get install $line
     done < $EXTRA_LIBS
 fi
-EXTRA_LIBS=../ci/extras/${ME}_extra_libs.txt
-ls -la ../ci/*
+EXTRA_LIBS=ci/extras/${ME}_extra_libs.txt
 cat $EXTRA_LIBS
 if test -f "$EXTRA_LIBS"; then
     while read line; do
