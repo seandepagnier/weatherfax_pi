@@ -19,7 +19,7 @@ sudo apt-get install devscripts equivs
 
 rm -rf build && mkdir build && cd build
 
-# Install extra build libs
+# Install extra libs
 ME=$(echo ${0##*/} | sed 's/\.sh//g')
 EXTRA_LIBS=../ci/extras/extra_libs.txt
 if test -f "$EXTRA_LIBS"; then
