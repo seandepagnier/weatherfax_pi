@@ -37,6 +37,8 @@ if test -f "$EXTRA_LIBS"; then
     done < $EXTRA_LIBS
 fi
 EXTRA_LIBS=../ci/extras/${ME}_extra_libs.txt
+ls -la $EXTRA_LIBS
+cat $EXTRA_LIBS
 if test -f "$EXTRA_LIBS"; then
     while read line; do
         sudo apt-get install $line
