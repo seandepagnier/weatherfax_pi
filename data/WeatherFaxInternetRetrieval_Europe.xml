@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <OCPNWeatherFaxInternetRetrieval>
-<Server Name="German Weather DWD" Url="http://www.dwd.de/DWD/wetter/wv_spez/hobbymet/wetterkarten/">
-    <Region Name="European">
-      <Map Url="bwk_bodendruck_na_ana.png" Contents="Surface Anlys(4mb)" Area="A" />
+<Server Name="German Weather DWD">
+    <Region Name="Europe" Url="http://www.dwd.de/DWD/wetter/wv_spez/hobbymet/wetterkarten/">
+      <Map Url="bwk_bodendruck_na_ana.png" Contents="Surface Analysis (Warning: 4MBytes)" Area="A" />
       <Map Url="ico_tkboden_na_024.png" Contents="24hr Forecast" Area="B" />
       <Map Url="ico_tkboden_na_036.png" Contents="36hr Forecast" Area="B" />
       <Map Url="ico_tkboden_na_048.png" Contents="48hr Forecast" Area="B" />
@@ -13,43 +13,999 @@
       <Map Url="ico_500ht_na_024.png" Contents="500mb 24hr" Area="C" />
       <Map Url="ico_500ht_na_048.png" Contents="500mb 48hr" Area="C" />
       <Map Url="ico_500ht_na_072.png" Contents="500mb 72hr" Area="C" />
-      <Area Name="A" lat1="40N" lat2="60N" lon1="40E" lon2="40W" />
-      <Area Name="B" lat1="40N" lat2="60N" lon1="40E" lon2="40W" />
-      <Area Name="C" lat1="30N" lat2="70N" lon1="40E" lon2="40W" />
+      <Area Name="A" lat1="31N" lat2="80N" lon1="50E" lon2="44W" />
+      <Area Name="B" lat1="31N" lat2="80N" lon1="50E" lon2="44W" />
+      <Area Name="C" lat1="35N" lat2="80N" lon1="44E" lon2="44W" />
 	 </Region>
+    <Region Name="Germany" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="48" By="3">
+        <Map Url="ICOOPGE00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPGE00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPGE00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="180" By="6">
+        <Map Url="ICOOPGE00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPGE00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPGE00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="47N" lat2="55N" lon1="4E" lon2="15E" />
+    </Region>
+    <Region Name="France" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="48" By="3">
+        <Map Url="ICOOPFR00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPFR00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPFR00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="180" By="6">
+        <Map Url="ICOOPFR00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPFR00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPFR00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="42N" lat2="51N" lon1="6W" lon2="11E" />
+    </Region>
+    <Region Name="United Kingdom" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="48" By="3">
+        <Map Url="ICOOPUK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPUK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPUK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="180" By="6">
+        <Map Url="ICOOPUK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPUK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPUK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="49N" lat2="60N" lon1="18W" lon2="8E" />
+    </Region>
+    <Region Name="Spain" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="48" By="3">
+        <Map Url="ICOOPSP00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPSP00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPSP00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="180" By="6">
+        <Map Url="ICOOPSP00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPSP00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPSP00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="35N" lat2="45N" lon1="11W" lon2="6E" />
+    </Region>
+    <Region Name="Italy / Balkans" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="48" By="6">
+        <Map Url="ICOOPIT00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPIT00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPIT00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="180" By="6">
+        <Map Url="ICOOPIT00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPIT00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPIT00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="35N" lat2="47N" lon1="7E" lon2="29E" />
+    </Region>
+    <Region Name="Turkey / Middle East" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="48" By="3">
+        <Map Url="ICOOPTK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPTK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPTK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="180" By="6">
+        <Map Url="ICOOPTK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPTK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPTK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="32N" lat2="44N" lon1="25E" lon2="46E" />
+    </Region>
+    <Region Name="Netherlands" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="48" By="3">
+        <Map Url="ICOOPNL00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPNL00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPNL00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="180" By="6">
+        <Map Url="ICOOPNL00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPNL00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPNL00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="50N" lat2="54N" lon1="0E" lon2="9E" />
+    </Region>
+    <Region Name="Denmark" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="48" By="3">
+        <Map Url="ICOOPDK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPDK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPDK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="180" By="6">
+        <Map Url="ICOOPDK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPDK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPDK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="54N" lat2="58N" lon1="5E" lon2="16E" />
+    </Region>
+    <Region Name="Scandinavia" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="48" By="3">
+        <Map Url="ICOOPSC00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPSC00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPSC00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="180" By="6">
+        <Map Url="ICOOPSC00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPSC00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPSC00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="54N" lat2="70N" lon1="9W" lon2="36E" />
+    </Region>
+    <Region Name="Central Europe" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="48" By="3">
+        <Map Url="ICOOPME00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPME00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPME00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="180" By="6">
+        <Map Url="ICOOPME00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPME00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPME00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="45N" lat2="55N" lon1="3W" lon2="19E" />
+    </Region>
+    <Region Name="Eastern Europe" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="48" By="3">
+        <Map Url="ICOOPEE00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPEE00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPEE00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="180" By="6">
+        <Map Url="ICOOPEE00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ICOOPEE00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ICOOPEE00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="45N" lat2="58N" lon1="19E" lon2="55E" />
+    </Region>
   </Server>
-  <Server Name="UK MET" Url="http://old.wetterzentrale.de/pics/">
-    <Region Name="Central">
-      <Map Url="bracka.gif" Contents="Surface Anlys" Area="A" />
-      <Map Url="brack0.gif" Contents="24hr Forecast" Area="A" />
-      <Map Url="brack0a.gif" Contents="36hr Forecast" Area="A" />
-      <Map Url="brack1.gif" Contents="48hr Forecast" Area="A" />
-      <Map Url="brack1a.gif" Contents="60hr Forecast" Area="A" />
-      <Map Url="brack2.gif" Contents="72hr Forecast" Area="A" />
-      <Map Url="brack2a.gif" Contents="84hr Forecast" Area="A" />
-      <Map Url="brack3.gif" Contents="96hr Forecast" Area="A" />
-      <Map Url="brack4.gif" Contents="120hr Forecast" Area="A" />
-      <Area Name="A" lat1="40N" lat2="80N" lon1="40E" lon2="60W" />
-	 </Region>
+  <Server Name="ECMWF" Url="https://www.wetterzentrale.de/maps/">
+    <Region Name="Europe">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="ECMOPEU00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPEU00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="240" By="12">
+        <Map Url="ECMOPEU00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPEU00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="30N" lat2="80N" lon1="90W" lon2="70E" />
+    </Region>
+    <Region Name="North America">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="ECMOPNA00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPNA00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="240" By="12">
+        <Map Url="ECMOPNA00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPNA00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="20N" lat2="60N" lon1="130W" lon2="65W" />
+    </Region>
+    <Region Name="South America">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="ECMOPSA00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPSA00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="240" By="12">
+        <Map Url="ECMOPSA00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPSA00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="58S" lat2="20N" lon1="100W" lon2="25W" />
+    </Region>
+    <Region Name="Africa">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="ECMOPAF00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPAF00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="240" By="12">
+        <Map Url="ECMOPAF00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPAF00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="40S" lat2="40N" lon1="33W" lon2="70E" />
+    </Region>
+    <Region Name="Eastern Asia">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="ECMOPEA00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPEA00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="240" By="12">
+        <Map Url="ECMOPEA00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPEA00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="25N" lat2="60N" lon1="85E" lon2="160E" />
+    </Region>
+    <Region Name="Southern Asia">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="ECMOPSS00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPSS00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="240" By="12">
+        <Map Url="ECMOPSS00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPSS00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="10S" lat2="33N" lon1="60E" lon2="130E" />
+    </Region>
+    <Region Name="Australia">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="ECMOPAU00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPAU00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="240" By="12">
+        <Map Url="ECMOPAU00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPAU00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="50S" lat2="3S" lon1="104E" lon2="178E" />
+    </Region>
+    <Region Name="France">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="ECMOPFR00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPFR00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="240" By="12">
+        <Map Url="ECMOPFR00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPFR00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="42N" lat2="51N" lon1="6W" lon2="11E" />
+    </Region>
+    <Region Name="United Kingdom">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="ECMOPUK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPUK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="240" By="12">
+        <Map Url="ECMOPUK00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPUK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="49N" lat2="60N" lon1="18W" lon2="8E" />
+    </Region>
+    <Region Name="Spain">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="ECMOPSP00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPSP00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="240" By="12">
+        <Map Url="ECMOPSP00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPSP00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="35N" lat2="45N" lon1="11W" lon2="6E" />
+    </Region>
+    <Region Name="Italy / Balkans">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="ECMOPIT00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPIT00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="240" By="12">
+        <Map Url="ECMOPIT00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPIT00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="35N" lat2="47N" lon1="7E" lon2="29E" />
+    </Region>
+    <Region Name="Turkey / Middle East">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="ECMOPTK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPTK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="240" By="12">
+        <Map Url="ECMOPTK00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPTK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="32N" lat2="44N" lon1="25E" lon2="46E" />
+    </Region>
+    <Region Name="Netherlands">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="ECMOPNL00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPNL00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="240" By="12">
+        <Map Url="ECMOPNL00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPNL00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="50N" lat2="54N" lon1="0E" lon2="9E" />
+    </Region>
+    <Region Name="Denmark">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="ECMOPDK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPDK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="240" By="12">
+        <Map Url="ECMOPDK00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPDK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="54N" lat2="58N" lon1="5E" lon2="16E" />
+    </Region>
+    <Region Name="Scandinavia">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="ECMOPSC00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPSC00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="240" By="12">
+        <Map Url="ECMOPSC00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPSC00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="54N" lat2="70N" lon1="9W" lon2="36E" />
+    </Region>
+    <Region Name="Central Europe">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="ECMOPME00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPME00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="240" By="12">
+        <Map Url="ECMOPME00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ECMOPME00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+      </Iterator>
+       <Area Name="1" lat1="45N" lat2="55N" lon1="3W" lon2="19E" />
+     </Region>
+   </Server>
+   <Server Name="GFS" Url="https://www.wetterzentrale.de/maps/">
+     <Region Name="Europe">
+	   <Iterator From="0" To="96" By="6">
+        <Map Url="GFSOPEU00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPEU00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPEU00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="GFSOPEU00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPEU00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPEU00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="192" To="384" By="24">
+        <Map Url="GFSOPEU00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPEU00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPEU00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="30N" lat2="80N" lon1="90W" lon2="70E" />
+    </Region>
+    <Region Name="North America">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="GFSOPNA00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPNA00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPNA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="GFSOPNA00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPNA00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPNA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="192" To="384" By="24">
+        <Map Url="GFSOPNA00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPNA00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPNA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="20N" lat2="60N" lon1="130W" lon2="65W" />
+    </Region>
+    <Region Name="Middle America">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="GFSOPMA00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPMA00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPMA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="GFSOPMA00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPMA00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPMA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="192" To="384" By="24">
+        <Map Url="GFSOPMA00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPMA00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPMA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="5N" lat2="25N" lon1="104W" lon2="68W" />
+    </Region>
+    <Region Name="South America">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="GFSOPSA00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPSA00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPSA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="GFSOPSA00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPSA00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPSA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="192" To="384" By="24">
+        <Map Url="GFSOPSA00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPSA00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPSA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="58S" lat2="20N" lon1="100W" lon2="25W" />
+    </Region>
+    <Region Name="Africa">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="GFSOPAF00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPAF00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPAF00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="GFSOPAF00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPAF00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPAF00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="192" To="384" By="24">
+        <Map Url="GFSOPAF00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPAF00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPAF00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="40S" lat2="40N" lon1="33W" lon2="70E" />
+    </Region>
+    <Region Name="Eastern Asia">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="GFSOPEA00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPEA00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPEA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="GFSOPEA00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPEA00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPEA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="192" To="384" By="24">
+        <Map Url="GFSOPEA00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPEA00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPEA00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="25N" lat2="60N" lon1="85E" lon2="160E" />
+    </Region>
+    <Region Name="Southern Asia">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="GFSOPSS00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPSS00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPSS00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="GFSOPSS00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPSS00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPSS00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="192" To="384" By="24">
+        <Map Url="GFSOPSS00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPSS00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPSS00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="10S" lat2="33N" lon1="60E" lon2="130E" />
+    </Region>
+    <Region Name="Australia">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="GFSOPAU00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPAU00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPAU00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="GFSOPAU00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPAU00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPAU00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="192" To="384" By="24">
+        <Map Url="GFSOPAU00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPAU00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPAU00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="50S" lat2="3S" lon1="104E" lon2="178E" />
+    </Region>
+    <Region Name="France">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="GFSOPFR00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPFR00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPFR00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="GFSOPFR00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPFR00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPFR00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="192" To="384" By="24">
+        <Map Url="GFSOPFR00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPFR00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPFR00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="42N" lat2="51N" lon1="6W" lon2="11E" />
+    </Region>
+    <Region Name="United Kingdom">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="GFSOPUK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPUK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPUK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="GFSOPUK00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPUK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPUK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="192" To="384" By="24">
+        <Map Url="GFSOPUK00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPUK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPUK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="49N" lat2="60N" lon1="18W" lon2="8E" />
+    </Region>
+    <Region Name="Spain">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="GFSOPSP00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPSP00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPSP00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="GFSOPSP00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPSP00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPSP00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="192" To="384" By="24">
+        <Map Url="GFSOPSP00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPSP00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPSP00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="35N" lat2="45N" lon1="11W" lon2="6E" />
+    </Region>
+    <Region Name="Italy / Balkans">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="GFSOPIT00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPIT00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPIT00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="GFSOPIT00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPIT00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPIT00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="192" To="384" By="24">
+        <Map Url="GFSOPIT00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPIT00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPIT00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="35N" lat2="47N" lon1="7E" lon2="29E" />
+    </Region>
+    <Region Name="Turkey / Middle East">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="GFSOPTK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPTK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPTK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="GFSOPTK00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPTK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPTK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="192" To="384" By="24">
+        <Map Url="GFSOPTK00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPTK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPTK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="32N" lat2="44N" lon1="25E" lon2="46E" />
+    </Region>
+    <Region Name="Netherlands">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="GFSOPNL00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPNL00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPNL00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="GFSOPNL00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPNL00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPNL00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="192" To="384" By="24">
+        <Map Url="GFSOPNL00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPNL00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPNL00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="50N" lat2="54N" lon1="0E" lon2="9E" />
+    </Region>
+    <Region Name="Denmark">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="GFSOPDK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPDK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPDK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="GFSOPDK00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPDK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPDK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="192" To="384" By="24">
+        <Map Url="GFSOPDK00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPDK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPDK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="54N" lat2="58N" lon1="5E" lon2="16E" />
+    </Region>
+    <Region Name="Scandinavia">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="GFSOPSC00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPSC00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPSC00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="GFSOPSC00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPSC00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPSC00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="192" To="384" By="24">
+        <Map Url="GFSOPSC00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPSC00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPSC00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="54N" lat2="70N" lon1="9W" lon2="36E" />
+    </Region>
+    <Region Name="Central Europe">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="GFSOPME00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPME00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPME00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="GFSOPME00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPME00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPME00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="192" To="384" By="24">
+        <Map Url="GFSOPME00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="GFSOPME00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="GFSOPME00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="45N" lat2="55N" lon1="3W" lon2="19E" />
+    </Region>
+    <Region Name="Spaghetti">
+	  <Iterator From="0" To="384" By="24">
+        <Map Url="GFSSPAGEU00_%01d_1.png" Contents="%02dhr 500HPa Geopot Spaghetti" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="30N" lat2="80N" lon1="120W" lon2="140E" />
+    </Region>
   </Server>
-  <Server Name="WeatherchartsUK" Url="http://www.weathercharts.net/">
-    <Region Name="UK">
-      <Map Url="noaa_ukmo_analysis/previous/PPVA89_00z_last.gif" Contents="Prev MSLP Analysis 00z" Area="1" />
-      <Map Url="noaa_ukmo_analysis/previous/PPVA89_06z_last.gif" Contents="Prev MSLP Analysis 06z" Area="1" />
-      <Map Url="noaa_ukmo_analysis/previous/PPVA89_12z_last.gif" Contents="Prev MSLP Analysis 12z" Area="1" />
-      <Map Url="noaa_ukmo_analysis/previous/PPVA89_18z_last.gif" Contents="Prev MSLP Analysis 18z" Area="1" />
-      <Map Url="noaa_ukmo_analysis/PPVA89.gif" Contents="Surface Analysis" Area="2" />
-      <Map Url="noaa_ukmo_prognosis/PPVE89.gif" Contents="24 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVG89.gif" Contents="36 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVI89.gif" Contents="48 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVJ89.gif" Contents="60 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVK89.gif" Contents="72 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVL89.gif" Contents="84 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVM89.gif" Contents="96 Hour MSLP" Area="3" />
-      <Map Url="noaa_ukmo_prognosis/PPVO89.gif" Contents="120 Hour MSLP" Area="3" />
-      <Area Name="1" lat1="40N" lat2="70N" lon1="50W" lon2="50E" />
-      <Area Name="2" lat1="40N" lat2="70N" lon1="60W" lon2="40E" />
-      <Area Name="3" lat1="40N" lat2="70N" lon1="50W" lon2="50E" />
+  <Server Name="UK Met Office">
+    <Region Name="NE Atlantic (b/w)" Url="http://www.weathercharts.net/">
+      <Map Url="noaa_ukmo_analysis/PPVA89.gif" Contents="MSLP Analysis" Area="2" />
+      <Map Url="noaa_ukmo_prognosis/PPVE89.gif" Contents="24hr MSLP Forecast" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVG89.gif" Contents="36hr MSLP Forecast" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVI89.gif" Contents="48hr MSLP Forecast" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVJ89.gif" Contents="60hr MSLP Forecast" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVK89.gif" Contents="72hr MSLP Forecast" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVL89.gif" Contents="84hr MSLP Forecast" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVM89.gif" Contents="96hr MSLP Forecast" Area="3" />
+      <Map Url="noaa_ukmo_prognosis/PPVO89.gif" Contents="120hr MSLP Forecast" Area="3" />
+      <Area Name="2" lat1="30N" lat2="80N" lon1="60W" lon2="45E" />
+      <Area Name="3" lat1="30N" lat2="80N" lon1="60W" lon2="45E" />
+    </Region>
+    <Region Name="NE Atlantic (color)" Url="http://data.consumer-digital.api.metoffice.gov.uk/v1/surface-pressure/colour/">
+		<Map Url="%Y-%m-%dT%H00/FSXX%HT_00.gif" Contents="MSLP Analysis" Area="1" Hour="-12;12;0" />
+		<Map Url="%Y-%m-%dT%H00/FSXX%HT_12.gif" Contents="12hr MSLP Forecast" Area="1" Hour="-12;12;0" />
+		<Map Url="%Y-%m-%dT%H00/FSXX%HT_24.gif" Contents="24hr MSLP Forecast" Area="1" Hour="-12;12;0" />
+		<Map Url="%Y-%m-%dT%H00/FSXX%HT_36.gif" Contents="36hr MSLP Forecast" Area="1" Hour="-12;12;0" />
+		<Map Url="%Y-%m-%dT%H00/FSXX%HT_48.gif" Contents="48hr MSLP Forecast" Area="1" Hour="-12;12;0" />
+		<Map Url="%Y-%m-%dT%H00/FSXX%HT_60.gif" Contents="60hr MSLP Forecast" Area="1" Hour="-12;12;0" />
+		<Map Url="%Y-%m-%dT%H00/FSXX%HT_72.gif" Contents="72hr MSLP Forecast" Area="1" Hour="-12;12;0" />
+		<Map Url="%Y-%m-%dT%H00/FSXX%HT_84.gif" Contents="84hr MSLP Forecast" Area="1" Hour="-12;12;0" />
+		<Area Name="1" lat1="30N" lat2="75N" lon1="60W" lon2="45E" />
+    </Region>
+    <Region Name="Europe" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="UKMHDOPEU00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPEU00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPEU00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="UKMHDOPEU00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPEU00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPEU00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="30N" lat2="80N" lon1="90W" lon2="70E" />
+    </Region>
+    <Region Name="France" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="UKMHDOPFR00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPFR00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPFR00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="UKMHDOPFR00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPFR00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPFR00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="42N" lat2="51N" lon1="6W" lon2="11E" />
+    </Region>
+    <Region Name="United Kingdom" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="UKMHDOPUK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPUK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPUK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="UKMHDOPUK00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPUK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPUK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="49N" lat2="60N" lon1="18W" lon2="8E" />
+    </Region>
+    <Region Name="Spain" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="UKMHDOPSP00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPSP00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPSP00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="UKMHDOPSP00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPSP00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPSP00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="35N" lat2="45N" lon1="11W" lon2="6E" />
+    </Region>
+    <Region Name="Italy / Balkans" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="UKMHDOPIT00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPIT00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPIT00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="UKMHDOPIT00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPIT00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPIT00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="35N" lat2="47N" lon1="7E" lon2="29E" />
+    </Region>
+    <Region Name="Turkey / Middle East" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="UKMHDOPTK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPTK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPTK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="UKMHDOPTK00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPTK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPTK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="32N" lat2="44N" lon1="25E" lon2="46E" />
+    </Region>
+    <Region Name="Netherlands" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="UKMHDOPNL00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPNL00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPNL00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="UKMHDOPNL00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPNL00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPNL00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="50N" lat2="54N" lon1="0E" lon2="9E" />
+    </Region>
+    <Region Name="Denmark" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="UKMHDOPDK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPDK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPDK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="UKMHDOPDK00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPDK00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPDK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="54N" lat2="58N" lon1="5E" lon2="16E" />
+    </Region>
+    <Region Name="Scandinavia" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="UKMHDOPSC00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPSC00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPSC00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="UKMHDOPSC00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPSC00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPSC00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="54N" lat2="70N" lon1="9W" lon2="36E" />
+    </Region>
+    <Region Name="Central Europe" Url="https://www.wetterzentrale.de/maps/">
+	  <Iterator From="0" To="96" By="6">
+        <Map Url="UKMHDOPME00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPME00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPME00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="108" To="168" By="12">
+        <Map Url="UKMHDOPME00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="UKMHDOPME00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="UKMHDOPME00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="45N" lat2="55N" lon1="3W" lon2="19E" />
+    </Region>
+  </Server>
+ <Server Name="Arpege" Url="https://www.wetterzentrale.de/maps/">
+    <Region Name="Europe">
+	  <Iterator From="3" To="48" By="3">
+        <Map Url="ARPOPEU00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPEU00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPEU00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="102" By="6">
+        <Map Url="ARPOPEU00_%03d_1.png" Contents="%03dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPEU00_%03d_9.png" Contents="%03dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPEU00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="30N" lat2="80N" lon1="90W" lon2="70E" />
+    </Region>
+    <Region Name="France">
+	  <Iterator From="3" To="48" By="3">
+        <Map Url="ARPOPFR00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPFR00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPFR00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="102" By="6">
+        <Map Url="ARPOPFR00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPFR00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPFR00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="42N" lat2="51N" lon1="6W" lon2="11E" />
+    </Region>
+    <Region Name="United Kingdom">
+	  <Iterator From="3" To="48" By="3">
+        <Map Url="ARPOPUK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPUK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPUK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="102" By="6">
+        <Map Url="ARPOPUK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPUK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPUK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="49N" lat2="60N" lon1="18W" lon2="8E" />
+    </Region>
+    <Region Name="Spain">
+	  <Iterator From="3" To="48" By="3">
+        <Map Url="ARPOPSP00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPSP00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPSP00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="102" By="6">
+        <Map Url="ARPOPSP00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPSP00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPSP00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="35N" lat2="45N" lon1="11W" lon2="6E" />
+    </Region>
+    <Region Name="Italy / Balkans">
+	  <Iterator From="3" To="48" By="6">
+        <Map Url="ARPOPIT00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPIT00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPIT00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="102" By="6">
+        <Map Url="ARPOPIT00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPIT00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPIT00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="35N" lat2="47N" lon1="7E" lon2="29E" />
+    </Region>
+    <Region Name="Turkey / Middle East">
+	  <Iterator From="3" To="48" By="3">
+        <Map Url="ARPOPTK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPTK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPTK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="102" By="6">
+        <Map Url="ARPOPTK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPTK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPTK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="32N" lat2="44N" lon1="25E" lon2="46E" />
+    </Region>
+    <Region Name="Netherlands">
+	  <Iterator From="3" To="48" By="3">
+        <Map Url="ARPOPNL00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPNL00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPNL00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="102" By="6">
+        <Map Url="ARPOPNL00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPNL00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPNL00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="50N" lat2="54N" lon1="0E" lon2="9E" />
+    </Region>
+    <Region Name="Denmark">
+	  <Iterator From="3" To="48" By="3">
+        <Map Url="ARPOPDK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPDK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPDK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="102" By="6">
+        <Map Url="ARPOPDK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPDK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPDK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="54N" lat2="58N" lon1="5E" lon2="16E" />
+    </Region>
+    <Region Name="Scandinavia">
+	  <Iterator From="3" To="48" By="3">
+        <Map Url="ARPOPSC00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPSC00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPSC00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="102" By="6">
+        <Map Url="ARPOPSC00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPSC00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPSC00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="54N" lat2="70N" lon1="9W" lon2="36E" />
+    </Region>
+    <Region Name="Central Europe">
+	  <Iterator From="3" To="48" By="3">
+        <Map Url="ARPOPME00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPME00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPME00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="54" To="102" By="6">
+        <Map Url="ARPOPME00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="ARPOPME00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="ARPOPME00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="45N" lat2="55N" lon1="3W" lon2="19E" />
+    </Region>
+  </Server>
+  <Server Name="Arome" Url="https://www.wetterzentrale.de/maps/">
+    <Region Name="Germany">
+	  <Iterator From="1" To="24" By="1">
+        <Map Url="AROOPGE00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="AROOPGE00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="AROOPGE00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="27" To="48" By="3">
+        <Map Url="AROOPGE00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="AROOPGE00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="AROOPGE00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="47N" lat2="55N" lon1="4E" lon2="15E" />
+    </Region>
+    <Region Name="France">
+	  <Iterator From="1" To="24" By="1">
+        <Map Url="AROOPFR00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="AROOPFR00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="AROOPFR00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="27" To="48" By="3">
+        <Map Url="AROOPFR00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="AROOPFR00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="AROOPFR00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="42N" lat2="51N" lon1="6W" lon2="11E" />
+    </Region>
+    <Region Name="United Kingdom">
+	  <Iterator From="1" To="24" By="1">
+        <Map Url="AROOPUK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="AROOPUK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="AROOPUK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="27" To="48" By="3">
+        <Map Url="AROOPUK00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="AROOPUK00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="AROOPUK00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="49N" lat2="60N" lon1="18W" lon2="8E" />
+    </Region>
+    <Region Name="Spain">
+	  <Iterator From="1" To="24" By="1">
+        <Map Url="AROOPSP00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="AROOPSP00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="AROOPSP00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="27" To="48" By="3">
+        <Map Url="AROOPSP00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="AROOPSP00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="AROOPSP00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="35N" lat2="45N" lon1="11W" lon2="6E" />
+    </Region>
+    <Region Name="Netherlands">
+	  <Iterator From="1" To="24" By="1">
+        <Map Url="AROOPNL00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="AROOPNL00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="AROOPNL00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+	  <Iterator From="27" To="48" By="3">
+        <Map Url="AROOPNL00_%01d_1.png" Contents="%02dhr 500HPa Geopot. Height" Area="1" />
+        <Map Url="AROOPNL00_%01d_9.png" Contents="%02dhr 10m Wind" Area="1" />
+        <Map Url="AROOPNL00_%01d_11.png" Contents="%02dhr CAPE" Area="1" />
+      </Iterator>
+      <Area Name="1" lat1="50N" lat2="54N" lon1="0E" lon2="9E" />
     </Region>
   </Server>
 </OCPNWeatherFaxInternetRetrieval>

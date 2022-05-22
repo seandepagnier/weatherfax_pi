@@ -4,41 +4,78 @@
 # Build the Android artifacts inside the circleci linux container
 #
 
-
 set -xe
 
 pwd
 
-#not needed for CI built, the workflow starts up already in "project" directory.
-# but required for local build.
-#cd project
-
 ls -la
 
-#sudo chown -R 1000 /oesenc_pi/build_android_64_ci
+#sudo apt-get -q update
+#sudo apt-get -y install git cmake gettext unzip
+
+# Get the OCPN Android build support package.
+# FOR LOCAL BUILD - have a local version to avoid big download each run - need to stage it but not commit it. DO NOT COMMIT AND PUSH master.zip
+if [ "${CIRCLECI_LOCAL,,}" = "true" ]; then
+    if [[ -d ~/circleci-cache ]]; then
+        if [[ -f ~/circleci-cache/apt-proxy ]]; then
+            cat ~/circleci-cache/apt-proxy | sudo tee -a /etc/apt/apt.conf.d/00aptproxy
+            cat /etc/apt/apt.conf.d/00aptproxy
+        fi
+        if [[ ! -f ~/circleci-cache/master.zip ]]; then
+            sudo wget https://github.com/bdbcat/OCPNAndroidCommon/archive/master.zip -O ~/circleci-cache/master.zip
+        fi
+        MASTER_LOC=~/circleci-cache
+        #unzip -qq -o /home/circleci/circleci-cache/master.zip
+    fi
+else
+    MASTER_LOC=$(pwd)
+    wget https://github.com/bdbcat/OCPNAndroidCommon/archive/master.zip
+    #unzip -qq -o master.zip
+fi
+echo "unzipping $MASTER_LOC/master.zip"
+
+unzip -qq -o $MASTER_LOC/master.zip
 
 sudo apt-get -q update
 sudo apt-get -y install git cmake gettext unzip
-
-# Get the OCPN Android build support package.
-#NOT REQUIRED FOR LOCAL BUILD
-echo "CIRCLECI_LOCAL: $CIRCLECI_LOCAL"
-if [ -z "$CIRCLECI_LOCAL" ]; then
-   wget https://github.com/bdbcat/OCPNAndroidCommon/archive/master.zip
+# Install extra build libs
+ME=$(echo ${0##*/} | sed 's/\.sh//g')
+EXTRA_LIBS=./ci/extras/extra_libs.txt
+if test -f "$EXTRA_LIBS"; then
+    while read line; do
+        sudo apt-get install $line
+    done < $EXTRA_LIBS
 fi
-unzip -qq -o master.zip
+EXTRA_LIBS=./ci/extras/${ME}_extra_libs.txt
+if test -f "$EXTRA_LIBS"; then
+    while read line; do
+        sudo apt-get install $line
+    done < $EXTRA_LIBS
+fi
+
+# Install extra build libs
+ME=$(echo ${0##*/} | sed 's/\.sh//g')
+EXTRA_LIBS=./ci/extras/extra_libs.txt
+if test -f "$EXTRA_LIBS"; then
+    while read line; do
+        sudo apt-get install $line
+    done < $EXTRA_LIBS
+fi
+EXTRA_LIBS=./ci/extras/${ME}_extra_libs.txt
+if test -f "$EXTRA_LIBS"; then
+    while read line; do
+        sudo apt-get install $line
+    done < $EXTRA_LIBS
+fi
 
 pwd
 ls -la
 
-#change this for local build, so as not to overwrite any other generic buildin "build".
-#sudo mkdir -p build_android_arm32
-#cd build_android_arm32
 mkdir -p build
 cd build
 
 rm -f CMakeCache.txt
-COMPDIR=$(find /opt/android -iname "android-ndk*")
+COMPDIR=$(find ~/. -regex ".*/ndk/22.[0-9].[0-9]*")
 
 cmake  \
   -D_wx_selected_config=androideabi-qt-armhf \
@@ -48,16 +85,13 @@ cmake  \
   -DCMAKE_CXX_COMPILER=$COMPDIR/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi21-clang++ \
   -DCMAKE_C_COMPILER=$COMPDIR/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi21-clang \
   -DOCPN_Android_Common=OCPNAndroidCommon-master \
-  -DPREFIX=/ \
+  -DCMAKE_INSTALL_PREFIX=/ \
   ..
 
 # Get number of processors and use this on make to speed up build
-if type nproc &> /dev/null
-then
-    make_cmd="make -j"$(nproc)
-else
-    make_cmd="make"
-fi
+procs=$(awk -F- '{print $2}' /sys/fs/cgroup/cpuset/cpuset.cpus)
+procs=$((procs + 1))
+make_cmd="make -j"$procs
 eval $make_cmd
 
 make package

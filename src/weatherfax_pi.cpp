@@ -303,7 +303,7 @@ bool weatherfax_pi::LoadConfig(void)
     pConf->Read ( _T ( "SoundingDatum" ), &m_sExportSoundingDatum, _T("LOWEST LOW WATER"));
 
     pConf->SetPath ( _T ( "/Settings/WeatherFax/Updates" ) );
-    pConf->Read( _T("UpdateDataBaseUrl"), &m_UpdateDataBaseUrl, _T("https://raw.githubusercontent.com/seandepagnier/weatherfax_pi/master/data/") );
+    pConf->Read( _T("UpdateDataBaseUrl"), &m_UpdateDataBaseUrl, _T("https://github.com/rgleason/weatherfax_pi/raw/master/data/") );
 
     return true;
 }
@@ -405,4 +405,3 @@ void weatherfax_pi::ShowPreferencesDialog( wxWindow* parent )
     }
     delete dialog;
 }
-

@@ -1,28 +1,52 @@
-== Weatherfax
+= Weatherfax
 
 
 image::weatherfax.png[]
+
+Author: Sean D'Epagnier,  August 26, 2021,  Version v1.0 +
+Maintainers: Rick Gleason, Jon Gough and the Plugin Team +
+Development Details: PI Manager (PIM) Workflow uses the Testplugin Template +
+
+== Purpose
 
 Retrieves internet image files, reads image files or decodes audio and then Overlays the image on top of charts.
 
 image::wx-0-retrieve-internet-overlaid-on-chart.png[]
 
-=== Links
+== Links
 
 * Source: https://github.com/seandepagnier/weatherfax_pi
+* Maintenance Source: https://github.com/rgleason/weatherfax_pi
 * Release: https://github.com/rgleason/weatherfax_pi/releases[Windows Releases]
 * Download: https://opencpn.org/OpenCPN/plugins/weatherfax.html
 * Forum: http://www.cruisersforum.com/forums/f134/weatherfax-97533.html
 
-=== Preparation
+== Installation and Preparation
 
-Install Weatherfax Plugin. Enable it in the Settings > Plugin Tab. Then open it and explore the top menus.
+=== Using Plugin Manager (PIM)
 
-With an internet connection it is quite easy to select the “HF Radio Schedules” to select and set alarms for use with a reciever, or to select the Internet Schedules and then retrieve Weatherfaxes via the Internet and overlay on the chart. Audio Capture requires a connection.
+Weatherfax is available as a managed plugin (PIM), which is the easiest way to install the plugin. The OpenCPN Manual has general information in xref:opencpn-plugins:misc:plugin-install.adoc[Plugin Download, Install and Enable] 
+for installing this plugin. This is the preferred way.
+
+In OpenCPN, go to the _Options → Plugins_ and download, install and enable the Weatherfax plugin.
+
+. In OpenCPN  Click *Tools-Options-Plugins*
+. First "Update" the master plugins catalog.
+. Select the Weatherfax entry and "Install" the plugin.
+. In the list of installed plugins "Enable" the Weatherfax plugin and "Apply".
+. Use “*Preferences*” to set your preferences (should be self-explanatory). Then “*Apply*.
+. After successful installation, the plugin should be available in the plugins tab of your OpenCPN options dialog box.
+. Then close *Options* and the Weatherfax Icon should appear in the Toolbar.
+. Then open it and explore the top menus.
+. With an internet connection it is quite easy to select the “HF Radio Schedules” to select and set alarms for use with a receiver, or to select the Internet Schedules and then retrieve Weatherfaxes via the Internet and overlay on the chart. Audio Capture requires a connection.
 
 image::wx-2-retrieve-menu.png[]
 
-=== Retrieve Weatherfax Image files with an internet connection
+=== Use Legacyt Plugin Package Installer (PI)
+
+The second way is to download a Legacy PI Package Installer (Windows .exe, Linux .deb or MacOS .pkg) from the  https://www.opencpn.org[OpenCPN website, to download Weatherfax]
+
+== Retrieve Weatherfax Image files with an internet connection
 
 If you have an internet connection, first Retrieve > All > HF Radio Schedules. +
 Then Retrieve > Internet > Select NOAA > Select Boston (for example) >
@@ -46,14 +70,14 @@ automatically listed in the menu area.
 * Select several faxes and pick “Retrieve Scheduled” or “Retrieve
 Selected”.
 
-==== Internet Retrieval Summary
+=== Internet Retrieval Summary
 
 * Retrieve…Internet
 * Select provider and region.
 * Select forecast you need.(X)
 * Highlight and use the 'Selected' button.
 
-image::weatherfax.-inetpng.png.detail.html[]
+image::weatherfax-inetpng.png[]
 
 The plugin data directory contains an WeatherFaxInternetRetrieval.xml file that has database for meterological sites. The “Internet Retrieval” Option uses this schedule.
 
@@ -95,7 +119,16 @@ charts.
 The weatherfax will be overlayed generally in the proper location
 provided the weather service has not changed their fax formats. (The user can modify the associated WeatherFaxInternetRetrieval.xml file appropriately to add or modify the actions.) Users should please post changes to this file to the Weatherfax Thread for the next release.
 
-=== HF Radio Weather Faxes
+=== Memory Use ===
+Please note tht all the loaded maps stay in RAM until OpenCPN is closed.  RAM occupation depends on the maps size. The number of weatherfax charts that can be stored in memory is dependent on the amount of memory available. When weatherfax_pi runs out of available memory, it will stop downloading weatherfaxes. As soon as you close WxFax and restart this memory is cleared, however the previous images then no longer have active georeferencing, so you will need to download them again for automatic georeferencing. Weatherfax_pi keeps all downloaded images connected to its coordinates and georeferenced until that session of weatherfax is closed.
+
+For exemple on OpenCPN linux flatpak:
+Load 96 maps in Arome/France: 887MB
+Load 57 maps in Arpege/Europe: 2250MB
+
+The limit seems to be the system RAM. I loaded 213 maps, more than 6GB and still okay and responsive.
+
+== HF Radio Weather Faxes
 
 The plugin has a builtin database (WeatherFaxSchedules.xml) for HF Radio Weather Service Fax transmissions, which when used properly can automatically alert the user and begin decoding these faxes.
 
@@ -106,19 +139,19 @@ image::wx-b1-ret-hfradiosch-filtertab-menu.png[]
 *Retrieve > RF Radio Schedule Menu* on the 1 minute Alarm Tab. 
 
 
-image::wx-b2-ret-hfradiosch-alarmtab-menu.png[]
+//image::wx-b2-ret-hfradiosch-alarmtab-menu.png[]
 
 
 *Retrieve > RF Radio Schedule Menu* on the Capture Options Tab. 
 
-image::wx-b3-ret-hfradiosch-captureoptionstab-menu.png[]
+// image::wx-b3-ret-hfradiosch-captureoptionstab-menu.png[]
 
 
 *Retrieve > RF Radio Schedule Menu* on the Information Tab. 
 
-image::wx-b4-ret-hfradiosch-infotab-menu.png[]
+// image::wx-b4-ret-hfradiosch-infotab-menu.png[]
 
-=== Decoding Sound via SSB
+== Decoding Sound via SSB
 
 Select Retrieve → Audio Capture (Ctrl+A)
 
@@ -126,7 +159,7 @@ A line from the SSB radio to the audio input of the sound card should be
 attached, and the radio tuned to the appropriate frequency (1.9khz below
 listed frequency and SSB mode) The SSB BFO must be adjusted correctly.
 
-=== Retrieve > Audio Capture shown while recieving
+== Retrieve > Audio Capture shown while recieving
 
 image::wx-a1-ret-audiocapture-recieving.png[image]
 
@@ -134,9 +167,9 @@ The images decoded can then be calibrated and overlayed on charts. The
 resulting image can be exported to a chart, so the plugin also works as
 a general purpose conversion tool to make charts from images.
 
-=== Weatherfax Image Wizard
+== Weatherfax Image Wizard
 
-==== Working with Files
+=== Working with Files
 
 The plugin can read and open numerous common image files, and audio
 files, and can save Kap files. The next step in development is to have
@@ -145,7 +178,7 @@ and reused.
 
 image::wx-1-file-menu.png[image]
 
-==== Weather Sources - David Burch Navigation Blog
+=== Weather Sources - David Burch Navigation Blog
 
 * https://www.youtube.com/watch?v=Sx_ImKxdZXI&feature=youtu.be[Georeferencing
 Sat Images in OpenCPN - Video 2018 -NEW]
@@ -163,76 +196,63 @@ and Pacific Weather Briefings - Blog 2015]
 Seas Forecasts and Tropical Cyclone Alerts by Email Request - Blog 2015]
 Metarea for Saildocs.
 
-==== Weatherfax Image File Sources
+=== Weatherfax Image File Sources
 
-===== Noaa All Weather Products
+==== Noaa All Weather Products
 
-http://www.nws.noaa.gov/om/marine/home.htm[Noaa Weather Products]
+https://www.nws.noaa.gov/om/marine/home.htm[Noaa Weather Products]
 
-===== Briefings
+==== Briefings
 
-* https://ocean.weather.gov/shtml/A_brief.shtml[OPC Atlantic Weather
-Briefing] https://ocean.weather.gov/shtml/A_brief_text.shtml[Text
-Briefing]
-* https://ocean.weather.gov/shtml/P_brief.shtml[OPC Pacific Weather
-Briefing] https://ocean.weather.gov/shtml/P_brief_text.shtml[Text
-Briefing]
+* https://ocean.weather.gov/shtml/A_brief.php[OPC Atlantic Weather Briefing] https://ocean.weather.gov/shtml/A_brief_text.php[Text Briefing]
+* https://ocean.weather.gov/shtml/P_brief.php[OPC Pacific Weather Briefing] https://ocean.weather.gov/shtml/P_brief_text.php[Text Briefing]
 
-===== FTP Websites
+==== FTP Websites
 
-https://tgftp.nws.noaa.gov/fax/[FTP WeatherFax] Most recent synoptic
-time, or near.
-https://testbed.aviationweather.gov/data/obs/sat/intl/[FTP Aviation
-Weather Satellite] https://www.goes.noaa.gov/[Noaa GOES Server] Updated
-every hour.
+https://tgftp.nws.noaa.gov/fax/[FTP WeatherFax] Most recent synoptic time, or near.
+// Requires authorization:
+// https://testbed.aviationweather.gov/data/obs/sat/intl/[FTP Aviation
+// Weather Satellite]
 
-===== Lists of Filenames
+// DNS lookup error:
+// https://www.goes.noaa.gov/[Noaa GOES Server] Updated every hour.
 
-* http://tgftp.nws.noaa.gov/fax/rfaxpac.txt[List of all Pacific Weather
-Map File Names]
-* http://tgftp.nws.noaa.gov/fax/rfaxatl.txt[List of all Atlantic Weather
-Map File Names]
+==== Lists of Filenames
+
+* http://tgftp.nws.noaa.gov/fax/rfaxpac.txt[List of all Pacific Weather Map File Names]
+* http://tgftp.nws.noaa.gov/fax/rfaxatl.txt[List of all Atlantic Weather Map File Names]
 * http://tgftp.nws.noaa.gov/fax/rfaxak.txt[Alaska map file names]
 * http://tgftp.nws.noaa.gov/fax/rfaxhi.txt[Hi map file names]
-* http://tgftp.nws.noaa.gov/fax/rfaxmex.txt[Gulf of Mexico and Carib
-file names]
-* http://tgftp.nws.noaa.gov/fax/otherfax.txt[Selected International map
-file names]
+* http://tgftp.nws.noaa.gov/fax/rfaxmex.txt[Gulf of Mexico and Carib file names]
+* http://tgftp.nws.noaa.gov/fax/otherfax.txt[Selected International map file names]
 * http://tgftp.nws.noaa.gov/fax/uk.txt[Selected UK map file names]
 
-===== Example Weatherfax Files
+==== Example Weatherfax Files
 
 Some example files that can be used (Gif, png, tif, etc.):
 
-* http://tgftp.nws.noaa.gov/fax/marine.shtml[NOAA Marine Radio Forecast
-Charts]
-* http://tgftp.nws.noaa.gov/fax/marshlatest.shtml[NOAA Boston Radio
-Forecast -Atlantic]
+* http://tgftp.nws.noaa.gov/fax/marine.shtml[NOAA Marine Radio Forecast Charts]
+* http://tgftp.nws.noaa.gov/fax/marshlatest.shtml[NOAA Boston Radio Forecast -Atlantic]
 * http://tgftp.nws.noaa.gov/fax/PYAD10.gif[Preliminary Surface Analysis]
-* http://tgftp.nws.noaa.gov/fax/PYAA11.gif[00Z-12Z Surface Analysis
-Atlantic -Part 1]
-* http://tgftp.nws.noaa.gov/fax/PYAA12.gif[00Z-12Z Surface Analysis
-Atlantic -Part 2]
-* http://tgftp.nws.noaa.gov/fax/QDTM10.gif[48 hr Surface Analysis
-Atlantic]
-* http://tgftp.nws.noaa.gov/fax/PWAM99.gif[96 hr Surface Analysis
-Atlantic]
+* http://tgftp.nws.noaa.gov/fax/PYAA11.gif[00Z-12Z Surface Analysis Atlantic -Part 1]
+* http://tgftp.nws.noaa.gov/fax/PYAA12.gif[00Z-12Z Surface Analysis Atlantic -Part 2]
+* http://tgftp.nws.noaa.gov/fax/QDTM10.gif[48 hr Surface Analysis Atlantic]
+* http://tgftp.nws.noaa.gov/fax/PWAM99.gif[96 hr Surface Analysis Atlantic]
 * http://tgftp.nws.noaa.gov/fax/PWAE98.gif[Atlantic]
 * http://tgftp.nws.noaa.gov/fax/PPAE11.gif[24 hr 500mb Atlantic]
-* http://www.opc.ncep.noaa.gov/Atl_tab.shtml[NOAA Ocean Prediction
-Center -Atlantic]
-* http://www.weathercharts.org/[UK Atlantic Forecasts]
+// DNS lookup error: 
+// * http://www.opc.ncep.noaa.gov/Atl_tab.shtml[NOAA Ocean Prediction Center -Atlantic]
+* https://www.weathercharts.org/[UK Atlantic Forecasts]
 
-==== How to use Weatherfax files and the Image Wizard:
+=== How to use Weatherfax files and the Image Wizard:
 
-* Save the files in a new directory on your hard drive in the same
-directory as your Charts. (I called the directory FaxWx).
+* Save the files in a new directory on your hard drive in the same directory as your Charts. (I called the directory FaxWx).
 * Open the Plugin and a fax file and use the Weatherfax Image Wizard
 * From OpenCPN select the Weatherfax Icon, a window pops up.
 * Select Open and browse to the FaxWx directory and select a fax file.
 * Open the file.
 
-==== Objective:
+=== Objective:
 
 The objective is to set the x/y coordinates and lat/long properly so
 that the image will map directly over the proper area on the
@@ -242,7 +262,7 @@ overlay or not, depending on the skill of the user. If it does not work
 properly the first time, simply try it again. There are two basic types
 of projections the wizard can handle.
 
-===== Mercator Projections
+==== Mercator Projections
 
 If the fax is a Mercator projection (orthogonal, not polar), click
 through the next screen that comes up and at the second screen set the
@@ -254,7 +274,7 @@ I first use a separate image viewer with the selected fax image, to zoom in and 
 
 image::weatherfax-inetpng.png[]
 
-===== Polar Projections
+==== Polar Projections
 
 There are other techniques used to modify a Polar fax onto a Mercator
 projection chart which are reviewed on the forum and will be more fully
@@ -284,9 +304,9 @@ Here is an example of a WxFax overlay in Opencpn
 
 image::wx-overlay.jpeg[]
 
-=== File Export as KAP, File Open KAP
+== File Export as KAP, File Open KAP
 
-==== File Export as KAP
+=== File Export as KAP
 
 Image files that are downloaded and overlaid onto charts with specific
 coordinates, can now be saved as Kap files that save long/lat and
@@ -294,8 +314,27 @@ coordinates with the file.
 
 image::wx-export-open-kap-files.jpeg[]
 
-==== File Open KAP (Next Improvement)
+=== File Open KAP (Next Improvement)
 
 Hopefully the plugin will also be made to read Kap files so that they can be automatically overlaid on charts without having to use the WeatherFax Image Wizard.
+
+== Update of Weatherfax URL's and Coordinates ==
+
+It is the User's job to update this information, by sending newly updated files of their area of the world. We cannot devote programming resources to this location specific task which changes regularly.
+
+Note that the file weatherfaxinternetretrieval.xml has been separated into world region xml files, to make this task easier. We need voluteers to take a region and send in updates every six months to a year.  Github pull requests to the maintainer for these changes are easiest, but emailed files are accepted too.
+
+The critical files are:
+    Regional WeatherFaxInternetRetrieval.xml's (multiple files)
+    CoordinateSets.xml
+
+Keep in mind that the World Regional weatherfaxInternetRetrieval (xml) files are now separated.
+
+David Burch's Blog has made some videos which help to explain how to update the world regional xmls and the coordinateset.xml file.
+https://www.youtube.com/watch?v=Ks4JwUYu84w[How to update file souces for OpenCPN weatherfax plugin]  
+
+http://davidburchnavigation.blogspot.com/search?q=weatherfax[How to update file souces for OpenCPN weatherfax plugin]
+
+
 
 Thanks to Sean for a great Plugin!

@@ -12,7 +12,7 @@ if(OCPN_FLATPAK_CONFIG)
     # On a flatpak build lib libraries such as LibGL and wxWidgets are only available in the flatpak sandbox. Thus, building flatpak must be done before attempts to locate these non-existing libraries in the host i. e., before any FindLibrary(), FindWxWidgets(), etc.
     find_program(TAR NAMES gtar tar)
     if(NOT TAR)
-        message(FATAL_ERROR "tar not found, required for OCPN_FLATPAK")
+        message(FATAL_ERROR "${CMLOC}tar not found, required for OCPN_FLATPAK")
     endif()
     add_custom_target(
         flatpak-build ALL
@@ -22,9 +22,10 @@ if(OCPN_FLATPAK_CONFIG)
     add_custom_target("flatpak-pkg")
     add_custom_command(
         TARGET flatpak-pkg
-        COMMAND ${TAR} -czf ${PKG_NVR}-${ARCH}_${PKG_TARGET_NVR}.tar.gz --transform 's|.*/files/|${PACKAGE}-flatpak-${PACKAGE_VERSION}/|' ${CMAKE_CURRENT_BINARY_DIR}/app/files
+        COMMAND ${TAR} -czf ${PKG_NVR}-${ARCH}${PKG_TARGET_WX_VER}_${PKG_TARGET_NVR}.tar.gz --verbose --transform 's|.*/files/|${PACKAGE}-flatpak-${PACKAGE_VERSION}/|' ${CMAKE_CURRENT_BINARY_DIR}/app/files
         COMMAND chmod -R a+wr ../build)
 
+        message(STATUS "${CMLOC}Zip file name: ${PKG_NVR}-${ARCH}${PKG_TARGET_WX_VER}_${PKG_TARGET_NVR}.tar.gz")
     set(CMLOC ${SAVE_CMLOC})
     return()
 endif(OCPN_FLATPAK_CONFIG)
@@ -88,7 +89,8 @@ set(CPACK_SOURCE_IGNORE_FILES "^${CMAKE_CURRENT_SOURCE_DIR}/.git/*" "^${CMAKE_CU
 if(UNIX AND NOT APPLE)
 
     # need apt-get install rpm, for rpmbuild
-    set(PACKAGE_DEPS "opencpn, bzip2, gzip")
+    set(PACKAGE_DEPS "${PACKAGE_DEPS},opencpn, bzip2, gzip")
+    message(STATUS "${CMLOC}PACKAGE_DEPS: ${PACKAGE_DEPS}")
     set(CPACK_GENERATOR "DEB;TGZ")
 
     set(CPACK_DEBIAN_PACKAGE_NAME ${PACKAGING_NAME})
@@ -158,7 +160,7 @@ if(NOT STANDALONE MATCHES "BUNDLED")
 
 
     set(CPACK_PROJECT_CONFIG_FILE "${CMAKE_CURRENT_BINARY_DIR}/PluginCPackOptions.cmake")
-    message(STATUS "${CMLOC}CMAKE_SOURCE_DIR: ${CMAKE_SOURCE_DIR}, PROJECT_SOURCE_DIR: ${PROJECT_SOURCE_DIR}, CPACK_PROJECT_CONFIG_FILE: ${CPACK_PROJECT_CONFIG_FILE}")
+    message(STATUS "${CMLOC}PROJECT_SOURCE_DIR: ${PROJECT_SOURCE_DIR}, CPACK_PROJECT_CONFIG_FILE: ${CPACK_PROJECT_CONFIG_FILE}")
 
     include(CPack)
 

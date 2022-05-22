@@ -39,6 +39,9 @@
 #include "WeatherFaxImage.h"
 #include "WeatherFax.h"
 
+#include "wx/curl/ftp.h"
+#include "wx/curl/dialog.h"
+
 InternetRetrievalDialog::InternetRetrievalDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
 #ifndef __WXOSX__
     : InternetRetrievalDialogBase( parent ),
@@ -54,6 +57,7 @@ InternetRetrievalDialog::InternetRetrievalDialog( weatherfax_pi &_weatherfax_pi,
     SetSize(0, 0, s.x, s.y-40);
 #endif
     m_panel8->Fit();
+
 }
 
 InternetRetrievalDialog::~InternetRetrievalDialog()
@@ -314,8 +318,9 @@ bool InternetRetrievalDialog::OpenXML(wxString filename)
                                             wxString iurl = wxString::FromUTF8(h->Attribute("Url"));
                                             url.Url = region_url + wxString::Format
                                                 (iurl, index);
+                                            wxString x = h->Attribute("Contents");
                                             url.Contents = wxString::Format
-                                                (wxString::FromUTF8(h->Attribute("Contents")), index*step+offset);
+                                                (x, (int)(index*step+offset));
                                             url.area_name = wxString::FromUTF8(h->Attribute("Area"));
 
                                             url.hour_offset = url.hour_round = url.hour_round_offset = 0;
@@ -643,35 +648,85 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
             }
         }
 
-        {
+        if(url.StartsWith("http")){
 
-        _OCPN_DLStatus res = OCPN_downloadFile( url, filename, _("WeatherFax InternetRetrieval"),
-                              _("Reading Headers: ") + faxurl->Contents, wxNullBitmap, this,
-                                               OCPN_DLDS_ELAPSED_TIME|OCPN_DLDS_ESTIMATED_TIME|OCPN_DLDS_REMAINING_TIME|
-                                               OCPN_DLDS_SPEED|OCPN_DLDS_SIZE|OCPN_DLDS_URL|
-                                               OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|
-                                               OCPN_DLDS_AUTO_CLOSE, 10 );
+            _OCPN_DLStatus res = OCPN_downloadFile( url, filename, _("WeatherFax InternetRetrieval"),
+                                _("Reading Headers: ") + faxurl->Contents, wxNullBitmap, this,
+                                                OCPN_DLDS_ELAPSED_TIME|OCPN_DLDS_ESTIMATED_TIME|OCPN_DLDS_REMAINING_TIME|
+                                                OCPN_DLDS_SPEED|OCPN_DLDS_SIZE|OCPN_DLDS_URL|
+                                                OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|
+                                                OCPN_DLDS_AUTO_CLOSE, 10 );
 
-        switch( res )
-        {
-        case OCPN_DL_NO_ERROR: break;
-        case OCPN_DL_STARTED: break;
-        case OCPN_DL_FAILED:
-        case OCPN_DL_UNKNOWN:
-        case OCPN_DL_USER_TIMEOUT:
-        {
-            wxMessageDialog mdlg(this, _("Failed to Download: ") +
-                                 faxurl->Contents + _T("\n") +
-                                 url + _T("\n") +
-                                 _("Verify there is a working internet connection.") + _T("\n") +
-                                 _("If the url is incorrect please edit the xml and/or post a bug report."),
-                                 _("Weather Fax"), wxOK | wxICON_ERROR);
-            mdlg.ShowModal();
-            wxRemoveFile( filename );
+            switch( res )
+            {
+            case OCPN_DL_NO_ERROR: break;
+            case OCPN_DL_STARTED: break;
+            case OCPN_DL_FAILED:
+            case OCPN_DL_UNKNOWN:
+            case OCPN_DL_USER_TIMEOUT:
+            {
+                wxMessageDialog mdlg(this, _("Failed to Download: ") +
+                                    faxurl->Contents + _T("\n") +
+                                    url + _T("\n") +
+                                    _("Verify there is a working internet connection.") + _T("\n") +
+                                    _("If the url is incorrect please edit the xml and/or post a bug report."),
+                                    _("Weather Fax"), wxOK | wxICON_ERROR);
+                mdlg.ShowModal();
+                wxRemoveFile( filename );
+            }
+            case OCPN_DL_ABORTED: return;
+            }
         }
-        case OCPN_DL_ABORTED: return;
+        else if (url.StartsWith("ftp")){
+            bool success = false;
+
+#if 1
+            wxFileOutputStream output(filename);
+
+            wxCurlDownloadDialog ddlg(url, &output, _("WeatherFax InternetRetrieval"),
+                                      _("Reading Headers: ") + faxurl->Contents, wxNullBitmap, this,
+                                                                            OCPN_DLDS_ELAPSED_TIME|OCPN_DLDS_ESTIMATED_TIME|OCPN_DLDS_REMAINING_TIME|
+                                                OCPN_DLDS_SPEED|OCPN_DLDS_SIZE|OCPN_DLDS_URL|
+                                                OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|
+                                                OCPN_DLDS_AUTO_CLOSE );
+
+            //ddlg.m_pThread->GetCurlSession()->SetOpt(CURLOPT_TRANSFERTEXT, TRUE);
+
+            wxCurlDialogReturnFlag ret = ddlg.RunModal();
+            output.Close();
+
+           switch (ret) {
+                case wxCDRF_SUCCESS: {
+                    success = true;
+                    break;
+                }
+                case wxCDRF_FAILED: {
+                    break;
+                }
+                case wxCDRF_USER_ABORTED: {
+                    break;
+                }
+                default:
+                    wxASSERT(false);  // This should never happen because we handle all
+                        // possible cases of ret
+            }
+#else
+            wxCurlFTP f(url);
+            //f.SetToBinary();
+            success = f.Get(filename);
+#endif
+
+            if(!success){
+                wxMessageDialog mdlg(this, _("Failed to Download: ") +
+                                    faxurl->Contents + _T("\n") +
+                                    url + _T("\n") +
+                                    _("Verify there is a working internet connection.") + _T("\n") +
+                                    _("If the url is incorrect please edit the xml and/or post a bug report."),
+                                    _("Weather Fax"), wxOK | wxICON_ERROR);
+                mdlg.ShowModal();
+                wxRemoveFile( filename );
+            }
         }
-    }
 
 
     loadimage:

@@ -50,7 +50,7 @@
       <Area Name="1" lat1="38N" lat2="41.5N" lon1="11E" lon2="16.5E" />
    </Region>
    <Region Name="Ionian-Sea">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.E.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">
@@ -62,7 +62,7 @@
       <Area Name="1" lat1="37N" lat2="40.5N" lon1="14.5E" lon2="20E" />
    </Region>
    <Region Name="Southern-Adriatic">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.F.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">
@@ -74,7 +74,7 @@
       <Area Name="1" lat1="39.5N" lat2="43N" lon1="14.5E" lon2="20E" />
    </Region>
    <Region Name="Northern-Adriatic">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.G.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">
@@ -86,7 +86,7 @@
       <Area Name="1" lat1="42N" lat2="46N" lon1="12E" lon2="17.5E" />
    </Region>
    <Region Name="Central-Med-Sea">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.H.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">
@@ -98,7 +98,7 @@
       <Area Name="1" lat1="35N" lat2="46N" lon1="2E" lon2="22E" />
    </Region>
    <Region Name="Eastern-Med">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.I.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">
@@ -110,7 +110,7 @@
       <Area Name="1" lat1="41N" lat2="44.5N" lon1="7E" lon2="12.5E" />
    </Region>
    <Region Name="Balearic">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.K.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">
@@ -122,7 +122,7 @@
       <Area Name="1" lat1="38.1N" lat2="41.4N" lon1="0E" lon2="4.5E" />
    </Region>
    <Region Name="Elba">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.L.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Area Name="1" lat1="42N" lat2="43.3N" lon1="9.4E" lon2="11.4E" />
@@ -134,7 +134,7 @@
       </Iterator>
    </Region>
    <Region Name="Genoa-Gulf">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.M.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">
@@ -146,7 +146,7 @@
       <Area Name="1" lat1="43N" lat2="44.4N" lon1="8.2E" lon2="10.4E" />
    </Region>
    <Region Name="Bonifazio">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.N.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">
@@ -158,7 +158,7 @@
       <Area Name="1" lat1="40.2N" lat2="42N" lon1="7.8E" lon2="10.2E" />
    </Region>
    <Region Name="Pontine">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.O.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">
@@ -170,7 +170,7 @@
       <Area Name="1" lat1="40N" lat2="41.4N" lon1="12.6E" lon2="14.8E" />
    </Region>
    <Region Name="Eolie">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.P.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">
@@ -182,7 +182,7 @@
       <Area Name="1" lat1="40N" lat2="41.4N" lon1="12.6E" lon2="14.8E" />
    </Region>
    <Region Name="Cote-d'Azur">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.Q.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">
@@ -194,7 +194,7 @@
       <Area Name="1" lat1="41.1N" lat2="44.1N" lon1="5E" lon2="9.5E" />
    </Region>
    <Region Name="Corse">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.S.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">
@@ -206,7 +206,7 @@
       <Area Name="1" lat1="41.4N" lat2="43.2N" lon1="7.5E" lon2="10.2E" />
    </Region>
    <Region Name="Istria">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.T.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">
@@ -218,7 +218,7 @@
       <Area Name="1" lat1="44N" lat2="45.6N" lon1="12.3E" lon2="14.7E" />
    </Region>
    <Region Name="Tremiti">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.U.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">
@@ -230,7 +230,7 @@
       <Area Name="1" lat1="41.4N" lat2="43.2N" lon1="14.4E" lon2="17.1E" />
    </Region>
    <Region Name="Albania">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.V.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">
@@ -242,7 +242,7 @@
       <Area Name="1" lat1="38.8N" lat2="40.4N" lon1="18E" lon2="20.7E" />
    </Region>
    <Region Name="Toranto">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.W.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">
@@ -254,7 +254,7 @@
       <Area Name="1" lat1="39.2N" lat2="40.6N" lon1="16.6E" lon2="18.4E" />
    </Region>
    <Region Name="Ustica">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.X.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">
@@ -266,13 +266,13 @@
       <Area Name="1" lat1="37.6N" lat2="38.9N" lon1="11.6E" lon2="13.6E" />
    </Region>
    <Region Name="Western-Med">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.Y.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Area Name="1" lat1="35N" lat2="44N" lon1="4W" lon2="10E" />
    </Region>
    <Region Name="Lion-Gulf">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.Z.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">
@@ -284,7 +284,7 @@
       <Area Name="1" lat1="40.8N" lat2="43.5N" lon1="1E" lon2="5.5E" />
    </Region>
    <Region Name="Mediterranean-Sea">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.AA.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">
@@ -296,7 +296,7 @@
       <Area Name="1" lat1="30N" lat2="46N" lon1="5W" lon2="35E" />
    </Region>
    <Region Name="Sardinia-Channel">
-      <Iterator From="1" To="37" By="1">
+      <Iterator From="1" To="37" By="1" Offset="-1" Step="1">
         <Map Url="wind10.AB.%d.png" Contents="Wind %+dhr" Area="1" />
       </Iterator>
       <Iterator From="38" To="49" By="1" Offset="-75" Step="3">

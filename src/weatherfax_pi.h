@@ -68,6 +68,8 @@ public:
       wxString GetCommonName();
       wxString GetShortDescription();
       wxString GetLongDescription();
+	  //from Shipdriver for definition of panel icon
+	  wxBitmap m_panelBitmap; 	 	  
 
       int GetToolbarToolCount(void);
 

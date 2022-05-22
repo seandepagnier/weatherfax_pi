@@ -37,13 +37,10 @@
       </Iterator>
       <Area Name="1" lat1="44N" lat2="66N" lon1="30W" lon2="15E" />
    </Region>
-   <!-- Start GFS COAMPS WRF -->
+   <!-- Start GFS COAMPS -->
    <Region Name="North Sea" Url="northsea/">
       <Iterator From="0" To="96" By="3">
         <Map Url="coamps/%03d.png" Contents="COAMPS Wind %03d" Area="1" />
-      </Iterator>
-      <Iterator From="6" To="72" By="3">
-        <Map Url="wrf/%03d.png" Contents="WRF Wind %03d" Area="1" />
       </Iterator>
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="GFS Wind %03d" Area="1" />
@@ -66,11 +63,8 @@
       <Iterator From="0" To="96" By="3">
         <Map Url="coamps/%03d.png" Contents="COAMPS Wind %03d" Area="1" />
       </Iterator>
-      <Iterator From="6" To="72" By="3">
-        <Map Url="wrf/%03d.png" Contents="WRF Wind %03d" Area="1" />
-      </Iterator>
       <Iterator From="0" To="48" By="3">
-        <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
+        <Map Url="wind/%03d.png" Contents="GFS Wind %03d" Area="1" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
         <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
       </Iterator>
@@ -89,9 +83,6 @@
    <Region Name="British Isles" Url="britisles/">
       <Iterator From="0" To="96" By="3">
         <Map Url="coamps/%03d.png" Contents="COAMPS Wind %03d" Area="1" />
-      </Iterator>
-      <Iterator From="6" To="72" By="3">
-        <Map Url="wrf/%03d.png" Contents="WRF Wind %03d" Area="1" />
       </Iterator>
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="GFS Wind %03d" Area="1" />
@@ -114,9 +105,6 @@
       <Iterator From="0" To="96" By="3">
         <Map Url="coamps/%03d.png" Contents="COAMPS Wind %03d" Area="1" />
       </Iterator>
-      <Iterator From="6" To="72" By="3">
-        <Map Url="wrf/%03d.png" Contents="WRF Wind %03d" Area="1" />
-      </Iterator>
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="GFS Wind %03d" Area="1" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
@@ -137,9 +125,6 @@
    <Region Name="Bay of Biscay" Url="biscay/">
       <Iterator From="0" To="96" By="3">
         <Map Url="coamps/%03d.png" Contents="COAMPS Wind %03d" Area="1" />
-      </Iterator>
-      <Iterator From="6" To="72" By="3">
-        <Map Url="wrf/%03d.png" Contents="WRF Wind %03d" Area="1" />
       </Iterator>
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="GFS Wind %03d" Area="1" />
@@ -162,19 +147,20 @@
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
-        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="2" />
       </Iterator>
       <Iterator From="54" To="72" By="6">
         <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
-        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="2" />
       </Iterator>
       <Iterator From="84" To="180" By="12">
         <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
-        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="2" />
       </Iterator>
      <Area Name="1" lat1="10N" lat2="45N" lon1="70W" lon2="4W" />
+     <Area Name="2" lat1="10N" lat2="45N" lon1="70W" lon2="4W" />
    </Region>
    <Region Name="Azores" Url="azores/">
       <Iterator From="0" To="48" By="3">
@@ -198,26 +184,24 @@
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
-        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="2" />
       </Iterator>
       <Iterator From="54" To="72" By="6">
         <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
-        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="2" />
       </Iterator>
       <Iterator From="84" To="180" By="12">
         <Map Url="wind/%03d.png" Contents="Wind %03d" Area="1" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
-        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="1" />
+        <Map Url="waves/%03d.png" Contents="Waves %03d" Area="2" />
       </Iterator>
      <Area Name="1" lat1="26.4N" lat2="30N" lon1="19W" lon2="12.5W" />
+     <Area Name="2" lat1="26.4N" lat2="30N" lon1="19W" lon2="12.5W" />
    </Region>
    <Region Name="Gibraltar" Url="gibraltar/">
       <Iterator From="0" To="96" By="3">
         <Map Url="coamps/%03d.png" Contents="COAMPS Wind %03d" Area="1" />
-      </Iterator>
-      <Iterator From="6" To="72" By="3">
-        <Map Url="wrf/%03d.png" Contents="WRF Wind %03d" Area="1" />
       </Iterator>
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="GFS Wind %03d" Area="1" />
@@ -240,9 +224,6 @@
       <Iterator From="0" To="96" By="3">
         <Map Url="coamps/%03d.png" Contents="COAMPS Wind %03d" Area="1" />
       </Iterator>
-      <Iterator From="6" To="72" By="3">
-        <Map Url="wrf/%03d.png" Contents="WRF Wind %03d" Area="1" />
-      </Iterator>
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="GFS Wind %03d" Area="1" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="1" />
@@ -263,9 +244,6 @@
    <Region Name="Mediterranean" Url="giraglia/">
       <Iterator From="0" To="96" By="3">
         <Map Url="coamps/%03d.png" Contents="COAMPS Wind %03d" Area="2" />
-      </Iterator>
-      <Iterator From="6" To="72" By="3">
-        <Map Url="wrf/%03d.png" Contents="WRF Wind %03d" Area="2" />
       </Iterator>
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="GFS Wind %03d" Area="2" />
@@ -288,9 +266,6 @@
       <Iterator From="0" To="96" By="3">
         <Map Url="coamps/%03d.png" Contents="COAMPS Wind %03d" Area="3" />
       </Iterator>
-      <Iterator From="6" To="72" By="3">
-        <Map Url="wrf/%03d.png" Contents="WRF Wind %03d" Area="3" />
-      </Iterator>
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="GFS Wind %03d" Area="3" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="3" />
@@ -311,9 +286,6 @@
    <Region Name="Mediterranean" Url="bonifacio/">
       <Iterator From="0" To="96" By="3">
         <Map Url="coamps/%03d.png" Contents="COAMPS Wind %03d" Area="4" />
-      </Iterator>
-      <Iterator From="6" To="72" By="3">
-        <Map Url="wrf/%03d.png" Contents="WRF Wind %03d" Area="4" />
       </Iterator>
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="GFS Wind %03d" Area="4" />
@@ -336,9 +308,6 @@
       <Iterator From="0" To="96" By="3">
         <Map Url="coamps/%03d.png" Contents="COAMPS Wind %03d" Area="5" />
       </Iterator>
-      <Iterator From="6" To="72" By="3">
-        <Map Url="wrf/%03d.png" Contents="WRF Wind %03d" Area="5" />
-      </Iterator>
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="GFS Wind %03d" Area="5" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="5" />
@@ -359,9 +328,6 @@
    <Region Name="Mediterranean" Url="bomballey/">
       <Iterator From="0" To="96" By="3">
         <Map Url="coamps/%03d.png" Contents="COAMPS Wind %03d" Area="6" />
-      </Iterator>
-      <Iterator From="6" To="72" By="3">
-        <Map Url="wrf/%03d.png" Contents="WRF Wind %03d" Area="6" />
       </Iterator>
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="GFS Wind %03d" Area="6" />
@@ -384,9 +350,6 @@
       <Iterator From="0" To="96" By="3">
         <Map Url="coamps/%03d.png" Contents="COAMPS Wind %03d" Area="7" />
       </Iterator>
-      <Iterator From="6" To="72" By="3">
-        <Map Url="wrf/%03d.png" Contents="WRF Wind %03d" Area="7" />
-      </Iterator>
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="GFS Wind %03d" Area="7" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="7" />
@@ -407,9 +370,6 @@
    <Region Name="Mediterranean" Url="westmed/">
       <Iterator From="0" To="96" By="3">
         <Map Url="coamps/%03d.png" Contents="COAMPS Wind %03d" Area="8" />
-      </Iterator>
-      <Iterator From="6" To="72" By="3">
-        <Map Url="wrf/%03d.png" Contents="WRF Wind %03d" Area="8" />
       </Iterator>
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="GFS Wind %03d" Area="8" />
@@ -432,9 +392,6 @@
       <Iterator From="0" To="96" By="3">
         <Map Url="coamps/%03d.png" Contents="COAMPS Wind %03d" Area="9" />
       </Iterator>
-      <Iterator From="6" To="72" By="3">
-        <Map Url="wrf/%03d.png" Contents="WRF Wind %03d" Area="9" />
-      </Iterator>
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="GFS Wind %03d" Area="9" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="9" />
@@ -456,9 +413,6 @@
       <Iterator From="0" To="96" By="3">
         <Map Url="coamps/%03d.png" Contents="COAMPS Wind %03d" Area="10" />
       </Iterator>
-      <Iterator From="6" To="72" By="3">
-        <Map Url="wrf/%03d.png" Contents="WRF Wind %03d" Area="10" />
-      </Iterator>
       <Iterator From="0" To="48" By="3">
         <Map Url="wind/%03d.png" Contents="GFS Wind %03d" Area="10" />
         <Map Url="press/%03d.png" Contents="Pressure %03d" Area="10" />
@@ -476,7 +430,7 @@
       </Iterator>
      <Area Name="10" lat1="35.5N" lat2="36.5N" lon1="6.5W" lon2="5W" />
    </Region>
-<!-- End GFS COAMPS WRF -->
+<!-- End GFS COAMPS -->
 <!-- GFS COAMPS -->
    <Region Name="Black Sea" Url="blacksea/">
       <Iterator From="0" To="96" By="3">

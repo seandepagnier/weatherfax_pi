@@ -924,7 +924,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 
 	wxFlexGridSizer* fgSizer641;
 	fgSizer641 = new wxFlexGridSizer( 0, 3, 0, 0 );
-	fgSizer641->AddGrowableCol( 4 );
+	fgSizer641->AddGrowableCol( 2 );
 	fgSizer641->SetFlexibleDirection( wxBOTH );
 	fgSizer641->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 
@@ -972,7 +972,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 
 	wxFlexGridSizer* fgSizer10;
 	fgSizer10 = new wxFlexGridSizer( 0, 2, 0, 0 );
-	fgSizer10->AddGrowableCol( 3 );
+	fgSizer10->AddGrowableCol( 1 );
 	fgSizer10->SetFlexibleDirection( wxHORIZONTAL );
 	fgSizer10->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 
