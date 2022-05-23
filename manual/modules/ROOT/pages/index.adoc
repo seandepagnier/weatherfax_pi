@@ -335,6 +335,8 @@ https://www.youtube.com/watch?v=Ks4JwUYu84w[How to update file souces for OpenCP
 
 http://davidburchnavigation.blogspot.com/search?q=weatherfax[How to update file souces for OpenCPN weatherfax plugin]
 
+== Examples and Use
 
+https://www.instructables.com/Raspberry-Pi-NOAA-Weather-Satellite-Receiver/[Raspberry Pi NOAA Weather Satellite Receiver]
 
 Thanks to Sean for a great Plugin!
