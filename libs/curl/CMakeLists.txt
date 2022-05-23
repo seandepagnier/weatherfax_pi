@@ -41,6 +41,7 @@ if (UNIX AND NOT APPLE AND NOT OCPN_FLATPAK_CONFIG)
   target_link_libraries(curl_if INTERFACE ${LIBCURL})
   target_include_directories(curl_if INTERFACE ${CURL_HEADERS})
   return ()
+
 endif ()
 
 set(curl_tarball "curl-${curl_version}.tar.gz")
