@@ -13,10 +13,10 @@
       <Map Url="difacs/IDX0049.%Y%m%d%H00.gif" Contents="Total waves Height &amp; Direction 06hr Forecast" Area="Wave" Hour="0;6;6" />
       <Map Url="difacs/IDX0049.%Y%m%d%H00.gif" Contents="Total waves Height &amp; Direction 12hr Forecast" Area="Wave" Hour="6;6;6" />
       <Map Url="difacs/IDX0049.%Y%m%d%H00.gif" Contents="Total waves Height &amp; Direction 18hr Forecast" Area="Wave" Hour="12;6;6" />
-      <Map Url="difacs/IDX0050.%Y%m%d%H00.gif" Contents="Primary Swell Height &amp; Direction Analysis" Area="Wave" Hour="-6;6;6" />
-      <Map Url="difacs/IDX0050.%Y%m%d%H00.gif" Contents="Primary Swell Height &amp; Direction 06hr Forecast" Area="Wave" Hour="0;6;6" />
-      <Map Url="difacs/IDX0050.%Y%m%d%H00.gif" Contents="Primary Swell Height &amp; Direction 12hr Forecast" Area="Wave" Hour="6;6;6" />
-      <Map Url="difacs/IDX0050.%Y%m%d%H00.gif" Contents="Primary Swell Height &amp; Direction 18hr Forecast" Area="Wave" Hour="12;6;6" />
+      <Map Url="difacs/IDX0050.%Y%m%d%H00.gif" Contents="Primary Swell Height &amp; Direction Analysis" Area="Swell" Hour="-6;6;6" />
+      <Map Url="difacs/IDX0050.%Y%m%d%H00.gif" Contents="Primary Swell Height &amp; Direction 06hr Forecast" Area="Swell" Hour="0;6;6" />
+      <Map Url="difacs/IDX0050.%Y%m%d%H00.gif" Contents="Primary Swell Height &amp; Direction 12hr Forecast" Area="Swell" Hour="6;6;6" />
+      <Map Url="difacs/IDX0050.%Y%m%d%H00.gif" Contents="Primary Swell Height &amp; Direction 18hr Forecast" Area="Swell" Hour="12;6;6" />
       <Map Url="difacs/IDX0051.gif" Contents="Sea Surface Wind Analysis" Area="Wind" />
       <Map Url="difacs/IDX0052.gif" Contents="Sea Surface Wind 12hr Forecast" Area="Wind" />
       <Map Url="difacs/IDX0053.gif" Contents="Sea Surface Wind 24hr Forecast" Area="Wind" />

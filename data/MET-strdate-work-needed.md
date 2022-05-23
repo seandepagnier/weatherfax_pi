@@ -1,3 +1,19 @@
+May/17/2022
+
+Basically everything in this file have been reviewed and corrected or discarded.:
+
+    Mauricius: Discarded
+    Singapore: Discarded but awaiting for a reply from them hopefully
+    Japan: Discarded
+    South Africa: Updated
+    French Polynesia: Updated
+    Chile: Remapped (one Mercator changed to Fixed-Flat and one Conic to Polar)
+    PWx, GFS, ECMWF and UKMO for a better coverage
+    Europe: Updated
+
+weatherfax_pi/data/MET-strdate-work-needed.md is obsolete too.
+
+=================================
 Australia BOM
 France MET
 Singapore Met
