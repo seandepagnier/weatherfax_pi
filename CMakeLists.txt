@@ -462,15 +462,6 @@ endif(QT_ANDROID)
 target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${EXTSRC} ${SRC_AUDIOFILE})
 ##==========================================================================
 
-if (OCPN_FLATPAK_CONFIG)
-  message(STATUS "Adding libs/curl")
-  add_subdirectory("${CMAKE_SOURCE_DIR}/libs/curl")
-  target_link_libraries(${PACKAGE_NAME} libcurl::libcurl)
-endif ()
-
-add_subdirectory("libs/wxcurl")
-  target_link_libraries(${PACKAGE_NAME} ocpn::wxcurl_src)
-
 TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 message(STATUS "${CMLOC}Adding PLUGINS_LIBS: ${EXTRA_LIBS}")
 
@@ -478,8 +469,13 @@ if(NOT OCPN_FLATPAK_CONFIG)
     # Build environment not available when flatpak is being configured so following statements will not work
     message(STATUS "${CMLOC}Adding target link libraries to ${PACKAGE_NAME}")
 
-    add_subdirectory(libs/tinyxml)
+    add_subdirectory("libs/curl")
+    target_link_libraries(${PACKAGE_NAME} libcurl::libcurl)
 
+    add_subdirectory("libs/wxcurl")
+    target_link_libraries(${PACKAGE_NAME} ocpn::wxcurl_src)
+
+    add_subdirectory(libs/tinyxml)
     target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
 endif(NOT OCPN_FLATPAK_CONFIG)
 

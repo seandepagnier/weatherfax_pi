@@ -27,10 +27,9 @@ project(ocpn_curl)
 add_library(curl_if INTERFACE)
 add_library(libcurl::libcurl ALIAS curl_if)
 
-if (OCPN_FLATPAK_CONFIG)
-  message(STATUS "libs/curl/CMakeLists.txt processing flatpak")
-
+if (UNIX AND NOT APPLE AND NOT OCPN_FLATPAK_CONFIG)
   #  On Linux and Flatpak: use the system library and be done with it.
+
   find_library(LIBCURL NAMES libcurl curl REQUIRED)
   message(STATUS "libs/curl/CMakeLists.txt LIBCURL:  ${LIBCURL}")
   if (${CMAKE_VERSION} VERSION_LESS 3.18)
@@ -42,6 +41,7 @@ if (OCPN_FLATPAK_CONFIG)
   target_link_libraries(curl_if INTERFACE ${LIBCURL})
   target_include_directories(curl_if INTERFACE ${CURL_HEADERS})
   return ()
+
 endif ()
 
 set(curl_tarball "curl-${curl_version}.tar.gz")
