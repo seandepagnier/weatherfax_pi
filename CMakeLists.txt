@@ -469,11 +469,13 @@ if(NOT OCPN_FLATPAK_CONFIG)
     # Build environment not available when flatpak is being configured so following statements will not work
     message(STATUS "${CMLOC}Adding target link libraries to ${PACKAGE_NAME}")
 
+IF(NOT QT_ANDROID)
     add_subdirectory("libs/curl")
     target_link_libraries(${PACKAGE_NAME} libcurl::libcurl)
 
     add_subdirectory("libs/wxcurl")
     target_link_libraries(${PACKAGE_NAME} ocpn::wxcurl_src)
+ENDIF(NOT QT_ANDROID)
 
     add_subdirectory(libs/tinyxml)
     target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
