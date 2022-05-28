@@ -238,8 +238,11 @@ WeatherFax::WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
     m_lFaxes->GetHandle()->grabGesture(Qt::PanGesture);
     m_lFaxes->Connect( wxEVT_QT_PANGESTURE,
                        (wxObjectEventFunction) (wxEventFunction) &WeatherFax::OnEvtPanGesture, NULL, this );
-    m_lFaxes->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( WeatherFaxBase::OnLeftDown ), NULL, this );
-    m_lFaxes->Connect( wxEVT_LEFT_UP, wxMouseEventHandler( WeatherFaxBase::OnLeftUp ), NULL, this );
+// Leamas patch
+//    m_lFaxes->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( WeatherFaxBase::OnLeftDown ), NULL, this );
+//    m_lFaxes->Connect( wxEVT_LEFT_UP, wxMouseEventHandler( WeatherFaxBase::OnLeftUp ), NULL, this );
+    m_lFaxes->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( WeatherFax::OnLeftDown ), NULL, this );
+    m_lFaxes->Connect( wxEVT_LEFT_UP, wxMouseEventHandler( WeatherFax::OnLeftUp ), NULL, this );
     m_tDownTimer.Connect(wxEVT_TIMER, wxTimerEventHandler
                          ( WeatherFax::OnDownTimer ), NULL, this);
 #endif
