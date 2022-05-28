@@ -35,6 +35,8 @@
 #include "GL/gl_private.h"
 #include "GLES2/gl2.h"
 #include <qdebug.h>
+#elif defined(__APPLE__)
+#include <OpenGL/gl.h>
 #else
 #include <GL/gl.h>
 #endif
