@@ -56,8 +56,8 @@ set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "32")
-set(VERSION_TWEAK "3")
-set(VERSION_DATE "05/28/2022")  # DD/MM/YYYY format
+set(VERSION_TWEAK "4")
+set(VERSION_DATE "05/29/2022")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
