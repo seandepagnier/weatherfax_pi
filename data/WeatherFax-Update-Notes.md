@@ -18,6 +18,13 @@ Maintenance of XML Files
 The weatherfaxinternetretrieval.xml and weatherfaxschedules.xml files must be maintained and updated by all the USERS!
 Contribute your special url's and schedules for the benefit of all.
 
+weatherfaxinternetretrieval.xml is dependent on many MET website services worldwide, and users who contribute xml files.
+weatherfaxschedules.xml is created from NOAA's current Worldwide RF Radio Schedule 
+https://www.weather.gov/nwr&in_desc=NOAA+Weather+Radio/
+https://www.nhc.noaa.gov/radiofax.shtml
+
+Users are asked to submit error reports and updated xml files through github.com/rgleason/weatherfax_pi   using Issues and attaching files or make a pull request.
+
 WeatherFaxInternetRetrieval Files (12 Regional Files)
 =======================
 WeatherFaxInternetRetrieval_PWx_Pacific.xml    Passageweather Pacific
