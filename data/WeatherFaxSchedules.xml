@@ -628,7 +628,7 @@
       <Map Time="1002" Contents="(REBROADCAST OF 0925/2125)" Valid="06" Area="2" />
       <Map Time="1015" Contents="(REBROADCAST OF 0938/2138)" Valid="06" Area="3" Duration="12" />
 	  <Map Time="1028" Contents="CYCLONE DANGER AREA or HIGH WINDS" Valid="09" Area="7" />
-	  <Map Time="1039" Contents="REBROADCAST/N  American Ice Service Chart" Valid="21" />	  
+	  <Map Time="1039" Contents="REBROADCAST/N  American Ice Service Chart" Valid="21" Duration="15" />	  
     </Frequency>
 
     <Frequency khz="6340.5,9110,12750">
@@ -673,7 +673,7 @@
       <Map Time="2202" Contents="(REBROADCAST OF 0925/2125 NE ATLANTIC)" Valid="18" Area="2" />
       <Map Time="2215" Contents="(REBROADCAST OF 0938/2138 NW ATLANTIC)" Valid="18" Area="3" />
       <Map Time="2228" Contents="CYCLONE DANGER AREA* or 48HR HIGH WIND/WAVES" Valid="21" Area="7" Duration="12" />
-      <Map Time="2239" Contents="REBROADCAST/N  American Ice Service Chart" Valid="21" />    
+      <Map Time="2239" Contents="REBROADCAST/N  American Ice Service Chart" Valid="21" Duration="15"/>    
     </Frequency>
 
     <Area Name="1" lat1="28N" lat2="52N" lon1="85W" lon2="45W" />
