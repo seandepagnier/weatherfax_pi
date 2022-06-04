@@ -39,8 +39,10 @@
 #include "WeatherFaxImage.h"
 #include "WeatherFax.h"
 
-#include "wx/curl/ftp.h"
-#include "wx/curl/dialog.h"
+#ifndef __OCPN__ANDROID__
+ #include "wx/curl/ftp.h"
+ #include "wx/curl/dialog.h"
+#endif
 
 InternetRetrievalDialog::InternetRetrievalDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
 #ifndef __WXOSX__
@@ -680,7 +682,7 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
         else if (url.StartsWith("ftp")){
             bool success = false;
 
-#if 1
+#ifndef __OCPN__ANDROID__
             wxFileOutputStream output(filename);
 
             wxCurlDownloadDialog ddlg(url, &output, _("WeatherFax InternetRetrieval"),
@@ -690,7 +692,6 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
                                                 OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|
                                                 OCPN_DLDS_AUTO_CLOSE );
 
-            //ddlg.m_pThread->GetCurlSession()->SetOpt(CURLOPT_TRANSFERTEXT, TRUE);
 
             wxCurlDialogReturnFlag ret = ddlg.RunModal();
             output.Close();
@@ -711,12 +712,21 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
                         // possible cases of ret
             }
 #else
-            wxCurlFTP f(url);
-            //f.SetToBinary();
-            success = f.Get(filename);
-#endif
+           _OCPN_DLStatus res = OCPN_downloadFile( url, filename, _("WeatherFax InternetRetrieval"),
+                                _("Reading Headers: ") + faxurl->Contents, wxNullBitmap, this,
+                                                OCPN_DLDS_ELAPSED_TIME|OCPN_DLDS_ESTIMATED_TIME|OCPN_DLDS_REMAINING_TIME|
+                                                OCPN_DLDS_SPEED|OCPN_DLDS_SIZE|OCPN_DLDS_URL|
+                                                OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|
+                                                OCPN_DLDS_AUTO_CLOSE, 10 );
 
-            if(!success){
+            switch( res )
+            {
+            case OCPN_DL_NO_ERROR: break;
+            case OCPN_DL_STARTED: break;
+            case OCPN_DL_FAILED:
+            case OCPN_DL_UNKNOWN:
+            case OCPN_DL_USER_TIMEOUT:
+            {
                 wxMessageDialog mdlg(this, _("Failed to Download: ") +
                                     faxurl->Contents + _T("\n") +
                                     url + _T("\n") +
@@ -726,6 +736,11 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
                 mdlg.ShowModal();
                 wxRemoveFile( filename );
             }
+            case OCPN_DL_ABORTED: return;
+            }
+
+#endif
+
         }
 
 
@@ -832,7 +847,7 @@ void InternetRetrievalDialog::RebuildServers()
     m_lServers->Clear();
     for(std::list<FaxServer>::iterator it = m_Servers.begin(); it != m_Servers.end(); it++)
         if(!it->Filtered)
-            m_lServers->SetSelection(m_lServers->Append(it->Name), it->Selected);
+            m_lServers->SetSelection(m_lServers->Append(it->Name));
     m_bDisableFilter = false;
 }
 
@@ -855,7 +870,7 @@ void InternetRetrievalDialog::RebuildRegions()
 
         for(unsigned int i=0; i < m_lServers->GetCount(); i++)
             if(!it->Filtered && m_lServers->IsSelected(i) && m_lServers->GetString(i) == it->Server) {
-                m_lRegions->SetSelection(m_lRegions->Append(it->Name), it->Selected);
+                m_lRegions->SetSelection(m_lRegions->Append(it->Name));
                 break;
             }
     skip:;
