@@ -400,6 +400,9 @@ Note This date format cannot be combined with any other format specifier.
 %Y 	Year with the century as a decimal number. 
 %% 	Percent sign. 
 
+For more examples and discussion about the use of strdate please see
+https://github.com/seandepagnier/weatherfax_pi/issues/58
+
 == Examples and Use
 
 David Burch's Blog has made some videos which help to explain how to update the world regional xmls and the coordinateset.xml file.
