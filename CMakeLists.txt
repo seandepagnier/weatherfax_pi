@@ -453,9 +453,15 @@ if(QT_ANDROID)
     include_directories( ${PROJECT_SOURCE_DIR}/extinclude/GLES2)
 endif(QT_ANDROID)
 
+
 ##
 ## ----- Change above to match project requirements for android build ----- ##
 ##
+
+# Needed for android builds
+if(QT_ANDROID)
+    include_directories(BEFORE ${qt_android_include})
+endif(QT_ANDROID)
 
 ## Required to collect all the set( headers and SRCS  - Adjust as required
 ##==========================================================================
@@ -482,6 +488,7 @@ ENDIF(NOT QT_ANDROID)
 endif(NOT OCPN_FLATPAK_CONFIG)
 
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/plugingl/include)
+
 add_subdirectory(libs/plugingl)
 target_link_libraries(${PACKAGE_NAME} ocpn::plugingl)
 
@@ -507,11 +514,6 @@ add_definitions(-DTIXML_USE_STL)
 ##
 ## ----- do not change next section - needed to configure build process ----- ##
 ##
-
-# Needed for android builds
-if(QT_ANDROID)
-    include_directories(BEFORE ${qt_android_include})
-endif(QT_ANDROID)
 
 
 
