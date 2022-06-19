@@ -175,8 +175,8 @@ void InternetRetrievalDialog::Load(bool force)
                     };
 
     for(it_Filenames = m_Filenames.begin(); it_Filenames != m_Filenames.end(); it_Filenames++)
-        if( wxFileExists( m_weatherfax_pi.StandardPath() + _T("WeatherFaxInternetRetrieval_") + *it_Filenames + _T(".xml")))
-            OpenXML( m_weatherfax_pi.StandardPath() + _T("WeatherFaxInternetRetrieval_") + *it_Filenames + _T(".xml"));
+        if( wxFileExists( m_weatherfax_pi.StandardWriteablePath() + _T("WeatherFaxInternetRetrieval_") + *it_Filenames + _T(".xml")))
+            OpenXML( m_weatherfax_pi.StandardWriteablePath() + _T("WeatherFaxInternetRetrieval_") + *it_Filenames + _T(".xml"));
         else
             OpenXML(GetPluginDataDir("weatherfax_pi") + s + _T("data") + s + _T("WeatherFaxInternetRetrieval_") + *it_Filenames + _T(".xml"));
 
@@ -628,7 +628,7 @@ void InternetRetrievalDialog::OnRetrieve( wxCommandEvent& event )
             url.Replace(formats[i], now.Format(formats[i], wxDateTime::UTC));
 
 
-        wxString path = weatherfax_pi::StandardPath();
+        wxString path = weatherfax_pi::StandardWriteablePath();
 
         wxString filename = url;
         filename.Replace(_T("/"), _T("!"));

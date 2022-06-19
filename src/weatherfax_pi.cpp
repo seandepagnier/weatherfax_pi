@@ -234,7 +234,7 @@ bool weatherfax_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
     return true;
 }
 
-wxString weatherfax_pi::StandardPath()
+wxString weatherfax_pi::StandardWriteablePath()
 {
     wxString s = wxFileName::GetPathSeparator();
     wxString stdPath  = *GetpPrivateApplicationDataLocation();
@@ -263,6 +263,18 @@ wxString weatherfax_pi::StandardPath()
       wxMkdir(stdPath);
 
     stdPath += s; // is this necessary?
+    return stdPath;
+}
+
+wxString weatherfax_pi::StandardDataPath()
+{
+    wxString s = wxFileName::GetPathSeparator();
+    wxString stdPath = GetPluginDataDir("weatherfax_pi");
+
+    stdPath += s;
+    stdPath += "data";
+    stdPath += s;
+
     return stdPath;
 }
 

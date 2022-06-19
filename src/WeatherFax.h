@@ -75,11 +75,11 @@ public:
 
 #ifdef __OCPN__ANDROID__
     void OnEvtPanGesture( wxQT_PanGestureEvent &event);
-#endif    
+#endif
     void OnLeftDown( wxMouseEvent& event );
     void OnLeftUp( wxMouseEvent& event );
     void OnDownTimer( wxTimerEvent & );
-    
+
     void OnClose( wxCloseEvent& event ) { Hide(); }
     void EnableDisplayControls(bool enable);
     void OnFaxes( wxCommandEvent& event );
@@ -125,11 +125,11 @@ protected:
     wxTimer m_tDeleteAudioWizard, m_tDownTimer;
 
 private:
-    bool DownloadFile( wxString filename );
+    bool DownloadDataFile( wxString filename );
 
 #ifdef __OCPN__ANDROID__
     wxPoint m_downPos, m_startPos, m_startMouse;
-#endif    
+#endif
 };
 
 class FaxDecoder;
