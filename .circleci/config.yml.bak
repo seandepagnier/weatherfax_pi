@@ -38,8 +38,6 @@ workflows:
 ## Currently circleci does not build armf64 correctly due to no suitable docker image
 ##        - build-armhf-bionic-64:
 ##            <<: *std-filters
-        - build-arm64-debian-bullseye:
-            <<: *std-filters
         - build-armhf-ubuntu-focal:
             <<: *std-filters
 ## Not required as flatpak build used instead - 14/01/2022
@@ -54,8 +52,6 @@ workflows:
             <<: *std-filters
         - build-focal-gtk3:
             <<: *std-filters
-        - build-jammy:
-            <<: *std-filters
         - build-buster:
             <<: *std-filters
         - build-flatpak-x86-2008:
@@ -67,13 +63,13 @@ workflows:
         - build-flatpak-arm64:
             <<: *std-filters
         - build-macos:
-           <<: *std-filters
+            <<: *std-filters
         - build-macos-wx315:
-           <<: *std-filters
+            <<: *std-filters
         - build-android-arm64:
-           <<: *std-filters
+            <<: *std-filters
         - build-android-armhf:
-           <<: *std-filters
+            <<: *std-filters
 
 orbs:
     cloudsmith: cloudsmith/cloudsmith@1.0.4
@@ -225,25 +221,6 @@ jobs:
             command: ci/circleci-build-raspbian-armhf.sh
             no_output_timeout: 30m
         - deploy-code
-
-    build-arm64-debian-bullseye:
-        machine:
-            image: ubuntu-2004:202104-01
-        environment:
-        - OCPN_TARGET=bullseye-arm64
-        - DOCKER_IMAGE=arm64v8/debian:bullseye-backports
-        - BUILD_FLAGS=-j3
-        - BUILD_ENV=debian
-        - BUILD_GTK3: true
-        - DEPLOY_USE_ORB: true
-        steps:
-        - checkout
-        - run: chmod a+x ./ci/*.sh
-        - run:
-            command: ci/circleci-build-raspbian-armhf.sh
-            no_output_timeout: 30m
-        - deploy-code
-
     build-armhf-bionic-64:
         machine:
             image: ubuntu-2004:202104-01
@@ -371,24 +348,6 @@ jobs:
             echo "deb-src http://us.archive.ubuntu.com/ubuntu/ focal main" | sudo tee -a /etc/apt/sources.list
         - run: >
             echo "deb-src http://us.archive.ubuntu.com/ubuntu/ focal-updates main" | sudo tee -a /etc/apt/sources.list
-        - run: cat /etc/apt/sources.list
-        - run: chmod a+x ci/*.sh
-        - run: ci/circleci-build-debian.sh
-        - deploy-code
-    build-jammy:
-        docker:
-        - image: cimg/base:edge-22.04
-        environment:
-        - BUILD_GTK3: true
-        - OCPN_TARGET: jammy
-        - DEPLOY_USE_ORB: true
-        - BUILD_ENV=ubuntu
-        steps:
-        - checkout
-        - run: >
-            echo "deb-src http://us.archive.ubuntu.com/ubuntu/ jammy main" | sudo tee -a /etc/apt/sources.list
-        - run: >
-            echo "deb-src http://us.archive.ubuntu.com/ubuntu/ jammy-updates main" | sudo tee -a /etc/apt/sources.list
         - run: cat /etc/apt/sources.list
         - run: chmod a+x ci/*.sh
         - run: ci/circleci-build-debian.sh
