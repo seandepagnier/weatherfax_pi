@@ -586,6 +586,11 @@ else(NOT QT_ANDROID)
         set(qt_android_include ${qt_android_include} "${OCPN_Android_Common}/wxWidgets/libarm64/wx/include/arm-linux-androideabi-qt-unicode-static-3.1")
         set(qt_android_include ${qt_android_include} "${OCPN_Android_Common}/wxWidgets/include")
 
+        file(GLOB _wx_setup
+            ${OCPN_Android_Common}/wxWidgets/libarm64/wx/include/arm-linux-*-static-*
+        )
+        set(qt_android_include ${qt_android_include} ${_wx_setup})
+
         SET(wxWidgets_LIBRARIES
         ${CMAKE_CURRENT_SOURCE_DIR}/${OCPN_Android_Common}/qt5/build_arm64_O3/qtbase/lib/libQt5Core.so
         ${CMAKE_CURRENT_SOURCE_DIR}/${OCPN_Android_Common}/qt5/build_arm64_O3/qtbase/lib/libQt5OpenGL.so
@@ -610,6 +615,11 @@ else(NOT QT_ANDROID)
 
         set(qt_android_include ${qt_android_include} "${OCPN_Android_Common}/wxWidgets/libarmhf/wx/include/arm-linux-androideabi-qt-unicode-static-3.1")
         set(qt_android_include ${qt_android_include} "${OCPN_Android_Common}/wxWidgets/include")
+
+        file(GLOB _wx_setup
+            ${OCPN_Android_Common}/wxWidgets/libarmhf/wx/include/arm-linux-*-static-*
+        )
+        set(qt_android_include ${qt_android_include} ${_wx_setup})
 
         ADD_DEFINITIONS( -DOCPN_ARMHF )
 
