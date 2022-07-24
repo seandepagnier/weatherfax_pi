@@ -1,3 +1,13 @@
+src\DecoderOptionsDialog.cpp
+src\FaxDecoder.cpp
+src\InternetRetrievalDialog.cpp
+src\SchedulesDialog.cpp
+src\WeatherFax.cpp
+src\WeatherFaxImage.cpp
+src\WeatherFaxUI.cpp
+src\WeatherFaxUI.h
+src\WeatherFaxWizard.cpp
+src\weatherfax_pi.cpp
 src/AboutDialog.h
 src/DecoderOptionsDialog.h
 src/defs.h
