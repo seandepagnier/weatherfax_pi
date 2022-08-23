@@ -2,565 +2,974 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-01 13:52-0600\n"
-"PO-Revision-Date: 2016-02-18 16:08-0500\n"
-"Last-Translator: nohal <pavel@kalian.cz>\n"
+"POT-Creation-Date: 2022-07-24 09:47+0200\n"
+"PO-Revision-Date: 2022-07-31 01:56\n"
+"Last-Translator: \n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: crowdin.com\n"
 "X-Crowdin-Project: opencpn\n"
+"X-Crowdin-Project-ID: 49843\n"
 "X-Crowdin-Language: el\n"
 "X-Crowdin-File: /plugins/weatherfax_pi/po/weatherfax_pi.pot\n"
+"X-Crowdin-File-ID: 127\n"
 
-#: src/WeatherFaxUI.h:97 src/InternetRetrievalDialog.cpp:347
-#: src/InternetRetrievalDialog.cpp:570 src/InternetRetrievalDialog.cpp:597
-#: src/InternetRetrievalDialog.cpp:616 src/SchedulesDialog.cpp:393
-#: src/WeatherFax.cpp:197 src/WeatherFax.cpp:279 src/WeatherFax.cpp:409
-#: src/WeatherFax.cpp:491 src/WeatherFax.cpp:522 src/WeatherFaxImage.cpp:597
+#: src/WeatherFaxUI.h:104 src\InternetRetrievalDialog.cpp:397
+#: src\InternetRetrievalDialog.cpp:642 src\InternetRetrievalDialog.cpp:675
+#: src\InternetRetrievalDialog.cpp:735 src\InternetRetrievalDialog.cpp:759
+#: src\SchedulesDialog.cpp:421 src\WeatherFax.cpp:200 src\WeatherFax.cpp:221
+#: src\WeatherFax.cpp:309 src\WeatherFax.cpp:494 src\WeatherFax.cpp:589
+#: src\WeatherFax.cpp:623 src\WeatherFax.cpp:820 src\WeatherFax.cpp:874
+#: src\WeatherFaxImage.cpp:610 src\WeatherFaxUI.h:104
 msgid "Weather Fax"
-msgstr ""
+msgstr "Weather Fax"
 
-#: src/WeatherFaxUI.h:165
+#: src/WeatherFaxUI.h:181 src\SchedulesDialog.cpp:43 src\WeatherFaxUI.h:181
 msgid "HF Radio Schedules"
 msgstr "Προγράμματα ραδιοφώνου HF"
 
-#: src/WeatherFaxUI.h:216
+#: src/WeatherFaxUI.h:235 src\InternetRetrievalDialog.cpp:51
+#: src\WeatherFaxUI.h:235
 msgid "Internet Retrieval"
 msgstr "Ανάκτηση από το Internet"
 
-#: src/WeatherFaxUI.h:337
-msgid "Weather Fax Image"
-msgstr ""
-
-#: src/WeatherFaxUI.h:366
+#: src/WeatherFaxUI.h:413 src\WeatherFaxUI.h:413
 msgid "Weather Fax Preferences"
-msgstr ""
+msgstr "Προτιμήσεις Φαξ Καιρού"
 
-#: src/WeatherFaxUI.h:408
+#: src/WeatherFaxUI.h:450 src\DecoderOptionsDialog.cpp:37 src\WeatherFaxUI.h:450
 msgid "Fax Decoding Options"
-msgstr ""
+msgstr "Επιλογές αποκωδικοποίησης φαξ"
 
-#: src/WeatherFaxUI.h:434
+#: src/WeatherFaxUI.h:476 src\WeatherFaxUI.h:476
 msgid "About Weatherfax"
-msgstr "Σχετικά με Weatherfax"
+msgstr "Σχετικά με το Weatherfax"
 
-#: src/WeatherFaxUI.cpp:23
-msgid "Fax"
+#: src\DecoderOptionsDialog.cpp:122
+msgid "Failed to configure capture."
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:42
-msgid "Transparency"
-msgstr "Διαφάνεια"
-
-#: src/WeatherFaxUI.cpp:58
-msgid "Invert"
-msgstr "Αντιστροφή"
-
-#: src/WeatherFaxUI.cpp:71
-msgid "&Open"
-msgstr "&Άνοιγμα"
-
-#: src/WeatherFaxUI.cpp:74
-msgid "Save &As"
-msgstr "Αποθήκευση &ως"
-
-#: src/WeatherFaxUI.cpp:77
-msgid "&Edit"
-msgstr "&Επεξεργασία"
-
-#: src/WeatherFaxUI.cpp:80
-msgid "&Goto"
-msgstr "&Goto"
-
-#: src/WeatherFaxUI.cpp:83
-msgid "E&xport"
-msgstr "E&ξαγωγή"
-
-#: src/WeatherFaxUI.cpp:86
-msgid "&Delete"
-msgstr "&Διαγραφή"
-
-#: src/WeatherFaxUI.cpp:92
-msgid "&Preferences"
-msgstr "&Προτιμήσεις"
-
-#: src/WeatherFaxUI.cpp:98
-msgid "&Close"
-msgstr "&Κλείσιμο"
-
-#: src/WeatherFaxUI.cpp:101
-msgid "&File"
-msgstr "&Αρχείο"
-
-#: src/WeatherFaxUI.cpp:104
-msgid "&Audio Capture"
-msgstr "&Καταγραφή ήχου"
-
-#: src/WeatherFaxUI.cpp:108
-msgid "&HF Radio Schedules"
-msgstr "Προγράμματα ραδιοφώνου &HF"
-
-#: src/WeatherFaxUI.cpp:112
-msgid "&Internet"
-msgstr "&Διαδίκτυο"
-
-#: src/WeatherFaxUI.cpp:115
-msgid "&Retrieve"
-msgstr "&Ανάκτηση"
-
-#: src/WeatherFaxUI.cpp:119
-msgid "&About"
-msgstr "&Περί"
-
-#: src/WeatherFaxUI.cpp:122
-msgid "&Help"
-msgstr "&Βοήθεια"
-
-#: src/WeatherFaxUI.cpp:229 src/WeatherFaxUI.cpp:583
-msgid "Contains"
-msgstr "Περιέχει"
-
-#: src/WeatherFaxUI.cpp:236 src/WeatherFaxUI.cpp:590
-msgid "Lat"
-msgstr "Πλάτος"
-
-#: src/WeatherFaxUI.cpp:243 src/WeatherFaxUI.cpp:597
-msgid "Lon"
-msgstr "Μήκος"
-
-#: src/WeatherFaxUI.cpp:250 src/WeatherFaxUI.cpp:604
-msgid "Boat Position"
-msgstr "Θέση πλοίου"
-
-#: src/WeatherFaxUI.cpp:253 src/WeatherFaxUI.cpp:607
-msgid "Reset"
-msgstr "Επαναφορά"
-
-#: src/WeatherFaxUI.cpp:263
-msgid "Stations"
-msgstr "Σταθμοί"
-
-#: src/WeatherFaxUI.cpp:279 src/WeatherFaxUI.cpp:316 src/WeatherFaxUI.cpp:651
-#: src/WeatherFaxUI.cpp:684
-msgid "All"
-msgstr "Όλα"
-
-#: src/WeatherFaxUI.cpp:282 src/WeatherFaxUI.cpp:654 src/WeatherFaxUI.cpp:687
-#: src/WeatherFaxUI.cpp:851
-msgid "None"
-msgstr "Καμία"
-
-#: src/WeatherFaxUI.cpp:295 src/SchedulesDialog.cpp:120
-msgid "Frequency"
-msgstr "Συχνότητα"
-
-#: src/WeatherFaxUI.cpp:305
-msgid "khz min"
+#: src\DecoderOptionsDialog.cpp:123
+msgid "Failure"
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:312
-msgid "khz max"
+#: src\FaxDecoder.cpp:119
+msgid "Failed"
+msgstr "Απέτυχε"
+
+#: src\FaxDecoder.cpp:119
+msgid "Failure Decoding Fax: "
+msgstr "Σφάλμα αποκωδικοποίησης φαξ: "
+
+#: src\FaxDecoder.cpp:268
+msgid "DecodeImageLine requires specific buffer length"
+msgstr "Το DecodeImageLine απαιτεί ειδικό μήκος buffer"
+
+#: src\FaxDecoder.cpp:378
+msgid "Port audio overflow on input, some data lost!"
+msgstr "Υπερχείλιση θύρας ήχου στην είσοδο, χάθηκαν δεδομένα!"
+
+#: src\FaxDecoder.cpp:509
+msgid "could not open input file: "
+msgstr "δεν ήταν δυνατό το άνοιγμα του τοπικού αρχείου: "
+
+#: src\FaxDecoder.cpp:513
+msgid "sample size not 8 or 16 bit: "
+msgstr "το μέγεθος δείγματος δεν είναι 8 ή 16 bit: "
+
+#: src\FaxDecoder.cpp:524
+msgid "no audiofile support compiled"
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:331
-msgid "Constraints"
-msgstr "Περιορισμοί"
+#: src\InternetRetrievalDialog.cpp:110 src\WeatherFaxUI.cpp:643
+msgid "Scheduled"
+msgstr "Προγραμματισμένο"
 
-#: src/WeatherFaxUI.cpp:338
-msgid "Has Area"
+#: src\InternetRetrievalDialog.cpp:111
+msgid "Server"
+msgstr "Διακομιστής"
+
+#: src\InternetRetrievalDialog.cpp:112
+msgid "Region"
+msgstr "Περιοχή"
+
+#: src\InternetRetrievalDialog.cpp:113 src\SchedulesDialog.cpp:131
+msgid "Contents"
+msgstr "Περιεχόμενα"
+
+#: src\InternetRetrievalDialog.cpp:114 src\SchedulesDialog.cpp:134
+msgid "Map Area"
+msgstr "Περιοχή χάρτη"
+
+#: src\InternetRetrievalDialog.cpp:238 src\SchedulesDialog.cpp:301
+msgid "Failed to load file: "
+msgstr "Απέτυχε η φόρτωση του αρχείου: "
+
+#: src\InternetRetrievalDialog.cpp:242 src\SchedulesDialog.cpp:305
+#: src\WeatherFax.cpp:155
+msgid "Invalid xml file"
+msgstr "Μη έγκυρο αρχείο xml"
+
+#: src\InternetRetrievalDialog.cpp:257 src\SchedulesDialog.cpp:320
+msgid "Loading"
+msgstr "Φόρτωση"
+
+#: src\InternetRetrievalDialog.cpp:257
+msgid "WeatherFax Internet Retrieval"
+msgstr "Ανάκτηση WeatherFax από Internet"
+
+#: src\InternetRetrievalDialog.cpp:299
+msgid "Invalid iterator: "
+msgstr "Μη έγκυρος επαναλήπτης: "
+
+#: src\InternetRetrievalDialog.cpp:335 src\InternetRetrievalDialog.cpp:365
+#: src\InternetRetrievalDialog.cpp:384 src\InternetRetrievalDialog.cpp:387
+#: src\WeatherFax.cpp:196
+msgid "Unrecognized xml node: "
+msgstr "Άγνωστος κόμβος xml: "
+
+#: src\InternetRetrievalDialog.cpp:377 src\SchedulesDialog.cpp:404
+msgid "Failed to match Area: "
+msgstr "Απέτυχε να ταιριάξει την περιοχή: "
+
+#: src\InternetRetrievalDialog.cpp:480
+msgid "Sorting this many urls might take too long"
+msgstr "Η διαλογή τόσων πολλών URL θα πάρει πολύ χρόνο"
+
+#: src\InternetRetrievalDialog.cpp:481 src\SchedulesDialog.cpp:508
+#: src\SchedulesDialog.cpp:843 src\SchedulesDialog.cpp:864
+#: src\SchedulesDialog.cpp:871 src\SchedulesDialog.cpp:912
+#: src\SchedulesDialog.cpp:952
+msgid "weatherfax"
+msgstr "weatherfax"
+
+#: src\InternetRetrievalDialog.cpp:641
+msgid "Fax already retrieved less than 180 minutes ago.\n"
+"Use existing file?"
+msgstr "Φαξ ελήφθη ήδη λιγότερο από πριν 180 λεπτά. \n"
+"Χρήση υπάρχοντος αρχείου;"
+
+#: src\InternetRetrievalDialog.cpp:655 src\InternetRetrievalDialog.cpp:688
+#: src\InternetRetrievalDialog.cpp:715
+msgid "WeatherFax InternetRetrieval"
+msgstr "WeatherFax InternetRetrieval"
+
+#: src\InternetRetrievalDialog.cpp:656 src\InternetRetrievalDialog.cpp:689
+#: src\InternetRetrievalDialog.cpp:716 src\WeatherFax.cpp:798
+msgid "Reading Headers: "
+msgstr "Ανάγνωση επικεφαλίδων: "
+
+#: src\InternetRetrievalDialog.cpp:670 src\InternetRetrievalDialog.cpp:730
+#: src\WeatherFax.cpp:816
+msgid "Failed to Download: "
+msgstr "Αποτυχία λήψης: "
+
+#: src\InternetRetrievalDialog.cpp:673 src\InternetRetrievalDialog.cpp:733
+#: src\WeatherFax.cpp:818
+msgid "Verify there is a working internet connection."
+msgstr "Επιβεβαιώστε την ύπαρξη ενεργής σύνδεσης στο internet."
+
+#: src\InternetRetrievalDialog.cpp:674 src\InternetRetrievalDialog.cpp:734
+#: src\WeatherFax.cpp:819
+msgid "If the url is incorrect please edit the xml and/or post a bug report."
+msgstr "Εάν η διεύθυνση url είναι σωστή παρακαλούμε επεξεργαστείτε το αρχείο xml και/ή υποβάλετε αναφορά σφάλματος."
+
+#: src\InternetRetrievalDialog.cpp:756
+msgid "No Faxes selected."
+msgstr "Δεν επιλέχθηκαν φαξ."
+
+#: src\InternetRetrievalDialog.cpp:758
+msgid " Try clicking the selected (first) column"
+msgstr " Δοκιμάστε να κάνετε κλικ την επιλεγμένη (πρώτη) στήλη"
+
+#: src\SchedulesDialog.cpp:127
+msgid "Capture"
+msgstr "Λήψη"
+
+#: src\SchedulesDialog.cpp:128
+msgid "Station"
+msgstr "Σταθμός"
+
+#: src\SchedulesDialog.cpp:129
+msgid "Frequencies"
+msgstr "Συχνότητες"
+
+#: src\SchedulesDialog.cpp:130
+msgid "Time (UTC)"
+msgstr "Ώρα (UTC)"
+
+#: src\SchedulesDialog.cpp:132
+msgid "Valid Time"
+msgstr "Έγκυρη ώρα"
+
+#: src\SchedulesDialog.cpp:133
+msgid "Duration"
+msgstr "Διάρκεια"
+
+#: src\SchedulesDialog.cpp:320 src\SchedulesDialog.cpp:647
+msgid "WeatherFax Schedules"
+msgstr "Χρονοδιάγραμμα WeatherFax"
+
+#: src\SchedulesDialog.cpp:376 src\SchedulesDialog.cpp:390
+#: src\SchedulesDialog.cpp:411
+msgid "Unrecognized xml node"
+msgstr "Άγνωστος κόμβος xml"
+
+#: src\SchedulesDialog.cpp:396
+msgid "Failed to find Duration for: "
+msgstr "Απέτυχε να βρει διάρκεια για: "
+
+#: src\SchedulesDialog.cpp:507
+msgid "Sorting this many schedules might take too long"
+msgstr "Η διαλογή τόσων πολλών λήψεων θα πάρει πολύ χρόνο"
+
+#: src\SchedulesDialog.cpp:647
+msgid "Populating List"
+msgstr "Συμπλήρωση λίστας"
+
+#: src\SchedulesDialog.cpp:701
+msgid "Capturing fax: "
+msgstr "Λήψη φαξ: "
+
+#: src\SchedulesDialog.cpp:702
+msgid " Conflicts with already scheduled fax: "
+msgstr " Έρχεται σε διένεξη με ήδη προγραμματισμένα φαξ: "
+
+#: src\SchedulesDialog.cpp:703
+msgid " disable this fax? "
+msgstr " απενεργοποίηση αυτού του φαξ; "
+
+#: src\SchedulesDialog.cpp:704
+msgid "weatherfax schedules"
+msgstr "χρονοδιάγραμμα WeatherFax"
+
+#: src\SchedulesDialog.cpp:766
+msgid "No Capture Set"
+msgstr "Κανένα χρονοδιάγραμμα για φαξ"
+
+#: src\SchedulesDialog.cpp:769
+msgid "starting in"
+msgstr "εκκίνηση με"
+
+#: src\SchedulesDialog.cpp:772
+msgid "second(s)"
+msgstr "δευτερόλεπτα"
+
+#: src\SchedulesDialog.cpp:776
+msgid "hour(s)"
+msgstr "ώρα (ες)"
+
+#: src\SchedulesDialog.cpp:779
+msgid "minute(s)"
+msgstr "λεπτό(ά)"
+
+#: src\SchedulesDialog.cpp:784
+msgid "Current fax: "
+msgstr "Τρέχον φαξ: "
+
+#: src\SchedulesDialog.cpp:818
+msgid "Tune ssb radio to"
+msgstr "Συντονίστε το ssb ραδιόφωνο σε"
+
+#: src\SchedulesDialog.cpp:820
+msgid "subtracting"
+msgstr "αφαίρεση"
+
+#: src\SchedulesDialog.cpp:821
+msgid "to receive fax for"
+msgstr "για να λάβετε φαξ για"
+
+#: src\SchedulesDialog.cpp:822
+msgid "Weather Fax Schedule Beginning Soon"
+msgstr "Οι λήψεις φαξ καιρού αρχίζουν σύντομα"
+
+#: src\SchedulesDialog.cpp:842
+msgid "Already capturing, cannot capture: "
+msgstr "Λαμβάνει ήδη, δεν μπορεί το: "
+
+#: src\SchedulesDialog.cpp:863 src\SchedulesDialog.cpp:909
+msgid "Failed to launch: "
+msgstr "Αποτυχία εκκίνησης: "
+
+#: src\SchedulesDialog.cpp:870
+msgid "Fault in weather fax plugin\n"
+"Currently capturing hf weather fax."
+msgstr "Σφάλμα στην πρόσθετο weather fax\n"
+"Προς το παρόν γίνεται λήψη φαξ καιρού hf."
+
+#: src\SchedulesDialog.cpp:910
+msgid "\n\n"
+"log:\n"
+msgstr "\n\n"
+"log:\n"
+
+#: src\SchedulesDialog.cpp:911
+msgid "\n\n"
+"error log:\n"
+msgstr "\n\n"
+"error log:\n"
+
+#: src\SchedulesDialog.cpp:918
+msgid "Open Weather Fax Input File"
+msgstr "Άνοιγμα αρχείου εισόδου Weather Fax"
+
+#: src\SchedulesDialog.cpp:920
+msgid "WAV files (*.wav)|*.WAV;*.wav|All files (*.*)|*.*"
+msgstr "WAV αρχεία (*.wav)|*.WAV|Όλα τα αρχεία (*.*)|*.*"
+
+#: src\SchedulesDialog.cpp:951
+msgid "External Capture Execution failed"
+msgstr "Απέτυχε η εξωτερική λήψη"
+
+#: src\WeatherFax.cpp:150
+msgid "Failed to load coordinate sets"
+msgstr "Απέτυχε η φόρτωση των συντεταγμένων"
+
+#: src\WeatherFax.cpp:220
+msgid "CoordinateSets.xml failed to load1"
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:341
-msgid "Has Valid Time"
-msgstr ""
+#: src\WeatherFax.cpp:309
+msgid "Failed to save xml file: "
+msgstr "Απέτυχε η αποθήκευση του αρχείου xml: "
 
-#: src/WeatherFaxUI.cpp:350
-msgid "Clear Captures"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:360 src/WeatherFaxUI.cpp:830 src/WeatherFaxUI.cpp:1530
-msgid "Filter"
-msgstr "Φίλτρο"
-
-#: src/WeatherFaxUI.cpp:368
-msgid "Message Box"
-msgstr "Πλαίσιο μηνύματος"
-
-#: src/WeatherFaxUI.cpp:377
-msgid "Sound"
-msgstr "Ήχος"
-
-#: src/WeatherFaxUI.cpp:380
-msgid "Select a file"
-msgstr "Επιλέξτε ένα αρχείο"
-
-#: src/WeatherFaxUI.cpp:392
-msgid "External Alarm"
-msgstr "Εξωτερικός συναγερμός"
-
-#: src/WeatherFaxUI.cpp:395
-msgid "aplay /usr/local/share/opencpn/sounds/2bells.wav"
-msgstr "/usr/local/share/opencpn/sounds/2bells.wav"
-
-#: src/WeatherFaxUI.cpp:405
-msgid "1 minute alarm"
-msgstr "Συναγερμός 1 λεπτού"
-
-#: src/WeatherFaxUI.cpp:413
-msgid "No Action"
-msgstr "Καμία ενέργεια"
-
-#: src/WeatherFaxUI.cpp:416 src/WeatherFax.cpp:375
+#: src\WeatherFax.cpp:456
 msgid "Audio Capture"
 msgstr "Καταγραφή ήχου"
 
-#: src/WeatherFaxUI.cpp:427
+#: src\WeatherFax.cpp:486
+msgid "try to execute :"
+msgstr "δοκιμάστε να εκτελέσετε :"
+
+#: src\WeatherFax.cpp:490
+msgid "Failed to load input file: "
+msgstr "Η φόρτωση του αρχείου εισόδου απέτυχε: "
+
+#: src\WeatherFax.cpp:492
+msgid "Android doesn't support tif images"
+msgstr ""
+
+#: src\WeatherFax.cpp:577
+msgid "Choose a file"
+msgstr ""
+
+#: src\WeatherFax.cpp:577
+msgid "Supported Files|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;*.TIF;*.tif;*.TIFF;*.tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;*.PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga;*.WAV;*.wav|All files (*.*)|*.*"
+msgstr "Υποστηρίζονται αρχεία | *. BMP, *.bmp, *. XBM, *.xbm, *. XPM, *.xpm, *. TIF, *.tif, *. TIFF, *.tiff, *. GIF, *.gif, *. JPEG, *.jpeg, *. JPG, *.jpg, *. PNM, *.pnm, *. PNG, *.png, *. PCX, *.pcx, *. PICT, *.pict, *. TGA, *.tga, *. WAV, *.wav | Όλα τα αρχεία (*. *) | *. *"
+
+#: src\WeatherFax.cpp:588
+msgid "Cannot open audio weather fax already in progress."
+msgstr "Δεν είναι δυνατό να ανοίξει ο ήχος, γίνεται λήψη φαξ καιρού."
+
+#: src\WeatherFax.cpp:608
+msgid "Save Weather Fax To Image"
+msgstr "Αποθήκευση φαξ καιρού σε εικόνα"
+
+#: src\WeatherFax.cpp:610
+msgid "All files (*.*)|*.*"
+msgstr ""
+
+#: src\WeatherFax.cpp:622
+msgid "Failed to save file: "
+msgstr "Απέτυχε η αποθήκευση του αρχείου: "
+
+#: src\WeatherFax.cpp:681
+msgid "Save Weather Fax To KAP"
+msgstr "Αποθήκευση Fax καιρού σε KAP"
+
+#: src\WeatherFax.cpp:683
+msgid "KAP Files|*.KAP;*.kap|All files (*.*)|*.*"
+msgstr "KAP αρχεία | *. KAP, *.kap | Όλα τα αρχεία (*. *) | *. *"
+
+#: src\WeatherFax.cpp:797
+msgid "WeatherFax Data update"
+msgstr "Ανανέωση δεδομένων WeatherFax"
+
+#: src\WeatherFax.cpp:867
+msgid "Installation xml files updated."
+msgstr ""
+
+#: src\WeatherFax.cpp:869
+msgid "User writable coordinateSets.xml renamed to CoordinateSets.xml.save"
+msgstr ""
+
+#: src\WeatherFax.cpp:871
+msgid "If you have customizations in these files you can merge them manually."
+msgstr ""
+
+#: src\WeatherFaxImage.cpp:453
+msgid "Resulting image has negative dimensions, aborting\n"
+msgstr "Η εικόνα που προκύπτει έχει αρνητικές διαστάσεις, ακύρωση\n"
+
+#: src\WeatherFaxImage.cpp:454 src\WeatherFaxImage.cpp:468
+msgid "Mapping Failed"
+msgstr "Η χαρτογράφηση απέτυχε"
+
+#: src\WeatherFaxImage.cpp:465
+#, c-format
+msgid "Resulting image larger than %dMB\n"
+"Try changing size parameter to a smaller value. (less than %.2f)\n"
+"aborting\n"
+msgstr "Η προκύπτουσα εικόνα είναι μεγαλύτερη από %dMB\n"
+"Δοκιμάστε να αλλάξετε την παράμετρο του μεγέθους σε μια μικρότερη τιμή. (λιγότερο από %.2f) \n"
+"Ακύρωση\n"
+
+#: src\WeatherFaxImage.cpp:476
+msgid "Mapping Weather Fax Image"
+msgstr "Χαρτογράφηση εικόνας Fax καιρού"
+
+#: src\WeatherFaxImage.cpp:476
+msgid "Weather Fax Mapper"
+msgstr "Χαρτογράφηση Φαξ Καιρού"
+
+#: src\WeatherFaxImage.cpp:609
+msgid "Graphics hardware not supported (Disable OpenGL)\n"
+msgstr "Η συσκευή των γραφικών δεν υποστηρίζεται (απενεργοποίηση OpenGL)\n"
+
+#: src\WeatherFaxUI.cpp:23
+msgid "Fax"
+msgstr "Φαξ"
+
+#: src\WeatherFaxUI.cpp:35 src\WeatherFaxUI.cpp:147
+msgid "&Internet"
+msgstr "&Διαδίκτυο"
+
+#: src\WeatherFaxUI.cpp:39 src\WeatherFaxUI.cpp:143
+msgid "&HF Radio Schedules"
+msgstr "Προγράμματα ραδιοφώνου &HF"
+
+#: src\WeatherFaxUI.cpp:42 src\WeatherFaxUI.cpp:121
+msgid "&Delete"
+msgstr "&Διαγραφή"
+
+#: src\WeatherFaxUI.cpp:46 src\WeatherFaxUI.cpp:127
+msgid "&Preferences"
+msgstr "&Προτιμήσεις"
+
+#: src\WeatherFaxUI.cpp:49 src\WeatherFaxUI.cpp:115
+msgid "&Goto"
+msgstr "&Goto"
+
+#: src\WeatherFaxUI.cpp:53
+msgid "File"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:55 src\WeatherFaxUI.cpp:106
+msgid "&Open"
+msgstr "&Άνοιγμα"
+
+#: src\WeatherFaxUI.cpp:58 src\WeatherFaxUI.cpp:109
+msgid "Save &As"
+msgstr "Αποθήκευση &ως"
+
+#: src\WeatherFaxUI.cpp:61 src\WeatherFaxUI.cpp:118
+msgid "E&xport"
+msgstr "E&ξαγωγή"
+
+#: src\WeatherFaxUI.cpp:77
+msgid "Transparency"
+msgstr "Διαφάνεια"
+
+#: src\WeatherFaxUI.cpp:93
+msgid "Invert"
+msgstr "Αντιστροφή"
+
+#: src\WeatherFaxUI.cpp:112
+msgid "&Edit"
+msgstr "&Επεξεργασία"
+
+#: src\WeatherFaxUI.cpp:133
+msgid "&Close"
+msgstr "&Κλείσιμο"
+
+#: src\WeatherFaxUI.cpp:136
+msgid "&File"
+msgstr "&Αρχείο"
+
+#: src\WeatherFaxUI.cpp:139
+msgid "&Capture"
+msgstr "&Λήψη"
+
+#: src\WeatherFaxUI.cpp:153
+msgid "&Update data sources"
+msgstr "& Ενημέρωση πηγών"
+
+#: src\WeatherFaxUI.cpp:156
+msgid "&Retrieve"
+msgstr "&Ανάκτηση"
+
+#: src\WeatherFaxUI.cpp:160
+msgid "&About"
+msgstr "&Περί"
+
+#: src\WeatherFaxUI.cpp:163
+msgid "&Help"
+msgstr "&Βοήθεια"
+
+#: src\WeatherFaxUI.cpp:270
+msgid "Contains"
+msgstr "Περιέχει"
+
+#: src\WeatherFaxUI.cpp:277 src\WeatherFaxUI.cpp:663
+msgid "Lat"
+msgstr "Πλάτος"
+
+#: src\WeatherFaxUI.cpp:284 src\WeatherFaxUI.cpp:681
+msgid "Lon"
+msgstr "Μήκος"
+
+#: src\WeatherFaxUI.cpp:291 src\WeatherFaxUI.cpp:688
+msgid "Boat Position"
+msgstr "Θέση πλοίου"
+
+#: src\WeatherFaxUI.cpp:294 src\WeatherFaxUI.cpp:691
+msgid "Reset"
+msgstr "Επαναφορά"
+
+#: src\WeatherFaxUI.cpp:304
+msgid "Stations"
+msgstr "Σταθμοί"
+
+#: src\WeatherFaxUI.cpp:320 src\WeatherFaxUI.cpp:357 src\WeatherFaxUI.cpp:708
+#: src\WeatherFaxUI.cpp:754
+msgid "All"
+msgstr "Όλα"
+
+#: src\WeatherFaxUI.cpp:323 src\WeatherFaxUI.cpp:711 src\WeatherFaxUI.cpp:759
+#: src\WeatherFaxUI.cpp:958
+msgid "None"
+msgstr "Καμία"
+
+#: src\WeatherFaxUI.cpp:336
+msgid "Frequency"
+msgstr "Συχνότητα"
+
+#: src\WeatherFaxUI.cpp:346
+msgid "khz min"
+msgstr "min kHz"
+
+#: src\WeatherFaxUI.cpp:353
+msgid "khz max"
+msgstr "max kHz"
+
+#: src\WeatherFaxUI.cpp:372
+msgid "Constraints"
+msgstr "Περιορισμοί"
+
+#: src\WeatherFaxUI.cpp:379
+msgid "Has Area"
+msgstr "Έχει έκταση"
+
+#: src\WeatherFaxUI.cpp:382
+msgid "Has Valid Time"
+msgstr "Έχει έγκυρη ώρα"
+
+#: src\WeatherFaxUI.cpp:391
+msgid "Clear Captures"
+msgstr "Εκκαθάριση στιγμιοτύπων"
+
+#: src\WeatherFaxUI.cpp:401 src\WeatherFaxUI.cpp:934 src\WeatherFaxUI.cpp:1792
+msgid "Filter"
+msgstr "Φίλτρο"
+
+#: src\WeatherFaxUI.cpp:409
+msgid "Message Box"
+msgstr "Πλαίσιο μηνύματος"
+
+#: src\WeatherFaxUI.cpp:418
+msgid "Sound"
+msgstr "Ήχος"
+
+#: src\WeatherFaxUI.cpp:421
+msgid "Select a file"
+msgstr "Επιλέξτε ένα αρχείο"
+
+#: src\WeatherFaxUI.cpp:421
+msgid "wav files|*.WAV;*.wav|All files (*.*)|*.*"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:433
+msgid "External Alarm"
+msgstr "Εξωτερικός συναγερμός"
+
+#: src\WeatherFaxUI.cpp:442
+msgid "Skip alarm if previous fax has already tuned"
+msgstr "Παράληψη συναγερμού αν έχει ήδη ληφθεί το προηγούμενο φαξ"
+
+#: src\WeatherFaxUI.cpp:450
+msgid "1 minute alarm"
+msgstr "Συναγερμός 1 λεπτού"
+
+#: src\WeatherFaxUI.cpp:458
+msgid "No Action"
+msgstr "Καμία ενέργεια"
+
+#: src\WeatherFaxUI.cpp:461
+msgid "Capture (uses capture settings in preferences)"
+msgstr "Λήψη (χρησιμοποιεί τις προτιμήσεις)"
+
+#: src\WeatherFaxUI.cpp:473
 msgid "External Command"
 msgstr "Εξωτερική εντολή"
 
-#: src/WeatherFaxUI.cpp:430
-msgid "arecord -f S16_LE"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:436
+#: src\WeatherFaxUI.cpp:492
 msgid "Manual Capture (with external program) automatic Open File"
-msgstr ""
+msgstr "Μη αυτόματη λήψη (με εξωτερικό πρόγραμμα), αυτόματο άνοιγμα αρχείου"
 
-#: src/WeatherFaxUI.cpp:443
+#: src\WeatherFaxUI.cpp:499
 msgid "Capture Options"
-msgstr ""
+msgstr "Επιλογές λήψης"
 
-#: src/WeatherFaxUI.cpp:450
+#: src\WeatherFaxUI.cpp:506
 msgid "Select fax images by clicking in the capture (first) column\n\n"
 "Schedules can be sorted by clicking the header column\n\n"
 "The schedules need testing as I can only receive from a few of the possible stations.  Corrections can be made by modifying the WeatherFaxSchedules.xml file. Patches can be submitted via github.\n\n"
 "Automatic control of a ssb radio is desireable as well, however the author only has a tecsun pl-600.  If a suitable radio can be donated, support will be implemented."
-msgstr ""
+msgstr "Επιλέξτε εικόνες φαξ κάνοντας κλικ στην (πρώτη) στήλη\n\n"
+"Οι λήψεις μπορούν  να ταξινομηθούν κάνοντας κλικ την στήλη με τις επικεφαλίδες\n\n"
+"Οι λήψεις  χρειάζονται δοκιμές καθώς μπορώ να δεχθώ μόνο από λίγους σταθμούς.  Διορθώσεις μπορούν να γίνουν, τροποποιώντας το αρχείο WeatherFaxSchedules.xml. Διορθώσεις μπορούν να υποβληθούν μέσω του github.\n\n"
+"Αυτόματος έλεγχος ενός ραδιοφώνου ssb είναι επιθυμητός, ωστόσο, ο συγγραφέας έχει μόνο ένα tecsun pl-600.  Εάν κάποιος μπορεί να του δώσει ένα κατάλληλο ραδιόφωνο, θα υλοποιηθεί η υποστήριξή του."
 
-#: src/WeatherFaxUI.cpp:458 src/WeatherFaxUI.cpp:1108
-#: src/WeatherFaxWizard.cpp:873
+#: src\WeatherFaxUI.cpp:514 src\WeatherFaxUI.cpp:1305
+#: src\WeatherFaxWizard.cpp:939
 msgid "Information"
-msgstr ""
+msgstr "Πληροφορίες"
 
-#: src/WeatherFaxUI.cpp:463
+#: src\WeatherFaxUI.cpp:519
 msgid "Capture Status"
-msgstr ""
+msgstr "Κατάσταση λήψης"
 
-#: src/WeatherFaxUI.cpp:479 src/WeatherFaxUI.cpp:1678
+#: src\WeatherFaxUI.cpp:535 src\WeatherFaxUI.cpp:765 src\WeatherFaxUI.cpp:1911
 msgid "Close"
-msgstr ""
+msgstr "Κλείσιμο"
 
-#: src/WeatherFaxUI.cpp:621
-msgid "Retrieve Scheduled"
-msgstr ""
+#: src\WeatherFaxUI.cpp:636
+msgid "Retrieve"
+msgstr "Ανάκτηση"
 
-#: src/WeatherFaxUI.cpp:624
-msgid "Retrieve Selected"
-msgstr ""
+#: src\WeatherFaxUI.cpp:646
+msgid "Selected"
+msgstr "Επιλεγμένο"
 
-#: src/WeatherFaxUI.cpp:634
+#: src\WeatherFaxUI.cpp:701
 msgid "Servers"
-msgstr ""
+msgstr "Διακομιστές"
 
-#: src/WeatherFaxUI.cpp:667
+#: src\WeatherFaxUI.cpp:734
 msgid "Regions"
-msgstr ""
+msgstr "Περιοχές"
 
-#: src/WeatherFaxUI.cpp:784
+#: src\WeatherFaxUI.cpp:866
 msgid "Decoder"
-msgstr ""
+msgstr "Αποκωδικοποιητής"
 
-#: src/WeatherFaxUI.cpp:800 src/WeatherFaxWizard.cpp:112
-#: src/WeatherFaxWizard.cpp:208
+#: src\WeatherFaxUI.cpp:878 src\WeatherFaxWizard.cpp:138
+#: src\WeatherFaxWizard.cpp:235 src\WeatherFaxWizard.cpp:250
 msgid "Stop"
-msgstr ""
+msgstr "Στοπ"
 
-#: src/WeatherFaxUI.cpp:803
+#: src\WeatherFaxUI.cpp:881
 msgid "Options"
-msgstr ""
+msgstr "Επιλογές"
 
-#: src/WeatherFaxUI.cpp:822
+#: src\WeatherFaxUI.cpp:902
+msgid "frequency"
+msgstr "συχνότητα"
+
+#: src\WeatherFaxUI.cpp:909
+msgid "N/A"
+msgstr "Δ/Υ"
+
+#: src\WeatherFaxUI.cpp:923
 msgid "Image Correction"
-msgstr ""
+msgstr "Διόρθωση της εικόνας"
 
-#: src/WeatherFaxUI.cpp:834
-msgid "No Filter"
-msgstr ""
+#: src\WeatherFaxUI.cpp:937
+msgid "phase by line"
+msgstr "συντονισμός ανά γραμμή"
 
-#: src/WeatherFaxUI.cpp:834
-msgid "Removal 1"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:834
-msgid "Removal 2"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:834
-msgid "Removal 3"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:834
-msgid "Value 1"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:834
-msgid "Value 2"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:834
-msgid "Value 3"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:840
-msgid "Phasing"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:847
+#: src\WeatherFaxUI.cpp:954
 msgid "Rotation"
-msgstr ""
+msgstr "Περιστροφή"
 
-#: src/WeatherFaxUI.cpp:851
-msgid "CCW"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:851
-msgid "CW"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:851
+#: src\WeatherFaxUI.cpp:958
 msgid "180"
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:857
+#: src\WeatherFaxUI.cpp:958
+msgid "CCW"
+msgstr "αριστ."
+
+#: src\WeatherFaxUI.cpp:958
+msgid "CW"
+msgstr "δεξ."
+
+#: src\WeatherFaxUI.cpp:979 src\WeatherFaxWizard.cpp:237
+msgid "Phasing"
+msgstr "Συντονισμός"
+
+#: src\WeatherFaxUI.cpp:994
 msgid "Skew"
+msgstr "Παραμόρφωση"
+
+#: src\WeatherFaxUI.cpp:1022 src\WeatherFaxUI.cpp:1318 src\WeatherFaxUI.cpp:1405
+msgid "a page"
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:895 src/WeatherFaxUI.cpp:1142
+#: src\WeatherFaxUI.cpp:1040 src\WeatherFaxUI.cpp:1335
 msgid "Image Coordinates"
-msgstr ""
+msgstr "Συντεταγμένες της εικόνας"
 
-#: src/WeatherFaxUI.cpp:909
+#: src\WeatherFaxUI.cpp:1052
 msgid "Remove"
-msgstr ""
+msgstr "Αφαίρεση"
 
-#: src/WeatherFaxUI.cpp:920 src/WeatherFaxUI.cpp:959 src/WeatherFaxUI.cpp:1154
-#: src/WeatherFaxUI.cpp:1177
+#: src\WeatherFaxUI.cpp:1069 src\WeatherFaxUI.cpp:1092 src\WeatherFaxUI.cpp:1342
+#: src\WeatherFaxUI.cpp:1365
 msgid "Coord Y/X"
-msgstr ""
+msgstr "Συντ Υ/Χ"
 
-#: src/WeatherFaxUI.cpp:925 src/WeatherFaxUI.cpp:964 src/WeatherFaxUI.cpp:1159
-#: src/WeatherFaxUI.cpp:1182
+#: src\WeatherFaxUI.cpp:1074 src\WeatherFaxUI.cpp:1097 src\WeatherFaxUI.cpp:1347
+#: src\WeatherFaxUI.cpp:1370
 msgid "Lat/Lon"
-msgstr ""
+msgstr "Γεωγ. πλάτος/μήκος"
 
-#: src/WeatherFaxUI.cpp:931
+#: src\WeatherFaxUI.cpp:1124
 msgid "Minutes"
+msgstr "Λεπτά"
+
+#: src\WeatherFaxUI.cpp:1196
+msgid "Lat/Lon Minutes"
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:998
-msgid "Show Lat/Lon Minutes"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1001
+#: src\WeatherFaxUI.cpp:1199
 msgid "+ Lat/Lon for N/E\n"
 "- Lat/Lon for S/W"
-msgstr ""
+msgstr "+ πλάτος/μήκος για Β/Α\n"
+"- πλάτος/μήκος για Ν/Δ"
 
-#: src/WeatherFaxUI.cpp:1019
+#: src\WeatherFaxUI.cpp:1217
 msgid "Coordinates Mapping Correction"
-msgstr ""
+msgstr "Διόρθωση συντεταγμένων χαρτογράφησης"
 
-#: src/WeatherFaxUI.cpp:1031
+#: src\WeatherFaxUI.cpp:1222
 msgid "Input Type"
-msgstr ""
+msgstr "Τύπος εισόδου"
 
-#: src/WeatherFaxUI.cpp:1035
-msgid "mercator"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1035
-msgid "polar"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1035
+#: src\WeatherFaxUI.cpp:1226
 msgid "conic"
-msgstr ""
+msgstr "κωνική"
 
-#: src/WeatherFaxUI.cpp:1035
+#: src\WeatherFaxUI.cpp:1226
 msgid "fixed-flat"
-msgstr ""
+msgstr "σταθερή-επίπεδη"
 
-#: src/WeatherFaxUI.cpp:1041
+#: src\WeatherFaxUI.cpp:1226
+msgid "mercator"
+msgstr "μερκατορική"
+
+#: src\WeatherFaxUI.cpp:1226
+msgid "polar"
+msgstr "πολική"
+
+#: src\WeatherFaxUI.cpp:1232
 msgid "Output Type"
-msgstr ""
+msgstr "Τύπος εξόδου"
 
-#: src/WeatherFaxUI.cpp:1045
+#: src\WeatherFaxUI.cpp:1236
 msgid "Mercator"
 msgstr "Μερκατορική"
 
-#: src/WeatherFaxUI.cpp:1049
+#: src\WeatherFaxUI.cpp:1240
 msgid "Size"
 msgstr "Μέγεθος"
 
-#: src/WeatherFaxUI.cpp:1053 src/WeatherFaxUI.cpp:1060 src/WeatherFaxUI.cpp:1067
-msgid "1"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1056
+#: src\WeatherFaxUI.cpp:1247
 msgid "W/H"
-msgstr ""
+msgstr "Π/Υ"
 
-#: src/WeatherFaxUI.cpp:1063
+#: src\WeatherFaxUI.cpp:1254
 msgid "True Width Ratio"
 msgstr "Λόγος αληθινού πλάτους"
 
-#: src/WeatherFaxUI.cpp:1078
+#: src\WeatherFaxUI.cpp:1267
 msgid "Pole X"
 msgstr "Πόλος X"
 
-#: src/WeatherFaxUI.cpp:1085
+#: src\WeatherFaxUI.cpp:1274
 msgid "Pole Y"
 msgstr "Πόλος Y"
 
-#: src/WeatherFaxUI.cpp:1092
+#: src\WeatherFaxUI.cpp:1281
 msgid "Equator Y"
 msgstr "Ισημερινός Y"
 
-#: src/WeatherFaxUI.cpp:1099
-msgid "Get Mapping "
-msgstr "Πάρετε χαρτογράφηση "
-
-#: src/WeatherFaxUI.cpp:1102
+#: src\WeatherFaxUI.cpp:1296
 msgid "Get Equator"
 msgstr "Πάρτε Ισημερινό"
 
-#: src/WeatherFaxUI.cpp:1105
+#: src\WeatherFaxUI.cpp:1299
+msgid "Get Mapping "
+msgstr "Πάρετε χαρτογράφηση "
+
+#: src\WeatherFaxUI.cpp:1302
 msgid "GetAspectRatio"
+msgstr "GetAspectRatio"
+
+#: src\WeatherFaxUI.cpp:1415
+msgid "<< Prev"
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:1365
+#: src\WeatherFaxUI.cpp:1418
+msgid "Next >>"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1421
+msgid "Cancel"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1563
 msgid "HF Schedules"
-msgstr ""
+msgstr "Χρονοδιαγράμματα HF"
 
-#: src/WeatherFaxUI.cpp:1372
+#: src\WeatherFaxUI.cpp:1570
 msgid "Load Schedules at Startup"
+msgstr "Φόρτωση προγραμμάτων κατά την εκκίνηση"
+
+#: src\WeatherFaxUI.cpp:1580
+msgid "capture"
+msgstr "λήψη"
+
+#: src\WeatherFaxUI.cpp:1589
+msgid "Sample Rate"
+msgstr "Ρυθμός Δειγματοληψίας"
+
+#: src\WeatherFaxUI.cpp:1593
+msgid "16000"
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:1382
+#: src\WeatherFaxUI.cpp:1593
+msgid "48000"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1593
+msgid "8000"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1599
+msgid "Device Index"
+msgstr "Δείκτης συσκευής"
+
+#: src\WeatherFaxUI.cpp:1610
+msgid "audio"
+msgstr "ήχος"
+
+#: src\WeatherFaxUI.cpp:1617
+msgid "device index"
+msgstr "δείκτης συσκευής"
+
+#: src\WeatherFaxUI.cpp:1624
+msgid "error ppm"
+msgstr "σφάλμα ppm"
+
+#: src\WeatherFaxUI.cpp:1631
+msgid "upconverter mhz"
+msgstr "upconverter mhz"
+
+#: src\WeatherFaxUI.cpp:1642
+msgid "rtlsdr"
+msgstr "rtlsdr"
+
+#: src\WeatherFaxUI.cpp:1649
 msgid "Export"
 msgstr "Εξαγωγή"
 
-#: src/WeatherFaxUI.cpp:1394
+#: src\WeatherFaxUI.cpp:1661
 msgid "Reduce to"
 msgstr "Μείωση σε"
 
-#: src/WeatherFaxUI.cpp:1401
+#: src\WeatherFaxUI.cpp:1668
 msgid "Colors"
 msgstr "Χρώματα"
 
-#: src/WeatherFaxUI.cpp:1408
+#: src\WeatherFaxUI.cpp:1675
 msgid "Recommended 4, 16, 64, or 256"
 msgstr "Συνιστάται 4, 16, 64 ή 256"
 
-#: src/WeatherFaxUI.cpp:1413
+#: src\WeatherFaxUI.cpp:1680
 msgid "Depth"
 msgstr "Βάθος"
 
-#: src/WeatherFaxUI.cpp:1420
+#: src\WeatherFaxUI.cpp:1687
 msgid "Meters"
 msgstr "Μέτρα"
 
-#: src/WeatherFaxUI.cpp:1423
+#: src\WeatherFaxUI.cpp:1690
 msgid "Fathoms"
 msgstr "Οργιές"
 
-#: src/WeatherFaxUI.cpp:1437
+#: src\WeatherFaxUI.cpp:1704
 msgid "fix sounding datum"
-msgstr ""
+msgstr "επιδιόρθωση δεδομένων βάθους"
 
-#: src/WeatherFaxUI.cpp:1490
+#: src\WeatherFaxUI.cpp:1757
 msgid "Audio Decoding Options"
 msgstr "Επιλογές αποκωδικοποίησης ήχου"
 
-#: src/WeatherFaxUI.cpp:1502
+#: src\WeatherFaxUI.cpp:1764
 msgid "Image Width"
 msgstr "Πλάτος εικόνας"
 
-#: src/WeatherFaxUI.cpp:1509
+#: src\WeatherFaxUI.cpp:1771
 msgid "Bits per Pixel"
 msgstr "Bit ανά Pixel"
 
-#: src/WeatherFaxUI.cpp:1516
+#: src\WeatherFaxUI.cpp:1778
 msgid "Carrier"
 msgstr "Φορέας"
 
-#: src/WeatherFaxUI.cpp:1523
+#: src\WeatherFaxUI.cpp:1785
 msgid "Deviation"
 msgstr "Απόκλιση"
 
-#: src/WeatherFaxUI.cpp:1534
-msgid "narrow"
-msgstr "στενό"
-
-#: src/WeatherFaxUI.cpp:1534
+#: src\WeatherFaxUI.cpp:1796
 msgid "middle"
 msgstr "μέσο"
 
-#: src/WeatherFaxUI.cpp:1534
+#: src\WeatherFaxUI.cpp:1796
+msgid "narrow"
+msgstr "στενό"
+
+#: src\WeatherFaxUI.cpp:1796
 msgid "wide"
 msgstr "ευρύ"
 
-#: src/WeatherFaxUI.cpp:1540
+#: src\WeatherFaxUI.cpp:1802
 msgid "Saturation Threshold"
 msgstr "Όριο κορεσμού"
 
-#: src/WeatherFaxUI.cpp:1550
+#: src\WeatherFaxUI.cpp:1817
 msgid "Skip start, stop and \n"
 "phasing detection"
 msgstr "Παράλειψη ανίχνευσης αρχής, σταματήματος\n"
 " και φάσης"
 
-#: src/WeatherFaxUI.cpp:1553
+#: src\WeatherFaxUI.cpp:1820
 msgid "Include header data in image"
-msgstr ""
+msgstr "Δεδομένα τίτλου στην εικόνα"
 
-#: src/WeatherFaxUI.cpp:1569
-msgid "Audio Capture Options"
-msgstr "Επιλογές καταγραφής ήχου"
-
-#: src/WeatherFaxUI.cpp:1576
-msgid "Sample Rate"
-msgstr "Ρυθμός Δειγματοληψίας"
-
-#: src/WeatherFaxUI.cpp:1580
-msgid "8000"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1580
-msgid "16000"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1580
-msgid "48000"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1586
-msgid "Device Index"
-msgstr "Δείκτης συσκευής"
-
-#: src/WeatherFaxUI.cpp:1599
+#: src\WeatherFaxUI.cpp:1834
 msgid "Done"
 msgstr "Έγινε"
 
-#: src/WeatherFaxUI.cpp:1655
+#: src\WeatherFaxUI.cpp:1888
 msgid "Weather Fax Plugin Version"
-msgstr ""
+msgstr "Εκδοχή του προσθέτου Weather Fax"
 
-#: src/WeatherFaxUI.cpp:1666
+#: src\WeatherFaxUI.cpp:1899
 msgid "The weatherfax plugin for opencpn is intended to reduce the amount of user interaction to receive weather faxes and optionally overlay them directly onto charts.\n\n"
 "This includes a fax decoder, which converts radio fax audio into images.\n\n"
 "To get started, open either an image or recorded wav audio file of a ssb radio fax transmission from the file menu, or select an option from the retrieve menu.\n\n"
@@ -574,141 +983,57 @@ msgstr "Το πρόσθετο weatherfax για το OpenCPN έχει ως στ�
 " https://github.com/seandepagnier/weatherfax_pi \n\n"
 "Ευχαριστίες στους μεταφραστές και στους δοκιμαστές."
 
-#: src/WeatherFaxUI.cpp:1675
+#: src\WeatherFaxUI.cpp:1908
 msgid "About the Author"
 msgstr "Σχετικά με τον συγγραφέα"
 
-#: src/InternetRetrievalDialog.cpp:96
-msgid "Scheduled"
-msgstr "Προγραμματισμένο"
+#: src\WeatherFaxWizard.cpp:44
+msgid "Weather Fax Image"
+msgstr "Εικόνα Φαξ Καιρού"
 
-#: src/InternetRetrievalDialog.cpp:97
-msgid "Server"
-msgstr "Διακομιστής"
-
-#: src/InternetRetrievalDialog.cpp:98
-msgid "Region"
-msgstr "Περιοχή"
-
-#: src/InternetRetrievalDialog.cpp:99 src/SchedulesDialog.cpp:122
-msgid "Contents"
-msgstr "Περιεχόμενα"
-
-#: src/InternetRetrievalDialog.cpp:100 src/SchedulesDialog.cpp:125
-msgid "Map Area"
-msgstr "Περιοχή χάρτη"
-
-#: src/InternetRetrievalDialog.cpp:204 src/SchedulesDialog.cpp:275
-msgid "Failed to load file: "
-msgstr "Απέτυχε η φόρτωση του αρχείου: "
-
-#: src/InternetRetrievalDialog.cpp:208 src/SchedulesDialog.cpp:279
-#: src/WeatherFax.cpp:152
-msgid "Invalid xml file"
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:223
-msgid "WeatherFax Internet Retrieval"
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:223 src/SchedulesDialog.cpp:294
-msgid "Loading"
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:263
-msgid "Invalid iterator: "
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:289 src/InternetRetrievalDialog.cpp:315
-#: src/InternetRetrievalDialog.cpp:334 src/InternetRetrievalDialog.cpp:337
-#: src/WeatherFax.cpp:193
-msgid "Unrecognized xml node: "
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:327 src/SchedulesDialog.cpp:376
-msgid "Failed to match Area: "
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:429
-msgid "Sorting this many urls might take too long"
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:430 src/SchedulesDialog.cpp:480
-#: src/SchedulesDialog.cpp:779 src/SchedulesDialog.cpp:792
-#: src/SchedulesDialog.cpp:799 src/SchedulesDialog.cpp:863
-msgid "weatherfax"
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:569
-msgid "Fax already retrieved less than 180 minutes ago.\n"
-"Use existing file?"
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:583
-msgid "WeatherFax InternetRetrieval"
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:584
-msgid "Reading Headers: "
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:592
-msgid "Failed to Download: "
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:595
-msgid "Verify there is a working internet connection."
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:596
-msgid "If the url is incorrect please edit the xml and/or post a bug report."
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:613
-msgid "No Faxes selected."
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:615
-msgid " Try clicking the selected (first) column"
-msgstr ""
-
-#: src/WeatherFaxWizard.cpp:45
+#: src\WeatherFaxWizard.cpp:50
 msgid "New Coord"
-msgstr ""
+msgstr "Νέα συντεταγμ."
 
-#: src/WeatherFaxWizard.cpp:205
+#: src\WeatherFaxWizard.cpp:234 src\WeatherFaxWizard.cpp:247
 msgid "Start"
-msgstr ""
+msgstr "Eκκίνηση"
 
-#: src/WeatherFaxWizard.cpp:295
+#: src\WeatherFaxWizard.cpp:237
+msgid "Image"
+msgstr "Εικόνα"
+
+#: src\WeatherFaxWizard.cpp:353
 msgid "Failed to apply mapping\n"
 "Check Mapping Correction Parameters"
-msgstr ""
+msgstr "Απέτυχε να εφαρμόσει τη χαρτογράφηση\n"
+"Ελέγξτε τους παράμετρους διόρθωσης"
 
-#: src/WeatherFaxWizard.cpp:296 src/WeatherFaxWizard.cpp:429
-#: src/WeatherFaxWizard.cpp:573 src/WeatherFaxWizard.cpp:662
-#: src/WeatherFaxWizard.cpp:678
+#: src\WeatherFaxWizard.cpp:354 src\WeatherFaxWizard.cpp:495
+#: src\WeatherFaxWizard.cpp:639 src\WeatherFaxWizard.cpp:728
+#: src\WeatherFaxWizard.cpp:744
 msgid "Mapping"
-msgstr ""
+msgstr "Χαρτογράφηση"
 
-#: src/WeatherFaxWizard.cpp:427
+#: src\WeatherFaxWizard.cpp:493
 msgid "Warning, latitudes on different sides of equator not recommended because of ambiguity of north or south pole"
-msgstr ""
+msgstr "Προειδοποίηση, γεωγραφικά πλάτη σε διαφορετικές πλευρές του Ισημερινού να μην χρησιμοποιούνται λόγω της ασάφειας του βόρειου ή του νότιου πόλου"
 
-#: src/WeatherFaxWizard.cpp:570
+#: src\WeatherFaxWizard.cpp:636
 msgid "Calculating Mapping Failed.\n"
 "Perhaps you have chosen the wrong mapping type for this image, or the coordinates specified are not correct\n"
-msgstr ""
+msgstr "Ο υπολογισμός της χαρτογράφησης απέτυχε.\n"
+"Ίσως να επιλέξατε λάθος τύπο χαρτογράφησης για αυτή την εικόνα, ή οι συντεταγμένες που δόθηκαν να μην είναι σωστές\n"
 
-#: src/WeatherFaxWizard.cpp:661
+#: src\WeatherFaxWizard.cpp:727
 msgid "Calculating Mapping not yet supported.\n"
-msgstr ""
+msgstr "Ο υπολογισμός της χαρτογράφησης δεν υποστηρίζεται ακόμα.\n"
 
-#: src/WeatherFaxWizard.cpp:677
+#: src\WeatherFaxWizard.cpp:743
 msgid "Calculating Equator not yet supported.\n"
-msgstr ""
+msgstr "Ο υπολογισμός Ισημερινού δεν υποστηρίζεται ακόμα.\n"
 
-#: src/WeatherFaxWizard.cpp:848
+#: src\WeatherFaxWizard.cpp:914
 msgid "Mapping allows for scaling, and conversion between coordinate systems\n"
 "Latitudes are +N -S, Longitudes +E -W\n\n"
 "For polar mapping mode:\n"
@@ -718,246 +1043,24 @@ msgid "Mapping allows for scaling, and conversion between coordinate systems\n"
 "First adjust pole X to center the latitudes. Next adjust the Pole Y value until the blue latitude curve closest to the pole is correct. Now, if the second blue latitude is too wide, then the true width ratio needs to be increased, otherwise it should be decreased. Repeat adjusting the Pole Y and true width ratio until both align. It is easiest to calibrate correctly if you use the farthest spaced latitudes available.\n"
 "Once the blue latitudes align perfectly, recompute the equator to ensure the resulting mapping is correct. At this point, the coordinates can be changed to better locations if needed. If true width is very close to 1.0 it probably should be exactly 1.0.\n"
 "It is also possible to go to the next step, adjust the coordinates, then come back to this step and get the mapping parameters again to improve the estimate."
-msgstr ""
+msgstr "Η χαρτογράφηση επιτρέπει αλλαγή κλίμακος και μετατροπή συστημάτων συντεταγμένων.\n"
+"Βόρεια πλάτη είναι θετικά και νότια αρνητικά. Ανατολικά μήκη είναι θετικά και δυτικά είναι αρνητικά.\n\n"
+"Για τα πολικά διαγράμματα ισχύει: η χαρτογράφηση γίνεται με το 'Υπολογισμός παραμέτρων χαρτογράφησης' αλλά η τιμή του x του πρώτου στίγματος (κόκκινη κάθετη γραμμή) πρέπει να ταυτίζεται με τον κάθετο άξονα του πολικού διαγράμματος.\n"
+"Αφού δοθούν οι συντεταγμένες η χαρτογράφηση θα προσανατολίσει τις μπλε γραμμές των πλατών. Αν όχι, ελέγξτε ξανά τις συντεταγμένες.\n"
+"Αν η ευθυγράμμιση είναι ικανοποιητική, τότε:\n"
+"Πρώτα ρυθμίστε τον πολικό άξονα των x στο κέντρο των  πλατών. Κατόπιν ρυθμίστε τον πολικό άξονα των y έτσι ώστε να είναι σωστή η πιο κοντινή στον πόλο μπλε καμπύλη. Αν τώρα η δεύτερη μπλε καμπύλη πλάτους είναι πολύ πλατιά (ή πολύ στενή), τότε πρέπει να αυξηθεί (ή μειωθεί) ο λόγος πλατών μέχρι να ευθυγραμμιστούν όλα. Η βαθμονόμηση γίνεται πιο εύκολα αν ξεκινήσετε από τα πιο απομακρυσμένα πλάτη.\n"
+"Όταν τα μπλε πλάτη είναι καλά ευθυγραμμισμένα ξανα-υπολογίστε τον ισημερινό για να βεβαιωθείτε ότι η χαρτογράφηση είναι σωστή. Σε αυτό το σημείο μπορείτε να αλλάξετε τις συντεταγμένες σε καλύτερες θέσεις, αν χρειαστεί.\n"
+"Είναι επίσης δυνατό να πάτε στο επόμενο βήμα, να ρυθμίσετε τις συντεταγμένες, μετά να επανέλθετε και να ξανακαθορίσετε τις παραμέτρους χαρτογράφησης για να βελτιώσετε την εκτίμηση."
 
-#: src/FaxDecoder.cpp:118
-msgid "Failure Decoding Fax: "
-msgstr ""
-
-#: src/FaxDecoder.cpp:118
-msgid "Failed"
-msgstr ""
-
-#: src/FaxDecoder.cpp:267
-msgid "DecodeImageLine requires specific buffer length"
-msgstr ""
-
-#: src/FaxDecoder.cpp:370
-msgid "Port audio overflow on input, some data lost!"
-msgstr ""
-
-#: src/FaxDecoder.cpp:482
-msgid "could not open input file: "
-msgstr ""
-
-#: src/FaxDecoder.cpp:486
-msgid "sample size not 8 or 16 bit: "
-msgstr ""
-
-#: src/SchedulesDialog.cpp:118
-msgid "Capture"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:119
-msgid "Station"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:121
-msgid "Time (UTC)"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:123
-msgid "Valid Time"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:124
-msgid "Duration"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:294 src/SchedulesDialog.cpp:596
-msgid "WeatherFax Schedules"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:347 src/SchedulesDialog.cpp:362
-#: src/SchedulesDialog.cpp:383
-msgid "Unrecognized xml node"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:368
-msgid "Failed to find Duration for: "
-msgstr ""
-
-#: src/SchedulesDialog.cpp:479
-msgid "Sorting this many schedules might take too long"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:596
-msgid "Populating List"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:646
-msgid "Capturing fax: "
-msgstr ""
-
-#: src/SchedulesDialog.cpp:647
-msgid " Conflicts with already scheduled fax: "
-msgstr ""
-
-#: src/SchedulesDialog.cpp:648
-msgid " disable this fax? "
-msgstr ""
-
-#: src/SchedulesDialog.cpp:649
-msgid "weatherfax schedules"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:709
-msgid "No Capture Set"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:712
-msgid "starting in"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:715
-msgid "second(s)"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:719
-msgid "hour(s)"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:722
-msgid "minute(s)"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:727
-msgid "Current fax: "
-msgstr ""
-
-#: src/SchedulesDialog.cpp:749
-msgid "Tune ssb radio to"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:751
-msgid "to receive fax for"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:752
-msgid "Weather Fax Schedule Beginning Soon"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:778
-msgid "Already capturing, cannot capture: "
-msgstr ""
-
-#: src/SchedulesDialog.cpp:791
-msgid "Failed to launch: "
-msgstr ""
-
-#: src/SchedulesDialog.cpp:798
-msgid "Fault in weather fax plugin\n"
-"Currently capturing hf weather fax."
-msgstr ""
-
-#: src/SchedulesDialog.cpp:828 src/WeatherFax.cpp:476
-msgid "Open Weather Fax Input File"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:830
-msgid "WAV files (*.wav)|*.WAV;*.wav|All files (*.*)|*.*"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:862
-msgid "External Capture Execution failed"
-msgstr ""
-
-#: src/WeatherFax.cpp:147
-msgid "Failed to load coordinate sets"
-msgstr ""
-
-#: src/WeatherFax.cpp:279
-msgid "Failed to save xml file: "
-msgstr ""
-
-#: src/WeatherFax.cpp:404
-msgid "try to execute :"
-msgstr ""
-
-#: src/WeatherFax.cpp:408
-msgid "Failed to load input file: "
-msgstr ""
-
-#: src/WeatherFax.cpp:478
-msgid "Supported Files|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;*.TIF;*.tif;*.TIFF;*.tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;*.PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga;*.WAV;*.wav|All files (*.*)|*.*"
-msgstr ""
-
-#: src/WeatherFax.cpp:490
-msgid "Cannot open audio weather fax already in progress."
-msgstr ""
-
-#: src/WeatherFax.cpp:510
-msgid "Save Weather Fax To Image"
-msgstr ""
-
-#: src/WeatherFax.cpp:512
-msgid "Image Files|*.BMP;*.bmp|*.PNG;*.png|*.TIFF;*.tiffAll files (*.*)|*.*"
-msgstr ""
-
-#: src/WeatherFax.cpp:521
-msgid "Failed to save file: "
-msgstr ""
-
-#: src/WeatherFax.cpp:578
-msgid "Save Weather Fax To KAP"
-msgstr ""
-
-#: src/WeatherFax.cpp:580
-msgid "KAP Files|*.KAP;*.kap|All files (*.*)|*.*"
-msgstr ""
-
-#: src/WeatherFaxImage.cpp:440
-msgid "Resulting image has negative dimensions, aborting\n"
-msgstr ""
-
-#: src/WeatherFaxImage.cpp:441 src/WeatherFaxImage.cpp:455
-msgid "Mapping Failed"
-msgstr ""
-
-#: src/WeatherFaxImage.cpp:452
-#, c-format
-msgid "Resulting image larger than %dMB\n"
-"Try changing size parameter to a smaller value. (less than %.2f)\n"
-"aborting\n"
-msgstr ""
-
-#: src/WeatherFaxImage.cpp:463
-msgid "Mapping Weather Fax Image"
-msgstr ""
-
-#: src/WeatherFaxImage.cpp:463
-msgid "Weather Fax Mapper"
-msgstr ""
-
-#: src/WeatherFaxImage.cpp:596
-msgid "Graphics hardware not supported (Disable OpenGL)\n"
-msgstr ""
-
-#: src/weatherfax_pi.cpp:84 src/weatherfax_pi.cpp:146
+#: src\weatherfax_pi.cpp:72
 msgid "WeatherFax"
+msgstr "WeatherFax"
+
+#: src\weatherfax_pi.cpp:76
+msgid "Weatherfax"
 msgstr ""
 
-#: src/weatherfax_pi.cpp:151
-msgid "Weather Fax PlugIn for OpenCPN"
-msgstr ""
-
-#: src/weatherfax_pi.cpp:156
-msgid "Weather Fax PlugIn for OpenCPN\n"
-"Can open image files directly, or decode audio faxes to an image.\n"
-"With simple calibration, resulting image is overlaid on top of charts.\n"
-"Converts images in mercator, polar, conic and uniform coordinates.\n"
-"Can convert any image into a raster chart.\n"
-"Builtin database for HF radio fax stations via SSB.\n"
-"Builtin database for internet retrieval from meterological sites.\n"
-msgstr "Πρόσθετο Weather Fax για το OpenCPN\n"
-"Ανοίγει αρχεία εικόνας απευθείας, ή αποκωδικοποιεί φαξ ήχου σε εικόνα.\n"
-"Με απλή βαθμονόμηση η εικόνα που προκύπτει υπερτίθεται πάνω στον χάρτη.\n"
-"Μετατρέπει εικόνες σε μερκατορικές, πολικές, κωνικές και ομοιόμορφες συντεταγμένες. \n"
-"Μετατρέπει οποιαδήποτε εικόνα σε χάρτη raster.\n"
-"Περιέχει βάση δεδομένων με ραδιοφωνικούς σταθμούς φαξ HF μέσω SSB\n"
-"και για ανάκτηση μετεωρολογικών δεδομένων μέσω του internet.\n"
-
-#: src/weatherfax_pi.cpp:324
+#: src\weatherfax_pi.cpp:371
 msgid "WeatherFax Preferences"
-msgstr ""
+msgstr "Προτιμήσεις WeatherFax"
 

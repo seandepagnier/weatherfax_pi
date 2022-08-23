@@ -3,17 +3,17 @@ msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-24 09:47+0200\n"
-"PO-Revision-Date: 2022-07-31 01:56\n"
+"PO-Revision-Date: 2022-07-31 01:57\n"
 "Last-Translator: \n"
-"Language-Team: Danish\n"
-"Language: da_DK\n"
+"Language-Team: Indonesian\n"
+"Language: id_ID\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Crowdin-Project: opencpn\n"
 "X-Crowdin-Project-ID: 49843\n"
-"X-Crowdin-Language: da\n"
+"X-Crowdin-Language: id\n"
 "X-Crowdin-File: /plugins/weatherfax_pi/po/weatherfax_pi.pot\n"
 "X-Crowdin-File-ID: 127\n"
 
@@ -25,28 +25,28 @@ msgstr ""
 #: src\WeatherFax.cpp:623 src\WeatherFax.cpp:820 src\WeatherFax.cpp:874
 #: src\WeatherFaxImage.cpp:610 src\WeatherFaxUI.h:104
 msgid "Weather Fax"
-msgstr "Weather Fax"
+msgstr "Faks Cuaca"
 
 #: src/WeatherFaxUI.h:181 src\SchedulesDialog.cpp:43 src\WeatherFaxUI.h:181
 msgid "HF Radio Schedules"
-msgstr "HF Radio tidsplaner"
+msgstr "Jadwal Radio HF"
 
 #: src/WeatherFaxUI.h:235 src\InternetRetrievalDialog.cpp:51
 #: src\WeatherFaxUI.h:235
 msgid "Internet Retrieval"
-msgstr "Hentning fra Internet"
+msgstr "Retrieval Internet"
 
 #: src/WeatherFaxUI.h:413 src\WeatherFaxUI.h:413
 msgid "Weather Fax Preferences"
-msgstr "Weather Fax præferencer"
+msgstr "Preferensi Faks Cuaca"
 
 #: src/WeatherFaxUI.h:450 src\DecoderOptionsDialog.cpp:37 src\WeatherFaxUI.h:450
 msgid "Fax Decoding Options"
-msgstr "Fax Decoding Optioner"
+msgstr "Pilihan Decoding Faks"
 
 #: src/WeatherFaxUI.h:476 src\WeatherFaxUI.h:476
 msgid "About Weatherfax"
-msgstr "Om Weatherfax"
+msgstr "Tentang Weatherfax"
 
 #: src\DecoderOptionsDialog.cpp:122
 msgid "Failed to configure capture."
@@ -58,27 +58,27 @@ msgstr ""
 
 #: src\FaxDecoder.cpp:119
 msgid "Failed"
-msgstr "Mislykkedes"
+msgstr "Gagal"
 
 #: src\FaxDecoder.cpp:119
 msgid "Failure Decoding Fax: "
-msgstr "Fejl under afkodning af Fax: "
+msgstr "Kegagalan Decoding Faks: "
 
 #: src\FaxDecoder.cpp:268
 msgid "DecodeImageLine requires specific buffer length"
-msgstr "DecodeImageLine kræver særlig bufferlængde"
+msgstr "DecodeImageLine membutuhkan panjang penyangga yang spesifik"
 
 #: src\FaxDecoder.cpp:378
 msgid "Port audio overflow on input, some data lost!"
-msgstr "Port audio overflow på input, nogle data tabt!"
+msgstr "Port audio overflow pada input, beberapa data hilang!"
 
 #: src\FaxDecoder.cpp:509
 msgid "could not open input file: "
-msgstr "kunne ikke åbne inputfilen: "
+msgstr "tidak bisa membuka file: "
 
 #: src\FaxDecoder.cpp:513
 msgid "sample size not 8 or 16 bit: "
-msgstr "sample størrelse ikke 8 eller 16 bit: "
+msgstr "ukuran contoh bukan 8 atau 16 bit: "
 
 #: src\FaxDecoder.cpp:524
 msgid "no audiofile support compiled"
@@ -86,7 +86,7 @@ msgstr ""
 
 #: src\InternetRetrievalDialog.cpp:110 src\WeatherFaxUI.cpp:643
 msgid "Scheduled"
-msgstr "Planlagt"
+msgstr "Dijadwalkan"
 
 #: src\InternetRetrievalDialog.cpp:111
 msgid "Server"
@@ -94,28 +94,28 @@ msgstr "Server"
 
 #: src\InternetRetrievalDialog.cpp:112
 msgid "Region"
-msgstr "Region"
+msgstr "Wilayah"
 
 #: src\InternetRetrievalDialog.cpp:113 src\SchedulesDialog.cpp:131
 msgid "Contents"
-msgstr "Contents"
+msgstr "Konten"
 
 #: src\InternetRetrievalDialog.cpp:114 src\SchedulesDialog.cpp:134
 msgid "Map Area"
-msgstr "Kort område"
+msgstr "Area Peta"
 
 #: src\InternetRetrievalDialog.cpp:238 src\SchedulesDialog.cpp:301
 msgid "Failed to load file: "
-msgstr "Kunne ikke indlæse filen: "
+msgstr "Gagal memuat file: "
 
 #: src\InternetRetrievalDialog.cpp:242 src\SchedulesDialog.cpp:305
 #: src\WeatherFax.cpp:155
 msgid "Invalid xml file"
-msgstr "Ugyldig XML-fil"
+msgstr "File xml tidak sah"
 
 #: src\InternetRetrievalDialog.cpp:257 src\SchedulesDialog.cpp:320
 msgid "Loading"
-msgstr "Indlæser"
+msgstr "Pemuatan"
 
 #: src\InternetRetrievalDialog.cpp:257
 msgid "WeatherFax Internet Retrieval"
@@ -123,21 +123,21 @@ msgstr ""
 
 #: src\InternetRetrievalDialog.cpp:299
 msgid "Invalid iterator: "
-msgstr "Ugyldig iterator: "
+msgstr "Iterator tidak valid: "
 
 #: src\InternetRetrievalDialog.cpp:335 src\InternetRetrievalDialog.cpp:365
 #: src\InternetRetrievalDialog.cpp:384 src\InternetRetrievalDialog.cpp:387
 #: src\WeatherFax.cpp:196
 msgid "Unrecognized xml node: "
-msgstr "Ukendt XML-node: "
+msgstr "Simpul xml yang tidak dikenal: "
 
 #: src\InternetRetrievalDialog.cpp:377 src\SchedulesDialog.cpp:404
 msgid "Failed to match Area: "
-msgstr "Kunne ikke matche område: "
+msgstr "Gagal mencocokkan Area: "
 
 #: src\InternetRetrievalDialog.cpp:480
 msgid "Sorting this many urls might take too long"
-msgstr "Sortering af så mange webadresser kan tage for lang tid"
+msgstr "Mengurutkan banyak url ini mungkin memakan waktu terlalu lama"
 
 #: src\InternetRetrievalDialog.cpp:481 src\SchedulesDialog.cpp:508
 #: src\SchedulesDialog.cpp:843 src\SchedulesDialog.cpp:864
@@ -149,49 +149,49 @@ msgstr "weatherfax"
 #: src\InternetRetrievalDialog.cpp:641
 msgid "Fax already retrieved less than 180 minutes ago.\n"
 "Use existing file?"
-msgstr "Fax er allerede hentet for mindre end 180 minutter siden. \n"
-"Brug eksisterende fil?"
+msgstr "Faks sudah diperbaiki kurang dari 180 menit yang lalu.\n"
+"Pakai file yang ada?"
 
 #: src\InternetRetrievalDialog.cpp:655 src\InternetRetrievalDialog.cpp:688
 #: src\InternetRetrievalDialog.cpp:715
 msgid "WeatherFax InternetRetrieval"
-msgstr "WeatherFax InternetRetrieval"
+msgstr ""
 
 #: src\InternetRetrievalDialog.cpp:656 src\InternetRetrievalDialog.cpp:689
 #: src\InternetRetrievalDialog.cpp:716 src\WeatherFax.cpp:798
 msgid "Reading Headers: "
-msgstr "Læser overskrifter: "
+msgstr "Topik membaca: "
 
 #: src\InternetRetrievalDialog.cpp:670 src\InternetRetrievalDialog.cpp:730
 #: src\WeatherFax.cpp:816
 msgid "Failed to Download: "
-msgstr ""
+msgstr "Gagal Mengunduh: "
 
 #: src\InternetRetrievalDialog.cpp:673 src\InternetRetrievalDialog.cpp:733
 #: src\WeatherFax.cpp:818
 msgid "Verify there is a working internet connection."
-msgstr "Kontroller, der er en fungerende internetforbindelse."
+msgstr "Verifikasi ada sambungan internet yang bekerja."
 
 #: src\InternetRetrievalDialog.cpp:674 src\InternetRetrievalDialog.cpp:734
 #: src\WeatherFax.cpp:819
 msgid "If the url is incorrect please edit the xml and/or post a bug report."
-msgstr "Hvis URL-adressen er forkert kan du redigere xml og/eller sende en fejlrapport."
+msgstr "Jika url tidak benar edit xml/atau kirimkan laporan bug."
 
 #: src\InternetRetrievalDialog.cpp:756
 msgid "No Faxes selected."
-msgstr "Ingen faxer valgt."
+msgstr "Tidak ada Fax yang dipilih."
 
 #: src\InternetRetrievalDialog.cpp:758
 msgid " Try clicking the selected (first) column"
-msgstr " Prøv at klikke på den valgte (første) kolonne"
+msgstr " Coba klik pilihan kolom (pertama)"
 
 #: src\SchedulesDialog.cpp:127
 msgid "Capture"
-msgstr "Hentning"
+msgstr "Menangkap"
 
 #: src\SchedulesDialog.cpp:128
 msgid "Station"
-msgstr "Station"
+msgstr "Stasiun"
 
 #: src\SchedulesDialog.cpp:129
 msgid "Frequencies"
@@ -199,80 +199,80 @@ msgstr ""
 
 #: src\SchedulesDialog.cpp:130
 msgid "Time (UTC)"
-msgstr "Tid (UTC)"
+msgstr "Waktu (UTC)"
 
 #: src\SchedulesDialog.cpp:132
 msgid "Valid Time"
-msgstr "Gyldig tid"
+msgstr "Waktu yang sah"
 
 #: src\SchedulesDialog.cpp:133
 msgid "Duration"
-msgstr "Varighed"
+msgstr "Jangka waktu"
 
 #: src\SchedulesDialog.cpp:320 src\SchedulesDialog.cpp:647
 msgid "WeatherFax Schedules"
-msgstr "WeatherFax Schedules"
+msgstr "Jadwal WeatherFax"
 
 #: src\SchedulesDialog.cpp:376 src\SchedulesDialog.cpp:390
 #: src\SchedulesDialog.cpp:411
 msgid "Unrecognized xml node"
-msgstr "Ukendt XML-node"
+msgstr "Simpul xml yang tidak dikenal"
 
 #: src\SchedulesDialog.cpp:396
 msgid "Failed to find Duration for: "
-msgstr "Mislykkedes at finde varighed for: "
+msgstr "Gagal menemukan Durasi: "
 
 #: src\SchedulesDialog.cpp:507
 msgid "Sorting this many schedules might take too long"
-msgstr "Sortering af så mange tidsplaner kan tage for lang tid"
+msgstr "Menyortir banyak jadwal mungkin menggunakan waktu terlalu lama"
 
 #: src\SchedulesDialog.cpp:647
 msgid "Populating List"
-msgstr "Udfylder liste"
+msgstr "Daftar Penduduk"
 
 #: src\SchedulesDialog.cpp:701
 msgid "Capturing fax: "
-msgstr "Henter fax: "
+msgstr "Menangkap faks: "
 
 #: src\SchedulesDialog.cpp:702
 msgid " Conflicts with already scheduled fax: "
-msgstr " Konflikter med allerede planlagt fax: "
+msgstr " Bertentangan dengan faks yang sudah terjadwal: "
 
 #: src\SchedulesDialog.cpp:703
 msgid " disable this fax? "
-msgstr " deaktivere denne fax? "
+msgstr " jangan mengaktifkan faks ini? "
 
 #: src\SchedulesDialog.cpp:704
 msgid "weatherfax schedules"
-msgstr "weatherfax schedules"
+msgstr "jadwal weatherfax"
 
 #: src\SchedulesDialog.cpp:766
 msgid "No Capture Set"
-msgstr "No Capture Set"
+msgstr "Belum Ditangkap"
 
 #: src\SchedulesDialog.cpp:769
 msgid "starting in"
-msgstr "starter om"
+msgstr "memulai pada"
 
 #: src\SchedulesDialog.cpp:772
 msgid "second(s)"
-msgstr "Sekund(er)"
+msgstr "detik(s)"
 
 #: src\SchedulesDialog.cpp:776
 msgid "hour(s)"
-msgstr "Time(r)"
+msgstr "jam(s)"
 
 #: src\SchedulesDialog.cpp:779
 msgid "minute(s)"
-msgstr "Minut(ter)"
+msgstr "menit(s)"
 
 #: src\SchedulesDialog.cpp:784
 msgid "Current fax: "
-msgstr "Aktuelle fax: "
+msgstr "Fax sekarang: "
 
 #: src\SchedulesDialog.cpp:818
 msgid "Tune ssb radio to"
-msgstr "Indstil ssb radio til"
+msgstr "Tune ssb radio ke"
 
 #: src\SchedulesDialog.cpp:820
 msgid "subtracting"
@@ -280,24 +280,25 @@ msgstr ""
 
 #: src\SchedulesDialog.cpp:821
 msgid "to receive fax for"
-msgstr "at modtage fax til"
+msgstr "untuk menerima faksimile"
 
 #: src\SchedulesDialog.cpp:822
 msgid "Weather Fax Schedule Beginning Soon"
-msgstr "Weather Fax Schedule begynder snart"
+msgstr "Jadwal Faks Cuaca Awal Segera"
 
 #: src\SchedulesDialog.cpp:842
 msgid "Already capturing, cannot capture: "
-msgstr "Henter allerede, kan ikke hente: "
+msgstr "Sudah menangkap, tidak bisa ditangkap: "
 
 #: src\SchedulesDialog.cpp:863 src\SchedulesDialog.cpp:909
 msgid "Failed to launch: "
-msgstr "Start mislykkedes: "
+msgstr "Gagal meluncurkan: "
 
 #: src\SchedulesDialog.cpp:870
 msgid "Fault in weather fax plugin\n"
 "Currently capturing hf weather fax."
-msgstr ""
+msgstr "Kesalahan dalam plugin fak cuaca \n"
+"Saat ini menangkap fak cuaca."
 
 #: src\SchedulesDialog.cpp:910
 msgid "\n\n"
@@ -311,19 +312,19 @@ msgstr ""
 
 #: src\SchedulesDialog.cpp:918
 msgid "Open Weather Fax Input File"
-msgstr "Åbn Weather Fax Input Fil"
+msgstr "Membuka input files fax cuaca"
 
 #: src\SchedulesDialog.cpp:920
 msgid "WAV files (*.wav)|*.WAV;*.wav|All files (*.*)|*.*"
-msgstr "WAV filer (*.wav)|*.WAV;*.wav|Alle filer (*.*)|*.*"
+msgstr "Bekas WAV (*.wav)|*.WAV;*.wav|Semua berkas (*.*)|*.*"
 
 #: src\SchedulesDialog.cpp:951
 msgid "External Capture Execution failed"
-msgstr "Udførelse af eksterne hentning mislykkedes"
+msgstr "Eksekusi Eksternal Capture gagal"
 
 #: src\WeatherFax.cpp:150
 msgid "Failed to load coordinate sets"
-msgstr "Kunne ikke indlæse koordinat datasæt"
+msgstr "Gagal memuat kumpulan koordinat"
 
 #: src\WeatherFax.cpp:220
 msgid "CoordinateSets.xml failed to load1"
@@ -331,19 +332,19 @@ msgstr ""
 
 #: src\WeatherFax.cpp:309
 msgid "Failed to save xml file: "
-msgstr "Kunne ikke gemme XML-filen: "
+msgstr "Gagal menyimpan file xml: "
 
 #: src\WeatherFax.cpp:456
 msgid "Audio Capture"
-msgstr "Audio Capture"
+msgstr "Penawanan Audio"
 
 #: src\WeatherFax.cpp:486
 msgid "try to execute :"
-msgstr ""
+msgstr "coba untuk eksekusi :"
 
 #: src\WeatherFax.cpp:490
 msgid "Failed to load input file: "
-msgstr "Det lykkedes ikke at indlæse input-filen: "
+msgstr "Gagal memuat masukan berkas: "
 
 #: src\WeatherFax.cpp:492
 msgid "Android doesn't support tif images"
@@ -355,15 +356,15 @@ msgstr ""
 
 #: src\WeatherFax.cpp:577
 msgid "Supported Files|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;*.TIF;*.tif;*.TIFF;*.tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;*.PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga;*.WAV;*.wav|All files (*.*)|*.*"
-msgstr "Understøttede Filer|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;*.TIF;*.tif;*.TIFF;*.tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;*.PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga;*.WAV;*.wav|Alle filer (*.*)|*.*"
+msgstr "Berkas yang Didukung|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;*.TIF;*.tif;*.TIFF;*.tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;*.PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga;*.WAV;*.wav|Semua berkas (*.*)|*.*"
 
 #: src\WeatherFax.cpp:588
 msgid "Cannot open audio weather fax already in progress."
-msgstr ""
+msgstr "Tidak bisa membuka faks cuaca audio ketika sedang berlangsung."
 
 #: src\WeatherFax.cpp:608
 msgid "Save Weather Fax To Image"
-msgstr ""
+msgstr "Melindungi Cuaca Fax Untuk Gambar"
 
 #: src\WeatherFax.cpp:610
 msgid "All files (*.*)|*.*"
@@ -371,15 +372,15 @@ msgstr ""
 
 #: src\WeatherFax.cpp:622
 msgid "Failed to save file: "
-msgstr ""
+msgstr "Gagal menyimpan berkas: "
 
 #: src\WeatherFax.cpp:681
 msgid "Save Weather Fax To KAP"
-msgstr "Gemme WeatherFax til KAP"
+msgstr "Melindungi cuaca Fax untuk KAP"
 
 #: src\WeatherFax.cpp:683
 msgid "KAP Files|*.KAP;*.kap|All files (*.*)|*.*"
-msgstr ""
+msgstr "File KAP|*.KAP;*.kap|Semua file (*.*)|*.*"
 
 #: src\WeatherFax.cpp:797
 msgid "WeatherFax Data update"
@@ -399,32 +400,32 @@ msgstr ""
 
 #: src\WeatherFaxImage.cpp:453
 msgid "Resulting image has negative dimensions, aborting\n"
-msgstr "Resulterende billede har negative dimensioner, aborting\n"
+msgstr "Gambar yang dihasilkan memiliki dimensi negatif, menggagalkan\n"
 
 #: src\WeatherFaxImage.cpp:454 src\WeatherFaxImage.cpp:468
 msgid "Mapping Failed"
-msgstr "Kortlægning mislykkedes"
+msgstr "Pemetaan gagal"
 
 #: src\WeatherFaxImage.cpp:465
 #, c-format
 msgid "Resulting image larger than %dMB\n"
 "Try changing size parameter to a smaller value. (less than %.2f)\n"
 "aborting\n"
-msgstr "Resulterende billede større end %dMB\n"
-"Prøv at ændre størrelsesparameter til en mindre værdi. (mindre end %.2f) \n"
-"aborting\n"
+msgstr "Gambar dihasilkan lebih besar dari %dMB\n"
+"Coba nilai yang lebih kecil. (kurang dari %.2f) \n"
+"menggagalkan\n"
 
 #: src\WeatherFaxImage.cpp:476
 msgid "Mapping Weather Fax Image"
-msgstr "Mapping Weather Fax Billede"
+msgstr "Pemetaan Foto Fak Cuaca"
 
 #: src\WeatherFaxImage.cpp:476
 msgid "Weather Fax Mapper"
-msgstr "Weather Fax Mapper"
+msgstr "Pemetaan fac cuaca"
 
 #: src\WeatherFaxImage.cpp:609
 msgid "Graphics hardware not supported (Disable OpenGL)\n"
-msgstr ""
+msgstr "Perangkat keras grafis tidak didukung (Nonaktifkan OpenGL)\n"
 
 #: src\WeatherFaxUI.cpp:23
 msgid "Fax"
@@ -436,19 +437,19 @@ msgstr "&Internet"
 
 #: src\WeatherFaxUI.cpp:39 src\WeatherFaxUI.cpp:143
 msgid "&HF Radio Schedules"
-msgstr "&HF Radio tidsplaner"
+msgstr "&Jadwal Radio HF"
 
 #: src\WeatherFaxUI.cpp:42 src\WeatherFaxUI.cpp:121
 msgid "&Delete"
-msgstr "&Slet"
+msgstr "&Menghapus"
 
 #: src\WeatherFaxUI.cpp:46 src\WeatherFaxUI.cpp:127
 msgid "&Preferences"
-msgstr "&Indstillinger"
+msgstr "&Pereferensi"
 
 #: src\WeatherFaxUI.cpp:49 src\WeatherFaxUI.cpp:115
 msgid "&Goto"
-msgstr "& Goto"
+msgstr "&Pergike"
 
 #: src\WeatherFaxUI.cpp:53
 msgid "File"
@@ -456,35 +457,35 @@ msgstr ""
 
 #: src\WeatherFaxUI.cpp:55 src\WeatherFaxUI.cpp:106
 msgid "&Open"
-msgstr "&Åbn"
+msgstr "&Buka"
 
 #: src\WeatherFaxUI.cpp:58 src\WeatherFaxUI.cpp:109
 msgid "Save &As"
-msgstr ""
+msgstr "Simpan &Sebagai"
 
 #: src\WeatherFaxUI.cpp:61 src\WeatherFaxUI.cpp:118
 msgid "E&xport"
-msgstr "&Export"
+msgstr "Ekspor"
 
 #: src\WeatherFaxUI.cpp:77
 msgid "Transparency"
-msgstr "Gennemsigtighed"
+msgstr "Transparansi"
 
 #: src\WeatherFaxUI.cpp:93
 msgid "Invert"
-msgstr "Inverter"
+msgstr "Membalikkan"
 
 #: src\WeatherFaxUI.cpp:112
 msgid "&Edit"
-msgstr "&Redigér"
+msgstr "&Edit"
 
 #: src\WeatherFaxUI.cpp:133
 msgid "&Close"
-msgstr "&Luk"
+msgstr "&Tutup"
 
 #: src\WeatherFaxUI.cpp:136
 msgid "&File"
-msgstr "&Fil"
+msgstr "&Berkas"
 
 #: src\WeatherFaxUI.cpp:139
 msgid "&Capture"
@@ -496,19 +497,19 @@ msgstr ""
 
 #: src\WeatherFaxUI.cpp:156
 msgid "&Retrieve"
-msgstr "&Hent"
+msgstr "&Ambil"
 
 #: src\WeatherFaxUI.cpp:160
 msgid "&About"
-msgstr "&Om"
+msgstr "&Tentang"
 
 #: src\WeatherFaxUI.cpp:163
 msgid "&Help"
-msgstr "&Hjælp"
+msgstr "&Membantu"
 
 #: src\WeatherFaxUI.cpp:270
 msgid "Contains"
-msgstr "Indeholder"
+msgstr "Mengandung"
 
 #: src\WeatherFaxUI.cpp:277 src\WeatherFaxUI.cpp:663
 msgid "Lat"
@@ -520,69 +521,69 @@ msgstr "Lon"
 
 #: src\WeatherFaxUI.cpp:291 src\WeatherFaxUI.cpp:688
 msgid "Boat Position"
-msgstr "Båd position"
+msgstr "Posisi Perahu"
 
 #: src\WeatherFaxUI.cpp:294 src\WeatherFaxUI.cpp:691
 msgid "Reset"
-msgstr "nulstil"
+msgstr "Atur ulang"
 
 #: src\WeatherFaxUI.cpp:304
 msgid "Stations"
-msgstr "Stationer"
+msgstr "Stasiun"
 
 #: src\WeatherFaxUI.cpp:320 src\WeatherFaxUI.cpp:357 src\WeatherFaxUI.cpp:708
 #: src\WeatherFaxUI.cpp:754
 msgid "All"
-msgstr "Alle"
+msgstr "Semua"
 
 #: src\WeatherFaxUI.cpp:323 src\WeatherFaxUI.cpp:711 src\WeatherFaxUI.cpp:759
 #: src\WeatherFaxUI.cpp:958
 msgid "None"
-msgstr "Ingen"
+msgstr "Tidak ada"
 
 #: src\WeatherFaxUI.cpp:336
 msgid "Frequency"
-msgstr "Frevens"
+msgstr "Frekuensi"
 
 #: src\WeatherFaxUI.cpp:346
 msgid "khz min"
-msgstr "khz min"
+msgstr "khz minimal"
 
 #: src\WeatherFaxUI.cpp:353
 msgid "khz max"
-msgstr "khz max"
+msgstr "khz maksimal"
 
 #: src\WeatherFaxUI.cpp:372
 msgid "Constraints"
-msgstr "Begrænsninger"
+msgstr "Kendala"
 
 #: src\WeatherFaxUI.cpp:379
 msgid "Has Area"
-msgstr "Har Område"
+msgstr "Memegang Wilayah"
 
 #: src\WeatherFaxUI.cpp:382
 msgid "Has Valid Time"
-msgstr "Har gyldig tid"
+msgstr "Memiliki Waktu Yang sah"
 
 #: src\WeatherFaxUI.cpp:391
 msgid "Clear Captures"
-msgstr ""
+msgstr "Bersihkan Tangkapan"
 
 #: src\WeatherFaxUI.cpp:401 src\WeatherFaxUI.cpp:934 src\WeatherFaxUI.cpp:1792
 msgid "Filter"
-msgstr "Filter"
+msgstr "Saring"
 
 #: src\WeatherFaxUI.cpp:409
 msgid "Message Box"
-msgstr "Meddelelsesboks"
+msgstr "Kotak pesan"
 
 #: src\WeatherFaxUI.cpp:418
 msgid "Sound"
-msgstr ""
+msgstr "Suara"
 
 #: src\WeatherFaxUI.cpp:421
 msgid "Select a file"
-msgstr ""
+msgstr "Pilih file"
 
 #: src\WeatherFaxUI.cpp:421
 msgid "wav files|*.WAV;*.wav|All files (*.*)|*.*"
@@ -590,7 +591,7 @@ msgstr ""
 
 #: src\WeatherFaxUI.cpp:433
 msgid "External Alarm"
-msgstr "Ekstern Alarm"
+msgstr "Alarm Luar"
 
 #: src\WeatherFaxUI.cpp:442
 msgid "Skip alarm if previous fax has already tuned"
@@ -598,11 +599,11 @@ msgstr ""
 
 #: src\WeatherFaxUI.cpp:450
 msgid "1 minute alarm"
-msgstr "1 minut alarm"
+msgstr "1 menit larem"
 
 #: src\WeatherFaxUI.cpp:458
 msgid "No Action"
-msgstr "Ingen handling"
+msgstr "Tidak ada tindakan"
 
 #: src\WeatherFaxUI.cpp:461
 msgid "Capture (uses capture settings in preferences)"
@@ -610,38 +611,38 @@ msgstr ""
 
 #: src\WeatherFaxUI.cpp:473
 msgid "External Command"
-msgstr "Ekstern kommando"
+msgstr "Perintah Eksternal"
 
 #: src\WeatherFaxUI.cpp:492
 msgid "Manual Capture (with external program) automatic Open File"
-msgstr "Manuel opsamling (med eksternt program) automatisk åbn fil"
+msgstr "Manual Capture (dengan program eksternal) Open File otomatis"
 
 #: src\WeatherFaxUI.cpp:499
 msgid "Capture Options"
-msgstr "Hentingsindstillinger"
+msgstr "Pilihan Tangkap"
 
 #: src\WeatherFaxUI.cpp:506
 msgid "Select fax images by clicking in the capture (first) column\n\n"
 "Schedules can be sorted by clicking the header column\n\n"
 "The schedules need testing as I can only receive from a few of the possible stations.  Corrections can be made by modifying the WeatherFaxSchedules.xml file. Patches can be submitted via github.\n\n"
 "Automatic control of a ssb radio is desireable as well, however the author only has a tecsun pl-600.  If a suitable radio can be donated, support will be implemented."
-msgstr "Vælg fax billeder ved at klikke i capture (første) søjle\n\n"
-"Planer kan sorteres ved at klikke på header-søjlen\n\n"
-"Planerne skal testes da jeg kun kan modtage fra et par af de mulige stationer.  Korrektioner kan foretages ved at redigere filen WeatherFaxSchedules.xml. Patches kan sendes via github.\n\n"
-"Automatisk kontrol af en ssb-radio er ønskeligt, men forfatteren har kun en tecsun pl-600.  Hvis en egnet radio kan doneres, vil støtte blive gennemført."
+msgstr "Pilih gambar faks dengan mengklik kolom capture (first)\n\n"
+" Jadwal dapat diurutkan dengan mengklik kolom header\n\n"
+" Jadwal membutuhkan pengujian karena saya hanya dapat menerima dari beberapa stasiun yang mungkin. Koreksi dapat dilakukan dengan memodifikasi file WeatherFaxSchedules.xml. Patch bisa dikirim via github.\n\n"
+" Kontrol otomatis dari radio ssb juga diinginkan, namun penulis hanya memiliki tecsun pl-600. Jika radio yang sesuai bisa disumbangkan, dukungan akan diimplementasikan."
 
 #: src\WeatherFaxUI.cpp:514 src\WeatherFaxUI.cpp:1305
 #: src\WeatherFaxWizard.cpp:939
 msgid "Information"
-msgstr "Information"
+msgstr "Informasi"
 
 #: src\WeatherFaxUI.cpp:519
 msgid "Capture Status"
-msgstr "Status for hentning"
+msgstr "Status Tangkap"
 
 #: src\WeatherFaxUI.cpp:535 src\WeatherFaxUI.cpp:765 src\WeatherFaxUI.cpp:1911
 msgid "Close"
-msgstr "Luk"
+msgstr "Akrab"
 
 #: src\WeatherFaxUI.cpp:636
 msgid "Retrieve"
@@ -653,24 +654,24 @@ msgstr ""
 
 #: src\WeatherFaxUI.cpp:701
 msgid "Servers"
-msgstr "Servers"
+msgstr "Server-server"
 
 #: src\WeatherFaxUI.cpp:734
 msgid "Regions"
-msgstr "Regioner"
+msgstr "Wilayah"
 
 #: src\WeatherFaxUI.cpp:866
 msgid "Decoder"
-msgstr "Dekoder"
+msgstr "Mahir sandi"
 
 #: src\WeatherFaxUI.cpp:878 src\WeatherFaxWizard.cpp:138
 #: src\WeatherFaxWizard.cpp:235 src\WeatherFaxWizard.cpp:250
 msgid "Stop"
-msgstr "Stop"
+msgstr "Berhenti"
 
 #: src\WeatherFaxUI.cpp:881
 msgid "Options"
-msgstr "Valgmuligheder"
+msgstr "Pilihan"
 
 #: src\WeatherFaxUI.cpp:902
 msgid "frequency"
@@ -682,7 +683,7 @@ msgstr ""
 
 #: src\WeatherFaxUI.cpp:923
 msgid "Image Correction"
-msgstr "Billedkorrektion"
+msgstr "Perbaikan Gambar"
 
 #: src\WeatherFaxUI.cpp:937
 msgid "phase by line"
@@ -690,11 +691,11 @@ msgstr ""
 
 #: src\WeatherFaxUI.cpp:954
 msgid "Rotation"
-msgstr "Rotation"
+msgstr "Putaran"
 
 #: src\WeatherFaxUI.cpp:958
 msgid "180"
-msgstr "180"
+msgstr ""
 
 #: src\WeatherFaxUI.cpp:958
 msgid "CCW"
@@ -706,11 +707,11 @@ msgstr "CW"
 
 #: src\WeatherFaxUI.cpp:979 src\WeatherFaxWizard.cpp:237
 msgid "Phasing"
-msgstr "Fase"
+msgstr "Secara bertahap"
 
 #: src\WeatherFaxUI.cpp:994
 msgid "Skew"
-msgstr "Skew"
+msgstr "Miring"
 
 #: src\WeatherFaxUI.cpp:1022 src\WeatherFaxUI.cpp:1318 src\WeatherFaxUI.cpp:1405
 msgid "a page"
@@ -718,25 +719,25 @@ msgstr ""
 
 #: src\WeatherFaxUI.cpp:1040 src\WeatherFaxUI.cpp:1335
 msgid "Image Coordinates"
-msgstr "Billede koordinater"
+msgstr "Koordinat Gambar"
 
 #: src\WeatherFaxUI.cpp:1052
 msgid "Remove"
-msgstr "Fjern"
+msgstr "Menghapus"
 
 #: src\WeatherFaxUI.cpp:1069 src\WeatherFaxUI.cpp:1092 src\WeatherFaxUI.cpp:1342
 #: src\WeatherFaxUI.cpp:1365
 msgid "Coord Y/X"
-msgstr "Koord Y / X"
+msgstr ""
 
 #: src\WeatherFaxUI.cpp:1074 src\WeatherFaxUI.cpp:1097 src\WeatherFaxUI.cpp:1347
 #: src\WeatherFaxUI.cpp:1370
 msgid "Lat/Lon"
-msgstr "Lat/Lon"
+msgstr ""
 
 #: src\WeatherFaxUI.cpp:1124
 msgid "Minutes"
-msgstr ""
+msgstr "Menit"
 
 #: src\WeatherFaxUI.cpp:1196
 msgid "Lat/Lon Minutes"
@@ -745,24 +746,24 @@ msgstr ""
 #: src\WeatherFaxUI.cpp:1199
 msgid "+ Lat/Lon for N/E\n"
 "- Lat/Lon for S/W"
-msgstr "+ Lat/Lon for N/E\n"
-"- Lat/Lon for S/W"
+msgstr "+ Lat/Lon untuk N/E\n"
+"- Lat/Lon untuk S/W"
 
 #: src\WeatherFaxUI.cpp:1217
 msgid "Coordinates Mapping Correction"
-msgstr "Coordinates Mapping Correction"
+msgstr "Koreksi Koordinat Pemetaan"
 
 #: src\WeatherFaxUI.cpp:1222
 msgid "Input Type"
-msgstr "Inputtype"
+msgstr "Jenis masukan"
 
 #: src\WeatherFaxUI.cpp:1226
 msgid "conic"
-msgstr "konisk"
+msgstr "kerucut"
 
 #: src\WeatherFaxUI.cpp:1226
 msgid "fixed-flat"
-msgstr "fixed-flat"
+msgstr "tetap-datar"
 
 #: src\WeatherFaxUI.cpp:1226
 msgid "mercator"
@@ -770,11 +771,11 @@ msgstr "mercator"
 
 #: src\WeatherFaxUI.cpp:1226
 msgid "polar"
-msgstr "polar"
+msgstr "kutub"
 
 #: src\WeatherFaxUI.cpp:1232
 msgid "Output Type"
-msgstr "Outputtype"
+msgstr "Jenis keluaran"
 
 #: src\WeatherFaxUI.cpp:1236
 msgid "Mercator"
@@ -782,7 +783,7 @@ msgstr "Mercator"
 
 #: src\WeatherFaxUI.cpp:1240
 msgid "Size"
-msgstr "Størelse"
+msgstr "Ukuran"
 
 #: src\WeatherFaxUI.cpp:1247
 msgid "W/H"
@@ -790,31 +791,31 @@ msgstr "W/H"
 
 #: src\WeatherFaxUI.cpp:1254
 msgid "True Width Ratio"
-msgstr "Sandt breddeforhold"
+msgstr "Rasio lebar sebenarnya"
 
 #: src\WeatherFaxUI.cpp:1267
 msgid "Pole X"
-msgstr "Pole X"
+msgstr "Tiang X"
 
 #: src\WeatherFaxUI.cpp:1274
 msgid "Pole Y"
-msgstr "Pole Y"
+msgstr "Tiang Y"
 
 #: src\WeatherFaxUI.cpp:1281
 msgid "Equator Y"
-msgstr "Ækvator Y"
+msgstr "Khatulistiwa Y"
 
 #: src\WeatherFaxUI.cpp:1296
 msgid "Get Equator"
-msgstr "Få ækvator"
+msgstr "Dapatkan Khatulistiwa"
 
 #: src\WeatherFaxUI.cpp:1299
 msgid "Get Mapping "
-msgstr "Få kortlægning "
+msgstr "Mendapatkan peta "
 
 #: src\WeatherFaxUI.cpp:1302
 msgid "GetAspectRatio"
-msgstr "GetAspectRatio"
+msgstr ""
 
 #: src\WeatherFaxUI.cpp:1415
 msgid "<< Prev"
@@ -830,11 +831,11 @@ msgstr ""
 
 #: src\WeatherFaxUI.cpp:1563
 msgid "HF Schedules"
-msgstr "HF tidsplaner"
+msgstr "Jadwal HF"
 
 #: src\WeatherFaxUI.cpp:1570
 msgid "Load Schedules at Startup"
-msgstr "Indlæs tidsplaner ved opstart"
+msgstr "Muatkan Jadwal di Startup"
 
 #: src\WeatherFaxUI.cpp:1580
 msgid "capture"
@@ -842,23 +843,23 @@ msgstr ""
 
 #: src\WeatherFaxUI.cpp:1589
 msgid "Sample Rate"
-msgstr "Sample Rate"
+msgstr "Rating sampel"
 
 #: src\WeatherFaxUI.cpp:1593
 msgid "16000"
-msgstr "16000"
+msgstr ""
 
 #: src\WeatherFaxUI.cpp:1593
 msgid "48000"
-msgstr "48000"
+msgstr ""
 
 #: src\WeatherFaxUI.cpp:1593
 msgid "8000"
-msgstr "8000"
+msgstr ""
 
 #: src\WeatherFaxUI.cpp:1599
 msgid "Device Index"
-msgstr ""
+msgstr "Petunjuk Perangkat"
 
 #: src\WeatherFaxUI.cpp:1610
 msgid "audio"
@@ -882,23 +883,23 @@ msgstr ""
 
 #: src\WeatherFaxUI.cpp:1649
 msgid "Export"
-msgstr "Exporter"
+msgstr "Pengeluaran"
 
 #: src\WeatherFaxUI.cpp:1661
 msgid "Reduce to"
-msgstr "Reducer til"
+msgstr "Mengurangi untuk"
 
 #: src\WeatherFaxUI.cpp:1668
 msgid "Colors"
-msgstr "Farver"
+msgstr "Warna-warna"
 
 #: src\WeatherFaxUI.cpp:1675
 msgid "Recommended 4, 16, 64, or 256"
-msgstr ""
+msgstr "Disarankan 4, 16, 64, atau 256"
 
 #: src\WeatherFaxUI.cpp:1680
 msgid "Depth"
-msgstr "Dybde"
+msgstr "Kedalaman"
 
 #: src\WeatherFaxUI.cpp:1687
 msgid "Meters"
@@ -906,65 +907,65 @@ msgstr "Meter"
 
 #: src\WeatherFaxUI.cpp:1690
 msgid "Fathoms"
-msgstr "Favne"
+msgstr "Mengerti"
 
 #: src\WeatherFaxUI.cpp:1704
 msgid "fix sounding datum"
-msgstr "fix sounding datum"
+msgstr "memperbaiki datum yang terdengar"
 
 #: src\WeatherFaxUI.cpp:1757
 msgid "Audio Decoding Options"
-msgstr "Audio dekodnings-muligheder"
+msgstr "Pilihan Decoding Audio"
 
 #: src\WeatherFaxUI.cpp:1764
 msgid "Image Width"
-msgstr "Billedbredde"
+msgstr "Lebar gambar"
 
 #: src\WeatherFaxUI.cpp:1771
 msgid "Bits per Pixel"
-msgstr "Bit pr. Pixel"
+msgstr "Bit per Piksel"
 
 #: src\WeatherFaxUI.cpp:1778
 msgid "Carrier"
-msgstr "Bærebølge"
+msgstr "Pengangkut"
 
 #: src\WeatherFaxUI.cpp:1785
 msgid "Deviation"
-msgstr "Deviation"
+msgstr "Deviasi"
 
 #: src\WeatherFaxUI.cpp:1796
 msgid "middle"
-msgstr "middel"
+msgstr "tengah"
 
 #: src\WeatherFaxUI.cpp:1796
 msgid "narrow"
-msgstr "smal"
+msgstr "sempit"
 
 #: src\WeatherFaxUI.cpp:1796
 msgid "wide"
-msgstr "bred"
+msgstr "lebar"
 
 #: src\WeatherFaxUI.cpp:1802
 msgid "Saturation Threshold"
-msgstr "Mætningstærskel"
+msgstr "Ambang Batas Saturasi"
 
 #: src\WeatherFaxUI.cpp:1817
 msgid "Skip start, stop and \n"
 "phasing detection"
-msgstr "Spring over start, stop og \n"
-"phasing"
+msgstr "Lewati start, stop dan\n"
+" phasing detection"
 
 #: src\WeatherFaxUI.cpp:1820
 msgid "Include header data in image"
-msgstr "Header data medtages i billedet"
+msgstr "Sertakan data header pada gambar"
 
 #: src\WeatherFaxUI.cpp:1834
 msgid "Done"
-msgstr "Udført"
+msgstr "Selesai"
 
 #: src\WeatherFaxUI.cpp:1888
 msgid "Weather Fax Plugin Version"
-msgstr "Weather Fax Plugin Version"
+msgstr ""
 
 #: src\WeatherFaxUI.cpp:1899
 msgid "The weatherfax plugin for opencpn is intended to reduce the amount of user interaction to receive weather faxes and optionally overlay them directly onto charts.\n\n"
@@ -973,27 +974,28 @@ msgid "The weatherfax plugin for opencpn is intended to reduce the amount of use
 "Source Code:\n"
 "https://github.com/seandepagnier/weatherfax_pi\n\n"
 "Many thanks to translators and testers."
-msgstr "Fax plugin for opencpn er beregnet til at reducere mængden af brugerinteraktion til faxmodtagelse vejr og eventuelt overlay dem direkte på charts.\n\n"
-"This omfatter en fax decoder, som konverterer radio fax lyd i images.\n\n"
-"To komme i gang, åbne et billede eller optaget .wav lydfil i en ssb radio faxtransmission fra menuen filer, eller Vælg en indstilling fra hente-menuen.\n\n"
-"Source kode: \\ nhttps://github.com/seandepagnier/weatherfax_pi \n\n"
-"Mange oversættere og testere."
+msgstr "Plugin weatherfax untuk opencpn dimaksudkan untuk mengurangi jumlah interaksi pengguna untuk menerima faks cuaca dan secara opsional menayangkannya langsung ke grafik.\n\n"
+" Ini termasuk decoder faks, yang mengubah faks faks radio menjadi gambar.\n\n"
+" Untuk memulai, buka file audio atau rekaman wav dari transmisi faks ssb radio dari menu file, atau pilih opsi dari menu retrieve.\n\n"
+" Kode Sumber:\n"
+" https://github.com/seandepagnier/weatherfax_pi\n\n"
+" Terima kasih banyak kepada penerjemah dan penguji."
 
 #: src\WeatherFaxUI.cpp:1908
 msgid "About the Author"
-msgstr "Om forfatteren"
+msgstr "Tentang Pengarang"
 
 #: src\WeatherFaxWizard.cpp:44
 msgid "Weather Fax Image"
-msgstr "Weather Fax billede"
+msgstr "Gambar faks cuaca"
 
 #: src\WeatherFaxWizard.cpp:50
 msgid "New Coord"
-msgstr "Nye koord"
+msgstr "Koord baru"
 
 #: src\WeatherFaxWizard.cpp:234 src\WeatherFaxWizard.cpp:247
 msgid "Start"
-msgstr "Start"
+msgstr "Mulai"
 
 #: src\WeatherFaxWizard.cpp:237
 msgid "Image"
@@ -1002,32 +1004,32 @@ msgstr ""
 #: src\WeatherFaxWizard.cpp:353
 msgid "Failed to apply mapping\n"
 "Check Mapping Correction Parameters"
-msgstr "Programmet kunne ikke anvende mapping\n"
-"Check kortlægnings-korrektionsparametre"
+msgstr "Gagal menerapkan pemetaan\n"
+" Periksa Parameter Koreksi Pemetaan"
 
 #: src\WeatherFaxWizard.cpp:354 src\WeatherFaxWizard.cpp:495
 #: src\WeatherFaxWizard.cpp:639 src\WeatherFaxWizard.cpp:728
 #: src\WeatherFaxWizard.cpp:744
 msgid "Mapping"
-msgstr "Kortlægning"
+msgstr "Pemetaan"
 
 #: src\WeatherFaxWizard.cpp:493
 msgid "Warning, latitudes on different sides of equator not recommended because of ambiguity of north or south pole"
-msgstr "Advarsel, breddegrader på forskellige sider af ækvator ikke anbefales på grund af uklarheden for nord eller syd pol"
+msgstr "Peringatan, garis lintang pada khatulistiwa tidak dianjurkan karena ambiguitas dari utara atau kutub selatan"
 
 #: src\WeatherFaxWizard.cpp:636
 msgid "Calculating Mapping Failed.\n"
 "Perhaps you have chosen the wrong mapping type for this image, or the coordinates specified are not correct\n"
-msgstr "Beregning af kortlægning mislykkedes. \n"
-"Måske du har valgt den forkerte mapping type for dette billede eller angivne koordinater er ikke korrekte\n"
+msgstr "Menghitung Pemetaan Gagal.\n"
+" Mungkin Anda telah memilih jenis pemetaan yang salah untuk gambar ini, atau koordinat yang ditentukan tidak benar\n"
 
 #: src\WeatherFaxWizard.cpp:727
 msgid "Calculating Mapping not yet supported.\n"
-msgstr "Beregning af kortlægning endnu ikke understøttet. \n"
+msgstr "Menghitung Pemetaan belum didukung.\n"
 
 #: src\WeatherFaxWizard.cpp:743
 msgid "Calculating Equator not yet supported.\n"
-msgstr "Beregning af ækvator endnu ikke understøttet. \n"
+msgstr "Menghitung Khatulistiwa belum didukung.\n"
 
 #: src\WeatherFaxWizard.cpp:914
 msgid "Mapping allows for scaling, and conversion between coordinate systems\n"
@@ -1039,19 +1041,19 @@ msgid "Mapping allows for scaling, and conversion between coordinate systems\n"
 "First adjust pole X to center the latitudes. Next adjust the Pole Y value until the blue latitude curve closest to the pole is correct. Now, if the second blue latitude is too wide, then the true width ratio needs to be increased, otherwise it should be decreased. Repeat adjusting the Pole Y and true width ratio until both align. It is easiest to calibrate correctly if you use the farthest spaced latitudes available.\n"
 "Once the blue latitudes align perfectly, recompute the equator to ensure the resulting mapping is correct. At this point, the coordinates can be changed to better locations if needed. If true width is very close to 1.0 it probably should be exactly 1.0.\n"
 "It is also possible to go to the next step, adjust the coordinates, then come back to this step and get the mapping parameters again to improve the estimate."
-msgstr "Kortlægning giver mulighed for skalering, og konvertering mellem koordinatsystemer\n"
-"Breddegrader er + N -S, længdegrader + E-W\n\n"
-"For polar kortlægning mode: \n"
-"Get kortlægning parametre beregner kortlægning fra de givne koordinater, men den første koordinats X-værdi (lodret rød linje) skal samstemme med polen i polar-tilstand på den lodrette meridian\n"
-"Når koordinaterne er indtastet,  bør gøre de blå breddegrader tilpassede.  Hvis de er langt væk, check input koordinaterne. \n"
-"Når de er tæt: \n"
-"Først juster pole X til at centrere breddegrader. Dernæst justeres Pole Y-værdi, indtil den blå breddekurve nærmest polen er korrekte. Nu, hvis den anden blå bredde er for bred, så det sande breddeforhold skal øges, ellers det bør være nedsat. Gentag justering af Pole Y og sande bredde forholdet indtil begge passer. Det er nemmest at kalibrere korrekt, hvis du bruger de længst afstand breddegrader tilgængelig. \n"
-"Once de blå breddegrader justeres perfekt, Gendan ækvator så den resulterende tilknytning er korrekt. På dette tidspunkt kan koordinaterne ændres til bedre placeringer, hvis det er nødvendigt. Hvis sande bredde er meget tæt på 1,0 det sandsynligvis være præcis 1.0.\n"
-"Det er også muligt at gå til det næste trin, justere koordinaterne, derefter vende tilbage til dette trin og få parametrene kortlægning igen at forbedre estimatet."
+msgstr "Pemetaan memungkinkan penskalaan, dan konversi antara sistem koordinat\n"
+" Latitudes adalah + N -S, Longitudes + E -W\n\n"
+" Untuk mode pemetaan polar:\n"
+" Dapatkan parameter Pemetaan menghitung pemetaan dari koordinat yang diberikan, namun koordinat pertama Nilai X (garis merah vertikal) harus sejajar dengan kutub dalam mode polar pada meridian vertikal\n"
+" Setelah koordinat dimasukkan, pemetaan harus membuat garis lintang biru sejajar. Jika mereka jauh, periksa koordinat inputnya.\n"
+" Setelah mereka dekat:\n"
+"Pertama atur tiang X ke tengah garis lintang. Selanjutnya atur nilai Pole Y sampai garis lintang biru yang paling dekat dengan kutub sudah benar. Nah, jika garis lintang biru kedua terlalu lebar, maka rasio lebar sebenarnya perlu ditingkatkan, jika tidak maka harus dikurangi. Ulangi menyesuaikan Pole Y dan true width ratio sampai keduanya menyelaraskan. Paling mudah untuk mengkalibrasi dengan benar jika Anda menggunakan lintang paling jauh yang ada.\n"
+" Setelah garis lintang biru sejajar dengan sempurna, hitung kembali khatulistiwa untuk memastikan pemetaan yang dihasilkan benar. Pada titik ini, koordinat bisa diubah ke lokasi yang lebih baik jika diperlukan. Jika benar lebar sangat dekat dengan 1.0 itu mungkin harus persis 1.0.\n"
+"Hal ini juga memungkinkan untuk pergi ke langkah berikutnya, menyesuaikan koordinat, kemudian kembali ke langkah ini dan mendapatkan parameter pemetaan lagi untuk memperbaiki perkiraan."
 
 #: src\weatherfax_pi.cpp:72
 msgid "WeatherFax"
-msgstr "WeatherFax"
+msgstr ""
 
 #: src\weatherfax_pi.cpp:76
 msgid "Weatherfax"
@@ -1059,5 +1061,5 @@ msgstr ""
 
 #: src\weatherfax_pi.cpp:371
 msgid "WeatherFax Preferences"
-msgstr "Weather Fax præferencer"
+msgstr "Pilihan cuaca fax"
 
