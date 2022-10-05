@@ -35,6 +35,8 @@ workflows:
 ##            <<: *std-filters
         - build-armhf-debian-bullseye:
             <<: *std-filters
+        - build-arm64-debian-bullseye:
+            <<: *std-filters
 ## Currently circleci does not build armf64 correctly due to no suitable docker image
 ##        - build-armhf-bionic-64:
 ##            <<: *std-filters
@@ -225,7 +227,6 @@ jobs:
             command: ci/circleci-build-raspbian-armhf.sh
             no_output_timeout: 30m
         - deploy-code
-
     build-arm64-debian-bullseye:
         machine:
             image: ubuntu-2004:202104-01
@@ -243,7 +244,6 @@ jobs:
             command: ci/circleci-build-raspbian-armhf.sh
             no_output_timeout: 30m
         - deploy-code
-
     build-armhf-bionic-64:
         machine:
             image: ubuntu-2004:202104-01
