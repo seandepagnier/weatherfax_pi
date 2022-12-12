@@ -18,7 +18,7 @@
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                       *
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Testplugin Version: 1.0.215.0 "07/10/2022"  DD/MM/YYYY  Flatpak work
+# Testplugin Version: 1.0.217.0 "28/11/2022"  DD/MM/YYYY  Flatpak work
 #  buildCI:yes useODAPI:no validateJSON:no
 # ---------------------------------------------------------------------------
 ## ----- When changing this file do NOT change the order in which sections occur        ----- ##
@@ -55,9 +55,9 @@ set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate 
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
-set(VERSION_PATCH "44")
+set(VERSION_PATCH "46")
 set(VERSION_TWEAK "0")
-set(VERSION_DATE "14/11/2022")  # DD/MM/YYYY format
+set(VERSION_DATE "11/12/2022")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -65,7 +65,7 @@ set(TP_COMMENT "  * Release for O5 using CI")
 
 set(PARENT "opencpn")
 
-# The next line allows setup of a local web server with git for testing purposes.
+# The next line allows for setting up your own local webserver with git on it for testing purposes, the default is github.com
 #set(GIT_REPOSITORY_SERVER "github.com")
 
 # Specifies Cloudsmith upload repository suffix for each catalog
@@ -92,8 +92,8 @@ option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
 set(CMAKE_CXX_STANDARD 11)
 
-
 # Don't use local version of GLU library
+# requires libs/glu directory
 set(USE_LOCAL_GLU FALSE)
 # Prefer libGL.so to libOpenGL.so, see CMP0072
 set(OpenGL_GL_PREFERENCE "LEGACY")
@@ -515,7 +515,10 @@ add_definitions(-DTIXML_USE_STL)
 ## ----- do not change next section - needed to configure build process ----- ##
 ##
 
-
+# Needed for android builds
+if(QT_ANDROID)
+    include_directories(BEFORE ${qt_android_include})
+endif(QT_ANDROID)
 
 # Needed for all builds
 ##=======================================

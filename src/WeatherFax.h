@@ -43,8 +43,8 @@ public:
 
     FaxArea() : lat1(NAN), lat2(NAN), lon1(NAN), lon2(NAN) {}
 
-    bool ContainsLat(double lat) { return wxIsNaN(lat) || (lat >= lat1 && lat <= lat2); }
-    bool ContainsLon(double lon) { return wxIsNaN(lon) ||
+    bool ContainsLat(double lat) { return isnan(lat) || (lat >= lat1 && lat <= lat2); }
+    bool ContainsLon(double lon) { return isnan(lon) ||
             (lon2 - lon1 < 180 && lon >= lon1 && lon <= lon2) ||
             (lon2 - lon1 >= 180 && (lon <= lon1 || lon >= lon2)); }
 
@@ -54,9 +54,9 @@ public:
             + ((lon >= 0) ? _T("E") : _T("W")); }
     wxString AreaDescription() {
         return description +
-            ((!wxIsNaN(lat1) && !wxIsNaN(lat2)) ?
+            ((!isnan(lat1) && !isnan(lat2)) ?
              _T(" ") + LatArea(lat1) + _T("-") + LatArea(lat2) : _T("")) +
-            ((!wxIsNaN(lon1) && !wxIsNaN(lon2)) ?
+            ((!isnan(lon1) && !isnan(lon2)) ?
              _T(" ") + LonArea(lon1) + _T("-") + LonArea(lon2) : _T(""));
     }
 };
