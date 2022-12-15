@@ -40,8 +40,6 @@ workflows:
 ## Currently circleci does not build armf64 correctly due to no suitable docker image
 ##        - build-armhf-bionic-64:
 ##            <<: *std-filters
-        - build-arm64-debian-bullseye:
-            <<: *std-filters
         - build-armhf-ubuntu-focal:
             <<: *std-filters
 ## Not required as flatpak build used instead - 14/01/2022
@@ -62,15 +60,15 @@ workflows:
             <<: *std-filters
         - build-flatpak-x86-2008:
             <<: *std-filters
-        - build-flatpak-x86-2008-beta:
-            <<: *std-filters
+#        - build-flatpak-x86-2008-beta:
+#            <<: *std-filters
         - build-flatpak-x86-1808:
             <<: *std-filters
         - build-flatpak-arm64:
             <<: *std-filters
         - build-macos:
            <<: *std-filters
-        - build-macos-wx315:
+        - build-macos-wx32:
            <<: *std-filters
         - build-android-arm64:
            <<: *std-filters
@@ -464,7 +462,7 @@ jobs:
         environment:
         - OCPN_TARGET:  flatpak
         - FLATPAK_BRANCH: beta
-        - WX_VER: wx315
+        - WX_VER: wx32
         - CLOUDSMITH_PKG_EXT: gz
         - SDK_VER: 20.08
         - DEPLOY_USE_ORB: true
@@ -503,14 +501,14 @@ jobs:
         - run: chmod a+x ci/*.sh
         - run: bash ci/circleci-build-macos.sh
         - deploy-code
-    build-macos-wx315:
+    build-macos-wx32:
         macos:
             xcode: "12.5.1"
         environment:
         - OCPN_TARGET:  macos
         - CLOUDSMITH_PKG_EXT: pkg
         - DEPLOY_USE_ORB: true
-        - WXVERSION: 315
+        - WXVERSION: 32
         steps:
         - checkout
         - run: chmod a+x ci/*.sh

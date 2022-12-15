@@ -18,7 +18,7 @@
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                       *
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Testplugin Version: 1.0.217.0 "28/11/2022"  DD/MM/YYYY  Flatpak work
+# Testplugin Version: 1.0.220.0 "11/12/2022"  DD/MM/YYYY  Flatpak work
 #  buildCI:yes useODAPI:no validateJSON:no
 # ---------------------------------------------------------------------------
 ## ----- When changing this file do NOT change the order in which sections occur        ----- ##
@@ -55,9 +55,9 @@ set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate 
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
-set(VERSION_PATCH "46")
+set(VERSION_PATCH "47")
 set(VERSION_TWEAK "0")
-set(VERSION_DATE "11/12/2022")  # DD/MM/YYYY format
+set(VERSION_DATE "13/12/2022")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
