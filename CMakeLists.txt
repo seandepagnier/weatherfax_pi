@@ -31,7 +31,7 @@
 set(CMLOC "CMakeLists: ")
 
 # define minimum cmake version
-cmake_minimum_required(VERSION 3.5.1)
+cmake_minimum_required(VERSION 3.24.1)
 if(COMMAND cmake_policy)
     if(POLICY CMP0043)
         cmake_policy(SET CMP0043 NEW)
@@ -55,9 +55,9 @@ set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate 
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
-set(VERSION_PATCH "47")
+set(VERSION_PATCH "48")
 set(VERSION_TWEAK "0")
-set(VERSION_DATE "13/12/2022")  # DD/MM/YYYY format
+set(VERSION_DATE "15/12/2022")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
