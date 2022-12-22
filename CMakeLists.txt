@@ -18,7 +18,7 @@
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                       *
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Testplugin Version: 1.0.220.0 "11/12/2022"  DD/MM/YYYY  Flatpak work
+# Testplugin Version: 1.0.220.0 "18/12/2022"  DD/MM/YYYY  Flatpak work
 #  buildCI:yes useODAPI:no validateJSON:no
 # ---------------------------------------------------------------------------
 ## ----- When changing this file do NOT change the order in which sections occur        ----- ##
@@ -31,7 +31,7 @@
 set(CMLOC "CMakeLists: ")
 
 # define minimum cmake version
-cmake_minimum_required(VERSION 3.24.1)
+cmake_minimum_required(VERSION 3.16.0)
 if(COMMAND cmake_policy)
     if(POLICY CMP0043)
         cmake_policy(SET CMP0043 NEW)
@@ -55,9 +55,9 @@ set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate 
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
-set(VERSION_PATCH "48")
+set(VERSION_PATCH "50")
 set(VERSION_TWEAK "0")
-set(VERSION_DATE "15/12/2022")  # DD/MM/YYYY format
+set(VERSION_DATE "22/12/2022")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov50")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -92,7 +92,7 @@ option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
 set(CMAKE_CXX_STANDARD 11)
 
-# Don't use local version of GLU library
+# Use local version of GLU library
 # requires libs/glu directory
 set(USE_LOCAL_GLU FALSE)
 # Prefer libGL.so to libOpenGL.so, see CMP0072
