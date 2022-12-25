@@ -71,10 +71,12 @@ workflows:
              <<: *std-filters
         - build-macos-wx32:
              <<: *std-filters
-        - build-android-arm64:
-             <<: *std-filters
-        - build-android-armhf:
-             <<: *std-filters
+## Not working
+##        - build-android-arm64:
+##             <<: *std-filters
+## Not working
+##        - build-android-armhf:
+##             <<: *std-filters
 ## Work in progress to allow circleci to do windows builds
 ##        - build-msvc-2022:
 ##            <<: *std-filters
