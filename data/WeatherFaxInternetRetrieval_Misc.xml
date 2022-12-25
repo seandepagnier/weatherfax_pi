@@ -49,4 +49,10 @@
       <Area Name="2" lat1="38S" lat2="24S" lon1="13E" lon2="37E" />
     </Region>
   </Server>
+  <Server Name="Marinha do Brasil" Url="https://www.marinha.mil.br/chm/sites/www.marinha.mil.br.chm/files/cartas-sinoticas/">
+    <Region Name="South Atlantic">
+      <Map Url="c%y%m%d%H.png" Contents="Sea level pressure chart" Area="1" Hour="-12;12;0" />
+      <Area Name="1" lat1="70S" lat2="20N" lon1="90W" lon2="0W" />
+    </Region>
+  </Server>
 </OCPNWeatherFaxInternetRetrieval>
