@@ -18,7 +18,7 @@
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                       *
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Testplugin Version: 1.0.230.0 "05/03/2023"  DD/MM/YYYY
+# Testplugin Version: 1.0.237.0 "30/04/2023"  DD/MM/YYYY
 #  buildCI:yes useODAPI:no validateJSON:no
 # ---------------------------------------------------------------------------
 ## ----- When changing this file do NOT change the order in which sections occur        ----- ##
@@ -55,9 +55,9 @@ set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate 
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
-set(VERSION_PATCH "56")
+set(VERSION_PATCH "57")
 set(VERSION_TWEAK "0")
-set(VERSION_DATE "27/03/2023")  # DD/MM/YYYY format
+set(VERSION_DATE "23/05/2023")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov57")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -85,8 +85,13 @@ set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/weatherfax.html")
 set(XML_SUMMARY  ${SHORT_DESCRIPTION})
 set(XML_DESCRIPTION  ${LONG_DESCRIPTION})
 
-## ----- Modify above to include all the plugin details --------- ##
-## ----- Modify below for plugin special requirements------------ ##
+##
+## ----- Modify section above to include all the details for your plugin ----- ##
+##
+
+##
+## ----- Modify section below if there are special requirements for the plugin ----- ##
+##
 
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
@@ -458,10 +463,6 @@ endif(QT_ANDROID)
 ## ----- Change above to match project requirements for android build ----- ##
 ##
 
-# Needed for android builds
-if(QT_ANDROID)
-    include_directories(BEFORE ${qt_android_include})
-endif(QT_ANDROID)
 
 ## Required to collect all the set( headers and SRCS  - Adjust as required
 ##==========================================================================
@@ -474,7 +475,7 @@ message(STATUS "${CMLOC}Adding PLUGINS_LIBS: ${EXTRA_LIBS}")
 if(NOT OCPN_FLATPAK_CONFIG)
     # Build environment not available when flatpak is being configured so following statements will not work
     message(STATUS "${CMLOC}Adding target link libraries to ${PACKAGE_NAME}")
-
+    
 IF(NOT QT_ANDROID)
     add_subdirectory("libs/curl")
     target_link_libraries(${PACKAGE_NAME} libcurl::libcurl)
@@ -484,6 +485,7 @@ IF(NOT QT_ANDROID)
 ENDIF(NOT QT_ANDROID)
 
     add_subdirectory(libs/tinyxml)
+
     target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
 endif(NOT OCPN_FLATPAK_CONFIG)
 
