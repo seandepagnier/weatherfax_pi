@@ -18,7 +18,7 @@
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                       *
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Testplugin Version: 1.0.237.0 "30/04/2023"  DD/MM/YYYY
+# Testplugin Version: 1.0.238.0 "09/06/2023"  DD/MM/YYYY
 #  buildCI:yes useODAPI:no validateJSON:no
 # ---------------------------------------------------------------------------
 ## ----- When changing this file do NOT change the order in which sections occur        ----- ##
@@ -55,9 +55,9 @@ set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate 
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
-set(VERSION_PATCH "57")
+set(VERSION_PATCH "58")
 set(VERSION_TWEAK "0")
-set(VERSION_DATE "23/05/2023")  # DD/MM/YYYY format
+set(VERSION_DATE "11/06/2023")  # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov57")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -439,11 +439,10 @@ ENDIF(WIN32)
 ##=============================================================
 
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpnsrc/glu/include)
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/${EXTINCLUDE_DIR})
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/GL)
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/GL)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxJSON/include)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
@@ -458,7 +457,6 @@ if(QT_ANDROID)
     include_directories( ${PROJECT_SOURCE_DIR}/extinclude/GLES2)
 endif(QT_ANDROID)
 
-
 ##
 ## ----- Change above to match project requirements for android build ----- ##
 ##
@@ -466,7 +464,7 @@ endif(QT_ANDROID)
 
 ## Required to collect all the set( headers and SRCS  - Adjust as required
 ##==========================================================================
-target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${EXTSRC} ${SRC_AUDIOFILE})
+target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSSRC} ${SRC_AUDIOFILE})
 ##==========================================================================
 
 TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
@@ -512,7 +510,10 @@ add_definitions(-DTIXML_USE_STL)
 # ----- If using JSON validation in plugin section above is needed ----- ##
 #
 
+##
 ## ----- Change above to match project requirements ----- ##
+##
+
 ##
 ## ----- do not change next section - needed to configure build process ----- ##
 ##
