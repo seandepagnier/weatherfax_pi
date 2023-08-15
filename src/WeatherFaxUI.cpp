@@ -433,7 +433,7 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	m_cbExternalAlarm = new wxCheckBox( m_panel2, wxID_ANY, _("External Alarm"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer63->Add( m_cbExternalAlarm, 0, wxALL, 5 );
 
-	m_tExternalAlarmCommand = new wxTextCtrl( m_panel2, wxID_ANY, _("aplay /usr/local/share/opencpn/sounds/2bells.wav"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_tExternalAlarmCommand = new wxTextCtrl( m_panel2, wxID_ANY, _T("aplay /usr/local/share/opencpn/sounds/2bells.wav"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer63->Add( m_tExternalAlarmCommand, 0, wxALL|wxEXPAND, 5 );
 
 
@@ -473,13 +473,13 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	m_rbExternalCapture = new wxRadioButton( m_panel3, wxID_ANY, _("External Command"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer32->Add( m_rbExternalCapture, 0, wxALL, 5 );
 
-	m_cExternalCapture = new wxComboBox( m_panel3, wxID_ANY, _("arecord -f S16_LE"), wxDefaultPosition, wxDefaultSize, 0, NULL, 0 );
-	m_cExternalCapture->Append( _("arecord -f S16_LE") );
-	m_cExternalCapture->Append( _("rtl_fm -M usb -g 47 -s 1800k -r 8k -f %frequency -p 38") );
+	m_cExternalCapture = new wxComboBox( m_panel3, wxID_ANY, _T("arecord -f S16_LE"), wxDefaultPosition, wxDefaultSize, 0, NULL, 0 );
+	m_cExternalCapture->Append( _T("arecord -f S16_LE") );
+	m_cExternalCapture->Append( _T("rtl_fm -M usb -g 47 -s 1800k -r 8k -f %frequency -p 38") );
 	m_cExternalCapture->SetSelection( 0 );
 	fgSizer32->Add( m_cExternalCapture, 0, wxALL|wxEXPAND, 5 );
 
-	m_staticText47 = new wxStaticText( m_panel3, wxID_ANY, _("|"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText47 = new wxStaticText( m_panel3, wxID_ANY, _T("|"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText47->Wrap( -1 );
 	fgSizer32->Add( m_staticText47, 0, wxALL, 5 );
 
@@ -646,7 +646,7 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	m_bRetrieveSelected = new wxButton( sbRetrieve->GetStaticBox(), wxID_ANY, _("Selected"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
 	fgSizer70->Add( m_bRetrieveSelected, 1, wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL, 5 );
 
-	m_bX = new wxButton( sbRetrieve->GetStaticBox(), wxID_ANY, _("X"), wxDefaultPosition, wxSize( 30,-1 ), 0 );
+	m_bX = new wxButton( sbRetrieve->GetStaticBox(), wxID_ANY, _T("X"), wxDefaultPosition, wxSize( 30,-1 ), 0 );
 	fgSizer70->Add( m_bX, 1, wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL, 5 );
 
 	m_tContainsLat = new wxTextCtrl( sbRetrieve->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
@@ -1241,21 +1241,21 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	m_staticText24->Wrap( -1 );
 	bSizer81->Add( m_staticText24, 0, wxALIGN_CENTER|wxALL, 5 );
 
-	m_tMappingMultiplier = new wxTextCtrl( sbSizer51->GetStaticBox(), wxID_ANY, _("1"), wxDefaultPosition, wxSize( 50,-1 ), 0 );
+	m_tMappingMultiplier = new wxTextCtrl( sbSizer51->GetStaticBox(), wxID_ANY, _T("1"), wxDefaultPosition, wxSize( 50,-1 ), 0 );
 	bSizer81->Add( m_tMappingMultiplier, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
 	m_staticText20 = new wxStaticText( sbSizer51->GetStaticBox(), wxID_ANY, _("W/H"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText20->Wrap( -1 );
 	bSizer81->Add( m_staticText20, 0, wxALIGN_CENTER|wxALL, 5 );
 
-	m_tMappingRatio = new wxTextCtrl( sbSizer51->GetStaticBox(), wxID_ANY, _("1"), wxDefaultPosition, wxSize( 50,-1 ), 0 );
+	m_tMappingRatio = new wxTextCtrl( sbSizer51->GetStaticBox(), wxID_ANY, _T("1"), wxDefaultPosition, wxSize( 50,-1 ), 0 );
 	bSizer81->Add( m_tMappingRatio, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
 	m_staticText211 = new wxStaticText( sbSizer51->GetStaticBox(), wxID_ANY, _("True Width Ratio"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText211->Wrap( -1 );
 	bSizer81->Add( m_staticText211, 0, wxALIGN_CENTER|wxALL, 5 );
 
-	m_tTrueRatio = new wxTextCtrl( sbSizer51->GetStaticBox(), wxID_ANY, _("1"), wxDefaultPosition, wxSize( 60,-1 ), 0 );
+	m_tTrueRatio = new wxTextCtrl( sbSizer51->GetStaticBox(), wxID_ANY, _T("1"), wxDefaultPosition, wxSize( 60,-1 ), 0 );
 	bSizer81->Add( m_tTrueRatio, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_CENTER_HORIZONTAL, 5 );
 
 

@@ -631,7 +631,7 @@ mapping1y^2*q + mapping2y^2*(e - 1)/d = 0
     double inputtrueratio = (south?-1:1)*sqrt(1 - square(sm2lm1l*cm2lm1l) - square(cm2lm1l))
         * (mapping2y - inputpoley) / ((mapping2x - mapping1x) * sm2lm1l * cm2lm1l);
 
-    if(wxIsNaN(inputpoley) || wxIsNaN(inputequator) || wxIsNaN(inputtrueratio) || inputtrueratio <= 0) {
+    if(isnan(inputpoley) || isnan(inputequator) || isnan(inputtrueratio) || inputtrueratio <= 0) {
         wxMessageDialog w
             ( this, _("Calculating Mapping Failed.\n\
 Perhaps you have chosen the wrong mapping type for this image, \

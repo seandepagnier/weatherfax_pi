@@ -18,7 +18,7 @@
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                       *
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough
-# Testplugin Version: 1.0.204.0 + Bdbcat for flatpak and curl 13/05/2022  DD/MM/YYYY
+# Testplugin Version: 1.0.253.0 "07/08/2023"  DD/MM/YYYY
 #  buildCI:yes useODAPI:no validateJSON:no
 # ---------------------------------------------------------------------------
 ## ----- When changing this file do NOT change the order in which sections occur        ----- ##
@@ -55,17 +55,17 @@ set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate 
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
-set(VERSION_PATCH "32")
-set(VERSION_TWEAK "1")
-set(VERSION_DATE "05/21/2022")  # DD/MM/YYYY format
-set(OCPN_MIN_VERSION "ov50")
+set(VERSION_PATCH "60")
+set(VERSION_TWEAK "0")
+set(VERSION_DATE "10/08/2023")  # DD/MM/YYYY format
+set(OCPN_MIN_VERSION "ov58")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
-set(TP_COMMENT "  * Release for O5 using CI")
+set(TP_COMMENT "  * Release for O571 and O58 using CI")
 
 set(PARENT "opencpn")
 
-# The next line allows setup of a local web server with git for testing purposes.
+# The next line allows for setting up your own local webserver with git on it for testing purposes, the default is github.com
 #set(GIT_REPOSITORY_SERVER "github.com")
 
 # Specifies Cloudsmith upload repository suffix for each catalog
@@ -85,15 +85,20 @@ set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/weatherfax.html")
 set(XML_SUMMARY  ${SHORT_DESCRIPTION})
 set(XML_DESCRIPTION  ${LONG_DESCRIPTION})
 
-## ----- Modify above to include all the plugin details --------- ##
-## ----- Modify below for plugin special requirements------------ ##
+##
+## ----- Modify section above to include all the details for your plugin ----- ##
+##
+
+##
+## ----- Modify section below if there are special requirements for the plugin ----- ##
+##
 
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
 set(CMAKE_CXX_STANDARD 11)
 
-
-# Don't use local version of GLU library
+# Use local version of GLU library
+# requires libs/glu directory
 set(USE_LOCAL_GLU FALSE)
 # Prefer libGL.so to libOpenGL.so, see CMP0072
 set(OpenGL_GL_PREFERENCE "LEGACY")
@@ -348,7 +353,7 @@ set(OCPNSRC
 
 set(OCPNHDRS
     ocpninclude/cutil.h
-#    ocpninclude/ocpn_plugin.h
+#    ocpninclude/ocpn_plugin.h    --in libs
     ocpninclude/pluginmanager.h
     ocpninclude/shaders.h
     ocpninclude/TexFont.h
@@ -434,11 +439,10 @@ ENDIF(WIN32)
 ##=============================================================
 
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpnsrc/glu/include)
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/${EXTINCLUDE_DIR})
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/GL)
+include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/GL)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxJSON/include)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
@@ -457,19 +461,11 @@ endif(QT_ANDROID)
 ## ----- Change above to match project requirements for android build ----- ##
 ##
 
+
 ## Required to collect all the set( headers and SRCS  - Adjust as required
 ##==========================================================================
-target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${EXTSRC} ${SRC_AUDIOFILE})
+target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSSRC} ${SRC_AUDIOFILE})
 ##==========================================================================
-
-if (OCPN_FLATPAK_CONFIG)
-  message(STATUS "Adding libs/curl")
-  add_subdirectory("${CMAKE_SOURCE_DIR}/libs/curl")
-  target_link_libraries(${PACKAGE_NAME} libcurl::libcurl)
-endif ()
-
-add_subdirectory("libs/wxcurl")
-  target_link_libraries(${PACKAGE_NAME} ocpn::wxcurl_src)
 
 TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 message(STATUS "${CMLOC}Adding PLUGINS_LIBS: ${EXTRA_LIBS}")
@@ -477,6 +473,14 @@ message(STATUS "${CMLOC}Adding PLUGINS_LIBS: ${EXTRA_LIBS}")
 if(NOT OCPN_FLATPAK_CONFIG)
     # Build environment not available when flatpak is being configured so following statements will not work
     message(STATUS "${CMLOC}Adding target link libraries to ${PACKAGE_NAME}")
+    
+IF(NOT QT_ANDROID)
+    add_subdirectory("libs/curl")
+    target_link_libraries(${PACKAGE_NAME} libcurl::libcurl)
+
+    add_subdirectory("libs/wxcurl")
+    target_link_libraries(${PACKAGE_NAME} ocpn::wxcurl_src)
+ENDIF(NOT QT_ANDROID)
 
     add_subdirectory(libs/tinyxml)
 
@@ -484,6 +488,7 @@ if(NOT OCPN_FLATPAK_CONFIG)
 endif(NOT OCPN_FLATPAK_CONFIG)
 
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/plugingl/include)
+
 add_subdirectory(libs/plugingl)
 target_link_libraries(${PACKAGE_NAME} ocpn::plugingl)
 
@@ -505,7 +510,10 @@ add_definitions(-DTIXML_USE_STL)
 # ----- If using JSON validation in plugin section above is needed ----- ##
 #
 
+##
 ## ----- Change above to match project requirements ----- ##
+##
+
 ##
 ## ----- do not change next section - needed to configure build process ----- ##
 ##
@@ -514,8 +522,6 @@ add_definitions(-DTIXML_USE_STL)
 if(QT_ANDROID)
     include_directories(BEFORE ${qt_android_include})
 endif(QT_ANDROID)
-
-
 
 # Needed for all builds
 ##=======================================

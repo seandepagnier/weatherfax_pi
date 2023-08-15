@@ -2,707 +2,1033 @@ msgid ""
 msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-01 13:52-0600\n"
-"PO-Revision-Date: 2016-02-18 16:09-0500\n"
-"Last-Translator: nohal <pavel@kalian.cz>\n"
+"POT-Creation-Date: 2022-07-24 09:47+0200\n"
+"PO-Revision-Date: 2022-08-23 14:44\n"
+"Last-Translator: \n"
 "Language-Team: Swedish\n"
 "Language: sv_SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: crowdin.com\n"
 "X-Crowdin-Project: opencpn\n"
+"X-Crowdin-Project-ID: 49843\n"
 "X-Crowdin-Language: sv-SE\n"
 "X-Crowdin-File: /plugins/weatherfax_pi/po/weatherfax_pi.pot\n"
+"X-Crowdin-File-ID: 127\n"
 
-#: src/WeatherFaxUI.h:97 src/InternetRetrievalDialog.cpp:347
-#: src/InternetRetrievalDialog.cpp:570 src/InternetRetrievalDialog.cpp:597
-#: src/InternetRetrievalDialog.cpp:616 src/SchedulesDialog.cpp:393
-#: src/WeatherFax.cpp:197 src/WeatherFax.cpp:279 src/WeatherFax.cpp:409
-#: src/WeatherFax.cpp:491 src/WeatherFax.cpp:522 src/WeatherFaxImage.cpp:597
+#: src/WeatherFaxUI.h:104 src\InternetRetrievalDialog.cpp:397
+#: src\InternetRetrievalDialog.cpp:642 src\InternetRetrievalDialog.cpp:675
+#: src\InternetRetrievalDialog.cpp:735 src\InternetRetrievalDialog.cpp:759
+#: src\SchedulesDialog.cpp:421 src\WeatherFax.cpp:200 src\WeatherFax.cpp:221
+#: src\WeatherFax.cpp:309 src\WeatherFax.cpp:494 src\WeatherFax.cpp:589
+#: src\WeatherFax.cpp:623 src\WeatherFax.cpp:820 src\WeatherFax.cpp:874
+#: src\WeatherFaxImage.cpp:610 src\WeatherFaxUI.h:104
 msgid "Weather Fax"
 msgstr "Väderfax"
 
-#: src/WeatherFaxUI.h:165
+#: src/WeatherFaxUI.h:181 src\SchedulesDialog.cpp:43 src\WeatherFaxUI.h:181
 msgid "HF Radio Schedules"
 msgstr "HF-radioschema"
 
-#: src/WeatherFaxUI.h:216
+#: src/WeatherFaxUI.h:235 src\InternetRetrievalDialog.cpp:51
+#: src\WeatherFaxUI.h:235
 msgid "Internet Retrieval"
 msgstr "Återställning via internet"
 
-#: src/WeatherFaxUI.h:337
-msgid "Weather Fax Image"
-msgstr "Väderfaxbilden"
-
-#: src/WeatherFaxUI.h:366
+#: src/WeatherFaxUI.h:413 src\WeatherFaxUI.h:413
 msgid "Weather Fax Preferences"
 msgstr "Väderfax-inställningar"
 
-#: src/WeatherFaxUI.h:408
+#: src/WeatherFaxUI.h:450 src\DecoderOptionsDialog.cpp:37 src\WeatherFaxUI.h:450
 msgid "Fax Decoding Options"
 msgstr "FaxInställningar"
 
-#: src/WeatherFaxUI.h:434
+#: src/WeatherFaxUI.h:476 src\WeatherFaxUI.h:476
 msgid "About Weatherfax"
 msgstr "Om Väderfax"
 
-#: src/WeatherFaxUI.cpp:23
+#: src\DecoderOptionsDialog.cpp:122
+msgid "Failed to configure capture."
+msgstr "Det gick inte att konfigurera mottagna data."
+
+#: src\DecoderOptionsDialog.cpp:123
+msgid "Failure"
+msgstr "Fel"
+
+#: src\FaxDecoder.cpp:119
+msgid "Failed"
+msgstr "Misslyckades"
+
+#: src\FaxDecoder.cpp:119
+msgid "Failure Decoding Fax: "
+msgstr "Misslyckad faxavkodning: "
+
+#: src\FaxDecoder.cpp:268
+msgid "DecodeImageLine requires specific buffer length"
+msgstr ""
+
+#: src\FaxDecoder.cpp:378
+msgid "Port audio overflow on input, some data lost!"
+msgstr "Audio overflow, vissa data förlorade!"
+
+#: src\FaxDecoder.cpp:509
+msgid "could not open input file: "
+msgstr "kunde inte öppna filen: "
+
+#: src\FaxDecoder.cpp:513
+msgid "sample size not 8 or 16 bit: "
+msgstr "sample size not 8 or 16 bit: "
+
+#: src\FaxDecoder.cpp:524
+msgid "no audiofile support compiled"
+msgstr "inget ljudfilsstöd kompilerat"
+
+#: src\InternetRetrievalDialog.cpp:110 src\WeatherFaxUI.cpp:643
+msgid "Scheduled"
+msgstr "Schemalagd"
+
+#: src\InternetRetrievalDialog.cpp:111
+msgid "Server"
+msgstr "Server"
+
+#: src\InternetRetrievalDialog.cpp:112
+msgid "Region"
+msgstr "Region"
+
+#: src\InternetRetrievalDialog.cpp:113 src\SchedulesDialog.cpp:131
+msgid "Contents"
+msgstr "Innehåll"
+
+#: src\InternetRetrievalDialog.cpp:114 src\SchedulesDialog.cpp:134
+msgid "Map Area"
+msgstr "Områdeskarta"
+
+#: src\InternetRetrievalDialog.cpp:238 src\SchedulesDialog.cpp:301
+msgid "Failed to load file: "
+msgstr "Det gick inte att läsa filen: "
+
+#: src\InternetRetrievalDialog.cpp:242 src\SchedulesDialog.cpp:305
+#: src\WeatherFax.cpp:155
+msgid "Invalid xml file"
+msgstr "Ogiltig xml fil"
+
+#: src\InternetRetrievalDialog.cpp:257 src\SchedulesDialog.cpp:320
+msgid "Loading"
+msgstr "Laddar"
+
+#: src\InternetRetrievalDialog.cpp:257
+msgid "WeatherFax Internet Retrieval"
+msgstr "Väderfax från Internet"
+
+#: src\InternetRetrievalDialog.cpp:299
+msgid "Invalid iterator: "
+msgstr "Ogiltig iterator: "
+
+#: src\InternetRetrievalDialog.cpp:335 src\InternetRetrievalDialog.cpp:365
+#: src\InternetRetrievalDialog.cpp:384 src\InternetRetrievalDialog.cpp:387
+#: src\WeatherFax.cpp:196
+msgid "Unrecognized xml node: "
+msgstr "Okänd Xml-nod: "
+
+#: src\InternetRetrievalDialog.cpp:377 src\SchedulesDialog.cpp:404
+msgid "Failed to match Area: "
+msgstr "Misslyckades att matcha område: "
+
+#: src\InternetRetrievalDialog.cpp:480
+msgid "Sorting this many urls might take too long"
+msgstr "Sortering av så här många webbadresser kan ta för lång tid"
+
+#: src\InternetRetrievalDialog.cpp:481 src\SchedulesDialog.cpp:508
+#: src\SchedulesDialog.cpp:843 src\SchedulesDialog.cpp:864
+#: src\SchedulesDialog.cpp:871 src\SchedulesDialog.cpp:912
+#: src\SchedulesDialog.cpp:952
+msgid "weatherfax"
+msgstr "väderfax"
+
+#: src\InternetRetrievalDialog.cpp:641
+msgid "Fax already retrieved less than 180 minutes ago.\n"
+"Use existing file?"
+msgstr "Faxet har hämtats för mindre än 180 minuter sedan.\n"
+"Använd befintlig fil?"
+
+#: src\InternetRetrievalDialog.cpp:655 src\InternetRetrievalDialog.cpp:688
+#: src\InternetRetrievalDialog.cpp:715
+msgid "WeatherFax InternetRetrieval"
+msgstr "Väderfax från Internet"
+
+#: src\InternetRetrievalDialog.cpp:656 src\InternetRetrievalDialog.cpp:689
+#: src\InternetRetrievalDialog.cpp:716 src\WeatherFax.cpp:798
+msgid "Reading Headers: "
+msgstr "Läser rubriker: "
+
+#: src\InternetRetrievalDialog.cpp:670 src\InternetRetrievalDialog.cpp:730
+#: src\WeatherFax.cpp:816
+msgid "Failed to Download: "
+msgstr "Det gick inte att ladda ned: "
+
+#: src\InternetRetrievalDialog.cpp:673 src\InternetRetrievalDialog.cpp:733
+#: src\WeatherFax.cpp:818
+msgid "Verify there is a working internet connection."
+msgstr "Kontrollera att det finns en fungerande internetanslutning."
+
+#: src\InternetRetrievalDialog.cpp:674 src\InternetRetrievalDialog.cpp:734
+#: src\WeatherFax.cpp:819
+msgid "If the url is incorrect please edit the xml and/or post a bug report."
+msgstr "Om webbadressen är felaktig, vänligen redigera xml och/eller skicka en felrapport."
+
+#: src\InternetRetrievalDialog.cpp:756
+msgid "No Faxes selected."
+msgstr "Inga fax valda."
+
+#: src\InternetRetrievalDialog.cpp:758
+msgid " Try clicking the selected (first) column"
+msgstr " Försök att klicka på den valda (första) kolumnen"
+
+#: src\SchedulesDialog.cpp:127
+msgid "Capture"
+msgstr "Fånga"
+
+#: src\SchedulesDialog.cpp:128
+msgid "Station"
+msgstr "Station"
+
+#: src\SchedulesDialog.cpp:129
+msgid "Frequencies"
+msgstr "Frekvenser"
+
+#: src\SchedulesDialog.cpp:130
+msgid "Time (UTC)"
+msgstr "Tid (UTC)"
+
+#: src\SchedulesDialog.cpp:132
+msgid "Valid Time"
+msgstr "Giltig tid"
+
+#: src\SchedulesDialog.cpp:133
+msgid "Duration"
+msgstr "Varaktighet"
+
+#: src\SchedulesDialog.cpp:320 src\SchedulesDialog.cpp:647
+msgid "WeatherFax Schedules"
+msgstr "Väderfaxschema"
+
+#: src\SchedulesDialog.cpp:376 src\SchedulesDialog.cpp:390
+#: src\SchedulesDialog.cpp:411
+msgid "Unrecognized xml node"
+msgstr "Okänd Xml-nod"
+
+#: src\SchedulesDialog.cpp:396
+msgid "Failed to find Duration for: "
+msgstr "Det gick inte att hitta varaktigheten för: "
+
+#: src\SchedulesDialog.cpp:507
+msgid "Sorting this many schedules might take too long"
+msgstr "Sortering av så många scheman kan ta för lång tid"
+
+#: src\SchedulesDialog.cpp:647
+msgid "Populating List"
+msgstr "Mängdlista"
+
+#: src\SchedulesDialog.cpp:701
+msgid "Capturing fax: "
+msgstr "Fångar fax: "
+
+#: src\SchedulesDialog.cpp:702
+msgid " Conflicts with already scheduled fax: "
+msgstr " Konflikt med redan schemalagt fax: "
+
+#: src\SchedulesDialog.cpp:703
+msgid " disable this fax? "
+msgstr " inaktivera detta fax? "
+
+#: src\SchedulesDialog.cpp:704
+msgid "weatherfax schedules"
+msgstr "väderfaxschema"
+
+#: src\SchedulesDialog.cpp:766
+msgid "No Capture Set"
+msgstr "Inga fångster specificerade"
+
+#: src\SchedulesDialog.cpp:769
+msgid "starting in"
+msgstr "startar med"
+
+#: src\SchedulesDialog.cpp:772
+msgid "second(s)"
+msgstr "Sekund(er)"
+
+#: src\SchedulesDialog.cpp:776
+msgid "hour(s)"
+msgstr "timma(r)"
+
+#: src\SchedulesDialog.cpp:779
+msgid "minute(s)"
+msgstr "minut(er)"
+
+#: src\SchedulesDialog.cpp:784
+msgid "Current fax: "
+msgstr "Aktuellt fax: "
+
+#: src\SchedulesDialog.cpp:818
+msgid "Tune ssb radio to"
+msgstr "Tune ssb radio to"
+
+#: src\SchedulesDialog.cpp:820
+msgid "subtracting"
+msgstr "subtraherar"
+
+#: src\SchedulesDialog.cpp:821
+msgid "to receive fax for"
+msgstr "mottag fax för"
+
+#: src\SchedulesDialog.cpp:822
+msgid "Weather Fax Schedule Beginning Soon"
+msgstr "Väderfaxschema startar snart"
+
+#: src\SchedulesDialog.cpp:842
+msgid "Already capturing, cannot capture: "
+msgstr "Mottagning pågår, kan inte ta emot: "
+
+#: src\SchedulesDialog.cpp:863 src\SchedulesDialog.cpp:909
+msgid "Failed to launch: "
+msgstr "Misslyckades att starta: "
+
+#: src\SchedulesDialog.cpp:870
+msgid "Fault in weather fax plugin\n"
+"Currently capturing hf weather fax."
+msgstr "Fel i plugin väderfax\n"
+"Mottagning av hf väderfax pågår."
+
+#: src\SchedulesDialog.cpp:910
+msgid "\n\n"
+"log:\n"
+msgstr "\n\n"
+"log:\n"
+
+#: src\SchedulesDialog.cpp:911
+msgid "\n\n"
+"error log:\n"
+msgstr "\n\n"
+"error log:\n"
+
+#: src\SchedulesDialog.cpp:918
+msgid "Open Weather Fax Input File"
+msgstr "Öppna väderfax indatafil"
+
+#: src\SchedulesDialog.cpp:920
+msgid "WAV files (*.wav)|*.WAV;*.wav|All files (*.*)|*.*"
+msgstr "WAV files (*.wav)|*.WAV;*.wav|All files (*.*)|*.*"
+
+#: src\SchedulesDialog.cpp:951
+msgid "External Capture Execution failed"
+msgstr "Extern mottagning misslyckades"
+
+#: src\WeatherFax.cpp:150
+msgid "Failed to load coordinate sets"
+msgstr "Det gick inte att ladda koordinatuppsättningar"
+
+#: src\WeatherFax.cpp:220
+msgid "CoordinateSets.xml failed to load1"
+msgstr "Kunde inte öppna CoordinateSets.xml "
+
+#: src\WeatherFax.cpp:309
+msgid "Failed to save xml file: "
+msgstr "Det gick inte att spara xml-filen: "
+
+#: src\WeatherFax.cpp:456
+msgid "Audio Capture"
+msgstr "Audio Capture"
+
+#: src\WeatherFax.cpp:486
+msgid "try to execute :"
+msgstr "försök att köra :"
+
+#: src\WeatherFax.cpp:490
+msgid "Failed to load input file: "
+msgstr "Det gick inte att öppna filen: "
+
+#: src\WeatherFax.cpp:492
+msgid "Android doesn't support tif images"
+msgstr "Android har inte stöd för tif-bilder"
+
+#: src\WeatherFax.cpp:577
+msgid "Choose a file"
+msgstr "Välj en fil"
+
+#: src\WeatherFax.cpp:577
+msgid "Supported Files|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;*.TIF;*.tif;*.TIFF;*.tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;*.PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga;*.WAV;*.wav|All files (*.*)|*.*"
+msgstr "Filtyper som stöds|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;*.TIF;*.tif;*.TIFF;*.tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;*.PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga;*.WAV;*.wav|All files (*.*)|*.*"
+
+#: src\WeatherFax.cpp:588
+msgid "Cannot open audio weather fax already in progress."
+msgstr "Kan inte öppna väderfax audio som redan pågår."
+
+#: src\WeatherFax.cpp:608
+msgid "Save Weather Fax To Image"
+msgstr "Spara väderfax till bild"
+
+#: src\WeatherFax.cpp:610
+msgid "All files (*.*)|*.*"
+msgstr "Alla filer (*.*)|*.*"
+
+#: src\WeatherFax.cpp:622
+msgid "Failed to save file: "
+msgstr "Det gick inte att spara filen: "
+
+#: src\WeatherFax.cpp:681
+msgid "Save Weather Fax To KAP"
+msgstr "Spara väderfax till KAP"
+
+#: src\WeatherFax.cpp:683
+msgid "KAP Files|*.KAP;*.kap|All files (*.*)|*.*"
+msgstr "KAP Filer|*.KAP;*.kap|All files (*.*)|*.*"
+
+#: src\WeatherFax.cpp:797
+msgid "WeatherFax Data update"
+msgstr "WeatherFax uppdatering av data"
+
+#: src\WeatherFax.cpp:867
+msgid "Installation xml files updated."
+msgstr "Installationens xml-filer uppdaterade."
+
+#: src\WeatherFax.cpp:869
+msgid "User writable coordinateSets.xml renamed to CoordinateSets.xml.save"
+msgstr "Användarens coordinateSets.xml namnändrad till CoordinateSets.xml.save"
+
+#: src\WeatherFax.cpp:871
+msgid "If you have customizations in these files you can merge them manually."
+msgstr "Om du har gjort anpassningar i dessa filer kan du slå ihop dem manuellt."
+
+#: src\WeatherFaxImage.cpp:453
+msgid "Resulting image has negative dimensions, aborting\n"
+msgstr "Den resulterande bilden får negativa dimensioner, avbryter\n"
+
+#: src\WeatherFaxImage.cpp:454 src\WeatherFaxImage.cpp:468
+msgid "Mapping Failed"
+msgstr "Mappning misslyckades"
+
+#: src\WeatherFaxImage.cpp:465
+#, c-format
+msgid "Resulting image larger than %dMB\n"
+"Try changing size parameter to a smaller value. (less than %.2f)\n"
+"aborting\n"
+msgstr "Skapad bild blir större än %dMB\n"
+"Prova att minska storleksinställningarna. (mindre än %.2f)\n"
+"avbryter\n"
+
+#: src\WeatherFaxImage.cpp:476
+msgid "Mapping Weather Fax Image"
+msgstr "Kartläggning av väderfaxbild"
+
+#: src\WeatherFaxImage.cpp:476
+msgid "Weather Fax Mapper"
+msgstr "Skapa väderfaxbild"
+
+#: src\WeatherFaxImage.cpp:609
+msgid "Graphics hardware not supported (Disable OpenGL)\n"
+msgstr "Grafikhårdvaran stöds inte (Inaktivera OpenGL)\n"
+
+#: src\WeatherFaxUI.cpp:23
 msgid "Fax"
 msgstr "Fax"
 
-#: src/WeatherFaxUI.cpp:42
-msgid "Transparency"
-msgstr ""
+#: src\WeatherFaxUI.cpp:35 src\WeatherFaxUI.cpp:147
+msgid "&Internet"
+msgstr "&Internet"
 
-#: src/WeatherFaxUI.cpp:58
-msgid "Invert"
-msgstr ""
+#: src\WeatherFaxUI.cpp:39 src\WeatherFaxUI.cpp:143
+msgid "&HF Radio Schedules"
+msgstr "&HF-radioscheman"
 
-#: src/WeatherFaxUI.cpp:71
-msgid "&Open"
-msgstr "&Öppna"
+#: src\WeatherFaxUI.cpp:42 src\WeatherFaxUI.cpp:121
+msgid "&Delete"
+msgstr "Ra&dera"
 
-#: src/WeatherFaxUI.cpp:74
-msgid "Save &As"
-msgstr ""
+#: src\WeatherFaxUI.cpp:46 src\WeatherFaxUI.cpp:127
+msgid "&Preferences"
+msgstr "&Inställningar"
 
-#: src/WeatherFaxUI.cpp:77
-msgid "&Edit"
-msgstr "&Redigera"
-
-#: src/WeatherFaxUI.cpp:80
+#: src\WeatherFaxUI.cpp:49 src\WeatherFaxUI.cpp:115
 msgid "&Goto"
 msgstr "&Gå-till"
 
-#: src/WeatherFaxUI.cpp:83
+#: src\WeatherFaxUI.cpp:53
+msgid "File"
+msgstr "Fil"
+
+#: src\WeatherFaxUI.cpp:55 src\WeatherFaxUI.cpp:106
+msgid "&Open"
+msgstr "&Öppna"
+
+#: src\WeatherFaxUI.cpp:58 src\WeatherFaxUI.cpp:109
+msgid "Save &As"
+msgstr "Spara &som"
+
+#: src\WeatherFaxUI.cpp:61 src\WeatherFaxUI.cpp:118
 msgid "E&xport"
-msgstr ""
+msgstr "E&xportera"
 
-#: src/WeatherFaxUI.cpp:86
-msgid "&Delete"
-msgstr ""
+#: src\WeatherFaxUI.cpp:77
+msgid "Transparency"
+msgstr "Transparens"
 
-#: src/WeatherFaxUI.cpp:92
-msgid "&Preferences"
-msgstr ""
+#: src\WeatherFaxUI.cpp:93
+msgid "Invert"
+msgstr "invertera"
 
-#: src/WeatherFaxUI.cpp:98
+#: src\WeatherFaxUI.cpp:112
+msgid "&Edit"
+msgstr "&Redigera"
+
+#: src\WeatherFaxUI.cpp:133
 msgid "&Close"
 msgstr "&Stäng"
 
-#: src/WeatherFaxUI.cpp:101
+#: src\WeatherFaxUI.cpp:136
 msgid "&File"
-msgstr ""
+msgstr "&Fil"
 
-#: src/WeatherFaxUI.cpp:104
-msgid "&Audio Capture"
-msgstr ""
+#: src\WeatherFaxUI.cpp:139
+msgid "&Capture"
+msgstr "&Fånga"
 
-#: src/WeatherFaxUI.cpp:108
-msgid "&HF Radio Schedules"
-msgstr ""
+#: src\WeatherFaxUI.cpp:153
+msgid "&Update data sources"
+msgstr "&Uppdatera datakällor"
 
-#: src/WeatherFaxUI.cpp:112
-msgid "&Internet"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:115
+#: src\WeatherFaxUI.cpp:156
 msgid "&Retrieve"
-msgstr ""
+msgstr "&Ta emot"
 
-#: src/WeatherFaxUI.cpp:119
+#: src\WeatherFaxUI.cpp:160
 msgid "&About"
-msgstr ""
+msgstr "&Om"
 
-#: src/WeatherFaxUI.cpp:122
+#: src\WeatherFaxUI.cpp:163
 msgid "&Help"
-msgstr ""
+msgstr "&Hjälp"
 
-#: src/WeatherFaxUI.cpp:229 src/WeatherFaxUI.cpp:583
+#: src\WeatherFaxUI.cpp:270
 msgid "Contains"
-msgstr ""
+msgstr "Innehåller"
 
-#: src/WeatherFaxUI.cpp:236 src/WeatherFaxUI.cpp:590
+#: src\WeatherFaxUI.cpp:277 src\WeatherFaxUI.cpp:663
 msgid "Lat"
-msgstr ""
+msgstr "Lat "
 
-#: src/WeatherFaxUI.cpp:243 src/WeatherFaxUI.cpp:597
+#: src\WeatherFaxUI.cpp:284 src\WeatherFaxUI.cpp:681
 msgid "Lon"
-msgstr ""
+msgstr "Lon"
 
-#: src/WeatherFaxUI.cpp:250 src/WeatherFaxUI.cpp:604
+#: src\WeatherFaxUI.cpp:291 src\WeatherFaxUI.cpp:688
 msgid "Boat Position"
-msgstr ""
+msgstr "Båtens position"
 
-#: src/WeatherFaxUI.cpp:253 src/WeatherFaxUI.cpp:607
+#: src\WeatherFaxUI.cpp:294 src\WeatherFaxUI.cpp:691
 msgid "Reset"
-msgstr ""
+msgstr "Återställ"
 
-#: src/WeatherFaxUI.cpp:263
+#: src\WeatherFaxUI.cpp:304
 msgid "Stations"
-msgstr ""
+msgstr "Stationer"
 
-#: src/WeatherFaxUI.cpp:279 src/WeatherFaxUI.cpp:316 src/WeatherFaxUI.cpp:651
-#: src/WeatherFaxUI.cpp:684
+#: src\WeatherFaxUI.cpp:320 src\WeatherFaxUI.cpp:357 src\WeatherFaxUI.cpp:708
+#: src\WeatherFaxUI.cpp:754
 msgid "All"
-msgstr ""
+msgstr "Alla"
 
-#: src/WeatherFaxUI.cpp:282 src/WeatherFaxUI.cpp:654 src/WeatherFaxUI.cpp:687
-#: src/WeatherFaxUI.cpp:851
+#: src\WeatherFaxUI.cpp:323 src\WeatherFaxUI.cpp:711 src\WeatherFaxUI.cpp:759
+#: src\WeatherFaxUI.cpp:958
 msgid "None"
-msgstr ""
+msgstr "Ingen"
 
-#: src/WeatherFaxUI.cpp:295 src/SchedulesDialog.cpp:120
+#: src\WeatherFaxUI.cpp:336
 msgid "Frequency"
-msgstr ""
+msgstr "Frekvens"
 
-#: src/WeatherFaxUI.cpp:305
+#: src\WeatherFaxUI.cpp:346
 msgid "khz min"
-msgstr ""
+msgstr "khz min"
 
-#: src/WeatherFaxUI.cpp:312
+#: src\WeatherFaxUI.cpp:353
 msgid "khz max"
-msgstr ""
+msgstr "khz min"
 
-#: src/WeatherFaxUI.cpp:331
+#: src\WeatherFaxUI.cpp:372
 msgid "Constraints"
-msgstr ""
+msgstr "Begränsningar"
 
-#: src/WeatherFaxUI.cpp:338
+#: src\WeatherFaxUI.cpp:379
 msgid "Has Area"
-msgstr ""
+msgstr "Har område"
 
-#: src/WeatherFaxUI.cpp:341
+#: src\WeatherFaxUI.cpp:382
 msgid "Has Valid Time"
-msgstr ""
+msgstr "Har giltig tid"
 
-#: src/WeatherFaxUI.cpp:350
+#: src\WeatherFaxUI.cpp:391
 msgid "Clear Captures"
-msgstr ""
+msgstr "Rensa captures"
 
-#: src/WeatherFaxUI.cpp:360 src/WeatherFaxUI.cpp:830 src/WeatherFaxUI.cpp:1530
+#: src\WeatherFaxUI.cpp:401 src\WeatherFaxUI.cpp:934 src\WeatherFaxUI.cpp:1792
 msgid "Filter"
-msgstr ""
+msgstr "Filtrera"
 
-#: src/WeatherFaxUI.cpp:368
+#: src\WeatherFaxUI.cpp:409
 msgid "Message Box"
-msgstr ""
+msgstr "Meddelanderuta"
 
-#: src/WeatherFaxUI.cpp:377
+#: src\WeatherFaxUI.cpp:418
 msgid "Sound"
-msgstr ""
+msgstr "Ljud"
 
-#: src/WeatherFaxUI.cpp:380
+#: src\WeatherFaxUI.cpp:421
 msgid "Select a file"
-msgstr ""
+msgstr "Välj en fil"
 
-#: src/WeatherFaxUI.cpp:392
+#: src\WeatherFaxUI.cpp:421
+msgid "wav files|*.WAV;*.wav|All files (*.*)|*.*"
+msgstr "wav files|*.WAV;*.wav|All files (*.*)|*.*"
+
+#: src\WeatherFaxUI.cpp:433
 msgid "External Alarm"
-msgstr ""
+msgstr "Externt larm"
 
-#: src/WeatherFaxUI.cpp:395
-msgid "aplay /usr/local/share/opencpn/sounds/2bells.wav"
-msgstr ""
+#: src\WeatherFaxUI.cpp:442
+msgid "Skip alarm if previous fax has already tuned"
+msgstr "Hoppa över alarm om föregående fax redan har tagits in"
 
-#: src/WeatherFaxUI.cpp:405
+#: src\WeatherFaxUI.cpp:450
 msgid "1 minute alarm"
-msgstr ""
+msgstr "Larm efter en minut "
 
-#: src/WeatherFaxUI.cpp:413
+#: src\WeatherFaxUI.cpp:458
 msgid "No Action"
-msgstr ""
+msgstr "Ingen åtgärd"
 
-#: src/WeatherFaxUI.cpp:416 src/WeatherFax.cpp:375
-msgid "Audio Capture"
-msgstr ""
+#: src\WeatherFaxUI.cpp:461
+msgid "Capture (uses capture settings in preferences)"
+msgstr "Fånga (använd mottagningsregler i inställningar)"
 
-#: src/WeatherFaxUI.cpp:427
+#: src\WeatherFaxUI.cpp:473
 msgid "External Command"
-msgstr ""
+msgstr "Externt kommando"
 
-#: src/WeatherFaxUI.cpp:430
-msgid "arecord -f S16_LE"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:436
+#: src\WeatherFaxUI.cpp:492
 msgid "Manual Capture (with external program) automatic Open File"
-msgstr ""
+msgstr "Manuell mottagning (med externt program) Öppna fil automatisk"
 
-#: src/WeatherFaxUI.cpp:443
+#: src\WeatherFaxUI.cpp:499
 msgid "Capture Options"
-msgstr ""
+msgstr "Mottagningsalternativ"
 
-#: src/WeatherFaxUI.cpp:450
+#: src\WeatherFaxUI.cpp:506
 msgid "Select fax images by clicking in the capture (first) column\n\n"
 "Schedules can be sorted by clicking the header column\n\n"
 "The schedules need testing as I can only receive from a few of the possible stations.  Corrections can be made by modifying the WeatherFaxSchedules.xml file. Patches can be submitted via github.\n\n"
 "Automatic control of a ssb radio is desireable as well, however the author only has a tecsun pl-600.  If a suitable radio can be donated, support will be implemented."
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:458 src/WeatherFaxUI.cpp:1108
-#: src/WeatherFaxWizard.cpp:873
+#: src\WeatherFaxUI.cpp:514 src\WeatherFaxUI.cpp:1305
+#: src\WeatherFaxWizard.cpp:939
 msgid "Information"
-msgstr ""
+msgstr "Information"
 
-#: src/WeatherFaxUI.cpp:463
+#: src\WeatherFaxUI.cpp:519
 msgid "Capture Status"
-msgstr ""
+msgstr "Mottagningsstatus"
 
-#: src/WeatherFaxUI.cpp:479 src/WeatherFaxUI.cpp:1678
+#: src\WeatherFaxUI.cpp:535 src\WeatherFaxUI.cpp:765 src\WeatherFaxUI.cpp:1911
 msgid "Close"
-msgstr ""
+msgstr "Stäng"
 
-#: src/WeatherFaxUI.cpp:621
-msgid "Retrieve Scheduled"
-msgstr ""
+#: src\WeatherFaxUI.cpp:636
+msgid "Retrieve"
+msgstr "Ta emot"
 
-#: src/WeatherFaxUI.cpp:624
-msgid "Retrieve Selected"
-msgstr ""
+#: src\WeatherFaxUI.cpp:646
+msgid "Selected"
+msgstr "Vald"
 
-#: src/WeatherFaxUI.cpp:634
+#: src\WeatherFaxUI.cpp:701
 msgid "Servers"
-msgstr ""
+msgstr "Server"
 
-#: src/WeatherFaxUI.cpp:667
+#: src\WeatherFaxUI.cpp:734
 msgid "Regions"
-msgstr ""
+msgstr "Regioner"
 
-#: src/WeatherFaxUI.cpp:784
+#: src\WeatherFaxUI.cpp:866
 msgid "Decoder"
-msgstr ""
+msgstr "Avkodare"
 
-#: src/WeatherFaxUI.cpp:800 src/WeatherFaxWizard.cpp:112
-#: src/WeatherFaxWizard.cpp:208
+#: src\WeatherFaxUI.cpp:878 src\WeatherFaxWizard.cpp:138
+#: src\WeatherFaxWizard.cpp:235 src\WeatherFaxWizard.cpp:250
 msgid "Stop"
-msgstr ""
+msgstr "Stopp"
 
-#: src/WeatherFaxUI.cpp:803
+#: src\WeatherFaxUI.cpp:881
 msgid "Options"
-msgstr ""
+msgstr "Inställningar"
 
-#: src/WeatherFaxUI.cpp:822
+#: src\WeatherFaxUI.cpp:902
+msgid "frequency"
+msgstr "frekvens"
+
+#: src\WeatherFaxUI.cpp:909
+msgid "N/A"
+msgstr "N/A"
+
+#: src\WeatherFaxUI.cpp:923
 msgid "Image Correction"
-msgstr ""
+msgstr "Korrigering av bild"
 
-#: src/WeatherFaxUI.cpp:834
-msgid "No Filter"
-msgstr ""
+#: src\WeatherFaxUI.cpp:937
+msgid "phase by line"
+msgstr "phase by line"
 
-#: src/WeatherFaxUI.cpp:834
-msgid "Removal 1"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:834
-msgid "Removal 2"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:834
-msgid "Removal 3"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:834
-msgid "Value 1"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:834
-msgid "Value 2"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:834
-msgid "Value 3"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:840
-msgid "Phasing"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:847
+#: src\WeatherFaxUI.cpp:954
 msgid "Rotation"
-msgstr ""
+msgstr "Rotation"
 
-#: src/WeatherFaxUI.cpp:851
-msgid "CCW"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:851
-msgid "CW"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:851
+#: src\WeatherFaxUI.cpp:958
 msgid "180"
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:857
+#: src\WeatherFaxUI.cpp:958
+msgid "CCW"
+msgstr "CCW"
+
+#: src\WeatherFaxUI.cpp:958
+msgid "CW"
+msgstr "CW"
+
+#: src\WeatherFaxUI.cpp:979 src\WeatherFaxWizard.cpp:237
+msgid "Phasing"
+msgstr "Fasning"
+
+#: src\WeatherFaxUI.cpp:994
 msgid "Skew"
-msgstr ""
+msgstr "Skeva"
 
-#: src/WeatherFaxUI.cpp:895 src/WeatherFaxUI.cpp:1142
+#: src\WeatherFaxUI.cpp:1022 src\WeatherFaxUI.cpp:1318 src\WeatherFaxUI.cpp:1405
+msgid "a page"
+msgstr "en sida"
+
+#: src\WeatherFaxUI.cpp:1040 src\WeatherFaxUI.cpp:1335
 msgid "Image Coordinates"
-msgstr ""
+msgstr "Bildkoordinater"
 
-#: src/WeatherFaxUI.cpp:909
+#: src\WeatherFaxUI.cpp:1052
 msgid "Remove"
-msgstr ""
+msgstr "Ta bort"
 
-#: src/WeatherFaxUI.cpp:920 src/WeatherFaxUI.cpp:959 src/WeatherFaxUI.cpp:1154
-#: src/WeatherFaxUI.cpp:1177
+#: src\WeatherFaxUI.cpp:1069 src\WeatherFaxUI.cpp:1092 src\WeatherFaxUI.cpp:1342
+#: src\WeatherFaxUI.cpp:1365
 msgid "Coord Y/X"
-msgstr ""
+msgstr "Koordinat Y/X"
 
-#: src/WeatherFaxUI.cpp:925 src/WeatherFaxUI.cpp:964 src/WeatherFaxUI.cpp:1159
-#: src/WeatherFaxUI.cpp:1182
+#: src\WeatherFaxUI.cpp:1074 src\WeatherFaxUI.cpp:1097 src\WeatherFaxUI.cpp:1347
+#: src\WeatherFaxUI.cpp:1370
 msgid "Lat/Lon"
-msgstr ""
+msgstr "Lat/Long"
 
-#: src/WeatherFaxUI.cpp:931
+#: src\WeatherFaxUI.cpp:1124
 msgid "Minutes"
-msgstr ""
+msgstr "Minuter"
 
-#: src/WeatherFaxUI.cpp:998
-msgid "Show Lat/Lon Minutes"
-msgstr ""
+#: src\WeatherFaxUI.cpp:1196
+msgid "Lat/Lon Minutes"
+msgstr "Lat/Lon Minuter"
 
-#: src/WeatherFaxUI.cpp:1001
+#: src\WeatherFaxUI.cpp:1199
 msgid "+ Lat/Lon for N/E\n"
 "- Lat/Lon for S/W"
-msgstr ""
+msgstr "+ Lat/Lon för N/E\n"
+"- Lat/Lon för S/W"
 
-#: src/WeatherFaxUI.cpp:1019
+#: src\WeatherFaxUI.cpp:1217
 msgid "Coordinates Mapping Correction"
-msgstr ""
+msgstr "Koordinater kartkorrigering"
 
-#: src/WeatherFaxUI.cpp:1031
+#: src\WeatherFaxUI.cpp:1222
 msgid "Input Type"
-msgstr ""
+msgstr "Inmatningstyp"
 
-#: src/WeatherFaxUI.cpp:1035
-msgid "mercator"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1035
-msgid "polar"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1035
+#: src\WeatherFaxUI.cpp:1226
 msgid "conic"
-msgstr ""
+msgstr "konisk"
 
-#: src/WeatherFaxUI.cpp:1035
+#: src\WeatherFaxUI.cpp:1226
 msgid "fixed-flat"
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:1041
+#: src\WeatherFaxUI.cpp:1226
+msgid "mercator"
+msgstr "mercator"
+
+#: src\WeatherFaxUI.cpp:1226
+msgid "polar"
+msgstr "polar"
+
+#: src\WeatherFaxUI.cpp:1232
 msgid "Output Type"
-msgstr ""
+msgstr "Utdatatyp"
 
-#: src/WeatherFaxUI.cpp:1045
+#: src\WeatherFaxUI.cpp:1236
 msgid "Mercator"
-msgstr ""
+msgstr "Mercator"
 
-#: src/WeatherFaxUI.cpp:1049
+#: src\WeatherFaxUI.cpp:1240
 msgid "Size"
-msgstr ""
+msgstr "Storlek"
 
-#: src/WeatherFaxUI.cpp:1053 src/WeatherFaxUI.cpp:1060 src/WeatherFaxUI.cpp:1067
-msgid "1"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1056
+#: src\WeatherFaxUI.cpp:1247
 msgid "W/H"
-msgstr ""
+msgstr "W/H"
 
-#: src/WeatherFaxUI.cpp:1063
+#: src\WeatherFaxUI.cpp:1254
 msgid "True Width Ratio"
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:1078
+#: src\WeatherFaxUI.cpp:1267
 msgid "Pole X"
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:1085
+#: src\WeatherFaxUI.cpp:1274
 msgid "Pole Y"
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:1092
+#: src\WeatherFaxUI.cpp:1281
 msgid "Equator Y"
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:1099
-msgid "Get Mapping "
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1102
+#: src\WeatherFaxUI.cpp:1296
 msgid "Get Equator"
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:1105
+#: src\WeatherFaxUI.cpp:1299
+msgid "Get Mapping "
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1302
 msgid "GetAspectRatio"
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:1365
+#: src\WeatherFaxUI.cpp:1415
+msgid "<< Prev"
+msgstr "<< Föregående"
+
+#: src\WeatherFaxUI.cpp:1418
+msgid "Next >>"
+msgstr "Nästa >>"
+
+#: src\WeatherFaxUI.cpp:1421
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: src\WeatherFaxUI.cpp:1563
 msgid "HF Schedules"
-msgstr ""
+msgstr "HF Schema"
 
-#: src/WeatherFaxUI.cpp:1372
+#: src\WeatherFaxUI.cpp:1570
 msgid "Load Schedules at Startup"
-msgstr ""
+msgstr "Ladda schemalagda vid start"
 
-#: src/WeatherFaxUI.cpp:1382
-msgid "Export"
-msgstr ""
+#: src\WeatherFaxUI.cpp:1580
+msgid "capture"
+msgstr "fånga"
 
-#: src/WeatherFaxUI.cpp:1394
-msgid "Reduce to"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1401
-msgid "Colors"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1408
-msgid "Recommended 4, 16, 64, or 256"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1413
-msgid "Depth"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1420
-msgid "Meters"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1423
-msgid "Fathoms"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1437
-msgid "fix sounding datum"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1490
-msgid "Audio Decoding Options"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1502
-msgid "Image Width"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1509
-msgid "Bits per Pixel"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1516
-msgid "Carrier"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1523
-msgid "Deviation"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1534
-msgid "narrow"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1534
-msgid "middle"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1534
-msgid "wide"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1540
-msgid "Saturation Threshold"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1550
-msgid "Skip start, stop and \n"
-"phasing detection"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1553
-msgid "Include header data in image"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1569
-msgid "Audio Capture Options"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1576
+#: src\WeatherFaxUI.cpp:1589
 msgid "Sample Rate"
-msgstr ""
+msgstr "Samplingsfrekvens"
 
-#: src/WeatherFaxUI.cpp:1580
-msgid "8000"
-msgstr ""
-
-#: src/WeatherFaxUI.cpp:1580
+#: src\WeatherFaxUI.cpp:1593
 msgid "16000"
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:1580
+#: src\WeatherFaxUI.cpp:1593
 msgid "48000"
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:1586
+#: src\WeatherFaxUI.cpp:1593
+msgid "8000"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1599
 msgid "Device Index"
 msgstr ""
 
-#: src/WeatherFaxUI.cpp:1599
+#: src\WeatherFaxUI.cpp:1610
+msgid "audio"
+msgstr "audio"
+
+#: src\WeatherFaxUI.cpp:1617
+msgid "device index"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1624
+msgid "error ppm"
+msgstr "fel ppm"
+
+#: src\WeatherFaxUI.cpp:1631
+msgid "upconverter mhz"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1642
+msgid "rtlsdr"
+msgstr "rtlsdr"
+
+#: src\WeatherFaxUI.cpp:1649
+msgid "Export"
+msgstr "Exportera"
+
+#: src\WeatherFaxUI.cpp:1661
+msgid "Reduce to"
+msgstr "Minska till"
+
+#: src\WeatherFaxUI.cpp:1668
+msgid "Colors"
+msgstr "Färger"
+
+#: src\WeatherFaxUI.cpp:1675
+msgid "Recommended 4, 16, 64, or 256"
+msgstr "Rekommendation 4, 16, 64 eller 256"
+
+#: src\WeatherFaxUI.cpp:1680
+msgid "Depth"
+msgstr "Djup"
+
+#: src\WeatherFaxUI.cpp:1687
+msgid "Meters"
+msgstr "Meter"
+
+#: src\WeatherFaxUI.cpp:1690
+msgid "Fathoms"
+msgstr "Famnar"
+
+#: src\WeatherFaxUI.cpp:1704
+msgid "fix sounding datum"
+msgstr "fast kartdatum"
+
+#: src\WeatherFaxUI.cpp:1757
+msgid "Audio Decoding Options"
+msgstr "Inställningar för ljudavkodning"
+
+#: src\WeatherFaxUI.cpp:1764
+msgid "Image Width"
+msgstr "Bildbredd"
+
+#: src\WeatherFaxUI.cpp:1771
+msgid "Bits per Pixel"
+msgstr "Bits per Pixel"
+
+#: src\WeatherFaxUI.cpp:1778
+msgid "Carrier"
+msgstr "Carrier"
+
+#: src\WeatherFaxUI.cpp:1785
+msgid "Deviation"
+msgstr "Deviation"
+
+#: src\WeatherFaxUI.cpp:1796
+msgid "middle"
+msgstr "mitt"
+
+#: src\WeatherFaxUI.cpp:1796
+msgid "narrow"
+msgstr "smal"
+
+#: src\WeatherFaxUI.cpp:1796
+msgid "wide"
+msgstr "bred"
+
+#: src\WeatherFaxUI.cpp:1802
+msgid "Saturation Threshold"
+msgstr "Saturation Threshold"
+
+#: src\WeatherFaxUI.cpp:1817
+msgid "Skip start, stop and \n"
+"phasing detection"
+msgstr "Hoppa över start, stopp och \n"
+"fasdetektering"
+
+#: src\WeatherFaxUI.cpp:1820
+msgid "Include header data in image"
+msgstr "Inkludera sidrubriker i bilden"
+
+#: src\WeatherFaxUI.cpp:1834
 msgid "Done"
-msgstr ""
+msgstr "Klart"
 
-#: src/WeatherFaxUI.cpp:1655
+#: src\WeatherFaxUI.cpp:1888
 msgid "Weather Fax Plugin Version"
-msgstr ""
+msgstr "Weather Fax Plugin Version"
 
-#: src/WeatherFaxUI.cpp:1666
+#: src\WeatherFaxUI.cpp:1899
 msgid "The weatherfax plugin for opencpn is intended to reduce the amount of user interaction to receive weather faxes and optionally overlay them directly onto charts.\n\n"
 "This includes a fax decoder, which converts radio fax audio into images.\n\n"
 "To get started, open either an image or recorded wav audio file of a ssb radio fax transmission from the file menu, or select an option from the retrieve menu.\n\n"
 "Source Code:\n"
 "https://github.com/seandepagnier/weatherfax_pi\n\n"
 "Many thanks to translators and testers."
-msgstr ""
+msgstr "Väderfax plugin för opencpn är avsedd att minska mängden användarinteraktion för att ta emot väderfax och eventuellt överlagre dem direkt på sjökortet.\n\n"
+"Pluginen har en fax- avkodare, som omvandlar radiofaxljud till bilder.\n\n"
+"För att komma igång, öppna antingen en bild eller inspelad wav-ljudfil av en ssb-radiofaxöverföring från filmenyn, eller välj ett alternativ från hämtningsmenyn.\n\n"
+"Källkod:\n"
+"https://github.com/seandepagnier/weatherfax_pi\n\n"
+"Stort tack till översättare och testare."
 
-#: src/WeatherFaxUI.cpp:1675
+#: src\WeatherFaxUI.cpp:1908
 msgid "About the Author"
-msgstr ""
+msgstr "Om utgivaren"
 
-#: src/InternetRetrievalDialog.cpp:96
-msgid "Scheduled"
-msgstr ""
+#: src\WeatherFaxWizard.cpp:44
+msgid "Weather Fax Image"
+msgstr "Väderfaxbilden"
 
-#: src/InternetRetrievalDialog.cpp:97
-msgid "Server"
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:98
-msgid "Region"
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:99 src/SchedulesDialog.cpp:122
-msgid "Contents"
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:100 src/SchedulesDialog.cpp:125
-msgid "Map Area"
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:204 src/SchedulesDialog.cpp:275
-msgid "Failed to load file: "
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:208 src/SchedulesDialog.cpp:279
-#: src/WeatherFax.cpp:152
-msgid "Invalid xml file"
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:223
-msgid "WeatherFax Internet Retrieval"
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:223 src/SchedulesDialog.cpp:294
-msgid "Loading"
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:263
-msgid "Invalid iterator: "
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:289 src/InternetRetrievalDialog.cpp:315
-#: src/InternetRetrievalDialog.cpp:334 src/InternetRetrievalDialog.cpp:337
-#: src/WeatherFax.cpp:193
-msgid "Unrecognized xml node: "
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:327 src/SchedulesDialog.cpp:376
-msgid "Failed to match Area: "
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:429
-msgid "Sorting this many urls might take too long"
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:430 src/SchedulesDialog.cpp:480
-#: src/SchedulesDialog.cpp:779 src/SchedulesDialog.cpp:792
-#: src/SchedulesDialog.cpp:799 src/SchedulesDialog.cpp:863
-msgid "weatherfax"
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:569
-msgid "Fax already retrieved less than 180 minutes ago.\n"
-"Use existing file?"
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:583
-msgid "WeatherFax InternetRetrieval"
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:584
-msgid "Reading Headers: "
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:592
-msgid "Failed to Download: "
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:595
-msgid "Verify there is a working internet connection."
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:596
-msgid "If the url is incorrect please edit the xml and/or post a bug report."
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:613
-msgid "No Faxes selected."
-msgstr ""
-
-#: src/InternetRetrievalDialog.cpp:615
-msgid " Try clicking the selected (first) column"
-msgstr ""
-
-#: src/WeatherFaxWizard.cpp:45
+#: src\WeatherFaxWizard.cpp:50
 msgid "New Coord"
 msgstr ""
 
-#: src/WeatherFaxWizard.cpp:205
+#: src\WeatherFaxWizard.cpp:234 src\WeatherFaxWizard.cpp:247
 msgid "Start"
-msgstr ""
+msgstr "Starta"
 
-#: src/WeatherFaxWizard.cpp:295
+#: src\WeatherFaxWizard.cpp:237
+msgid "Image"
+msgstr "Bild"
+
+#: src\WeatherFaxWizard.cpp:353
 msgid "Failed to apply mapping\n"
 "Check Mapping Correction Parameters"
 msgstr ""
 
-#: src/WeatherFaxWizard.cpp:296 src/WeatherFaxWizard.cpp:429
-#: src/WeatherFaxWizard.cpp:573 src/WeatherFaxWizard.cpp:662
-#: src/WeatherFaxWizard.cpp:678
+#: src\WeatherFaxWizard.cpp:354 src\WeatherFaxWizard.cpp:495
+#: src\WeatherFaxWizard.cpp:639 src\WeatherFaxWizard.cpp:728
+#: src\WeatherFaxWizard.cpp:744
 msgid "Mapping"
 msgstr ""
 
-#: src/WeatherFaxWizard.cpp:427
+#: src\WeatherFaxWizard.cpp:493
 msgid "Warning, latitudes on different sides of equator not recommended because of ambiguity of north or south pole"
-msgstr ""
+msgstr "Varning, breddgrader på olika sidor av ekvatorn rekommenderas inte på grund av tvetydigheten i norr eller söder pol"
 
-#: src/WeatherFaxWizard.cpp:570
+#: src\WeatherFaxWizard.cpp:636
 msgid "Calculating Mapping Failed.\n"
 "Perhaps you have chosen the wrong mapping type for this image, or the coordinates specified are not correct\n"
 msgstr ""
 
-#: src/WeatherFaxWizard.cpp:661
+#: src\WeatherFaxWizard.cpp:727
 msgid "Calculating Mapping not yet supported.\n"
 msgstr ""
 
-#: src/WeatherFaxWizard.cpp:677
+#: src\WeatherFaxWizard.cpp:743
 msgid "Calculating Equator not yet supported.\n"
 msgstr ""
 
-#: src/WeatherFaxWizard.cpp:848
+#: src\WeatherFaxWizard.cpp:914
 msgid "Mapping allows for scaling, and conversion between coordinate systems\n"
 "Latitudes are +N -S, Longitudes +E -W\n\n"
 "For polar mapping mode:\n"
@@ -714,238 +1040,15 @@ msgid "Mapping allows for scaling, and conversion between coordinate systems\n"
 "It is also possible to go to the next step, adjust the coordinates, then come back to this step and get the mapping parameters again to improve the estimate."
 msgstr ""
 
-#: src/FaxDecoder.cpp:118
-msgid "Failure Decoding Fax: "
-msgstr ""
-
-#: src/FaxDecoder.cpp:118
-msgid "Failed"
-msgstr ""
-
-#: src/FaxDecoder.cpp:267
-msgid "DecodeImageLine requires specific buffer length"
-msgstr ""
-
-#: src/FaxDecoder.cpp:370
-msgid "Port audio overflow on input, some data lost!"
-msgstr ""
-
-#: src/FaxDecoder.cpp:482
-msgid "could not open input file: "
-msgstr ""
-
-#: src/FaxDecoder.cpp:486
-msgid "sample size not 8 or 16 bit: "
-msgstr ""
-
-#: src/SchedulesDialog.cpp:118
-msgid "Capture"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:119
-msgid "Station"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:121
-msgid "Time (UTC)"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:123
-msgid "Valid Time"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:124
-msgid "Duration"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:294 src/SchedulesDialog.cpp:596
-msgid "WeatherFax Schedules"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:347 src/SchedulesDialog.cpp:362
-#: src/SchedulesDialog.cpp:383
-msgid "Unrecognized xml node"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:368
-msgid "Failed to find Duration for: "
-msgstr ""
-
-#: src/SchedulesDialog.cpp:479
-msgid "Sorting this many schedules might take too long"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:596
-msgid "Populating List"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:646
-msgid "Capturing fax: "
-msgstr ""
-
-#: src/SchedulesDialog.cpp:647
-msgid " Conflicts with already scheduled fax: "
-msgstr ""
-
-#: src/SchedulesDialog.cpp:648
-msgid " disable this fax? "
-msgstr ""
-
-#: src/SchedulesDialog.cpp:649
-msgid "weatherfax schedules"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:709
-msgid "No Capture Set"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:712
-msgid "starting in"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:715
-msgid "second(s)"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:719
-msgid "hour(s)"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:722
-msgid "minute(s)"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:727
-msgid "Current fax: "
-msgstr ""
-
-#: src/SchedulesDialog.cpp:749
-msgid "Tune ssb radio to"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:751
-msgid "to receive fax for"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:752
-msgid "Weather Fax Schedule Beginning Soon"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:778
-msgid "Already capturing, cannot capture: "
-msgstr ""
-
-#: src/SchedulesDialog.cpp:791
-msgid "Failed to launch: "
-msgstr ""
-
-#: src/SchedulesDialog.cpp:798
-msgid "Fault in weather fax plugin\n"
-"Currently capturing hf weather fax."
-msgstr ""
-
-#: src/SchedulesDialog.cpp:828 src/WeatherFax.cpp:476
-msgid "Open Weather Fax Input File"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:830
-msgid "WAV files (*.wav)|*.WAV;*.wav|All files (*.*)|*.*"
-msgstr ""
-
-#: src/SchedulesDialog.cpp:862
-msgid "External Capture Execution failed"
-msgstr ""
-
-#: src/WeatherFax.cpp:147
-msgid "Failed to load coordinate sets"
-msgstr ""
-
-#: src/WeatherFax.cpp:279
-msgid "Failed to save xml file: "
-msgstr ""
-
-#: src/WeatherFax.cpp:404
-msgid "try to execute :"
-msgstr ""
-
-#: src/WeatherFax.cpp:408
-msgid "Failed to load input file: "
-msgstr ""
-
-#: src/WeatherFax.cpp:478
-msgid "Supported Files|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;*.TIF;*.tif;*.TIFF;*.tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;*.PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga;*.WAV;*.wav|All files (*.*)|*.*"
-msgstr ""
-
-#: src/WeatherFax.cpp:490
-msgid "Cannot open audio weather fax already in progress."
-msgstr ""
-
-#: src/WeatherFax.cpp:510
-msgid "Save Weather Fax To Image"
-msgstr ""
-
-#: src/WeatherFax.cpp:512
-msgid "Image Files|*.BMP;*.bmp|*.PNG;*.png|*.TIFF;*.tiffAll files (*.*)|*.*"
-msgstr ""
-
-#: src/WeatherFax.cpp:521
-msgid "Failed to save file: "
-msgstr ""
-
-#: src/WeatherFax.cpp:578
-msgid "Save Weather Fax To KAP"
-msgstr ""
-
-#: src/WeatherFax.cpp:580
-msgid "KAP Files|*.KAP;*.kap|All files (*.*)|*.*"
-msgstr ""
-
-#: src/WeatherFaxImage.cpp:440
-msgid "Resulting image has negative dimensions, aborting\n"
-msgstr ""
-
-#: src/WeatherFaxImage.cpp:441 src/WeatherFaxImage.cpp:455
-msgid "Mapping Failed"
-msgstr ""
-
-#: src/WeatherFaxImage.cpp:452
-#, c-format
-msgid "Resulting image larger than %dMB\n"
-"Try changing size parameter to a smaller value. (less than %.2f)\n"
-"aborting\n"
-msgstr ""
-
-#: src/WeatherFaxImage.cpp:463
-msgid "Mapping Weather Fax Image"
-msgstr ""
-
-#: src/WeatherFaxImage.cpp:463
-msgid "Weather Fax Mapper"
-msgstr ""
-
-#: src/WeatherFaxImage.cpp:596
-msgid "Graphics hardware not supported (Disable OpenGL)\n"
-msgstr ""
-
-#: src/weatherfax_pi.cpp:84 src/weatherfax_pi.cpp:146
+#: src\weatherfax_pi.cpp:72
 msgid "WeatherFax"
-msgstr ""
+msgstr "Väderfax"
 
-#: src/weatherfax_pi.cpp:151
-msgid "Weather Fax PlugIn for OpenCPN"
-msgstr ""
+#: src\weatherfax_pi.cpp:76
+msgid "Weatherfax"
+msgstr "Väderfax"
 
-#: src/weatherfax_pi.cpp:156
-msgid "Weather Fax PlugIn for OpenCPN\n"
-"Can open image files directly, or decode audio faxes to an image.\n"
-"With simple calibration, resulting image is overlaid on top of charts.\n"
-"Converts images in mercator, polar, conic and uniform coordinates.\n"
-"Can convert any image into a raster chart.\n"
-"Builtin database for HF radio fax stations via SSB.\n"
-"Builtin database for internet retrieval from meterological sites.\n"
-msgstr ""
-
-#: src/weatherfax_pi.cpp:324
+#: src\weatherfax_pi.cpp:371
 msgid "WeatherFax Preferences"
-msgstr ""
+msgstr "Inställningar för väderfax"
 

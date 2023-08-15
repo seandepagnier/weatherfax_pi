@@ -140,7 +140,7 @@ static void LoadCoordinatesFromXml(WeatherFaxImageCoordinateList &coords, wxStri
     TiXmlDocument doc;
 
     wxString error;
-    wxString coordinatesets_path = weatherfax_pi::StandardPath();
+    wxString coordinatesets_path = weatherfax_pi::StandardWriteablePath();
     wxString s = wxFileName::GetPathSeparator();
     wxString default_coordinatesets_path = GetPluginDataDir("weatherfax_pi") + s + _T("data") + s;
 
@@ -238,8 +238,11 @@ WeatherFax::WeatherFax( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
     m_lFaxes->GetHandle()->grabGesture(Qt::PanGesture);
     m_lFaxes->Connect( wxEVT_QT_PANGESTURE,
                        (wxObjectEventFunction) (wxEventFunction) &WeatherFax::OnEvtPanGesture, NULL, this );
-    m_lFaxes->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( WeatherFaxBase::OnLeftDown ), NULL, this );
-    m_lFaxes->Connect( wxEVT_LEFT_UP, wxMouseEventHandler( WeatherFaxBase::OnLeftUp ), NULL, this );
+// Leamas patch
+//    m_lFaxes->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( WeatherFaxBase::OnLeftDown ), NULL, this );
+//    m_lFaxes->Connect( wxEVT_LEFT_UP, wxMouseEventHandler( WeatherFaxBase::OnLeftUp ), NULL, this );
+    m_lFaxes->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( WeatherFax::OnLeftDown ), NULL, this );
+    m_lFaxes->Connect( wxEVT_LEFT_UP, wxMouseEventHandler( WeatherFax::OnLeftUp ), NULL, this );
     m_tDownTimer.Connect(wxEVT_TIMER, wxTimerEventHandler
                          ( WeatherFax::OnDownTimer ), NULL, this);
 #endif
@@ -301,7 +304,7 @@ static void SaveCoordinatesToXml(WeatherFaxImageCoordinateList &coords, wxString
         root->LinkEndChild(c);
     }
 
-    wxString coordinatesets_path = weatherfax_pi::StandardPath();
+    wxString coordinatesets_path = weatherfax_pi::StandardWriteablePath();
     if(!doc.SaveFile((coordinatesets_path + filename).mb_str()))
         wxLogMessage(_("Weather Fax") + wxString(_T(": ")) + _("Failed to save xml file: ") + filename);
 }
@@ -564,7 +567,7 @@ void WeatherFax::Goto(int selection)
 #else
     WFDistanceBearingMercator(lat0, lon0, lat1, lon1, NULL, &distance);
 #endif
-    if(!wxIsNaN(distance))
+    if(!isnan(distance))
         JumpToPosition((lat0 + lat1) / 2, (lon0 + lon1) / 2, .5/distance);
 }
 
@@ -786,10 +789,10 @@ void WeatherFax::OnAbout( wxCommandEvent& event )
     dlg.ShowModal();
 }
 
-bool WeatherFax::DownloadFile( wxString filename )
+bool WeatherFax::DownloadDataFile( wxString filename )
 {
     const wxString url = m_weatherfax_pi.m_UpdateDataBaseUrl + filename;
-    const wxString target_filename = m_weatherfax_pi.StandardPath() + filename;
+    const wxString target_filename = m_weatherfax_pi.StandardDataPath() + filename;
     const wxString tmp_filename = wxFileName::CreateTempFileName( _T("weatherfax_") );
     _OCPN_DLStatus res = OCPN_downloadFile( url, tmp_filename, _("WeatherFax Data update"),
                             _("Reading Headers: ") + url, wxNullBitmap, this,
@@ -827,25 +830,51 @@ bool WeatherFax::DownloadFile( wxString filename )
 
 void WeatherFax::OnUpdateData( wxCommandEvent& event )
 {
-    if( DownloadFile( _T("WeatherFaxInternetRetrieval_NOAA.xml") ) &&
-      DownloadFile( _T("WeatherFaxInternetRetrieval_NOAA_OPC.xml") ) &&
-      DownloadFile( _T("WeatherFaxInternetRetrieval_NAVY.xml") ) &&
-      DownloadFile( _T("WeatherFaxInternetRetrieval_PWx_Amer_Atl.xml") ) &&
-      DownloadFile( _T("WeatherFaxInternetRetrieval_Aviation_Weather.xml") ) &&
-      DownloadFile( _T("WeatherFaxInternetRetrieval_PWx_Euro_Atl.xml") ) &&
-      DownloadFile( _T("WeatherFaxInternetRetrieval_LaMMA.xml") ) &&
-      DownloadFile( _T("WeatherFaxInternetRetrieval_Europe.xml") ) &&
-      DownloadFile( _T("WeatherFaxInternetRetrieval_PWx_India.xml") ) &&
-      DownloadFile( _T("WeatherFaxInternetRetrieval_Australia.xml") ) &&
-      DownloadFile( _T("WeatherFaxInternetRetrieval_PWx_Pacific.xml") ) &&
-      DownloadFile( _T("WeatherFaxInternetRetrieval_Misc.xml") ) &&
-      DownloadFile( _T("CoordinateSets.xml") ) ) {
+    bool bdlOK = false;
+    if( DownloadDataFile( _T("WeatherFaxInternetRetrieval_NOAA.xml") ) &&
+      DownloadDataFile( _T("WeatherFaxInternetRetrieval_NOAA_OPC.xml") ) &&
+      DownloadDataFile( _T("WeatherFaxInternetRetrieval_NAVY.xml") ) &&
+      DownloadDataFile( _T("WeatherFaxInternetRetrieval_PWx_Amer_Atl.xml") ) &&
+      DownloadDataFile( _T("WeatherFaxInternetRetrieval_Aviation_Weather.xml") ) &&
+      DownloadDataFile( _T("WeatherFaxInternetRetrieval_PWx_Euro_Atl.xml") ) &&
+      DownloadDataFile( _T("WeatherFaxInternetRetrieval_LaMMA.xml") ) &&
+      DownloadDataFile( _T("WeatherFaxInternetRetrieval_Europe.xml") ) &&
+      DownloadDataFile( _T("WeatherFaxInternetRetrieval_PWx_India.xml") ) &&
+      DownloadDataFile( _T("WeatherFaxInternetRetrieval_Australia.xml") ) &&
+      DownloadDataFile( _T("WeatherFaxInternetRetrieval_PWx_Pacific.xml") ) &&
+      DownloadDataFile( _T("WeatherFaxInternetRetrieval_Misc.xml") ) &&
+      DownloadDataFile( _T("CoordinateSets.xml") ) ) {
         m_InternetRetrievalDialog.Load(true);
+        bdlOK = true;
     }
-    if( DownloadFile( _T("WeatherFaxSchedules.xml") ) ) {
+    if( DownloadDataFile( _T("WeatherFaxSchedules.xml") ) ) {
         m_SchedulesDialog.Load(true);
     }
 
+    if (bdlOK){
+        wxString sCSfile = weatherfax_pi::StandardWriteablePath();
+        sCSfile += "CoordinateSets.xml";
+        if( wxFileExists( sCSfile ) ) {
+            if( wxFileExists( sCSfile + ".save" ) ) {
+                wxRemoveFile(sCSfile + _T(".save"));
+            }
+            wxRenameFile(sCSfile, sCSfile + _T(".save"));
+        }
+
+        wxCopyFile(weatherfax_pi::StandardDataPath() + "CoordinateSets.xml",
+                   weatherfax_pi::StandardWriteablePath() + "CoordinateSets.xml");
+
+        wxString message = _("Installation xml files updated.");
+        message += "\n";
+        message += _("User writable coordinateSets.xml renamed to CoordinateSets.xml.save");
+        message += "\n";
+        message += _("If you have customizations in these files you can merge them manually.");
+
+        wxMessageDialog mdlg(this, message,
+                            _("Weather Fax"), wxOK | wxICON_ERROR);
+        mdlg.ShowModal();
+
+    }
 }
 
 bool WeatherFax::Show( bool show )

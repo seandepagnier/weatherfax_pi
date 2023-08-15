@@ -43,7 +43,7 @@
       <Area Name="5" lat1="20N" lat2="55N" lon1="95W" lon2="55W" />
       <Area Name="5a" lat1="08N" lat2="70N" lon1="95W" lon2="05W" />
       <Area Name="6" lat1="60N" lat2="45N" lon1="65W" lon2="40W" />
-      <Area Name="7" lat1="05N" lat2="60N" lon1="100W" lon2="00W" />
+      <Area Name="7" lat1="0N" lat2="60N" lon1="100W" lon2="10W" />
       <Area Name="8" lat1="22N" lat2="51N" lon1="98W" lon2="40W" />
       <Area Name="8a" lat1="22N" lat2="51N" lon1="98W" lon2="40W" />
     </Region>
@@ -136,7 +136,7 @@
       <Area Name="3" lat1="0N" lat2="31N" lon1="100W" lon2="35W" />
       <Area Name="4" lat1="12S" lat2="44N" lon1="112W" lon2="28W" />
       <Area Name="5" lat1="7N" lat2="31N" lon1="98W" lon2="35W" />
-      <Area Name="6" lat1="5N" lat2="60N" lon1="100W" lon2="0W" />
+      <Area Name="6" lat1="0N" lat2="60N" lon1="100W" lon2="10W" />
 	  <Area Name="7" lat1="0N" lat2="31N" lon1="100W" lon2="35W" />
   	  <Area Name="8" lat1="0N" lat2="31N" lon1="100W" lon2="35W" />
   	  <Area Name="9" lat1="0N" lat2="31N" lon1="100W" lon2="35W" />

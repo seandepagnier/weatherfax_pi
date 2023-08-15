@@ -55,7 +55,7 @@ class weatherfax_pi : public opencpn_plugin_116
 public:
       weatherfax_pi(void *ppimgr);
 
-      
+
 //    The required PlugIn Methods
       int Init(void);
       bool DeInit(void);
@@ -69,7 +69,7 @@ public:
       wxString GetShortDescription();
       wxString GetLongDescription();
 	  //from Shipdriver for definition of panel icon
-	  wxBitmap m_panelBitmap; 	 	  
+	  wxBitmap m_panelBitmap;
 
       int GetToolbarToolCount(void);
 
@@ -85,7 +85,8 @@ public:
       void OnWeatherFaxClose();
       void ShowPreferencesDialog( wxWindow* parent );
 
-      static wxString StandardPath();
+      static wxString StandardWriteablePath();
+      static wxString StandardDataPath();
 
       wxWindow         *m_parent_window;
 
@@ -93,9 +94,9 @@ public:
 
       /* audio decoding options */
       bool m_bLoadSchedulesStart;
-      
+
       FaxDecoderCaptureSettings m_CaptureSettings;
-    
+
       int m_iExportColors;
       bool m_bExportDepthMeters;
       wxString m_sExportSoundingDatum;

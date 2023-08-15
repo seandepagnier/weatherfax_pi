@@ -1,0 +1,1057 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: opencpn\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-24 09:47+0200\n"
+"PO-Revision-Date: 2022-07-31 01:57\n"
+"Last-Translator: \n"
+"Language-Team: Filipino\n"
+"Language: fil_PH\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Crowdin-Project: opencpn\n"
+"X-Crowdin-Project-ID: 49843\n"
+"X-Crowdin-Language: fil\n"
+"X-Crowdin-File: /plugins/weatherfax_pi/po/weatherfax_pi.pot\n"
+"X-Crowdin-File-ID: 127\n"
+
+#: src/WeatherFaxUI.h:104 src\InternetRetrievalDialog.cpp:397
+#: src\InternetRetrievalDialog.cpp:642 src\InternetRetrievalDialog.cpp:675
+#: src\InternetRetrievalDialog.cpp:735 src\InternetRetrievalDialog.cpp:759
+#: src\SchedulesDialog.cpp:421 src\WeatherFax.cpp:200 src\WeatherFax.cpp:221
+#: src\WeatherFax.cpp:309 src\WeatherFax.cpp:494 src\WeatherFax.cpp:589
+#: src\WeatherFax.cpp:623 src\WeatherFax.cpp:820 src\WeatherFax.cpp:874
+#: src\WeatherFaxImage.cpp:610 src\WeatherFaxUI.h:104
+msgid "Weather Fax"
+msgstr "Fax ng panahon"
+
+#: src/WeatherFaxUI.h:181 src\SchedulesDialog.cpp:43 src\WeatherFaxUI.h:181
+msgid "HF Radio Schedules"
+msgstr "Iskedyul ng radyo sa HF"
+
+#: src/WeatherFaxUI.h:235 src\InternetRetrievalDialog.cpp:51
+#: src\WeatherFaxUI.h:235
+msgid "Internet Retrieval"
+msgstr "Pagsasauli ng Internet"
+
+#: src/WeatherFaxUI.h:413 src\WeatherFaxUI.h:413
+msgid "Weather Fax Preferences"
+msgstr "Mga pagpipilian sa fax ng panahon"
+
+#: src/WeatherFaxUI.h:450 src\DecoderOptionsDialog.cpp:37 src\WeatherFaxUI.h:450
+msgid "Fax Decoding Options"
+msgstr "Mga opsyon sa decoding ng fax"
+
+#: src/WeatherFaxUI.h:476 src\WeatherFaxUI.h:476
+msgid "About Weatherfax"
+msgstr "Tungkol sa Weatherfax"
+
+#: src\DecoderOptionsDialog.cpp:122
+msgid "Failed to configure capture."
+msgstr ""
+
+#: src\DecoderOptionsDialog.cpp:123
+msgid "Failure"
+msgstr ""
+
+#: src\FaxDecoder.cpp:119
+msgid "Failed"
+msgstr "Nabigo"
+
+#: src\FaxDecoder.cpp:119
+msgid "Failure Decoding Fax: "
+msgstr "Hindi madecode ang fax: "
+
+#: src\FaxDecoder.cpp:268
+msgid "DecodeImageLine requires specific buffer length"
+msgstr "DecodeImageLine ay nangangailangan ns specific na haba ng buffer"
+
+#: src\FaxDecoder.cpp:378
+msgid "Port audio overflow on input, some data lost!"
+msgstr "I-port ang overflow ng tunod sa input, nawala ang ilang data!"
+
+#: src\FaxDecoder.cpp:509
+msgid "could not open input file: "
+msgstr "hindi maopen ang input file: "
+
+#: src\FaxDecoder.cpp:513
+msgid "sample size not 8 or 16 bit: "
+msgstr "halimbawa ng laki ay hindi 8 o 16 bit: "
+
+#: src\FaxDecoder.cpp:524
+msgid "no audiofile support compiled"
+msgstr ""
+
+#: src\InternetRetrievalDialog.cpp:110 src\WeatherFaxUI.cpp:643
+msgid "Scheduled"
+msgstr "Naka-iskedyul"
+
+#: src\InternetRetrievalDialog.cpp:111
+msgid "Server"
+msgstr "Serber"
+
+#: src\InternetRetrievalDialog.cpp:112
+msgid "Region"
+msgstr "Rehiyon"
+
+#: src\InternetRetrievalDialog.cpp:113 src\SchedulesDialog.cpp:131
+msgid "Contents"
+msgstr "Nilalaman"
+
+#: src\InternetRetrievalDialog.cpp:114 src\SchedulesDialog.cpp:134
+msgid "Map Area"
+msgstr "Mapa ng lugar"
+
+#: src\InternetRetrievalDialog.cpp:238 src\SchedulesDialog.cpp:301
+msgid "Failed to load file: "
+msgstr "Hindi na-load ang file: "
+
+#: src\InternetRetrievalDialog.cpp:242 src\SchedulesDialog.cpp:305
+#: src\WeatherFax.cpp:155
+msgid "Invalid xml file"
+msgstr "Imbalidong xml file"
+
+#: src\InternetRetrievalDialog.cpp:257 src\SchedulesDialog.cpp:320
+msgid "Loading"
+msgstr "Nagkakarga"
+
+#: src\InternetRetrievalDialog.cpp:257
+msgid "WeatherFax Internet Retrieval"
+msgstr "Pagsasauli ng WeatherFax Internet"
+
+#: src\InternetRetrievalDialog.cpp:299
+msgid "Invalid iterator: "
+msgstr "Imbalidong iterator: "
+
+#: src\InternetRetrievalDialog.cpp:335 src\InternetRetrievalDialog.cpp:365
+#: src\InternetRetrievalDialog.cpp:384 src\InternetRetrievalDialog.cpp:387
+#: src\WeatherFax.cpp:196
+msgid "Unrecognized xml node: "
+msgstr "Di-kilalang xml node: "
+
+#: src\InternetRetrievalDialog.cpp:377 src\SchedulesDialog.cpp:404
+msgid "Failed to match Area: "
+msgstr "Hindi tugma sa lugar: "
+
+#: src\InternetRetrievalDialog.cpp:480
+msgid "Sorting this many urls might take too long"
+msgstr "Matatagalan ang pagaayos ng mga url na ito"
+
+#: src\InternetRetrievalDialog.cpp:481 src\SchedulesDialog.cpp:508
+#: src\SchedulesDialog.cpp:843 src\SchedulesDialog.cpp:864
+#: src\SchedulesDialog.cpp:871 src\SchedulesDialog.cpp:912
+#: src\SchedulesDialog.cpp:952
+msgid "weatherfax"
+msgstr "weatherfax"
+
+#: src\InternetRetrievalDialog.cpp:641
+msgid "Fax already retrieved less than 180 minutes ago.\n"
+"Use existing file?"
+msgstr "Ang fax ay nakuha na mga 180 na minuto na ang nakalipas.\n"
+"Gamitin ang existing file?"
+
+#: src\InternetRetrievalDialog.cpp:655 src\InternetRetrievalDialog.cpp:688
+#: src\InternetRetrievalDialog.cpp:715
+msgid "WeatherFax InternetRetrieval"
+msgstr "Pagkuha sa WeatherFax Internet"
+
+#: src\InternetRetrievalDialog.cpp:656 src\InternetRetrievalDialog.cpp:689
+#: src\InternetRetrievalDialog.cpp:716 src\WeatherFax.cpp:798
+msgid "Reading Headers: "
+msgstr "Header sa pagbabasa: "
+
+#: src\InternetRetrievalDialog.cpp:670 src\InternetRetrievalDialog.cpp:730
+#: src\WeatherFax.cpp:816
+msgid "Failed to Download: "
+msgstr "Hindi mai-download: "
+
+#: src\InternetRetrievalDialog.cpp:673 src\InternetRetrievalDialog.cpp:733
+#: src\WeatherFax.cpp:818
+msgid "Verify there is a working internet connection."
+msgstr "Alamin kong may gumaganang koneksyon sa internet."
+
+#: src\InternetRetrievalDialog.cpp:674 src\InternetRetrievalDialog.cpp:734
+#: src\WeatherFax.cpp:819
+msgid "If the url is incorrect please edit the xml and/or post a bug report."
+msgstr "Kung ang url ay mali paki ayos ng xml at/o magpost ng bug report."
+
+#: src\InternetRetrievalDialog.cpp:756
+msgid "No Faxes selected."
+msgstr "Walang faxes na napili."
+
+#: src\InternetRetrievalDialog.cpp:758
+msgid " Try clicking the selected (first) column"
+msgstr " Subukang pindutin ang mga napili (una) column"
+
+#: src\SchedulesDialog.cpp:127
+msgid "Capture"
+msgstr "Pagkuha"
+
+#: src\SchedulesDialog.cpp:128
+msgid "Station"
+msgstr "Istasyon"
+
+#: src\SchedulesDialog.cpp:129
+msgid "Frequencies"
+msgstr ""
+
+#: src\SchedulesDialog.cpp:130
+msgid "Time (UTC)"
+msgstr "Oras (UTC)"
+
+#: src\SchedulesDialog.cpp:132
+msgid "Valid Time"
+msgstr "Balidong Oras"
+
+#: src\SchedulesDialog.cpp:133
+msgid "Duration"
+msgstr "Durasyon"
+
+#: src\SchedulesDialog.cpp:320 src\SchedulesDialog.cpp:647
+msgid "WeatherFax Schedules"
+msgstr "Iskedyul ng WeatherFax"
+
+#: src\SchedulesDialog.cpp:376 src\SchedulesDialog.cpp:390
+#: src\SchedulesDialog.cpp:411
+msgid "Unrecognized xml node"
+msgstr "Hindi kilalang xml node"
+
+#: src\SchedulesDialog.cpp:396
+msgid "Failed to find Duration for: "
+msgstr "Hindi makita ang durasyon para sa: "
+
+#: src\SchedulesDialog.cpp:507
+msgid "Sorting this many schedules might take too long"
+msgstr "Matatagalan ang pagaayos ng ganitong kadami ng iskedyul"
+
+#: src\SchedulesDialog.cpp:647
+msgid "Populating List"
+msgstr "Listahan ng mga Populating"
+
+#: src\SchedulesDialog.cpp:701
+msgid "Capturing fax: "
+msgstr "Pagkuha ng fax: "
+
+#: src\SchedulesDialog.cpp:702
+msgid " Conflicts with already scheduled fax: "
+msgstr " Hindi nagkasundo sa naiskedyul na fax: "
+
+#: src\SchedulesDialog.cpp:703
+msgid " disable this fax? "
+msgstr " i-disable ang fax? "
+
+#: src\SchedulesDialog.cpp:704
+msgid "weatherfax schedules"
+msgstr "iskedyul ng weatherfax"
+
+#: src\SchedulesDialog.cpp:766
+msgid "No Capture Set"
+msgstr "Walang set sa pagkuha"
+
+#: src\SchedulesDialog.cpp:769
+msgid "starting in"
+msgstr "nagsisimula sa"
+
+#: src\SchedulesDialog.cpp:772
+msgid "second(s)"
+msgstr "segundo(s)"
+
+#: src\SchedulesDialog.cpp:776
+msgid "hour(s)"
+msgstr "oras"
+
+#: src\SchedulesDialog.cpp:779
+msgid "minute(s)"
+msgstr "minuto(s)"
+
+#: src\SchedulesDialog.cpp:784
+msgid "Current fax: "
+msgstr "Kasalukuyang fax: "
+
+#: src\SchedulesDialog.cpp:818
+msgid "Tune ssb radio to"
+msgstr "I-tune ang ssb na radyo sa"
+
+#: src\SchedulesDialog.cpp:820
+msgid "subtracting"
+msgstr ""
+
+#: src\SchedulesDialog.cpp:821
+msgid "to receive fax for"
+msgstr "sa pagtanggap ng fax para"
+
+#: src\SchedulesDialog.cpp:822
+msgid "Weather Fax Schedule Beginning Soon"
+msgstr "Malapit na magsimula ang iskedyul ng Weather Fax"
+
+#: src\SchedulesDialog.cpp:842
+msgid "Already capturing, cannot capture: "
+msgstr "Kumukuha na, hindi na makakuha: "
+
+#: src\SchedulesDialog.cpp:863 src\SchedulesDialog.cpp:909
+msgid "Failed to launch: "
+msgstr "Hindi ma ilunsad: "
+
+#: src\SchedulesDialog.cpp:870
+msgid "Fault in weather fax plugin\n"
+"Currently capturing hf weather fax."
+msgstr "Pagkakamali ay nasa weather fax plugin\n"
+"Kasalukuyang kinukuha ang hf weather fax."
+
+#: src\SchedulesDialog.cpp:910
+msgid "\n\n"
+"log:\n"
+msgstr ""
+
+#: src\SchedulesDialog.cpp:911
+msgid "\n\n"
+"error log:\n"
+msgstr ""
+
+#: src\SchedulesDialog.cpp:918
+msgid "Open Weather Fax Input File"
+msgstr "I-open ang imput file ng Weather Fax"
+
+#: src\SchedulesDialog.cpp:920
+msgid "WAV files (*.wav)|*.WAV;*.wav|All files (*.*)|*.*"
+msgstr "File na may uri na WAV(*.wav)|*.WAV;*.wav|All files (*.*)|*.*"
+
+#: src\SchedulesDialog.cpp:951
+msgid "External Capture Execution failed"
+msgstr "Nabigo sa pagkuha ng panlabas na kuha"
+
+#: src\WeatherFax.cpp:150
+msgid "Failed to load coordinate sets"
+msgstr "Hindi nai-load ang coordinate sets"
+
+#: src\WeatherFax.cpp:220
+msgid "CoordinateSets.xml failed to load1"
+msgstr ""
+
+#: src\WeatherFax.cpp:309
+msgid "Failed to save xml file: "
+msgstr "Hindi nai-save ang xml file: "
+
+#: src\WeatherFax.cpp:456
+msgid "Audio Capture"
+msgstr "I-capture ang tunog"
+
+#: src\WeatherFax.cpp:486
+msgid "try to execute :"
+msgstr "hindi mapagana :"
+
+#: src\WeatherFax.cpp:490
+msgid "Failed to load input file: "
+msgstr "Hindi na-load ang file: "
+
+#: src\WeatherFax.cpp:492
+msgid "Android doesn't support tif images"
+msgstr ""
+
+#: src\WeatherFax.cpp:577
+msgid "Choose a file"
+msgstr ""
+
+#: src\WeatherFax.cpp:577
+msgid "Supported Files|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;*.TIF;*.tif;*.TIFF;*.tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;*.PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga;*.WAV;*.wav|All files (*.*)|*.*"
+msgstr "Mga suportadong file|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;*.TIF;*.tif;*.TIFF;*.tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;*.PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga;*.WAV;*.wav|All files (*.*)|*.*"
+
+#: src\WeatherFax.cpp:588
+msgid "Cannot open audio weather fax already in progress."
+msgstr "Hindi ma open ang tunog ng weather fax na kasalukuyang may prinoproceso."
+
+#: src\WeatherFax.cpp:608
+msgid "Save Weather Fax To Image"
+msgstr "I-save ang Weather Fax sa imahe"
+
+#: src\WeatherFax.cpp:610
+msgid "All files (*.*)|*.*"
+msgstr ""
+
+#: src\WeatherFax.cpp:622
+msgid "Failed to save file: "
+msgstr "Hindi na i-save ang file: "
+
+#: src\WeatherFax.cpp:681
+msgid "Save Weather Fax To KAP"
+msgstr "I-save sa KAP ang Weather Fax"
+
+#: src\WeatherFax.cpp:683
+msgid "KAP Files|*.KAP;*.kap|All files (*.*)|*.*"
+msgstr "Mga Files ng KAP|*.KAP;*.kap|All files (*.*)|*.*"
+
+#: src\WeatherFax.cpp:797
+msgid "WeatherFax Data update"
+msgstr ""
+
+#: src\WeatherFax.cpp:867
+msgid "Installation xml files updated."
+msgstr ""
+
+#: src\WeatherFax.cpp:869
+msgid "User writable coordinateSets.xml renamed to CoordinateSets.xml.save"
+msgstr ""
+
+#: src\WeatherFax.cpp:871
+msgid "If you have customizations in these files you can merge them manually."
+msgstr ""
+
+#: src\WeatherFaxImage.cpp:453
+msgid "Resulting image has negative dimensions, aborting\n"
+msgstr "Ang resulta ng imahe ay may negatibong dimesyon, hinihinto\n"
+
+#: src\WeatherFaxImage.cpp:454 src\WeatherFaxImage.cpp:468
+msgid "Mapping Failed"
+msgstr "Hindi matagumpay ang pagmap"
+
+#: src\WeatherFaxImage.cpp:465
+#, c-format
+msgid "Resulting image larger than %dMB\n"
+"Try changing size parameter to a smaller value. (less than %.2f)\n"
+"aborting\n"
+msgstr "Ang resulta ng imahe ay mas malaki ng %dMB\n"
+"Subukang palitan ang laki ng parameter sa mas maliit na halaga. (hindi hihigit sa %.2f)\n"
+"Humihinto\n"
+
+#: src\WeatherFaxImage.cpp:476
+msgid "Mapping Weather Fax Image"
+msgstr "Imahe ng Mapping Weather Fax"
+
+#: src\WeatherFaxImage.cpp:476
+msgid "Weather Fax Mapper"
+msgstr "Mapper ng Weather Fax"
+
+#: src\WeatherFaxImage.cpp:609
+msgid "Graphics hardware not supported (Disable OpenGL)\n"
+msgstr "Hindi suportado ang iyong graphics hardware (I-disable ang OpenGL)\n"
+
+#: src\WeatherFaxUI.cpp:23
+msgid "Fax"
+msgstr "Telegrama"
+
+#: src\WeatherFaxUI.cpp:35 src\WeatherFaxUI.cpp:147
+msgid "&Internet"
+msgstr "&Internet"
+
+#: src\WeatherFaxUI.cpp:39 src\WeatherFaxUI.cpp:143
+msgid "&HF Radio Schedules"
+msgstr "&Iskedyu ng radyo para sa HF"
+
+#: src\WeatherFaxUI.cpp:42 src\WeatherFaxUI.cpp:121
+msgid "&Delete"
+msgstr "&Tanggalin"
+
+#: src\WeatherFaxUI.cpp:46 src\WeatherFaxUI.cpp:127
+msgid "&Preferences"
+msgstr "&Mga pagpipilian"
+
+#: src\WeatherFaxUI.cpp:49 src\WeatherFaxUI.cpp:115
+msgid "&Goto"
+msgstr "&Pumunta"
+
+#: src\WeatherFaxUI.cpp:53
+msgid "File"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:55 src\WeatherFaxUI.cpp:106
+msgid "&Open"
+msgstr "&Buksan"
+
+#: src\WeatherFaxUI.cpp:58 src\WeatherFaxUI.cpp:109
+msgid "Save &As"
+msgstr "I-save $Bilang"
+
+#: src\WeatherFaxUI.cpp:61 src\WeatherFaxUI.cpp:118
+msgid "E&xport"
+msgstr "E&xport"
+
+#: src\WeatherFaxUI.cpp:77
+msgid "Transparency"
+msgstr "Transparency"
+
+#: src\WeatherFaxUI.cpp:93
+msgid "Invert"
+msgstr "Baliktarin"
+
+#: src\WeatherFaxUI.cpp:112
+msgid "&Edit"
+msgstr "&I-edit"
+
+#: src\WeatherFaxUI.cpp:133
+msgid "&Close"
+msgstr "&Isara"
+
+#: src\WeatherFaxUI.cpp:136
+msgid "&File"
+msgstr "&File"
+
+#: src\WeatherFaxUI.cpp:139
+msgid "&Capture"
+msgstr "&Nakuha"
+
+#: src\WeatherFaxUI.cpp:153
+msgid "&Update data sources"
+msgstr "&Mag-update ng mga mapagkukunan ng datos"
+
+#: src\WeatherFaxUI.cpp:156
+msgid "&Retrieve"
+msgstr "&Makuha ulit"
+
+#: src\WeatherFaxUI.cpp:160
+msgid "&About"
+msgstr "&Tungkol"
+
+#: src\WeatherFaxUI.cpp:163
+msgid "&Help"
+msgstr "&Tulong"
+
+#: src\WeatherFaxUI.cpp:270
+msgid "Contains"
+msgstr "Nilalaman"
+
+#: src\WeatherFaxUI.cpp:277 src\WeatherFaxUI.cpp:663
+msgid "Lat"
+msgstr "Lat"
+
+#: src\WeatherFaxUI.cpp:284 src\WeatherFaxUI.cpp:681
+msgid "Lon"
+msgstr "Lon"
+
+#: src\WeatherFaxUI.cpp:291 src\WeatherFaxUI.cpp:688
+msgid "Boat Position"
+msgstr "Posisyon ng bangka"
+
+#: src\WeatherFaxUI.cpp:294 src\WeatherFaxUI.cpp:691
+msgid "Reset"
+msgstr "I-rest"
+
+#: src\WeatherFaxUI.cpp:304
+msgid "Stations"
+msgstr "Mga istasyon"
+
+#: src\WeatherFaxUI.cpp:320 src\WeatherFaxUI.cpp:357 src\WeatherFaxUI.cpp:708
+#: src\WeatherFaxUI.cpp:754
+msgid "All"
+msgstr "Lahat"
+
+#: src\WeatherFaxUI.cpp:323 src\WeatherFaxUI.cpp:711 src\WeatherFaxUI.cpp:759
+#: src\WeatherFaxUI.cpp:958
+msgid "None"
+msgstr "Wala"
+
+#: src\WeatherFaxUI.cpp:336
+msgid "Frequency"
+msgstr "Dalas"
+
+#: src\WeatherFaxUI.cpp:346
+msgid "khz min"
+msgstr "khz min"
+
+#: src\WeatherFaxUI.cpp:353
+msgid "khz max"
+msgstr "khz max"
+
+#: src\WeatherFaxUI.cpp:372
+msgid "Constraints"
+msgstr "Limitasyon"
+
+#: src\WeatherFaxUI.cpp:379
+msgid "Has Area"
+msgstr "May lugar"
+
+#: src\WeatherFaxUI.cpp:382
+msgid "Has Valid Time"
+msgstr "May balidong oras"
+
+#: src\WeatherFaxUI.cpp:391
+msgid "Clear Captures"
+msgstr "I-clear ang mga kuha"
+
+#: src\WeatherFaxUI.cpp:401 src\WeatherFaxUI.cpp:934 src\WeatherFaxUI.cpp:1792
+msgid "Filter"
+msgstr "Salain"
+
+#: src\WeatherFaxUI.cpp:409
+msgid "Message Box"
+msgstr "Kahon ng mensahe"
+
+#: src\WeatherFaxUI.cpp:418
+msgid "Sound"
+msgstr "Tunog"
+
+#: src\WeatherFaxUI.cpp:421
+msgid "Select a file"
+msgstr "Pumili ng File"
+
+#: src\WeatherFaxUI.cpp:421
+msgid "wav files|*.WAV;*.wav|All files (*.*)|*.*"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:433
+msgid "External Alarm"
+msgstr "Panlabas na Alarm"
+
+#: src\WeatherFaxUI.cpp:442
+msgid "Skip alarm if previous fax has already tuned"
+msgstr "Ang alarma ay laktawan kung na-tune na ang nakaraang fax"
+
+#: src\WeatherFaxUI.cpp:450
+msgid "1 minute alarm"
+msgstr "Isang minutong alarm"
+
+#: src\WeatherFaxUI.cpp:458
+msgid "No Action"
+msgstr "Walang aksyon"
+
+#: src\WeatherFaxUI.cpp:461
+msgid "Capture (uses capture settings in preferences)"
+msgstr "Nakuha(sa mga kagustuhan ng pagkuha ay gumagamit ng mga pagtatakda)"
+
+#: src\WeatherFaxUI.cpp:473
+msgid "External Command"
+msgstr "Panlabas na utos"
+
+#: src\WeatherFaxUI.cpp:492
+msgid "Manual Capture (with external program) automatic Open File"
+msgstr "Manu-manong pagkuha (may external program) automatic na i-open ang File"
+
+#: src\WeatherFaxUI.cpp:499
+msgid "Capture Options"
+msgstr "Opsyon sa pagkuha"
+
+#: src\WeatherFaxUI.cpp:506
+msgid "Select fax images by clicking in the capture (first) column\n\n"
+"Schedules can be sorted by clicking the header column\n\n"
+"The schedules need testing as I can only receive from a few of the possible stations.  Corrections can be made by modifying the WeatherFaxSchedules.xml file. Patches can be submitted via github.\n\n"
+"Automatic control of a ssb radio is desireable as well, however the author only has a tecsun pl-600.  If a suitable radio can be donated, support will be implemented."
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:514 src\WeatherFaxUI.cpp:1305
+#: src\WeatherFaxWizard.cpp:939
+msgid "Information"
+msgstr "Impormasyon"
+
+#: src\WeatherFaxUI.cpp:519
+msgid "Capture Status"
+msgstr "Status ng pagkuha"
+
+#: src\WeatherFaxUI.cpp:535 src\WeatherFaxUI.cpp:765 src\WeatherFaxUI.cpp:1911
+msgid "Close"
+msgstr "Isara"
+
+#: src\WeatherFaxUI.cpp:636
+msgid "Retrieve"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:646
+msgid "Selected"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:701
+msgid "Servers"
+msgstr "Servers"
+
+#: src\WeatherFaxUI.cpp:734
+msgid "Regions"
+msgstr "Rehiyon"
+
+#: src\WeatherFaxUI.cpp:866
+msgid "Decoder"
+msgstr "Decoder"
+
+#: src\WeatherFaxUI.cpp:878 src\WeatherFaxWizard.cpp:138
+#: src\WeatherFaxWizard.cpp:235 src\WeatherFaxWizard.cpp:250
+msgid "Stop"
+msgstr "Huminto"
+
+#: src\WeatherFaxUI.cpp:881
+msgid "Options"
+msgstr "Opsyon"
+
+#: src\WeatherFaxUI.cpp:902
+msgid "frequency"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:909
+msgid "N/A"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:923
+msgid "Image Correction"
+msgstr "Pagayos sa larawan"
+
+#: src\WeatherFaxUI.cpp:937
+msgid "phase by line"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:954
+msgid "Rotation"
+msgstr "Rotasyon"
+
+#: src\WeatherFaxUI.cpp:958
+msgid "180"
+msgstr "180"
+
+#: src\WeatherFaxUI.cpp:958
+msgid "CCW"
+msgstr "CCW"
+
+#: src\WeatherFaxUI.cpp:958
+msgid "CW"
+msgstr "CW"
+
+#: src\WeatherFaxUI.cpp:979 src\WeatherFaxWizard.cpp:237
+msgid "Phasing"
+msgstr "Phasing"
+
+#: src\WeatherFaxUI.cpp:994
+msgid "Skew"
+msgstr "Skew"
+
+#: src\WeatherFaxUI.cpp:1022 src\WeatherFaxUI.cpp:1318 src\WeatherFaxUI.cpp:1405
+msgid "a page"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1040 src\WeatherFaxUI.cpp:1335
+msgid "Image Coordinates"
+msgstr "Coordinates ng larawan"
+
+#: src\WeatherFaxUI.cpp:1052
+msgid "Remove"
+msgstr "Tanggalin"
+
+#: src\WeatherFaxUI.cpp:1069 src\WeatherFaxUI.cpp:1092 src\WeatherFaxUI.cpp:1342
+#: src\WeatherFaxUI.cpp:1365
+msgid "Coord Y/X"
+msgstr "Coord Y/X"
+
+#: src\WeatherFaxUI.cpp:1074 src\WeatherFaxUI.cpp:1097 src\WeatherFaxUI.cpp:1347
+#: src\WeatherFaxUI.cpp:1370
+msgid "Lat/Lon"
+msgstr "Lat/Lon"
+
+#: src\WeatherFaxUI.cpp:1124
+msgid "Minutes"
+msgstr "Minuto"
+
+#: src\WeatherFaxUI.cpp:1196
+msgid "Lat/Lon Minutes"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1199
+msgid "+ Lat/Lon for N/E\n"
+"- Lat/Lon for S/W"
+msgstr "+ Lat/Lon for N/E\n"
+"- Lat/Lon for S/W"
+
+#: src\WeatherFaxUI.cpp:1217
+msgid "Coordinates Mapping Correction"
+msgstr "Mga coordinates para sa correction mapping"
+
+#: src\WeatherFaxUI.cpp:1222
+msgid "Input Type"
+msgstr "Input Type"
+
+#: src\WeatherFaxUI.cpp:1226
+msgid "conic"
+msgstr "conic"
+
+#: src\WeatherFaxUI.cpp:1226
+msgid "fixed-flat"
+msgstr "fixed-flat"
+
+#: src\WeatherFaxUI.cpp:1226
+msgid "mercator"
+msgstr "mercator"
+
+#: src\WeatherFaxUI.cpp:1226
+msgid "polar"
+msgstr "polar"
+
+#: src\WeatherFaxUI.cpp:1232
+msgid "Output Type"
+msgstr "Uri ng Output"
+
+#: src\WeatherFaxUI.cpp:1236
+msgid "Mercator"
+msgstr "Mercator"
+
+#: src\WeatherFaxUI.cpp:1240
+msgid "Size"
+msgstr "Laki"
+
+#: src\WeatherFaxUI.cpp:1247
+msgid "W/H"
+msgstr "W/H"
+
+#: src\WeatherFaxUI.cpp:1254
+msgid "True Width Ratio"
+msgstr "Totoong ratio ng Width"
+
+#: src\WeatherFaxUI.cpp:1267
+msgid "Pole X"
+msgstr "Pole X"
+
+#: src\WeatherFaxUI.cpp:1274
+msgid "Pole Y"
+msgstr "Pole Y"
+
+#: src\WeatherFaxUI.cpp:1281
+msgid "Equator Y"
+msgstr "Equator Y"
+
+#: src\WeatherFaxUI.cpp:1296
+msgid "Get Equator"
+msgstr "Kunin ang Equator"
+
+#: src\WeatherFaxUI.cpp:1299
+msgid "Get Mapping "
+msgstr "Kunin ang Mapping "
+
+#: src\WeatherFaxUI.cpp:1302
+msgid "GetAspectRatio"
+msgstr "GetAspectRatio"
+
+#: src\WeatherFaxUI.cpp:1415
+msgid "<< Prev"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1418
+msgid "Next >>"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1421
+msgid "Cancel"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1563
+msgid "HF Schedules"
+msgstr "Mga iskedyul ng HF"
+
+#: src\WeatherFaxUI.cpp:1570
+msgid "Load Schedules at Startup"
+msgstr "I-load ang mga iskedyul sa pagsisimula"
+
+#: src\WeatherFaxUI.cpp:1580
+msgid "capture"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1589
+msgid "Sample Rate"
+msgstr "Halimbawa ng antas"
+
+#: src\WeatherFaxUI.cpp:1593
+msgid "16000"
+msgstr "16000"
+
+#: src\WeatherFaxUI.cpp:1593
+msgid "48000"
+msgstr "48000"
+
+#: src\WeatherFaxUI.cpp:1593
+msgid "8000"
+msgstr "8000"
+
+#: src\WeatherFaxUI.cpp:1599
+msgid "Device Index"
+msgstr "Indeks ng aparato"
+
+#: src\WeatherFaxUI.cpp:1610
+msgid "audio"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1617
+msgid "device index"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1624
+msgid "error ppm"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1631
+msgid "upconverter mhz"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1642
+msgid "rtlsdr"
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1649
+msgid "Export"
+msgstr "I-export"
+
+#: src\WeatherFaxUI.cpp:1661
+msgid "Reduce to"
+msgstr "Bawasan hanggang"
+
+#: src\WeatherFaxUI.cpp:1668
+msgid "Colors"
+msgstr "Mga kulay"
+
+#: src\WeatherFaxUI.cpp:1675
+msgid "Recommended 4, 16, 64, or 256"
+msgstr "Rekomendado sa 4, 16, 64, o 256"
+
+#: src\WeatherFaxUI.cpp:1680
+msgid "Depth"
+msgstr "Lalim"
+
+#: src\WeatherFaxUI.cpp:1687
+msgid "Meters"
+msgstr "Metros"
+
+#: src\WeatherFaxUI.cpp:1690
+msgid "Fathoms"
+msgstr "Fathoms"
+
+#: src\WeatherFaxUI.cpp:1704
+msgid "fix sounding datum"
+msgstr "ayusin ang mga batayan ng pagpapatunog"
+
+#: src\WeatherFaxUI.cpp:1757
+msgid "Audio Decoding Options"
+msgstr "Mga opsyon sa decoding ng fax"
+
+#: src\WeatherFaxUI.cpp:1764
+msgid "Image Width"
+msgstr "Lapad ng Larawan"
+
+#: src\WeatherFaxUI.cpp:1771
+msgid "Bits per Pixel"
+msgstr "Bits per Pixel"
+
+#: src\WeatherFaxUI.cpp:1778
+msgid "Carrier"
+msgstr "Tagadala"
+
+#: src\WeatherFaxUI.cpp:1785
+msgid "Deviation"
+msgstr "Paglihis"
+
+#: src\WeatherFaxUI.cpp:1796
+msgid "middle"
+msgstr "gitna"
+
+#: src\WeatherFaxUI.cpp:1796
+msgid "narrow"
+msgstr "makitid"
+
+#: src\WeatherFaxUI.cpp:1796
+msgid "wide"
+msgstr "malawak"
+
+#: src\WeatherFaxUI.cpp:1802
+msgid "Saturation Threshold"
+msgstr "Saturation Threshold"
+
+#: src\WeatherFaxUI.cpp:1817
+msgid "Skip start, stop and \n"
+"phasing detection"
+msgstr "Lumaktaw sa umpisa, huminto at \n"
+"i-detect ang phasing"
+
+#: src\WeatherFaxUI.cpp:1820
+msgid "Include header data in image"
+msgstr "Isali ang header na datos sa imahe"
+
+#: src\WeatherFaxUI.cpp:1834
+msgid "Done"
+msgstr "Tapos"
+
+#: src\WeatherFaxUI.cpp:1888
+msgid "Weather Fax Plugin Version"
+msgstr "Bersyon ng Weather Fax Plugin"
+
+#: src\WeatherFaxUI.cpp:1899
+msgid "The weatherfax plugin for opencpn is intended to reduce the amount of user interaction to receive weather faxes and optionally overlay them directly onto charts.\n\n"
+"This includes a fax decoder, which converts radio fax audio into images.\n\n"
+"To get started, open either an image or recorded wav audio file of a ssb radio fax transmission from the file menu, or select an option from the retrieve menu.\n\n"
+"Source Code:\n"
+"https://github.com/seandepagnier/weatherfax_pi\n\n"
+"Many thanks to translators and testers."
+msgstr ""
+
+#: src\WeatherFaxUI.cpp:1908
+msgid "About the Author"
+msgstr "Tungkol sa may-akda"
+
+#: src\WeatherFaxWizard.cpp:44
+msgid "Weather Fax Image"
+msgstr "Imahe ng fax ng panahon"
+
+#: src\WeatherFaxWizard.cpp:50
+msgid "New Coord"
+msgstr "Bagong Coord"
+
+#: src\WeatherFaxWizard.cpp:234 src\WeatherFaxWizard.cpp:247
+msgid "Start"
+msgstr "Simulan"
+
+#: src\WeatherFaxWizard.cpp:237
+msgid "Image"
+msgstr ""
+
+#: src\WeatherFaxWizard.cpp:353
+msgid "Failed to apply mapping\n"
+"Check Mapping Correction Parameters"
+msgstr "Hindi ma apply ang mapping\n"
+"Tingnan ang mga parameter ng mapping correction"
+
+#: src\WeatherFaxWizard.cpp:354 src\WeatherFaxWizard.cpp:495
+#: src\WeatherFaxWizard.cpp:639 src\WeatherFaxWizard.cpp:728
+#: src\WeatherFaxWizard.cpp:744
+msgid "Mapping"
+msgstr "Mapping"
+
+#: src\WeatherFaxWizard.cpp:493
+msgid "Warning, latitudes on different sides of equator not recommended because of ambiguity of north or south pole"
+msgstr "Babala, ang latitudes sa ibat ibang side ng equator ay hindi nirerecomenda dagil sa ambiguity ng north at south pole"
+
+#: src\WeatherFaxWizard.cpp:636
+msgid "Calculating Mapping Failed.\n"
+"Perhaps you have chosen the wrong mapping type for this image, or the coordinates specified are not correct\n"
+msgstr "Nabigo sa Calculating Mapping.\n"
+"Baka napili mo ang maling uri ng mapping para sa larawan, o ang coordinate ng napili ay hindi tama\n"
+
+#: src\WeatherFaxWizard.cpp:727
+msgid "Calculating Mapping not yet supported.\n"
+msgstr "Hindi suportado ang Calculating Mapping.\n"
+
+#: src\WeatherFaxWizard.cpp:743
+msgid "Calculating Equator not yet supported.\n"
+msgstr "Hindi suportado ang Calculating Equator.\n"
+
+#: src\WeatherFaxWizard.cpp:914
+msgid "Mapping allows for scaling, and conversion between coordinate systems\n"
+"Latitudes are +N -S, Longitudes +E -W\n\n"
+"For polar mapping mode:\n"
+"Get Mapping parameters calculates the mapping from the coordinates given, but the first coordinate's X value (vertical red line) must align with the pole in polar mode on the vertical meridian\n"
+"Once the coordinates are entered, the mapping should make the the blue latitudes align.  If they are far off, check the input coordinates.\n"
+"Once they are close:\n"
+"First adjust pole X to center the latitudes. Next adjust the Pole Y value until the blue latitude curve closest to the pole is correct. Now, if the second blue latitude is too wide, then the true width ratio needs to be increased, otherwise it should be decreased. Repeat adjusting the Pole Y and true width ratio until both align. It is easiest to calibrate correctly if you use the farthest spaced latitudes available.\n"
+"Once the blue latitudes align perfectly, recompute the equator to ensure the resulting mapping is correct. At this point, the coordinates can be changed to better locations if needed. If true width is very close to 1.0 it probably should be exactly 1.0.\n"
+"It is also possible to go to the next step, adjust the coordinates, then come back to this step and get the mapping parameters again to improve the estimate."
+msgstr "Pinapayagan ng pag-map para sa pag-scale, at conversion sa pagitan ng mga sistema ng coordinate\n"
+"Latitudes ay + N -S, Longitudes + E -W\n\n"
+"Para sa polar mapping mode:\n"
+"Kalkulado ng mga parameter ng pagma-map ang pagmamapa mula sa mga coordinate na ibinigay, pero ang halaga ng X (patayo na pulang linya) ng unang coordinate ay dapat na nakahanay sa pole sa polar mode sa patayong meridian\n"
+"Kung ang coordinates ay naipasok na, ang mapping ay makakatuwid sa asul na mga linya ng latitude. Kung sila ay malayo sa isat-isa, siguraduhin ang mga na input na coordinates.\n"
+"Kung ito ay sarado na:\n"
+"Una i-adjust ang pole X papunta sa gitna ng latitudes. Sunod ay i-adjust ang Pole Y na halaga hanggang ang asul na latitude ay kukurba sa pinakamalapit na pole kuns saan tama. Ngayon, kung ang ikalawang asul na latitude ay masyadong malawak, ang totoong ratio kung gaano sya kalapad ay kaylangang taasan, kung hindi ay kaylangan babaan. Gawin ulit ang pag-adjust ng Pole Y at ang totoong ratio ng lapad hanggang sa magkapantay ito. Ito ay madaling ma calibrate ng maayos kung gagamitin mo ang pinakamalayong latitude na pwede.\n"
+"Kung ang asul na lalitude ay nagkapantay ng perfecto, i kalkula ulit ang equator upang masiguro na ang resulta ng mapping ay tama. Sa puntong ito, ang coordinates ay maaaring mapalitan sa tamang lokasyon kung kinakaylangan. Kung ang totoong lapad ay malapit sa 1.0 ito ay dapat na exacto sa 1.0.\n"
+"Ito ay possible rin sa susunod na hakbang, ang pagadjust ng coordinates, at bumalik sa hakbang na ito para makuha ang mapping parameter upang maimprove ulit ang tantya."
+
+#: src\weatherfax_pi.cpp:72
+msgid "WeatherFax"
+msgstr "WeatherFax"
+
+#: src\weatherfax_pi.cpp:76
+msgid "Weatherfax"
+msgstr ""
+
+#: src\weatherfax_pi.cpp:371
+msgid "WeatherFax Preferences"
+msgstr "Mga pagpipilian sa WeatherFax"
+

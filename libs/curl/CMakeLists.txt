@@ -27,10 +27,9 @@ project(ocpn_curl)
 add_library(curl_if INTERFACE)
 add_library(libcurl::libcurl ALIAS curl_if)
 
-if (OCPN_FLATPAK_CONFIG)
-  message(STATUS "libs/curl/CMakeLists.txt processing flatpak")
-
+if (UNIX AND NOT APPLE AND NOT OCPN_FLATPAK_CONFIG)
   #  On Linux and Flatpak: use the system library and be done with it.
+
   find_library(LIBCURL NAMES libcurl curl REQUIRED)
   message(STATUS "libs/curl/CMakeLists.txt LIBCURL:  ${LIBCURL}")
   if (${CMAKE_VERSION} VERSION_LESS 3.18)
@@ -42,51 +41,6 @@ if (OCPN_FLATPAK_CONFIG)
   target_link_libraries(curl_if INTERFACE ${LIBCURL})
   target_include_directories(curl_if INTERFACE ${CURL_HEADERS})
   return ()
+
 endif ()
 
-set(curl_tarball "curl-${curl_version}.tar.gz")
-set(curl_url https://curl.se/download/${curl_tarball})
-set(curl_cache_dir "${CMAKE_CURRENT_LIST_DIR}/cache")
-set(curl_srcdir "${curl_cache_dir}/curl-${curl_version}")
-
-# Make sure the tarball is downloaded and unpacked
-if (NOT EXISTS ${curl_srcdir})
-  # Some Debian/Ubuntu versions have buggy curl and hence file(DOWNLOAD ...):
-  if (NOT EXISTS "${curl_cache_dir}/${curl_tarball}")
-    execute_process(
-      COMMAND wget -nv -O "${curl_cache_dir}/${curl_tarball}" ${curl_url}
-    )
-  endif ()
-  execute_process(
-    COMMAND ${CMAKE_COMMAND} -E tar -xzf "${curl_cache_dir}/${curl_tarball}"
-    WORKING_DIRECTORY "${curl_cache_dir}"
-  )
-endif ()
-
-if ("${CMAKE_BUILD_TYPE}" STREQUAL "")
-  set(CMAKE_BUILD_TYPE Release CACHE STRING "Build release executable" FORCE)
-endif ()
-set(BUILD_SHARED_LIBS OFF CACHE BOOL "Disable shared libs" FORCE)
-
-set(BUILD_CURL_EXE OFF CACHE BOOL "Build the curl(1) executable" FORCE)
-set(CURL_DISABLE_GOPHER ON CACHE BOOL "Disable Gopher support" FORCE)
-set(CURL_DISABLE_HSTS ON CACHE BOOL "Disable Hsts support" FORCE)
-set(CURL_DISABLE_IMAP ON CACHE BOOL "Disable IMAP support" FORCE)
-set(CURL_DISABLE_LDAP ON CACHE BOOL "Disable LDAP support" FORCE)
-set(CURL_DISABLE_LDAPS ON CACHE BOOL "Disable LDAPS support" FORCE)
-set(CURL_DISABLE_MIME ON CACHE BOOL "Disable MIME support" FORCE)
-set(CURL_DISABLE_MQTT ON CACHE BOOL "Disable MQTT support" FORCE)
-set(CURL_DISABLE_NTLM ON CACHE BOOL "Disable NTLM support" FORCE)
-set(CURL_DISABLE_POP3 ON CACHE BOOL "Disable POP3 support" FORCE)
-set(CURL_DISABLE_SMB ON CACHE BOOL "Disable SMB support" FORCE)
-set(CURL_DISABLE_TELNET ON CACHE BOOL "Disable telnet support" FORCE)
-set(ENABLE_MANUAL OFF CACHE BOOL "Don't build manual" FORCE)
-
-if (WIN32)
-  set(ENABLE_INET_PTON OFF CACHE BOOL "Disable for XP compatibility" ON)
-endif ()
-
-add_subdirectory(${curl_srcdir})
-
-target_link_libraries(curl_if INTERFACE libcurl)
-target_include_directories(curl_if INTERFACE "${curl_srcdir}/include")

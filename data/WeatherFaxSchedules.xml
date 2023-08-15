@@ -1,27 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <OCPNWeatherFaxSchedules>
-  <Station Name="Cape Naval, South Africa">
-    <Frequency khz="4014,7508,13538">
-      <Map Time="0500" Contents="SURFACE ANALYSIS(SHIPPING)" Valid="00" Area="ASXX" Duration="15" />
-<!-- RTTY at 1700 not supported -->      
-      <Map Time="2230" Contents="SURFACE ANALYSIS(SHIPPING)" Valid="18" Area="ASXX" Duration="15" />
-    </Frequency>
 
-    <Frequency khz="7508,13538,18238">
-      <Map Time="0630" Contents="AIR PROGNOSES (PREVIOUS DAY'S RUN)" Valid="12" Area="FUXX" Duration="15" />
-      <Map Time="0730" Contents="SURFACE PROGNOSES (PREVIOUS DAY'S RUN)" Valid="12" Area="FSXX" Duration="15" />
-      <Map Time="0800" Contents="ANTARCTIC ICE LIMITS (OCTOBER TO MARCH)" Valid="12" Area="AIAA" Duration="15" />
-<!-- RTTY at 0915 not supported -->      
-      <Map Time="1030" Contents="SURFACE ANALYSIS(SHIPPING)" Valid="06" Area="ASXX" Duration="15" />
-      <Map Time="1100" Contents="SURFACE PROGNOSES" Valid="00" Area="FSXX" Duration="15" />
-      <Map Time="1530" Contents="SURFACE ANALYSIS(SHIPPING)" Valid="12" Area="ASXX" Duration="15" />
-    </Frequency>
-
-    <Area Name="ASXX" Description="1:20,000 Lambert" lat1="60S" lat2="0S" lon1="50W" lon2="90E" />
-    <Area Name="FUXX" Description="1:20,000 Mercator" lat1="60S" lat2="5S" lon1="15W" lon2="60E" />
-    <Area Name="FSXX" Description="1:20,000 Mercator" lat1="60S" lat2="5S" lon1="15W" lon2="60E" />
-    <Area Name="AIAA" Description="Antartic coast" />
-  </Station>
+<!-- Have removed Cape Naval, South Africa  -->
+<!-- Have removed Taipei, Republic of China   -->
+<!-- Have removed Northwood United Kingdom (Persian Gulf)   -->
 
 <!-- Tokyo Japan is incomplete as I do not know all of the map areas -->
   <Station Name="Tokyo, Japan">
@@ -54,6 +36,9 @@
       <Map Time="1640" Contents="500HPA HEIGHT, TEMPERATURE" Valid="12" Area="C" />
       <Map Time="1700" Contents="850HPA HEIGHT, TEMPERATURE, DEW POINT DEPRESSION" Valid="12" Area="C" />
       <Map Time="1719" Contents="COASTAL WAVE ANALYSIS" Valid="12" Area="X" Duration="20" />
+      <Map Time="1739" Contents="24HR 500 hPa HEIGHT, VORTICITY PROGNOSIS" Valid="12" Area="C" />
+      <Map Time="1810" Contents="36HR 500 hPa HEIGHT, VORTICITY PROGNOSIS" Valid="12" Area="C" />
+      <Map Time="1850" Contents="12/24/48/72HR OCEAN WAVE PROG" Valid="12" Area="C" />
       <Map Time="1910" Contents="METEOROLOGICAL SATELLITE PICTURE (MSAT)" Valid="18" Area="C'" Duration="20" />
       <Map Time="1930" Contents="24HR SURFACE PRESSURE, WIND, FOG, ICING, SEA ICE PROG" Valid="12" Area="C'" Duration="20" />
       <Map Time="1950" Contents="TROPICAL CYCLONE FORECAST (1)" Valid="18" Area="C'" />
@@ -62,8 +47,9 @@
       <Map Time="2100" Contents="48HR SURFACE PRESSURE, WIND, FOG, ICING, SEA ICE PROG" Valid="12" Area="C" />
       <Map Time="2120" Contents="RETRANSMISSION OF SURFACE ANALYSIS" Valid="12" Area="C" />
       <Map Time="2140" Contents="TROPICAL CYCLONE FORECAST(6)" Valid="18" Area="C'" />
-      <Map Time="2200" Contents="48/72HR SURFACE PRESSURE, PRECIPITATION PROGNOSIS" Valid="18" Area="C'" />
-      <Map Time="2220" Contents="RETRANSMISSION OF 1719" />
+
+      <Map Time="2200" Contents="48/72HR SURFACE PRESSURE, PRECIPITATION PROGNOSIS" Valid="12" Area="C'" />
+      <Map Time="2220" Contents="24HR OCEAN WAVE PROG" Valid="12" Area="X" />
       <Map Time="2240" Contents="RETRANSMISSION OF 0548/1950" />
       <Map Time="2300" Contents="RETRANSMISSION OF 0421/1930" />
       <Map Time="2320" Contents="RETRANSMISSION OF 0440/2010" />
@@ -78,50 +64,7 @@
     <Area Name="X" Description="1:6,000,000" />
   </Station>
 
-  <Station Name="Taipei, Republic of China">
-    <Frequency khz="4616,8140,13900,18560">
-      <Map Time="0110" Contents="TYPHOON WARNINGS* (ENGLISH &amp; CHINESE)" Valid="00" />
-      <Map Time="0120" Contents="GMS SATELLITE IMAGE" Valid="00" Duration="15" />
-      <Map Time="0305" Contents="FISHERY WEATHER FORECAST (IN CHINESE)" Valid="00" />
-      <Map Time="0330" Contents="SURFACE ANALYSIS WITH PLOTTED DATA" Valid="00" />
-      <Map Time="0350" Contents="24HR SURFACE PROG" Valid="00" />
-      <Map Time="0410" Contents="TYPHOON WARNING* (ENGLISH &amp; CHINESE)" Valid="03" />
-      <Map Time="0430" Contents="500HPA HEIGHT ANALYSIS WITH PLOTTED DATA" Valid="00" />
-      <Map Time="0440" Contents="SURFACE PRESSURE ANALYSIS, RFS 500HPA HEIGHT ANALYSIS" Valid="00" />
-      <Map Time="0450" Contents="RFS SURFACE, 500HPA PRESSURE PROGNOSIS 12 HOUR" Valid="00" />
-      <Map Time="0500" Contents="RFS SURFACE, 500HPA PRESSURE PROGNOSIS 24 HOUR" Valid="00" />
-      <Map Time="0510" Contents="RFS SURFACE, 500HPA PRESSURE PROGNOSIS 36 HOUR" Valid="00" />
-      <Map Time="0520" Contents="RFS SURFACE, 500HPA PRESSURE PROGNOSIS 48 HOUR" Valid="00" />
-      <Map Time="0530" Contents="RFS SURFACE, 500HPA PRESSURE PROGNOSIS 72 HOUR" Valid="00" Duration="10" />
-      <Map Time="0700" Contents="TYPHOON WARNINGS* (ENGLISH &amp; CHINESE)" Valid="06" />
-      <Map Time="0720" Contents="GMS SATELLITE IMAGE" Valid="06" Duration="12" />
-      <Map Time="0905" Contents="FISHERY WEATHER FORECAST (IN CHINESE)" Valid="06" />
-      <Map Time="0930" Contents="SURFACE ANALYSIS WITH PLOTTED DATA" Valid="06" Duration="20" />
-      <Map Time="1000" Contents="TYPHOON WARNINGS* (ENGLISH &amp; CHINESE)" Valid="09" Duration="20" />
 
-      <Map Time="1300" Contents="TYPHOON WARNINGS* (ENGLISH &amp; CHINESE)" Valid="12" />
-      <Map Time="1320" Contents="GMS SATELLITE IMAGE" Valid="12" Duration="15" />
-      <Map Time="1505" Contents="FISHERY WEATHER FORECAST (IN CHINESE)" Valid="12" />
-      <Map Time="1530" Contents="SURFACE ANALYSIS WITH PLOTTED DATA" Valid="12" Duration="20" />
-      <Map Time="1600" Contents="TYPHOON WARNING* (ENGLISH &amp; CHINESE)" Valid="15" />
-      <Map Time="1620" Contents="500HPA HEIGHT ANALYSIS WITH PLOTTED DATA" Valid="12" />
-      <Map Time="1630" Contents="SURFACE PRESSURE ANALYSIS, RFS 500HPA HEIGHT ANALYSIS" Valid="12" />
-      <Map Time="1640" Contents="RFS SURFACE, 500HPA PRESSURE PROGNOSIS 12 HOUR" Valid="12" />
-      <Map Time="1650" Contents="RFS SURFACE, 500HPA PRESSURE PROGNOSIS 24 HOUR" Valid="12" />
-      <Map Time="1700" Contents="RFS SURFACE, 500HPA PRESSURE PROGNOSIS 36 HOUR" Valid="12" />
-      <Map Time="1710" Contents="RFS SURFACE, 500HPA PRESSURE PROGNOSIS 48 HOUR" Valid="12" />
-      <Map Time="1720" Contents="RFS SURFACE, 500HPA PRESSURE PROGNOSIS 72 HOUR" Valid="12" Duration="10" />
-      <Map Time="1900" Contents="TYPHOON WARNINGS* (ENGLISH &amp; CHINESE)" Valid="18" />
-      <Map Time="1920" Contents="GMS SATELLITE IMAGE" Valid="18" Duration="20" />
-      <Map Time="2050" Contents="GFS 500HPA HEIGHT PROGNOSIS 96 HOUR" Valid="12" Duration="20" />
-      <Map Time="2105" Contents="FISHERY WEATHER FORECAST (IN CHINESE)" Valid="18" />
-      <Map Time="2130" Contents="SURFACE ANALYSIS WITH PLOTTED DATA" Valid="18" Duration="20" />
-      <Map Time="2150" Contents="GFS 500HPA HEIGHT PROGNOSIS 120 HOUR" Valid="12" Duration="20" />
-      <Map Time="2200" Contents="TYPHOON WARNINGS* (ENGLISH &amp; CHINESE)" Valid="09" Duration="20" />
-    </Frequency>
-
-    <Area Name="?" Description="Unknown" />
-  </Station>
 
   <Station Name="Seoul, Republic Of Korea">
     <Frequency khz="3585,5857.5,7433.5,9165">
@@ -228,81 +171,38 @@
     <Area Name="A" lat1="30S" lat2="50N" lon1="45E" lon2="160E" />
   </Station>
 
-  <Station Name="Northwood, United Kingdom (Persian Gulf)">
-    <Frequency khz="6834,12390">
-<!--      <Map Time="0106" Contents="SCHEDULE" /> -->
-<!--      <Map Time="0118" Contents="QSL REPORT" /> -->
-<!--      <Map Time="0142" Contents="SYMBOLOGY" /> -->
-      <Map Time="0306" Contents="SURFACE ANALYSIS" Valid="00" Duration="12" />
-      <Map Time="0354" Contents="STREAMLINE ANALYSIS" Valid="00" />
-      <Map Time="0406" Contents="SURFACE ANALYSIS" Valid="00" />
-      <Map Time="0418" Contents="700 hPA WBPT/PPTN +24" Valid="00" />
-      <Map Time="0430" Contents="AIR TEMP/DEW POINT +24" Valid="00" />
-      <Map Time="0442" Contents="SURFACE PROG T+24" Valid="00" />
-      <Map Time="0454" Contents="GULF TAFS" Valid="03" />
-      <Map Time="0506" Contents="SURFACE ANALYSIS" Valid="00" />
-      <Map Time="0518" Contents="SURFACE PROG T+24" Valid="00" />
-      <Map Time="0530" Contents="SURFACE PROG T+48" Valid="00" />
-      <Map Time="0542" Contents="GULF TAFS" Valid="06" />
-      <Map Time="0606" Contents="SURFACE ANALYSIS" Valid="00" />
-      <Map Time="0618" Contents="SURFACE PROG T+24" Valid="00" Duration="12" />
-      <Map Time="0654" Contents="GULF TAFS" Valid="06" />
-      <Map Time="0706" Contents="SPARE TAFS" />
-      <Map Time="0718" Contents="SIGNIFICANT WINDS PROG T+24" Valid="00" />
-      <Map Time="0730" Contents="SURFACE PROG T+48" Valid="00" />
-      <Map Time="0742" Contents="SURFACE PROG T+72" Valid="00" />
-      <Map Time="0754" Contents="SURFACE PROG T+96" Valid="00" />
-      <Map Time="1818" Contents="SURFACE ANALYSIS" Valid="12" />
-      <Map Time="1830" Contents="SURFACE PROG T+24" Valid="12" />
-      <Map Time="1854" Contents="GULF TAFS" Valid="18" />
-      <Map Time="1906" Contents="SPARE TAFS" Valid="12" />
-      <Map Time="1918" Contents="SIGNIFICANT WINDS PROG T+24" Valid="12" />
-      <Map Time="1930" Contents="SURFACE PROG T+48" Valid="12" />
-      <Map Time="1942" Contents="SURFACE PROG T+72" Valid="12" />
-      <Map Time="1954" Contents="SURFACE PROG T+96" Valid="12" />
-      <Map Time="2006" Contents="SURFACE PROG T+120" Valid="12" />
-      <Map Time="2018" Contents="THICKNESS/GEOPONTENTIAL HEIGHT ANALYSIS" Valid="12" />
-      <Map Time="2030" Contents="SURFACE SIGNIFINT WINDS T+48" Valid="12" />
-      <Map Time="2042" Contents="SURFACE SIGNIFINT WINDS T+72" Valid="12" />
-      <Map Time="2054" Contents="SURFACE SIGNIFINT WINDS T+96" Valid="12" />
-      <Map Time="2106" Contents="THICKNESS/GEOPONTENTIAL HEIGHT ANALYSIS" Valid="12" />
-      <Map Time="2130" Contents="THICKNESS/GEOPONTENTIAL HEIGHT T+24" Valid="12" />
-      <Map Time="2142" Contents="850 hPA WINDS T+24" Valid="12" />
-      <Map Time="2154" Contents="700 hPA WINDS T+24" Valid="12" />
-      <Map Time="2206" Contents="SEA SURFACE TEMP" Valid="12" Duration="12" />
-      <Map Time="2242" Contents="700 hPA WBPT/PPTN T+24" Valid="18" />
-      <Map Time="2254" Contents="AIR TEMP/DEW POINT +24" Valid="18" Duration="12" />
-      <Map Time="2330" Contents="SEA AND SWELL PROGNOSIS T+24" Valid="18" Duration="12" />
+
+
+ <Station Name="Guanzou Coast Radio Station XSQ, China">
+    <Frequency khz="4159.5, 8310.5, 12375.5, 16562.5">
+      <Map Time="0025" Contents="24H SURFACE FORECAST" Valid="00" />
+      <Map Time="0050" Contents="48H SURFACE FORECAST" Valid="00" />
+      <Map Time="0115" Contents="72H SURFACE FORECAST" Valid="00" />
+	  <Map Time="0140" Contents="24H SOUTH CHINA SEA FORECAST" Valid="22" />
+	  <Map Time="0215" Contents="120H TROPICAL CYCLONE FORECAST" Valid="00" Duration="20" />
+	  <Map Time="0240" Contents="48H SOUTH CHINA SEA FORECAST" Valid="22"  />
+	  <Map Time="0305" Contents="72H SOUTH CHINA SEA FORECAST" Valid="22"  />
+	  <Map Time="0330" Contents="24H WAVE HT, SURFACE WIND FORECAST" Valid="00"  />
+	  <Map Time="0400" Contents="SURFACE ANALYSIS" Valid="00"  />
+	  <Map Time="0425" Contents="48H WAVE HT, SURFACE WIND FORECAST" Valid="00"  />
+	  <Map Time="0450" Contents="72H WAVE HT, SURFACE WIND FORECAST" Valid="00"  />
+      <Map Time="0815" Contents="120H TROPICAL CYCLONE FORECAST" Valid="06" Duration="20" />
+	  <Map Time="1225" Contents="24H SURFACE FORECAST" Valid="12" />
+	  <Map Time="1250" Contents="48H SURFACE FORECAST" Valid="12"  />
+	  <Map Time="1315" Contents="72H SURFACE FORECAST" Valid="12"  />
+	  <Map Time="1340" Contents="24H SOUTH CHINA SEA FORECAST" Valid="08"  />
+	  <Map Time="1415" Contents="120H SOUTH CHINA SEA FORECAST" Valid="12"  />
+	  <Map Time="1440" Contents="48H SOUTH CHINA SEA FORECAST" Valid="08"  />
+	  <Map Time="1505" Contents="72H SOUTH CHINA SEA FORECAST" Valid="08"  />
+	  <Map Time="1600" Contents="24H WAVE HT, SUEFACE WIND FORECAST" Valid="12" />
+	  <Map Time="1625" Contents="48H WAVE HT, SUEFACE WIND FORECAST" Valid="12"  />
+	  <Map Time="1650" Contents="72H WAVE HT, SUEFACE WIND FORECAST" Valid="12"  />
+	  <Map Time="2015" Contents="120H TROPICAL CYCLONE FORECAST" Valid="18" Duration="20" />
     </Frequency>
-    <Frequency khz="12390,18261">
-      <Map Time="0818" Contents="THICKNESS/GEOPONTENTIAL HEIGHT ANALYSIS" Valid="00" />
-      <Map Time="0830" Contents="SURFACE SIGNIFINT WINDS T+48" Valid="00" />
-      <Map Time="0842" Contents="SURFACE SIGNIFINT WINDS T+72" Valid="00" />
-      <Map Time="0854" Contents="SURFACE SIGNIFINT WINDS T+96" Valid="00" />
-      <Map Time="0906" Contents="SURFACE ANALYSIS" Valid="06" />
-      <Map Time="0930" Contents="THICKNESS/GEOPONTENTIAL HEIGHT T+24" Valid="00" />
-      <Map Time="0942" Contents="850 hPA WINDS T+24" Valid="00" />
-      <Map Time="0954" Contents="700 hPA WINDS T+24" Valid="00" />
-      <Map Time="1006" Contents="SEA SURFACE TEMP" Valid="00" />
-      <Map Time="1018" Contents="SURFACE PROG T+24" Valid="06" />
-      <Map Time="1042" Contents="700 hPA WBPT/PPTN T+24" Valid="06" />
-      <Map Time="1054" Contents="AIR TEMP/DEW POINT +24" Valid="06" Duration="12" />
-      <Map Time="1130" Contents="SEA AND SWELL PROGNOSIS T+24" Valid="06" Duration="12" />
-<!--      <Map Time="1306" Contents="SCHEDULE" /> -->
-<!--      <Map Time="1318" Contents="QSL REPORT" /> -->
-      <Map Time="1506" Contents="SURFACE ANALYSIS" Valid="12" Duration="12" />
-      <Map Time="1554" Contents="STREAMLINE ANALYSIS" Valid="12" />
-      <Map Time="1606" Contents="SURFACE ANALYSIS" Valid="12" />
-      <Map Time="1618" Contents="700 hPA WBPT/PPTN +24" Valid="12" />
-      <Map Time="1630" Contents="AIR TEMP/DEW POINT +24" Valid="12" />
-      <Map Time="1642" Contents="SURFACE PROG T+24" Valid="12" />
-      <Map Time="1654" Contents="GULF TAFS" Valid="15" />
-      <Map Time="1706" Contents="SURFACE ANALYSIS" Valid="12" />
-      <Map Time="1718" Contents="SURFACE PROG T+24" Valid="12" />
-      <Map Time="1730" Contents="SURFACE PROG T+48" Valid="12" />
-      <Map Time="1742" Contents="GULF TAFS" Valid="18" Duration="12" />
-    </Frequency>
+
+    <Area Name="A" lat1="30S" lat2="50N" lon1="45E" lon2="160E" />
   </Station>
+
 
   <Station Name="Rio De Janeiro, Brazil">
     <Frequency khz="12665,16978">
@@ -324,23 +224,27 @@
     <Area Name="D" lat1="50S" lat2="15N" lon1="72W" lon2="18E" />
   </Station>
 
+
   <Station Name="Valparaiso, Playa Ancha, Chile">
     <Frequency khz="4228,8677,17146.4">
       <Map Time="1115" Contents="SURFACE ANALYSIS" Valid="06" Area="A" />
       <Map Time="1130" Contents="SATELLITE IMAGE" Valid="09" Area="A" Duration="15" />
-      <Map Time="1630" Contents="SURFACE ANALYSIS" Valid="12" Area="A" />
+      <Map Time="1630" Contents="24HR SURFACE FORECAST" Valid="12" Area="A" />
       <Map Time="1645" Contents="SATELLITE IMAGE" Valid="15" Area="A" Duration="15" />
-      <Map Time="1915" Contents="SIGNIFICANT WAVE MAP (MTS)" Valid="12" Area="A" />
+      <Map Time="1915" Contents="SURFACE CHART" Valid="12" Area="A" />
       <Map Time="1930" Contents="SATELLITE IMAGE" Valid="18" Area="A" Duration="15" />
-      <Map Time="2200" Contents="SURFACE ANALYSIS" Valid="18" Area="A" />
-      <Map Time="2215" Contents="ICE REPORT" Area="A" />
-      <Map Time="2230" Contents="12HR WINDS BARB ISOTACHS FORECAST" Valid="12" Area="A" Duration="15" />
-      <Map Time="2310" Contents="12HR SURFACE FORECAST" Area="A" />
+      <Map Time="2200" Contents="36HR SURFACE FORECAST" Valid="00" Area="A" />
+      <Map Time="2215" Contents="SURFACE CHART" Valid="18"  Area="B" />
+      <Map Time="2230" Contents="WINDS BARB ISOTACHS FORECAST" Valid="12" Area="A" Duration="15" />
+      <Map Time="2310" Contents="48 HR SURFACE FORECAST" Valid="12" Area="A" />
       <Map Time="2325" Contents="SATELLITE IMAGE" Valid="21" Area="A" Duration="15" />
     </Frequency>
 
     <Area Name="A" lat1="80S" lat2="10S" lon1="130W" lon2="30W" />
+    <Area Name="B" lat1="85S" lat2="50S" lon1="90W" lon2="30W" />
   </Station>
+
+
 
   <Station Name="Halifax, Nova Scotia, Canada">
     <Frequency khz="122.5,4271,6496.4,10536,13510">
@@ -419,6 +323,8 @@
     </Frequency>
   </Station>
 
+
+
   <Station Name="Sydney, Nova Scotia, Canada">
     <Frequency khz="4416">
       <Map Time="1121" Contents="ICE ANALYSIS GULF OF ST. LAWRENCE" />
@@ -438,13 +344,15 @@
     </Frequency>
   </Station>
 
+
   <Station Name="Kodiak, Alaska, U.S.A.">
     <Frequency khz="2054,4298,8459,12412.5">
 <!--      <Map Time="0400" Contents="TEST PATTERN" /> -->
+      <Map Time="0343" Contents="SEA ICE ANALYSIS/REBROADCAST" Valid="LATEST" Area="6"/>
       <Map Time="0403" Contents="SURFACE ANALYSIS" Valid="00" Area="2" Duration="10" />
       <Map Time="0427" Contents="REBROADCAST 24HR SURFACE F'CAST 2227/1027" Valid="12" Area="3" />
       <Map Time="0437" Contents="REBROADCAST 48HR SURFACE F'CAST 2237/1037" Valid="12" Area="1" />
-      <Map Time="0447" Contents="REBROADCAST 96HR SURFACE F'CAST 2348" Valid="LATEST" />
+      <Map Time="0447" Contents="REBROADCAST 96HR SURFACE F'CAST 2348" Valid="12" />
       <Map Time="0456" Contents="SEA STATE ANALYSIS/REBROADCAST" Valid="00" Area="1" />
       <Map Time="0506" Contents="GOES IR SATELLITE IMAGE" Valid="00" Area="5" />
       <Map Time="0517" Contents="500 MB ANALYSIS" Valid="00" Area="1" Duration="10" />
@@ -463,27 +371,33 @@
       <Map Time="1138" Contents="48HR 500 MB FORECAST" Valid="00" Area="1" />
       <Map Time="1148" Contents="SEA SURFACE TEMPERATURE ANALYSIS" Valid="LATEST" Area="4" />
       <Map Time="1159" Contents="COOK INLET SEA ICE FORECAST" Valid="LATEST" Area="7" Duration="10" />
+      <Map Time="1543" Contents="SEA ICE ANALYSIS/REBROADCAST" Valid="LATEST" Area="6"/>
 <!--      <Map Time="1600" Contents="TEST PATTERN" /> -->
       <Map Time="1603" Contents="SURFACE ANALYSIS" Valid="12" Area="2" />
       <Map Time="1627" Contents="REBROADCAST 24HR SURFACE F'CAST 2227/1027" Valid="00" Area="3" />
       <Map Time="1637" Contents="REBROADCAST 48HR SURFACE F'CAST 2237/1037" Valid="00" Area="1" />
-      <Map Time="1647" Contents="REBROADCAST 96HR SURFACE F'CAST 2348" Valid="LATEST" />
+      <Map Time="1647" Contents="REBROADCAST 96HR SURFACE F'CAST 2348" Valid="LATEST" Area="1" />
       <Map Time="1656" Contents="SEA STATE ANALYSIS/REBROADCAST" Valid="00" Area="1" />
       <Map Time="1706" Contents="GOES IR SATELLITE IMAGE" Valid="12" Area="5" />
       <Map Time="1717" Contents="500 MB ANALYSIS" Valid="12" Area="1" Duration="10" />
 <!--      <Map Time="1727" Contents="SYMBOLS AND CONTRACTIONS/SCHEDULE" Valid="00" /> -->
       <Map Time="1748" Contents="REQUEST FOR COMMENTS/PRODUCT NOTICE" Valid="00" />
       <Map Time="1758" Contents="24HR 500 MB FORECAST" Valid="12" Area="1" Duration="10" />
+
+
+
 <!--      <Map Time="2150" Contents="TEST PATTERN" /> -->
       <Map Time="2153" Contents="SURFACE ANALYSIS" Valid="18" Area="2" />
+      <Map Time="2203" Contents="24HR SURFACE FORECAST" Valid="12" Area="3" />
       <Map Time="2217" Contents="24HR WIND/WAVE FORECAST" Valid="12" Area="3" />
-      <Map Time="2227" Contents="24HR SURFACE FORECAST" Valid="12" Area="3" />
-      <Map Time="2237" Contents="48HR SURFACE FORECAST" Valid="12" Area="1" />
-      <Map Time="2247" Contents="48HR WIND/WAVE FORECAST" Valid="12" Area="1" />
-      <Map Time="2257" Contents="5-DAY SEA ICE FORECAST/SEA ICE ANALYSIS" Valid="LATEST" Area="6" />
-      <Map Time="2317" Contents="GOES IR SATELLITE IMAGE" Valid="18" Area="5" />
-      <Map Time="2328" Contents="48HR WAVE PERIOD, SWELL DIRECTION" Valid="12" Area="1" />
-      <Map Time="2338" Contents="48HR 500 MB FORECAST" Valid="12" Area="1" />
+      <Map Time="2227" Contents="48HR SURFACE FORECAST" Valid="12" Area="1" />
+      <Map Time="2237" Contents="48HR WIND/WAVE FORECAST" Valid="12" Area="1" />
+      <Map Time="2247" Contents="48HR WAVE PERIOD, SWELL DIR" Valid="12" Area="1" />
+      <Map Time="2257" Contents="5-DAY SEA ICE FORECAST REBROADCAST 0343" Valid="LATEST" Area="6" />
+      <Map Time="2307" Contents="GOES IR SATELLITE IMAGE" Valid="18" Area="5" />
+      <Map Time="2317" Contents="72HR SURFACE FORECASTN" Valid="12" Area="1" />
+      <Map Time="2328" Contents="72HR WIND/WAVE FORECAST" Valid="12" Area="1" />
+      <Map Time="2338" Contents="72HR WAVE PERIOD, SWELL DIR" Valid="12" Area="1" />
       <Map Time="2348" Contents="96HR SURFACE FORECAST" Valid="12" Area="1" />
       <Map Time="2358" Contents="96HR WIND/WAVE FORECAST" Valid="12" Area="1" />
       <Map Time="0008" Contents="96HR WAVE PERIOD, SWELL DIRECTION" Valid="12" Area="1" />
@@ -499,44 +413,48 @@
     <Area Name="7" Description="Cook Inlet" />
   </Station>
 
+
   <Station Name="PT. Reyes, California, U.S.A.">
-    <Frequency khz="4346,8682,12786,17151.2">
-<!--      <Map Time="1840" Contents="TEST PATTERN" /> -->
-      <Map Time="1842" Contents="SST ANALYSIS" Valid="00" Area="9" />
-      <Map Time="1852" Contents="SST ANALYSIS" Valid="00" Area="6" />
-      <Map Time="1902" Contents="TROPICAL GOES IR SATELLITE IMAGE" Valid="00" Area="7" />
-      <Map Time="1913" Contents="WIND/WAVE ANALYSIS" Valid="00" Area="8" />
-      <Map Time="1923" Contents="24HR 500MB FORECAST" Valid="00" Area="1" />
-      <Map Time="1933" Contents="24HR SURFACE FORECAST" Valid="00" Area="8" />
-      <Map Time="1943" Contents="24HR WIND/WAVE FORECAST" Valid="00" Area="8" />
-      <Map Time="1953" Contents="48HR 500MB FORECAST" Valid="00" Area="1" />
-      <Map Time="2003" Contents="48HR SURFACE FORECAST" Valid="00" Area="1" />
-      <Map Time="2013" Contents="48HR WIND/WAVE FORECAST" Valid="00" Area="1" />
-      <Map Time="2023" Contents="48HR WAVE PERIOD/SWELL DIRECTION" Valid="00" Area="1" />
-      <Map Time="2033" Contents="96HR 500MB FORECAST" Valid="00" Area="1" />
-      <Map Time="2043" Contents="96HR SURFACE FORECAST" Valid="00" Area="1" />
-      <Map Time="2053" Contents="96HR WIND/WAVE FORECAST" Valid="00" Area="1" />
-      <Map Time="2103" Contents="96HR WAVE PERIOD/SWELL DIRECTION" Valid="00" Area="1" />
-      <Map Time="2113" Contents="PACIFIC GOES IR SATELLITE IMAGE" Valid="00" Area="5" />
-      <Map Time="2124" Contents="SURFACE ANALYSIS (PART 1 NE PACIFIC)" Valid="00" Area="2" />
-      <Map Time="2137" Contents="SURFACE ANALYSIS (PART 2 NW PACIFIC)" Valid="00" Area="3" />
-      <Map Time="2150" Contents="TROPICAL SURFACE ANALYSIS" Valid="00" Area="4" />
-      <Map Time="2204" Contents="TROPICAL 24HR WIND/WAVE FORECAST" Valid="00" Area="4" />
-      <Map Time="2214" Contents="CYCLONE DANGER AREA* or HIGH WIND/WAVES" Valid="00" Area="10" />
+    <Frequency khz="4346,8682,12786,17151.2,22527">
+      <Map Time="1820" Contents="TEST PATTERN" />
+      <Map Time="1822" Contents="24HR SURFACE FORECAST" Valid="12" Area="8" />
+      <Map Time="1832" Contents="24HR WIND/WAVE FORECAST" Valid="12" Area="8" />
+	  <Map Time="1842" Contents="24HR 500MB FORECAST" Valid="12" Area="1" />
+      <Map Time="1852" Contents="SST ANALYSIS" Valid="LATEST" Area="9" />
+      <Map Time="1902" Contents="SST ANALYSIS" Valid="LATEST" Area="6" />
+      <Map Time="1913" Contents="TROPICAL GOES IR SATELLITE IMAGE" Valid="18" Area="7" />
+      <Map Time="1923" Contents="WIND/WAVE ANALYSIS" Valid="18" Area="8" />
+      <Map Time="1933" Contents="96HR SURFACE FORECAST" Valid="12" Area="1" />
+      <Map Time="1943" Contents="96HR WIND/WAVE FORECAST" Valid="12" Area="1" />
+	  <Map Time="1953" Contents="96HR 500MB FORECAST" Valid="12" Area="1" />
+      <Map Time="2003" Contents="96HR WAVE PERIOD/SWELL DIRECTION" Valid="12" Area="1" />
+      <Map Time="2013" Contents="48HR SURFACE FORECAST" Valid="12" Area="1" />
+      <Map Time="2023" Contents="48HR WIND/WAVE FORECAST" Valid="12" Area="1" />
+      <Map Time="2033" Contents="48HR 500MB FORECAST" Valid="12" Area="1" />
+      <Map Time="2043" Contents="48HR WAVE PERIOD/SWELL DIRECTION" Valid="12" Area="1" />
+      <Map Time="2053" Contents="72HR SURFACE FORECAST" Valid="12" Area="1" />
+      <Map Time="2103" Contents="72HR WIND/WAVE FORECAST" Valid="12" Area="1" />
+      <Map Time="2113" Contents="PACIFIC GOES IR SATELLITE IMAGE" Valid="18" Area="5" />
+      <Map Time="2124" Contents="SURFACE ANALYSIS (PART 1 NE PACIFIC)" Valid="18" Area="2" />
+      <Map Time="2137" Contents="SURFACE ANALYSIS (PART 2 NW PACIFIC)" Valid="18" Area="3" />
+      <Map Time="2150" Contents="TROPICAL SURFACE ANALYSIS" Valid="18" Area="4" />
+      <Map Time="2204" Contents="TROPICAL 24HR WIND/WAVE FORECAST" Valid="12" Area="4" />
+      <Map Time="2214" Contents="CYCLONE DANGER AREA* or HIGH WIND/WAVES" Valid="21" Area="10" />
 <!--      <Map Time="2320" Contents="TEST PATTERN" /> -->
       <Map Time="2324" Contents="BROADCAST SCHEDULE (PART 1)" />
       <Map Time="2335" Contents="BROADCAST SCHEDULE (PART 2)" />
       <Map Time="2346" Contents="TROPICAL 48HR WAVE PERIOD/SWELL DIR" Valid="00" Area="4" />
       <Map Time="2356" Contents="TROPICAL 72HR WAVE PERIOD/SWELL DIR" Valid="00" Area="4" Duration="10" />
     </Frequency>
-    <Frequency khz="8682,12786,17151.2,22527">
+
+    <Frequency khz="4346,8682,12786,17151.2">
 <!--      <Map Time="0140" Contents="TEST PATTERN"/> -->
       <Map Time="0143" Contents="NE PACIFIC GOES IR SATELLITE IMAGE" Valid="00" Area="6" />
       <Map Time="0154" Contents="PACIFIC GOES IR SATELLITE IMAGE" Valid="00" Area="5" />
       <Map Time="0205" Contents="TROPICAL SEA STATE ANALYSIS" Valid="00" Area="4" />
       <Map Time="0215" Contents="TROPICAL 48HR SURFACE FORECAST" Valid="12" Area="4" />
-      <Map Time="0225" Contents="TROPICAL 48HR WIND/WAVE FORECAST" Valid="00" Area="4" />
-      <Map Time="0235" Contents="TROPICAL 72HR WIND/WAVE FORECAST" Valid="00" Area="4" />
+      <Map Time="0225" Contents="TROPICAL 48HR WIND/WAVE FORECAST" Valid="12" Area="4" />
+      <Map Time="0235" Contents="TROPICAL 72HR WIND/WAVE FORECAST" Valid="12" Area="4" />
       <Map Time="0245" Contents="500MB ANALYSIS" Valid="00" Area="1" />
       <Map Time="0255" Contents="SEA STATE ANALYSIS, WIND/WAVE ANALYSIS" Valid="00" Area="1" />
       <Map Time="0305" Contents="PRELIM SURFACE ANALYSIS (PART 1 NE PAC)" Valid="00" Area="2" />
@@ -546,25 +464,25 @@
       <Map Time="0357" Contents="CYCLONE DANGER AREA* or HIGH WIND/WAVES" Valid="03" Area="10" />
       <Map Time="0408" Contents="TROPICAL SURFACE ANALYSIS" Valid="00" Area="4" Duration="12" />
 <!--      <Map Time="0655" Contents="TEST PATTERN" /> -->
-      <Map Time="0657" Contents="2033Z REBROADCAST (96HR 500MB)" Valid="00" Area="1" />
-      <Map Time="0707" Contents="2043Z REBROADCAST (96HR SURFACE)" Valid="00" Area="1" />
-      <Map Time="0717" Contents="2053Z REBROADCAST (96HR WIND/WAVE)" Valid="00" Area="1" />
-      <Map Time="0727" Contents="2103Z REBROADCAST (96HR WAVE PERIOD)" Valid="00" Area="1" />
+      <Map Time="0657" Contents="1953Z REBROADCAST (96HR 500MB)" Valid="00" Area="1" />
+      <Map Time="0707" Contents="1933Z REBROADCAST (96HR SURFACE)" Valid="00" Area="1" />
+      <Map Time="0717" Contents="1943Z REBROADCAST (96HR WIND/WAVE)" Valid="00" Area="1" />
+      <Map Time="0727" Contents="2003Z REBROADCAST (96HR WAVE PERIOD)" Valid="00" Area="8" />
       <Map Time="0737" Contents="TROPICAL GOES IR SATELLITE IMAGE" Valid="06" Area="7" />
       <Map Time="0748" Contents="WIND/WAVE ANALYSIS" Valid="06" Area="8" />
-      <Map Time="0758" Contents="24HR 500MB FORECAST" Valid="00" Area="1" />
-      <Map Time="0808" Contents="24HR SURFACE FORECAST" Valid="00" Area="8" />
-      <Map Time="0818" Contents="24HR WIND/WAVE FORECAST" Valid="00" Area="8" />
-      <Map Time="0828" Contents="48HR 500MB FORECAST" Valid="00" Area="1" />
-      <Map Time="0838" Contents="48HR SURFACE FORECAST" Valid="00" Area="1" />
-      <Map Time="0848" Contents="48HR WIND/WAVE FORECAST" Valid="00" Area="1" />
+      <Map Time="0758" Contents="24HR SURFACE FORECAST" Valid="00" Area="8" />
+      <Map Time="0808" Contents="24HR WIND/WAVE FORECAST" Valid="00" Area="8" />
+      <Map Time="0818" Contents="24HR 500MB FORECAST" Valid="00" Area="1" />
+      <Map Time="0828" Contents="48HR SURFACE FORECAST" Valid="00" Area="1" />
+      <Map Time="0838" Contents="48HR WIND/WAVE FORECAST" Valid="00" Area="1" />
+      <Map Time="0848" Contents="48HR 500MB FORECAST" Valid="00" Area="1" />
       <Map Time="0858" Contents="48HR WAVE PERIOD/SWELL DIRECTION" Valid="00" Area="1" />
-      <Map Time="0908" Contents="PACIFIC GOES IR SATELLITE IMAGE" Valid="00" Area="5" />
-      <Map Time="0919" Contents="SURFACE ANALYSIS (PART 1 NE PACIFIC)" Valid="00" Area="2" />
-      <Map Time="0932" Contents="SURFACE ANALYSIS (PART 2 NW PACIFIC)" Valid="00" Area="3" />
-      <Map Time="0945" Contents="TROPICAL SURFACE ANALYSIS" Valid="00" Area="4" />
-      <Map Time="0959" Contents="TROPICAL 24HR WIND/WAVE FORECAST" Valid="00" Area="4" />
-      <Map Time="1009" Contents="CYCLONE DANGER AREA* or HIGH WIND/WAVES" Valid="00" Area="10" />
+      <Map Time="0908" Contents="PACIFIC GOES IR SATELLITE IMAGE" Valid="06" Area="5" />
+      <Map Time="0919" Contents="SURFACE ANALYSIS (PART 1 NE PACIFIC)" Valid="06" Area="2" />
+      <Map Time="0932" Contents="SURFACE ANALYSIS (PART 2 NW PACIFIC)" Valid="06" Area="3" />
+      <Map Time="0945" Contents="TROPICAL SURFACE ANALYSIS" Valid="06" Area="4" />
+      <Map Time="0959" Contents="TROPICAL 24HR WIND/WAVE FORECAST" Valid="06" Area="4" />
+      <Map Time="1009" Contents="CYCLONE DANGER AREA* or HIGH WIND/WAVES" Valid="09" Area="10" />
 <!--      <Map Time="1120" Contents="TEST PATTERN" /> -->
       <Map Time="1124" Contents="BROADCAST SCHEDULE (PART 1)" />
       <Map Time="1135" Contents="BROADCAST SCHEDULE (PART 2)" />
@@ -574,18 +492,18 @@
       <Map Time="1218" Contents="TROPICAL 72HR WIND/WAVE FORECAST" Valid="00" Area="4" />
       <Map Time="1228" Contents="TROPICAL 48HR WAVE PERIOD/SWELL DIR" Valid="00" Area="4" Duration="10" />
 <!--      <Map Time="1400" Contents="TEST PATTERN" /> -->
-      <Map Time="1403" Contents="NE PACIFIC GOES IR SATELLITE IMAGE" Valid="00" Area="6" />
-      <Map Time="1414" Contents="PACIFIC GOES IR SATELLITE IMAGE" Valid="00" Area="5" />
-      <Map Time="1425" Contents="TROPICAL SEA STATE ANALYSIS" Valid="00" Area="4" />
+      <Map Time="1403" Contents="NE PACIFIC GOES IR SATELLITE IMAGE" Valid="12" Area="6" />
+      <Map Time="1414" Contents="PACIFIC GOES IR SATELLITE IMAGE" Valid="12" Area="5" />
+      <Map Time="1425" Contents="TROPICAL SEA STATE ANALYSIS" Valid="12" Area="4" />
       <Map Time="1435" Contents="TROPICAL 48HR SURFACE FORECAST" Valid="00" Area="4" />
-      <Map Time="1445" Contents="500MB ANALYSIS" Valid="00" Area="1" />
-      <Map Time="1455" Contents="SEA STATE ANALYSIS, WIND/WAVE ANALYSIS" Valid="00" Area="8" />
-      <Map Time="1505" Contents="PRELIM SURFACE ANALYSIS (PART 1 NE PAC)" Valid="00" Area="2" />
-      <Map Time="1518" Contents="PRELIM SURFACE ANALYSIS (PART 2 NW PAC)" Valid="00" Area="3" />
-      <Map Time="1531" Contents="FINAL SURFACE ANALYSIS(PART 1 NE PAC)" Valid="00" Area="2" />
-      <Map Time="1544" Contents="FINAL SURFACE ANALYSIS(PART 2 NW PAC)" Valid="00" Area="3" />
+      <Map Time="1445" Contents="500MB ANALYSIS" Valid="12" Area="1" />
+      <Map Time="1455" Contents="SEA STATE ANALYSIS, WIND/WAVE ANALYSIS" Valid="12" Area="8" />
+      <Map Time="1505" Contents="PRELIM SURFACE ANALYSIS (PART 1 NE PAC)" Valid="12" Area="2" />
+      <Map Time="1518" Contents="PRELIM SURFACE ANALYSIS (PART 2 NW PAC)" Valid="12" Area="3" />
+      <Map Time="1531" Contents="FINAL SURFACE ANALYSIS(PART 1 NE PAC)" Valid="12" Area="2" />
+      <Map Time="1544" Contents="FINAL SURFACE ANALYSIS(PART 2 NW PAC)" Valid="12" Area="3" />
       <Map Time="1557" Contents="CYCLONE DANGER AREA* or HIGH WIND/WAVES" Valid="00" Area="10" />
-      <Map Time="1608" Contents="TROPICAL SURFACE ANALYSIS" Valid="00" Area="4" Duration="10" />
+      <Map Time="1608" Contents="TROPICAL SURFACE ANALYSIS" Valid="12" Area="4" Duration="10" />
     </Frequency>
 
     <Area Name="1" lat1="20N" lat2="70N" lon1="135E" lon2="115W" />
@@ -600,6 +518,8 @@
     <Area Name="10" lat1="0N" lat2="40N" lon1="180W" lon2="80W" />
   </Station>
 
+
+
   <Station Name="New Orleans, Louisiana, U.S.A.">
     <Frequency khz="4317.9,8503.9,12789.9">
 <!--      <Map Time="0000" Contents="TEST PATTERN" /> -->
@@ -612,7 +532,7 @@
       <Map Time="0115" Contents="48 HR SURFACE FORECAST" Valid="12" Area="3" />
       <Map Time="0125" Contents="72 HR SURFACE FORECAST" Valid="12" Area="3" />
       <Map Time="0135" Contents="CYCLONE DANGER AREA* or 48 HR HIGH WIND/WAVES" Valid="21" Area="6" />
-      <Map Time="0150" Contents="(REBROADCAST OF 0825)" Valid="00" Area="3" />
+      <Map Time="0150" Contents="(REBROADCAST OF 0825  72HR WAVE PD/SWELL)" Valid="00" Area="3" />
       <Map Time="0200" Contents="GOES IR TROPICAL SATELLITE IMAGE" Valid="00" Area="4" />
       <Map Time="0215" Contents="00 HR SEA STATE ANALYSIS" Valid="00" Area="3" />
       <Map Time="0225" Contents="REQUEST FOR COMMENTS/PRODUCT NOTICE" />
@@ -620,20 +540,21 @@
 <!--      <Map Time="0600" Contents="TEST PATTERN" /> -->
       <Map Time="0605" Contents="U.S./TROPICAL SURFACE ANALYSIS (W HALF)" Valid="00" Area="1" />
       <Map Time="0620" Contents="TROPICAL SURFACE ANALYSIS (E HALF)" Valid="00" Area="2" />
-      <Map Time="0635" Contents="24 HR WIND/WAVE FORECAST" Valid="00" Area="3" />
-      <Map Time="0645" Contents="48 HR WIND/WAVE FORECAST" Valid="00" Area="3" />
-      <Map Time="0655" Contents="72 HR WIND/WAVE FORECAST" Valid="00" Area="3" />
-      <Map Time="0705" Contents="24 HR SURFACE FORECAST" Valid="00" Area="3" />
-      <Map Time="0715" Contents="48 HR SURFACE FORECAST" Valid="00" Area="3" />
-      <Map Time="0725" Contents="72 HR SURFACE FORECAST" Valid="00" Area="3" />
+      <Map Time="0635" Contents="48 HR WAVE PERIOD/SWELL DIRECTION" Valid="00" Area="3" />
+      <Map Time="0645" Contents="(REBROADCAST OF 0215) SEA STATE ANALYSIS" Valid="00" Area="3" />
+      <Map Time="0655" Contents="24 HR SURFACE FORECAST" Valid="00" Area="3" />
+	  <Map Time="0705" Contents="48 HR SURFACE FORECAST" Valid="00" Area="3" />
+	  <Map Time="0715" Contents="72 HR SURFACE FORECAST" Valid="00" Area="3" />
+      <Map Time="0725" Contents="24 HR WIND/WAVE FORECAST" Valid="00" Area="3" />
       <Map Time="0735" Contents="CYCLONE DANGER AREA* or 48HR HIGH WIND/WAVES" Valid="03" Area="6" />
-      <Map Time="0750" Contents="48 HR WAVE PERIOD/SWELL DIRECTION" Valid="00" Area="3" />
-      <Map Time="0800" Contents="GOES IR TROPICAL SATELLITE IMAGE" Valid="07" Area="4" />
-      <Map Time="0815" Contents="(REBROADCAST OF 0215/1415)" Valid="00" Area="3" />
+      <Map Time="0750" Contents="48 HR WIND/WAVE FORECAST" Valid="00" Area="3" />
+      <Map Time="0800" Contents="GOES IR TROPICAL SATELLITE IMAGE" Valid="06" Area="4" />
+      <Map Time="0815" Contents="72 HR WIND/WAVE FORECAST" Valid="00" Area="3" />
       <Map Time="0825" Contents="72 HR WAVE PERIOD/SWELL DIRECTION" Valid="00" Area="3" />
-      <Map Time="0835" Contents="(REBROADCAST OF 1350)" Valid="12" />
+      <Map Time="0835" Contents="(REBROADCAST OF 0215) SEA STATE ANALYSIS" Valid="12" Area="3" />
       <Map Time="0845" Contents="HIGH SEAS FORECAST (IN ENGLISH)" Valid="04" Area="5" Duration="10" />
     </Frequency>
+
     <Frequency khz="4317.9,8503.9,12789.9,17146.4">
 <!--      <Map Time="1200" Contents="TEST PATTERN" /> -->
       <Map Time="1205" Contents="U.S./TROPICAL SURFACE ANALYSIS (W HALF)" Valid="06" Area="1" />
@@ -652,17 +573,17 @@
       <Map Time="1445" Contents="HIGH SEAS FORECAST (IN ENGLISH)" Valid="10" Area="5" />
 <!--      <Map Time="1800" Contents="TEST PATTERN" /> -->
       <Map Time="1805" Contents="U.S./TROPICAL SURFACE ANALYSIS (W HALF)" Valid="12" Area="1" />
-      <Map Time="1820" Contents="TROPICAL SURFACE ANALYSIS (E HALF)" Valid="00" Area="2" />
-      <Map Time="1835" Contents="24 HR WIND/WAVE FORECAST" Valid="12" Area="3" />
-      <Map Time="1845" Contents="48 HR WIND/WAVE FORECAST" Valid="12" Area="3" />
-      <Map Time="1855" Contents="72 HR WIND/WAVE FORECAST" Valid="12" Area="3" />
-      <Map Time="1905" Contents="24 HR SURFACE FORECAST" Valid="12" Area="3" />
-      <Map Time="1915" Contents="48 HR SURFACE FORECAST" Valid="12" Area="3" />
-      <Map Time="1925" Contents="72 HR SURFACE FORECAST" Valid="12" Area="3" />
+      <Map Time="1820" Contents="TROPICAL SURFACE ANALYSIS (E HALF)" Valid="12" Area="2" />
+	  <Map Time="1835" Contents="48 HR WAVE PERIOD/SWELL DIRECTION" Valid="12" Area="3" />
+      <Map Time="1845" Contents="REBROADCAST 0215/1415 SEA STATE ANALYSIS" Valid="12" Area="3" />
+      <Map Time="1855" Contents="24 HR SURFACE FORECAST" Valid="12" Area="3" />
+      <Map Time="1905" Contents="48 HR SURFACE FORECAST" Valid="12" Area="3" />
+      <Map Time="1915" Contents="72 HR SURFACE FORECAST" Valid="12" Area="3" />
+      <Map Time="1925" Contents="24 HR WIND/WAVE FORECAST" Valid="12" Area="3" />
       <Map Time="1935" Contents="CYCLONE DANGER AREA* or 48HR HIGH WIND/WAVES" Valid="15" Area="6" />
-      <Map Time="1950" Contents="48 HR WAVE PERIOD/SWELL DIRECTION" Valid="12" Area="3" />
+      <Map Time="1950" Contents="48 HR WIND/WAVE FORECAST" Valid="12" Area="3" />
       <Map Time="2000" Contents="GOES IR TROPICAL SATELLITE IMAGE" Valid="18" Area="4" />
-      <Map Time="2015" Contents="(REBROADCAST OF 0215/1415)" Valid="12" Area="3" />
+      <Map Time="2015" Contents="72 HR WIND/WAVE FORECAST" Valid="12" Area="3" />
       <Map Time="2025" Contents="BROADCAST SCHEDULE" Duration="10" />
       <Map Time="2045" Contents="HIGH SEAS FORECAST (IN ENGLISH)" Valid="16" Area="5" Duration="10" />
     </Frequency>
@@ -696,20 +617,21 @@
       <Map Time="0805" Contents="24HR SURFACE FORECAST" Valid="00" Area="8" />
       <Map Time="0815" Contents="24HR WIND/WAVE FORECAST" Valid="00" Area="8" />
       <Map Time="0825" Contents="24HR 500MB FORECAST" Valid="00" Area="4" />
-      <Map Time="0835" Contents="36HR 500MB FORECAST" Valid="12" Area="4" />
-      <Map Time="0845" Contents="48HR 500MB FORECAST" Valid="00" Area="4" />
-      <Map Time="0855" Contents="48HR SURFACE FORECAST" Valid="00" Area="4" />
-      <Map Time="0905" Contents="48HR WIND/WAVE FORECAST" Valid="00" Area="4" />
+      <Map Time="0835" Contents="36HR 500MB FORECAST" Valid="00" Area="4" />
+      <Map Time="0845" Contents="48HR SURFACE FORECAST" Valid="00" Area="4" />
+      <Map Time="0855" Contents="48HR WIND/WAVE FORECAST" Valid="00" Area="4" />
+	  <Map Time="0905" Contents="48HR 500MB FORECAST" Valid="00" Area="4" />
       <Map Time="0915" Contents="48HR WAVE PERIOD FORECAST" Valid="00" Area="4" />
       <Map Time="0925" Contents="SURFACE ANALYSIS (PART 1 NE ATLANTIC)" Valid="06" Area="2" />
       <Map Time="0938" Contents="SURFACE ANALYSIS (PART 2 NW ATLANTIC)" Valid="06" Area="3" />
       <Map Time="0951" Contents="SATELLITE IMAGE" Valid="06" Area="6" />
       <Map Time="1002" Contents="(REBROADCAST OF 0925/2125)" Valid="06" Area="2" />
       <Map Time="1015" Contents="(REBROADCAST OF 0938/2138)" Valid="06" Area="3" Duration="12" />
+	  <Map Time="1028" Contents="CYCLONE DANGER AREA or HIGH WINDS" Valid="09" Area="7" />
+	  <Map Time="1039" Contents="REBROADCAST/N  American Ice Service Chart" Valid="21" Duration="15" />
     </Frequency>
 
     <Frequency khz="6340.5,9110,12750">
-      <Map Time="1028" Contents="CYCLONE DANGER AREA* or 48HR HIGH WIND/WAVES" Valid="09" Area="7" Duration="12" />
 <!--      <Map Time="1400" Contents="TEST PATTERN" /> -->
       <Map Time="1405" Contents="BROADCAST SCHEDULE (PART 1)" />
       <Map Time="1420" Contents="BROADCAST SCHEDULE (PART 2)" />
@@ -720,35 +642,38 @@
       <Map Time="1515" Contents="WIND/WAVE ANALYSIS" Valid="12" Area="8" />
       <Map Time="1525" Contents="SURFACE ANALYSIS (PART 1 NE ATLANTIC)" Valid="12" Area="2" />
       <Map Time="1538" Contents="SURFACE ANALYSIS (PART 2 NW ATLANTIC)" Valid="12" Area="3" />
-      <Map Time="1600" Contents="ICE CHARTS" Valid="LATEST" />
+      <Map Time="1600" Contents="ICE CHARTS" Valid="21" />
 <!--      <Map Time="1720" Contents="TEST PATTERN" /> -->
       <Map Time="1723" Contents="(REBROADCAST OF 0325/1525)" Valid="12" Area="2" />
       <Map Time="1736" Contents="(REBROADCAST OF 0338/1538)" Valid="12" Area="3" />
       <Map Time="1749" Contents="500MB ANALYSIS" Valid="12" Area="4" />
       <Map Time="1759" Contents="SEA STATE ANALYSIS" Valid="12" Area="4" />
-      <Map Time="1810" Contents="ICE CHARTS" Valid="LATEST" />
+      <Map Time="1810" Contents="24HR SURFACE FORECAST" Valid="12" Area="8" />
       <Map Time="1824" Contents="CYCLONE DANGER AREA* or 48HR HIGH WIND/WAVES" Valid="15" Area="7" Duration="12" />
+      <Map Time="1810" Contents="24HR WIND/WAVE FORECAST" Valid="12" Area="8" />
+      <Map Time="1810" Contents="24HR 500MB E FORECAST" Valid="12" Area="4" />
 <!--      <Map Time="1900" Contents="TEST PATTERN" /> -->
-      <Map Time="1905" Contents="24HR SURFACE FORECAST" Valid="12" Area="8" />
-      <Map Time="1915" Contents="24HR WIND/WAVE FORECAST" Valid="12" Area="8" />
-      <Map Time="1925" Contents="24HR 500MB FORECAST" Valid="12" Area="4" />
-      <Map Time="1935" Contents="36HR 500MB FORECAST" Valid="00" Area="4" />
-      <Map Time="1945" Contents="48HR 500MB FORECAST" Valid="12" Area="4" />
+      <Map Time="1905" Contents="36HR 500MB FORECAST" Valid="12" Area="4" />
+      <Map Time="1915" Contents="96HR SURFACE FORECAST" Valid="12" Area="4" />
+      <Map Time="1925" Contents="96HR WIND/WAVE FORECAST" Valid="12" Area="4" />
+      <Map Time="1935" Contents="96HR 500MB FORECAST" Valid="12" Area="4" />
+      <Map Time="1945" Contents="96HR WAVE FORECAST" Valid="12" Area="4" />
       <Map Time="1955" Contents="48HR SURFACE FORECAST" Valid="12" Area="4" />
       <Map Time="2005" Contents="48HR WIND/WAVE FORECAST" Valid="12" Area="4" />
-      <Map Time="2015" Contents="48HR WAVE PERIOD FORECAST" Valid="12" Area="4" />
-      <Map Time="2025" Contents="PRELIMINARY SURFACE ANALYSIS" Valid="18" Area="1" />
-      <Map Time="2035" Contents="96 HR 500MB FORECAST" Valid="12" Area="4" />
-      <Map Time="2045" Contents="96 HR SURFACE FORECAST" Valid="12" Area="4" />
-      <Map Time="2055" Contents="96 HR WIND/WAVE FORECAST" Valid="12" Area="4" />
-      <Map Time="2105" Contents="96 HR WAVE PERIOD FORECAST" Valid="12" Area="4" />
-      <Map Time="2115" Contents="(REBROADCAST OF 2045)" Valid="12" Area="4" />
+      <Map Time="2015" Contents="48HR 500MB FORECAST" Valid="12" Area="4" />
+      <Map Time="2025" Contents="48HR WAVE PERIOD FORECAST" Valid="12" Area="4" />
+      <Map Time="2035" Contents="PRELIMINARY SURFACE ANALYSIS" Valid="18" Area="1" />
+      <Map Time="2055" Contents="72 HR SURFACE FORECAST" Valid="12" Area="4" />
+      <Map Time="2105" Contents="72 HR WIND/WAVE FORECAST" Valid="12" Area="4" />
+	  <Map Time="2045" Contents="72 HR 500MB FORECAST" Valid="12" Area="4" />
+      <Map Time="2115" Contents="72 HR WAVE PERIOD FORECAST" Valid="12" Area="4" />
       <Map Time="2125" Contents="SURFACE ANALYSIS (PART 1 NE ATLANTIC)" Valid="18" Area="2" />
       <Map Time="2138" Contents="SURFACE ANALYSIS (PART 2 NW ATLANTIC)" Valid="18" Area="3" />
       <Map Time="2151" Contents="SATELLITE IMAGE" Valid="18" Area="6" />
-      <Map Time="2202" Contents="(REBROADCAST OF 0925/2125)" Valid="18" Area="2" />
-      <Map Time="2215" Contents="(REBROADCAST OF 0938/2138)" Valid="18" Area="3" />
+      <Map Time="2202" Contents="(REBROADCAST OF 0925/2125 NE ATLANTIC)" Valid="18" Area="2" />
+      <Map Time="2215" Contents="(REBROADCAST OF 0938/2138 NW ATLANTIC)" Valid="18" Area="3" />
       <Map Time="2228" Contents="CYCLONE DANGER AREA* or 48HR HIGH WIND/WAVES" Valid="21" Area="7" Duration="12" />
+      <Map Time="2239" Contents="REBROADCAST/N  American Ice Service Chart" Valid="21" Duration="15"/>
     </Frequency>
 
     <Area Name="1" lat1="28N" lat2="52N" lon1="85W" lon2="45W" />
@@ -761,7 +686,7 @@
     <Area Name="8" lat1="22N" lat2="51N" lon1="98W" lon2="40W" />
   </Station>
 
-<!-- Corrections to australia need to be made to both stations -->
+
   <Station Name="Charleville, Australia">
     <Frequency khz="2628,5100,11030,13920">
       <Map Time="0900" Contents="Australian MSLP Prog (H+36) (Repeat)" Valid="00" Area="AUST" />
@@ -794,6 +719,7 @@
       <Map Time="1800" Contents="Asian (Part A) Gradient Level Wind Anal (Manual)" Valid="00" Area="A" />
       <Map Time="1823" Contents="Asian (Part B) Gradient Level Wind Anal (Manual)" Valid="00" Area="B" Duration="15" />
     </Frequency>
+
     <Frequency khz="5100,11030,13920,20469">
       <Map Time="1915" Contents="Indian Ocean MSLP Anal (Manual)" Valid="12" Area="IO" />
       <Map Time="1930" Contents="Australian Wind Waves Ht(m) Prog" Valid="12" Area="AUST" />
@@ -822,12 +748,18 @@
       <Map Time="0445" Contents="Australian MSLP 4-day forecast, Days 3 and 4" Duration="15" />
       <Map Time="0600" Contents="Asian (Part A) Gradient Level Wind Anal (Manual)" Valid="00" Area="A" />
       <Map Time="0623" Contents="Asian (Part B) Gradient Level Wind Anal (Manual)" Valid="00" Area="B" />
-      <Map Time="0645" Contents="Asian MSLP Anal (Manual)" Valid="00" Area="C" />
+<!--       <Map Time="0645" Contents="Asian MSLP Anal (Manual)" Valid="00" Area="C" />   -->
       <Map Time="0730" Contents="Indian Ocean MSLP Anal (Manual)" Valid="00" Area="IO" />
       <Map Time="0745" Contents="Australian Wind Waves Ht(m) Prog" Valid="00" Area="AUST" />
       <Map Time="0800" Contents="Australian Swell Waves Ht(m) Prog (H+24)" Valid="00" Area="AUST" />
-      <Map Time="0830" Contents="South Pacific Ocean MSLP Anal" Valid="00" Area="SWP" />
-      <Map Time="0845" Contents="Australian MSLP Anal (Manual)" Valid="00" Area="AUST" Duration="15" />
+      <Map Time="0830" Contents="Australian MSLP 4-day forecast, Days 3 and 4 (Repeat)" Valid="00" Area="AUST" />
+      <Map Time="0845" Contents="Australian MSLP Anal (Manual)" Valid="06" Area="AUST" Duration="15" />
+      <Map Time="0900" Contents="Australian MSLP Prog (H+36) (Repeat)" Valid="00" Area="AUST" />
+      <Map Time="0915" Contents="Australian MSLP 4-day forecast, Days 1 and 2 (Repeat)"  />
+      <Map Time="0930" Contents="Australian MSLP 4-day forecast, Days 3 and 4 (Repeat)" />
+      <Map Time="0015" Contents="Casey Eastern and Western High Seas (H+24)" Valid="00"  />
+      <Map Time="1030" Contents="S.H. 500 hPa Prog (H+48)" Valid="00" Area="SH" />
+      <Map Time="1045" Contents="S.H. MSLP Prog (H+48)" Valid="00" Area="SH" Duration="20" />
     </Frequency>
 
     <Frequency khz="11030">
@@ -843,13 +775,21 @@
     <Area Name="C" lat1="35S" lat2="30N" lon1="70E" lon2="180E" />
     <Area Name="E" lat1="40S" lat2="40N" lon1="70E" lon2="180E" />
     <Area Name="IO" lat1="90S" lat2="10S" lon1="0E" lon2="180E" />
+    <Area Name="CASEY" lat1="50S" lat2="70S" lon1="80E" lon2="160E" />
     <Area Name="SH" lat1="90S" lat2="20S" lon1="0E" lon2="180E" />
+    <Area Name="PSST" lat1="50S" lat2="20N" lon1="150E" lon2="180E" />
     <Area Name="SWP" lat1="90S" lat2="20S" lon1="150E" lon2="90W" />
+    <Area Name="IOSST" lat1="50S" lat2="20N" lon1="30E" lon2="150W" />
   </Station>
 
-<!-- Corrections to australia need to be made to both stations -->
   <Station Name="Wiluna, Australia">
     <Frequency khz="5755,7535,10555,15615">
+      <Map Time="0900" Contents="Australian MSLP Prog (H+36) (Repeat)" Valid="00" Area="AUST" />
+      <Map Time="0915" Contents="Australian MSLP 4-day forecast, Days 1 and 2" />
+      <Map Time="0930" Contents="Australian MSLP 4-day forecast, Days 3 and 4" />
+      <Map Time="1015" Contents="Casey Eastern and Western High Seas (H+24)" Valid="00" />
+      <Map Time="1030" Contents="S.H. 500 hPa Prog (H+48)" Valid="00" />
+      <Map Time="1045" Contents="S.H. MSLP Prog (H+48)" Valid="00" />
       <Map Time="1100" Contents="Casey Eastern and Western High Seas (H+48)" Valid="00" />
       <Map Time="1115" Contents="S.H. 500 hPa Anal" Valid="00" />
       <Map Time="1130" Contents="Asian Sea Surface Temp Anal (Weekly)" Valid="LATEST" />
@@ -873,14 +813,14 @@
       <Map Time="1700" Contents="IPS Recommended Frequencies for VMW (Wiluna)" />
       <Map Time="1800" Contents="Asian (Part A) Gradient Level Wind Anal (Manual)" Valid="00" Area="A" />
       <Map Time="1823" Contents="Asian (Part B) Gradient Level Wind Anal (Manual)" Valid="00" Area="B" Duration="15" />
+    </Frequency>
+    <Frequency khz="7535,10555,15615,18060">
       <Map Time="1915" Contents="Indian Ocean MSLP Anal (Manual)" Valid="12" Area="IO" />
       <Map Time="1930" Contents="Australian Wind Waves Ht(m) Prog" Valid="12" Area="AUST" />
       <Map Time="1945" Contents="Australian Swell Waves Ht(m) Prog (H+24)" Valid="12" Area="AUST" />
       <Map Time="2000" Contents="South Pacific Ocean MSLP Anal (Manual)" Valid="12" Area="SWP" />
       <Map Time="2015" Contents="Casey Eastern and Western High Seas (H+24)" Valid="12" />
-      <Map Time="2030" Contents="Australian MSLP Anal (Manual)" Valid="18" Area="AUST" Duration="15" />
-    </Frequency>
-    <Frequency khz="7535,10555,15615,18060">
+      <Map Time="2030" Contents="Australian MSLP Anal (Manual)" Valid="18" Area="AUST" />
       <Map Time="2215" Contents="Casey Eastern and Western High Seas (H+36)" Valid="12" />
       <Map Time="2230" Contents="S.H. 500 hPa Prog (H+48)" Valid="12" Area="SH" />
       <Map Time="2245" Contents="S.H. MSLP Prog (H+48)" Valid="12" Area="SH" />
@@ -896,24 +836,24 @@
       <Map Time="0200" Contents="Australian MSLP Prog (H+36)" Valid="00" Area="AUST" Duration="15" />
       <Map Time="0245" Contents="Australian MSLP Anal (Manual)" Valid="00" Area="AUST" />
       <Map Time="0300" Contents="Australian 500 hPa Anal" Valid="00" Area="AUST" />
-      <Map Time="0315" Contents="Voice Broadcast Information for VMW (Wiluna)" />
+      <Map Time="0315" Contents="Voice Broadcast Information for VMW (Wiluna)" Duration="15" />
       <Map Time="0400" Contents="Australian 500 hPa (H+24) Prog" Valid="00" Area="AUST" />
       <Map Time="0430" Contents="Australian MSLP 4-day forecast, Days 1 and 2" />
       <Map Time="0445" Contents="Australian MSLP 4-day forecast, Days 3 and 4" Duration="15" />
       <Map Time="0600" Contents="Asian (Part A) Gradient Level Wind Anal (Manual)" Valid="00" Area="A" />
       <Map Time="0623" Contents="Asian (Part B) Gradient Level Wind Anal (Manual)" Valid="00" Area="B" />
-      <Map Time="0645" Contents="Asian MSLP Anal (Manual)" Valid="00" Area="C" Duration="15" />
+<!--       <Map Time="0645" Contents="Asian MSLP Anal (Manual)" Valid="00" Area="C" />   -->
       <Map Time="0730" Contents="Indian Ocean MSLP Anal (Manual)" Valid="00" Area="IO" />
       <Map Time="0745" Contents="Australian Wind Waves Ht(m) Prog" Valid="00" Area="AUST" />
-      <Map Time="0800" Contents="Australian Swell Waves Ht(m) Prog (H+24)" Valid="00" Area="AUST" Duration="15" />
-      <Map Time="0830" Contents="South Pacific Ocean MSLP Anal" Valid="00" Area="SWP" />
-      <Map Time="0845" Contents="Australian MSLP Anal (Manual)" Valid="00" Area="AUST" />
+      <Map Time="0800" Contents="Australian Swell Waves Ht(m) Prog (H+24)" Valid="00" Area="AUST" />
+      <Map Time="0830" Contents="Australian MSLP 4-day forecast, Days 3 and 4 (Repeat)" Valid="00" Area="AUST" />
+      <Map Time="0845" Contents="Australian MSLP Anal (Manual)" Valid="06" Area="AUST" Duration="15" />
       <Map Time="0900" Contents="Australian MSLP Prog (H+36) (Repeat)" Valid="00" Area="AUST" />
-      <Map Time="0915" Contents="Australian MSLP 4-day forecast, Days 1 and 2" />
-      <Map Time="0930" Contents="Australian MSLP 4-day forecast, Days 3 and 4" Duration="15" />
-      <Map Time="1015" Contents="Casey Eastern and Western High Seas (H+24)" Valid="00" />
-      <Map Time="1030" Contents="S.H. 500 hPa Prog (H+48)" Valid="00" />
-      <Map Time="1045" Contents="S.H. MSLP Prog (H+48)" Valid="00" Duration="15" />
+      <Map Time="0915" Contents="Australian MSLP 4-day forecast, Days 1 and 2 (Repeat)"  />
+      <Map Time="0930" Contents="Australian MSLP 4-day forecast, Days 3 and 4 (Repeat)" />
+      <Map Time="0015" Contents="Casey Eastern and Western High Seas (H+24)" Valid="00"  />
+      <Map Time="1030" Contents="S.H. 500 hPa Prog (H+48)" Valid="00" Area="SH" />
+      <Map Time="1045" Contents="S.H. MSLP Prog (H+48)" Valid="00" Area="SH" Duration="20" />
     </Frequency>
 
     <Area Name="A" lat1="35S" lat2="30N" lon1="120E" lon2="180E" />
@@ -922,19 +862,22 @@
     <Area Name="C" lat1="35S" lat2="30N" lon1="70E" lon2="180E" />
     <Area Name="E" lat1="40S" lat2="40N" lon1="70E" lon2="180E" />
     <Area Name="IO" lat1="90S" lat2="10S" lon1="0E" lon2="180E" />
+    <Area Name="CASEY" lat1="50S" lat2="70S" lon1="80E" lon2="160E" />
     <Area Name="SH" lat1="90S" lat2="20S" lon1="0E" lon2="180E" />
+    <Area Name="PSST" lat1="50S" lat2="20N" lon1="150E" lon2="180E" />
     <Area Name="SWP" lat1="90S" lat2="20S" lon1="150E" lon2="90W" />
+    <Area Name="IOSST" lat1="50S" lat2="20N" lon1="30E" lon2="150W" />
   </Station>
 
   <Station Name="Wellington, New Zealand">
     <Frequency khz="3247.4">
-      <Map Time="1245" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
-      <Map Time="1345" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
-      <Map Time="1445" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
-      <Map Time="1545" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="12" Area="TNZ" Duration="15" />
-      <Map Time="1645" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="12" Area="SWP" Duration="15" />
-      <Map Time="0945" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="06" Area="TNZ" Duration="15" />
-      <Map Time="1045" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="06" Area="SWP" Duration="15" />
+      <Map Time="1000" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="06" Area="SWP" Duration="15" />
+	  <Map Time="1000" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="06" Area="SWP" Duration="15" />
+	  <Map Time="1200" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1300" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1400" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1500" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="12" Area="TNZ" Duration="15" />
+      <Map Time="1600" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="12" Area="SWP" Duration="15" />
     </Frequency>
 
     <Frequency khz="5807">
@@ -945,7 +888,7 @@
       <Map Time="0400" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="00" Area="SWP" Duration="15" />
       <Map Time="0900" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="06" Area="TNZ" Duration="15" />
       <Map Time="1000" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="06" Area="SWP" Duration="15" />
-
+<!-- 1100/2300 TRANSMISSION SCHEDULE    -->
       <Map Time="1200" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
       <Map Time="1300" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
       <Map Time="1400" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
@@ -953,61 +896,65 @@
       <Map Time="1600" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="12" Area="SWP" Duration="15" />
       <Map Time="2100" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="18" Area="TNZ" Duration="15" />
       <Map Time="2200" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="18" Area="SWP" Duration="15" />
+<!-- 1100/2300 TRANSMISSION SCHEDULE    -->
     </Frequency>
-    
+
     <Frequency khz="9459">
-      <Map Time="0015" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
-      <Map Time="0115" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
-      <Map Time="0215" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
-      <Map Time="0315" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="00" Area="TNZ" Duration="15" />
-      <Map Time="0415" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="00" Area="SWP" Duration="15" />
-      <Map Time="0915" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="06" Area="TNZ" Duration="15" />
-      <Map Time="1015" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="06" Area="SWP" Duration="15" />
-
-      <Map Time="1215" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
-      <Map Time="1315" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
-      <Map Time="1415" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
-      <Map Time="1515" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="12" Area="TNZ" Duration="15" />
-      <Map Time="1615" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="12" Area="SWP" Duration="15" />
-      <Map Time="2115" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="18" Area="TNZ" Duration="15" />
-      <Map Time="2215" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="18" Area="SWP" Duration="15" />
+      <Map Time="0000" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0100" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0200" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0300" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="00" Area="TNZ" Duration="15" />
+      <Map Time="0400" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0900" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="06" Area="TNZ" Duration="15" />
+      <Map Time="1000" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="06" Area="SWP" Duration="15" />
+<!-- 1100/2300 TRANSMISSION SCHEDULE    -->
+      <Map Time="1200" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1300" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1400" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1500" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="12" Area="TNZ" Duration="15" />
+      <Map Time="1600" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="2100" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="18" Area="TNZ" Duration="15" />
+      <Map Time="2200" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="18" Area="SWP" Duration="15" />
+<!-- 1100/2300 TRANSMISSION SCHEDULE    -->
     </Frequency>
-    
+
     <Frequency khz="13550.5">
-      <Map Time="0030" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
-      <Map Time="0130" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
-      <Map Time="0230" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
-      <Map Time="0330" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="00" Area="TNZ" Duration="15" />
-      <Map Time="0430" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="00" Area="SWP" Duration="15" />
-      <Map Time="0930" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="06" Area="TNZ" Duration="15" />
-      <Map Time="1030" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="06" Area="SWP" Duration="15" />
+      <Map Time="0000" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0100" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0200" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0300" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="00" Area="TNZ" Duration="15" />
+      <Map Time="0400" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0900" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="06" Area="TNZ" Duration="15" />
+      <Map Time="1000" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="06" Area="SWP" Duration="15" />
+<!-- 1100/2300 TRANSMISSION SCHEDULE    -->
+      <Map Time="1200" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1300" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1400" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="1500" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="12" Area="TNZ" Duration="15" />
+      <Map Time="1600" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="12" Area="SWP" Duration="15" />
+      <Map Time="2100" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="18" Area="TNZ" Duration="15" />
+      <Map Time="2200" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="18" Area="SWP" Duration="15" />
+<!-- 1100/2300 TRANSMISSION SCHEDULE    -->
+    </Frequency>
 
-      <Map Time="1230" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
-      <Map Time="1330" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
-      <Map Time="1430" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="12" Area="SWP" Duration="15" />
-      <Map Time="1530" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="12" Area="TNZ" Duration="15" />
-      <Map Time="1630" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="12" Area="SWP" Duration="15" />
-      <Map Time="2130" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="18" Area="TNZ" Duration="15" />
-      <Map Time="2230" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="18" Area="SWP" Duration="15" />
-    </Frequency>
-    
     <Frequency khz="16340.1">
-      <Map Time="0045" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
-      <Map Time="0145" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
-      <Map Time="0245" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
-      <Map Time="0345" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="00" Area="TNZ" Duration="15" />
-      <Map Time="0445" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="00" Area="SWP" Duration="15" />
-      <Map Time="2145" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="18" Area="TNZ" Duration="15" />
-      <Map Time="2245" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="18" Area="SWP" Duration="15"/>
+      <Map Time="0000" Contents="SOUTHWEST PACIFIC 30HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0100" Contents="SOUTHWEST PACIFIC 48HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0200" Contents="SOUTHWEST PACIFIC 72HR SURFACE PROG (MSL)" Valid="00" Area="SWP" Duration="15" />
+      <Map Time="0300" Contents="TASMAN-NEW ZEALAND MSL ANALYSIS" Valid="00" Area="TNZ" Duration="15" />
+      <Map Time="0400" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="00" Area="SWP" Duration="15" />
+<!-- 1100/2300 TRANSMISSION SCHEDULE    -->
+      <Map Time="2200" Contents="SOUTHWEST PACIFIC MSL ANALYSIS" Valid="18" Area="SWP" Duration="15" />
+<!-- 1100/2300 TRANSMISSION SCHEDULE    -->
     </Frequency>
-    
+
     <Area Name="TNZ" Description="TASMAN SEA - NEW ZEALAND" />
     <Area Name="SWP" Description="SOUTHWEST PACIFIC" lat1="55S" lat2="0N" lon1="140E" lon2="100W" />
   </Station>
-    
+
   <Station Name="Honolulu, Hawaii, USA">
     <Frequency khz="9982.5,11090">
-      <Map Time="0524" Contents="SIGNIFICANT CLOUD FEATURES" Valid="03" Area="D" />
+<!--      <Map Time="0524" Contents="SIGNIFICANT CLOUD FEATURES" Valid="03" Area="D" />   -->
       <Map Time="0535" Contents="CYCLONE DANGER AREA" Valid="03" Area="E" />
       <Map Time="0555" Contents="STREAMLINE ANALYSIS" Valid="00" Area="B" />
       <Map Time="0615" Contents="SURFACE ANALYSIS" Valid="00" Area="C" />
@@ -1039,6 +986,9 @@
       <Map Time="1214" Contents="SURFACE ANALYSIS" Valid="06" Area="C" />
       <Map Time="1234" Contents="EAST PACIFIC GOES IR SATELLITE IMAGE" Valid="12" Area="G" />
       <Map Time="1248" Contents="SW PACIFIC GOES IR SATELLITE IMAGE" Valid="12" Area="H" Duration="14" />
+<!--  1300/0100 SCHEDULE PART I 120/576  -->
+<!--  1320/0120 SCHEDULE PART II 120/576  -->
+<!--  1340/0140 SYMBOLS OR PRODUCT NOTICE BULLETIN 120/576   -->
       <Map Time="1400" Contents="24HR TROPICAL SURFACE FORECAST" Valid="00" Area="Z" />
       <Map Time="1410" Contents="48HR TROPICAL SURFACE FORECAST" Valid="00" Area="Z" />
       <Map Time="1420" Contents="72HR TROPICAL SURFACE FORECAST" Valid="00" Area="Z" />
@@ -1054,7 +1004,7 @@
     </Frequency>
 
     <Frequency khz="11090,16135">
-      <Map Time="1724" Contents="SIGNIFICANT CLOUD FEATURES" Valid="15" Area="D" />
+<!--      <Map Time="1724" Contents="SIGNIFICANT CLOUD FEATURES" Valid="15" Area="D" />  -->
       <Map Time="1735" Contents="CYCLONE DANGER AREA" Valid="15" Area="E" />
       <Map Time="1755" Contents="STREAMLINE ANALYSIS" Valid="12" Area="B" />
       <Map Time="1815" Contents="SURFACE ANALYSIS" Valid="12" Area="C" />
@@ -1083,21 +1033,24 @@
       <Map Time="2328" Contents="SEA SURFACE TEMPS" Valid="LATEST" Area="F" />
       <Map Time="2341" Contents="rebroadcast 24HR WIND/WAVE FORECASTS" Valid="12" Area="B" />
       <Map Time="2354" Contents="STREAMLINE ANALYSIS" Valid="18" Area="B" />
-      <Map Time="1214" Contents="SURFACE ANALYSIS" Valid="18" Area="C" />
-      <Map Time="1234" Contents="EAST PACIFIC GOES IR SATELLITE IMAGE" Valid="12" Area="G" />
-      <Map Time="1248" Contents="SW PACIFIC GOES IR SATELLITE IMAGE" Valid="12" Area="H" Duration="14" />
+      <Map Time="0014" Contents="SURFACE ANALYSIS" Valid="18" Area="C" />
+      <Map Time="0034" Contents="EAST PACIFIC GOES IR SATELLITE IMAGE" Valid="00" Area="G" />
+      <Map Time="0048" Contents="SW PACIFIC GOES IR SATELLITE IMAGE" Valid="00" Area="H" Duration="14" />
+<!--  1300/0100 SCHEDULE PART I 120/576  -->
+<!--  1320/0120 SCHEDULE PART II 120/576  -->
+<!--  1340/0140 SYMBOLS OR PRODUCT NOTICE BULLETIN 120/576   -->
       <Map Time="0200" Contents="24HR TROPICAL SURFACE FORECAST" Valid="12" Area="Z" />
       <Map Time="0210" Contents="48HR TROPICAL SURFACE FORECAST" Valid="12" Area="Z" />
       <Map Time="0220" Contents="72HR TROPICAL SURFACE FORECAST" Valid="12" Area="Z" />
       <Map Time="0230" Contents="48/72HR TROPICAL WAVE PERIOD,SWELL DIR" Valid="12" Area="Z" />
-      <Map Time="0240" Contents="TROPICAL SEA STATE ANALYSIS" Valid="12" Area="Z" />
+      <Map Time="0240" Contents="TROPICAL SEA STATE ANALYSIS" Valid="00" Area="Z" />
       <Map Time="0250" Contents="rebroadcast 24HR TROPICAL WIND/WAVE FORECASTS" Valid="12" Area="Z" />
       <Map Time="0300" Contents="48HR TROPICAL WIND/WAVE FORECAST" Valid="12" Area="Z" />
       <Map Time="0310" Contents="72HR TROPICAL WIND/WAVE FORECAST" Valid="12" Area="Z" />
-      <Map Time="0320" Contents="rebroadcast/SEA STATE ANALYSIS" Valid="12" Area="1" />
-      <Map Time="0330" Contents="SURFACE ANALYSIS(PART 1 NE PAC)" Valid="12" Area="2" />
-      <Map Time="0343" Contents="SURFACE ANALYSIS(PART 2 NW PAC)" Valid="12" Area="3" />
-      <Map Time="0356" Contents="TROPICAL SURFACE ANALYSIS" Valid="12" Area="Z" Duration="13" />
+      <Map Time="0320" Contents="rebroadcast/SEA STATE ANALYSIS" Valid="00" Area="1" />
+      <Map Time="0330" Contents="SURFACE ANALYSIS(PART 1 NE PAC)" Valid="00" Area="2" />
+      <Map Time="0343" Contents="SURFACE ANALYSIS(PART 2 NW PAC)" Valid="00" Area="3" />
+      <Map Time="0356" Contents="TROPICAL SURFACE ANALYSIS" Valid="00" Area="Z" Duration="13" />
     </Frequency>
 
     <Area Name="A" lat1="30S" lat2="50N" lon1="130E" lon2="110W" />
@@ -1150,49 +1103,59 @@
     <Area Name="A" Description="Barents Sea" />
     <Area Name="B" Description="Barents Sea" />
     <Area Name="C" Description="Barents Sea" />
-  </Station>n
+  </Station>
+
+
 
   <Station Name="Hamburg/Pinneburg, Germany">
     <Frequency khz="3855,7880,13882.5">
-      <Map Time="0430" Contents="Surface weather chart" Valid="00" Duration="12" />
-      <Map Time="0512" Contents="h + 30 (GME ) surface pressure" Valid="18" />
-      <Map Time="0525" Contents="surface pressure analysis" Valid="00" />
-      <Map Time="0546" Contents="tropical storms, North Atlantic (during season)" Valid="03" />
-      <Map Time="0559" Contents="H + 12, H + 24 (GME) 500 hPa H + T, surface P" Valid="00" />
-      <Map Time="0612" Contents="H + 12, H + 24 (GME) 850 hPa H + T, 700 hPa U" Valid="00" />
-      <Map Time="0625" Contents="H + 36, H + 48 (GME) 500 hPa H + T, surface P" Valid="00" />
-      <Map Time="0638" Contents="H + 36, H + 48 (GME) 850 hPa H + T, 700 hPa U" Valid="00" />
-      <Map Time="0651" Contents="H + 60, H + 72 (GME) 500 hPa H + T, surface P" Valid="00" />
-      <Map Time="0704" Contents="H + 60, H + 72 (GME) 850 hPa H + T, 700 hPa U" Valid="00" />
-      <Map Time="0717" Contents="h + 30 (GME ) surface pressure" Valid="18" />
+      <Map Time="0430" Contents="Surface weather Chart N.America, Europe" Valid="00" Duration="12" />
+      <Map Time="0500" Contents="00HR, 24HR MSL Pressure, wind 10m" Valid="00" Duration="12" />
+      <Map Time="0512" Contents="h + 36 (GME)Surface pressure" Valid="00" />
+      <Map Time="0525" Contents="Surface pressure analysis, arrows movement, ice" Valid="00" />
+      <Map Time="0638" Contents="tropical storms, North Atlantic (during season)" Valid="03" />
+	  <Map Time="0651" Contents="H + 12, H + 24 (GME) 500 hPa H + T, surface P" Valid="00" />
+      <Map Time="0704" Contents="H + 12, H + 24 (GME) 850 hPa H + T, 700 hPa U" Valid="00" />
+      <Map Time="0717" Contents="Repetition 0512 UTC" Valid="18" />
       <Map Time="0730" Contents="H+48 (GME) surface pressure" Valid="00" />
-      <Map Time="0743" Contents="surface pressure analysis" Valid="00" />
+      <Map Time="0743" Contents="H+60 (GME) surface pressure" Valid="00" />
       <Map Time="0804" Contents="H+84 (GME) surface pressure" Valid="00" />
-      <Map Time="0817" Contents="H+108 (GME) surface pressure" Valid="00" />
-      <Map Time="0830" Contents="H+24 (GSM) wind and swell direction" Valid="00" />
-      <Map Time="0842" Contents="H+48 (GSM) wind and swell direction" Valid="00" />
-      <Map Time="0854" Contents="H+72 (GSM) wind and swell direction" Valid="00" />
-      <Map Time="0906" Contents="H+96 (GSM) wind and swell direction" Valid="00" />
-      <Map Time="0930" Contents="Ice conditions chart Northwest Atlantic" Valid="00" />
+	  <Map Time="0817" Contents="H+108(GME) surface pressure" Valid="00" />
+	  <Map Time="0830" Contents="H+24(GSM) Sea and swell, wind dir, swell dir" Valid="00" />
+	  <Map Time="0842" Contents="H+48(GSM) Sea and swell, wind dir, swell dir" Valid="00" />
+	  <Map Time="0854" Contents="H+72 (GSM) Sea and swell, wind dir, direction of swell" Valid="00" />
+	  <Map Time="0906" Contents="H+96 (GSM) Sea and swell, wind dir, swell dir" Valid="00" />
+	  <Map Time="0930" Contents="H+36 H+48 (GME) 500 hPA H + T, surface P" Valid="00" />
       <Map Time="0945" Contents="Sea surface temperature North Sea" Valid="00" />
       <Map Time="1007" Contents="Ice conditions chart West Baltic Sea" Valid="00" />
       <Map Time="1029" Contents="H+48 wave prediction North Atlantic" Valid="00" />
       <Map Time="1050" Contents="Surface weather chart" Valid="06" Duration="20" />
-      <Map Time="1145" Contents="re: Surface weather chart" Valid="06" />
-      <Map Time="1205" Contents="re: h + 30 (GME ) surface pressure" Valid="18" />
-      <Map Time="1220" Contents="re: H+48 (GME) surface pressure" Valid="00" Duration="12" />
+      <Map Time="1111" Contents="H+36, H+48 (GME) 850 hPa H + T, 700 hPa U" Valid="00" />
+      <Map Time="1123" Contents="H+36, H+48 (GME) 850 hPa H + T, 700 hPa U" Valid="00" />
+      <Map Time="1236" Contents="Repetition chart 1050 UTC" Valid="06" />
+      <Map Time="1256" Contents="Repetition chart 1512 UTC" Valid="18" />
+	  <Map Time="1308" Contents="Repetition chart 0730 UTC" Valid="00" />
+      <Map Time="1320" Contents="Repetition chart 0743 UTC" Valid="00" />
+      <Map Time="1332" Contents="Repetition chart 0804 UTC" Valid="00" />
+      <Map Time="1344" Contents="Repetition chart 0817 UTC" Valid="00" />
+	  <Map Time="1356" Contents="Repetition chart 1050 UTC" Valid="06" />
+<!--  1425/------- Schedule part 1 -->
+<!--  1445/------- Schedule part 2 -->
+      <Map Time="1508" Contents="Ice conditions NW Atlantic Canadian Ice Service" Valid="12" />
       <Map Time="1520" Contents="Ice conditions chart West Baltic Sea or special area" Valid="09" />
       <Map Time="1540" Contents="Ice conditions chart European Arctic Sea or special area" Valid="09" />
-      <Map Time="1600" Contents="Surface weather chart" Valid="12" Duration="12" />
+      <Map Time="1636" Contents="Surface weather chart" Valid="12" Duration="12" />
       <Map Time="1800" Contents="surface pressure analysis" Valid="12" />
       <Map Time="1821" Contents="tropical storms, North Atlantic (during season)" Valid="15" />
       <Map Time="1834" Contents="H+24 (GME) surface pressure" Valid="12" />
       <Map Time="1847" Contents="H+48 (GME) surface pressure" Valid="12" />
+<!--      <Map Time="----" Contents="H+60 (GME) surface pressure" Valid="12" />	  -->
       <Map Time="1900" Contents="H+84 (GME) surface pressure" Valid="12" />
+<!--      <Map Time="----" Contents="H+108 (GME) surface pressure" Valid="12" />	  -->
       <Map Time="1913" Contents="H+24 (GSM) wind and swell direction" Valid="12" />
       <Map Time="1926" Contents="H+48 (GSM) wind and swell direction" Valid="12" />
       <Map Time="1939" Contents="H+72 (GSM) wind and swell direction" Valid="12" Duration="12" />
-      <Map Time="2100" Contents="Ice conditions chart Northwest Atlantic" Valid="12" />
+<!--	  <Map Time="____" Contents="H+96 (GSM) wind and swell direction" Valid="12" Duration="12" />  -->
       <Map Time="2115" Contents="Ice conditions chart West Baltic Sea" Valid="15" />
       <Map Time="2136" Contents="H+48 wave prediction North Atlantic" Valid="12" />
       <Map Time="2200" Contents="Surface weather chart" Valid="18" Duration="20" />
@@ -1200,112 +1163,192 @@
   </Station>
 
   <Station Name="Northwood, United Kingdom">
-    <Frequency khz="2618.5,4610,8040">
-      <Map Time="2012" Contents="SFC PROGNOSIS T+120" Valid="12" />
-      <Map Time="2024" Contents="SIG WINDS T+48" Valid="12" />
-      <Map Time="2036" Contents="SIG WINDS T+72" Valid="12" />
-      <Map Time="2048" Contents="SIG WINDS T+96" Valid="12" />
-      <Map Time="2100" Contents="SFC ANALYSIS" Valid="12" />
-      <Map Time="2112" Contents="THICKNESS/GPH ANALYSIS" Valid="12" />
-      <Map Time="2124" Contents="THICKNESS/GPH T+24" Valid="12" />
-      <Map Time="2136" Contents="850MB SPOT WINDS T+24" Valid="12" />
-      <Map Time="2148" Contents="700MB SPOT WINDS T+24" Valid="12" />
+    <Frequency khz="2618.5">
       <Map Time="2200" Contents="SFC ANALYSIS" Valid="18" />
-      <Map Time="2212" Contents="SURFACE PROGNOSIS T+24" Valid="18" />
-      <Map Time="2224" Contents="REDUCED VIS T+24" Valid="18" />
-      <Map Time="2236" Contents="850MB WEBT/PPTN T+24" Valid="18" />
-      <Map Time="2248" Contents="OAT AND TD CONTOUR T+24" Valid="18" />
+      <Map Time="2212" Contents="SFC PROGNOSIS T+24" Valid="18" />
+      <Map Time="2136" Contents="ANPS PROGNOSIS T+24" Valid="18" />
       <Map Time="2300" Contents="SFC ANALYSIS" Valid="18" />
-      <Map Time="2312" Contents="SURFACE PROGNOSIS T+24" Valid="18" />
-      <Map Time="2324" Contents="SEA AND SWELL T+24" Valid="18" />
-      <Map Time="2336" Contents="THICKNESS/GPH T+24" Valid="12" />
-      <Map Time="2348" Contents="GALE WARNING SUMMARY" Valid="00" />
+      <Map Time="2312" Contents="SFC PROGNOSIS T+24" Valid="18" />
+	  <Map Time="2324" Contents="SEA and SWELL T+24" Valid="18" />
+	  <Map Time="2336" Contents="ANPS PROGNOSIS T+24" Valid="18" />
+	  <Map Time="2348" Contents="SEA and SWELL T+24" Valid="18" />
       <Map Time="0000" Contents="SFC ANALYSIS" Valid="18" />
       <Map Time="0012" Contents="SFC PRONOSIS T+24" Valid="18" />
-      <Map Time="0024" Contents="850MB WEBT/PPTN T+24" Valid="18" />
-      <Map Time="0036" Contents="OAT AND TD CONTOUR T+24" Valid="18" />
-      <Map Time="0048" Contents="SHIP ICE ACCRETION" Valid="12" Duration="12" />
-      <Map Time="0100" Contents="MAIN SCHEDULE" Valid="00" />
-      <Map Time="0124" Contents="QSL REPORT" Valid="00" />
-      <Map Time="0136" Contents="OCEAN FRONTS" Valid="00" />
-      <Map Time="0148" Contents="300MB GPH" Valid="18" Duration="12" />
-      <Map Time="0212" Contents="SYMBOLOGY" Valid="00" />
-      <Map Time="0236" Contents="SFC ANALYSIS" Valid="00" Duration="12" />
-      <Map Time="0300" Contents="SFC ANALYSIS" Valid="00" Duration="12" />
-      <Map Time="0348" Contents="GALE WARNING SUMMARY" Valid="00" />
+      <Map Time="0024" Contents="PRECIPATATION AND REDUCE VIS T-12" Valid="18" />
+      <Map Time="0036" Contents="PRECIPATATION AND REDUCE VIS T-24" Valid="18" />
+      <Map Time="0048" Contents="SFC ANALYSIS" Valid="18" />
+      <Map Time="0100" Contents="SFC PROGNOSIS T-24" Valid="18" />
+      <Map Time="0112" Contents="SEA and SWELL T+48" Valid="18" />
+      <Map Time="0124" Contents="SFC PROGNOSIS T+72" Valid="18" />
+      <Map Time="0136" Contents="OCEAN FRONTS" Valid="18" />
+      <Map Time="0148" Contents="SEA and SWELL T+24" Valid="18" />
+	  <Map Time="0200" Contents="SFC ANALYSIS" Valid="18" />
+	  <Map Time="0212" Contents="SEA SURFACE TEMP" Valid="00" />
+      <Map Time="0224" Contents="SFC PRONOSIS T+24" Valid="18" />
+      <Map Time="0236" Contents="SFC ANALYSIS" Valid="18" />
+	  <Map Time="0300" Contents="SFC ANALYSIS" Valid="00" />
+      <Map Time="0324" Contents="SFC WINDS T+24" Valid="00" />
+      <Map Time="0336" Contents="ANPS PRONOSIS T+24" Valid="00" />
+      <Map Time="0348" Contents="ANPS PROGNOSIS T+24" Valid="00" />
       <Map Time="0400" Contents="SFC ANALYSIS" Valid="00" />
-      <Map Time="0412" Contents="OAT AND TD CONTOUR T+24" Valid="00" />
-      <Map Time="0424" Contents="850MB WEBT/PPTN T+24" Valid="00" />
-      <Map Time="0436" Contents="SURFACE PROGNOSIS T+24" Valid="00" />
-      <Map Time="0448" Contents="SCEXA TAFS" Valid="00" />
-      <Map Time="0500" Contents="SFC ANALYSIS" Valid="00" />
-      <Map Time="0512" Contents="SURFACE PROGNOSIS T+24" Valid="00" />
-      <Map Time="0524" Contents="SURFACE PROGNOSIS T+48" Valid="00" />
-      <Map Time="0536" Contents="SCEXA TAFS" Valid="00" />
-      <Map Time="0548" Contents="GALE WARNING SUMMARY" Valid="00" Duration="12" />
+      <Map Time="0424" Contents="SFC WINDS T+24" Valid="18" />
+      <Map Time="0436" Contents="SFC PRONOSIS T+24" Valid="00" />
+      <Map Time="0448" Contents="SFC WINDS T+48" Valid="18" />
+      <Map Time="0500" Contents="SFC ANALYSIS" Valid="00" Duration="20" />
     </Frequency>
-    <Frequency khz="4610,8040,11086.5">
-      <Map Time="0600" Contents="NWEXAS TAFS" Valid="00" />
-      <Map Time="0612" Contents="SFC ANALYSIS" Valid="00" />
-      <Map Time="0624" Contents="SURFACE PROGNOSIS T+24" Valid="00" />
-      <Map Time="0648" Contents="SCEXA TAFS" Valid="07" />
-      <Map Time="0700" Contents="SPARE SCEXA TAFS" Valid="07" />
-      <Map Time="0712" Contents="SIG WINDS T+24" Valid="00" />
-      <Map Time="0724" Contents="SFC PROGNOSIS T+48" Valid="00" />
-      <Map Time="0736" Contents="SFC PROGNOSIS T+72" Valid="00" />
-      <Map Time="0748" Contents="SFC PROGNOSIS T+96" Valid="00" />
-      <Map Time="0800" Contents="SFC PROGNOSIS T+120" Valid="00" />
-      <Map Time="0812" Contents="THICKNESS/GPH ANALYSIS" Valid="00" />
-      <Map Time="0824" Contents="SIG WINDS T+48" Valid="00" />
-      <Map Time="0836" Contents="SIG WINDS T+72" Valid="00" />
-      <Map Time="0848" Contents="SIG WINDS T+96" Valid="00" />
-      <Map Time="0900" Contents="SFC ANALYSIS" Valid="00" />
-      <Map Time="0912" Contents="THICKNESS/GPH ANALYSIS" Valid="00" />
-      <Map Time="0924" Contents="THICKNESS/GPH T+24" Valid="00" />
-      <Map Time="0936" Contents="850MB SPOT WINDS T+24" Valid="00" />
-      <Map Time="0948" Contents="700MB SPOT WINDS T+24" Valid="00" />
-      <Map Time="1000" Contents="SFC ANALYSIS" Valid="06" />
-      <Map Time="1012" Contents="SURFACE PROGNOSIS T+24" Valid="06" />
-      <Map Time="1024" Contents="REDUCED VIS T+24" Valid="06" />
-      <Map Time="1036" Contents="850MB WEBT/PPTN T+24" Valid="06" />
-      <Map Time="1048" Contents="OAT AND TD CONTOUR T+24" Valid="06" />
-      <Map Time="1100" Contents="SFC ANALYSIS" Valid="06" />
-      <Map Time="1112" Contents="SURFACE PROGNOSIS T+24" Valid="06" />
-      <Map Time="1124" Contents="SEA AND SWELL T+24" Valid="06" />
-      <Map Time="1136" Contents="THICKNESS/GPH T+24" Valid="00" />
-      <Map Time="1148" Contents="GALE WARNING SUMMARY" Valid="12" />
+
+    <Frequency khz="4610,8040">
+      <Map Time="0000" Contents="SFC ANALYSIS" Valid="18" />
+      <Map Time="0012" Contents="SFC PRONOSIS T+24" Valid="18" />
+      <Map Time="0024" Contents="PRECIPATATION AND REDUCED VIS T-12" Valid="18" />
+      <Map Time="0036" Contents="PRECIPATATION AND REDUCED VIS T-24" Valid="18" />
+      <Map Time="0048" Contents="SFC ANALYSIS" Valid="18" />
+      <Map Time="0100" Contents="SFC PROGNOSIS T-24" Valid="18" />
+      <Map Time="0112" Contents="SEA and SWELL T+48" Valid="18" />
+      <Map Time="0124" Contents="SFC PROGNOSIS T+72" Valid="18" />
+      <Map Time="0136" Contents="OCEAN FRONTS" Valid="18" />
+      <Map Time="0148" Contents="SEA and SWELL T+24" Valid="18" />
+	  <Map Time="0200" Contents="SFC ANALYSIS" Valid="18" />
+	  <Map Time="0212" Contents="SEA SURFACE TEMP" Valid="00" />
+      <Map Time="0224" Contents="SFC PRONOSIS T+24" Valid="18" />
+      <Map Time="0236" Contents="SFC ANALYSIS" Valid="18" />
+	  <Map Time="0300" Contents="SFC ANALYSIS" Valid="00" />
+      <Map Time="0324" Contents="SFC WINDS T+24" Valid="00" />
+      <Map Time="0336" Contents="ANPS PRONOSIS T+24" Valid="00" />
+      <Map Time="0348" Contents="ANPS PROGNOSIS T+24" Valid="00" />
+      <Map Time="0400" Contents="SFC ANALYSIS" Valid="00" />
+      <Map Time="0424" Contents="SFC WINDS T+24" Valid="18" />
+      <Map Time="0436" Contents="SFC PRONOSIS T+24" Valid="00" />
+      <Map Time="0448" Contents="SFC WINDS T+48" Valid="18" />
+      <Map Time="0500" Contents="SFC ANALYSIS" Valid="00" />
+      <Map Time="0512" Contents="SFC PROGNOSIS T-24" Valid="00" />
+      <Map Time="0524" Contents="SFC PROGNOSIS T-48" Valid="00" />
+      <Map Time="0548" Contents="GALE WARNING" Valid="00" />
+      <Map Time="0612" Contents="SFC ANALYSIS" Valid="12" />
+      <Map Time="0624" Contents="SFC PRONOSIS T+24" Valid="00" />
+	  <Map Time="0636" Contents="SFC ANALYSIS" Valid="00" />
+      <Map Time="0648" Contents="SFC PRONOSIS T+24" Valid="00" />
+	  <Map Time="0700" Contents="SFC ANALYSIS" Valid="00" />
+      <Map Time="0712" Contents="SFC PRONOSIS T+24" Valid="00" />
+      <Map Time="0724" Contents="SFC PRONOSIS T+48" Valid="00" />
+      <Map Time="0736" Contents="SFC PRONOSIS T+72" Valid="00" />
+      <Map Time="0748" Contents="SFC PRONOSIS T+96" Valid="00" />
+      <Map Time="0800" Contents="SFC PRONOSIS T+120" Valid="00" />
+      <Map Time="0812" Contents="SFC PRONOSIS T+48" Valid="00" />
+      <Map Time="0824" Contents="PRECIPATATION AND REDUCED VIS T-12" Valid="00" />
+      <Map Time="0836" Contents="PRECIPATATION AND REDUCED VIS T-24" Valid="00" />
+      <Map Time="0848" Contents="SFC PRONOSIS T+24" Valid="00" />
+	  <Map Time="0900" Contents="SFC ANALYSIS" Valid="06" />
+      <Map Time="0924" Contents="ANPS PRONOSIS T+24" Valid="00" />
       <Map Time="1200" Contents="SFC ANALYSIS" Valid="06" />
       <Map Time="1212" Contents="SFC PRONOSIS T+24" Valid="06" />
-      <Map Time="1224" Contents="850MB WEBT/PPTN T+24" Valid="06" />
-      <Map Time="1236" Contents="OAT AND TD CONTOUR T+24" Valid="06" />
-      <Map Time="1248" Contents="SHIP ICE ACCRETION" Valid="06" />
-      <Map Time="1300" Contents="MAIN SCHEDULE" Valid="00" /> 
-      <Map Time="1324" Contents="QSL REPORT" Valid="06" />
-      <Map Time="1336" Contents="OCEAN FRONTS" Valid="06" />
-      <Map Time="1348" Contents="300MB GPH" Valid="06" />
-      <Map Time="1400" Contents="SEA SURFACE TEMP" Valid="06" />
+      <Map Time="1224" Contents="PRECIPATATION AND REDUCED VIS T-12" Valid="06" />
+      <Map Time="1236" Contents="PRECIPATATION AND REDUCED VIS T-24" Valid="06" />
+      <Map Time="1248" Contents="SFC ANALYSIS" Valid="18" />
+      <Map Time="1300" Contents="SFC PROGNOSIS T-24" Valid="06" />
+      <Map Time="1312" Contents="SFC WINDS T+24" Valid="06" />
+      <Map Time="1324" Contents="GALE WARNING" Valid="06" />
+      <Map Time="1336" Contents="OCEAN FRONTS" Valid="18" />
+      <Map Time="1348" Contents="SEA and SWELL T+24" Valid="06" />
+	  <Map Time="1400" Contents="SEA SURFACE TEMP" Valid="00" />
+      <Map Time="1412" Contents="SFC ANALYSIS" Valid="06" />
+      <Map Time="1424" Contents="SFC PRONOSIS T+24" Valid="06" />
       <Map Time="1436" Contents="SFC ANALYSIS" Valid="12" />
-      <Map Time="1500" Contents="SFC ANALYSIS" Valid="12" />
-      <Map Time="1548" Contents="GALE WARNING SUMMARY" Valid="16" />
+	  <Map Time="1500" Contents="SFC ANALYSIS" Valid="12" />
+      <Map Time="1512" Contents="ANPS PRONOSIS T+24" Valid="00" />
+      <Map Time="1524" Contents="ANPS PROGNOSIS T+120" Valid="00" />
+      <Map Time="1536" Contents="SEA and SWELL T+48" Valid="06" />
       <Map Time="1600" Contents="SFC ANALYSIS" Valid="12" />
-      <Map Time="1612" Contents="TA AND TD CONTOUR T+24" Valid="12" />
-      <Map Time="1624" Contents="850MB WEBT/PPTN T+24" Valid="12" />
-      <Map Time="1636" Contents="SURFACE PROGNOSIS T+24" Valid="12" />
-      <Map Time="1648" Contents="SCEXA TAFS" Valid="12" />
+      <Map Time="1624" Contents="SFC WINDS T+24" Valid="06" />
+      <Map Time="1636" Contents="SFC PRONOSIS T+24" Valid="12" />
+      <Map Time="1648" Contents="SFC WINDS T+48" Valid="06" />
       <Map Time="1700" Contents="SFC ANALYSIS" Valid="12" />
-      <Map Time="1712" Contents="SURFACE PROGNOSIS T+24" Valid="12" />
-      <Map Time="1724" Contents="SURFACE PROGNOSIS T+48" Valid="12" />
-      <Map Time="1736" Contents="SCEXA TAFS" Valid="18" />
-      <Map Time="1748" Contents="GALE WARNING SUMMARY" Valid="18" />
-      <Map Time="1800" Contents="SFC ANALYSIS" Valid="" />
-      <Map Time="1812" Contents="SURFACE PROGNOSIS T+24" Valid="12" />
-      <Map Time="1824" Contents="NWEXAS TAFS" Valid="12" Duration="12" />
-      <Map Time="1848" Contents="SCEXA TAFS" Valid="19" />
-      <Map Time="1900" Contents="THICKNESS/GPH ANALYSIS" Valid="12" />
-      <Map Time="1912" Contents="SIG WINDS T+24" Valid="12" />
+      <Map Time="1712" Contents="SFC PROGNOSIS T+24" Valid="12" />
+      <Map Time="1724" Contents="SFC PROGNOSIS T+48" Valid="12" />
+      <Map Time="1748" Contents="SEA and SWELL T+24" Valid="06" />
+      <Map Time="1800" Contents="SFC ANALYSIS" Valid="12" />
+      <Map Time="1812" Contents="SFC PRONOSIS T+24" Valid="12" />
+      <Map Time="1824" Contents="SFC ANALYSIS" Valid="12" />
+      <Map Time="1812" Contents="SFC PROGNOSIS T+24" Valid="00" />
+      <Map Time="1824" Contents="SFC ANALYSIS" Valid="00" />
+      <Map Time="1836" Contents="SFC PROGNOSIS T+24" Valid="12" />
+      <Map Time="1848" Contents="SFC ANALYSIS" Valid="12" />
+      <Map Time="1900" Contents="SFC PROGNOSIS T+24" Valid="00" />
       <Map Time="1924" Contents="SFC PROGNOSIS T+48" Valid="12" />
       <Map Time="1936" Contents="SFC PROGNOSIS T+72" Valid="12" />
-      <Map Time="1948" Contents="SFC PROGNOSIS T+96" Valid="12" Duration="12" />
+      <Map Time="1948" Contents="SFC PROGNOSIS T+96" Valid="12" />
+      <Map Time="2012" Contents="SFC PROGNOSIS T+120" Valid="12" />
+      <Map Time="2024" Contents="SFC PROGNOSIS T+48" Valid="12" />
+      <Map Time="2036" Contents="PRECIPATATION AND REDUCED VIS T-12" Valid="12" />
+      <Map Time="2048" Contents="SFC PROGNOSIS T+24" Valid="12" />
+      <Map Time="2100" Contents="SFC ANALYSIS" Valid="18" />
+      <Map Time="2112" Contents="PRECIPATATION AND REDUCED VIS T-24" Valid="12" />
+      <Map Time="2124" Contents="ANPS PROGNOSIS T+24" Valid="00" />
+      <Map Time="2136" Contents="ANPS PROGNOSIS T+120" Valid="00" />
+      <Map Time="2200" Contents="SFC ANALYSIS" Valid="18" />
+      <Map Time="2212" Contents="SFC PROGNOSIS T+24" Valid="18" />
+      <Map Time="2136" Contents="ANPS PROGNOSIS T+24" Valid="18" />
+      <Map Time="2300" Contents="SFC ANALYSIS" Valid="18" />
+      <Map Time="2312" Contents="SFC PROGNOSIS T+24" Valid="18" />
+	  <Map Time="2324" Contents="SEA and SWELL T+24" Valid="18" />
+	  <Map Time="2336" Contents="ANPS PROGNOSIS T+24" Valid="18" />
+	  <Map Time="2348" Contents="SEA and SWELL T+24" Valid="18" Duration="20" />
+	</Frequency>
+
+    <Frequency khz="11086.5">
+      <Map Time="0612" Contents="SFC ANALYSIS" Valid="12" />
+      <Map Time="0624" Contents="SFC PRONOSIS T+24" Valid="00" />
+	  <Map Time="0636" Contents="SFC ANALYSIS" Valid="00" />
+      <Map Time="0648" Contents="SFC PRONOSIS T+24" Valid="00" />
+	  <Map Time="0700" Contents="SFC ANALYSIS" Valid="00" />
+      <Map Time="0712" Contents="SFC PRONOSIS T+24" Valid="00" />
+      <Map Time="0724" Contents="SFC PRONOSIS T+48" Valid="00" />
+      <Map Time="0736" Contents="SFC PRONOSIS T+72" Valid="00" />
+      <Map Time="0748" Contents="SFC PRONOSIS T+96" Valid="00" />
+      <Map Time="0800" Contents="SFC PRONOSIS T+120" Valid="00" />
+      <Map Time="0812" Contents="SFC PRONOSIS T+48" Valid="00" />
+      <Map Time="0824" Contents="PRECIPATATION AND REDUCED VIS T-12" Valid="00" />
+      <Map Time="0836" Contents="PRECIPATATION AND REDUCED VIS T-24" Valid="00" />
+      <Map Time="0848" Contents="SFC PRONOSIS T+24" Valid="00" />
+	  <Map Time="0900" Contents="SFC ANALYSIS" Valid="06" />
+      <Map Time="0924" Contents="ANPS PRONOSIS T+24" Valid="00" />
+      <Map Time="1200" Contents="SFC ANALYSIS" Valid="06" />
+      <Map Time="1212" Contents="SFC PRONOSIS T+24" Valid="06" />
+      <Map Time="1224" Contents="PRECIPATATION AND REDUCED VIS T-12" Valid="06" />
+      <Map Time="1236" Contents="PRECIPATATION AND REDUCED VIS T-24" Valid="06" />
+      <Map Time="1248" Contents="SFC ANALYSIS" Valid="18" />
+      <Map Time="1300" Contents="SFC PROGNOSIS T-24" Valid="06" />
+      <Map Time="1312" Contents="SFC WINDS T+24" Valid="06" />
+      <Map Time="1324" Contents="GALE WARNING" Valid="06" />
+      <Map Time="1336" Contents="OCEAN FRONTS" Valid="18" />
+      <Map Time="1348" Contents="SEA and SWELL T+24" Valid="06" />
+	  <Map Time="1400" Contents="SEA SURFACE TEMP" Valid="00" />
+      <Map Time="1412" Contents="SFC ANALYSIS" Valid="06" />
+      <Map Time="1424" Contents="SFC PRONOSIS T+24" Valid="06" />
+      <Map Time="1436" Contents="SFC ANALYSIS" Valid="12" />
+	  <Map Time="1500" Contents="SFC ANALYSIS" Valid="12" />
+      <Map Time="1512" Contents="ANPS PRONOSIS T+24" Valid="00" />
+      <Map Time="1524" Contents="ANPS PROGNOSIS T+120" Valid="00" />
+      <Map Time="1536" Contents="SEA and SWELL T+48" Valid="06" />
+      <Map Time="1600" Contents="SFC ANALYSIS" Valid="12" />
+      <Map Time="1624" Contents="SFC WINDS T+24" Valid="06" />
+      <Map Time="1636" Contents="SFC PRONOSIS T+24" Valid="12" />
+      <Map Time="1648" Contents="SFC WINDS T+48" Valid="06" />
+      <Map Time="1700" Contents="SFC ANALYSIS" Valid="12" />
+      <Map Time="1712" Contents="SFC PROGNOSIS T+24" Valid="12" />
+      <Map Time="1724" Contents="SFC PROGNOSIS T+48" Valid="12" />
+      <Map Time="1748" Contents="SEA and SWELL T+24" Valid="06" />
+      <Map Time="1800" Contents="SFC ANALYSIS" Valid="12" />
+      <Map Time="1812" Contents="SFC PRONOSIS T+24" Valid="12" />
+      <Map Time="1824" Contents="SFC ANALYSIS" Valid="12" />
+      <Map Time="1812" Contents="SFC PROGNOSIS T+24" Valid="00" />
+      <Map Time="1824" Contents="SFC ANALYSIS" Valid="00" />
+      <Map Time="1836" Contents="SFC PROGNOSIS T+24" Valid="12" />
+      <Map Time="1848" Contents="SFC ANALYSIS" Valid="12" />
+      <Map Time="1900" Contents="SFC PROGNOSIS T+24" Valid="00" />
+      <Map Time="1924" Contents="SFC PROGNOSIS T+48" Valid="12" />
+      <Map Time="1936" Contents="SFC PROGNOSIS T+72" Valid="12" />
+      <Map Time="1948" Contents="SFC PROGNOSIS T+96" Valid="12" Duration="20" />
     </Frequency>
   </Station>
 </OCPNWeatherFaxSchedules>

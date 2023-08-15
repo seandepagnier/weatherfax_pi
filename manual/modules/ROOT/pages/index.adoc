@@ -42,7 +42,7 @@ In OpenCPN, go to the _Options → Plugins_ and download, install and enable the
 
 image::wx-2-retrieve-menu.png[]
 
-=== Use Legacyt Plugin Package Installer (PI)
+=== Use Legacy Plugin Package Installer (PI)
 
 The second way is to download a Legacy PI Package Installer (Windows .exe, Linux .deb or MacOS .pkg) from the  https://www.opencpn.org[OpenCPN website, to download Weatherfax]
 
@@ -318,17 +318,92 @@ image::wx-export-open-kap-files.jpeg[]
 
 Hopefully the plugin will also be made to read Kap files so that they can be automatically overlaid on charts without having to use the WeatherFax Image Wizard.
 
-== Update of Weatherfax URL's and Coordinates ==
+== XML File Update - User Powered
+
+=== Weatherfax URL's and Coordinates and Schedules
 
 It is the User's job to update this information, by sending newly updated files of their area of the world. We cannot devote programming resources to this location specific task which changes regularly.
 
 Note that the file weatherfaxinternetretrieval.xml has been separated into world region xml files, to make this task easier. We need voluteers to take a region and send in updates every six months to a year.  Github pull requests to the maintainer for these changes are easiest, but emailed files are accepted too.
 
 The critical files are:
-    Regional WeatherFaxInternetRetrieval.xml's (multiple files)
-    CoordinateSets.xml
+. WeatherfaxInternetRetrieval_(Region).xml's (Multiple Regional files)
+. CoordinateSets.xml  (installed in the program directory and saved in the User writable directory)
+. WeatherfaxSchedule.xml  - For capture of sound.
+	
+=== Operational Notes
 
-Keep in mind that the World Regional weatherfaxInternetRetrieval (xml) files are now separated.
+To start out with a clean slate, no previous weatherfax xml files.
+
+. Remove the %localappdata%/opencpn/plugins/weatherfax/data files   Use Options > Plugins > Uninstall the plugin.
+. Remove the local user directory data, in particular coordinateSets.xml   Manually remove this directory "C:\ProgramData\opencpn\plugins\weatherfax" or empty it.
+. Not necessary, but you can manually remove all weatherfax_pi tarballs from "C:\ProgramData\opencpn\plugins\cache\tarballs". For more information about the location of installation files see the Development Manual - Installation Paths https://opencpn-manuals.github.io/main/plugin-installer/Installation-paths.html
+. Use search "CoordinateSets.xml" in your files to determine where the Opencpn local user (writable) files are stored if you don't know already.
+
+When weatherfax_pi tarballs are installed, updated  _%localappdata%/opencpn/plugins/weatherfax/data_ files are installed.
+After internet weatherfax files are retrieved using _Retrieve > Update Data Files_ and when weatherfax or opencpn is closed, the coordinateSets.xml in memory is saved to the User writable directory _C:\ProgramData\opencpn\plugins\weatherfax_ with any Image Wizard coordinate changes made by the User. If the original coordinate name is use the changes are save to the new CoordinateSets.xml file ( instead of the installation coordinateSets.xml file at _%localappdata%/opencpn/plugins/weatherfax/data_). If _New Coordinates_ is selected from the dropdown menu in the upper left (or _New Coordinates 2_ or _3_) then those are saveed in a new User_CoordinateSets.xml file also located in the user writable directory _C:\ProgramData\opencpn\plugins\weatherfax_ and which is used for the image in future downloads.
+
+We also notice that the empty WeatherfaxInternetRetrieval.xml file and WeatherfaxSchedule.xml are copied to this directory as well. Is this so that users can customize them?  I am not sure what is happening here.  Should all the WeatherfaxInternetRetrieval_(Regional).xml files be copied there?  Which files are actually being used by the program?
+
+=== Maintenance of XML Files
+
+The weatherfaxinternetretrieval.xml and weatherfaxschedules.xml files must be maintained and updated by all the USERS!
+Contribute your special url's and schedules for the benefit of all.
+
+. WeatherfaxInternetRetrieval.xml is dependent on many MET website services worldwide, and users who contribute xml files.
+. WeatherfaxSchedules.xml is created from NOAA's current Worldwide RF Radio Schedule https://www.weather.gov/nwr&in_desc=NOAA+Weather+Radio/   and 
+https://www.nhc.noaa.gov/radiofax.shtml
+
+Users are asked to submit error reports and updated xml files through _github.com/rgleason/weatherfax_pi_  using "Issues" and attaching files or make a pull request.
+
+=== WeatherFaxInternetRetrieval Files (12 Regional Files)
+
+. WeatherFaxInternetRetrieval_PWx_Pacific.xml    Passageweather Pacific
+. WeatherFaxInternetRetrieval_PWx_India.xml      Passageweather India
+. WeatherFaxInternetRetrieval_PWx_Euro_Atl.xml   Passageweather European
+. WeatherFaxInternetRetrieval_PWx_Amer_Atl.xml   Passageweather American Atlantic
+. WeatherFaxInternetRetrieval_NOAA_OPC.xml       NOAA Ocean Prediction Center
+. WeatherFaxInternetRetrieval_NOAA.xml           NOAA
+. WeatherFaxInternetRetrieval_Navy.xml           Navy Gulf Stream
+. WeatherFaxInternetRetrieval_Misc.xml           Bermuda, French Polynesia, Chile, South Africa
+. WeatherFaxInternetRetrieval_LaMMA.xml          Ligurian, Mediterranean, Adriatic, Ionian, Sardinia, Ionian, etc.
+. WeatherFaxInternetRetrieval_Europe.xml         German Weather DWD, ECMWF, GFS, UK MET, Arpege, Arome, all of Europe
+. WeatherFaxInternetRetrieval_Aviation.xml       Sat Images, Infra-red
+. WeatherFaxInternetRetrieval_Australia.xml      Australia BOM
+
+=== Use of STRDATE 
+
+Date and Time Manipulation using DATE and STRDATE Functions
+https://www.ibm.com/support/pages/date-and-time-manipulation-using-date-and-strdate-functions
+
+Download the IBM White Paper  June 26 2009
+https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/strdate-wstrdate?view=msvc-170
+
+Format Specifier 	Description 
+%8 	ISO-8601 date format. Valid format is YYYYMMDD'T'HHMMSS'.'sssZ 
+Note This date format cannot be combined with any other format specifier. 
+%a 	Abbreviated weekday name. 
+%A 	Full weekday name. 
+%b 	Abbreviated month name. 
+%B 	Full month name. 
+%d 	Day of the month as a decimal number (01 - 31). 
+%H 	Hour in 24-hour format (00 - 23). 
+%I 	Hour in 12-hour format (01 - 12). 
+%j 	Day of the year as a decimal number (001 - 366). 
+%m 	Month as a decimal number (01 - 12). 
+%M 	Minute as a decimal number (00 - 59). 
+%S 	Second as a decimal number (00 - 59) 
+%U 	Week of the year as a decimal number, with Sunday as the first day of the week (00 - 51). 
+%w 	Weekday as a decimal number (0 - 6, with Sunday as "0"). 
+%W 	Week of the year as a decimal number, with Monday as the first day of the week (00 - 51). 
+%y 	Year without the century as a decimal number (00 - 99). 
+%Y 	Year with the century as a decimal number. 
+%% 	Percent sign. 
+
+For more examples and discussion about the use of strdate please see
+https://github.com/seandepagnier/weatherfax_pi/issues/58
+
+== Examples and Use
 
 David Burch's Blog has made some videos which help to explain how to update the world regional xmls and the coordinateset.xml file.
 https://www.youtube.com/watch?v=Ks4JwUYu84w[How to update file souces for OpenCPN weatherfax plugin]  
@@ -336,5 +411,6 @@ https://www.youtube.com/watch?v=Ks4JwUYu84w[How to update file souces for OpenCP
 http://davidburchnavigation.blogspot.com/search?q=weatherfax[How to update file souces for OpenCPN weatherfax plugin]
 
 
+https://www.instructables.com/Raspberry-Pi-NOAA-Weather-Satellite-Receiver/[Raspberry Pi NOAA Weather Satellite Receiver]
 
 Thanks to Sean for a great Plugin!
