@@ -171,7 +171,8 @@ void InternetRetrievalDialog::Load(bool force)
                     _T("PWx_India"),
                     _T("Australia"),
                     _T("PWx_Pacific"),
-                    _T("Misc")
+                    _T("Misc"),
+                    _T("EUMetSat_ASCAT")
                     };
 
     for(it_Filenames = m_Filenames.begin(); it_Filenames != m_Filenames.end(); it_Filenames++)
