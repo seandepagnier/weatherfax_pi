@@ -874,7 +874,9 @@ void InternetRetrievalDialog::RebuildRegions()
 
         for(unsigned int i=0; i < m_lServers->GetCount(); i++)
             if(!it->Filtered && m_lServers->IsSelected(i) && m_lServers->GetString(i) == it->Server) {
-                m_lRegions->SetSelection(m_lRegions->Append(it->Name), it->Selected);
+                int n = m_lRegions->Append(it->Name);
+                if (it->Selected)
+                    m_lRegions->SetSelection(n);
                 break;
             }
     skip:;
