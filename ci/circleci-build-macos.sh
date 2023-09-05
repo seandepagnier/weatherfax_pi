@@ -10,7 +10,7 @@ set -o pipefail
 # Check if the cache is with us. If not, re-install brew.
 brew list --versions libexif || brew update-reset
 
-for pkg in cairo cmake gettext libarchive libexif python wget; do
+for pkg in cairo gettext cmake libarchive libexif python wget; do
     brew list --versions $pkg || brew install $pkg || brew install $pkg || :
     brew link --overwrite $pkg || brew install $pkg
 done
