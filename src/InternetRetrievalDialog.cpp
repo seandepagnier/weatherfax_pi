@@ -847,8 +847,11 @@ void InternetRetrievalDialog::RebuildServers()
     m_bDisableFilter = true;
     m_lServers->Clear();
     for(std::list<FaxServer>::iterator it = m_Servers.begin(); it != m_Servers.end(); it++)
-        if(!it->Filtered)
-            m_lServers->SetSelection(m_lServers->Append(it->Name), it->Selected);
+        if(!it->Filtered){
+            int n = m_lServers->Append(it->Name);
+            if (it->Selected)
+                m_lServers->SetSelection(n);
+        }
     m_bDisableFilter = false;
 }
 
