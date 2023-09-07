@@ -54,9 +54,9 @@ set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate 
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
-set(VERSION_PATCH "69")
+set(VERSION_PATCH "70")
 set(VERSION_TWEAK "0")
-set(VERSION_DATE  "06/09/2023")#DD/MM/YYYY format
+set(VERSION_DATE  "07/09/2023")#DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov58")
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
@@ -333,7 +333,6 @@ SET(SRC_AUDIOFILE
             src/libaudiofile/modules/SimpleModule.cpp
 )
 
-
 set(LIBSSRC
     libs/wxJSON/src/jsonreader.cpp
     libs/wxJSON/src/jsonval.cpp
@@ -430,7 +429,7 @@ if(NOT OCPN_FLATPAK_CONFIG)
 
     add_subdirectory("libs/wxcurl")
     target_link_libraries(${PACKAGE_NAME} ocpn::wxcurl_src)
-ENDIF(NOT QT_ANDROID)
+ ENDIF(NOT QT_ANDROID)
 
     add_subdirectory(libs/tinyxml)
     add_subdirectory(libs/pluginDC)

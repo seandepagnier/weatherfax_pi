@@ -4,19 +4,19 @@ Can any of these be eliminated or used by other plugins?
 
 These LIBS folders are unique to weatherfax,
 
-    libs/curl <--- Is this really needed?
-    libs/glshim <--- I don't think this is needed anymore
-    libs/plugingl <---I think this is the same as pluginDC
-    libs/wxcurl <--- Is this needed?
-    libs/zlib-1.2.3 <---Weather_routing needs zlib1.lib maybe this would help
+    libs/curl <--- Needed for Linux builds
+    libs/glshim <--- Removed, not needed.
+    libs/plugingl <---Removed same as pluginDC
+    libs/wxcurl <--- Needed for download of DATA
+    libs/zlib-1.2.3 <---Weather_routing uses zlib1.lib maybe this would help
 
 Other folders and files
 
-    src/libaudiofile <--- is for the audio portion, can it be moved to libs?
-    include/GL <--- is this necessary?
-    include/msvc/inttypes.h <--- is this necessary? can it be moved?
-    include/ <--- many audio header files?
-    buildwin/portaudio_x86.dll
+    src/libaudiofile <--- is for the audio portion, can it be moved to libs? MAYBE LATER
+    include/GL <--- is this necessary?  COULD USE LIBS
+    include/msvc/inttypes.h <--- is this necessary? can it be moved?  DONT KNOW
+    include/ <--- many audio header files?   MOVE TO LIBS MAYBE LATER
+    buildwin/portaudio_x86.dll   JUST LEAVE HERE
     buildwin/portaudio_x86.lib
     buildwin/PVW32Con.exe
     buildwin/zlib.lib (used in Weather_Routing )
