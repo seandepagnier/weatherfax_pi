@@ -441,17 +441,16 @@ include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ODAPI)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxJSON/include)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
 #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/pluginDC)       #not sure needed
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxcurl)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxcurl/src)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxcurl/include)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/curl)           #not sure needed
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/pluginDC)       #not sure needed
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxcurl)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxcurl/src)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxcurl/include)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/curl)           #not sure needed
 
 ## Change target_sources to match your project needs.
 ##=================================================
 target_sources(${PACKAGE_NAME} PUBLIC ${SRC})
 ##=================================================
-# target_sources(${PACKAGE_NAME} PUBLIC ${SRCS} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSHDRS} ${LIBSSRC} ${SRC_AUDIOFILE})
 
 TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 message(STATUS "${CMLOC}Adding PLUGINS_LIBS: ${EXTRA_LIBS}")
@@ -460,13 +459,13 @@ if(NOT OCPN_FLATPAK_CONFIG)
     # Build environment not available when flatpak is being configured so following statements will not work
     message(STATUS "${CMLOC}Adding target link libraries to ${PACKAGE_NAME}")
     
-# IF(NOT QT_ANDROID)
-#    add_subdirectory("libs/curl")
-#    target_link_libraries(${PACKAGE_NAME} libcurl::libcurl)
-#
-#    add_subdirectory("libs/wxcurl")
-#    target_link_libraries(${PACKAGE_NAME} ocpn::wxcurl_src)
-#ENDIF(NOT QT_ANDROID)
+ IF(NOT QT_ANDROID)
+    add_subdirectory("libs/curl")
+    target_link_libraries(${PACKAGE_NAME} libcurl::libcurl)
+
+    add_subdirectory("libs/wxcurl")
+    target_link_libraries(${PACKAGE_NAME} ocpn::wxcurl_src)
+ENDIF(NOT QT_ANDROID)
 
     add_subdirectory(libs/tinyxml)
     add_subdirectory(libs/pluginDC)
