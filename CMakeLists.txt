@@ -334,30 +334,7 @@ SET(SRC_AUDIOFILE
 )
 
 
-set(OCPNSRC
-    ocpnsrc/cutil.cpp
-    ocpnsrc/TexFont.cpp
-)
-
-set(OCPNHDRS
-    ocpninclude/cutil.h
-#    ocpninclude/ocpn_plugin.h    --in libs
-    ocpninclude/pluginmanager.h
-    ocpninclude/shaders.h
-    ocpninclude/TexFont.h
-    ocpninclude/vector2D.h
-    libs/ocpn-api/ocpn_plugin.h
-)
-
-#set(EXTSRC
-#)
-
-#set(EXTINCLUDE
-#    extinclude/ODAPI.h
-#    extinclude/ODJSONSchemas.h
-#)
-
-set(LIBSSRC 
+set(LIBSSRC
     libs/wxJSON/src/jsonreader.cpp
     libs/wxJSON/src/jsonval.cpp
     libs/wxJSON/src/jsonwriter.cpp)
@@ -428,30 +405,17 @@ ENDIF(WIN32)
 ##=============================================================
 
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpnsrc/glu/include)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/${EXTINCLUDE_DIR})
-
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/GL)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/glu)   #added with plugDC
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/GL)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ODAPI)
-
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxJSON/include)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/pluginDC)       #not sure needed
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxcurl)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxcurl/src)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxcurl/include)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/curl)           #not sure needed
 
 ## Change target_sources to match your project needs.
 ##=================================================
 target_sources(${PACKAGE_NAME} PUBLIC ${SRC})
 ##=================================================
-# target_sources(${PACKAGE_NAME} PUBLIC ${SRCS} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSHDRS} ${LIBSSRC} ${SRC_AUDIOFILE})
 
 TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 message(STATUS "${CMLOC}Adding PLUGINS_LIBS: ${EXTRA_LIBS}")
@@ -460,13 +424,13 @@ if(NOT OCPN_FLATPAK_CONFIG)
     # Build environment not available when flatpak is being configured so following statements will not work
     message(STATUS "${CMLOC}Adding target link libraries to ${PACKAGE_NAME}")
     
-# IF(NOT QT_ANDROID)
-#    add_subdirectory("libs/curl")
-#    target_link_libraries(${PACKAGE_NAME} libcurl::libcurl)
-#
-#    add_subdirectory("libs/wxcurl")
-#    target_link_libraries(${PACKAGE_NAME} ocpn::wxcurl_src)
-#ENDIF(NOT QT_ANDROID)
+ IF(NOT QT_ANDROID)
+    add_subdirectory("libs/curl")
+    target_link_libraries(${PACKAGE_NAME} libcurl::libcurl)
+
+    add_subdirectory("libs/wxcurl")
+    target_link_libraries(${PACKAGE_NAME} ocpn::wxcurl_src)
+ENDIF(NOT QT_ANDROID)
 
     add_subdirectory(libs/tinyxml)
     add_subdirectory(libs/pluginDC)
