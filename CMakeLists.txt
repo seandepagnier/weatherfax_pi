@@ -334,30 +334,7 @@ SET(SRC_AUDIOFILE
 )
 
 
-set(OCPNSRC
-    ocpnsrc/cutil.cpp
-    ocpnsrc/TexFont.cpp
-)
-
-set(OCPNHDRS
-    ocpninclude/cutil.h
-#    ocpninclude/ocpn_plugin.h    --in libs
-    ocpninclude/pluginmanager.h
-    ocpninclude/shaders.h
-    ocpninclude/TexFont.h
-    ocpninclude/vector2D.h
-    libs/ocpn-api/ocpn_plugin.h
-)
-
-#set(EXTSRC
-#)
-
-#set(EXTINCLUDE
-#    extinclude/ODAPI.h
-#    extinclude/ODJSONSchemas.h
-#)
-
-set(LIBSSRC 
+set(LIBSSRC
     libs/wxJSON/src/jsonreader.cpp
     libs/wxJSON/src/jsonval.cpp
     libs/wxJSON/src/jsonwriter.cpp)
@@ -428,24 +405,12 @@ ENDIF(WIN32)
 ##=============================================================
 
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpnsrc/glu/include)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/${EXTINCLUDE_DIR})
-
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/GL)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/glu)   #added with plugDC
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/GL)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ODAPI)
-
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxJSON/include)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/pluginDC)       #not sure needed
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxcurl)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxcurl/src)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxcurl/include)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/curl)           #not sure needed
 
 ## Change target_sources to match your project needs.
 ##=================================================
