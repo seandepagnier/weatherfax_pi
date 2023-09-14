@@ -54,7 +54,7 @@ set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate 
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
-set(VERSION_PATCH "70")
+set(VERSION_PATCH "71")
 set(VERSION_TWEAK "0")
 set(VERSION_DATE  "07/09/2023")#DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov58")
@@ -206,7 +206,6 @@ SET (HDRS
             libs/ocpn-api/ocpn_plugin.h
 )
 
-# Needed otherwise - error LNK2019: unresolved external symbol
 SET(SRC_AUDIOFILE
 			src/libaudiofile/af_vfs.h
 			src/libaudiofile/afinternal.h
@@ -333,21 +332,6 @@ SET(SRC_AUDIOFILE
             src/libaudiofile/modules/SimpleModule.cpp
 )
 
-set(LIBSSRC
-    libs/wxJSON/src/jsonreader.cpp
-    libs/wxJSON/src/jsonval.cpp
-    libs/wxJSON/src/jsonwriter.cpp)
-
-set(LIBHDRS
-    libs/GL/gl.h
-    libs/GL/gl_private.h
-    libs/GL/glext.h
-    libs/GL/glu.h
-    libs/wxJSON/include/json_defs.h
-    libs/wxJSON/include/jsonreader.h
-    libs/wxJSON/include/jsonval.h
-    libs/wxJSON/include/jsonwriter.h)
-
 add_definitions(-DPLUGIN_USE_SVG)
 
 ## ----- Section above - Add your project SET(SRCS and SET(HDRS  etc..
@@ -363,7 +347,7 @@ add_definitions(-DPLUGIN_USE_SVG)
 ## This add_library  can be used in conditionals below.
 ##================================================================================
 
-SET(SRC ${SRCS} ${HDRS} ${LIBSHDRS} ${LIBSSRC} ${SRC_AUDIOFILE})
+SET(SRC ${SRCS} ${HDRS}  ${SRC_AUDIOFILE})
 
 ##=============================================================
 
@@ -404,11 +388,11 @@ ENDIF(WIN32)
 ##=============================================================
 
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs)
 #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/GL)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ODAPI)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxJSON/include)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ODAPI)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxJSON/include)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
 
 ## Change target_sources to match your project needs.
@@ -422,20 +406,26 @@ message(STATUS "${CMLOC}Adding PLUGINS_LIBS: ${EXTRA_LIBS}")
 if(NOT OCPN_FLATPAK_CONFIG)
     # Build environment not available when flatpak is being configured so following statements will not work
     message(STATUS "${CMLOC}Adding target link libraries to ${PACKAGE_NAME}")
-    
- IF(NOT QT_ANDROID)
-    add_subdirectory("libs/curl")
-    target_link_libraries(${PACKAGE_NAME} libcurl::libcurl)
 
-    add_subdirectory("libs/wxcurl")
-    target_link_libraries(${PACKAGE_NAME} ocpn::wxcurl_src)
- ENDIF(NOT QT_ANDROID)
+#	add_subdirectory("${PROJECT_SOURCE_DIR}/opencpn-libs/WindowsHeaders")
+#	target_link_libraries(${PACKAGE_NAME} windows::headers)
 
-    add_subdirectory(libs/tinyxml)
-    add_subdirectory(libs/pluginDC)
+	add_subdirectory(${PROJECT_SOURCE_DIR}/opencpn-libs/api-16)
+	target_link_libraries(${PACKAGE_NAME} ocpn::api)
 
-    target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
-    target_link_libraries(${PACKAGE_NAME} ocpn::pluginDC)
+	IF(NOT QT_ANDROID)
+    	add_subdirectory("opencpn-libs/curl")
+    	target_link_libraries(${PACKAGE_NAME} ocpn::libcurl)
+
+    	add_subdirectory("opencpn-libs/wxcurl")
+    	target_link_libraries(${PACKAGE_NAME} ocpn::wxcurl)
+ 	ENDIF(NOT QT_ANDROID)
+
+    add_subdirectory(opencpn-libs/tinyxml)
+	target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
+
+    add_subdirectory(opencpn-libs/plugingl)
+    target_link_libraries(${PACKAGE_NAME} ocpn::plugingl)
 endif(NOT OCPN_FLATPAK_CONFIG)
 
 add_definitions(-DTIXML_USE_STL)
