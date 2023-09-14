@@ -407,8 +407,8 @@ if(NOT OCPN_FLATPAK_CONFIG)
     # Build environment not available when flatpak is being configured so following statements will not work
     message(STATUS "${CMLOC}Adding target link libraries to ${PACKAGE_NAME}")
 
-#	add_subdirectory("${PROJECT_SOURCE_DIR}/opencpn-libs/WindowsHeaders")
-#	target_link_libraries(${PACKAGE_NAME} windows::headers)
+	add_subdirectory("${PROJECT_SOURCE_DIR}/opencpn-libs/WindowsHeaders")
+	target_link_libraries(${PACKAGE_NAME} windows::headers)
 
 	add_subdirectory(${PROJECT_SOURCE_DIR}/opencpn-libs/api-16)
 	target_link_libraries(${PACKAGE_NAME} ocpn::api)
