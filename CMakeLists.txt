@@ -203,7 +203,6 @@ SET (HDRS
 			src/WeatherFaxUI.h
 			src/WeatherFaxWizard.h
 			src/wximgkap.h
-            libs/ocpn-api/ocpn_plugin.h
 )
 
 SET(SRC_AUDIOFILE
