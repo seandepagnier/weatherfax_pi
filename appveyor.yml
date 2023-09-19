@@ -4,8 +4,8 @@ clone_depth: 10
 
 
 platform:
-# - x64
-  - Win32
+#  - x64
+#  - Win32
 
 configuration: Release
 test: OFF
