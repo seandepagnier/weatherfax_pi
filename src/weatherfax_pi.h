@@ -50,7 +50,7 @@
 class WeatherFaxImage;
 class WeatherFax;
 
-class weatherfax_pi : public opencpn_plugin_116
+class weatherfax_pi : public opencpn_plugin_117
 {
 public:
       weatherfax_pi(void *ppimgr);
@@ -64,6 +64,8 @@ public:
       int GetAPIVersionMinor();
       int GetPlugInVersionMajor();
       int GetPlugInVersionMinor();
+      int GetPlugInVersionPatch();
+      int GetPlugInVersionPost();	  
       wxBitmap *GetPlugInBitmap();
       wxString GetCommonName();
       wxString GetShortDescription();
