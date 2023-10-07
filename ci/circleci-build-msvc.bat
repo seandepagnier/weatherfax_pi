@@ -29,6 +29,7 @@ if errorlevel 1 (
 )
 
 git submodule update --init opencpn-libs
+
 dir
 
 if exist build (rmdir /s /q build)
