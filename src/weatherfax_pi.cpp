@@ -49,7 +49,7 @@ extern "C" DECL_EXP void destroy_pi(opencpn_plugin* p)
 //---------------------------------------------------------------------------------------------------------
 
 weatherfax_pi::weatherfax_pi(void *ppimgr)
-    : opencpn_plugin_116(ppimgr)
+    : opencpn_plugin_117(ppimgr)
 {
     // Create the PlugIn icons
     initialize_images();
@@ -128,6 +128,16 @@ int weatherfax_pi::GetPlugInVersionMajor()
 int weatherfax_pi::GetPlugInVersionMinor()
 {
     return PLUGIN_VERSION_MINOR;
+}
+
+int weatherfax_pi::GetPlugInVersionPatch()
+{
+    return PLUGIN_VERSION_PATCH;
+}
+
+int weatherfax_pi::GetPlugInVersionPost()
+{
+    return PLUGIN_VERSION_TWEAK;
 }
 
 wxBitmap *weatherfax_pi::GetPlugInBitmap()

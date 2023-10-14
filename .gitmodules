@@ -1,4 +1,3 @@
 [submodule "opencpn-libs"]
 	path = opencpn-libs
-	url = https://github.com/leamas/opencpn-libs.git
-	branch = devel
+	url = https://github.com/OpenCPN/opencpn-libs.git

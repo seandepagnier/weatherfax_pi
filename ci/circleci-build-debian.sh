@@ -32,9 +32,10 @@ if test -f "$EXTRA_LIBS"; then
     done < "$EXTRA_LIBS"
 fi
 
+pwd
+
 git submodule update --init opencpn-libs
 
-pwd
 sudo mk-build-deps --install ./ci/control
 
 sudo apt-get --allow-unauthenticated install ./*all.deb  || :
