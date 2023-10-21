@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-24 09:47+0200\n"
-"PO-Revision-Date: 2022-07-31 01:56\n"
+"PO-Revision-Date: 2023-10-04 18:33\n"
 "Last-Translator: \n"
 "Language-Team: Greek\n"
 "Language: el_GR\n"
@@ -50,11 +50,11 @@ msgstr "Σχετικά με το Weatherfax"
 
 #: src\DecoderOptionsDialog.cpp:122
 msgid "Failed to configure capture."
-msgstr ""
+msgstr "Αποτυχία ρύθμισης της καταγραφής."
 
 #: src\DecoderOptionsDialog.cpp:123
 msgid "Failure"
-msgstr ""
+msgstr "Αποτυχία"
 
 #: src\FaxDecoder.cpp:119
 msgid "Failed"
@@ -82,7 +82,7 @@ msgstr "το μέγεθος δείγματος δεν είναι 8 ή 16 bit: "
 
 #: src\FaxDecoder.cpp:524
 msgid "no audiofile support compiled"
-msgstr ""
+msgstr "χωρίς υποστήριξη ηχητικού αρχείου"
 
 #: src\InternetRetrievalDialog.cpp:110 src\WeatherFaxUI.cpp:643
 msgid "Scheduled"
@@ -330,7 +330,7 @@ msgstr "Απέτυχε η φόρτωση των συντεταγμένων"
 
 #: src\WeatherFax.cpp:220
 msgid "CoordinateSets.xml failed to load1"
-msgstr ""
+msgstr "Το CoordinateSets.xml δεν φορτώθηκε1"
 
 #: src\WeatherFax.cpp:309
 msgid "Failed to save xml file: "
@@ -350,11 +350,11 @@ msgstr "Η φόρτωση του αρχείου εισόδου απέτυχε: "
 
 #: src\WeatherFax.cpp:492
 msgid "Android doesn't support tif images"
-msgstr ""
+msgstr "Το Android δεν υποστηρίζει εικόνες tif"
 
 #: src\WeatherFax.cpp:577
 msgid "Choose a file"
-msgstr ""
+msgstr "Επιλέξτε αρχείο"
 
 #: src\WeatherFax.cpp:577
 msgid "Supported Files|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;*.TIF;*.tif;*.TIFF;*.tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;*.PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga;*.WAV;*.wav|All files (*.*)|*.*"
@@ -370,7 +370,7 @@ msgstr "Αποθήκευση φαξ καιρού σε εικόνα"
 
 #: src\WeatherFax.cpp:610
 msgid "All files (*.*)|*.*"
-msgstr ""
+msgstr "Όλα τα αρχεία (*.*)|*.*"
 
 #: src\WeatherFax.cpp:622
 msgid "Failed to save file: "
@@ -390,15 +390,15 @@ msgstr "Ανανέωση δεδομένων WeatherFax"
 
 #: src\WeatherFax.cpp:867
 msgid "Installation xml files updated."
-msgstr ""
+msgstr "Τα αρχεία xml ενημερώθηκαν."
 
 #: src\WeatherFax.cpp:869
 msgid "User writable coordinateSets.xml renamed to CoordinateSets.xml.save"
-msgstr ""
+msgstr "Εγγράψιμα coordinateSets.xml μετονομάστηκαν σε CoordinateSets.xml.save"
 
 #: src\WeatherFax.cpp:871
 msgid "If you have customizations in these files you can merge them manually."
-msgstr ""
+msgstr "Αν έχετε αλλάξει αυτά τα αρχεία μπορείτε να τα συγχωνεύσετε με το χέρι."
 
 #: src\WeatherFaxImage.cpp:453
 msgid "Resulting image has negative dimensions, aborting\n"
@@ -455,7 +455,7 @@ msgstr "&Goto"
 
 #: src\WeatherFaxUI.cpp:53
 msgid "File"
-msgstr ""
+msgstr "Αρχείο"
 
 #: src\WeatherFaxUI.cpp:55 src\WeatherFaxUI.cpp:106
 msgid "&Open"
@@ -589,7 +589,7 @@ msgstr "Επιλέξτε ένα αρχείο"
 
 #: src\WeatherFaxUI.cpp:421
 msgid "wav files|*.WAV;*.wav|All files (*.*)|*.*"
-msgstr ""
+msgstr "αρχεία wav|*.WAV, *.wav|Όλα τα αρχεία (*.*)|*.*"
 
 #: src\WeatherFaxUI.cpp:433
 msgid "External Alarm"
@@ -717,7 +717,7 @@ msgstr "Παραμόρφωση"
 
 #: src\WeatherFaxUI.cpp:1022 src\WeatherFaxUI.cpp:1318 src\WeatherFaxUI.cpp:1405
 msgid "a page"
-msgstr ""
+msgstr "μια σελίδα"
 
 #: src\WeatherFaxUI.cpp:1040 src\WeatherFaxUI.cpp:1335
 msgid "Image Coordinates"
@@ -743,7 +743,7 @@ msgstr "Λεπτά"
 
 #: src\WeatherFaxUI.cpp:1196
 msgid "Lat/Lon Minutes"
-msgstr ""
+msgstr "μήκος/πλάτος λεπτά"
 
 #: src\WeatherFaxUI.cpp:1199
 msgid "+ Lat/Lon for N/E\n"
@@ -821,15 +821,15 @@ msgstr "GetAspectRatio"
 
 #: src\WeatherFaxUI.cpp:1415
 msgid "<< Prev"
-msgstr ""
+msgstr "<< Προηγ"
 
 #: src\WeatherFaxUI.cpp:1418
 msgid "Next >>"
-msgstr ""
+msgstr "Επόμενη >>"
 
 #: src\WeatherFaxUI.cpp:1421
 msgid "Cancel"
-msgstr ""
+msgstr "Ακύρωση"
 
 #: src\WeatherFaxUI.cpp:1563
 msgid "HF Schedules"
@@ -1058,7 +1058,7 @@ msgstr "WeatherFax"
 
 #: src\weatherfax_pi.cpp:76
 msgid "Weatherfax"
-msgstr ""
+msgstr "Weatherfax"
 
 #: src\weatherfax_pi.cpp:371
 msgid "WeatherFax Preferences"
