@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <OCPNWeatherFaxInternetRetrieval>
-  <Server Name="Aviation Weather" Url="https://aviationweather-cprk.ncep.noaa.gov/data/obs/sat/intl/">
+  <Server Name="Aviation Weather" Url="https://aviationweather.gov/data/obs/sat/intl/">
     <Region Name="Sat Images Infrared">
       <Map Url="sat_irbw_a.jpg" Contents="Americas" Area="A" />
       <Map Url="sat_irbw_b1.jpg" Contents="Atlantic" Area="B1" />

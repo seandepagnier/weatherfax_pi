@@ -146,8 +146,8 @@
   <Area Name="MAB37" lat1="38.93614483680747N" lat2="50.84442714662337N" lon1="135.1423397936632W" lon2="119.9034571656382W" />
  </Region>
  <Region Name="San Francisco ASCAT B">
-  <Map Url="WMBas38.png" Contents="Metop-B Ascending" Area="MAB38" />
-  <Map Url="WMBds38.png" Contents="Metop-B Descending" Area="MAB38" />
+  <Map Url="WMBas38.pn" Contents="Metop-B Ascending" Area="MAB38" />
+  <Map Url="WMBds38.pn" Contents="Metop-B Descending" Area="MAB38" />
   <Area Name="MAB38" lat1="29.03538382192023N" lat2="40.77564126564366N" lon1="135.1647589511848W" lon2="119.8779870272516W" />
  </Region>
  <Region Name="Transpac ASCAT B">
@@ -196,8 +196,8 @@
   <Area Name="MAB73" lat1="39.096123N" lat2="50.79395N" lon1="90.183637W" lon2="74.84684799999999W" />
  </Region>
  <Region Name="Charleston ASCAT B">
-  <Map Url="WMBas74.png" Contents="Metop-B Ascending" Area="MAB74" />
-  <Map Url="WMBds74.png" Contents="Metop-B Descending" Area="MAB74" />
+  <Map Url="WMBas74.pn" Contents="Metop-B Ascending" Area="MAB74" />
+  <Map Url="WMBds74.pn" Contents="Metop-B Descending" Area="MAB74" />
   <Area Name="MAB74" lat1="28.97201064574316N" lat2="40.74267416263328N" lon1="90.12957261300726W" lon2="74.88659760253337W" />
  </Region>
  <Region Name="Florida ASCAT B">
@@ -378,8 +378,8 @@
   <Area Name="MAC37" lat1="38.93614483680747N" lat2="50.84442714662337N" lon1="135.1423397936632W" lon2="119.9034571656382W" />
  </Region>
  <Region Name="San Francisco ASCAT C">
-  <Map Url="WMBas38.png" Contents="Metop-C Ascending" Area="MAC38" />
-  <Map Url="WMBds38.png" Contents="Metop-C Descending" Area="MAC38" />
+  <Map Url="WMBas38.pn" Contents="Metop-C Ascending" Area="MAC38" />
+  <Map Url="WMBds38.pn" Contents="Metop-C Descending" Area="MAC38" />
   <Area Name="MAC38" lat1="29.03538382192023N" lat2="40.77564126564366N" lon1="135.1647589511848W" lon2="119.8779870272516W" />
  </Region>
  <Region Name="Transpac ASCAT C">
@@ -428,8 +428,8 @@
   <Area Name="MAC73" lat1="39.096123N" lat2="50.79395N" lon1="90.183637W" lon2="74.84684799999999W" />
  </Region>
  <Region Name="Charleston ASCAT C">
-  <Map Url="WMBas74.png" Contents="Metop-C Ascending" Area="MAC74" />
-  <Map Url="WMBds74.png" Contents="Metop-C Descending" Area="MAC74" />
+  <Map Url="WMBas74.pn" Contents="Metop-C Ascending" Area="MAC74" />
+  <Map Url="WMBds74.pn" Contents="Metop-C Descending" Area="MAC74" />
   <Area Name="MAC74" lat1="28.97201064574316N" lat2="40.74267416263328N" lon1="90.12957261300726W" lon2="74.88659760253337W" />
  </Region>
  <Region Name="Florida ASCAT C">
