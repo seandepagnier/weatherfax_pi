@@ -36,7 +36,7 @@
 
 #include <algorithm>
 #include <cassert>
-#include <math.h>
+#include <cmath>
 #include <functional>
 #include <stdio.h>
 
@@ -74,6 +74,9 @@ status ModuleState::initFileModule(AFfilehandle file, Track *track)
 	else
 		m_fileModule = unit->initcompress(track, file->m_fh, file->m_seekok,
 			file->m_fileFormat == AF_FILE_RAWDATA, &chunkFrames);
+
+	if (!m_fileModule)
+		return AF_FAIL;
 
 	if (unit->needsRebuffer)
 	{
