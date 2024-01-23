@@ -1,7 +1,8 @@
 ##---------------------------------------------------------------------------
 ## Author:      Sean d'Epagnier
 ##***************************************************************************
-## *   Copyright (C) 2010 by Sean d'Epagnier                  *
+## *   Copyright (C) 2010 by Sean d'Epagnier                              *
+## *   License:     GPLv3+
 ## *   This program is free software; you can redistribute it and/or modify  *
 ## *   it under the terms of the GNU General Public License as published by  *
 ## *   the Free Software Foundation; either version 2 of the License, or     *
@@ -17,16 +18,15 @@
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx,                                       *
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                       *
 #-----------------------------------------------------------------------------
-# Frontend2 Author: Jon Gough
-# Testplugin Version: 1.0.253.0 "07/08/2023"  DD/MM/YYYY
-#  buildCI:yes useODAPI:no validateJSON:no
+# Frontend2 Author: Jon Gough 
+# Testplugin(TP) v1.0.286.3 29/12/2023 DD/MM/YYYY format
+# buildCI:yes useODAPI:no validateJSON:no
 # ---------------------------------------------------------------------------
-## ----- When changing this file do NOT change the order in which sections occur        ----- ##
-## ----- Changes should only be made between the section blocks that identify where     ----- ##
-## ----- these changes should be. The whole configuration process relies on this        ----- ##
-## ----- sequence to be successful                                                      ----- ##
+## -- When changing this file do NOT change the order of the sections.    -- ##
+## -- Make changes only between the section blocks identified             -- ##
+## -- The whole configuration process relies on this sequence for success.-- ##
 ##
-## ----- Modify section below to include all the details for your plugin ----- ##
+## -- Modify section below to include all the details for your plugin.    -- ##
 
 set(CMLOC "CMakeLists: ")
 
@@ -37,8 +37,9 @@ if(COMMAND cmake_policy)
         cmake_policy(SET CMP0043 NEW)
     endif(POLICY CMP0043)
     cmake_policy(SET CMP0048 NEW)
-# Need cmake 3.13 to implement this, but raspbian builds are at 3.7.2 and bionic at 3.10 and xenial builds at 3.5.1
-#    cmake_policy(SET CMP0076 NEW)
+    if(POLICY CMP0076)
+        cmake_policy(SET CMP0076 NEW)
+    endif(POLICY CMP0076)
     if(POLICY CMP0077)
         cmake_policy(SET CMP0077 NEW)
     endif(POLICY CMP0077)
@@ -55,54 +56,48 @@ set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate 
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
-set(VERSION_PATCH "60")
+set(VERSION_PATCH "111")
 set(VERSION_TWEAK "0")
-set(VERSION_DATE "10/08/2023")  # DD/MM/YYYY format
+set(VERSION_DATE  "22/01/2023")#DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov58")
+
 set(OCPN_API_VERSION_MAJOR "1")
-set(OCPN_API_VERSION_MINOR "16")
-set(TP_COMMENT "  * Release for O571 and O58 using CI")
+set(OCPN_API_VERSION_MINOR "17")
+set(TP_COMMENT "  * Release using CI")
 
 set(PARENT "opencpn")
 
-# The next line allows for setting up your own local webserver with git on it for testing purposes, the default is github.com
+#Use to set up a local webserver with git installed.
+#Default is github.com. Now set in pluginconfigure.cmake
 #set(GIT_REPOSITORY_SERVER "github.com")
 
-# Specifies Cloudsmith upload repository suffix for each catalog
+## Specifies Cloudsmith upload repository suffix for each catalog
 set(PROD "prod")   #Standard Repos
 set(BETA "beta")   #Standard Repos
 set(ALPHA "alpha") #Standard Repos
 
-# Set if yourCloudsmith Base Repository name does not match your Git Repository name.
-# set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Rick's customization
-set(CLOUDSMITH_BASE_REPOSITORY "weatherfax")
+# Set if  Cloudsmith Base Repository name does not match your Git Repository name.
+#set(CLOUDSMITH_BASE_REPOSITORY "${GIT_REPOSITORY_NAME}")
+#set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Ricks's customization
+set(CLOUDSMITH_BASE_REPOSITORY "weatherfax")   #without the _pi
 
 # Set the following to use OpenCPN cloudsmith repositories instead of own repositories
 set(CLOUDSMITH_USER "opencpn")
-#set(CLOUDSMITH_USER "rick-gleason")
+# set(CLOUDSMITH_USER "rick-gleason")
 
 set(XML_INFO_URL "https://opencpn.org/OpenCPN/plugins/weatherfax.html")
 set(XML_SUMMARY  ${SHORT_DESCRIPTION})
 set(XML_DESCRIPTION  ${LONG_DESCRIPTION})
 
-##
-## ----- Modify section above to include all the details for your plugin ----- ##
-##
-
-##
-## ----- Modify section below if there are special requirements for the plugin ----- ##
-##
+## ----- Modify section above to include all the details for your plugin ------- ##
+## ----- Modify section below if there are special requirements for the plugin --##
 
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
 set(CMAKE_CXX_STANDARD 11)
 
-# Use local version of GLU library
-# requires libs/glu directory
-set(USE_LOCAL_GLU FALSE)
 # Prefer libGL.so to libOpenGL.so, see CMP0072
-set(OpenGL_GL_PREFERENCE "LEGACY")
-
+set(OpenGL_GL_PREFERENCE "LEGACY")    #not operational
 # For Weatherfax this must be set ON or it fails to compile
 option(USE_GL "Enable OpenGL support" ON)
 message(STATUS "${CMLOC}USE_GL: ${USE_GL}")
@@ -110,29 +105,30 @@ message(STATUS "${CMLOC}USE_GL: ${USE_GL}")
 if("${CMAKE_BUILD_TYPE}" STREQUAL "")
     set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build" FORCE)
 endif("${CMAKE_BUILD_TYPE}" STREQUAL "")
-
 set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "" "Debug" "Release" "RelWithDebInfo" "MinSizeRel")
 message(STATUS "${CMLOC}Build type: ${CMAKE_BUILD_TYPE}")
 
-
-## ----- The statement below is used to setup standard variables that are required by the CMAKE process - do not remove ----- ##
+## ----- Statements below used to setup standard variables required by the CMAKE process -- Do not remove - ##
 
 project(${PACKAGE})
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-##=======================================
+##========================================================
+
 include("PluginSetup")
-##=======================================
-## ----- The above is used to setup standard variables that are required by the CMAKE process - do not remove ----- ##
-## ----- Modify section below if there are special requirements for the plugin ----- ##
+
+##========================================================
+## ----- Above sets up standard variables required by CMAKE - Do not remove -----##
+## ----- Modify section below if there are special requirements for the plugin --##
 
 set(CMAKE_VERBOSE_MAKEFILE "Activate verbose mode for make files" ON)
 
 option(Plugin_CXX11 "Use c++11" OFF)
 
-## ----- Modify section above if there are special requirements for the plugin ----- ##
-## ----- do not change next section - needed to configure build process ----- ##
+## ----- Modify section above if there are special requirements for the plugin --##
+## ----- Do not change next section - needed to configure build process ---------##
+##===========================================================
 
 #======== Portaudio Section below direct from weatherfax_pi =======
 IF (UNIX)
@@ -168,24 +164,20 @@ IF (MSVC)
     INCLUDE_DIRECTORIES(BEFORE ${PROJECT_SOURCE_DIR}/include/msvc)
 ENDIF (MSVC)
 
-## --Section above is direct from Weatherfax located above SET(SRC_WEATHERFAX  ---##
 ## --Below needed for build process.
-##=======================================
+##===========================================================
+
 include("PluginConfigure")
-##=======================================
-## ----- do not change section above - needed to configure build process -----
-## ----- Change below to match project requirements for source, headers, etc. ----- ##
+
+##===========================================================
+## ----- Do not change section above - needed to configure build process --------##
+## ----- Change below to match project requirements for source, headers, etc. ---##
 
 add_definitions(-DUSE_S57)
 
-IF(PLUGIN_USE_SVG)
-    MESSAGE(STATUS "${CMLOC}SVG support enabled...")
-    IF(NOT QT_ANDROID)
-        ADD_DEFINITIONS(-DPLUGIN_USE_SVG)
-    ENDIF(NOT QT_ANDROID)
-ENDIF(PLUGIN_USE_SVG)
+## ---- Section Below - Add your project SET(SRCS and SET(HDRS  etc..
 
-SET(SRC_WEATHERFAX
+SET(SRCS
             src/weatherfax_pi.cpp
             src/FaxDecoder.cpp
             src/DecoderOptionsDialog.cpp
@@ -215,10 +207,8 @@ SET (HDRS
 			src/WeatherFaxUI.h
 			src/WeatherFaxWizard.h
 			src/wximgkap.h
-            libs/ocpn-api/ocpn_plugin.h
 )
 
-# Needed otherwise - error LNK2019: unresolved external symbol
 SET(SRC_AUDIOFILE
 			src/libaudiofile/af_vfs.h
 			src/libaudiofile/afinternal.h
@@ -345,66 +335,26 @@ SET(SRC_AUDIOFILE
             src/libaudiofile/modules/SimpleModule.cpp
 )
 
-
-set(OCPNSRC
-    ocpnsrc/cutil.cpp
-    ocpnsrc/TexFont.cpp
-)
-
-set(OCPNHDRS
-    ocpninclude/cutil.h
-#    ocpninclude/ocpn_plugin.h    --in libs
-    ocpninclude/pluginmanager.h
-    ocpninclude/shaders.h
-    ocpninclude/TexFont.h
-    ocpninclude/vector2D.h
-    libs/ocpn-api/ocpn_plugin.h
-)
-
-set(EXTSRC
-)
-
-set(EXTINCLUDE
-    extinclude/ODAPI.h
-    extinclude/ODJSONSchemas.h
-)
-
-#is this needed? -Do not seem to need this for windows
-set(LIBSSRC libs/wxJSON/src/jsonreader.cpp libs/wxJSON/src/jsonval.cpp libs/wxJSON/src/jsonwriter.cpp)
-
-# Currently using cmake/PluginGL.cmake  Line 594
-# See cmake/PluginXML.cmake  Line 593, Also now using cmakelists.txt  libs/tinyxml
-
-
-
-#is this needed? windows seems to still work when commented out, still using pluginGL.cmake
-set(LIBHDRS
-    libs/GL/gl.h
-    libs/GL/gl_private.h
-    libs/GL/glext.h
-    libs/GL/glu.h
-    libs/wxJSON/include/json_defs.h
-    libs/wxJSON/include/jsonreader.h
-    libs/wxJSON/include/jsonval.h
-    libs/wxJSON/include/jsonwriter.h
-    )
-
 add_definitions(-DPLUGIN_USE_SVG)
 
-set(EXTINCLUDE_DIR ${EXTINCLUDE_DIR} extinclude libs/ocpn-api/)
+## ----- Section above - Add your project SET(SRCS and SET(HDRS  etc.-------##
+## ----- If using JSON validation in plugin section below is needed --------##
 
-## +++++++++Section above is added recently to Weatherfax set ++++++++++##
-##++++++++++++RTLSDR Section directly from Weatherfax +++++++++##
+# Do not need Json Schema Validation
 
-#
-# ----- If using JSON validation in plugin section below is needed ----- ##
-#
+## ----- If using JSON validation in plugin section above is needed --------##
 
-# Not doing Json_schema_validation.
 
-#
-# ----- If using JSON validation in plugin section above is needed ----- ##
-#
+##=============================================================
+## Change as required to collect all the set( headers and SRCS
+## This add_library  can be used in conditionals below.
+##=============================================================
+
+SET(SRC ${SRCS} ${HDRS}  ${SRC_AUDIOFILE})
+
+##=============================================================
+
+## ----- RTLSDR Section directly from Weatherfax ----- ##
 
 IF(UNIX)
   find_library(RTLSDR_LIBRARY NAMES rtlsdr
@@ -434,105 +384,102 @@ IF(WIN32)
     ENDIF()
 ENDIF(WIN32)
 
+## ----- End of RTLSDR Section directly from Weatherfax ----- ##
+
 ##=============================================================
-# Modify/configure 'Include' Directories below for the Plugin
+## Modify/configure 'Include' Directories below for the Plugin
 ##=============================================================
 
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/${EXTINCLUDE_DIR})
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/GL)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxJSON/include)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/src/libaudiofile)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/src/plugingl)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxcurl/src)
 
-#
-# ----- Change below to match project requirements for android build ----- ##
-#
+## Change target_sources to match your project needs.
+##==============================================================
 
-if(QT_ANDROID)
-    include_directories( ${PROJECT_SOURCE_DIR}/extinclude/GLES2)
-endif(QT_ANDROID)
+target_sources(${PACKAGE_NAME} PUBLIC ${SRC} )
 
-##
-## ----- Change above to match project requirements for android build ----- ##
-##
-
-
-## Required to collect all the set( headers and SRCS  - Adjust as required
-##==========================================================================
-target_sources(${PACKAGE_NAME} PUBLIC ${SRC_WEATHERFAX} ${HDRS} ${OCPNSRC} ${EXTSRC} ${LIBSSRC} ${SRC_AUDIOFILE})
-##==========================================================================
+##==============================================================
 
 TARGET_LINK_LIBRARIES(${PACKAGE_NAME} ${EXTRA_LIBS})
 message(STATUS "${CMLOC}Adding PLUGINS_LIBS: ${EXTRA_LIBS}")
 
 if(NOT OCPN_FLATPAK_CONFIG)
-    # Build environment not available when flatpak is being configured so following statements will not work
+    # Build environment not available when flatpak is being configured 
+	# so following statements will not work
     message(STATUS "${CMLOC}Adding target link libraries to ${PACKAGE_NAME}")
-    
-IF(NOT QT_ANDROID)
-    add_subdirectory("libs/curl")
-    target_link_libraries(${PACKAGE_NAME} libcurl::libcurl)
 
-    add_subdirectory("libs/wxcurl")
-    target_link_libraries(${PACKAGE_NAME} ocpn::wxcurl_src)
-ENDIF(NOT QT_ANDROID)
+    if (WIN32)
+        add_subdirectory(opencpn-libs/WindowsHeaders)
+        target_link_libraries(${PACKAGE_NAME} windows::headers)
+    endif (WIN32)
 
-    add_subdirectory(libs/tinyxml)
+    add_subdirectory(opencpn-libs/api-17)
+    target_link_libraries(${PACKAGE_NAME} ocpn::api)
 
+	IF(NOT QT_ANDROID)
+    	add_subdirectory("opencpn-libs/curl")
+    	target_link_libraries(${PACKAGE_NAME} ocpn::libcurl)
+
+    	add_subdirectory("opencpn-libs/wxcurl")
+    	target_link_libraries(${PACKAGE_NAME} ocpn::wxcurl)
+ 	ENDIF(NOT QT_ANDROID)
+
+    add_subdirectory(opencpn-libs/tinyxml)
     target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
+
+    add_subdirectory(opencpn-libs/plugin_dc)
+    target_link_libraries(${PACKAGE_NAME} ocpn::plugin-dc)
+
 endif(NOT OCPN_FLATPAK_CONFIG)
-
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/plugingl/include)
-
-add_subdirectory(libs/plugingl)
-target_link_libraries(${PACKAGE_NAME} ocpn::plugingl)
 
 add_definitions(-DTIXML_USE_STL)
 
-##++++++++++Section above from Weatherfax located relative to where it was  ++++++++
 ##
-## ----- Change below to match project requirements ----- ##
-##
-
-
-#
-# ----- If using JSON validation in plugin section below is needed ----- ##
-#
-
-# Not doing Json_schema_validation.
-
-#
-# ----- If using JSON validation in plugin section above is needed ----- ##
-#
-
-##
-## ----- Change above to match project requirements ----- ##
+## ----- If using JSON validation section below is needed ---------------##
 ##
 
-##
-## ----- do not change next section - needed to configure build process ----- ##
-##
+if(UNIX AND NOT APPLE AND NOT QT_ANDRIOD)
+    if(PI_JSON_SCHEMA_VALIDATOR)
+        # Change OS/ABI to be UNIX - System V to make it run with OCPN
+        set(lib_name lib${PACKAGE_NAME}.so)
+        message(STATUS "${CMLOC}lib-name: ${lib_name}")
+        find_file(elfedit elfedit)
+        if(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+            message(STATUS "${CMLOC}Will ensure OS/ABI is set to 0 to match OCPN")
+            add_custom_command(
+                TARGET ${PACKAGE_NAME}
+                POST_BUILD
+                WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                DEPENDS ${PACKAGE_NAME}
+                COMMENT " Running post build action on ${lib_name}."
+                COMMAND sh -c 'elfedit --input-osabi=Linux --output-osabi=none ${lib_name} || (echo 0) ')
+        else(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+            message(STATUS "${CMLOC}Cannot correct OS/ABI to match OCPN if it is generated incorrectly. Package binutils needed")
+        endif(NOT (${elfedit} STREQUAL "elfedit-NOTFOUND"))
+    endif(PI_JSON_SCHEMA_VALIDATOR)
+endif(UNIX AND NOT APPLE AND NOT QT_ANDRIOD)
+
+
+##------- Change below to match project requirements --------------------##
 
 # Needed for android builds
 if(QT_ANDROID)
     include_directories(BEFORE ${qt_android_include})
 endif(QT_ANDROID)
 
-# Needed for all builds
-##=======================================
+## Needed for all builds Do not change - needed to build app -------------##
+##===============================================================
+
 include("PluginInstall")
 include("PluginLocalization")
 include("PluginPackage")
-##=======================================
-## ----- do not change section above - needed to configure build process ----- ##
+
+##================================================================
+## ----- Do not change section above - needed to configure build process --##
 
 message(STATUS "${CMLOC}include directories: ")
 get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 foreach(dir ${dirs})
     message(STATUS "${CMLOC}dir='${dir}'")
 endforeach()
+

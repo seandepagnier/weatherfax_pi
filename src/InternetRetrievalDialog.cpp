@@ -171,7 +171,8 @@ void InternetRetrievalDialog::Load(bool force)
                     _T("PWx_India"),
                     _T("Australia"),
                     _T("PWx_Pacific"),
-                    _T("Misc")
+                    _T("Misc"),
+                    _T("EUMetSat_ASCAT")
                     };
 
     for(it_Filenames = m_Filenames.begin(); it_Filenames != m_Filenames.end(); it_Filenames++)
@@ -846,8 +847,11 @@ void InternetRetrievalDialog::RebuildServers()
     m_bDisableFilter = true;
     m_lServers->Clear();
     for(std::list<FaxServer>::iterator it = m_Servers.begin(); it != m_Servers.end(); it++)
-        if(!it->Filtered)
-            m_lServers->SetSelection(m_lServers->Append(it->Name), it->Selected);
+        if(!it->Filtered){
+            int n = m_lServers->Append(it->Name);
+            if (it->Selected)
+                m_lServers->SetSelection(n);
+        }
     m_bDisableFilter = false;
 }
 
@@ -870,7 +874,9 @@ void InternetRetrievalDialog::RebuildRegions()
 
         for(unsigned int i=0; i < m_lServers->GetCount(); i++)
             if(!it->Filtered && m_lServers->IsSelected(i) && m_lServers->GetString(i) == it->Server) {
-                m_lRegions->SetSelection(m_lRegions->Append(it->Name), it->Selected);
+                int n = m_lRegions->Append(it->Name);
+                if (it->Selected)
+                    m_lRegions->SetSelection(n);
                 break;
             }
     skip:;

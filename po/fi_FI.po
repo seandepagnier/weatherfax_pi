@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-24 09:47+0200\n"
-"PO-Revision-Date: 2022-07-31 01:56\n"
+"PO-Revision-Date: 2023-10-08 20:19\n"
 "Last-Translator: \n"
 "Language-Team: Finnish\n"
 "Language: fi_FI\n"
@@ -50,11 +50,11 @@ msgstr "Tietoja sääfaksista"
 
 #: src\DecoderOptionsDialog.cpp:122
 msgid "Failed to configure capture."
-msgstr ""
+msgstr "Kaappauksen määritys epäonnistui."
 
 #: src\DecoderOptionsDialog.cpp:123
 msgid "Failure"
-msgstr ""
+msgstr "Epäonnistuminen"
 
 #: src\FaxDecoder.cpp:119
 msgid "Failed"
@@ -82,7 +82,7 @@ msgstr "näytteen koko ei ole 8 tai 16 bittinen: "
 
 #: src\FaxDecoder.cpp:524
 msgid "no audiofile support compiled"
-msgstr ""
+msgstr "äänitukea ei ole käännetty"
 
 #: src\InternetRetrievalDialog.cpp:110 src\WeatherFaxUI.cpp:643
 msgid "Scheduled"
@@ -330,7 +330,7 @@ msgstr "Ei voitu ladata koordinaattisarjoja"
 
 #: src\WeatherFax.cpp:220
 msgid "CoordinateSets.xml failed to load1"
-msgstr ""
+msgstr "CoordinateSets.xml ei onnistunut latauksessa1"
 
 #: src\WeatherFax.cpp:309
 msgid "Failed to save xml file: "
@@ -350,11 +350,11 @@ msgstr "Ei voitu ladata syöttötiedostoa: "
 
 #: src\WeatherFax.cpp:492
 msgid "Android doesn't support tif images"
-msgstr ""
+msgstr "Android ei tue tif- kuvia"
 
 #: src\WeatherFax.cpp:577
 msgid "Choose a file"
-msgstr ""
+msgstr "Valitse tiedosto"
 
 #: src\WeatherFax.cpp:577
 msgid "Supported Files|*.BMP;*.bmp;*.XBM;*.xbm;*.XPM;*.xpm;*.TIF;*.tif;*.TIFF;*.tiff;*.GIF;*.gif;*.JPEG;*.jpeg;*.JPG;*.jpg;*.PNM;*.pnm;*.PNG;*.png;*.PCX;*.pcx;*.PICT;*.pict;*.TGA;*.tga;*.WAV;*.wav|All files (*.*)|*.*"
@@ -371,7 +371,7 @@ msgstr "Tallenna sääfaksi kuvaksi"
 
 #: src\WeatherFax.cpp:610
 msgid "All files (*.*)|*.*"
-msgstr ""
+msgstr "Kaikki tiedostot (*.*)|*.*"
 
 #: src\WeatherFax.cpp:622
 msgid "Failed to save file: "
@@ -391,15 +391,15 @@ msgstr "Sääfaksi tietojen päivitys"
 
 #: src\WeatherFax.cpp:867
 msgid "Installation xml files updated."
-msgstr ""
+msgstr "Asennus xml-tiedostot päivitetty."
 
 #: src\WeatherFax.cpp:869
 msgid "User writable coordinateSets.xml renamed to CoordinateSets.xml.save"
-msgstr ""
+msgstr "Käyttäjän kirjoitettava koordinaattiSets.xml nimetty uudelleen KoordinaattiSets.xml.save"
 
 #: src\WeatherFax.cpp:871
 msgid "If you have customizations in these files you can merge them manually."
-msgstr ""
+msgstr "Jos sinulla on muokkauksia näihin tiedostoihin, voit yhdistää ne manuaalisesti."
 
 #: src\WeatherFaxImage.cpp:453
 msgid "Resulting image has negative dimensions, aborting\n"
@@ -456,7 +456,7 @@ msgstr "&Mene"
 
 #: src\WeatherFaxUI.cpp:53
 msgid "File"
-msgstr ""
+msgstr "Tiedosto"
 
 #: src\WeatherFaxUI.cpp:55 src\WeatherFaxUI.cpp:106
 msgid "&Open"
@@ -590,7 +590,7 @@ msgstr "Valitse tiedosto"
 
 #: src\WeatherFaxUI.cpp:421
 msgid "wav files|*.WAV;*.wav|All files (*.*)|*.*"
-msgstr ""
+msgstr "wav tiedostot•*.WAV;*.wav¶ Kaikki tiedostot (*.*)¶ *.*"
 
 #: src\WeatherFaxUI.cpp:433
 msgid "External Alarm"
@@ -718,7 +718,7 @@ msgstr "Vinous"
 
 #: src\WeatherFaxUI.cpp:1022 src\WeatherFaxUI.cpp:1318 src\WeatherFaxUI.cpp:1405
 msgid "a page"
-msgstr ""
+msgstr "sivu"
 
 #: src\WeatherFaxUI.cpp:1040 src\WeatherFaxUI.cpp:1335
 msgid "Image Coordinates"
@@ -744,7 +744,7 @@ msgstr "Minuuttia"
 
 #: src\WeatherFaxUI.cpp:1196
 msgid "Lat/Lon Minutes"
-msgstr ""
+msgstr "Lat/Lon Minutit"
 
 #: src\WeatherFaxUI.cpp:1199
 msgid "+ Lat/Lon for N/E\n"
@@ -822,15 +822,15 @@ msgstr "Haesivusuhde"
 
 #: src\WeatherFaxUI.cpp:1415
 msgid "<< Prev"
-msgstr ""
+msgstr "<< Edell"
 
 #: src\WeatherFaxUI.cpp:1418
 msgid "Next >>"
-msgstr ""
+msgstr "Seuraava >>"
 
 #: src\WeatherFaxUI.cpp:1421
 msgid "Cancel"
-msgstr ""
+msgstr "Peruuta"
 
 #: src\WeatherFaxUI.cpp:1563
 msgid "HF Schedules"
@@ -1060,7 +1060,7 @@ msgstr "WeatherFax"
 
 #: src\weatherfax_pi.cpp:76
 msgid "Weatherfax"
-msgstr ""
+msgstr "Weatherfax"
 
 #: src\weatherfax_pi.cpp:371
 msgid "WeatherFax Preferences"

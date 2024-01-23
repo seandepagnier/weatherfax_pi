@@ -1,3 +1,15 @@
+src/weatherfax_pi.cpp
+src/FaxDecoder.cpp
+src/DecoderOptionsDialog.cpp
+src/WeatherFax.cpp
+src/WeatherFaxWizard.cpp
+src/WeatherFaxUI.cpp
+src/WeatherFaxImage.cpp
+src/SchedulesDialog.cpp
+src/InternetRetrievalDialog.cpp
+src/AboutDialog.cpp
+src/icons.cpp
+src/wximgkap.cpp
 src/AboutDialog.h
 src/DecoderOptionsDialog.h
 src/defs.h
@@ -12,4 +24,3 @@ src/WeatherFaxImage.h
 src/WeatherFaxUI.h
 src/WeatherFaxWizard.h
 src/wximgkap.h
-libs/ocpn-api/ocpn_plugin.h

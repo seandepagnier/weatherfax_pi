@@ -130,7 +130,11 @@ The limit seems to be the system RAM. I loaded 213 maps, more than 6GB and still
 
 == HF Radio Weather Faxes
 
-The plugin has a builtin database (WeatherFaxSchedules.xml) for HF Radio Weather Service Fax transmissions, which when used properly can automatically alert the user and begin decoding these faxes.
+The plugin has a builtin database (WeatherFaxSchedules.xml) for HF Radio Weather Service Fax transmissions, which when used properly can automatically alert the user and begin decoding these faxes.  
+
+This schedule is updated from time to time using schedules and frequencies of all the official fax services worldwide from
+https://www.weather.gov/media/marine/rfax.pdf    The detailed DWD schedule is also useful https://www.dwd.de/EN/specialusers/shipping/broadcast_en/broadcast_fax_102020.pdf?__blob=publicationFile&v=1
+
 
 *Retrieve > RF Radio Schedule Menu* on the Filter Tab. 
 

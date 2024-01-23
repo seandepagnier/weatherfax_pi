@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: opencpn\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-24 09:47+0200\n"
-"PO-Revision-Date: 2022-07-31 01:57\n"
+"PO-Revision-Date: 2023-10-04 18:33\n"
 "Last-Translator: \n"
 "Language-Team: English, United Kingdom\n"
 "Language: en_GB\n"
@@ -25,40 +25,40 @@ msgstr ""
 #: src\WeatherFax.cpp:623 src\WeatherFax.cpp:820 src\WeatherFax.cpp:874
 #: src\WeatherFaxImage.cpp:610 src\WeatherFaxUI.h:104
 msgid "Weather Fax"
-msgstr ""
+msgstr "Weather Fax"
 
 #: src/WeatherFaxUI.h:181 src\SchedulesDialog.cpp:43 src\WeatherFaxUI.h:181
 msgid "HF Radio Schedules"
-msgstr ""
+msgstr "HF Radio Schedules"
 
 #: src/WeatherFaxUI.h:235 src\InternetRetrievalDialog.cpp:51
 #: src\WeatherFaxUI.h:235
 msgid "Internet Retrieval"
-msgstr ""
+msgstr "Internet Retrieval"
 
 #: src/WeatherFaxUI.h:413 src\WeatherFaxUI.h:413
 msgid "Weather Fax Preferences"
-msgstr ""
+msgstr "Weather Fax Preferences"
 
 #: src/WeatherFaxUI.h:450 src\DecoderOptionsDialog.cpp:37 src\WeatherFaxUI.h:450
 msgid "Fax Decoding Options"
-msgstr ""
+msgstr "Fax Decoding Options"
 
 #: src/WeatherFaxUI.h:476 src\WeatherFaxUI.h:476
 msgid "About Weatherfax"
-msgstr ""
+msgstr "About Weatherfax"
 
 #: src\DecoderOptionsDialog.cpp:122
 msgid "Failed to configure capture."
-msgstr ""
+msgstr "Failed to configure capture."
 
 #: src\DecoderOptionsDialog.cpp:123
 msgid "Failure"
-msgstr ""
+msgstr "Failure"
 
 #: src\FaxDecoder.cpp:119
 msgid "Failed"
-msgstr ""
+msgstr "Failed"
 
 #: src\FaxDecoder.cpp:119
 msgid "Failure Decoding Fax: "
@@ -692,122 +692,123 @@ msgstr ""
 
 #: src\WeatherFaxUI.cpp:958
 msgid "CCW"
-msgstr ""
+msgstr "CCW"
 
 #: src\WeatherFaxUI.cpp:958
 msgid "CW"
-msgstr ""
+msgstr "CW"
 
 #: src\WeatherFaxUI.cpp:979 src\WeatherFaxWizard.cpp:237
 msgid "Phasing"
-msgstr ""
+msgstr "Phasing"
 
 #: src\WeatherFaxUI.cpp:994
 msgid "Skew"
-msgstr ""
+msgstr "Skew"
 
 #: src\WeatherFaxUI.cpp:1022 src\WeatherFaxUI.cpp:1318 src\WeatherFaxUI.cpp:1405
 msgid "a page"
-msgstr ""
+msgstr "a page"
 
 #: src\WeatherFaxUI.cpp:1040 src\WeatherFaxUI.cpp:1335
 msgid "Image Coordinates"
-msgstr ""
+msgstr "Image Coordinates"
 
 #: src\WeatherFaxUI.cpp:1052
 msgid "Remove"
-msgstr ""
+msgstr "Remove"
 
 #: src\WeatherFaxUI.cpp:1069 src\WeatherFaxUI.cpp:1092 src\WeatherFaxUI.cpp:1342
 #: src\WeatherFaxUI.cpp:1365
 msgid "Coord Y/X"
-msgstr ""
+msgstr "Coord Y/X"
 
 #: src\WeatherFaxUI.cpp:1074 src\WeatherFaxUI.cpp:1097 src\WeatherFaxUI.cpp:1347
 #: src\WeatherFaxUI.cpp:1370
 msgid "Lat/Lon"
-msgstr ""
+msgstr "Lat/Lon"
 
 #: src\WeatherFaxUI.cpp:1124
 msgid "Minutes"
-msgstr ""
+msgstr "Minutes"
 
 #: src\WeatherFaxUI.cpp:1196
 msgid "Lat/Lon Minutes"
-msgstr ""
+msgstr "Lat/Lon Minutes"
 
 #: src\WeatherFaxUI.cpp:1199
 msgid "+ Lat/Lon for N/E\n"
 "- Lat/Lon for S/W"
-msgstr ""
+msgstr "+ Lat/Lon for N/E\n"
+"- Lat/Lon for S/W"
 
 #: src\WeatherFaxUI.cpp:1217
 msgid "Coordinates Mapping Correction"
-msgstr ""
+msgstr "Coordinates Mapping Correction"
 
 #: src\WeatherFaxUI.cpp:1222
 msgid "Input Type"
-msgstr ""
+msgstr "Input Type"
 
 #: src\WeatherFaxUI.cpp:1226
 msgid "conic"
-msgstr ""
+msgstr "conic"
 
 #: src\WeatherFaxUI.cpp:1226
 msgid "fixed-flat"
-msgstr ""
+msgstr "fixed-flat"
 
 #: src\WeatherFaxUI.cpp:1226
 msgid "mercator"
-msgstr ""
+msgstr "mercator"
 
 #: src\WeatherFaxUI.cpp:1226
 msgid "polar"
-msgstr ""
+msgstr "polar"
 
 #: src\WeatherFaxUI.cpp:1232
 msgid "Output Type"
-msgstr ""
+msgstr "Output Type"
 
 #: src\WeatherFaxUI.cpp:1236
 msgid "Mercator"
-msgstr ""
+msgstr "Mercator"
 
 #: src\WeatherFaxUI.cpp:1240
 msgid "Size"
-msgstr ""
+msgstr "Size"
 
 #: src\WeatherFaxUI.cpp:1247
 msgid "W/H"
-msgstr ""
+msgstr "W/H"
 
 #: src\WeatherFaxUI.cpp:1254
 msgid "True Width Ratio"
-msgstr ""
+msgstr "True Width Ratio"
 
 #: src\WeatherFaxUI.cpp:1267
 msgid "Pole X"
-msgstr ""
+msgstr "Pole X"
 
 #: src\WeatherFaxUI.cpp:1274
 msgid "Pole Y"
-msgstr ""
+msgstr "Pole Y"
 
 #: src\WeatherFaxUI.cpp:1281
 msgid "Equator Y"
-msgstr ""
+msgstr "Equator Y"
 
 #: src\WeatherFaxUI.cpp:1296
 msgid "Get Equator"
-msgstr ""
+msgstr "Get Equator"
 
 #: src\WeatherFaxUI.cpp:1299
 msgid "Get Mapping "
-msgstr ""
+msgstr "Get Mapping "
 
 #: src\WeatherFaxUI.cpp:1302
 msgid "GetAspectRatio"
-msgstr ""
+msgstr "GetAspectRatio"
 
 #: src\WeatherFaxUI.cpp:1415
 msgid "<< Prev"
@@ -907,56 +908,57 @@ msgstr ""
 
 #: src\WeatherFaxUI.cpp:1757
 msgid "Audio Decoding Options"
-msgstr ""
+msgstr "Audio Decoding Options"
 
 #: src\WeatherFaxUI.cpp:1764
 msgid "Image Width"
-msgstr ""
+msgstr "Image Width"
 
 #: src\WeatherFaxUI.cpp:1771
 msgid "Bits per Pixel"
-msgstr ""
+msgstr "Bits per Pixel"
 
 #: src\WeatherFaxUI.cpp:1778
 msgid "Carrier"
-msgstr ""
+msgstr "Carrier"
 
 #: src\WeatherFaxUI.cpp:1785
 msgid "Deviation"
-msgstr ""
+msgstr "Deviation"
 
 #: src\WeatherFaxUI.cpp:1796
 msgid "middle"
-msgstr ""
+msgstr "middle"
 
 #: src\WeatherFaxUI.cpp:1796
 msgid "narrow"
-msgstr ""
+msgstr "narrow"
 
 #: src\WeatherFaxUI.cpp:1796
 msgid "wide"
-msgstr ""
+msgstr "wide"
 
 #: src\WeatherFaxUI.cpp:1802
 msgid "Saturation Threshold"
-msgstr ""
+msgstr "Saturation Threshold"
 
 #: src\WeatherFaxUI.cpp:1817
 msgid "Skip start, stop and \n"
 "phasing detection"
-msgstr ""
+msgstr "Skip start, stop and \n"
+"phasing detection"
 
 #: src\WeatherFaxUI.cpp:1820
 msgid "Include header data in image"
-msgstr ""
+msgstr "Include header data in image"
 
 #: src\WeatherFaxUI.cpp:1834
 msgid "Done"
-msgstr ""
+msgstr "Done"
 
 #: src\WeatherFaxUI.cpp:1888
 msgid "Weather Fax Plugin Version"
-msgstr ""
+msgstr "Weather Fax Plugin Version"
 
 #: src\WeatherFaxUI.cpp:1899
 msgid "The weatherfax plugin for opencpn is intended to reduce the amount of user interaction to receive weather faxes and optionally overlay them directly onto charts.\n\n"
@@ -965,55 +967,62 @@ msgid "The weatherfax plugin for opencpn is intended to reduce the amount of use
 "Source Code:\n"
 "https://github.com/seandepagnier/weatherfax_pi\n\n"
 "Many thanks to translators and testers."
-msgstr ""
+msgstr "The weatherfax plugin for opencpn is intended to reduce the amount of user interaction to receive weather faxes and optionally overlay them directly onto charts.\n\n"
+"This includes a fax decoder, which converts radio fax audio into images.\n\n"
+"To get started, open either an image or recorded wav audio file of a ssb radio fax transmission from the file menu, or select an option from the retrieve menu.\n\n"
+"Source Code:\n"
+"https://github.com/seandepagnier/weatherfax_pi\n\n"
+"Many thanks to translators and testers."
 
 #: src\WeatherFaxUI.cpp:1908
 msgid "About the Author"
-msgstr ""
+msgstr "About the Author"
 
 #: src\WeatherFaxWizard.cpp:44
 msgid "Weather Fax Image"
-msgstr ""
+msgstr "Weather Fax Image"
 
 #: src\WeatherFaxWizard.cpp:50
 msgid "New Coord"
-msgstr ""
+msgstr "New Coord"
 
 #: src\WeatherFaxWizard.cpp:234 src\WeatherFaxWizard.cpp:247
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 #: src\WeatherFaxWizard.cpp:237
 msgid "Image"
-msgstr ""
+msgstr "Image"
 
 #: src\WeatherFaxWizard.cpp:353
 msgid "Failed to apply mapping\n"
 "Check Mapping Correction Parameters"
-msgstr ""
+msgstr "Failed to apply mapping\n"
+"Check Mapping Correction Parameters"
 
 #: src\WeatherFaxWizard.cpp:354 src\WeatherFaxWizard.cpp:495
 #: src\WeatherFaxWizard.cpp:639 src\WeatherFaxWizard.cpp:728
 #: src\WeatherFaxWizard.cpp:744
 msgid "Mapping"
-msgstr ""
+msgstr "Mapping"
 
 #: src\WeatherFaxWizard.cpp:493
 msgid "Warning, latitudes on different sides of equator not recommended because of ambiguity of north or south pole"
-msgstr ""
+msgstr "Warning, latitudes on different sides of the Equator not recommended because of ambiguity of the North or the South Pole"
 
 #: src\WeatherFaxWizard.cpp:636
 msgid "Calculating Mapping Failed.\n"
 "Perhaps you have chosen the wrong mapping type for this image, or the coordinates specified are not correct\n"
-msgstr ""
+msgstr "Calculating Mapping Failed.\n"
+"Perhaps you have chosen the wrong mapping type for this image, or the coordinates specified are not correct\n"
 
 #: src\WeatherFaxWizard.cpp:727
 msgid "Calculating Mapping not yet supported.\n"
-msgstr ""
+msgstr "Calculating Mapping not yet supported.\n"
 
 #: src\WeatherFaxWizard.cpp:743
 msgid "Calculating Equator not yet supported.\n"
-msgstr ""
+msgstr "Calculating Equator not yet supported.\n"
 
 #: src\WeatherFaxWizard.cpp:914
 msgid "Mapping allows for scaling, and conversion between coordinate systems\n"
@@ -1025,17 +1034,25 @@ msgid "Mapping allows for scaling, and conversion between coordinate systems\n"
 "First adjust pole X to center the latitudes. Next adjust the Pole Y value until the blue latitude curve closest to the pole is correct. Now, if the second blue latitude is too wide, then the true width ratio needs to be increased, otherwise it should be decreased. Repeat adjusting the Pole Y and true width ratio until both align. It is easiest to calibrate correctly if you use the farthest spaced latitudes available.\n"
 "Once the blue latitudes align perfectly, recompute the equator to ensure the resulting mapping is correct. At this point, the coordinates can be changed to better locations if needed. If true width is very close to 1.0 it probably should be exactly 1.0.\n"
 "It is also possible to go to the next step, adjust the coordinates, then come back to this step and get the mapping parameters again to improve the estimate."
-msgstr ""
+msgstr "Mapping allows for scaling, and conversion between coordinate systems\n"
+"Latitudes are +N -S, Longitudes +E -W\n\n"
+"For polar mapping mode:\n"
+"Get Mapping parameters calculates the mapping from the coordinates given, but the first coordinate's X value (vertical red line) must align with the pole in polar mode on the vertical meridian\n"
+"Once the coordinates are entered, the mapping should make the the blue latitudes align.  If they are far off, check the input coordinates.\n"
+"Once they are close:\n"
+"First adjust pole X to center the latitudes. Next adjust the Pole Y value until the blue latitude curve closest to the pole is correct. Now, if the second blue latitude is too wide, then the true width ratio needs to be increased, otherwise it should be decreased. Repeat adjusting the Pole Y and true width ratio until both align. It is easiest to calibrate correctly if you use the farthest spaced latitudes available.\n"
+"Once the blue latitudes align perfectly, recompute the equator to ensure the resulting mapping is correct. At this point, the coordinates can be changed to better locations if needed. If true width is very close to 1.0 it probably should be exactly 1.0.\n"
+"It is also possible to go to the next step, adjust the coordinates, then come back to this step and get the mapping parameters again to improve the estimate."
 
 #: src\weatherfax_pi.cpp:72
 msgid "WeatherFax"
-msgstr ""
+msgstr "WeatherFax"
 
 #: src\weatherfax_pi.cpp:76
 msgid "Weatherfax"
-msgstr ""
+msgstr "Weatherfax"
 
 #: src\weatherfax_pi.cpp:371
 msgid "WeatherFax Preferences"
-msgstr ""
+msgstr "WeatherFax Preferences"
 
