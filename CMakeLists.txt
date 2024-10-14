@@ -18,9 +18,9 @@
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx,                                       *
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                       *
 #-----------------------------------------------------------------------------
-# Frontend2 Author: Jon Gough 
-# Testplugin(TP) v1.0.286.3 29/12/2023 DD/MM/YYYY format
-# buildCI:yes useODAPI:no validateJSON:no
+# Frontend2 Author: Jon Gough Testplugin(TP)
+# v1.0.309.0 14/10/2024 DD/MM/YYYY
+# format buildCI:yes useODAPI:yes validateJSON:yes
 # ---------------------------------------------------------------------------
 ## -- When changing this file do NOT change the order of the sections.    -- ##
 ## -- Make changes only between the section blocks identified             -- ##
@@ -33,17 +33,20 @@ set(CMLOC "CMakeLists: ")
 # define minimum cmake version
 cmake_minimum_required(VERSION 3.5.1)
 if(COMMAND cmake_policy)
-    if(POLICY CMP0043)
-        cmake_policy(SET CMP0043 NEW)
-    endif(POLICY CMP0043)
-    cmake_policy(SET CMP0048 NEW)
-    if(POLICY CMP0076)
-        cmake_policy(SET CMP0076 NEW)
-    endif(POLICY CMP0076)
-    if(POLICY CMP0077)
-        cmake_policy(SET CMP0077 NEW)
-    endif(POLICY CMP0077)
-endif(COMMAND cmake_policy)
+  if (POLICY CMP0043)
+    cmake_policy(SET CMP0043 NEW)
+  endif (POLICY CMP0043)
+  cmake_policy(SET CMP0048 NEW)
+  if (POLICY CMP0076)
+    cmake_policy(SET CMP0076 NEW)
+  endif (POLICY CMP0076)
+  if (POLICY CMP0077)
+    cmake_policy(SET CMP0077 NEW)
+  endif (POLICY CMP0077)
+endif (COMMAND cmake_policy)
+
+# set for vscode/vscodium
+set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
 
 # define plugin name, owner and versions
 SET(VERBOSE_NAME weatherfax)
@@ -57,12 +60,12 @@ set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "111")
-set(VERSION_TWEAK "1")
-set(VERSION_DATE  "22/01/2023")#DD/MM/YYYY format
+set(VERSION_TWEAK "2")
+set(VERSION_DATE  "14/10/24")#DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov58")
 
 set(OCPN_API_VERSION_MAJOR "1")
-set(OCPN_API_VERSION_MINOR "17")
+set(OCPN_API_VERSION_MINOR "18")
 set(TP_COMMENT "  * Release using CI")
 
 set(PARENT "opencpn")
@@ -97,18 +100,25 @@ option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 set(CMAKE_CXX_STANDARD 11)
 
 # Prefer libGL.so to libOpenGL.so, see CMP0072
-set(OpenGL_GL_PREFERENCE "LEGACY")    #not operational
+set(OpenGL_GL_PREFERENCE "LEGACY") # not operational
 # For Weatherfax this must be set ON or it fails to compile
 option(USE_GL "Enable OpenGL support" ON)
 message(STATUS "${CMLOC}USE_GL: ${USE_GL}")
 
-if("${CMAKE_BUILD_TYPE}" STREQUAL "")
-    set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build" FORCE)
-endif("${CMAKE_BUILD_TYPE}" STREQUAL "")
-set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "" "Debug" "Release" "RelWithDebInfo" "MinSizeRel")
+if ("${CMAKE_BUILD_TYPE}" STREQUAL "")
+  set(CMAKE_BUILD_TYPE
+      "Release"
+      CACHE STRING "Choose the type of build" FORCE
+  )
+endif ("${CMAKE_BUILD_TYPE}" STREQUAL "")
+set_property(
+  CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "" "Debug" "Release" "RelWithDebInfo"
+                                  "MinSizeRel"
+)
 message(STATUS "${CMLOC}Build type: ${CMAKE_BUILD_TYPE}")
 
-## ----- Statements below used to setup standard variables required by the CMAKE process -- Do not remove - ##
+# ----- Statements below used to setup standard variables required by the CMAKE  -##
+# ----- process -- Do not remove -##
 
 project(${PACKAGE})
 
@@ -175,7 +185,7 @@ include("PluginConfigure")
 
 add_definitions(-DUSE_S57)
 
-## ---- Section Below - Add your project SET(SRCS and SET(HDRS  etc..
+## ----- Section above - Add your project SET(SRCS and SET(HDRS  etc.-------##
 
 SET(SRCS
             src/weatherfax_pi.cpp
@@ -463,9 +473,9 @@ endif(UNIX AND NOT APPLE AND NOT QT_ANDRIOD)
 ##------- Change below to match project requirements --------------------##
 
 # Needed for android builds
-if(QT_ANDROID)
-    include_directories(BEFORE ${qt_android_include})
-endif(QT_ANDROID)
+if (QT_ANDROID)
+  include_directories(BEFORE ${qt_android_include})
+endif (QT_ANDROID)
 
 ## Needed for all builds Do not change - needed to build app -------------##
 ##===============================================================
@@ -478,8 +488,11 @@ include("PluginPackage")
 ## ----- Do not change section above - needed to configure build process --##
 
 message(STATUS "${CMLOC}include directories: ")
-get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
-foreach(dir ${dirs})
-    message(STATUS "${CMLOC}dir='${dir}'")
-endforeach()
-
+get_property(
+  dirs
+  DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+  PROPERTY INCLUDE_DIRECTORIES
+)
+foreach (dir ${dirs})
+  message(STATUS "${CMLOC}dir='${dir}'")
+endforeach ()
