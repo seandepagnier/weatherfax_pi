@@ -60,7 +60,7 @@ set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "9")
 set(VERSION_PATCH "111")
-set(VERSION_TWEAK "4")
+set(VERSION_TWEAK "5")
 set(VERSION_DATE  "14/10/24")#DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov58")
 
@@ -423,7 +423,7 @@ if(NOT OCPN_FLATPAK_CONFIG)
         target_link_libraries(${PACKAGE_NAME} windows::headers)
     endif (WIN32)
 
-    add_subdirectory(opencpn-libs/api-17)
+    add_subdirectory(opencpn-libs/api-18)
     target_link_libraries(${PACKAGE_NAME} ocpn::api)
 
 	IF(NOT QT_ANDROID)
