@@ -6,7 +6,7 @@ parameters:
         type: boolean
         default: true
 
-## Start of build control of O58 and O562 plugins
+## Start of build control of O58 and O562 pluginsrun_workflow_deploy
 ## run_workflow_deploy_O58
 ##    type: boolean
 ##    default: true
