@@ -445,24 +445,4 @@ jobs:
         - deploy-code:
             deploy_use_orb: false
 
-## -------------------------------------------
-## Ubuntu OS - Generally deprecated and not used.
-## -------------------------------------------
-## KEEP needed for Raspbian OpenCPN v5.6
-    build-ubuntu-armhf-1804-buster:
-        machine:
-            image: ubuntu-2204:current
-            resource_class: arm.medium
-        environment:
-        - OCPN_TARGET=buster-armhf
-        - DOCKER_IMAGE=jongough/ubuntu-armhf:18.04
-        - BUILD_FLAGS=-j3
-        - BUILD_ENV=ubuntu
-        - DEPLOY_USE_ORB: true
-        steps:
-        - checkout
-        - run: chmod a+x ./ci/*.sh
-        - run:
-            command: ci/circleci-build-ubuntu-docker.sh
-            no_output_timeout: 30m
-        - deploy-code
+
