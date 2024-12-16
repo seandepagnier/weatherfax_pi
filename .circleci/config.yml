@@ -33,11 +33,11 @@ workflows:
              <<: *std-filters
         - build-android-armhf:
              <<: *std-filters
-        - build-flatpak-arm64-2208:
+        - build-flatpak-aarch64-2208:
             <<: *std-filters
         - build-flatpak-x86-2208:
             <<: *std-filters
-        - build-flatpak-arm64-2408:
+        - build-flatpak-aarch64-2408:
             <<: *std-filters
         - build-flatpak-x86-2408:
             <<: *std-filters
@@ -151,7 +151,7 @@ jobs:
         - run: bash ci/circleci-build-macos.sh
         - deploy-code:
             deploy_use_orb: false
-            install_pythob: false
+            install_python: false
     build-macos-universal:
         macos:
             xcode: "14.2"
@@ -202,12 +202,13 @@ jobs:
             command: ci\circleci-build-msvc.bat
         - deploy-code:
             deploy_use_orb: false
-    build-flatpak-arm64-2208:
+    build-flatpak-aarch64-2208:
         machine:
             image: ubuntu-2204:current
             resource_class: arm.medium
         environment:
-        - OCPN_TARGET:  flatpak-arm64
+        - OCPN_TARGET:  flatpak
+        - BUILD_ARCH: aarch64
         - FLATPAK_BRANCH: stable
         - CLOUDSMITH_PKG_EXT: gz
         - SDK_VER: 22.08
@@ -224,6 +225,7 @@ jobs:
             resource_class: arm.medium
         environment:
         - OCPN_TARGET:  flatpak
+        - BUILD_ARCH: x86_64
         - FLATPAK_BRANCH: stable
         - CLOUDSMITH_PKG_EXT: gz
         - SDK_VER: 22.08
@@ -235,12 +237,13 @@ jobs:
             command: bash ci/circleci-build-flatpak.sh
             no_output_timeout: 30m
         - deploy-code
-    build-flatpak-arm64-2408:
+    build-flatpak-aarch64-2408:
         machine:
             image: ubuntu-2204:current
             resource_class: arm.medium
         environment:
-        - OCPN_TARGET:  flatpak-arm64
+        - OCPN_TARGET:  flatpak
+        - BUILD_ARCH: aarch64
         - FLATPAK_BRANCH: stable
         - CLOUDSMITH_PKG_EXT: gz
         - SDK_VER: 24.08
@@ -257,6 +260,7 @@ jobs:
             resource_class: arm.medium
         environment:
         - OCPN_TARGET:  flatpak
+        - BUILD_ARCH: x86_64
         - FLATPAK_BRANCH: stable
         - CLOUDSMITH_PKG_EXT: gz
         - SDK_VER: 24.08
@@ -331,7 +335,7 @@ jobs:
         environment:
         - OCPN_TARGET=bullseye-armhf
         - DOCKER_IMAGE=jongough/debian-armhf:bullseye
-        - BUILD_FLbuild-debian-arm64-12-bookwormAGS=-j3
+        - BUILD_FLAGS=-j3
         - BUILD_ENV=debian
         - BUILD_GTK3: true
         - DEPLOY_USE_ORB: true

@@ -1,4 +1,6 @@
 cmake-build*
+.BATCH
+.build
 build/*
 .idea*
 .directory
