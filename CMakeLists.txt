@@ -58,8 +58,8 @@ set(SHORT_DESCRIPTION "Open fax image, decode audio fax, chart overlay")
 set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate chart overlay image. Convert images in mercator, polar, conic and uniform coordinates. Convert any image into a raster chart. Built in HF Radio Fax database for SSB and Internet retrieval from meterological sites. ")
 
 set(VERSION_MAJOR "1")
-set(VERSION_MINOR "9")
-set(VERSION_PATCH "24")
+set(VERSION_MINOR "10")
+set(VERSION_PATCH "0")
 set(VERSION_TWEAK "0")
 set(VERSION_DATE  "12/15/24")#DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov58")
