@@ -49,7 +49,7 @@ extern "C" DECL_EXP void destroy_pi(opencpn_plugin* p)
 //---------------------------------------------------------------------------------------------------------
 
 weatherfax_pi::weatherfax_pi(void *ppimgr)
-    : opencpn_plugin_118(ppimgr)
+    : opencpn_plugin_117(ppimgr)
 {
     // Create the PlugIn icons
     initialize_images();
