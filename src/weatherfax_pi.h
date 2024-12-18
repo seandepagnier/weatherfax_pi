@@ -50,7 +50,7 @@
 class WeatherFaxImage;
 class WeatherFax;
 
-class weatherfax_pi : public opencpn_plugin_117
+class weatherfax_pi : public opencpn_plugin_118
 {
 public:
       weatherfax_pi(void *ppimgr);
