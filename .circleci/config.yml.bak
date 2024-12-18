@@ -26,8 +26,8 @@ std-filters: &std-filters
 workflows:
     build_all:
         jobs:
-## ----------------------
-## OpenCPN 5.8 Plugins  (Also work in 5.10)
+## --------------------
+## OpenCPN 5.8 Plugins
 ## ----------------------
         - build-android-arm64:
              <<: *std-filters
@@ -49,9 +49,9 @@ workflows:
             <<: *std-filters
         - build-debian-x86_64-12-bookworm:
             <<: *std-filters
-        - build-debian-arm64-11-bullseye:
-            <<: *std-filters
         - build-debian-armhf-11-bullseye:
+            <<: *std-filters
+        - build-debian-arm64-11-bullseye:
             <<: *std-filters
         - build-debian-x86_64-11-bullseye:
             <<: *std-filters
@@ -66,16 +66,9 @@ workflows:
 ## ------------------------------------------
 ## Circleci will not build for macos 11 so removed - 18/10/2023
         - build-macos:
-             <<: *std-filters
+            <<: *std-filters
         - build-msvc-2022:
             <<: *std-filters
-
-## -------------------------------------
-## UBUNTU OS  Frozen - 28/05/2023  DROP
-## -------------------------------------
-## KEEP needed for Raspbian OpenCPN v5.6
-#        - build-ubuntu-armhf-1804-buster:
-#            <<: *std-filters
 
 orbs:
     cloudsmith: cloudsmith/cloudsmith@1.0.4
@@ -158,6 +151,7 @@ jobs:
         - run: bash ci/circleci-build-macos.sh
         - deploy-code:
             deploy_use_orb: false
+            install_pythob: false
     build-macos-universal:
         macos:
             xcode: "14.2"
@@ -190,6 +184,7 @@ jobs:
               sh -c "cat build/*.xml"
         - deploy-code:
             deploy_use_orb: false
+            install_python: false
     build-msvc-wx32-2022:
         executor:
             name: win/server-2022
@@ -424,6 +419,7 @@ jobs:
         - run: bash ci/circleci-build-macos.sh
         - deploy-code:
             deploy_use_orb: false
+            install_python: false
 
 ## Appveyor doesn't build for Windows now.
 ## If below is used, WinXT will not work.
@@ -445,24 +441,4 @@ jobs:
         - deploy-code:
             deploy_use_orb: false
 
-## -------------------------------------------
-## Ubuntu OS - Generally deprecated and not used.
-## -------------------------------------------
-## KEEP needed for Raspbian OpenCPN v5.6
-    build-ubuntu-armhf-1804-buster:
-        machine:
-            image: ubuntu-2204:current
-            resource_class: arm.medium
-        environment:
-        - OCPN_TARGET=buster-armhf
-        - DOCKER_IMAGE=jongough/ubuntu-armhf:18.04
-        - BUILD_FLAGS=-j3
-        - BUILD_ENV=ubuntu
-        - DEPLOY_USE_ORB: true
-        steps:
-        - checkout
-        - run: chmod a+x ./ci/*.sh
-        - run:
-            command: ci/circleci-build-ubuntu-docker.sh
-            no_output_timeout: 30m
-        - deploy-code
+
