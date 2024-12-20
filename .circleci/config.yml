@@ -313,7 +313,6 @@ jobs:
     build-debian-x86_64-12-bookworm:
         machine:
             image: ubuntu-2204:current
-            resource_class: arm.medium
         environment:
         - OCPN_TARGET: bookworm
         - BUILD_GTK3: true
@@ -325,8 +324,8 @@ jobs:
         - checkout
         - run: chmod a+x ci/*.sh
         - run:
-            command: ci/circleci-build-ubuntu-docker.sh
-            no_output_timeout: 30m
+              command: ci/circleci-build-ubuntu-docker.sh
+              no_output_timeout: 30m
         - deploy-code
     build-debian-armhf-11-bullseye:
         machine:
