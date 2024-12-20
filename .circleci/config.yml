@@ -311,22 +311,24 @@ jobs:
             no_output_timeout: 30m
         - deploy-code
     build-debian-x86_64-12-bookworm:
-        machine:
-            image: ubuntu-2204:current
-            resource_class: arm.medium
+        docker:
+            - image: circleci/buildpack-deps:bookworm-scm
         environment:
         - OCPN_TARGET: bookworm
         - BUILD_GTK3: true
-        - WX_VER: 32
         - DEPLOY_USE_ORB: true
         - BUILD_ENV=debian
-        - DOCKER_IMAGE=debian:bookworm
         steps:
         - checkout
+        - run: >
+              echo "deb-src http://ftp.us.debian.org/debian bookworm main"
+              | sudo tee -a /etc/apt/sources.list
+        - run: >
+              echo "deb-src http://ftp.us.debian.org/debian bookworm-updates main"
+              | sudo tee -a /etc/apt/sources.list
+        - run: cat /etc/apt/sources.list
         - run: chmod a+x ci/*.sh
-        - run:
-            command: ci/circleci-build-ubuntu-docker.sh
-            no_output_timeout: 30m
+        - run: ci/circleci-build-debian.sh
         - deploy-code
     build-debian-armhf-11-bullseye:
         machine:
