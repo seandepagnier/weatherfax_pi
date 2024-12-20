@@ -312,7 +312,7 @@ jobs:
         - deploy-code
     build-debian-x86_64-12-bookworm:
         machine:
-            image: ubuntu-2004:202104-01
+            image: ubuntu-2204:current
         environment:
         - OCPN_TARGET: bookworm
         - BUILD_GTK3: true
