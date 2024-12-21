@@ -312,8 +312,7 @@ jobs:
         - deploy-code
     build-debian-x86_64-12-bookworm:
         machine:
-            image: ubuntu-2204:current
-            resource_class: arm.medium
+            image: ubuntu-2404:current
         environment:
         - OCPN_TARGET: bookworm
         - BUILD_GTK3: true
