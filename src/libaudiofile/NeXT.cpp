@@ -32,6 +32,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <limits.h>
 
 #include "File.h"
 #include "Setup.h"
@@ -120,6 +121,12 @@ status NeXTFile::readInit(AFfilesetup setup)
 	if (!channelCount)
 	{
 		_af_error(AF_BAD_CHANNELS, "invalid file with 0 channels");
+		return AF_FAIL;
+	}
+	/* avoid overflow of INT for double size rate */
+	if (channelCount > (INT32_MAX / (sizeof(double))))
+	{
+		_af_error(AF_BAD_CHANNELS, "invalid file with %i channels", channelCount);
 		return AF_FAIL;
 	}
 

@@ -123,8 +123,7 @@ struct signConverter
 	typedef typename IntTypes<Format>::UnsignedType UnsignedType;
 
 	static const int kScaleBits = (Format + 1) * CHAR_BIT - 1;
-	static const int kMaxSignedValue = (((1 << (kScaleBits - 1)) - 1) << 1) + 1;
-	static const int kMinSignedValue = -kMaxSignedValue - 1;
+	static const int kMinSignedValue = 0-(1U<<kScaleBits);
 
 	struct signedToUnsigned : public std::unary_function<SignedType, UnsignedType>
 	{

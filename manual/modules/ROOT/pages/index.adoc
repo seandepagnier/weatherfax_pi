@@ -21,6 +21,10 @@ image::wx-0-retrieve-internet-overlaid-on-chart.png[]
 * Download: https://opencpn.org/OpenCPN/plugins/weatherfax.html
 * Forum: http://www.cruisersforum.com/forums/f134/weatherfax-97533.html
 
+== Resource ==
+
+Weatherfax Beginners Guide by Franziska Inkognito: https://opencpn.org/wiki/dokuwiki/doku.php?id=opencpn:supplementary_hardware:wf[Simple guide for receiving RTTF and HF-Fax]
+
 == Installation and Preparation
 
 === Using Plugin Manager (PIM)
