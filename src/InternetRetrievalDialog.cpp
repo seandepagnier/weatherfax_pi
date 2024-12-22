@@ -164,7 +164,6 @@ void InternetRetrievalDialog::Load(bool force)
                     _T("NOAA_OPC"),
                     _T("NAVY"),
                     _T("PWx_Amer_Atl"),
-                    _T("Aviation_Weather"),
                     _T("PWx_Euro_Atl"),
                     _T("Europe"),
                     _T("LaMMA"),
