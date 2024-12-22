@@ -393,4 +393,7 @@
     <Coordinate Name="ASCAT C - Bermuda ASCAT C - MAC86" X1="153" Y1="152" Lat1="38.00000" Lon1="-72.00000" X2="587" Y2="483" Lat2="32.00000" Lon2="-63.00000" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
     <Coordinate Name="ASCAT C - Carib N ASCAT C - MAC87" X1="153" Y1="35" Lat1="30.00000" Lon1="-72.00000" X2="587" Y2="589" Lat2="20.00000" Lon2="-63.00000" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
     <Coordinate Name="ASCAT C - Carib S ASCAT C - MAC88" X1="153" Y1="148" Lat1="18.00000" Lon1="-72.00000" X2="587" Y2="589" Lat2="10.00000" Lon2="-63.00000" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
+    <Coordinate Name="ASCAT Indexes - ASCAT North America Index - NA123" X1="155" Y1="132" Lat1="50.00000" Lon1="-150.00000" X2="1243" Y2="712" Lat2="10.00000" Lon2="-60.00000" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
+    <Coordinate Name="ASCAT Indexes - ASCAT Europe Index - EU123" X1="86" Y1="11" Lat1="70.00000" Lon1="-30.00000" X2="1191" Y2="1282" Lat2="20.00000" Lon2="45.00000" Mapping="Mercator" MappingMultiplier="1.0000" MappingRatio="1.0000" />
+    <Coordinate Name="ASCAT B - Adriatic ASCAT B - MAB157" X1="6" Y1="101" Lat1="50.00000" Lon1="15.00000" X2="2192" Y2="1766" Lat2="40.00000" Lon2="30.00000" Mapping="Mercator" MappingMultiplier="3.0000" MappingRatio="1.0000" />
 </WeatherFaxCoordinates>
