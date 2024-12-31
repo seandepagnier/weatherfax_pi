@@ -981,7 +981,7 @@ void WeatherFax::OnUpdateData( wxCommandEvent& event )
         message += _("If you have customizations in these files you can merge them manually.");
 
         wxMessageDialog mdlg(this, message,
-                            _("Weather Fax"), wxOK | wxICON_ERROR);
+                            _("Weather Fax"), wxOK | wxICON_INFORMATION);
         mdlg.ShowModal();
 
     }
