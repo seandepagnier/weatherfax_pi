@@ -2,7 +2,6 @@ cmake-build*
 .BATCH
 .build
 build/*
-.idea*
 .directory
 po/POTFILES.in.test
 temp

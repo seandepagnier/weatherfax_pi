@@ -11,23 +11,6 @@
       <Area Name="2" lat1="18N" lat2="41N" lon1="90W" lon2="40W" />
     </Region>
   </Server>
-  <Server Name="French Polynesia" Url="https://meteo.pf/sites/default/files/meteo_data/bulletins/marines/">
-    <Region Name="South Pacific">
-      <Map Url="preiso36.png" Contents="Day 1 Wind" Area="1" />
-      <Map Url="preiso60.png" Contents="Day 2 Wind" Area="1" />
-      <Map Url="preiso84.png" Contents="Day 3 Wind" Area="1" />
-      <Map Url="preiso108.png" Contents="Day 4 Wind" Area="1" />
-      <Map Url="preiso132.png" Contents="Day 5 Wind" Area="1" />
-      <Map Url="etatmer12.png" Contents="Waves Today" Area="2" />
-      <Map Url="etatmer36.png" Contents="Waves Day 1" Area="2" />
-      <Map Url="etatmer60.png" Contents="Waves Day 2" Area="2" />
-      <Map Url="houle12.png" Contents="Swell Today" Area="2" />
-      <Map Url="houle36.png" Contents="Swell Day 1" Area="2" />
-      <Map Url="houle60.png" Contents="Swell Day 2" Area="2" />
-      <Area Name="1" lat1="48S" lat2="0N" lon1="175W" lon2="128W" />
-      <Area Name="2" lat1="48S" lat2="0N" lon1="175W" lon2="128W" />
-    </Region>
-  </Server>
   <Server Name="Chile Met" Url="http://web.directemar.cl/met/jturno/">
     <Region Name="Chile">
       <Map Url="cartas/carta.jpg" Contents="Streamline Analysis (Warning: 3MBytes)" Area="1" />

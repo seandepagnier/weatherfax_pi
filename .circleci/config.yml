@@ -222,7 +222,6 @@ jobs:
     build-flatpak-x86-2208:
         machine:
             image: ubuntu-2204:current
-            resource_class: arm.medium
         environment:
         - OCPN_TARGET:  flatpak
         - BUILD_ARCH: x86_64
@@ -257,7 +256,6 @@ jobs:
     build-flatpak-x86-2408:
         machine:
             image: ubuntu-2204:current
-            resource_class: arm.medium
         environment:
         - OCPN_TARGET:  flatpak
         - BUILD_ARCH: x86_64
@@ -312,7 +310,7 @@ jobs:
         - deploy-code
     build-debian-x86_64-12-bookworm:
         machine:
-            image: ubuntu-2204:current
+            image: ubuntu-2404:current
         environment:
         - OCPN_TARGET: bookworm
         - BUILD_GTK3: true
@@ -324,8 +322,8 @@ jobs:
         - checkout
         - run: chmod a+x ci/*.sh
         - run:
-              command: ci/circleci-build-ubuntu-docker.sh
-              no_output_timeout: 30m
+            command: ci/circleci-build-ubuntu-docker.sh
+            no_output_timeout: 30m
         - deploy-code
     build-debian-armhf-11-bullseye:
         machine:

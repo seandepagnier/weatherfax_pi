@@ -134,8 +134,7 @@
       <Map Url="GEOCOLOR/1800x1080.jpg" Contents="GeoColor" Area="1" />
       <Map Url="AirMass/1800x1080.jpg" Contents="AirMass RGB" Area="1" />
       <Map Url="Sandwich/1800x1080.jpg" Contents="Sandwich RGB" Area="1" />
-      <Map Url="DayCloudPhase/1800x1080.jpg" Contents="Day Cloud Phase RGB" Area="1" />
-      <Map Url="NightMicrophysics/1800x1080.jpg" Contents="Nighttime Microphysics" Area="1" />
+      <Map Url="DayNightCloudMicroCombo/1800x1080.jpg" Contents="DayNightCloudMicroCombo RGB" Area="1" />
       <Map Url="FireTemperature/1800x1080.jpg" Contents="Fire Temperature" Area="1" />
       <Map Url="Dust/1800x1080.jpg" Contents="Dust RGB" Area="1" />
       <Map Url="01/1800x1080.jpg" Contents="Band 1 - 0.47µm Blue - Visible" Area="1" />
@@ -160,8 +159,7 @@
       <Map Url="GEOCOLOR/1800x1080.jpg" Contents="GeoColor" Area="1" />
       <Map Url="AirMass/1800x1080.jpg" Contents="AirMass RGB" Area="1" />
       <Map Url="Sandwich/1800x1080.jpg" Contents="Sandwich RGB" Area="1" />
-      <Map Url="DayCloudPhase/1800x1080.jpg" Contents="Day Cloud Phase RGB" Area="1" />
-      <Map Url="NightMicrophysics/1800x1080.jpg" Contents="Nighttime Microphysics" Area="1" />
+      <Map Url="DayNightCloudMicroCombo/1800x1080.jpg" Contents="DayNightCloudMicroCombo RGB" Area="1" />
       <Map Url="FireTemperature/1800x1080.jpg" Contents="Fire Temperature" Area="1" />
       <Map Url="Dust/1800x1080.jpg" Contents="Dust RGB" Area="1" />
       <Map Url="01/1800x1080.jpg" Contents="Band 1 - 0.47µm Blue - Visible" Area="1" />
@@ -186,8 +184,7 @@
       <Map Url="GEOCOLOR/1800x1080.jpg" Contents="GeoColor" Area="1" />
       <Map Url="AirMass/1800x1080.jpg" Contents="AirMass RGB" Area="1" />
       <Map Url="Sandwich/1800x1080.jpg" Contents="Sandwich RGB" Area="1" />
-      <Map Url="DayCloudPhase/1800x1080.jpg" Contents="Day Cloud Phase RGB" Area="1" />
-      <Map Url="NightMicrophysics/1800x1080.jpg" Contents="Nighttime Microphysics" Area="1" />
+      <Map Url="DayNightCloudMicroCombo/1800x1080.jpg" Contents="DayNightCloudMicroCombo RGB" Area="1" />
       <Map Url="FireTemperature/1800x1080.jpg" Contents="Fire Temperature" Area="1" />
       <Map Url="Dust/1800x1080.jpg" Contents="Dust RGB" Area="1" />
       <Map Url="01/1800x1080.jpg" Contents="Band 1 - 0.47µm Blue - Visible" Area="1" />
@@ -212,8 +209,7 @@
       <Map Url="GEOCOLOR/1800x1080.jpg" Contents="GeoColor" Area="1" />
       <Map Url="AirMass/1800x1080.jpg" Contents="AirMass RGB" Area="1" />
       <Map Url="Sandwich/1800x1080.jpg" Contents="Sandwich RGB" Area="1" />
-      <Map Url="DayCloudPhase/1800x1080.jpg" Contents="Day Cloud Phase RGB" Area="1" />
-      <Map Url="NightMicrophysics/1800x1080.jpg" Contents="Nighttime Microphysics" Area="1" />
+      <Map Url="DayNightCloudMicroCombo/1800x1080.jpg" Contents="DayNightCloudMicroCombo RGB" Area="1" />
       <Map Url="FireTemperature/1800x1080.jpg" Contents="Fire Temperature" Area="1" />
       <Map Url="Dust/1800x1080.jpg" Contents="Dust RGB" Area="1" />
       <Map Url="01/1800x1080.jpg" Contents="Band 1 - 0.47µm Blue - Visible" Area="1" />
@@ -238,8 +234,7 @@
       <Map Url="GEOCOLOR/1800x1080.jpg" Contents="GeoColor" Area="1" />
       <Map Url="AirMass/1800x1080.jpg" Contents="AirMass RGB" Area="1" />
       <Map Url="Sandwich/1800x1080.jpg" Contents="Sandwich RGB" Area="1" />
-      <Map Url="DayCloudPhase/1800x1080.jpg" Contents="Day Cloud Phase RGB" Area="1" />
-      <Map Url="NightMicrophysics/1800x1080.jpg" Contents="Nighttime Microphysics" Area="1" />
+      <Map Url="DayNightCloudMicroCombo/1800x1080.jpg" Contents="DayNightCloudMicroCombo RGB" Area="1" />
       <Map Url="FireTemperature/1800x1080.jpg" Contents="Fire Temperature" Area="1" />
       <Map Url="Dust/1800x1080.jpg" Contents="Dust RGB" Area="1" />
       <Map Url="01/1800x1080.jpg" Contents="Band 1 - 0.47µm Blue - Visible" Area="1" />
@@ -264,8 +259,7 @@
       <Map Url="GEOCOLOR/1000x1000.jpg" Contents="GeoColor" Area="1" />
       <Map Url="AirMass/1000x1000.jpg" Contents="AirMass RGB" Area="1" />
       <Map Url="Sandwich/1000x1000.jpg" Contents="Sandwich RGB" Area="1" />
-      <Map Url="DayCloudPhase/1000x1000.jpg" Contents="Day Cloud Phase RGB" Area="1" />
-      <Map Url="NightMicrophysics/1000x1000.jpg" Contents="Nighttime Microphysics" Area="1" />
+      <Map Url="DayNightCloudMicroCombo/1800x1080.jpg" Contents="DayNightCloudMicroCombo RGB" Area="1" />
       <Map Url="FireTemperature/1000x1000.jpg" Contents="Fire Temperature" Area="1" />
       <Map Url="Dust/1000x1000.jpg" Contents="Dust RGB" Area="1" />
       <Map Url="01/1000x1000.jpg" Contents="Band 1 - 0.47µm Blue - Visible" Area="1" />
