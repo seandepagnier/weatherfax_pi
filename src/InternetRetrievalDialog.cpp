@@ -683,36 +683,6 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
         else if (url.StartsWith("ftp")){
             bool success = false;
 
-#ifndef __OCPN__ANDROID__
-            wxFileOutputStream output(filename);
-
-            wxCurlDownloadDialog ddlg(url, &output, _("WeatherFax InternetRetrieval"),
-                                      _("Reading Headers: ") + faxurl->Contents, wxNullBitmap, this,
-                                                                            OCPN_DLDS_ELAPSED_TIME|OCPN_DLDS_ESTIMATED_TIME|OCPN_DLDS_REMAINING_TIME|
-                                                OCPN_DLDS_SPEED|OCPN_DLDS_SIZE|OCPN_DLDS_URL|
-                                                OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|
-                                                OCPN_DLDS_AUTO_CLOSE );
-
-
-            wxCurlDialogReturnFlag ret = ddlg.RunModal();
-            output.Close();
-
-           switch (ret) {
-                case wxCDRF_SUCCESS: {
-                    success = true;
-                    break;
-                }
-                case wxCDRF_FAILED: {
-                    break;
-                }
-                case wxCDRF_USER_ABORTED: {
-                    break;
-                }
-                default:
-                    wxASSERT(false);  // This should never happen because we handle all
-                        // possible cases of ret
-            }
-#else
            _OCPN_DLStatus res = OCPN_downloadFile( url, filename, _("WeatherFax InternetRetrieval"),
                                 _("Reading Headers: ") + faxurl->Contents, wxNullBitmap, this,
                                                 OCPN_DLDS_ELAPSED_TIME|OCPN_DLDS_ESTIMATED_TIME|OCPN_DLDS_REMAINING_TIME|
@@ -739,9 +709,6 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
             }
             case OCPN_DL_ABORTED: return;
             }
-
-#endif
-
         }
 
 
