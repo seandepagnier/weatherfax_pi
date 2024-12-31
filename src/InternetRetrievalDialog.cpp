@@ -688,7 +688,6 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
                                                 OCPN_DLDS_SPEED|OCPN_DLDS_SIZE|OCPN_DLDS_URL|
                                                 OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|
                                                 OCPN_DLDS_AUTO_CLOSE, 10 );
-
             switch( res )
             {
             case OCPN_DL_NO_ERROR: break;
