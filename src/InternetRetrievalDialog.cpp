@@ -39,10 +39,10 @@
 #include "WeatherFaxImage.h"
 #include "WeatherFax.h"
 
-#ifndef __OCPN__ANDROID__
- #include "wx/curl/ftp.h"
- #include "wx/curl/dialog.h"
-#endif
+//#ifndef __OCPN__ANDROID__
+// #include "wx/curl/ftp.h"
+// #include "wx/curl/dialog.h"
+//#endif
 
 InternetRetrievalDialog::InternetRetrievalDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
 #ifndef __WXOSX__
