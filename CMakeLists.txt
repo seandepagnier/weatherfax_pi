@@ -428,17 +428,8 @@ if (NOT OCPN_FLATPAK_CONFIG)
   add_subdirectory(opencpn-libs/api-18)
   target_link_libraries(${PACKAGE_NAME} ocpn::api)
 
-
-	#IF(NOT QT_ANDROID)
-    #	add_subdirectory("opencpn-libs/curl")
-    #	target_link_libraries(${PACKAGE_NAME} ocpn::libcurl)
-
-    #	add_subdirectory("opencpn-libs/wxcurl")
-    #	target_link_libraries(${PACKAGE_NAME} ocpn::wxcurl)
- 	#ENDIF(NOT QT_ANDROID)
-
-    add_subdirectory(opencpn-libs/tinyxml)
-    target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
+  add_subdirectory(opencpn-libs/tinyxml)
+  target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
 
   add_subdirectory(opencpn-libs/plugin_dc)
   target_link_libraries(${PACKAGE_NAME} ocpn::plugin-dc)
