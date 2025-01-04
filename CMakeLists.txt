@@ -59,7 +59,7 @@ set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate 
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "10")
-set(VERSION_PATCH "8")
+set(VERSION_PATCH "9")
 set(VERSION_TWEAK "0")
 set(VERSION_DATE "31/12/24")#DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov58")
@@ -428,17 +428,8 @@ if (NOT OCPN_FLATPAK_CONFIG)
   add_subdirectory(opencpn-libs/api-18)
   target_link_libraries(${PACKAGE_NAME} ocpn::api)
 
-
-	IF(NOT QT_ANDROID)
-    	add_subdirectory("opencpn-libs/curl")
-    	target_link_libraries(${PACKAGE_NAME} ocpn::libcurl)
-
-    	add_subdirectory("opencpn-libs/wxcurl")
-    	target_link_libraries(${PACKAGE_NAME} ocpn::wxcurl)
- 	ENDIF(NOT QT_ANDROID)
-
-    add_subdirectory(opencpn-libs/tinyxml)
-    target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
+  add_subdirectory(opencpn-libs/tinyxml)
+  target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
 
   add_subdirectory(opencpn-libs/plugin_dc)
   target_link_libraries(${PACKAGE_NAME} ocpn::plugin-dc)
