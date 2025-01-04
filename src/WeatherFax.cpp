@@ -135,9 +135,10 @@ int AttributeInt(TiXmlElement *e, const char *name, int def)
 }
 
 #define FAIL(X) do { error = X; goto failed; } while(0)
+#define FAIL2(X) do { error = X; goto failed2; } while(0)
 static void LoadCoordinatesFromXml(WeatherFaxImageCoordinateList &coords, wxString coordinatesets)
 {
-    TiXmlDocument doc;
+    TiXmlDocument doc_default;
 
     wxString error;
     wxString coordinatesets_path = weatherfax_pi::StandardWriteablePath();
@@ -145,11 +146,10 @@ static void LoadCoordinatesFromXml(WeatherFaxImageCoordinateList &coords, wxStri
     wxString default_coordinatesets_path = GetPluginDataDir("weatherfax_pi") + s + _T("data") + s;
 
     coords.DeleteContents(true);
-    if(!doc.LoadFile((coordinatesets_path + coordinatesets).mb_str()) &&
-       !doc.LoadFile((default_coordinatesets_path + coordinatesets).mb_str()))
+    if(!doc_default.LoadFile((default_coordinatesets_path + coordinatesets).mb_str()))
         FAIL(_("Failed to load coordinate sets"));
     else {
-        TiXmlHandle root(doc.RootElement());
+        TiXmlHandle root(doc_default.RootElement());
 
         if(strcmp(root.Element()->Value(), "WeatherFaxCoordinates"))
             FAIL(_("Invalid xml file"));
@@ -191,12 +191,117 @@ static void LoadCoordinatesFromXml(WeatherFaxImageCoordinateList &coords, wxStri
                 coord->mappingmultiplier = AttributeDouble(e, "MappingMultiplier", 1.0);
                 coord->mappingratio = AttributeDouble(e, "MappingRatio", 1.0);
 
+                //std::string m = name.ToStdString();
+                //printf("Adding %s\n", m.c_str());
                 coords.Append(coord);
             } else
                 FAIL(_("Unrecognized xml node: ") + wxString::FromUTF8(e->Value()));
     }
-    return;
 failed:
+    wxLogMessage(_("Weather Fax") + " : "+ error);
+
+    // merge the "Writable" coordinatesets
+    TiXmlDocument doc_update;
+    if(!doc_update.LoadFile((coordinatesets_path + coordinatesets).mb_str()))
+        FAIL2(_("Failed to load coordinate sets"));
+    else {
+        TiXmlHandle root(doc_update.RootElement());
+
+        if(strcmp(root.Element()->Value(), "WeatherFaxCoordinates"))
+            FAIL2(_("Invalid xml file"));
+
+        for(TiXmlElement* e = root.FirstChild().Element(); e; e = e->NextSiblingElement()) {
+            if (!strcmp(e->Value(), "Coordinate")) {
+                wxString name = wxString::FromUTF8(e->Attribute("Name"));
+
+                WeatherFaxImageCoordinates* coord_update =
+                    new WeatherFaxImageCoordinates(name);
+
+                coord_update->p1.x = AttributeInt(e, "X1", 0);
+                coord_update->p1.y = AttributeInt(e, "Y1", 0);
+                coord_update->lat1 = AttributeDouble(e, "Lat1", 0);
+                coord_update->lon1 = AttributeDouble(e, "Lon1", 0);
+
+                coord_update->p2.x = AttributeInt(e, "X2", 0);
+                coord_update->p2.y = AttributeInt(e, "Y2", 0);
+                coord_update->lat2 = AttributeDouble(e, "Lat2", 0);
+                coord_update->lon2 = AttributeDouble(e, "Lon2", 0);
+
+                wxString rotation =
+                    wxString::FromUTF8(e->Attribute("Rotation"));
+                if (rotation == _T("CW"))
+                    coord_update->rotation = WeatherFaxImageCoordinates::CW;
+                else if (rotation == _T("CCW"))
+                    coord_update->rotation = WeatherFaxImageCoordinates::CCW;
+                else if (rotation == _T("180"))
+                    coord_update->rotation = WeatherFaxImageCoordinates::R180;
+                else
+                    coord_update->rotation = WeatherFaxImageCoordinates::NONE;
+
+                coord_update->mapping = WeatherFaxImageCoordinates::GetMapType(
+                    wxString::FromUTF8(e->Attribute("Mapping")));
+
+                coord_update->inputpole.x = AttributeInt(e, "InputPoleX", 0);
+                coord_update->inputpole.y = AttributeInt(e, "InputPoleY", 0);
+                coord_update->inputequator =
+                    AttributeDouble(e, "InputEquator", 0);
+
+                coord_update->inputtrueratio =
+                    AttributeDouble(e, "InputTrueRatio", 1.0);
+                coord_update->mappingmultiplier =
+                    AttributeDouble(e, "MappingMultiplier", 1.0);
+                coord_update->mappingratio =
+                    AttributeDouble(e, "MappingRatio", 1.0);
+
+                // Search in default_doc for an exact name match
+                // If found, update the record
+                bool bfound = false;
+                for (size_t i = 0; i < coords.GetCount(); i++) {
+                    if (coords[i]->name == name) {
+                      std::string m = name.ToStdString();
+                      printf("   Updating %s\n", m.c_str());
+
+                      coords[i]->p1.x = coord_update->p1.x;
+                      coords[i]->p1.y = coord_update->p1.y;
+                      coords[i]->lat1 = coord_update->lat1;
+                      coords[i]->lon1 = coord_update->lon1;
+
+                      coords[i]->p2.x = coord_update->p2.x;
+                      coords[i]->p2.y = coord_update->p2.y;
+                      coords[i]->lat2 = coord_update->lat2;
+                      coords[i]->lon2 = coord_update->lon2;
+
+                      coords[i]->rotation = coord_update->rotation;
+                      coords[i]->mapping = coord_update->mapping;
+
+                      coords[i]->inputpole.x = coord_update->inputpole.x;
+                      coords[i]->inputpole.y = coord_update->inputpole.y;
+                      coords[i]->inputequator = coord_update->inputequator;
+
+                      coords[i]->inputtrueratio = coord_update->inputtrueratio;
+                      coords[i]->mappingmultiplier =
+                          coord_update->mappingmultiplier;
+                      coords[i]->mappingratio = coord_update->mappingratio;
+
+                      delete coord_update;
+
+                      bfound = true;
+                      break;  // i loop
+                    }
+                }             // i loop
+
+                if (!bfound) {
+                    // std::string m = name.ToStdString();
+                    // printf("Adding %s\n", m.c_str());
+                    coords.Append(coord_update);
+                }
+            }
+            else
+              FAIL2(_("Unrecognized xml node: ") + wxString::FromUTF8(e->Value()));
+        }
+    }
+    return;
+failed2:
     wxLogMessage(_("Weather Fax") + " : "+ error);
 //    wxMessageDialog mdlg(NULL, "file: " + coordinatesets_path + coordinatesets + " : " + error, _("Weather Fax"), wxOK | wxICON_ERROR);
 //    mdlg.ShowModal();
@@ -460,38 +565,41 @@ WeatherFaxWizard* WeatherFax::OpenWav(wxString filename, long offset, wxString s
     return wizard;
 }
 
-void WeatherFax::OpenImage(wxString filename, wxString station, wxString area, wxString contents)
-{
+void WeatherFax::OpenImage(wxString filename, wxString station, wxString area, wxString contents) {
     int transparency = m_sTransparency->GetValue();
     int whitetransparency = m_sWhiteTransparency->GetValue();
     bool invert = m_cInvert->GetValue();
 
     WeatherFaxImageCoordinateList BuiltinCoordList;
     wxImage wimg;
-    if (!wimg.CanRead(filename))
-        ::wxInitAllImageHandlers();
+    if (!wimg.CanRead(filename)) ::wxInitAllImageHandlers();
 
 #ifdef __OCPN__ANDROID__
     qDebug() << "load file...";
 #endif
-    if(!wimg.LoadFile(filename)) {
+    if (!wimg.LoadFile(filename)) {
 #ifdef WIN32
         // attempt to convert using PVW32Con.exe
         wxString s = wxFileName::GetPathSeparator();
-        wxString pvw32con = GetPluginDataDir("weatherfax_pi") + s + _T("PVW32Con.exe");
-        wxString cmd = pvw32con + _T(" \"") + filename + _T("\" -t --o \"" + filename + _T("\""));
+        wxString pvw32con =
+            GetPluginDataDir("weatherfax_pi") + s + _T("PVW32Con.exe");
+        wxString cmd = pvw32con + _T(" \"") + filename +
+                       _T("\" -t --o \"" + filename + _T("\""));
 
         int ret = ::wxExecute(cmd, wxEXEC_SYNC);
 
-        wxLogMessage(_("try to execute :") + cmd + _T("\nreturn code ") + wxString::Format(_T("%d"), ret));
-        if(!wimg.LoadFile(filename))
+        wxLogMessage(_("try to execute :") + cmd + _T("\nreturn code ") +
+                     wxString::Format(_T("%d"), ret));
+        if (!wimg.LoadFile(filename))
 #endif
         {
-            wxMessageDialog mdlg(this, _("Failed to load input file: ") + filename
+            wxMessageDialog mdlg(this,
+                                 _("Failed to load input file: ") + filename
 #ifdef __OCPN__ANDROID__
-                                 + _("Android doesn't support tif images")
+                                     + _("Android doesn't support tif images")
 #endif
-                                 , _("Weather Fax"), wxOK | wxICON_ERROR);
+                                     ,
+                                 _("Weather Fax"), wxOK | wxICON_ERROR);
             mdlg.ShowModal();
             return;
         }
@@ -500,18 +608,20 @@ void WeatherFax::OpenImage(wxString filename, wxString station, wxString area, w
 #ifdef __OCPN__ANDROID__
     qDebug() << "ok";
 #endif
-    WeatherFaxImage *img = new WeatherFaxImage(wimg, transparency, whitetransparency, invert);
-    wxString name = station.size() && area.size() ? (station + _T(" - ") + area) : _T("");
+    WeatherFaxImage* img =
+        new WeatherFaxImage(wimg, transparency, whitetransparency, invert);
+    wxString name =
+        station.size() && area.size() ? (station + _T(" - ") + area) : _T("");
 #ifdef __OCPN__ANDROID__
     qDebug() << "image ok";
 #endif
-    for(unsigned int i=0; i<m_BuiltinCoords.GetCount(); i++)
-        if(name == m_BuiltinCoords[i]->name) {
-            img->m_Coords = m_BuiltinCoords[i];
-            img->MakePhasedImage();
-            if(img->MakeMappedImage(this))
-                goto wizarddone;
-        }
+    for (unsigned int i = 0; i < m_BuiltinCoords.GetCount(); i++) {
+      if (name == m_BuiltinCoords[i]->name) {
+        img->m_Coords = m_BuiltinCoords[i];
+        img->MakePhasedImage();
+        if (img->MakeMappedImage(this)) goto wizarddone;
+      }
+    }
 
     {
         FaxDecoderCaptureSettings CaptureSettings = m_weatherfax_pi.m_CaptureSettings;
@@ -871,7 +981,7 @@ void WeatherFax::OnUpdateData( wxCommandEvent& event )
         message += _("If you have customizations in these files you can merge them manually.");
 
         wxMessageDialog mdlg(this, message,
-                            _("Weather Fax"), wxOK | wxICON_ERROR);
+                            _("Weather Fax"), wxOK | wxICON_INFORMATION);
         mdlg.ShowModal();
 
     }

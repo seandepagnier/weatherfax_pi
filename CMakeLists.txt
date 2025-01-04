@@ -19,7 +19,7 @@
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                       *
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough Testplugin(TP)
-# v1.0.318.0 21/12/2024 DD/MM/YYYY
+# v1.0.319.0 23/12/2024 DD/MM/YYYY
 # format buildCI:yes useODAPI:yes validateJSON:yes
 # ---------------------------------------------------------------------------
 ## -- When changing this file do NOT change the order of the sections.    -- ##
@@ -59,9 +59,9 @@ set(LONG_DESCRIPTION "Open image files, decode audio fax to an image, calibrate 
 
 set(VERSION_MAJOR "1")
 set(VERSION_MINOR "10")
-set(VERSION_PATCH "4")
+set(VERSION_PATCH "10")
 set(VERSION_TWEAK "0")
-set(VERSION_DATE  "12/21/24")#DD/MM/YYYY format
+set(VERSION_DATE "4/1/24")#DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov58")
 
 set(OCPN_API_VERSION_MAJOR "1")
@@ -428,17 +428,8 @@ if (NOT OCPN_FLATPAK_CONFIG)
   add_subdirectory(opencpn-libs/api-18)
   target_link_libraries(${PACKAGE_NAME} ocpn::api)
 
-
-	IF(NOT QT_ANDROID)
-    	add_subdirectory("opencpn-libs/curl")
-    	target_link_libraries(${PACKAGE_NAME} ocpn::libcurl)
-
-    	add_subdirectory("opencpn-libs/wxcurl")
-    	target_link_libraries(${PACKAGE_NAME} ocpn::wxcurl)
- 	ENDIF(NOT QT_ANDROID)
-
-    add_subdirectory(opencpn-libs/tinyxml)
-    target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
+  add_subdirectory(opencpn-libs/tinyxml)
+  target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
 
   add_subdirectory(opencpn-libs/plugin_dc)
   target_link_libraries(${PACKAGE_NAME} ocpn::plugin-dc)

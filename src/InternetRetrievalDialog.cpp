@@ -39,11 +39,6 @@
 #include "WeatherFaxImage.h"
 #include "WeatherFax.h"
 
-#ifndef __OCPN__ANDROID__
- #include "wx/curl/ftp.h"
- #include "wx/curl/dialog.h"
-#endif
-
 InternetRetrievalDialog::InternetRetrievalDialog( weatherfax_pi &_weatherfax_pi, wxWindow* parent)
 #ifndef __WXOSX__
     : InternetRetrievalDialogBase( parent ),
@@ -164,7 +159,6 @@ void InternetRetrievalDialog::Load(bool force)
                     _T("NOAA_OPC"),
                     _T("NAVY"),
                     _T("PWx_Amer_Atl"),
-                    _T("Aviation_Weather"),
                     _T("PWx_Euro_Atl"),
                     _T("Europe"),
                     _T("LaMMA"),
@@ -683,43 +677,12 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
         else if (url.StartsWith("ftp")){
             bool success = false;
 
-#ifndef __OCPN__ANDROID__
-            wxFileOutputStream output(filename);
-
-            wxCurlDownloadDialog ddlg(url, &output, _("WeatherFax InternetRetrieval"),
-                                      _("Reading Headers: ") + faxurl->Contents, wxNullBitmap, this,
-                                                                            OCPN_DLDS_ELAPSED_TIME|OCPN_DLDS_ESTIMATED_TIME|OCPN_DLDS_REMAINING_TIME|
-                                                OCPN_DLDS_SPEED|OCPN_DLDS_SIZE|OCPN_DLDS_URL|
-                                                OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|
-                                                OCPN_DLDS_AUTO_CLOSE );
-
-
-            wxCurlDialogReturnFlag ret = ddlg.RunModal();
-            output.Close();
-
-           switch (ret) {
-                case wxCDRF_SUCCESS: {
-                    success = true;
-                    break;
-                }
-                case wxCDRF_FAILED: {
-                    break;
-                }
-                case wxCDRF_USER_ABORTED: {
-                    break;
-                }
-                default:
-                    wxASSERT(false);  // This should never happen because we handle all
-                        // possible cases of ret
-            }
-#else
            _OCPN_DLStatus res = OCPN_downloadFile( url, filename, _("WeatherFax InternetRetrieval"),
                                 _("Reading Headers: ") + faxurl->Contents, wxNullBitmap, this,
                                                 OCPN_DLDS_ELAPSED_TIME|OCPN_DLDS_ESTIMATED_TIME|OCPN_DLDS_REMAINING_TIME|
                                                 OCPN_DLDS_SPEED|OCPN_DLDS_SIZE|OCPN_DLDS_URL|
                                                 OCPN_DLDS_CAN_PAUSE|OCPN_DLDS_CAN_ABORT|
                                                 OCPN_DLDS_AUTO_CLOSE, 10 );
-
             switch( res )
             {
             case OCPN_DL_NO_ERROR: break;
@@ -739,9 +702,6 @@ Use existing file?"), _("Weather Fax"), wxYES | wxNO | wxCANCEL);
             }
             case OCPN_DL_ABORTED: return;
             }
-
-#endif
-
         }
 
 

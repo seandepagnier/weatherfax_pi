@@ -222,7 +222,6 @@ jobs:
     build-flatpak-x86-2208:
         machine:
             image: ubuntu-2204:current
-            resource_class: arm.medium
         environment:
         - OCPN_TARGET:  flatpak
         - BUILD_ARCH: x86_64
@@ -257,7 +256,6 @@ jobs:
     build-flatpak-x86-2408:
         machine:
             image: ubuntu-2204:current
-            resource_class: arm.medium
         environment:
         - OCPN_TARGET:  flatpak
         - BUILD_ARCH: x86_64
