@@ -944,8 +944,8 @@ void WeatherFax::OnUpdateData( wxCommandEvent& event )
     if( DownloadDataFile( _T("WeatherFaxInternetRetrieval_NOAA.xml") ) &&
       DownloadDataFile( _T("WeatherFaxInternetRetrieval_NOAA_OPC.xml") ) &&
       DownloadDataFile( _T("WeatherFaxInternetRetrieval_NAVY.xml") ) &&
+      DownloadDataFile( _T("WeatherFaxInternetRetrieval_EUMetSat_ASCAT.xml") ) &&
       DownloadDataFile( _T("WeatherFaxInternetRetrieval_PWx_Amer_Atl.xml") ) &&
-      DownloadDataFile( _T("WeatherFaxInternetRetrieval_Aviation_Weather.xml") ) &&
       DownloadDataFile( _T("WeatherFaxInternetRetrieval_PWx_Euro_Atl.xml") ) &&
       DownloadDataFile( _T("WeatherFaxInternetRetrieval_LaMMA.xml") ) &&
       DownloadDataFile( _T("WeatherFaxInternetRetrieval_Europe.xml") ) &&

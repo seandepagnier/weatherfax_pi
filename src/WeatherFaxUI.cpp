@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Oct 26 2018)
+// C++ code generated with wxFormBuilder (version 4.2.1-0-g80c4cb6)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO *NOT* EDIT THIS FILE!
@@ -29,7 +29,9 @@ WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString&
 	fgSizer7->SetFlexibleDirection( wxBOTH );
 	fgSizer7->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 
-	m_lFaxes = new wxListBox( sbFax->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxSize( -1,100 ), 0, NULL, wxLB_EXTENDED );
+	m_lFaxes = new wxListBox( sbFax->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), 0, NULL, wxLB_EXTENDED );
+	m_lFaxes->SetMinSize( wxSize( 80,100 ) );
+
 	m_menu4 = new wxMenu();
 	wxMenuItem* m_menuItem61;
 	m_menuItem61 = new wxMenuItem( m_menu4, wxID_ANY, wxString( _("&Internet") ) + wxT('\t') + wxT("ctrl+i"), wxEmptyString, wxITEM_NORMAL );
@@ -90,7 +92,7 @@ WeatherFaxBase::WeatherFaxBase( wxWindow* parent, wxWindowID id, const wxString&
 	fgSizer24->SetFlexibleDirection( wxBOTH );
 	fgSizer24->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 
-	m_cInvert = new wxCheckBox( this, wxID_ANY, _("Invert"), wxDefaultPosition, wxSize( 300,-1 ), 0 );
+	m_cInvert = new wxCheckBox( this, wxID_ANY, _("Invert"), wxDefaultPosition, wxSize( -1,-1 ), 0 );
 	fgSizer24->Add( m_cInvert, 0, wxALL, 5 );
 
 
@@ -433,7 +435,7 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	m_cbExternalAlarm = new wxCheckBox( m_panel2, wxID_ANY, _("External Alarm"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer63->Add( m_cbExternalAlarm, 0, wxALL, 5 );
 
-	m_tExternalAlarmCommand = new wxTextCtrl( m_panel2, wxID_ANY, _T("aplay /usr/local/share/opencpn/sounds/2bells.wav"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_tExternalAlarmCommand = new wxTextCtrl( m_panel2, wxID_ANY, _("aplay /usr/local/share/opencpn/sounds/2bells.wav"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer63->Add( m_tExternalAlarmCommand, 0, wxALL|wxEXPAND, 5 );
 
 
@@ -473,13 +475,13 @@ SchedulesDialogBase::SchedulesDialogBase( wxWindow* parent, wxWindowID id, const
 	m_rbExternalCapture = new wxRadioButton( m_panel3, wxID_ANY, _("External Command"), wxDefaultPosition, wxDefaultSize, 0 );
 	fgSizer32->Add( m_rbExternalCapture, 0, wxALL, 5 );
 
-	m_cExternalCapture = new wxComboBox( m_panel3, wxID_ANY, _T("arecord -f S16_LE"), wxDefaultPosition, wxDefaultSize, 0, NULL, 0 );
-	m_cExternalCapture->Append( _T("arecord -f S16_LE") );
-	m_cExternalCapture->Append( _T("rtl_fm -M usb -g 47 -s 1800k -r 8k -f %frequency -p 38") );
+	m_cExternalCapture = new wxComboBox( m_panel3, wxID_ANY, _("arecord -f S16_LE"), wxDefaultPosition, wxDefaultSize, 0, NULL, 0 );
+	m_cExternalCapture->Append( _("arecord -f S16_LE") );
+	m_cExternalCapture->Append( _("rtl_fm -M usb -g 47 -s 1800k -r 8k -f %frequency -p 38") );
 	m_cExternalCapture->SetSelection( 0 );
 	fgSizer32->Add( m_cExternalCapture, 0, wxALL|wxEXPAND, 5 );
 
-	m_staticText47 = new wxStaticText( m_panel3, wxID_ANY, _T("|"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText47 = new wxStaticText( m_panel3, wxID_ANY, _("|"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText47->Wrap( -1 );
 	fgSizer32->Add( m_staticText47, 0, wxALL, 5 );
 
@@ -593,7 +595,7 @@ SchedulesDialogBase::~SchedulesDialogBase()
 
 InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
-	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
+	this->SetSizeHints( wxSize( -1,-1 ), wxDefaultSize );
 
 	wxFlexGridSizer* fgSizer61;
 	fgSizer61 = new wxFlexGridSizer( 0, 2, 0, 0 );
@@ -631,7 +633,6 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	fgSizer42->SetFlexibleDirection( wxBOTH );
 	fgSizer42->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 
-	fgSizer42->SetMinSize( wxSize( -1,180 ) );
 	wxStaticBoxSizer* sbRetrieve;
 	sbRetrieve = new wxStaticBoxSizer( new wxStaticBox( m_panel8, wxID_ANY, _("Retrieve") ), wxVERTICAL );
 
@@ -641,13 +642,17 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	fgSizer70->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 
 	m_bRetrieveScheduled = new wxButton( sbRetrieve->GetStaticBox(), wxID_ANY, _("Scheduled"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+	m_bRetrieveScheduled->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxEmptyString ) );
+
 	fgSizer70->Add( m_bRetrieveScheduled, 1, wxEXPAND|wxALIGN_CENTER_VERTICAL|wxALL, 5 );
 
 	m_bRetrieveSelected = new wxButton( sbRetrieve->GetStaticBox(), wxID_ANY, _("Selected"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+	m_bRetrieveSelected->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxEmptyString ) );
+
 	fgSizer70->Add( m_bRetrieveSelected, 1, wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL, 5 );
 
-	m_bX = new wxButton( sbRetrieve->GetStaticBox(), wxID_ANY, _T("X"), wxDefaultPosition, wxSize( 30,-1 ), 0 );
-	fgSizer70->Add( m_bX, 1, wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL, 5 );
+
+	fgSizer70->Add( 0, 0, 1, wxEXPAND, 5 );
 
 	m_tContainsLat = new wxTextCtrl( sbRetrieve->GetStaticBox(), wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
 	#ifdef __WXGTK__
@@ -692,6 +697,19 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	fgSizer70->Add( m_bReset, 1, wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL, 5 );
 
 
+	fgSizer70->Add( 0, 0, 1, wxEXPAND, 5 );
+
+	m_bClose = new wxButton( sbRetrieve->GetStaticBox(), wxID_ANY, _("Close"), wxDefaultPosition, wxSize( -1,-1 ), 0 );
+	m_bClose->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxEmptyString ) );
+
+	fgSizer70->Add( m_bClose, 0, wxALL, 5 );
+
+	m_bX = new wxButton( sbRetrieve->GetStaticBox(), wxID_ANY, _("X"), wxDefaultPosition, wxSize( 30,-1 ), 0 );
+	m_bX->SetFont( wxFont( wxNORMAL_FONT->GetPointSize(), wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false, wxEmptyString ) );
+
+	fgSizer70->Add( m_bX, 1, wxALL|wxEXPAND|wxALIGN_CENTER_VERTICAL, 5 );
+
+
 	sbRetrieve->Add( fgSizer70, 1, wxEXPAND|wxRIGHT|wxLEFT, 5 );
 
 
@@ -702,6 +720,8 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 
 	wxFlexGridSizer* fgSizer29;
 	fgSizer29 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer29->AddGrowableCol( 0 );
+	fgSizer29->AddGrowableRow( 0 );
 	fgSizer29->SetFlexibleDirection( wxBOTH );
 	fgSizer29->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 
@@ -733,40 +753,34 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	wxStaticBoxSizer* sbSizer121;
 	sbSizer121 = new wxStaticBoxSizer( new wxStaticBox( m_panel8, wxID_ANY, _("Regions") ), wxVERTICAL );
 
-	wxFlexGridSizer* fgSizer69;
-	fgSizer69 = new wxFlexGridSizer( 0, 1, 0, 0 );
-	fgSizer69->AddGrowableCol( 0 );
-	fgSizer69->AddGrowableRow( 0 );
-	fgSizer69->SetFlexibleDirection( wxBOTH );
-	fgSizer69->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	wxFlexGridSizer* fgSizer64;
+	fgSizer64 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer64->AddGrowableCol( 0 );
+	fgSizer64->AddGrowableRow( 0 );
+	fgSizer64->SetFlexibleDirection( wxBOTH );
+	fgSizer64->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+
+	m_bAllRegions1 = new wxButton( sbSizer121->GetStaticBox(), wxID_ANY, _("All"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+	fgSizer64->Add( m_bAllRegions1, 1, wxALL|wxEXPAND, 5 );
+
+	m_bNoRegions1 = new wxButton( sbSizer121->GetStaticBox(), wxID_ANY, _("None"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
+	fgSizer64->Add( m_bNoRegions1, 1, wxALL|wxEXPAND, 5 );
+
+
+	sbSizer121->Add( fgSizer64, 0, wxALIGN_CENTER_HORIZONTAL|wxALL, 5 );
+
+	wxFlexGridSizer* fgSizer711;
+	fgSizer711 = new wxFlexGridSizer( 0, 2, 0, 0 );
+	fgSizer711->AddGrowableCol( 0 );
+	fgSizer711->AddGrowableRow( 0 );
+	fgSizer711->SetFlexibleDirection( wxBOTH );
+	fgSizer711->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 
 	m_lRegions = new wxListBox( sbSizer121->GetStaticBox(), wxID_ANY, wxDefaultPosition, wxSize( -1,-1 ), 0, NULL, wxLB_EXTENDED );
-	fgSizer69->Add( m_lRegions, 1, wxALL|wxEXPAND, 5 );
+	fgSizer711->Add( m_lRegions, 1, wxALL|wxEXPAND, 5 );
 
 
-	sbSizer121->Add( fgSizer69, 1, wxEXPAND, 5 );
-
-	wxFlexGridSizer* fgSizer71;
-	fgSizer71 = new wxFlexGridSizer( 0, 2, 0, 0 );
-	fgSizer71->SetFlexibleDirection( wxBOTH );
-	fgSizer71->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
-
-	m_bAllRegions = new wxButton( sbSizer121->GetStaticBox(), wxID_ANY, _("All"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
-	m_bAllRegions->SetMinSize( wxSize( 70,-1 ) );
-
-	fgSizer71->Add( m_bAllRegions, 1, wxALL|wxEXPAND|wxALIGN_RIGHT, 5 );
-
-	m_bNoRegions = new wxButton( sbSizer121->GetStaticBox(), wxID_ANY, _("None"), wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT );
-	fgSizer71->Add( m_bNoRegions, 1, wxALL|wxEXPAND, 5 );
-
-
-	fgSizer71->Add( 0, 0, 1, wxEXPAND, 5 );
-
-	m_bClose = new wxButton( sbSizer121->GetStaticBox(), wxID_ANY, _("Close"), wxDefaultPosition, wxSize( -1,-1 ), 0 );
-	fgSizer71->Add( m_bClose, 1, wxALIGN_RIGHT|wxALL|wxEXPAND, 5 );
-
-
-	sbSizer121->Add( fgSizer71, 1, wxEXPAND|wxALL, 5 );
+	sbSizer121->Add( fgSizer711, 1, wxEXPAND, 5 );
 
 
 	fgSizer42->Add( sbSizer121, 1, wxEXPAND|wxALL, 5 );
@@ -781,6 +795,7 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 
 	this->SetSizer( fgSizer61 );
 	this->Layout();
+	fgSizer61->Fit( this );
 
 	this->Centre( wxBOTH );
 
@@ -792,18 +807,18 @@ InternetRetrievalDialogBase::InternetRetrievalDialogBase( wxWindow* parent, wxWi
 	m_lUrls->Connect( wxEVT_COMMAND_LIST_ITEM_SELECTED, wxListEventHandler( InternetRetrievalDialogBase::OnUrlSelected ), NULL, this );
 	m_bRetrieveScheduled->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
 	m_bRetrieveSelected->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
-	m_bX->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnClose ), NULL, this );
 	m_tContainsLat->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
 	m_tContainsLon->Connect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
 	m_bBoatPosition->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnBoatPosition ), NULL, this );
 	m_bReset->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnReset ), NULL, this );
+	m_bClose->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnClose ), NULL, this );
+	m_bX->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnClose ), NULL, this );
 	m_bAllServers->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnAllServers ), NULL, this );
 	m_bNoServers->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnNoServers ), NULL, this );
 	m_lServers->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilterServers ), NULL, this );
+	m_bAllRegions1->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnAllRegions ), NULL, this );
+	m_bNoRegions1->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnNoRegions ), NULL, this );
 	m_lRegions->Connect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilterRegions ), NULL, this );
-	m_bAllRegions->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnAllRegions ), NULL, this );
-	m_bNoRegions->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnNoRegions ), NULL, this );
-	m_bClose->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnClose ), NULL, this );
 }
 
 InternetRetrievalDialogBase::~InternetRetrievalDialogBase()
@@ -816,18 +831,18 @@ InternetRetrievalDialogBase::~InternetRetrievalDialogBase()
 	m_lUrls->Disconnect( wxEVT_COMMAND_LIST_ITEM_SELECTED, wxListEventHandler( InternetRetrievalDialogBase::OnUrlSelected ), NULL, this );
 	m_bRetrieveScheduled->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
 	m_bRetrieveSelected->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnRetrieve ), NULL, this );
-	m_bX->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnClose ), NULL, this );
 	m_tContainsLat->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
 	m_tContainsLon->Disconnect( wxEVT_COMMAND_TEXT_UPDATED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilter ), NULL, this );
 	m_bBoatPosition->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnBoatPosition ), NULL, this );
 	m_bReset->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnReset ), NULL, this );
+	m_bClose->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnClose ), NULL, this );
+	m_bX->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnClose ), NULL, this );
 	m_bAllServers->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnAllServers ), NULL, this );
 	m_bNoServers->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnNoServers ), NULL, this );
 	m_lServers->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilterServers ), NULL, this );
+	m_bAllRegions1->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnAllRegions ), NULL, this );
+	m_bNoRegions1->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnNoRegions ), NULL, this );
 	m_lRegions->Disconnect( wxEVT_COMMAND_LISTBOX_SELECTED, wxCommandEventHandler( InternetRetrievalDialogBase::OnFilterRegions ), NULL, this );
-	m_bAllRegions->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnAllRegions ), NULL, this );
-	m_bNoRegions->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnNoRegions ), NULL, this );
-	m_bClose->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( InternetRetrievalDialogBase::OnClose ), NULL, this );
 
 }
 
@@ -924,7 +939,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 
 	wxFlexGridSizer* fgSizer641;
 	fgSizer641 = new wxFlexGridSizer( 0, 3, 0, 0 );
-	fgSizer641->AddGrowableCol( 2 );
+	fgSizer641->AddGrowableCol( 4 );
 	fgSizer641->SetFlexibleDirection( wxBOTH );
 	fgSizer641->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 
@@ -972,7 +987,7 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 
 	wxFlexGridSizer* fgSizer10;
 	fgSizer10 = new wxFlexGridSizer( 0, 2, 0, 0 );
-	fgSizer10->AddGrowableCol( 1 );
+	fgSizer10->AddGrowableCol( 3 );
 	fgSizer10->SetFlexibleDirection( wxHORIZONTAL );
 	fgSizer10->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
 
@@ -1241,21 +1256,21 @@ WeatherFaxWizardBase::WeatherFaxWizardBase( wxWindow* parent, wxWindowID id, con
 	m_staticText24->Wrap( -1 );
 	bSizer81->Add( m_staticText24, 0, wxALIGN_CENTER|wxALL, 5 );
 
-	m_tMappingMultiplier = new wxTextCtrl( sbSizer51->GetStaticBox(), wxID_ANY, _T("1"), wxDefaultPosition, wxSize( 50,-1 ), 0 );
+	m_tMappingMultiplier = new wxTextCtrl( sbSizer51->GetStaticBox(), wxID_ANY, _("1"), wxDefaultPosition, wxSize( 50,-1 ), 0 );
 	bSizer81->Add( m_tMappingMultiplier, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
 	m_staticText20 = new wxStaticText( sbSizer51->GetStaticBox(), wxID_ANY, _("W/H"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText20->Wrap( -1 );
 	bSizer81->Add( m_staticText20, 0, wxALIGN_CENTER|wxALL, 5 );
 
-	m_tMappingRatio = new wxTextCtrl( sbSizer51->GetStaticBox(), wxID_ANY, _T("1"), wxDefaultPosition, wxSize( 50,-1 ), 0 );
+	m_tMappingRatio = new wxTextCtrl( sbSizer51->GetStaticBox(), wxID_ANY, _("1"), wxDefaultPosition, wxSize( 50,-1 ), 0 );
 	bSizer81->Add( m_tMappingRatio, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
 
 	m_staticText211 = new wxStaticText( sbSizer51->GetStaticBox(), wxID_ANY, _("True Width Ratio"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText211->Wrap( -1 );
 	bSizer81->Add( m_staticText211, 0, wxALIGN_CENTER|wxALL, 5 );
 
-	m_tTrueRatio = new wxTextCtrl( sbSizer51->GetStaticBox(), wxID_ANY, _T("1"), wxDefaultPosition, wxSize( 60,-1 ), 0 );
+	m_tTrueRatio = new wxTextCtrl( sbSizer51->GetStaticBox(), wxID_ANY, _("1"), wxDefaultPosition, wxSize( 60,-1 ), 0 );
 	bSizer81->Add( m_tTrueRatio, 0, wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_CENTER_HORIZONTAL, 5 );
 
 

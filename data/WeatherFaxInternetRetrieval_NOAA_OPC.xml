@@ -8,11 +8,11 @@
       <Map Url="shtml/A_48hr500bw.gif" Contents="48-hour 500 MB Forecast" Area="2" />
       <Map Url="shtml/A_72hr500bw.gif" Contents="72-hour 500 MB Forecast" Area="2" />
       <Map Url="shtml/A_96hr500bw.gif" Contents="96-hour 500 MB Forecast" Area="2" />
-      <Map Url="shtml/A_24hrbw.gif" Contents="24-hour Surface Forecast" Area="2b" />
-      <Map Url="shtml/A_48hrbw.gif" Contents="48-hour Surface Forecast" Area="2" />
+      <Map Url="shtml/A_24hrsfcbw.gif" Contents="24-hour Surface Forecast" Area="2b" />
+      <Map Url="shtml/A_48hrsfcbw.gif" Contents="48-hour Surface Forecast" Area="2" />
       <Map Url="shtml/A_72hrbw.gif" Contents="72-hour Surface Forecast" Area="2" />
       <Map Url="shtml/A_96hrbw.gif" Contents="96-hour Surface Forecast" Area="2" />
-	  <Map Url="shtml/A_24hrwind_wave.gif" Contents="24-hour Wind Wave Forecast" Area="2" />
+	  <Map Url="shtml/A_24hrww.gif" Contents="24-hour Wind Wave Forecast" Area="2" />
 	  <Map Url="shtml/A_48hrwind_wave.gif" Contents="48-hour Wind Wave Forecast" Area="2" />
 	  <Map Url="shtml/A_72hrwind_wave.gif" Contents="72-hour Wind Wave Forecast" Area="2" />
 	  <Map Url="shtml/A_96hrwind_wave.gif" Contents="96-hour Wind Wave Forecast" Area="2" />
@@ -47,7 +47,7 @@
       <Map Url="shtml/P_48hrbw.gif" Contents="48-hour Surface Forecast" Area="3" />
       <Map Url="shtml/P_72hrbw.gif" Contents="72-hour Surface Forecast" Area="3" />
       <Map Url="shtml/P_96hrbw.gif" Contents="96-hour Surface Forecast" Area="3" />
-      <Map Url="shtml/P_24hrwind_wave.gif" Contents="24-hour Wind Wave Forecast" Area="2" />
+      <Map Url="shtml/P_24hrww.gif" Contents="24-hour Wind Wave Forecast" Area="2" />
       <Map Url="shtml/P_48hrwind_wave.gif" Contents="48-hour Wind Wave Forecast" Area="3" />
       <Map Url="shtml/P_72hrwind_wave.gif" Contents="72-hour Wind Wave Forecast" Area="3" />
       <Map Url="shtml/P_96hrwind_wave.gif" Contents="96-hour Wind Wave Forecast" Area="3" />
