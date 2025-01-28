@@ -31,7 +31,7 @@
     <property name="relative_path">1</property>
     <property name="use_microsoft_bom">0</property>
     <property name="use_native_eol">0</property>
-    <object class="Frame" expanded="true">
+    <object class="Frame" expanded="false">
       <property name="aui_managed">0</property>
       <property name="aui_manager_style">wxAUI_MGR_DEFAULT</property>
       <property name="bg"></property>
@@ -67,7 +67,7 @@
         <property name="growablecols">0</property>
         <property name="growablerows">0</property>
         <property name="hgap">0</property>
-        <property name="minimum_size"></property>
+        <property name="minimum_size">300,300</property>
         <property name="name">fgSizer8</property>
         <property name="non_flexible_grow_mode">wxFLEX_GROWMODE_SPECIFIED</property>
         <property name="permission">none</property>
@@ -140,7 +140,7 @@
                     <property name="maximum_size"></property>
                     <property name="min_size"></property>
                     <property name="minimize_button">0</property>
-                    <property name="minimum_size">80,100</property>
+                    <property name="minimum_size">-1,-1</property>
                     <property name="moveable">1</property>
                     <property name="name">m_lFaxes</property>
                     <property name="pane_border">1</property>
@@ -788,13 +788,13 @@
       <property name="window_extra_style"></property>
       <property name="window_name"></property>
       <property name="window_style"></property>
-      <object class="wxFlexGridSizer" expanded="false">
+      <object class="wxFlexGridSizer" expanded="true">
         <property name="cols">1</property>
         <property name="flexible_direction">wxBOTH</property>
         <property name="growablecols">0</property>
         <property name="growablerows">0</property>
         <property name="hgap">0</property>
-        <property name="minimum_size"></property>
+        <property name="minimum_size">400,350</property>
         <property name="name">fgSizer25</property>
         <property name="non_flexible_grow_mode">wxFLEX_GROWMODE_SPECIFIED</property>
         <property name="permission">none</property>
@@ -838,7 +838,7 @@
             <property name="maximum_size">-1,-1</property>
             <property name="min_size"></property>
             <property name="minimize_button">0</property>
-            <property name="minimum_size">-1,160</property>
+            <property name="minimum_size">-1,-1</property>
             <property name="moveable">1</property>
             <property name="name">m_lSchedules</property>
             <property name="pane_border">1</property>
@@ -865,11 +865,11 @@
             <event name="OnListColClick">OnSchedulesSort</event>
           </object>
         </object>
-        <object class="sizeritem" expanded="false">
+        <object class="sizeritem" expanded="true">
           <property name="border">5</property>
           <property name="flag">wxEXPAND | wxALL</property>
           <property name="proportion">1</property>
-          <object class="wxNotebook" expanded="false">
+          <object class="wxNotebook" expanded="true">
             <property name="BottomDockable">1</property>
             <property name="LeftDockable">1</property>
             <property name="RightDockable">1</property>
@@ -923,11 +923,11 @@
             <property name="window_extra_style"></property>
             <property name="window_name"></property>
             <property name="window_style"></property>
-            <object class="notebookpage" expanded="false">
+            <object class="notebookpage" expanded="true">
               <property name="bitmap"></property>
               <property name="label">Filter</property>
-              <property name="select">1</property>
-              <object class="wxPanel" expanded="false">
+              <property name="select">0</property>
+              <object class="wxPanel" expanded="true">
                 <property name="BottomDockable">1</property>
                 <property name="LeftDockable">1</property>
                 <property name="RightDockable">1</property>
@@ -983,7 +983,7 @@
                   <property name="cols">0</property>
                   <property name="flexible_direction">wxBOTH</property>
                   <property name="growablecols">1</property>
-                  <property name="growablerows"></property>
+                  <property name="growablerows">0</property>
                   <property name="hgap">0</property>
                   <property name="minimum_size"></property>
                   <property name="name">fgSizer26</property>
@@ -2313,11 +2313,11 @@
                 </object>
               </object>
             </object>
-            <object class="notebookpage" expanded="false">
+            <object class="notebookpage" expanded="true">
               <property name="bitmap"></property>
               <property name="label">1 minute alarm</property>
               <property name="select">0</property>
-              <object class="wxPanel" expanded="false">
+              <object class="wxPanel" expanded="true">
                 <property name="BottomDockable">1</property>
                 <property name="LeftDockable">1</property>
                 <property name="RightDockable">1</property>
@@ -2372,8 +2372,8 @@
                 <object class="wxFlexGridSizer" expanded="false">
                   <property name="cols">1</property>
                   <property name="flexible_direction">wxBOTH</property>
-                  <property name="growablecols">0</property>
-                  <property name="growablerows"></property>
+                  <property name="growablecols">1</property>
+                  <property name="growablerows">0</property>
                   <property name="hgap">0</property>
                   <property name="minimum_size"></property>
                   <property name="name">fgSizer31</property>
@@ -2811,11 +2811,11 @@
                 </object>
               </object>
             </object>
-            <object class="notebookpage" expanded="false">
+            <object class="notebookpage" expanded="true">
               <property name="bitmap"></property>
               <property name="label">Capture Options</property>
               <property name="select">0</property>
-              <object class="wxPanel" expanded="false">
+              <object class="wxPanel" expanded="true">
                 <property name="BottomDockable">1</property>
                 <property name="LeftDockable">1</property>
                 <property name="RightDockable">1</property>
@@ -2870,8 +2870,8 @@
                 <object class="wxFlexGridSizer" expanded="false">
                   <property name="cols">1</property>
                   <property name="flexible_direction">wxBOTH</property>
-                  <property name="growablecols">0</property>
-                  <property name="growablerows"></property>
+                  <property name="growablecols">1</property>
+                  <property name="growablerows">0</property>
                   <property name="hgap">0</property>
                   <property name="minimum_size"></property>
                   <property name="name">fgSizer30</property>
@@ -3354,11 +3354,11 @@
                 </object>
               </object>
             </object>
-            <object class="notebookpage" expanded="false">
+            <object class="notebookpage" expanded="true">
               <property name="bitmap"></property>
               <property name="label">Information</property>
-              <property name="select">0</property>
-              <object class="wxPanel" expanded="false">
+              <property name="select">1</property>
+              <object class="wxPanel" expanded="true">
                 <property name="BottomDockable">1</property>
                 <property name="LeftDockable">1</property>
                 <property name="RightDockable">1</property>
@@ -3413,8 +3413,8 @@
                 <object class="wxFlexGridSizer" expanded="false">
                   <property name="cols">2</property>
                   <property name="flexible_direction">wxBOTH</property>
-                  <property name="growablecols"></property>
-                  <property name="growablerows"></property>
+                  <property name="growablecols">0</property>
+                  <property name="growablerows">0</property>
                   <property name="hgap">0</property>
                   <property name="minimum_size"></property>
                   <property name="name">fgSizer49</property>
@@ -3489,11 +3489,11 @@
             </object>
           </object>
         </object>
-        <object class="sizeritem" expanded="false">
+        <object class="sizeritem" expanded="true">
           <property name="border">5</property>
           <property name="flag">wxEXPAND</property>
           <property name="proportion">1</property>
-          <object class="wxStaticBoxSizer" expanded="false">
+          <object class="wxStaticBoxSizer" expanded="true">
             <property name="id">wxID_ANY</property>
             <property name="label">Capture Status</property>
             <property name="minimum_size"></property>
@@ -3507,9 +3507,9 @@
               <property name="proportion">1</property>
               <object class="wxFlexGridSizer" expanded="false">
                 <property name="cols">0</property>
-                <property name="flexible_direction">wxBOTH</property>
+                <property name="flexible_direction">wxHORIZONTAL</property>
                 <property name="growablecols">1</property>
-                <property name="growablerows"></property>
+                <property name="growablerows">0</property>
                 <property name="hgap">0</property>
                 <property name="minimum_size"></property>
                 <property name="name">fgSizer34</property>
@@ -3753,23 +3753,23 @@
       <property name="window_extra_style"></property>
       <property name="window_name"></property>
       <property name="window_style"></property>
-      <object class="wxFlexGridSizer" expanded="true">
+      <object class="wxFlexGridSizer" expanded="false">
         <property name="cols">2</property>
         <property name="flexible_direction">wxBOTH</property>
         <property name="growablecols">0</property>
         <property name="growablerows">0</property>
         <property name="hgap">0</property>
-        <property name="minimum_size"></property>
+        <property name="minimum_size">400,350</property>
         <property name="name">fgSizer61</property>
         <property name="non_flexible_grow_mode">wxFLEX_GROWMODE_SPECIFIED</property>
         <property name="permission">none</property>
         <property name="rows">0</property>
         <property name="vgap">0</property>
-        <object class="sizeritem" expanded="true">
+        <object class="sizeritem" expanded="false">
           <property name="border">5</property>
           <property name="flag">wxEXPAND</property>
           <property name="proportion">1</property>
-          <object class="wxSplitterWindow" expanded="true">
+          <object class="wxSplitterWindow" expanded="false">
             <property name="BottomDockable">1</property>
             <property name="LeftDockable">1</property>
             <property name="RightDockable">1</property>
@@ -3963,8 +3963,8 @@
                 </object>
               </object>
             </object>
-            <object class="splitteritem" expanded="true">
-              <object class="wxPanel" expanded="true">
+            <object class="splitteritem" expanded="false">
+              <object class="wxPanel" expanded="false">
                 <property name="BottomDockable">1</property>
                 <property name="LeftDockable">1</property>
                 <property name="RightDockable">1</property>
@@ -4016,7 +4016,7 @@
                 <property name="window_extra_style"></property>
                 <property name="window_name"></property>
                 <property name="window_style">wxTAB_TRAVERSAL</property>
-                <object class="wxFlexGridSizer" expanded="true">
+                <object class="wxFlexGridSizer" expanded="false">
                   <property name="cols">3</property>
                   <property name="flexible_direction">wxBOTH</property>
                   <property name="growablecols">1,2</property>
@@ -4028,11 +4028,11 @@
                   <property name="permission">none</property>
                   <property name="rows">0</property>
                   <property name="vgap">0</property>
-                  <object class="sizeritem" expanded="true">
+                  <object class="sizeritem" expanded="false">
                     <property name="border">5</property>
                     <property name="flag">wxEXPAND|wxALL</property>
                     <property name="proportion">1</property>
-                    <object class="wxStaticBoxSizer" expanded="true">
+                    <object class="wxStaticBoxSizer" expanded="false">
                       <property name="id">wxID_ANY</property>
                       <property name="label">Retrieve</property>
                       <property name="minimum_size">-1,-1</property>
@@ -4040,11 +4040,11 @@
                       <property name="orient">wxVERTICAL</property>
                       <property name="parent">1</property>
                       <property name="permission">none</property>
-                      <object class="sizeritem" expanded="true">
+                      <object class="sizeritem" expanded="false">
                         <property name="border">5</property>
                         <property name="flag">wxEXPAND|wxRIGHT|wxLEFT</property>
                         <property name="proportion">1</property>
-                        <object class="wxFlexGridSizer" expanded="true">
+                        <object class="wxFlexGridSizer" expanded="false">
                           <property name="cols">3</property>
                           <property name="flexible_direction">wxBOTH</property>
                           <property name="growablecols"></property>
@@ -4806,11 +4806,11 @@
                       </object>
                     </object>
                   </object>
-                  <object class="sizeritem" expanded="true">
+                  <object class="sizeritem" expanded="false">
                     <property name="border">5</property>
                     <property name="flag">wxEXPAND|wxALL</property>
                     <property name="proportion">1</property>
-                    <object class="wxStaticBoxSizer" expanded="true">
+                    <object class="wxStaticBoxSizer" expanded="false">
                       <property name="id">wxID_ANY</property>
                       <property name="label">Servers</property>
                       <property name="minimum_size"></property>
@@ -4818,11 +4818,11 @@
                       <property name="orient">wxVERTICAL</property>
                       <property name="parent">1</property>
                       <property name="permission">none</property>
-                      <object class="sizeritem" expanded="true">
+                      <object class="sizeritem" expanded="false">
                         <property name="border">5</property>
                         <property name="flag">wxALL|wxALIGN_CENTER_HORIZONTAL</property>
                         <property name="proportion">0</property>
-                        <object class="wxFlexGridSizer" expanded="true">
+                        <object class="wxFlexGridSizer" expanded="false">
                           <property name="cols">2</property>
                           <property name="flexible_direction">wxBOTH</property>
                           <property name="growablecols">0</property>
@@ -4986,11 +4986,11 @@
                           </object>
                         </object>
                       </object>
-                      <object class="sizeritem" expanded="true">
+                      <object class="sizeritem" expanded="false">
                         <property name="border">5</property>
                         <property name="flag">wxEXPAND</property>
                         <property name="proportion">2</property>
-                        <object class="wxFlexGridSizer" expanded="true">
+                        <object class="wxFlexGridSizer" expanded="false">
                           <property name="cols">1</property>
                           <property name="flexible_direction">wxBOTH</property>
                           <property name="growablecols">0</property>
@@ -5071,11 +5071,11 @@
                       </object>
                     </object>
                   </object>
-                  <object class="sizeritem" expanded="true">
+                  <object class="sizeritem" expanded="false">
                     <property name="border">5</property>
                     <property name="flag">wxEXPAND|wxALL</property>
                     <property name="proportion">1</property>
-                    <object class="wxStaticBoxSizer" expanded="true">
+                    <object class="wxStaticBoxSizer" expanded="false">
                       <property name="id">wxID_ANY</property>
                       <property name="label">Regions</property>
                       <property name="minimum_size"></property>
@@ -5083,11 +5083,11 @@
                       <property name="orient">wxVERTICAL</property>
                       <property name="parent">1</property>
                       <property name="permission">none</property>
-                      <object class="sizeritem" expanded="true">
+                      <object class="sizeritem" expanded="false">
                         <property name="border">5</property>
                         <property name="flag">wxALIGN_CENTER_HORIZONTAL|wxALL</property>
                         <property name="proportion">0</property>
-                        <object class="wxFlexGridSizer" expanded="true">
+                        <object class="wxFlexGridSizer" expanded="false">
                           <property name="cols">2</property>
                           <property name="flexible_direction">wxBOTH</property>
                           <property name="growablecols">0</property>
@@ -5251,11 +5251,11 @@
                           </object>
                         </object>
                       </object>
-                      <object class="sizeritem" expanded="true">
+                      <object class="sizeritem" expanded="false">
                         <property name="border">5</property>
                         <property name="flag">wxEXPAND</property>
                         <property name="proportion">1</property>
-                        <object class="wxFlexGridSizer" expanded="true">
+                        <object class="wxFlexGridSizer" expanded="false">
                           <property name="cols">2</property>
                           <property name="flexible_direction">wxBOTH</property>
                           <property name="growablecols">0</property>
@@ -5343,7 +5343,7 @@
         </object>
       </object>
     </object>
-    <object class="Dialog" expanded="false">
+    <object class="Dialog" expanded="true">
       <property name="aui_managed">0</property>
       <property name="aui_manager_style">wxAUI_MGR_DEFAULT</property>
       <property name="bg"></property>
@@ -5372,23 +5372,23 @@
       <property name="window_name"></property>
       <property name="window_style"></property>
       <event name="OnInitDialog">OnSetSizes</event>
-      <object class="wxFlexGridSizer" expanded="false">
+      <object class="wxFlexGridSizer" expanded="true">
         <property name="cols">1</property>
         <property name="flexible_direction">wxBOTH</property>
         <property name="growablecols">0</property>
         <property name="growablerows">0</property>
         <property name="hgap">0</property>
-        <property name="minimum_size"></property>
+        <property name="minimum_size">400,350</property>
         <property name="name">fgSizer63</property>
         <property name="non_flexible_grow_mode">wxFLEX_GROWMODE_SPECIFIED</property>
         <property name="permission">none</property>
         <property name="rows">0</property>
         <property name="vgap">0</property>
-        <object class="sizeritem" expanded="false">
+        <object class="sizeritem" expanded="true">
           <property name="border">5</property>
           <property name="flag">wxEXPAND | wxALL</property>
           <property name="proportion">1</property>
-          <object class="wxSimplebook" expanded="false">
+          <object class="wxSimplebook" expanded="true">
             <property name="BottomDockable">1</property>
             <property name="LeftDockable">1</property>
             <property name="RightDockable">1</property>
@@ -5440,10 +5440,10 @@
             <property name="window_extra_style"></property>
             <property name="window_name"></property>
             <property name="window_style"></property>
-            <object class="simplebookpage" expanded="false">
+            <object class="simplebookpage" expanded="true">
               <property name="label">a page</property>
               <property name="select">0</property>
-              <object class="wxPanel" expanded="false">
+              <object class="wxPanel" expanded="true">
                 <property name="BottomDockable">1</property>
                 <property name="LeftDockable">1</property>
                 <property name="RightDockable">1</property>
@@ -5495,7 +5495,7 @@
                 <property name="window_extra_style"></property>
                 <property name="window_name"></property>
                 <property name="window_style">wxTAB_TRAVERSAL</property>
-                <object class="wxFlexGridSizer" expanded="false">
+                <object class="wxFlexGridSizer" expanded="true">
                   <property name="cols">1</property>
                   <property name="flexible_direction">wxBOTH</property>
                   <property name="growablecols">0</property>
@@ -5569,13 +5569,13 @@
                       <event name="OnPaint">OnPaintImage</event>
                     </object>
                   </object>
-                  <object class="sizeritem" expanded="false">
+                  <object class="sizeritem" expanded="true">
                     <property name="border">5</property>
                     <property name="flag">wxEXPAND|wxALL</property>
                     <property name="proportion">1</property>
-                    <object class="wxFlexGridSizer" expanded="false">
+                    <object class="wxFlexGridSizer" expanded="true">
                       <property name="cols">2</property>
-                      <property name="flexible_direction">wxBOTH</property>
+                      <property name="flexible_direction">wxHORIZONTAL</property>
                       <property name="growablecols">1</property>
                       <property name="growablerows">0</property>
                       <property name="hgap">0</property>
@@ -5585,7 +5585,7 @@
                       <property name="permission">none</property>
                       <property name="rows">1</property>
                       <property name="vgap">0</property>
-                      <object class="sizeritem" expanded="false">
+                      <object class="sizeritem" expanded="true">
                         <property name="border">5</property>
                         <property name="flag">wxEXPAND|wxALL</property>
                         <property name="proportion">1</property>
@@ -6048,7 +6048,7 @@
                           </object>
                         </object>
                       </object>
-                      <object class="sizeritem" expanded="false">
+                      <object class="sizeritem" expanded="true">
                         <property name="border">5</property>
                         <property name="flag">wxEXPAND|wxALL</property>
                         <property name="proportion">1</property>
@@ -10995,7 +10995,7 @@
         </object>
       </object>
     </object>
-    <object class="Dialog" expanded="false">
+    <object class="Dialog" expanded="true">
       <property name="aui_managed">0</property>
       <property name="aui_manager_style">wxAUI_MGR_DEFAULT</property>
       <property name="bg"></property>
@@ -11029,7 +11029,7 @@
         <property name="growablecols"></property>
         <property name="growablerows"></property>
         <property name="hgap">0</property>
-        <property name="minimum_size"></property>
+        <property name="minimum_size">200,350</property>
         <property name="name">fgSizer51</property>
         <property name="non_flexible_grow_mode">wxFLEX_GROWMODE_SPECIFIED</property>
         <property name="permission">none</property>
@@ -12599,7 +12599,7 @@
         </object>
       </object>
     </object>
-    <object class="Dialog" expanded="false">
+    <object class="Dialog" expanded="true">
       <property name="aui_managed">0</property>
       <property name="aui_manager_style">wxAUI_MGR_DEFAULT</property>
       <property name="bg"></property>
@@ -12633,7 +12633,7 @@
         <property name="growablecols"></property>
         <property name="growablerows"></property>
         <property name="hgap">0</property>
-        <property name="minimum_size"></property>
+        <property name="minimum_size">300,200</property>
         <property name="name">fgSizer57</property>
         <property name="non_flexible_grow_mode">wxFLEX_GROWMODE_SPECIFIED</property>
         <property name="permission">none</property>
@@ -13708,7 +13708,7 @@
         <property name="growablecols"></property>
         <property name="growablerows"></property>
         <property name="hgap">0</property>
-        <property name="minimum_size"></property>
+        <property name="minimum_size">300,200</property>
         <property name="name">fgSizer90</property>
         <property name="non_flexible_grow_mode">wxFLEX_GROWMODE_SPECIFIED</property>
         <property name="permission">none</property>
@@ -13924,9 +13924,9 @@
           <property name="proportion">1</property>
           <object class="wxFlexGridSizer" expanded="false">
             <property name="cols">2</property>
-            <property name="flexible_direction">wxBOTH</property>
-            <property name="growablecols"></property>
-            <property name="growablerows"></property>
+            <property name="flexible_direction">wxHORIZONTAL</property>
+            <property name="growablecols">0</property>
+            <property name="growablerows">0</property>
             <property name="hgap">0</property>
             <property name="minimum_size"></property>
             <property name="name">fgSizer91</property>
