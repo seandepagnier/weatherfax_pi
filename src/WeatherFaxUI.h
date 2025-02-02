@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Oct 26 2018)
+// C++ code generated with wxFormBuilder (version 4.2.1-0-g80c4cb6)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO *NOT* EDIT THIS FILE!
@@ -37,6 +37,7 @@
 #include <wx/notebook.h>
 #include <wx/gauge.h>
 #include <wx/dialog.h>
+#include <wx/valgen.h>
 #include <wx/splitter.h>
 #include <wx/scrolwin.h>
 #include <wx/choice.h>
@@ -46,7 +47,6 @@
 #include "wxWTranslateCatalog.h"
 
 ///////////////////////////////////////////////////////////////////////////
-
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class WeatherFaxBase
@@ -74,7 +74,7 @@ class WeatherFaxBase : public wxFrame
 		wxMenuItem* m_mCapture;
 		wxMenu* m_menu3;
 
-		// Virtual event handlers, overide them in your derived class
+		// Virtual event handlers, override them in your derived class
 		virtual void OnClose( wxCloseEvent& event ) { event.Skip(); }
 		virtual void OnFaxes( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnEdit( wxCommandEvent& event ) { event.Skip(); }
@@ -101,7 +101,7 @@ class WeatherFaxBase : public wxFrame
 		wxSlider* m_sTransparency;
 		wxSlider* m_sWhiteTransparency;
 
-		WeatherFaxBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxCAPTION|wxCLOSE_BOX|wxFRAME_FLOAT_ON_PARENT|wxFRAME_NO_TASKBAR|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER|wxSYSTEM_MENU|wxTAB_TRAVERSAL );
+		WeatherFaxBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 458,364 ), long style = wxCAPTION|wxCLOSE_BOX|wxFRAME_FLOAT_ON_PARENT|wxFRAME_NO_TASKBAR|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER|wxSYSTEM_MENU|wxTAB_TRAVERSAL );
 
 		~WeatherFaxBase();
 
@@ -161,7 +161,7 @@ class SchedulesDialogBase : public wxDialog
 		wxGauge* m_gCaptureStatus;
 		wxButton* m_bClose;
 
-		// Virtual event handlers, overide them in your derived class
+		// Virtual event handlers, override them in your derived class
 		virtual void OnSchedulesLeftDown( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnSchedulesSort( wxListEvent& event ) { event.Skip(); }
 		virtual void OnFilter( wxCommandEvent& event ) { event.Skip(); }
@@ -179,6 +179,7 @@ class SchedulesDialogBase : public wxDialog
 	public:
 
 		SchedulesDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("HF Radio Schedules"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
+
 		~SchedulesDialogBase();
 
 };
@@ -197,42 +198,43 @@ class InternetRetrievalDialogBase : public wxDialog
 		wxPanel* m_panel8;
 		wxButton* m_bRetrieveScheduled;
 		wxButton* m_bRetrieveSelected;
-		wxButton* m_bX;
 		wxTextCtrl* m_tContainsLat;
 		wxStaticText* m_staticText24;
 		wxTextCtrl* m_tContainsLon;
 		wxStaticText* m_staticText25;
 		wxButton* m_bBoatPosition;
 		wxButton* m_bReset;
+		wxButton* m_bClose;
+		wxButton* m_bX;
 		wxButton* m_bAllServers;
 		wxButton* m_bNoServers;
 		wxListBox* m_lServers;
+		wxButton* m_bAllRegions1;
+		wxButton* m_bNoRegions1;
 		wxListBox* m_lRegions;
-		wxButton* m_bAllRegions;
-		wxButton* m_bNoRegions;
-		wxButton* m_bClose;
 
-		// Virtual event handlers, overide them in your derived class
+		// Virtual event handlers, override them in your derived class
 		virtual void OnRetrieve( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnUrlsLeftDown( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnUrlsSort( wxListEvent& event ) { event.Skip(); }
 		virtual void OnUrlSelected( wxListEvent& event ) { event.Skip(); }
 		virtual void OnRetrieve( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnFilter( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnBoatPosition( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnReset( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAllServers( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNoServers( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnFilterServers( wxCommandEvent& event ) { event.Skip(); }
-		virtual void OnFilterRegions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAllRegions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNoRegions( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnFilterRegions( wxCommandEvent& event ) { event.Skip(); }
 
 
 	public:
 
-		InternetRetrievalDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Internet Retrieval"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 890,669 ), long style = wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
+		InternetRetrievalDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Internet Retrieval"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
+
 		~InternetRetrievalDialogBase();
 
 		void m_splitter1OnIdle( wxIdleEvent& )
@@ -332,7 +334,7 @@ class WeatherFaxWizardBase : public wxDialog
 		wxButton* m_bNext;
 		wxButton* m_bCancel;
 
-		// Virtual event handlers, overide them in your derived class
+		// Virtual event handlers, override them in your derived class
 		virtual void OnSetSizes( wxInitDialogEvent& event ) { event.Skip(); }
 		virtual void OnBitmapClickPage1( wxMouseEvent& event ) { event.Skip(); }
 		virtual void OnPaintImage( wxPaintEvent& event ) { event.Skip(); }
@@ -366,6 +368,7 @@ class WeatherFaxWizardBase : public wxDialog
 		wxFlexGridSizer* m_fgSizer434;
 
 		WeatherFaxWizardBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( -1,-1 ), long style = wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
+
 		~WeatherFaxWizardBase();
 
 };
@@ -393,7 +396,7 @@ class WeatherFaxPrefsDialog : public wxDialog
 		wxButton* m_sdbSizer1OK;
 		wxButton* m_sdbSizer1Cancel;
 
-		// Virtual event handlers, overide them in your derived class
+		// Virtual event handlers, override them in your derived class
 		virtual void OnOptions( wxCommandEvent& event ) { event.Skip(); }
 
 
@@ -411,6 +414,7 @@ class WeatherFaxPrefsDialog : public wxDialog
 		wxTextCtrl* m_tExportSoundingDatum;
 
 		WeatherFaxPrefsDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Weather Fax Preferences"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
+
 		~WeatherFaxPrefsDialog();
 
 };
@@ -431,7 +435,7 @@ class DecoderOptionsDialogBase : public wxDialog
 		wxStaticText* m_staticText41;
 		wxButton* m_bDone;
 
-		// Virtual event handlers, overide them in your derived class
+		// Virtual event handlers, override them in your derived class
 		virtual void OnOptionsSpin( wxSpinEvent& event ) { event.Skip(); }
 		virtual void OnResetOptions( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnDone( wxCommandEvent& event ) { event.Skip(); }
@@ -448,6 +452,7 @@ class DecoderOptionsDialogBase : public wxDialog
 		wxCheckBox* m_cbInclude;
 
 		DecoderOptionsDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("Fax Decoding Options"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
+
 		~DecoderOptionsDialogBase();
 
 };
@@ -466,7 +471,7 @@ class AboutDialogBase : public wxDialog
 		wxButton* m_bAboutAuthor;
 		wxButton* m_bClose;
 
-		// Virtual event handlers, overide them in your derived class
+		// Virtual event handlers, override them in your derived class
 		virtual void OnAboutAuthor( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnClose( wxCommandEvent& event ) { event.Skip(); }
 
@@ -474,6 +479,7 @@ class AboutDialogBase : public wxDialog
 	public:
 
 		AboutDialogBase( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("About Weatherfax"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = wxCAPTION|wxCLOSE_BOX|wxDEFAULT_DIALOG_STYLE|wxMAXIMIZE_BOX|wxMINIMIZE_BOX|wxRESIZE_BORDER );
+
 		~AboutDialogBase();
 
 };

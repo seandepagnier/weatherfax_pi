@@ -158,6 +158,7 @@ void InternetRetrievalDialog::Load(bool force)
     m_Filenames = { _T("NOAA"),
                     _T("NOAA_OPC"),
                     _T("NAVY"),
+                    _T("EUMetSat_ASCAT"),					
                     _T("PWx_Amer_Atl"),
                     _T("PWx_Euro_Atl"),
                     _T("Europe"),
@@ -165,8 +166,7 @@ void InternetRetrievalDialog::Load(bool force)
                     _T("PWx_India"),
                     _T("Australia"),
                     _T("PWx_Pacific"),
-                    _T("Misc"),
-                    _T("EUMetSat_ASCAT")
+                    _T("Misc")
                     };
 
     for(it_Filenames = m_Filenames.begin(); it_Filenames != m_Filenames.end(); it_Filenames++)
